@@ -1,0 +1,45 @@
+<div id="form-project-1">
+  <div class="container-fluid container-custom-project">
+    <div class="row pdt-tp">
+      <div class="col-md-12">
+        <h5>Get feedback and ask for advices</h5>
+        <p class="second-line">
+          Questions and comments can be found in the <strong>feedback</strong> tab of your project page.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="communitty-add-users text-center" ng-click="addquestion()">
+          <img src="images/community-background.png">
+          <h5 class="text-red">
+            <i class="fa fa-plus"></i> Add a question
+          </h5>
+          <p>
+           Talking about your project is the key
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row mgr-bt-100 no-mgr-lft-rght">
+      <div class="col-md-12">
+        <div class="row mgr-tp-10 cards-feedbacks" ng-repeat="question in questions">
+          <div class="col-md-1 img-feedback">
+            <img class="img-circle" height="50px" width="50px" ng-src="{{question.creator_img}}">
+          </div>
+          <div class="col-md-10 project-community-qTitle">
+            <h5 ng-bind="question.title"></h5>
+            <p class="from_text">
+              <span am-time-ago="question.date_added"></span>
+              from <a ui-sref="profile({profile: question.user.username})" class="underline_user">{{question.user.first_name}} {{question.user.last_name}}</a>
+              <span class="feedback_badge">{{question.badge | uppercase}}</span>
+            </p>
+          </div>
+          <div class="col-md-1">
+            <img class="picto_delete pull-right" src="/images/cross-icon.svg" ng-click="deleteFeedbacks(question.id)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

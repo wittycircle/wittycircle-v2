@@ -1,0 +1,27 @@
+<section id="modal_feedbacks">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-md-10">
+        <h4 class="modal-title">Delete your project</h4>
+      </div>
+      <div class="col-md-2">
+        <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()"></img>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <!--<h4>Warning</h4>-->
+        <p class="modal-text-desc">
+          Are you sur you want to delete your project? <br />All the related data will be lost.
+        </p>
+      </div>
+    </div>
+    <div class="row text-center modal-question-project">
+      <button class="back-button" ng-click="dismiss()">Cancel</button>
+      <button class="go-button" ng-click="goDeleteIt()" >Delete</button>
+    </div>
+  </div>
+</section>

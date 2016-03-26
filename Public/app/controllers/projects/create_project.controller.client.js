@@ -1,0 +1,626 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name wittyApp.controller:CreateProjectCtrl
+ * @description
+ * # CreateProjectCtrl
+ * Controller of the wittyApp
+ */
+angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload',
+  function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload) {
+
+  $scope.currentUser = $rootScope.globals.currentUser;
+  $scope.project_category = {};
+  $scope.places_after = {};
+  $scope.isSaved = false;
+  $scope.isSavedText = "Next";
+  $scope.noOpenings = false;
+  $scope.state_choose = {};
+  $scope.haveBg = true;
+  $scope.$state = $state;
+  Categories.getCategories(function (response) {
+    $scope.categories = response;
+  });
+
+  /*** Cloudinary jQuery Plugin ***/
+
+
+  /*** Getting the project id previouslt set in a cookie in data_project service **/
+  var projectId = Data_project.returnProjectId().id;
+
+
+  function capitalizeFirstLetter(string) {
+    if (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    } else {
+      return;
+    }
+  }
+
+  $scope.encodeUrl = function(url) {
+    url = Beauty_encode.encodeUrl(url);
+    return url;
+  }
+
+  function getDescription(name) {
+    var description = ["The main informations about your project",
+    "Tell us what you have in mind",
+    "What about working with others?",
+    "What are you looking for?",
+    "Get feedback from the crowd"];
+    var desc;
+
+    if (name == "basics") {
+      desc = description[0];
+    }
+    if (name == "story") {
+      desc = description[1];
+    }
+    if (name == "people") {
+      desc = description[2];
+    }
+    if (name == "needs") {
+      desc = description[3];
+    }
+    if (name == "community") {
+      desc = description[4];
+    }
+    return desc;
+  }
+
+  var visitedId = 0;
+
+  $scope.canGotoThis = function(toS, sid) {
+    var sname = $state.current.name.split('.');
+    var state = sname[1];
+    var id;
+    var ret = false;
+
+    if (state == 'basics') {
+      id = 0;
+      if (id > visitedId) {
+        visitedId = id;
+        ret = true;
+      }
+    }
+    if (state == 'story') {
+      id = 1;
+      if (id > visitedId) {
+        visitedId = id;
+        ret = true;
+      }
+    }
+    if (state == 'people') {
+      id = 2;
+      if (id > visitedId) {
+        visitedId = id;
+        ret = true;
+      }
+    }
+    if (state == 'needs') {
+      id = 3;
+      if (id > visitedId) {
+        visitedId = id;
+        ret = true;
+      }
+    }
+    if (state == 'community') {
+      id = 4;
+      if (id > visitedId) {
+        visitedId = id;
+        ret = true;
+      }
+    }
+    if (sid < id || sid <= visitedId) {
+      $state.go('createproject.' + toS);
+    }
+  }
+
+  $scope.isVisible = function(sid) {
+    var sname = $state.current.name.split('.');
+    var state = sname[1];
+    var id;
+    var ret = false;
+
+    if (state == 'basics') {
+      id = 0;
+      if (id > visitedId) {
+        visitedId = id;
+      }
+    }
+    if (state == 'story') {
+      id = 1;
+      if (id > visitedId) {
+        visitedId = id;
+      }
+    }
+    if (state == 'people') {
+      id = 2;
+      if (id > visitedId) {
+        visitedId = id;
+      }
+    }
+    if (state == 'needs') {
+      id = 3;
+      if (id > visitedId) {
+        visitedId = id;
+      }
+    }
+    if (state == 'community') {
+      id = 4;
+      if (id > visitedId) {
+        visitedId = id;
+      }
+    }
+    if (sid < id || sid <= visitedId) {
+      ret = true;
+    }
+    return ret;
+  }
+
+  $scope.isActive = function(sid) {
+    var sname = $state.current.name.split('.');
+    var state = sname[1];
+    var id;
+    var ret = false;
+
+    if (state == 'basics') {
+      id = 0;
+    }
+    if (state == 'story') {
+      id = 1;
+    }
+    if (state == 'people') {
+      id = 2;
+    }
+    if (state == 'needs') {
+      id = 3;
+    }
+    if (state == 'community') {
+      id = 4;
+    }
+    if (id == sid) {
+      ret = true;
+    }
+    return ret;
+  }
+
+  var sname = $state.current.name.split('.');
+  $scope.state = capitalizeFirstLetter(sname[1]);
+  $scope.state_description = getDescription(sname[1]);
+
+  $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams){
+      var sname = toState.name.split('.');
+      $scope.fromState = fromState;
+      $scope.state = capitalizeFirstLetter(sname[1]);
+      $scope.state_description = getDescription(sname[1]);
+      if (sname[1] == "community") {
+        $scope.isSavedText = "Publish";
+      } else {
+        $scope.isSavedText = "Next";
+      }
+    }
+  );
+
+  $scope.back = function() {
+    $state.go($scope.fromState.name);
+  }
+
+  function addUsertoFeedbacks(quest) {
+    Object.keys(quest).forEach(function (key) {
+      quest[key].user = Users.getUserbyId(quest[0].user_id, function(response) {
+        quest[key].user = response.profile;
+      });
+    });
+    return (quest);
+  };
+
+  function addUserToInvolvment(data) {
+    var users = [];
+
+    Object.keys(data).forEach(function (key) {
+      Users.getUserbyId(data[key].user_id, function (response) {
+        response.profile.id = response.data.id;
+        users.push(response.profile);
+      });
+    });
+    return users;
+  }
+
+  /*
+  ** INITIATE PROJECT WITH FECTHING DATA
+  */
+  $scope.initiateProject = function () {
+    $scope.categories = Categories.getCategories(function (response) {
+      $scope.categories = response;
+    });
+    $scope.project = Projects.getProjectbyId(projectId, function (response) {
+      $scope.project = response[0];
+      $scope.select_state = $scope.project.status;
+      $scope.places_after.obj = Locations.getplaces($scope.project);
+      if ($scope.project.project_visibility === 1) {
+        $scope.project.project_visibility = true;
+      }
+      if ($scope.project.picture) {
+        $scope.imagecover = $scope.project.picture;
+        if ($scope.project.picture_position && $scope.imagecover) {
+          $scope.imagecoverposition = $scope.project.picture_position;
+        }
+      }
+      if ($scope.project.main_video) {
+        $scope.config = {
+                      preload: "auto",
+                      sources: [
+                          {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
+                      ],
+                      theme: {
+                          url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                      },
+                      plugins: {
+                          controls: {
+                              autoHide: true,
+                              autoHideTime: 2000
+                          }
+                      }
+                  };
+      }
+      Categories.getCategory(response[0].category_id, function (response) {
+        $scope.project_category.obj = response[0];
+      });
+      Feedbacks.getFeedbacksbyProjectPublicId($scope.project.public_id, function(response) {
+        $scope.questions = addUsertoFeedbacks(response);
+      });
+      $http.get('http://127.0.0.1/project/' + response[0].id + '/involved').then(function(response) {
+        $scope.involved_users = addUserToInvolvment(response.data);
+      });
+      $http.get('http://127.0.0.1/openings/project/' + response[0].id).then(function(response) {
+        if (response.data.length == 0) {
+          $scope.openings = [];
+          $scope.noOpenings = true;
+        } else {
+          $scope.openings = response.data;
+          Object.keys($scope.openings).forEach(function(key) {
+            if ($scope.openings[key].taggs != false) {
+              $scope.openings[key].taggs = JSON.parse($scope.openings[key].taggs);
+            }
+          });
+        }
+      });
+
+    });
+  };
+
+  /*
+  ** UPLOAD PHOTO_COVER AND SETTINGS THE RIGHT ONE FOR $SCOPE.IMAGECOVER
+  */
+
+  $scope.selectCategory = function(cat) {
+    $scope.project_category.obj = cat;
+  }
+
+  $scope.dragcv = true;
+  $scope.cursorpt = false;
+
+  $scope.editPosition = function() {
+    $scope.dragcv = false;
+    $scope.cursorpt = true;
+
+    $timeout(function() {
+        $('#viewProject-header').backgroundDraggable();
+    }, 1000);
+  };
+
+  $scope.savePosition = function(data, project_category, places_after, statechoose) {
+    $scope.dragcv = true;
+    $scope.cursorpt = false;
+    $scope.imagecoverposition = angular.element('#viewProject-header').css('background-position');
+    $scope.savebasics(data, project_category, places_after, statechoose);
+  }
+
+  $scope.cancelPosition = function() {
+    $scope.dragcv = true;
+    $scope.cursorpt = false;
+  }
+
+  $scope.uploadFiles = function(file) {
+    var data = {};
+    $scope.imageCoverLoading = true;
+    Upload.dataUrl(file, true).then(function(url){
+      data.url = url;
+      $http.post('http://127.0.0.1/upload/project/cover_card', data).success(function(response) {
+        $scope.picture_card = response.secure_url;
+      });
+
+      $http.post('http://127.0.0.1/upload/project/cover', data).success(function(resp) {
+        $scope.imagecoverposition = 'center center';
+        $scope.imagecover = resp.secure_url;
+        $scope.cursorpt = true;
+        $scope.dragcv = false;
+
+        $timeout(function() {
+            $('#viewProject-header').backgroundDraggable();
+            $scope.imageCoverLoading = false;
+        }, 1000);
+
+      }).error(function(response) {
+        console.log(response);
+      });
+    });
+
+  };
+
+  $scope.deleteVideo = function() {
+    var data = {};
+
+    if ($scope.project.main_video) {
+      data.video_id = $scope.project.main_video_id;
+      data.project_id = $scope.project.id;
+      $http.post('http://127.0.0.1/upload/delete/videos', data).success(function(response) {
+        if (response.result == "ok") {
+          $scope.project.main_video = "";
+          $scope.config.sources = "";
+        }
+      }).error(function(error_message) {
+        console.log(error_message);
+      });
+    } else {
+      data.video_id = $scope.project_video_id;
+      data.project_id = $scope.project.id;
+      $http.post('http://127.0.0.1/upload/delete/videos', data).success(function(response) {
+        console.log($scope.config.sources);
+        if (response.result == "ok") {
+          $scope.project.main_video = "";
+          $scope.config.sources[0].src = "";
+        }
+        console.log($scope.config.sources);
+      }).error(function(error_message) {
+        console.log(error_message);
+      });
+    }
+  };
+
+  $scope.savebasics = function(data, project_category, places_after, statechoose) {
+    if ($scope.project_video) {
+      data.main_video = $scope.project_video;
+      data.main_video_id = $scope.project_video_id;
+    }
+    if (statechoose != undefined) {
+      data.status = statechoose;
+    }
+    data.picture_position = $scope.imagecoverposition;
+    data.picture = $scope.imagecover;
+    data.picture_card = $scope.picture_card;
+    data.category_id = project_category.id;
+    Locations.setplaces(places_after, data);
+    Projects.updateProject(data.id, data, function(response) {
+      //$state.go('createproject.story');
+    });
+  };
+
+  $scope.savestory = function(data) {
+    if ($scope.project_video) {
+      data.main_video = $scope.project_video;
+    }
+    Projects.updateProject(data.id, data, function(response) {
+      $state.go('createproject.people');
+    });
+  }
+
+  /*
+  ** PEOPLE STATE :: START BY OPENING MODAL
+  */
+  $scope.findandadduser = function() {
+    $scope.modalInstance = $modal.open({
+       animation: true,
+       templateUrl: 'views/projects/create/modal/add-user-project.client.html',
+       controller: 'AddUserProjectCtrl',
+       windowClass: 'adduser-modal',
+       scope: $scope
+     });
+  };
+
+  function removeInvolvedUser(data, user_id) {
+    Object.keys(data).forEach(function (key) {
+      if (data[key].id === user_id && data[key].id != undefined) {
+        data.splice(key, 1);
+        return;
+      }
+    });
+  };
+
+  $scope.deleteInvolvedUser = function(project_id, user_id, involved_users) {
+    $http.delete('http://127.0.0.1/project/' + project_id + '/involved/' + user_id).then(function(response) {
+      if (response.status == 200) {
+        removeInvolvedUser(involved_users, user_id);
+      }
+    });
+  };
+
+  /*
+  ** NEEDS STATE
+  */
+
+  $scope.addNeeds = function() {
+    $scope.modalInstance = $modal.open({
+       animation: true,
+       templateUrl: 'views/projects/create/modal/add_needs.view.client.html',
+       size: 'lg',
+       controller: 'AddNeedsProjectCtrl',
+       scope: $scope
+     });
+  };
+
+  $scope.updateOpening = function(opening, index) {
+    $rootScope.need = opening;
+    $rootScope.need.index = index;
+    $scope.modalInstance = $modal.open({
+       animation: true,
+       templateUrl: 'views/projects/create/modal/update_needs.view.client.html',
+       size: 'lg',
+       controller: 'AddNeedsProjectCtrl',
+       scope: $scope
+     });
+  };
+
+  $scope.deleteOpening = function(opening_id) {
+    console.log(opening_id);
+    $http.delete('http://127.0.0.1/opening/' + opening_id).success(function(response) {
+      console.log(response);
+      if (response.serverStatus == 2) {
+        Object.keys($scope.openings).forEach(function (key) {
+          if ($scope.openings[key].id == opening_id) {
+            $scope.openings.splice(key, 1);
+            return;
+          }
+        });
+      }
+    });
+  };
+
+
+  /*
+  ** COMMUNITY STATE :: START BY OPENING MODAL
+  */
+  $scope.addquestion = function() {
+    $scope.modalInstance = $modal.open({
+       animation: true,
+       templateUrl: 'views/projects/create/modal/add-question-project.view.client.html',
+       size: 'lg',
+       controller: 'AddQuestionProjectCtrl',
+       scope: $scope
+     });
+  };
+
+
+  $scope.deleteFeedbacks = function(feedbacks_id) {
+    var error_message = "";
+    Feedbacks.deleteFeedbacks(feedbacks_id, function(response) {
+      if (response.serverStatus == 2) {
+        for (var i = 0; i < $scope.questions.length; i++) {
+          if ($scope.questions[i].id == feedbacks_id)
+          $scope.questions.splice(i, 1);
+          return;
+        }
+      }
+      else {
+        error_message = response;
+      }
+    });
+    return error_message;
+  };
+
+  $scope.finish = function(public_id, title, data, project_category, places_after, statechoose) {
+      var path = '/project/' + public_id + '/' + $scope.encodeUrl(title);
+      if ($state.current.url == '/basics') {
+        $scope.savebasics(data, project_category, places_after, statechoose);
+        $state.go('createproject.story');
+      }
+      if ($state.current.url == '/story') {
+        $scope.savestory(data);
+        $state.go('createproject.people');
+      }
+      if ($state.current.url == '/people') {
+        $state.go('createproject.needs');
+      }
+      if ($state.current.url == '/needs') {
+        $state.go('createproject.community');
+      }
+      if ($state.current.url == '/community') {
+        //data.project_visibility = 1;
+        $scope.savebasics(data, project_category, places_after, statechoose);
+        $location.path(path);
+      }
+  };
+
+  $scope.uploadVideo = function() {
+   $scope.file = {};
+    $scope.widget = $(".cloudinary_fileupload")
+      .unsigned_cloudinary_upload(cloudinary.config().upload_preset, {tags: 'myphotoalbum', context:'photo='}, {
+        // Uncomment the following lines to enable client side image resizing and validation.
+        // Make sure cloudinary/processing is included the js file
+        //disableImageResize: false,
+        //imageMaxWidth: 800,
+        //imageMaxHeight: 600,
+        //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|bmp|ico)$/i,
+        //maxFileSize: 20000000, // 20MB
+        dropZone: ".update-project-video",
+        start: function (e) {
+          console.log(document.getElementById("file").value);
+          $scope.status = "Starting upload...";
+          $scope.file = {};
+          $scope.$apply();
+        },
+        fail: function (e, data) {
+          $scope.status = "Upload failed";
+          $scope.$apply();
+        }
+      })
+      .on("cloudinaryprogress", function (e, data) {
+        if (data.files[0].size > 100000000) {
+          $scope.status = "File too large!";
+          return ;
+        }
+        var name = data.files[0].name;
+        var file = $scope.file[name] || {};
+        file.progress = Math.round((data.loaded * 100.0) / data.total);
+        file.status = "Uploading... " + file.progress + "%";
+        $scope.file[name] = file;
+        $scope.$apply();
+        })
+      .on("cloudinaryprogressall", function (e, data) {
+        $scope.progress = Math.round((data.loaded * 100.0) / data.total);
+        $scope.status = "Uploading... " + $scope.progress + "%";
+        $scope.$apply();
+      })
+      .on("cloudinarydone", function (e, data) {
+        $rootScope.photos = $rootScope.photos || [];
+        data.result.context = {custom: {photo: $scope.title}};
+        $scope.result = data.result;
+        var name = data.files[0].name;
+        var file = $scope.file[name] ||{};
+        file.name = name;
+        file.result = data.result;
+        $scope.file[name] = file;
+        $scope.$apply();
+         /*** Display video when success ***/
+        $scope.videoproject = true;
+         Upload.dataUrl(data.files[0], true).then(function(url){
+          $scope.config = {
+                         preload: "auto",
+                         sources: [
+                             {src: $sce.trustAsResourceUrl(url), type: "video/mp4"}
+                         ],
+                         theme: {
+                             url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                         },
+                         plugins: {
+                             controls: {
+                                 autoHide: true,
+                                 autoHideTime: 2000
+                             }
+                         }
+                     };
+           data.url = url;
+           $scope.itsOk = true;
+         });
+         $scope.project_video = data.result.secure_url;
+         $scope.project_video_id = data.result.public_id;
+
+      }).on("cloudinaryfail", function(e, data){
+        if (data.files[0].size > 100000000) {
+          $scope.status = "File too large!";
+          return ;
+        }
+          var file = $scope.files[name] ||{};
+          file.name = name;
+          file.result = data.result;
+          $scope.files[name] = file;
+
+        });
+
+  };
+
+
+}]);

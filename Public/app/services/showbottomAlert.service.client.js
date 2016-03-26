@@ -1,0 +1,57 @@
+/**
+ * @ngdoc service
+ * @name wittyApp.showbottomAlert
+ * @description
+ * # showbottomAlert
+ * Factory in the wittyApp.
+ */
+  (function () {
+      'use strict';
+
+      angular
+          .module('wittyApp')
+          .factory('showbottomAlert', showbottomAlert);
+
+      showbottomAlert.$inject = ['$http', '$cookieStore', '$rootScope', '$resource', '$q', '$mdBottomSheet'];
+      function showbottomAlert($http, $cookieStore, $rootScope, $resource, $q, $mdBottomSheet, $scope) {
+          var service = {};
+
+          service.pop_it              = pop_it;
+          service.pop_it_involvment   = pop_it_involvment;
+          service.pop_it_persistance  = pop_it_persistance;
+
+          return service;
+
+
+          function pop_it($event) {
+            $mdBottomSheet.show({
+              templateUrl: 'views/core/popover-login.view.client.html',
+              controller: 'HeaderCtrl',
+              clickOutsideToClose: false,
+              disableParentScroll: false,
+              targetEvent: $event
+            });
+          };
+
+          function pop_it_involvment($scope) {
+            $mdBottomSheet.show({
+              templateUrl: 'views/involvment/popover-involvment.view.client.html',
+              controller: 'InvolvmentSheetCtrl',
+              clickOutsideToClose: true,
+              disableParentScroll: true,
+              scope: $scope
+            });
+          }
+
+          function pop_it_persistance() {
+            $mdBottomSheet.show({
+              templateUrl: 'views/core/popover-login.view.client.html',
+              controller: 'HeaderCtrl',
+              clickOutsideToClose: false,
+              disableParentScroll: false,
+            });
+          };
+
+      };
+
+  })();

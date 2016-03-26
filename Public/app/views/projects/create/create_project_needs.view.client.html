@@ -1,0 +1,102 @@
+<div id="form-project-1">
+  <div class="container-fluid container-custom-project">
+    <div class="row pdt-tp">
+      <div class="col-md-12">
+        <h5>Ask for help and advices</h5>
+        <p class="second-line">
+          Post ads about what you need. They will be displayed in the <strong>get involved</strong> tab of your project page.
+        </p>
+<!--         <p class="p-book">
+          Psot ads mentionning the kind of help you are looking for. They will be displayed in the "Get involved" tab of your project page.
+        </p> -->
+      </div>
+    </div>
+    <div class="row" ng-if="openings.length == 0">
+      <div class="row">
+        <div class="col-md-3 col-centered project-needs-question">
+          <div class="add_needs text-center center-block" ng-click="addNeeds()">
+            <img src="images/needs-icon.png">
+            <h5 class="text-red">
+              <i class="fa fa-plus"></i> Add a need
+            </h5>
+            <p>
+              Our fancy algorithm will do the rest.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-if="openings.length > 0">
+      <div class="cards_openings col-md-3" ng-repeat="open in openings">
+        <div class="discover-body-card project-card cards_openings_body animated fadeIn">
+          <div class="card-tag">
+            <div class="card-tag-content title_needs_cards">
+              <span ng-if="open.status == 'Teammate' || open.status == 'Mentor'">A</span> <span ng-bind="open.status"></span> <span class="muted" ng-if="open.status == 'Teammate' || open.status == 'Mentor'">skilled in<br></span> <span class="muted" ng-if="open.status != 'Teammate' && open.status != 'Mentor'"> in<br></span> <span ng-bind="open.skill"></span>
+            </div>
+          </div>
+          <div class="card-picture" ng-style="{'background-image': 'url(' + open.picture + ')'}">
+          <!-- <img ng-src="{{card.picture}}" alt="card-picture"> -->
+          <div class="filter_needs_cards">
+          </div>
+          </div>
+          <div class="card-info card-info-needs">
+            <div class="card-description-text">
+              <p class="text_cards_needs">{{open.description}}</p>
+            </div>
+            <div class="need_tags" ng-if="open.taggs != false">
+              <span class="tag_text" ng-repeat="tag in open.taggs" ng-bind="tag"></span>
+            </div>
+          </div>
+          <div class="cards_openings_footer">
+            <div class="row">
+              <div class="col-md-6">
+                <i class="fa fa-pencil-square-o icon_footer_2 pull-right" ng-click="updateOpening(open, $index)"></i>
+              </div>
+              <div class="col-md-6">
+                <i class="fa fa-trash-o icon_footer" ng-click="deleteOpening(open.id)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 project-needs-question">
+        <div class="add_needs text-center center-block" ng-click="addNeeds()">
+          <img src="images/needs-icon.png">
+          <h5 class="text-red">
+            <i class="fa fa-plus"></i> Add a need
+          </h5>
+          <p>
+            Our fancy algorithm will do the rest.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- <div id="form-project-1">
+  <div class="row">
+    <div class="container-fluid container-custom-project">
+      <div class="row state-project">
+        <div class="col-md-12 text-center">
+          <button class="back-button" ng-click="back()">Back</button>
+          <button class="go-button" ui-sref="createproject.community">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
+
+<script>
+
+$(function() {
+  $(document).ready(function() {
+    window.scrollTo(0, 0);
+  });
+});
+
+</script>

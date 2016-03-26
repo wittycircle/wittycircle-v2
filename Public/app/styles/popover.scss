@@ -1,0 +1,171 @@
+$red: #FF4D4D;
+$more-red: #D94242;
+$bg-color-strokes: #F5F5F5;
+$bg-color: #FAFAFA;
+$secondary-text: #999999;
+$font-h3: 'Open Sans', sans-serif;
+$font-h3: 'Open Sans', sans-serif;
+$blue: #416299;
+
+
+#main-body {
+	.md-bottom-sheet-backdrop {
+		z-index: 499;
+	}
+}
+
+.custom-popover {
+	background-color: rgba(20, 20, 20, 0.9);
+	border-style: none;;
+	color: white;
+	position: fixed;
+	bottom:0%;
+	z-index: 500;
+
+	#popover-login {
+		padding: 40px 0 55px 0;
+
+		.popover-container {
+			max-width: 1000px;
+			margin-left: auto;
+			margin-right: auto;
+
+			.popover-text {
+				display: inline-block;
+				float: left;
+
+				h1 {
+					font-family: 'FreigBook';
+					font-size: 42px;
+					margin-bottom: 10px;
+				}
+
+				p {
+					font-family: 'FreigBook';
+					font-size: 21px;
+					line-height: 26px;
+				}
+			}
+
+			.popover-button {
+				display: inline-block;
+				text-align: center;
+				position: relative;
+				top: 15px;
+				margin-left: 70px;
+
+				.fb-login {
+					margin-bottom: 12px;
+
+					button:hover {
+						background-color: #344e7a;
+						border: 1px solid #344e7a;
+					}
+				}
+
+				.go-login {
+					margin-bottom: 10px;
+
+					button {
+						margin-bottom: 0;
+					}
+				}
+
+				.go-login:hover {
+					button {
+						background-color: #E0E0E0;
+						color: #404040;
+					}
+				}
+
+				.email-login {
+					cursor: pointer;
+
+					a {
+						font-family: 'FreigSem';
+						font-size: 18px;
+					}
+
+					img {
+						width: 21px;
+						height: auto;
+						margin-right: 5px;
+						position: relative;
+						bottom: 1px;
+					}
+				}
+			}
+
+			.popover-button-involvment {
+				display: inline-flex;
+				text-align: center;
+				position: relative;
+				top: 37px;
+				margin-left: 70px;
+
+				.join {
+					margin-bottom: 12px;
+					margin-right: 20px;
+
+					button {
+						font-family: 'FreigSem';
+						font-size: 18px;
+						background-color: $red;
+						padding: 8px 40px;
+						border: 1px solid $red;
+						border-radius: 4px;
+					}
+
+					button:hover {
+						background-color: $more-red;
+						border: 1px solid $more-red;
+					}
+				}
+
+				.decline {
+					margin-bottom: 10px;
+
+					button {
+						font-family: 'FreigSem';
+						font-size: 18px;
+						background-color: transparent;
+						padding: 8px 40px;
+						border: 1px solid white;
+						border-radius: 4px;
+					}
+					button:hover {
+						background-color: white;
+						color: #222222;
+					}
+				}
+
+				.email-login {
+					cursor: pointer;
+
+					a {
+						font-family: 'FreigSem';
+						font-size: 18px;
+					}
+
+					img {
+						width: 21px;
+						height: auto;
+						margin-right: 5px;
+						position: relative;
+						bottom: 1px;
+					}
+				}
+
+			}
+		}
+
+		.involvment-popover {
+			img{
+				display: inline;
+			}
+			p {
+				display: inline;
+			}
+		}
+	}
+}

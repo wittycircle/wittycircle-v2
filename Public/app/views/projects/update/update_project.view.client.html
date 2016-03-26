@@ -1,0 +1,57 @@
+<section id="createProject-page" ng-init="initiateProject()">
+  <header id="viewProject-header" ng-style="{'background-image': 'url(' + resizePic(imagecover, 1200, 410) + ')' , 'background-position': imagecoverposition}" ng-class="{ 'addcursormove': cursorpt }">
+  <div class="viewProject-filter" ng-if="dragcv"></div>
+  <div class="viewProject-title" ng-if="dragcv">
+    <h1>{{state}}</h1>
+    <h4>{{state_description}}</h4>
+  </div>
+  <div class="savingposition" ng-if="dragcv == false">
+    <p class="drag_text">
+      Drag to Reposition Cover
+    </p>
+    <button class="btn_save_position" ng-click="savePosition(project.public_id, project.title, project, project_category.obj, places_after.obj, state_choose.obj)">Save</button>
+    <button class="btn_cancel_position" ng-click="cancelPosition()">Cancel</button>
+  </div>
+  <div class="viewProject-bottom" ng-if="dragcv">
+    <div class="viewProject-nav">
+      <ul class="viewProject-category">
+        <li class="li_nav" ui-sref-active="nav-project-active">
+          <a ui-sref=".basics"><span class="circle_number">1</span> Basics</a>
+        </li>
+        <li class="li_nav" ui-sref-active="nav-project-active">
+          <a ui-sref=".story"><span class="circle_number">2</span> Story</a>
+        </li>
+        <li class="li_nav" ui-sref-active="nav-project-active">
+          <a ui-sref=".people"><span class="circle_number">3</span> People</a>
+        </li>
+        <li class="li_nav" ui-sref-active="nav-project-active">
+          <a ui-sref=".needs"><span class="circle_number">4</span> Needs</a>
+        </li>
+        <li class="li_nav" ui-sref-active="nav-project-active">
+          <a ui-sref=".community"><span class="circle_number">5</span> Community</a>
+        </li>
+      </ul>
+
+      <ul class="viewProject-option">
+        <li class="view_preview" ui-sref="viewproject({public_id: project.public_id, title: encodeUrl(project.title)})">Leave edit mode</li>
+        <button type="submit" ng-click="finish(project.public_id, project.title, project, project_category.obj, places_after.obj, state_choose.obj)"><i ng-if="isSaved" class="fa fa-check"></i> {{isSavedText}}</button>
+      </ul>
+
+    </div>
+  </div>
+</header>
+  <div id="form-views" ui-view onbeforeunload="confirmExit()"></div>
+  <script>
+    function confirmExit() {
+            console.log("OK");
+            confirm("do you want to check our other products");
+            if (answer){
+
+                alert("bye");
+            }
+            else{
+                window.location = "http://www.example.com";
+            }
+        };
+  </script>
+</section>

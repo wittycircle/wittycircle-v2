@@ -1,0 +1,232 @@
+<section id="modal_needs">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-md-10">
+        <h4 class="modal-title">New need</h4>
+      </div>
+      <div class="col-md-2">
+        <img class="close_modal pull-right" src="images/cross-icon.svg" class="pull-right" ng-click="dismiss()"></img>
+      </div>
+    </div>
+  </div>
+
+  <div id="discover-body-page">
+  	<div class="body-page">
+  		<div class="home-video-bg">
+  	  </div>
+
+  	  	<div class="discover-component presentation-component pres_needs">
+  	  		<div class="discover-search2">
+  	  			<div class="discover-search2-text">
+  						<h2 class="text_drop">I am looking for <span ng-if="cHelp == 'Teammate' || cHelp == 'Mentor'">a</span></h2>
+  					</div>
+  				<div class="discover-search2-dropdown">
+  					<div id="dsa2" class="discover-search2-ah searchbox">
+  						<h2 id="dsa2">{{cHelp}}</h2>
+  						<img id="dsa2" src="/images/arrow-down-icon-blue.svg">
+  					</div>
+  					<aside id="androp" class="discover-search2-downbox" style="display: none">
+  						<ul>
+  							<li ng-repeat="help in helps" ng-click="getHelp(help)">{{help}}<sup ng-if="help == 'Freelancer' || help == 'Fundings'">soon</sup></li>
+  						</ul>
+  					</aside>
+  				</div>
+  				<div id="dstext" class="discover-search2-text animated fadeIn pres_needs">
+  					<h2 ng-if="cHelp != 'Teammate' && cHelp != 'Mentor'">in</h2>
+  					<h2 ng-if="cHelp == 'Teammate' || cHelp == 'Mentor'">skilled in</h2>
+  				</div>
+  				<div id="dslist" class="discover-skill-list animated fadeIn" ng-repeat="skill in skillList">
+  					<div id="dslist" class="discover-skill-tag searchbox">
+  						<h2 id="dslist">{{skill.sName}}</h2>
+  						<div id="dslist" class="discover-skill-cross" ng-click="removeSkill(skill.sName)">
+  							<img id="dslist" src="/images/cross-icon.svg">
+  						</div>
+  					</div>
+  					<span id="dslist" ng-hide="$last">,</span>
+  					<span id="dComma" ng-if="$last && !fullList">,</span>
+  				</div>
+  				<div id="dsdrop1" class="discover-search2-dropdown2" ng-show="!fullList" >
+  					<div class="discover-search2-anyskill inputfield searchbox" ng-show="!fullList">
+  						<input auto-complete id="input-dsa" class="animated fadeIn" onfocus="getDropdown()" onfocusout="hideDropdown()" onmouseover="changePlh()" onmouseout="normalPlh()" type="search" oninput="getSearchBox()" ng-model="skillName">
+  						<label id="labelText" class="animated fadeIn" style="display: block">Anything</label>
+  						<label id="labelText2" class="animated fadeIn" style="display: none">add skill</label>
+  					</div>
+  					<aside id="dsabox1" class="discover-search2-popularskills downbox" style="display: none">
+  						<ul>
+  							<h3>Popular skills:</h3>
+  							<li ng-repeat="skill in skills | limitTo: 5" ng-click="searchSkill(skill.name)">{{skill.name}}</li>
+  						</ul>
+  					</aside>
+  					<aside id="dsabox2" class="discover-search2-downbox1 downbox" style="display: none">
+  						<ul>
+  							<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 5">{{skillS.name}}</li>
+  							<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+  						</ul>
+  					</aside>
+  				</div>
+  	  		</div>
+  	  	</div>
+  	  	<script>
+        var scope = angular.element($("#modal_needs")).scope();
+        window.onmouseover = function(e) {
+          if (scope.skillList.length > 0) {
+            if (e.target.id === 'dslist' || e.target.id === 'input-dsa' || e.target.id === 'dsa') {
+              if (document.getElementById('input-dsa')) {
+                document.getElementById('input-dsa').style.display = "block";
+                document.getElementById('dsdrop1').style.display = "inline-block";
+                if (document.getElementById('dComma'))
+                  document.getElementById('dComma').style.display = "inline-block";
+              }
+            } else {
+              // document.getElementById('input-dsa').style.display = "none";
+              // document.getElementById('mComma').style.display = "none";
+            }
+          }
+        }
+
+        document.getElementById('modal_needs').onclick = function(e) {
+              /*** DownBox DOM ***/
+            if (e.target.id == 'dsa' && document.getElementById('dsd').style.display == "none") {
+                document.getElementById('dsd').style.display = "block";
+                document.querySelectorAll("#dsa img")[0].style.transform = "rotate(-180deg)";
+              } else {
+                if (document.getElementById('dsd')) {
+                  document.getElementById('dsd').style.display = "none";
+                  document.querySelectorAll("#dsa img")[0].style.transform = "rotate(0deg)";
+                }
+              }
+
+            if (e.target.id == 'dst' && document.getElementById('dsd2').style.display == "none") {
+              document.getElementById('dsd2').style.display = "block";
+              document.querySelectorAll("#dst img")[0].style.transform = "rotate(-180deg)";
+            } else {
+              if (document.getElementById('dsd2')) {
+                document.getElementById('dsd2').style.display = "none";
+                document.querySelectorAll("#dst img")[0].style.transform = "rotate(0deg)";
+              }
+            }
+            if (e.target.id == 'dsa2' && document.getElementById('androp').style.display === "none") {
+              document.getElementById('androp').style.display = "block";
+              document.querySelectorAll("#dsa2 img")[0].style.transform = "rotate(-180deg)";
+            } else {
+              if (document.getElementById('androp')) {
+                document.getElementById('androp').style.display = "none";
+                document.querySelectorAll("#dsa2 img")[0].style.transform = "rotate(0deg)";
+              }
+            }
+
+            if (e.target.id === 'input-dsa2') {
+              document.getElementById('dsabox1').style.display = "block";
+            } else {
+              document.getElementById('dsabox1').style.display = "none";
+            }
+
+            /*** Skill DOM ***/
+            if (scope.skillList.length > 0) {
+              if (e.target.id !== 'dslist' || e.target.id !== 'input-dsa' || e.target.id !== 'dsa' || e.target.id !== 'input-dsa2')
+                if (document.getElementById('input-dsa')) {
+                  console.log("OK");
+                  document.getElementById('input-dsa').style.display = "none";
+                  document.getElementById('dsdrop1').style.display = "none";
+                  if (document.getElementById('dComma'))
+                    document.getElementById('dComma').style.display = "none";
+                }
+
+            }
+          }
+
+          function changePlh() {
+            if (document.getElementById('labelText')) {
+              document.getElementById('labelText').style.display = "none";
+              document.getElementById('labelText2').style.display = "block";
+            }
+          };
+
+          function normalPlh() {
+            if (document.getElementById('labelText')) {
+              document.getElementById('labelText').style.display = "block";
+              document.getElementById('labelText2').style.display = "none";
+            }
+          };
+
+          function getDropdown() {
+            document.getElementById("input-dsa").onmouseout = function() {changePlh()};
+            if (document.getElementById('labelText')) {
+              document.getElementById('labelText').style.display = "none";
+              document.getElementById('labelText2').style.display = "block";
+              document.getElementById('labelText2').style.color = "#999999";
+            }
+            document.getElementById('input-dsa').id = "input-dsa2";
+          };
+
+          function hideDropdown() {
+            document.getElementById('input-dsa2').id = "input-dsa";
+            if (document.getElementById('labelText')) {
+              document.getElementById('labelText').style.display = "block";
+              document.getElementById('labelText2').style.display = "none";
+              document.getElementById('labelText2').style.color = "white";
+            }
+            document.getElementById("input-dsa").onmouseout = function() {normalPlh()};
+            // document.getElementById("input-dsa").onmouseover = "changePlh()";
+            // document.getElementById("input-dsa").onmouseout = "normalPlh()";
+          };
+
+          function getSearchBox() {
+            var x = document.getElementById('input-dsa2').value;
+
+            if (x) {
+              if (document.getElementById('labelText')) {
+                document.getElementById('labelText').style.display = "none";
+                document.getElementById('labelText2').style.display = "none";
+                document.getElementById('labelText').id = "labelNoText";
+                document.getElementById('labelText2').id = "labelNoText2";
+              }
+              document.getElementById('dsabox1').style.display = "none";
+              document.getElementById('dsabox2').style.display = "block";
+            } else {
+              document.getElementById('labelNoText').id = "labelText";
+              document.getElementById('labelNoText2').id = "labelText2";
+              document.getElementById('labelText2').style.display = "block";
+              document.getElementById('dsabox2').style.display = "none";
+              document.getElementById('dsabox1').style.display = "block";
+            }
+          };
+      </script>
+  	</div>
+  </div>
+
+
+
+  <div class="container_needs">
+    <div class="row row_custom_needs">
+      <div class="center-block input-area">
+        <textarea class="textarea_needs" maxlength="195" ng-model="openings_description" placeholder="Details will help..."></textarea>
+        <!--{{openings_description.length}} / 100-->
+        <div>
+          <p class="counter-project-description" ng-if="openings_description.length < 190 ">
+            {{openings_description.length}}/195
+          </p>
+          <p class="counter-project-description" ng-if="openings_description.length >= 190 ">
+            <span class="counter-project-description-alert"><i class="fa fa-exclamation-triangle"></i>{{openings_description.length}}</span>/195
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-button-needs">
+    <div class="row row_custom_needs">
+      <div class="center-block input-area">
+        <div class="col-md-6">
+          <button class="pull-right cancel_button_needs" ng-click="dismiss()">Cancel</button>
+        </div>
+        <div class="col-md-6">
+          <button class="pull-left button_needs" ng-click="addNeeds(openings_description, $scope.skill, $scope.cHelp)">Publish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+</section>

@@ -1,0 +1,29 @@
+<section ng-init="initiateProject()">
+  <div class="header-project" ng-style="{'background-image': 'url(' + resizePic(imagecover, 1200, 410) + ')'}">
+    <div class="header-name text-center">
+        <h3>{{state}}</h3>
+    </div>
+    <div id="footer-header" class="text-center">
+      <div class="container=fluid container-custom-project">
+      <ul class="navbar-nav nav nav-project">
+        <li>
+          <a ui-sref=".basics" ui-sref-active="nav-project-active"><span>1</span> Basics</a>
+        </li>
+        <li>
+          <a ui-sref=".story" ui-sref-active="nav-project-active"><span>2</span> Story</a>
+        </li>
+        <li>
+          <a ui-sref=".people"><span>3</span> People</a>
+        </li>
+        <li>
+          <a ui-sref=".interests"><span>4</span> Needs</a>
+        </li>
+        <li>
+          <a ui-sref=".community"><span>5</span> Community</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+  <div id="form-views" ui-view></div>
+</section>

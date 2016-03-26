@@ -1,0 +1,117 @@
+<section id="profile-experience-modal">
+	<div class="profile-modal-title">
+		<h3>Add a position</h3>
+		<img id="semcross" src="/images/cross-icon.svg" ng-click="dismiss()">
+	</div>
+
+	<div class="profile-modal-body">
+		<div class="profile-modal-job sminput">
+			<label>Job title</label>
+			<input type="text" ng-model="eJob" />
+			<p ng-if="noJob">This is a required field</p>
+		</div>
+
+		<div class="profile-modal-company sminput">
+			<label>Company name</label>
+			<input type="text" ng-model="eCompany" />
+			<p ng-if="noCompany">This is a required field</p>
+		</div>
+
+		<div class="profile-modal-location sminput">
+			<label>Location</label>
+			<input type="text" placeholder="Search a city, a zip code,..." edit-ex-location="" ng-model="displayEditLocation"/>
+			<p ng-if="noLocation">This is a required field</p>
+		</div>
+
+		<div class="profile-modal-period">
+			<label>Time period</label>
+			<div class="time-period">
+
+				<div id="tptm" class="time-period-dropdown">
+					<div class="tp-month">
+						<h4 ng-bind="startMonth"></h4>
+					</div>
+					<div id="tmdropdown" class="time-month-dropdown">
+						<ul onmouseover="preventScroll()" onmouseout="allowScroll()">
+							<li ng-repeat="month in months" ng-click="getStartMonth(month)">{{month.Pap}}</li>
+						</ul>
+					</div>
+				</div>
+				<div id="tpty" class="time-period-dropdown">
+					<div class="tp-year">
+						<h4 ng-bind="startYear"></h4>
+					</div>
+					<div id="tydropdown" class="time-year-dropdown">
+						<ul onmouseover="preventScroll()" onmouseout="allowScroll()">
+							<li ng-repeat="year in years" ng-click="getStartYear(year)">{{year}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="tp-dash"></div>
+
+				<div id="tptm2" class="time-period-dropdown">
+					<div class="tp-month">
+						<h4 ng-bind="endMonth"></h4>
+					</div>
+					<div id="tmdropdown2" class="time-month-dropdown">
+						<ul onmouseover="preventScroll()" onmouseout="allowScroll()">
+							<li ng-repeat="month in months" ng-click="getEndMonth(month)">{{month.Pap}}</li>
+						</ul>
+					</div>
+				</div>
+				<div id="tpty2" class="time-period-dropdown">
+					<div class="tp-year">
+						<h4 ng-bind="endYear"></h4>
+					</div>
+					<div id="tydropdown2" class="time-year-dropdown">
+						<ul onmouseover="preventScroll()" onmouseout="allowScroll()">
+							<li ng-repeat="year in years" ng-click="getEndYear(year)">{{year}}</li>
+						</ul>
+					</div>
+				</div>
+				<p ng-if="noTime">This is a required field</p>
+				<div class="tp-checkbox">
+					<input type="checkbox" ng-model="checkboxEndTime"> 
+					<h5>I'm currently working there</h5>
+				</div>
+			</div>
+		</div>
+
+		<div class="profile-modal-description">
+			<label>Job description</label>
+			<textarea type="text" ng-model="eJobDescription" placeholder="What were you doing? What you shipped"></textarea>
+		</div>
+
+		<div class="profile-modal-button">
+			<button type="submit" ng-click="saveEditPosition()">Edit position</button>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('#profile-experience-modal').on('click', function(e) {
+				var tCon1 = $('#tptm');
+				var tCon2 = $('#tpty');
+				var tCon3 = $('#tptm2');
+				var tCon4 = $('#tpty2');
+
+				if (tCon1.is(e.target) || tCon1.has(e.target).length || $('#tmdropdown').css('display') === "block")
+					$('#tmdropdown').slideToggle(300);
+				if (tCon2.is(e.target) || tCon2.has(e.target).length || $('#tydropdown').css('display') === "block")
+					$('#tydropdown').slideToggle(300);
+				if (tCon3.is(e.target) || tCon3.has(e.target).length || $('#tmdropdown2').css('display') === "block")
+					$('#tmdropdown2').slideToggle(300);
+				if (tCon4.is(e.target) || tCon4.has(e.target).length || $('#tydropdown2').css('display') === "block")
+					$('#tydropdown2').slideToggle(300);
+			});
+		});
+
+		function preventScroll() {
+			document.body.style.position = "fixed";
+			document.body.style.overflow = "scroll";
+		}
+
+		function allowScroll() {
+			document.body.style.position = "static";
+		}
+	</script>
+</section>

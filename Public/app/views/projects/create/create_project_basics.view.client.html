@@ -1,0 +1,183 @@
+<div id="form-project-1">
+  <div class="container-fluid container-custom-project">
+    <div class="row pdt-tp">
+      <div class="col-md-8">
+        <div class="row project-title-input">
+          <div class="col-md-3 title-input">
+            <h5>Project title</h5>
+          </div>
+          <div class="col-md-9">
+            <input type="text" class="custom-input-project" ng-model="project.title">
+          </div>
+        </div>
+        <div class="row custom-row-project">
+          <div class="col-md-3">
+            <h5>Category</h5>
+          </div>
+          <div class="col-md-9">
+            <div id="dst" class="project-basics-category">
+              <h2 id="dst">{{project_category.obj.name}}</h2>
+              <img id="dst" src="/images/arrow-down-icon-b.svg">
+            </div>
+            <aside id="dsd2" class="discover-search1-downbox2" style="display: none">
+              <ul>
+                <li ng-repeat="category in categories" ng-click="selectCategory(category)">{{category.name}}</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+        <div class="row custom-row-project">
+          <div class="col-md-3">
+            <h5>Location</h5>
+          </div>
+          <div class="col-md-9">
+            <input class="custom-input-project input-maps" ng-model="places_after.obj" places-auto-complete types="['geocode']" placeholder="Where is your project based?"></input>
+          </div>
+        </div>
+        <div class="row custom-row-project">
+          <div class="col-md-3">
+            <h5>Short description</h5>
+          </div>
+          <div class="col-md-9">
+            <textarea class="custom-input-project" ng-model="project.description" maxlength="100"></textarea>
+            <p class="counter-project-description" ng-if="project.description.length <= 95 ">
+              {{project.description.length}}/100
+            </p>
+            <p class="counter-project-description" ng-if="project.description.length > 95 ">
+              <span class="counter-project-description-alert"><i class="fa fa-exclamation-triangle"></i>{{project.description.length}}</span>/100
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-4 text-center">
+        <div class="drop_container">
+          <div class="bg_filter" ng-if="imagecoveruploaded || imagecover">
+          </div>
+          <div ng-if="imageCoverLoading" class="spinner-load">
+            <div class="spinner__item1 spinner-item"></div>
+            <div class="spinner__item2 spinner-item"></div>
+            <div class="spinner__item3 spinner-item"></div>
+          </div>
+          <div ngf-drop="uploadFiles(imagecoveruploaded)" ngf-select="uploadFiles(imagecoveruploaded)" ngf-select-disabled="imagecover" ng-model="imagecoveruploaded" class="animated" ng-class="{ 'drop-box-cover': !imagecover}"
+              ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
+              accept="image/*"
+              ngf-pattern="'image/*'"
+              >
+              <!--<img ngf-src="imagecoveruploaded" ngf-resize="{width: 300, height: 200}">-->
+              <div class="img_up" ng-style="{'background-image': 'url(' + imagecover + ')', 'background-position': 'center center'}">
+              </div>
+              <span class="delete" ng-if="imagecoveruploaded || imagecover" ngf-select="uploadFiles(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
+              accept="image/*"
+              ngf-pattern="'image/*'"
+              >Change cover</span>
+              <span class="change" ng-if="imagecoveruploaded || imagecover" ng-click="editPosition()">Adjust cover</span>
+          </div>
+        </div>
+        <div class="header-upload-cover"><i class="fa fa-cloud-upload"></i> Upload a cover picture</div>
+        <p class="upload-description">
+          Choose a high quality picture that illustrates your project. 10 Mb max
+        </p>
+      </div>
+      <div class="row custom-row-project">
+        <div class="col-md-12 visibility_container" style="margin-top: 40px;">
+          <div class="col-md-8">
+            <p class="visibility_text">
+              <span ng-if="project.project_visibility == 0">Your project is now <strong>private</strong>, switch to the public mode if you want to make it visible.</span><span ng-if="project.project_visibility == 1">Your project is now <strong>public</strong>, switch to the private mode if you want to hide it temporarly.</span>
+            </p>
+          </div>
+          <div class="col-md-4 no-pdt">
+            <md-switch ng-model="project.project_visibility" aria-label="project_visibility" md-no-ink></md-switch>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container-fluid container-custom-project">
+    <div class="row state-project">
+      <div class="col-md-5">
+        <h5>What is the project state of progress?</h5>
+      </div>
+      <div class="col-md-7">
+        <hr>
+        <div ng-click="state_choose.obj = 'Idea'" class="col-md-3 text-center" ng-class="{ 'state_2': select_state == 'Idea' }">
+          <div class="bg-step text-center" ng-click="select_state = 'Idea'">
+            <!--<md-icon md-svg-src="images/pictos_step/idea-picto.svg" style="width: 18px; height: 18px;"></md-icon>-->
+            <img src="images/pictos_step/idea-picto.svg" style="width: 18px; height: 18px;"/>
+            <p class="text_state" ng-click="state_choose.obj = 'Idea'">
+              Idea
+            </p>
+            <div>
+              <div class="tooltipw">Even the smallest thought deserves to be shared</div>
+            </div>
+          </div>
+        </div>
+        <div ng-click="state_choose.obj = 'Drafted project'" class="col-md-3 text-center" ng-class="{ 'state_2': select_state == 'Drafted project' }">
+          <div class="bg-step" ng-click="select_state = 'Drafted project'">
+            <!--<md-icon md-svg-src="images/drafted-picto.svg" style="width: 18px; height: 18px;"></md-icon>-->
+            <img src="images/pictos_step/drafted-picto.svg" style="width: 18px; height: 18px;"/>
+            <p class="text_state" ng-click="state_choose.obj = 'Drafted project'">
+              Drafted <br>project
+            </p>
+            <div>
+              <div class="tooltipw">Raise the interest of the community and get feedback</div>
+            </div>
+          </div>
+        </div>
+        <div ng-click="state_choose.obj = 'Beta project'" class="col-md-3 text-center" ng-class="{ 'state_2': select_state == 'Beta project' }">
+          <div class="bg-step" ng-click="select_state = 'Beta project'">
+            <!--<md-icon md-svg-src="images/pictos_step/beta-picto.svg" style="width: 18px; height: 18px;"></md-icon>-->
+            <img src="images/pictos_step/beta-picto.svg" style="width: 18px; height: 18px;"/>
+            <p class="text_state" ng-click="state_choose.obj = 'Beta project'">
+              Beta project
+            </p>
+            <div>
+              <div class="tooltipw">Implement your work <br>and crash test it</div>
+            </div>
+          </div>
+        </div>
+        <div ng-click="state_choose.obj = 'Live project'" class="col-md-3 text-center" ng-class="{ 'state_2': select_state == 'Live project' }">
+          <div class="bg-step" ng-click="select_state = 'Live project'">
+            <!--<md-icon md-svg-src="images/pictos_step/live-picto.svg" style="width: 18px; height: 18px;"></md-icon>-->
+            <img src="images/pictos_step/live-picto.svg" style="width: 18px; height: 18px;"/>
+            <p class="text_state" ng-click="state_choose.obj = 'Live project'">
+              Live project
+            </p>
+            <div>
+              <div class="tooltipw">Promote your project <br>and meet your early fans</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+$(function() {
+  $(document).ready(function() {
+    window.scrollTo(0, 0);
+  });
+});
+
+document.getElementById('main-body').onclick = function(e) {
+
+	if (e.target.id == 'dst' && document.getElementById('dsd2').style.display == "none") {
+		document.getElementById('dsd2').style.display = "block";
+		document.querySelectorAll("#dst img")[0].style.transform = "rotate(-180deg)";
+	} else {
+		if (document.getElementById('dsd2')) {
+			document.getElementById('dsd2').style.display = "none";
+			document.querySelectorAll("#dst img")[0].style.transform = "rotate(0deg)";
+		}
+	}
+
+}
+
+</script>

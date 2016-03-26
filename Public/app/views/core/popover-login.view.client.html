@@ -1,0 +1,25 @@
+<md-bottom-sheet class="md-grid custom-popover" layout="column" ng-cloak>
+  <section id="popover-login">
+      <div class="popover-container">
+        <div class="popover-text">
+          <h1>hello.</h1>
+          <p>We are glad to have you here. Join thousands of creators and share your project<br /> or your knowledge with our growing community.</p>
+        </div>
+        <div class="popover-button">
+          <div class="fb-login">
+            <a href="http://127.0.0.1/auth/facebook">
+              <button><i class="fa fa-facebook" style="color: white"></i>Log in with Facebook</button>
+            </a>
+          </div>
+          <div class="go-login">
+            <a href="http://127.0.0.1/auth/google">
+              <button class="go-login"><img src="/images/social_media/newgoogle-logo.svg">Log in with Google</button>
+            </a>
+          </div>
+          <div class="email-login" ng-click="popSwL()">
+            <a><img src="/images/mailbox-icon-w.png"> Sign up with email</a>
+          </div>
+        </div>
+      </div>
+  </section>
+</md-bottom-sheet>

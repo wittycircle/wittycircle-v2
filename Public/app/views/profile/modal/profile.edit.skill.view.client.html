@@ -1,0 +1,28 @@
+<section id="profile-skill-body">
+	<div class="profile-body-nav">
+		<li class="sbnsk">Skills</li>
+		<img src="/images/cross-icon.svg" ng-click="dismiss()"></li>
+	</div>
+
+	<div class="profile-skill-search">
+		<div class="profile-skill-header">
+			<h4>What are you skilled in?</h4>
+		</div>
+		<div class="profile-skill-select sss">
+			<li ng-repeat="profileSkill in profileSkills track by $index">
+				<h4>{{profileSkill.skill_name}} <i class="fa fa-times" ng-click="removeSkill(profileSkill)"></i></h4>
+			</li>
+		</div>
+		<div class="profile-skill-inSearch">
+			<input type="search" ng-model="skillSearch" placeholder="Search for a specific skill...">
+		</div>
+		<div class="profile-skill-list sss">
+			<li ng-repeat="cSkill in cSkills | filter: skillSearch | limitTo : 34" ng-click="getSkill(cSkill)">
+				<h4>{{cSkill.name}}</h4>
+			</li>
+		</div>
+		<div class="profile-skill-button">
+			<button type="submit" ng-click="saveSkill()"><i ng-if="saveText === 'Saved'" class="fa fa-check"></i> {{saveText}}</button>
+		</div>
+	</div>
+</section>

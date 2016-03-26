@@ -1,0 +1,685 @@
+
+/****** Presentation Global ******/
+.presentation-component {
+	position: absolute;
+	width: 1000px;
+	z-index: 20;
+	text-align: left;
+	top: 160px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	padding-left: 30px;
+
+	h2 {
+		font-family: 'FreigLight';
+		font-size: 32px;
+		color: white;
+	}
+	.searchbox {
+		border-radius: 4px;
+		cursor: pointer;
+		background-color: rgba(20, 20, 20, 0.5);
+		h2 {
+			padding-top: 6px;
+			padding-bottom: 6px;
+		}
+	}
+
+	img {
+		display: inline-block;
+		width: 14px;
+		margin: 5px 10px 15px 10px;
+		-webkit-transition: all 150ms linear;
+		-o-transition: all 150ms linear;
+		-moz-transition: all 150ms linear;
+		-ms-transition: all 150ms linear;
+		-kthtml-transition: all 150ms linear;
+		transition: all 150ms linear;
+	}
+
+	.presentation-title {
+		padding-top: 15px;
+		padding-bottom: 20px;
+		h2 {
+			font-family: 'FreigSem';
+			font-size: 36px;
+		}
+	}
+
+	.inputfield {
+		input {
+			width: 140px;
+			padding-right: 10px;
+			padding-left: 10px;
+			color: #999999;
+			font-size: 32px;
+			font-family: 'FreigLight';
+			border: none;
+			border-radius: 5px;
+			background-color: rgba(20, 20, 20, 0.5);
+			cursor: pointer;
+			-webkit-transition: all 100ms linear;
+			-o-transition: all 100ms linear;
+			-moz-transition: all 100ms linear;
+			-ms-transition: all 100ms linear;
+			-kthtml-transition: all 100ms linear;
+			transition: all 100ms linear;
+		}
+
+		input:focus {
+			color: white;
+		}
+	}
+
+	.downbox {
+		position: absolute;
+		background-color: white;
+		z-index: 1000;
+		border: 1px solid #999999;
+		border-radius: 8px;
+		width: 240px;
+
+		li {
+			padding: 5px 20px 5px 20px;
+			font-family: 'FreigBook';
+			color: #222222;
+			font-size: 18px;
+		}
+
+		li:hover {
+			border-radius: 8px;
+			background-color: #F5F5F5;
+		}
+
+		ul {
+			padding-bottom: 10px;
+			margin-top: 8px;
+		}
+	}
+
+	label {
+		position: absolute;
+		font-family: 'FreigLight';
+		pointer-events: none;
+		font-weight: 300;
+		font-size: 32px;
+		color: rgba(255, 255, 255, 0.9);
+		margin-top: -47px;
+		margin-left: 10px;
+		-webkit-animation-duration: 0.4s;
+		-moz-animation-duration: 0.4s;
+		-o-animation-duration: 0.4s;
+		-ms-animation-duration: 0.4s;
+	}
+}
+
+.presentation-body-container {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.presentation-body-title {
+	text-align: center;
+	padding: 45px 20px 60px 20px;
+
+	h4 {
+		font-family: 'FreigSem';
+		font-size: 18px;
+		color: #222222;
+
+		strong {
+			color: #ff4d4d;
+		}
+
+		span {
+			color: #ff4d4d;
+		}
+	}
+}
+
+.presentation-body-loadmore {
+	padding: 50px 20px 90px 20px;
+	text-align: center;
+
+	button {
+		display: inline-block;
+		padding: 5px 20px 7px 20px;
+		border: 2px solid #222222;
+		border-radius: 5px;
+		font-family: 'FreigSem';
+		font-size: 16px;
+		color: #222222;
+		background-color: white;
+	}
+
+	button:hover {
+		background-color: #222222;
+		color: white;
+	}
+}
+
+/****** Discover ******/
+
+.discover-component {
+	.discover-search1 {
+		.discover-search1-text {
+			display: inline-block;
+			margin: 0px 10px;
+		}
+
+		.discover-search1-dropdown {
+			display: inline-block;
+			margin: 10px 0px;
+			h2 {
+				display: inline-block;
+				padding: 5px 15px 5px 10px;
+			}
+
+			.discover-search1-downbox1 {
+				position: absolute;
+				z-index: 50;
+				background-color: white;
+				border: 1px solid white;
+				border-radius: 8px;
+				width: 200px;
+
+				ul {
+					margin-top: 10px;
+					margin-bottom: 20px;
+				}
+
+				li {
+					padding: 10px 20px 0px 20px;
+					font-family: 'FreigLight';
+					color: #222222;
+					font-size: 18px;
+				}
+
+				li:hover {
+					background-color: #F5F5F5;
+				}
+			}
+
+			.discover-search1-downbox2 {
+				position: absolute;
+		        background-color: white;
+		        border: 1px solid white;
+		        z-index: 99999;
+		        border-radius: 8px;
+		        margin-left: 5px;
+
+				ul {
+					-webkit-column-count: 3;
+					-moz-column-count: 3;
+					column-count: 3;
+					margin-top: 10px;
+					margin-bottom: 20px;
+					margin-right: 10px;
+				}
+
+				li {
+					padding: 10px 20px 0px 20px;
+					font-family: 'FreigLight';
+					color: #222222;
+					font-size: 18px;
+				}
+
+				li:hover {
+					background-color: #F5F5F5;
+				}
+			}
+		}
+
+	}
+
+	.discover-search2 {
+		#input-dsa::-webkit-input-placeholder {
+			color: white;
+		}
+
+		#input-dsa2::-webkit-input-placeholder {
+			color: rgba(255, 255, 255, 0.5);
+		}
+
+		.discover-search2-text {
+			display: inline-block;
+			margin-right: 10px;
+			-webkit-transition: all 400ms linear;
+			-o-transition: all 400ms linear;
+			-moz-transition: all 400ms linear;
+			-ms-transition: all 400ms linear;
+			-kthtml-transition: all 400ms linear;
+			transition: all 400ms linear;
+		}
+
+		.discover-search2-dropdown {
+			display: inline-block;
+			margin-right: 10px;
+
+			h2 {
+				display: inline-block;
+				padding: 5px 15px 5px 10px;
+			}
+
+			.discover-search2-downbox {
+				position: absolute;
+				z-index: 50;
+				background-color: white;
+				border: 1px solid white;
+				border-radius: 8px;
+			}
+			ul {
+				-webkit-column-count: 3;
+				-moz-column-count: 3;
+				column-count: 3;
+				margin-top: 10px;
+				margin-bottom: 20px;
+				margin-right: 10px;
+			}
+
+			li {
+				padding: 10px 20px 0px 20px;
+				font-family: 'FreigLight';
+				color: #222222;
+				font-size: 18px;
+			}
+
+			li:hover {
+				background-color: #F5F5F5;
+			}
+
+		}
+
+		.discover-skill-list {
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			-webkit-animation-duration: 0.4s;
+			-moz-animation-duration: 0.4s;
+			-o-animation-duration: 0.4s;
+			-ms-animation-duration: 0.4s;
+
+			.discover-skill-tag {
+				display: inline-block;
+				h2 {
+					display: inline-block;
+					padding: 5px 5px 5px 10px;
+				}
+
+				.discover-skill-cross {
+					display: inline-block;
+					padding-top: 10px;
+					img:focus {
+						outline: 0;
+					}
+				}
+			}
+
+			span {
+				display: inline-block;
+				font-family: 'FreigBook';
+				font-size: 30px;
+				color: white;
+				margin-bottom: 0;
+			}
+		}
+
+		.discover-search2-dropdown2 {
+			display: inline-block;
+			margin: 0px 10px 10px 0px;
+
+			h2 {
+				display: inline-block;
+				padding: 8px 5px 8px 10px;
+			}
+
+			.discover-search2-anyskill {
+				input {
+					background-color: rgba(20, 20, 20, 0.5);
+					width: 130px;
+					-webkit-transition: all 200ms linear;
+					-o-transition: all 200ms linear;
+					-moz-transition: all 200ms linear;
+					-ms-transition: all 200ms linear;
+					-kthtml-transition: all 200ms linear;
+					transition: all 200ms linear
+				}
+
+			}
+
+			.discover-search2-popularskills {
+				h3 {
+					font-family: 'FreigBook';
+					color: #999999;
+					font-size: 18px;
+					padding: 8px 20px;
+				}
+			}
+
+			.discover-search2-downbox1 {
+				max-height: 340px;
+				min-height: 50px;
+				overflow: scroll;
+
+				span {
+					padding: 10px;
+					font-family: 'FreigBook';
+					font-style: italic;
+					font-size: 16px;
+					color: #999999;
+				}
+			}
+		}
+
+		.discover-search2-anylocation {
+			display: inline-block;
+			-webkit-transition: all 400ms linear;
+			-o-transition: all 400ms linear;
+			-moz-transition: all 400ms linear;
+			-ms-transition: all 400ms linear;
+			-kthtml-transition: all 400ms linear;
+			transition: all 400ms linear;
+			input {
+				width: 200px;
+			}
+
+			input:focus {
+				color: white;
+				::-webkit-input-placeholder {
+					color: white;
+				}
+			}
+		}
+
+		.inputfield {
+			input {
+				color: white;
+			}
+		}
+	}
+}
+
+#discover-body-content {
+	.discover-body-container {
+		.discover-body-list {
+			text-align: left;
+			padding-left: 20px;
+
+			.discover-body-card {
+				margin: 0 16px 40px 16px;
+				display: inline-block;
+				width: 287px;
+				height: 418px;
+				border: 1px solid #E5E5E5;
+				border-radius: 5px;
+				cursor: pointer;
+				overflow: hidden;
+			}
+		}
+	}
+}
+
+/****** Meet ******/
+
+.meet-component {
+	li {
+		padding: 10px 20px 5px 20px;
+		font-family: 'FreigBook';
+		color: #222222;
+		font-size: 18px;
+	}
+
+	li:hover {
+		border-radius: 8px;
+		background-color: #F5F5F5;
+	}
+
+	ul {
+		padding-bottom: 10px;
+		margin-top: 8px;
+	}
+
+	#meet-search1 {
+		.meet-search1-dropdown {
+			display: inline-block;
+			margin: 0px 10px 10px 0px;
+
+			h2 {
+				display: inline-block;
+				padding: 6px 5px 6px 10px;
+			}
+		}
+
+		.meet-search1-anyskill {
+			input {
+				width: 130px;
+				-webkit-animation-duration: 0.4s;
+				-moz-animation-duration: 0.4s;
+				-o-animation-duration: 0.4s;
+				-ms-animation-duration: 0.4s;
+			}
+			input::-webkit-input-placeholder {
+				-webkit-transition: all 200ms linear;
+				-o-transition: all 200ms linear;
+				-moz-transition: all 200ms linear;
+				-ms-transition: all 200ms linear;
+				-kthtml-transition: all 200ms linear;
+				transition: all 200ms linear;
+			}
+		}
+
+		#input-msa::-webkit-input-placeholder {
+			color: white;
+		}
+
+		#input-msa2::-webkit-input-placeholder {
+			color: rgba(255, 255, 255, 0.3);
+		}
+
+		.meet-search1-text {
+			display: inline-block;
+			margin: 0px 10px 0px 0px;
+		}
+
+		.meet-search1-text2 {
+			display: inline-block;
+			margin: 0px 10px 0px 0px;
+		}
+
+		.meet-skill-list {
+			display: inline-block;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			-webkit-animation-duration: 0.4s;
+			-moz-animation-duration: 0.4s;
+			-o-animation-duration: 0.4s;
+			-ms-animation-duration: 0.4s;
+
+			.meet-skill-tag {
+				display: inline-block;
+				h2 {
+					display: inline-block;
+					padding: 6px 5px 6px 10px;
+				}
+
+				.meet-skill-cross {
+					display: inline-block;
+					padding-top: 10px;
+					img:focus {
+						outline: 0;
+					}
+				}
+			}
+
+			span {
+				display: inline-block;
+				font-family: 'FreigBook';
+				font-size: 30px;
+				color: white;
+				margin-bottom: 0;
+			}
+		}
+
+		.meet-search1-popularskills {
+			h3 {
+				font-family: 'FreigBook';
+				color: #999999;
+				font-size: 19px;
+				padding: 8px 20px;
+			}
+
+		}
+
+		.meet-search1-downbox1 {
+			max-height: 340px;
+			min-height: 50px;
+			overflow: scroll;
+
+			span {
+				padding: 10px;
+				font-family: 'FreigBook';
+				font-style: italic;
+				font-size: 16px;
+				color: #999999;
+			}
+		}
+
+		.meet-search1-downbox2 {
+
+		}
+
+		.meet-search2-anylocation {
+			display: inline-block;
+
+			input {
+				width: 200px;
+			}
+			input:focus {
+				color: white;
+			}
+		}
+		
+		.inputfield {
+			input {
+				color: white;
+			}
+		}
+
+		.meet-search2-text2 {
+			display: inline-block;
+			margin: 0px 10px 0px 0px;
+		}
+	}
+
+	.meet-search2 {
+		margin: 5px 0;
+
+		.meet-search2-text1 {
+			display: inline-block;
+		}
+
+		.meet-search2-dropdown {
+			display: inline-block;
+			h2 {
+				display: inline-block;
+				padding: 10px 15px 10px 10px;
+			}
+
+			.meet-search2-anyskills {
+				margin-left: 20px;
+				margin-right: 10px;
+			}
+		}
+
+		.meet-search2-anylocation {
+			display: inline-block;
+
+			input {
+				width: 200px;
+			}
+		}
+
+		.meet-search2-text2 {
+			display: inline-block;
+			margin: 0px 10px 0px 0px;
+		}
+	}
+}
+
+#meet-body-content {
+	max-width: 1000px;
+	margin: 0 auto;
+	-webkit-transition-delay: all 500ms linear;
+	-o-transition-delay: all 500ms linear;
+	-moz-transition-delay: all 500ms linear;
+	-ms-transition-delay: all 500ms linear;
+	-kthtml-transition-delay: all 500ms linear;
+	transition-delay: all 500ms linear;
+
+	.meet-body-cards {
+		text-align: left;
+		padding-left: 15px;
+
+		.meet-body-card {
+			display: inline-table;
+			text-align: center;
+			width: 207px;
+			height: 260px;
+			margin: 0px 16px 50px 16px;
+			border: 1px solid #E5E5E5;
+			border-radius: 5px;
+		}
+	}
+}
+
+/****** Work ******/
+
+.work-component {
+	.wst {
+		display: inline-block;
+		margin: 0px 5px;
+	}
+	.work-search1{
+		margin: 10px 0px;
+		.work-search1-dropdown {
+			display: inline-block;
+			margin-right: 10px;
+
+			h2 {
+				display: inline-block;
+				padding: 10px 15px 10px 10px;
+			}
+		}
+
+		.work-search1-textmin {
+			margin: 0;
+		}
+	}
+
+	.work-search2 {
+		margin: 15px 0px;
+
+		.work-search2-location {
+			margin: 0;
+			.work-search2-anylocation {
+				input {
+					width: 200px;
+				}
+
+				input:focus {
+					color: white;
+				}
+			}
+		}
+
+		.work-search2-dropdown {
+			display: inline-block;
+			margin-left: 20px;
+			h2 {
+				display: inline-block;
+				padding: 10px 15px 10px 10px;
+			}
+		}
+	}
+}

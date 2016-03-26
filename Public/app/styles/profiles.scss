@@ -1,0 +1,741 @@
+a:hover {
+	color: white
+}
+
+#profile-header {
+	position: relative;
+	height: 410px;
+	width: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	h2 {
+		font-family: 'FreigSem';
+		font-size: 36px;
+	}
+
+	h5 {
+		font-family: 'FreigBook';
+		font-size: 17px;
+	}
+	.filter {
+		position: absolute;
+		height: 410px;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.profile-cover-first {
+		position: absolute;
+		width: 280px;
+		left: 0;
+		right: 0;
+		top: 25%;
+		margin: 0 auto;
+		text-align: center;
+		z-index: 50;
+
+		p {
+			font-family: 'FreigBook';
+			font-size: 21px;
+			color: white;
+			margin-bottom: 15px;
+		}
+
+		a {
+			font-family: 'FreigSem';
+			font-size: 15px;
+			color: white;
+			padding: 8px 15px;
+			background-color: #ff4d4d;
+			border-radius: 4px;
+			cursor: pointer;
+			-webkit-transition: all 200ms linear;
+			-o-transition: all 200ms linear;
+			-moz-transition: all 200ms linear;
+			-ms-transition: all 200ms linear;
+			-kthtml-transition: all 200ms linear;
+			transition: all 200ms linear;
+
+			.fa-camera {
+				font-size: 16px;
+				margin-right: 5px;
+			}
+		}
+
+		a:hover {
+			background-color: #d94242;
+		}
+	}
+
+	.profile-contents {
+		position: relative;
+		top: 140px;
+		z-index: 49;
+		max-width: 1000px;
+		margin-left: auto;
+		margin-right: auto;
+
+		.profile-upload-cover {
+			position: relative;
+			top: -50px;
+			display: none;
+			float: right;
+			cursor: pointer;
+			margin-right: 15px;
+			background-color: rgba(0, 0, 0, 0.3);
+			padding: 5px 10px;
+			border-radius: 4px;
+
+			p {
+				display: inline-block;
+				font-family: 'FreigBook';
+				font-size: 16px;
+				color: white;
+				margin: 0;
+			}
+
+			i {
+				display: inline-block;
+				margin-right: 10px;
+			}
+
+			.fa-camera {
+				color: white;
+				font-size: 18px;
+				-webkit-transition: all 150ms linear;
+				-o-transition: all 150ms linear;
+				-moz-transition: all 150ms linear;
+				-ms-transition: all 150ms linear;
+				-kthtml-transition: all 150ms linear;
+				transition: all 150ms linear;
+			}
+		}
+
+		.profile-upload-cover:hover {
+			background-color: rgba(0, 0, 0, 0.5);
+			.fa-camera {
+				transform: scale(0.9,0.9);
+			}
+		}
+
+		.profile-info {
+			display: inline-block;
+
+			.spinner-item {
+				height: 9px;
+				width: 9px;
+			}
+
+			.profile-update-picture {
+				position: absolute;
+				height: inherit;
+				width: 100%;
+				cursor: pointer;
+				border-radius: 50%;
+				background-color: rgba(0,0,0,0.5);
+				display: none;
+
+				.fa-camera {
+					position: absolute;
+					top: 47%;
+					left: 45%;
+					color: #e5e5e5;
+					-webkit-transition: all 100ms linear;
+					-o-transition: all 100ms linear;
+					-moz-transition: all 100ms linear;
+					-ms-transition: all 100ms linear;
+					-kthtml-transition: all 100ms linear;
+					transition: all 100ms linear;
+					font-size: 20px;
+				}
+			}
+
+			.profile-info-picture {
+				display: inline-block;
+				position: relative;
+				margin: 0px 10px;
+				border-radius: 50%;
+				width: 154px;
+				height: 154px;
+				overflow: hidden;
+				
+				img {
+					width: auto;
+					height: 154px;
+					border-radius: 50%;
+				}
+			}
+
+			.profile-info-picture2 {
+				display: inline-block;
+				position: relative;
+				margin: 0px 10px;
+				border: 3px solid white;
+				border-radius: 50%;
+				overflow: hidden;
+				width: 154px;
+				height: 154px;
+
+				img {
+					width: auto;
+					height: 154px;
+				}
+			}
+
+			.profile-upload-picture {
+				width: 154px;
+				height: auto;
+			}
+
+			.profile-info-cv {
+				display: inline-block;
+				position: relative;
+				float: right;
+				top: 55px;
+				margin: 0 10px;
+
+				.info-line {
+					margin-bottom: 5px;
+				}
+
+				.location {
+
+					.location-name-city {
+						display: inline-block;
+					}
+
+					h5 {
+						display: inline-block;
+					}
+
+					img {
+						display: inline-block;
+						width: auto;
+						height: 16px;
+						outline: 0;
+					}
+
+					input {
+						position: relative;
+						bottom: 3px;
+						width: 100%;
+						padding: 4px 10px;
+						border: 1px solid #e5e5e5;
+						border-radius: 4px;
+						font-family: 'FreigBook';
+						font-size: 16px;
+						color: #222222;
+					}
+
+					.location-name {
+						display: inline-block;
+						position: relative;
+						margin: 0px 10px 0px 5px;
+						top: 2px;
+						h5 {
+							top: 10px;
+							font-size: 16px;
+						}
+
+						input {
+							background-color: transparent;
+							border-bottom: 1px solid white;
+							border-top: none;
+							border-left: none;
+							border-right: none;
+							border-radius: 0;
+							color: white;
+						}
+					}
+
+					.location-social {
+						display: inline-block;
+						float: right;
+						margin: 0 20px;
+						li {
+							display: inline-block;
+
+							a {
+								width: 20px;
+								height: 20px;
+								margin: 0 4px;
+							}
+							a.website {
+								display: block;
+								background-image: url('/images/social_media/website-logo.png');
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+							a.fb {
+								display: block;
+								background-image: url('/images/social_media/facebook-logo.png');
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: 9px;
+							}
+							a.tw {
+								display: block;
+								background-image: url('/images/social_media/twitter-logo.png');
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+							a.gp {
+								display: block;
+								background-image: url('/images/social_media/googleplus-logo.png');
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+							a.ln {
+								display: block;
+								background-image: url('/images/social_media/linkedin-logo.png');
+								background-position: center;
+								background-repeat: no-repeat;
+								background-size: 100%;
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	.profile-bottom {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		height: 72px;
+		background-color: rgba(0, 0, 0, 0.5);
+
+		.profile-bottom-info {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 1000px;
+			height: inherit;
+
+			.profile-follow {
+				display: inline-block;
+				position: relative;
+				margin-left: 15px;
+				padding: 0 10px;
+				top: 8px;
+
+				.follower {
+					display: inline-block;
+					position: relative;
+					margin: 0 8px;
+					text-align: center;
+
+					h2 {
+						font-family: 'FreigSem';
+						font-size: 19px;
+					}
+					h5 {
+						font-size: 14px;
+					}
+				}
+
+				.follow,
+				.followed {
+					position: relative;
+					bottom: 14px;
+					text-align: center;
+				}
+			}
+
+			.profile-user-projects {
+				display: inline-block;
+				position: relative;
+				bottom: 5px;
+				cursor: pointer;
+				margin-left: 109px;
+				height: inherit;
+
+				.profile-projects-text {
+					display: inline-block;
+					margin-right: 5px;
+					padding: 27px 0;
+
+					h6 {
+						font-family: 'FreigBook';
+						font-size: 15px;
+					}
+				}
+
+				.profile-projects-picture {
+					display: inline-block;
+					height: inherit;
+					float: right;
+					padding: 15px 0;
+
+					.profile-pp {
+						display: inline-block;
+						width: 40px;
+						height: 40px;
+						border-radius: 5px;
+						margin: 0 4px;
+						overflow: hidden;
+
+						img {
+							width: auto;
+							height: 40px;
+						}
+					}
+
+					.profile-arrow {
+						display: inline-block;
+						float: right;
+						padding: 11px 0;
+
+						img {
+							margin-left: 5px;
+							width: 15px;
+							-webkit-transition: all 150ms linear;
+							-o-transition: all 150ms linear;
+							-moz-transition: all 150ms linear;
+							-ms-transition: all 150ms linear;
+							-kthtml-transition: all 150ms linear;
+							transition: all 150ms linear;
+						}
+					}
+				}
+			}
+
+			.profile-user-options {
+				a {
+					font-family: 'FreigBook';
+					font-size: 16px;
+					cursor: pointer;
+				}
+				display: inline-block;
+				float: right;
+				padding: 0px 0px 0px 40px;
+				position: relative;
+				height: 70px;
+				position: relative;
+				top: 0;
+
+				.profile-text-link {
+					display: inline-block;
+					margin: 23px 7px;
+				}
+
+				.profile-follow-link {
+					display: inline-block;
+					background-color: transparent;
+					margin: 17px 7px 0 7px;
+					border: 1px solid white;
+					border-radius: 4px;
+					padding: 6px 15px 7px 15px;
+					color: white;
+					font-family: 'FreigSem';
+					font-size: 16px;
+					float: right;
+					-webkit-transition: all 200ms linear;
+					-o-transition: all 200ms linear;
+					-moz-transition: all 200ms linear;
+					-ms-transition: all 200ms linear;
+					-kthtml-transition: all 200ms linear;
+					transition: all 200ms linear;
+
+					.fa-plus {
+						font-size: 14px;
+						margin-right: 10px; 
+					}
+
+					.fa-check {
+						font-size: 14px;
+						margin-right: 10px;
+					}
+				}
+
+				.profile-follow-link:hover {
+					background-color: white;
+					color: black;
+				}
+			}
+		}
+	}
+}
+
+#profile-slideDown {
+	.profile-slideDown-container {
+		.profile-slideDown-project {
+			max-width: 1000px;
+			padding: 70px 15px 0px 15px;
+			margin: 0 auto;
+
+			.profile-slideDown-article {
+				display: inline-block;
+				text-align: center;
+
+				.profile-slideDown-card {
+					margin: 0 16px 0 16px;
+					display: inline-block;
+					width: 287px;
+					height: 418px;
+					border: 1px solid #E5E5E5;
+					border-radius: 5px;
+					overflow: hidden;				
+				}
+
+				.profile-slideDown-text {
+					p {
+						font-family: 'FreigBook';
+						font-size: 15px;
+						color: #999999;
+						padding: 15px 0;
+					}
+				}
+			}
+		}
+
+		.profile-slideDown-close {
+			text-align: center;
+			margin-top: 30px;
+			border-top: 1px solid #e5e5e5;
+			border-bottom: 2px solid #e5e5e5;
+			background-color: #FAFAFA;
+			cursor: pointer;
+
+			p {
+				font-family: 'FreigSem';
+				font-size: 18px;
+				color: #222222;
+				margin: 15px 0;
+			}
+		}
+	}
+}
+
+
+#profile-corps {
+	position: relative;
+	z-index: 1;
+	
+	h2 {
+		display: inline-block;
+		font-family: 'FreigLight';
+		font-size: 36px;
+		color: #222222;
+		padding-bottom: 10px;
+	}
+
+	background-color: #FAFAFA;
+
+	.profile-contents {
+		max-width: 1024px;
+		margin: 0 auto;
+		background-color: white;
+
+		.profile-aside {
+			display: inline-block;
+			float: left;
+			padding: 40px 40px;
+			width: 370px;
+			li {
+				display: inline-block;
+				font-family: 'FreigSem';
+				font-size: 13px;
+				text-transform: uppercase;
+				padding: 2px 4px;
+				border-radius: 4px;
+				margin-bottom: 5px;
+				margin-right: 4px;
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+
+			}
+			.profile-first-aside {
+				margin: 20px 0;
+
+
+				.profile-edit-skills {
+					display: inline-block;
+					position: relative;
+					bottom: 6px;
+					margin-left: 10px;
+					outline: 0;
+				}
+
+
+				.profile-aside-skills {
+					padding-left: 5px;
+					padding-top: 4px;
+
+					li {
+						background-color: #222222;
+						color: white;
+						cursor: pointer;
+					}
+
+					li:hover {
+						background-color: #999999;
+					}
+				}
+			}
+
+			.profile-second-aside {
+				margin: 20px 0;
+
+				img {
+					display: inline-block;
+					position: relative;
+					bottom: 5px;
+					margin-left: 10px;
+					outline: 0;
+				}
+
+				.profile-aside-interests {
+					padding-left: 5px;
+					padding-top: 4px;
+
+					li {
+						background-color: #999999;
+						color: white;
+					}
+
+					li:hover {
+						background-color: #222222;
+					}
+				}
+			}
+		}
+
+		.profile-main {
+			display: inline-block;
+			width: 630px;
+			padding-top: 40px;
+			padding-right: 20px;
+			padding-bottom: 200px;
+			min-height: 800px;
+
+			.profile-main-about {
+				margin-top: 20px;
+				margin-bottom: 20px;
+
+				img {
+					display: inline-block;
+					position: relative;
+					bottom: 5px;
+					margin-left: 10px;
+					outline: 0;
+				}
+
+				p {
+					font-family: 'FreigBook';
+					font-size: 18px;
+					color: #222222;
+					margin-bottom: 20px;
+					line-height: 28px;
+				}
+			}
+
+			.profile-main-experience {
+				margin-top: 60px;
+
+				.fa-plus {
+					display: inline-block;
+					position: relative;
+					bottom: 2px;
+					margin-left: 10px;
+					outline: 0;
+					font-size: 15px;
+					color: #999999;
+
+					span {
+						position: relative;
+						font-family: 'FreigSem';
+						font-size: 15px;
+						margin-left: 2px;
+						bottom: 1px;
+					}
+				}
+
+				.profile-exp-list {
+					.profile-exp {
+						padding-bottom: 10px;
+						border-bottom: 1px solid #E5E5E5;
+						.profile-exp-post {
+							padding-top: 10px;
+
+							h3 {
+								display: inline-block;
+								font-family: 'FreigSem';
+								color: #222222;
+								font-size: 18px;
+								padding-right: 8px;
+								padding-top: 2px;
+								padding-bottom: 2px;
+								border-right: 1px solid black;
+							}
+							h4 {
+								display: inline-block;
+								font-family: 'FreigBook';
+								color: #222222;
+								font-size: 18px;
+								padding-left: 8px;
+							}
+
+							.profile-exp-option {
+								float: right;
+								position: relative;
+								top: 2px;
+								margin-right: 10px;
+
+								img {
+									width: 16px;
+									height: 16px;
+									outline: 0;
+								}
+
+								.fa-trash {
+									color: #999999;
+									font-size: 16px;
+									outline: 0;
+								}
+							}
+						}
+
+						.profile-exp-period {
+							margin-top: 3px;
+							span {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								color: #999999;
+							}
+
+							.exp-location {
+								margin-left: 10px;
+							}
+						}
+
+						.profile-exp-description {
+							margin-top: 4px;
+							h6 {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								color: #222222;
+								line-height: 18px;
+							}
+						}
+					}
+				}
+			}
+
+			.profile-main-portfolio {
+				margin-top: 20px;
+			}
+		}
+	}
+}

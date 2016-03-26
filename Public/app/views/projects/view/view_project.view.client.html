@@ -1,0 +1,113 @@
+<section id="viewProject-page">
+	<header id="viewProject-header" data-ng-style="{'background-image': 'url(' + resizePic(vm.project.picture, 1200, 410) + ')', 'background-position': vm.project.picture_position}">
+		<div class="viewProject-filter"></div>
+		<div class="viewProject-title">
+			<h1 data-ng-bind="::vm.project.title"></h1>
+			<h4 data-ng-bind="::vm.project.description"></h4>
+			<div class="viewProject-info">
+				<li class="stickers-icon">
+					<img src="/images/stickers-icon-white.png">
+					<h5 data-ng-bind="::vm.category.name"></h5>
+				</li>
+				<li class="location-icon">
+					<img src="/images/location-icon-white.png">
+					<h5 data-ng-bind="(vm.project.location_city) + ', ' + (vm.project.location_country)"></h5>
+				</li>
+				<li class="user-icon">
+					<img src="/images/user-icon-white.png">
+					<h5><span data-ng-bind="vm.project_followers.length"></span> followers</h5>
+				</li>
+				<li class="ng-cloak">
+					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="goToProfile(vm.project.user.id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img ng-click="goToProfile(user.id)" class="img-circle" height="30px" width="30px" ng-repeat="user in involved_users" ng-src="{{user.profile_picture}}" />
+					</h5>
+				</li>
+			</div>
+		</div>
+		<div class="viewProject-bottom">
+			<div class="viewProject-nav">
+				<ul class="viewProject-category">
+					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
+					<li ui-sref=".feedback">Feedback <div class="circle_number" ng-bind="totalNumber" ng-if="totalNumber != false"></div></li>
+					<li ui-sref=".openings">Get involved <div class="circle_number" ng-bind="openingsNumber" ng-if="openingsNumber"></div></li></li>
+				</ul>
+
+				<ul class="viewProject-option">
+					<li data-ng-if="!editable || editable" ng-click="goToMessage(project.creator_user_id)">Contact</li>
+					<!--<li>Share</li>-->
+					<li id="sharer">
+						Share
+						<div class="icon-share animated bounceIn">
+								<span class="fa-stack fa-lg"
+								socialshare
+								socialshare-provider="facebook"
+								socialshare-text="this is a desc test"
+								socialshare-hashtags="wittycircle, projects"
+								socialshare-url="{{currentUrl}}"
+								socialshare-type="dialog">
+								  <i class="fa fa-circle fa-stack-1x"></i>
+								  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+								</span>
+								<span class="fa-stack fa-lg"
+								socialshare
+								socialshare-provider="twitter"
+								socialshare-via="Wittycircle"
+								socialshare-text="Wittycircle - My project {{project.title}} is now live on Wittycircle"
+								socialshare-url="{{currentUrl}}"
+								socialshare-popup-height="300"
+								socialshare-popup-width="400"
+								socialshare-trigger="click">
+									<i class="fa fa-circle fa-circle-twitter fa-stack-1x"></i>
+									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+								</span>
+						</li>
+					</li>
+					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: project.public_id})" ng-if="editable"><img src="../images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+					<button type="submit" ng-if="loggedUser && (!editable || editable == false)" ng-click="followProject(project.public_id)"><span><i ng-if="followText === 'Follow'" class="fa fa-plus"></i><i ng-if="followText !== 'Follow'" class="fa fa-check"></i></span>{{followText}}</button>
+					<button type="submit" ng-if="!loggedUser" ng-click="showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
+				</ul>
+			</div>
+		</div>
+	</header>
+
+	<div ui-view>
+		<div class="project-post-container">
+			<div class="project-post-video">
+				<videogular vg-theme="config.theme.url" class="video_custom animated fadeIn" ng-if="config.sources">
+					<vg-media vg-src="config.sources" class="animated fadeIn">
+					</vg-media>
+					<vg-controls ng-if="itsOk == 3" vg-autohide="config.plugins.controls.autoHide" vg-autohide-time="config.plugins.controls.autoHideTime">
+							<vg-play-pause-button></vg-play-pause-button>
+							<vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+							<vg-scrub-bar>
+									<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+							</vg-scrub-bar>
+							<vg-time-display>{{ totalTime | date:'mm:ss':'+0000' }}</vg-time-display>
+							<vg-volume>
+									<vg-mute-button></vg-mute-button>
+									<vg-volume-bar></vg-volume-bar>
+							</vg-volume>
+							<!--<div class='my-button iconButton'><img src="/images/witty-logo-icon-w.svg" height="20px" width="20px"></div>-->
+							<vg-fullscreen-button></vg-fullscreen-button>
+					</vg-controls>
+					<vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
+					<!--<vg-poster vg-url='config.plugins.poster'></vg-poster>-->
+				</videogular>
+			</div>
+			<div class="project-post-box">
+				<div class="custom-project-post" ng-bind-html="vm.project.post">
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script>
+		window.scrollTo(0, 0);
+
+	   function changeEditPictoB() {
+	   		$("#editButton").find('img').attr("src", '/images/picto-edit-vb.svg');
+	   };
+	   function changeEditPictoW() {
+	   		$("#editButton").find('img').attr("src", '/images/picto-edit-w.svg');
+	   };
+</script>
+</section>

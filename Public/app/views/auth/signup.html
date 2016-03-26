@@ -1,0 +1,634 @@
+<section id="signup-page" signup-page-dom=""onbeforeunload="return myFunction()">
+
+	<div class="filter"></div>
+
+	<section id="signup-basic-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba"><strong>Basics</strong></li></a>
+				<li class="sbnab" ng-disabled="!canPass">About you</li></a>
+				<li class="sbnsk">Skills</li>
+				<li class="sbnin">Interests</li>
+				<li class="sbnex">Experience</li>
+			</ul>
+		</div>
+
+		<div class="signup-body-info">
+			<div class="signup-info-picture">
+				<h1>{{personalInfo.first_name}} {{personalInfo.last_name}}</h1>
+				<div class="signup-dd-picture-2 animated fadeIn" ngf-drop="uploadProfilePicture(basicPicture)" ngf-select="uploadProfilePicture(basicPicture)" ng-model="basicPicture"
+		            ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
+		            accept="image/*"
+		            ngf-pattern="'image/*'" ng-class="{'signup-dd-picture': !signUpPicture}">
+					<div ng-if="imageSignupLoading" class="spinner-load">
+						<div class="spinner__item1 spinner-item"></div>
+						<div class="spinner__item2 spinner-item"></div>
+						<div class="spinner__item3 spinner-item"></div>
+					</div>
+					<img ng-if="signUpPicture" ng-src="{{signUpPicture}}" />
+				</div>
+				<div class="signup-dd-text">
+					<h4 ngf-select="uploadProfilePicture(basicPicture)" ng-model="basicPicture" ngf-multiple="false" ngf-allow-dir="false"
+		            accept="image/*"
+		            ngf-pattern="'image/*'">Upload a picture</h4>
+					<p>Click the link above or drag and drop a picture here.</p>
+				</div>
+			</div>
+
+			<div class="signup-info-info">
+				<div class="signup-info-gender">
+					<label>Your gender</label><br />
+					<div class="signup-radio-male">
+						<div id="srma" class="signup-radio" ng-click="getSexe('Male')"><i ng-if="sexe && sexe === 'Male'" class="fa fa-check"></i></div> 
+						<h5>Male</h5>
+					</div>
+					<div id="srfe" class="signup-radio-female">
+						<div class="signup-radio" ng-click="getSexe('Female')"><i ng-if="sexe && sexe !== 'Male'" class="fa fa-check"></i></div> 
+						<h5>Female</h5>
+					</div>
+				</div>
+
+				<div class="signup-info-bd">
+					<label>Your date of birth</label><br />
+					<div id="sbdbox1" class="signup-bd-box">
+						<div class="signup-bd-day bd-box">
+							<h4>{{formDay}}</h4>
+						</div>
+						<div id="sbdd" class="signup-bd-dropdown" onmouseover="preventScroll()" onmouseout="allowScroll()">
+							<ul>
+								<li ng-repeat="day in days" ng-click="getDay(day)">{{day}}</li>
+							</ul>
+						</div>
+					</div>
+
+					<div id="sbdbox2" class="signup-bd-box">
+						<div class="signup-bd-month bd-box">
+							<h4>{{formMonth}}</h4>
+						</div>
+						<div id="sbdm" class="signup-bd-dropdownM">
+							<ul>
+								<li ng-repeat="month in months" ng-click="getMonth(month)" onmouseover="preventScroll()" onmouseout="allowScroll()">{{month.Pap}}</li>
+							</ul>
+						</div>
+					</div>
+
+					<div id="sbdbox3" class="signup-bd-box">
+						<div class="signup-bd-year bd-box">
+							<h4>{{formYear}}</h4>
+						</div>
+						<div id="sbdy" class="signup-bd-dropdown">
+							<ul id="sbdyu">
+								<li ng-repeat="year in years" ng-click="getYear(year)" onmouseover="preventScroll()" onmouseout="allowScroll()">{{year}}</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="signup-info-location">
+					<label>Your location</label><br />
+					<input type="text" location-search="" ng-model="displayLocation" placeholder="Search your city" />
+				</div>
+
+				<div class="signup-info-button">
+					<button ng-click="saveBasics()" ng-class="{ 'disabled-button' : !checked }">Continue</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="signup-about-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba">Basics</li></a>
+				<li class="sbnab"><strong>About you</strong></li></a>
+				<li class="sbnsk">Skills</li>
+				<li class="sbnin">Interests</li>
+				<li class="sbnex">Experience</li>
+			</ul>
+		</div>
+
+		<div class="signup-about-status">
+			<div class="signup-status-general">
+				<div class="signup-status-area1 ssar">
+					<div class="ssa ssa1">
+						<h1>I am looking to</h1>
+					</div>
+					<div class="signup-status-dropdown">
+						<div class="ssa ssa2">
+							<h1>{{aboutText}}</h1>
+							<img src="/images/arrow-down-icon-b.svg">
+						</div>
+						<div class="ssa2-dropdown">
+							<li ng-click="getAboutText('Discover new things')">Discover new things</li>
+							<li ng-click="getAboutText('Join projects')">Join projects</li>
+							<li ng-click="getAboutText('Find teammates')">Find teammates</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="signup-about-aboutarea">
+			<h4>Tell us a bit about yourself</h4>
+			<div class="signup-aboutarea-text">
+				<textarea ng-model="aboutDescription" placeholder="Your story matters..."></textarea>
+			</div>
+		</div>
+
+		<div class="signup-about-button">
+			<span id="bab">Back</span>
+			<button ng-click="saveAbout()">Continue</button>
+		</div>
+	</section>
+
+	<section id="signup-skill-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba">Basics</li></a>
+				<li class="sbnab">About you</li></a>
+				<li class="sbnsk"><strong>Skills</strong></li>
+				<li class="sbnin">Interests</li>
+				<li class="sbnex">Experience</li>
+			</ul>
+		</div>
+
+		<div class="signup-skill-search">
+			<div class="signup-skill-header">
+				<h4>What are you skilled in?</h4>
+			</div>
+			<div class="signup-skill-select sss">
+				<li ng-repeat="skillC in skillCascade track by $index">
+					<h4>{{skillC.skill_name}} <i class="fa fa-times" ng-click="removeSkill(skillC.skill_id)"></i></h4>
+				</li>
+			</div>
+			<div class="signup-skill-inSearch">
+				<input type="search" ng-model="skillSearch" placeholder="Search for a specific skill...">
+			</div>
+			<div class="signup-skill-list sss">
+				<li ng-repeat="cSkill in cSkills | filter: skillSearch | limitTo : 34" ng-click="getSkill(cSkill)">
+					<h4>{{cSkill.name}}</h4>
+				</li>
+			</div>
+			<div class="signup-skill-button">
+				<span id="bsk">Back</span>
+				<button type="submit" ng-click="saveSkill()">{{sButton}}</button>
+			</div>
+		</div>
+	</section>
+
+	<section id="signup-interest-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba">Basics</li></a>
+				<li class="sbnab">About you</li></a>
+				<li class="sbnsk">Skills</li>
+				<li class="sbnin"><strong>Interests</strong></li>
+				<li class="sbnex">Experience</li>
+			</ul>
+		</div>
+
+		<div class="signup-interest-search">
+			<div class="signup-interest-header">
+				<h4>What are you into?</h4>
+			</div>
+			<div class="signup-interest-select sss">
+				<li ng-repeat="interest in interestList track by $index">
+					<h4>{{interest.interest_name}} <i class="fa fa-times" ng-click="removeInterest(interest.interest_id)"></i></h4>
+				</li>
+			</div>
+			<div class="signup-interest-inSearch">
+				<input type="search" ng-model="interestSearch" placeholder="Search for a specific hobby, topic...">
+			</div>
+			<div class="signup-interest-list sss">
+				<li ng-repeat="cInterest in cInterests | filter: interestSearch | limitTo : 34 track by $index" ng-click="getInterest(cInterest)">
+					<h4>{{cInterest.name}}</h4>
+				</li>
+			</div>
+			<div class="signup-interest-button">
+				<span id="bin">Back</span>
+				<button type="submit" ng-click="saveInterest()">{{iButton}}</button>
+			</div>
+		</div>
+	</section>
+
+	<section id="signup-experience-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba">Basics</li></a>
+				<li class="sbnab">About you</li></a>
+				<li class="sbnsk">Skills</li>
+				<li class="sbnin">Interests</li>
+				<li class="sbnex"><strong>Experience</strong></li>
+			</ul>
+		</div>
+
+		<div class="signup-experience-add">
+			<div class="signup-experience-title">
+				<h3>Tell us about your work experience</h3>
+			</div>
+
+			<div id="senew" class="signup-experience-new" ng-click="addNewPosition()">
+				<h4><i class="fa fa-plus"></i> Add a new reference</h4>
+				<h5>Job position, role in an association, volunteering...</h5>
+			</div>
+
+			<div class="signup-main-experience" ng-repeat="position in positions track by $index" add-position="">
+				<div class="signup-exp-list">
+					<div class="signup-exp">
+						<div class="signup-exp-post">
+							<h3 ng-bind="position.title"></h3>
+							<h4 ng-bind="position.company"></h4>
+							<div class="signup-exp-param">
+								<img src="/images/picto_edit.svg" ng-click="editPosition($index, position.id)">
+								<i class="fa fa-trash" ng-click="removePosition(position.id)"></i>
+							</div>
+						</div>
+						<div class="signup-exp-period">
+							<span class="exp-period"><i class="fa fa-calendar"></i> {{position.date_from | wittyDateFilterEx}} - {{position.date_to | wittyDateFilterEx}}</span>
+							<span ng-if="!position.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{position.location_city}}, {{position.location_country}}</span>
+							<span ng-if="position.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{position.location_city}}, {{position.location_state | uppercase}}</span>
+						</div>
+						<div class="signup-exp-description">
+							<p ng-bind="position.description"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="signup-experience-button">
+				<span id="bex">Back</span>
+				<button type="submit" ng-click="saveProfile()">{{exButton}}</button>
+			</div>
+		</div>
+	</section>
+
+	<section id="signup-experience-modal">
+		<div class="signup-modal-title">
+			<h3>Add a position</h3>
+			<img id="semcross" src="/images/cross-icon.svg">
+		</div>
+
+		<div class="signup-modal-body">
+			<div class="signup-modal-job sminput">
+				<label>Job title</label>
+				<input type="text" ng-model="eJob" />
+				<p ng-if="noJob">This is a required field</p>
+			</div>
+
+			<div class="signup-modal-company sminput">
+				<label>Company name</label>
+				<input type="text" ng-model="eCompany" />
+				<p ng-if="noCompany">This is a required field</p>
+			</div>
+
+			<div class="signup-modal-location sminput">
+				<label>Location</label>
+				<input type="text" placeholder="Search a city, a zip code,..." location-search="" ng-model="displayLocation2"/>
+				<p ng-if="noLocation">This is a required field</p>
+			</div>
+
+			<div class="signup-modal-period">
+				<label>Time period</label>
+				<div class="time-period">
+
+					<div id="tptm" class="time-period-dropdown">
+						<div class="tp-month">
+							<h4 ng-bind="startMonth"></h4>
+						</div>
+						<div id="tmdropdown" class="time-month-dropdown">
+							<ul>
+								<li ng-repeat="month in months" ng-click="getStartMonth(month)">{{month.Pap}}</li>
+							</ul>
+						</div>
+					</div>
+					<div id="tpty" class="time-period-dropdown">
+						<div class="tp-year">
+							<h4 ng-bind="startYear"></h4>
+						</div>
+						<div id="tydropdown" class="time-year-dropdown">
+							<ul>
+								<li ng-repeat="year in years | reverse" ng-click="getStartYear(year)">{{year}}</li>
+							</ul>
+						</div>
+					</div>
+					<div class="tp-dash"></div>
+
+					<div id="tptm2" class="time-period-dropdown">
+						<div class="tp-month">
+							<h4 ng-bind="endMonth"></h4>
+						</div>
+						<div id="tmdropdown2" class="time-month-dropdown">
+							<ul>
+								<li ng-repeat="month in months" ng-click="getEndMonth(month)">{{month.Pap}}</li>
+							</ul>
+						</div>
+					</div>
+					<div id="tpty2" class="time-period-dropdown">
+						<div class="tp-year">
+							<h4 ng-bind="endYear"></h4>
+						</div>
+						<div id="tydropdown2" class="time-year-dropdown">
+							<ul>
+								<li ng-repeat="year in years | reverse" ng-click="getEndYear(year)">{{year}}</li>
+							</ul>
+						</div>
+					</div>
+					<p ng-if="noTime">This is a required field</p>
+					<div class="tp-checkbox">
+						<input type="checkbox" ng-model="checkboxEndTime"> 
+						<h5>I'm currently working there</h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="signup-modal-description">
+				<label>Job description</label>
+				<textarea type="text" ng-model="eJobDescription" placeholder="What were you doing? What you shipped..."></textarea>
+			</div>
+
+			<div class="signup-modal-button">
+				<button ng-if="getIndex === -1" type="submit" ng-click="savePosition()">Add position</button>
+				<button ng-if="getIndex !== -1" type="submit" ng-click="savePosition(1)">Edit position</button>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+		$(document).ready(function() {
+			// $('.signup-info-gender').click(function(e) {
+			// 	var container1 	= $('#srma');
+			// 	var container2 	= $('#srfe');
+			// 	var coM 	 	= $('#rima');
+			// 	var coF			= $('#rife');
+
+			// 	if (container1.is(e.target) || container1.has(e.target).length && !coM.hasClass("fa-check")) {
+			// 		coF.removeClass("fa-check");
+			// 		coM.addClass("fa-check");
+			// 	}
+			// 	if (container2.is(e.target) || container2.has(e.target).length && !coF.hasClass("fa-check")) {
+			// 		coM.removeClass("fa-check");
+			// 		coF.addClass("fa-check");
+			// 	}
+
+			// });
+
+			//Modal
+			// $('#senew').click(function() {
+			// 	$('#signup-experience-body').removeClass('animated fadeInRightBig');
+			// 	$('#signup-experience-modal').fadeIn();
+			// 	$('#signup-experience-body').fadeOut();
+			// });
+
+			                function myFunction() {
+                    return "Write something clever here...";
+                }
+			$('#semcross').click(function() {
+				$('#signup-experience-modal').fadeOut();
+				$('#signup-experience-body').fadeIn();
+			});
+
+			// $('#sbnba').on('click', function() {
+			// 	$('#signup-basic-body').addClass('animated fadeInLeftBig', function() {
+			// 		console.log("OK");
+			// 		console.log($(this).css('display'));
+			// 		$(this).css('display', 'block');
+			// 	});
+			// 	$('#signup-about-body').addClass('animated fadeOutRightBig', function(){
+			// 		$(this).css('display', 'none');
+			// 	});
+			// });
+
+
+			$('#signup-page').on('click', function(e) {
+				var container1 = $('#sbdbox1');
+				var container2 = $('#sbdbox2');
+				var container3 = $('#sbdbox3');
+
+				/*** Section date of birth ***/
+				if (container1.is(e.target) || container1.has(e.target).length || $('#sbdd').css('display') === "block")
+					$('#sbdd').slideToggle(300);
+				if (container2.is(e.target) || container2.has(e.target).length || $('#sbdm').css('display') === "block")
+					$('#sbdm').slideToggle(300);
+				if (container3.is(e.target) || container3.has(e.target).length || $('#sbdy').css('display') === "block") {
+					if ($('#sbdy').css('display') === "block") {
+						var scrollIni = $('#sbdyu').offset().top;
+						$('#sbdy').animate({ scrollTop: scrollIni});
+					}
+					$('#sbdy').slideToggle(300);
+					if ($('#sbdy').css('display') === "block") {
+						var scrollTo = $('#sbdyu').offset().top + ($('#sbdyu').height() / 2);
+						$('#sbdy').animate({ scrollTop: scrollTo});
+					}
+				}
+
+
+				/*** Section nav ***/
+				var scope = angular.element($("#signup-page")).scope();
+
+				if (scope.canPass) {
+					var c0			= $('.sbnba');
+					var c1 			= $('.sbnab');
+					var c2 	 		= $('.sbnsk');
+					var c3 			= $('.sbnin');
+					var c4 			= $('.sbnex');
+
+					var b1 			= $('#bab');
+					var b2 			= $('#bsk');
+					var b3 			= $('#bin');
+					var b4 			= $('#bex');
+
+					var aClassName 	= $('#signup-basic-body');
+					var bClassName	= $('#signup-about-body');
+					var cClassName  = $('#signup-skill-body');
+					var dClassName  = $('#signup-interest-body');
+					var eClassName 	= $('#signup-experience-body');
+
+					var inRightBig 	= "animated fadeInRightBig";
+					var inLeftBig 	= "animated fadeInLeftBig";
+					var outRightBig = "animated fadeOutRightBig";
+					var outLeftBig 	= "animated fadeOutLeftBig";
+
+					if ($('#signup-basic-body').css('display') === "block") {
+						var count 	 = 0;
+						var cDisplay = $('#signup-basic-body');
+					}
+					if ($('#signup-about-body').css('display') === "block") {
+						var count 	 = 1;
+						var cDisplay = $('#signup-about-body');
+					}
+					if ($('#signup-skill-body').css('display') === "block") {
+						var count 	 = 2;
+						var cDisplay = $('#signup-skill-body');
+					}
+					if ($('#signup-interest-body').css('display') === "block") {
+						var count 	 = 3;
+						var cDisplay = $('#signup-interest-body');
+					}
+					if ($('#signup-experience-body').css('display') === "block") {
+						var count 	 = 4;
+						var cDisplay = $('#signup-experience-body');
+					}
+
+					if (b1.is(e.target)) {
+						aClassName.attr('class', inLeftBig);
+						aClassName.css('display', 'block');
+						cDisplay.attr('class', outRightBig);
+						setTimeout(function() {
+							cDisplay.hide();
+						}, 200);
+					}
+					if (b2.is(e.target)) {
+						bClassName.attr('class', inLeftBig);
+						bClassName.css('display', 'block');
+						cDisplay.attr('class', outRightBig);
+						setTimeout(function() {
+							cDisplay.hide();
+						}, 200);
+					}
+					if (b3.is(e.target)) {
+						cClassName.attr('class', inLeftBig);
+						cClassName.css('display', 'block');
+						cDisplay.attr('class', outRightBig);
+						setTimeout(function() {
+							cDisplay.hide();
+						}, 200);
+					}
+					if (b4.is(e.target)) {
+						dClassName.attr('class', inLeftBig);
+						dClassName.css('display', 'block');
+						cDisplay.attr('class', outRightBig);
+						setTimeout(function() {
+							cDisplay.hide();
+						}, 200);
+					}
+
+					if (c0.is(e.target)) {
+						if (count > 0) {
+							aClassName.attr('class', inLeftBig);
+							aClassName.css('display', 'block');
+							cDisplay.attr('class', outRightBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						}
+					}
+
+					if (c1.is(e.target)) {
+						if (count > 1) {
+							bClassName.attr('class', inLeftBig);
+							bClassName.css('display', 'block');
+							cDisplay.attr('class', outRightBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						} else {
+							bClassName.attr('class', inRightBig);
+							bClassName.css('display', 'block');
+							cDisplay.attr('class', outLeftBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						}
+					}
+
+					if (c2.is(e.target)) {
+						if (count > 2) {
+							cClassName.attr('class', inLeftBig);
+							cClassName.css('display', 'block');
+							cDisplay.attr('class', outRightBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						} else {
+							cClassName.attr('class', inRightBig);
+							cClassName.css('display', 'block');
+							cDisplay.attr('class', outLeftBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						}
+					}
+
+					if (c3.is(e.target)) {
+						if (count > 3) {
+							dClassName.attr('class', inLeftBig);
+							dClassName.css('display', 'block');
+							cDisplay.attr('class', outRightBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						} else {
+							dClassName.attr('class', inRightBig);
+							dClassName.css('display', 'block');
+							cDisplay.attr('class', outLeftBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						}
+					}
+
+					if (c4.is(e.target)) {
+						if (count < 4) {
+							eClassName.attr('class', inRightBig);
+							eClassName.css('display', 'block');
+							cDisplay.attr('class', outLeftBig);
+							setTimeout(function() {
+								cDisplay.hide();
+							}, 200);
+						}
+					}
+				}
+
+				/*** Section about ***/
+				var aCon1 = $('.ssa2');
+				var aCon2 = $('.ssa2-dropdown');
+
+				if (aCon1.is(e.target) || aCon1.has(e.target).length) {
+					if (aCon2.css('display') === "none") {
+						aCon1.find('img').css('transform', "rotate(-180deg)");
+						aCon2.css('display', "block");
+					}
+					else {
+						aCon1.find('img').css('transform', "rotate(0)");
+						aCon2.css('display', "none");
+					}
+				} else {
+					aCon1.find('img').css('transform', "rotate(0)");
+					aCon2.css('display', "none");
+				}
+
+				/*** Section experience ***/
+				//modal 
+				var tCon1 = $('#tptm');
+				var tCon2 = $('#tpty');
+				var tCon3 = $('#tptm2');
+				var tCon4 = $('#tpty2');
+
+				if (tCon1.is(e.target) || tCon1.has(e.target).length || $('#tmdropdown').css('display') === "block")
+					$('#tmdropdown').slideToggle(300);
+				if (tCon2.is(e.target) || tCon2.has(e.target).length || $('#tydropdown').css('display') === "block")
+					$('#tydropdown').slideToggle(300);
+				if (tCon3.is(e.target) || tCon3.has(e.target).length || $('#tmdropdown2').css('display') === "block")
+					$('#tmdropdown2').slideToggle(300);
+				if (tCon4.is(e.target) || tCon4.has(e.target).length || $('#tydropdown2').css('display') === "block")
+					$('#tydropdown2').slideToggle(300);
+			});
+
+			$('#skill-remove').click(function() {
+				console.log("e");
+			});
+
+		});
+
+		function preventScroll() {
+			document.body.style.position = "fixed";
+			document.body.style.overflow = "scroll";
+		}
+
+		function allowScroll() {
+			document.body.style.position = "static";
+		}
+	</script>
+
+</section>

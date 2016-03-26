@@ -1,0 +1,63 @@
+<section id="profile-about-body">
+	<div class="profile-body-nav">
+		<li class="sbnab">About you</li></a>
+		<img src="/images/cross-icon.svg" ng-click="dismiss()"></li>
+	</div>
+
+	<div class="profile-about-status">
+		<div class="profile-status-general">
+			<div class="profile-status-area1 ssar">
+				<div class="ssa ssa1">
+					<h1>I am looking to</h1>
+				</div>
+				<div class="profile-status-dropdown">
+					<div class="ssa ssa2">
+						<h1>{{aboutText}}</h1>
+						<img src="/images/arrow-down-icon-b.svg">
+					</div>
+					<div class="ssa2-dropdown">
+						<li ng-click="getAboutText('Discover new things')">Discover new things</li>
+						<li ng-click="getAboutText('Join projects')">Join projects</li>
+						<li ng-click="getAboutText('Find teammates')">Find teammates</li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="profile-about-aboutarea">
+		<h4>Tell us a bit about yourself</h4>
+		<div class="profile-aboutarea-text">
+			<textarea ng-model="aboutDescription" placeholder="Your story matters..."></textarea>
+		</div>
+	</div>
+
+	<div class="profile-about-button">
+		<button type="submit" ng-click="saveAbout()"><i ng-if="aButton === 'Saved'" class="fa fa-check"></i> {{aButton}}</button>
+	</div>
+
+	<script>
+
+		$(document).ready(function() {
+
+			$('#profile-about-body').on('click', function(e) {
+				var aCon1 = $('.ssa2');
+				var aCon2 = $('.ssa2-dropdown');
+
+				if (aCon1.is(e.target) || aCon1.has(e.target).length) {
+					if (aCon2.css('display') === "none") {
+						aCon1.find('img').css('transform', "rotate(-180deg)");
+						aCon2.css('display', "block");
+					}
+					else {
+						aCon1.find('img').css('transform', "rotate(0)");
+						aCon2.css('display', "none");
+					}
+				} else {
+					aCon1.find('img').css('transform', "rotate(0)");
+					aCon2.css('display', "none");
+				}
+			});
+		});
+	</script>
+</section>

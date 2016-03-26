@@ -1,0 +1,31 @@
+
+ <section id="modal-users" class="messages-newpost">
+    <div class="messages-modal-header">
+      <div class="messages-modal-title">
+        <h3>Add members to your team</h3>
+      </div>
+      <div class="messages-modal-cross" alt="witty-crosspicture">
+        <img src="/images/cross-icon.svg" ng-click="dismiss()">
+      </div>
+    </div>
+    <article id="messages-modal-searchArea" ng-init="searchUsers()">
+      <div class="messages-newpost-search">
+        <input type="search" placeholder="Search a username" ng-model="usersearched">
+      </div>
+      <div id="mmolist" class="messages-newpost-users">
+        <div class="messages-newpost-user" ng-repeat="user in users | toArray:false | filter:usersearched | limitTo:5" ng-click="goinvite(user)">
+          <div class="messages-newpost-puser">
+            <img ng-src="{{user.profile[0].profile_picture}}" alt="witty-userpicture" ng-show="profile.profile_picture !== null">
+            <div class="messages-newpost-iuser">
+              <h3>{{user.profile[0].first_name}} {{user.profile[0].last_name}}</h3>
+              <h5 ng-if="user.profile[0].location_city">{{user.profile[0].location_city}}, {{user.profile[0].location_country}}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="messages-newpost-footer">
+          <img src="/images/witty-logo-icon-b.svg">
+        </div>
+      </div>
+    </article>
+  </div>

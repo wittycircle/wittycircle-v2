@@ -1,0 +1,108 @@
+<section id="setting-page">
+
+	<header id="setting-header" ng-style="{'background-image': 'url({{ resizePic(backPic, 1200, 410, 'fill') }})'}">
+		<div class="setting-filter"></div>
+		<div class="setting-header-title">
+			<h1>Settings</h1>
+		</div>
+		<div class="setting-navbar">
+			<div class="setting-navbar-list">
+				<ul>
+					<li class="setting-navbar-general" onclick="showGeneral()">General</li>
+					<li class="setting-navbar-password" onclick="showPassword()">Password</li>
+					<li>Notifications <sup>soon</sup></li>
+<!-- 					<li>Social networks<sup>soon</sup></li>
+ -->				</ul>
+			</div>
+		</div>
+	</header>
+
+	<section id="setting-body">
+		<div class="setting-general setting-box">
+			<div class="setting-general-firstname sg-field">
+				<label>First name</label>
+				<input type="text" ng-value="data.first_Name" ng-model="data.first_name"/>
+				<p ng-if="!checkFirstName" >Please enter a valid first name</p>
+			</div>
+			<div class="setting-general-lastname sg-field">
+				<label>Last name</label>
+				<input type="text" ng-value="data.last_name" ng-model="data.last_name"/>
+				<p ng-if="!checkLastName" >Please enter a valid last name</p>
+			</div>
+			<div class="setting-general-username sg-field">
+				<label>Username</label>
+				<input type="text" ng-value="data.username" ng-model="data.username"/>
+				<span><h6>Your custom URL:</h6> <h5 ng-if="!data.username"><strong>wittycircle.com/{{username}}</strong></h5>
+				<h5 ng-if="data.username"><strong>wittycircle.com/{{data.username}}</strong></h5></span>
+				<p ng-if="!checkUsername" > Please enter a valid username</p>
+				<p ng-if="checkExistU" > Username already in use</p>
+			</div>
+			<div class="setting-general-email sg-field">
+				<label>Email</label>
+				<input type="email" ng-value="data.email" ng-model="data.email" />
+				<p ng-if="!checkEmail" >Please enter a valid email</p>
+				<p ng-if="checkExistE" > Email already in use</p>
+			</div>
+
+			<button type="submit" ng-click="generalUpdate()"><i ng-if="settingChanged" class="fa fa-check"></i> {{changeText}}</button>
+		</div>
+
+		<div class="setting-password setting-box" style="display: none;">
+			<div class="setting-password-current sg-field" ng-if="password">
+				<label>Current password</label>
+				<input type="password" ng-model="newPass.currentPass"/>
+				<h5 ng-if="checkCurrentPass" >Invalid password</h5>
+			</div>
+			<div class="setting-password-new sg-field">
+				<label>New password</label>
+				<input type="password" ng-model="newPass.password" placeholder="Minimum 8 characters" />
+				<h5 ng-if="checkSizePass">Your password must have minimum 8 characters</h5>
+				<h5 ng-if="checkNewPass">Please enter a valid password</h5>
+			</div>
+			<div class="setting-password-confirm sg-field">
+				<label>Confirm new password</label>
+				<input type="password" ng-model="newPass.confirmPass" placeholder="Must match your new password" />
+				<h5 ng-if="passNotMatch" >Your passwords does not match</h5>
+				<h5 ng-if="checkConfirmPass" >Please enter a valid password</h5>
+			</div>
+
+			<button type="submit" ng-click="passwordUpdate()"><i ng-if="passwordChanged" class="fa fa-check"> </i><span ng-show="!passwordChanged">Save new password</span><span ng-show="passwordChanged"> Saved</span></button>
+		</div>
+	</section>
+
+<!-- 	<section id="setting-delete">
+		<div class="setting-delete-box">
+			<h5>Thinking of leaving us permanently ?</h5>
+			<button>Delete account</button>
+			<h5>All your personal informations will be deleted from our databases.</h5>
+			<h4><strong>This action cannot be undone</strong></h4>
+		</div>
+	</section> -->
+
+	<script>
+		function showGeneral() {
+			if (document.getElementsByClassName('setting-general')[0].style.display == "none") {
+				document.getElementsByClassName('setting-general')[0].style.display = "block";
+				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";;
+			}
+		}
+
+		function showPassword() {
+			if (document.getElementsByClassName('setting-password')[0].style.display == "none") {
+				document.getElementsByClassName('setting-password')[0].style.display = "block";
+				document.getElementsByClassName('setting-general')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";;
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";;
+			}
+		}
+	</script>
+</section>
+
+
+

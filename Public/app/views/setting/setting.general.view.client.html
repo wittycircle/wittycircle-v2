@@ -1,0 +1,16 @@
+<div class="general_body_setting">
+	<form method="POST">
+		<label>First name</label>
+			<input type="text" ng-init="data.first_name=firstName" ng-model="data.first_name" style="width: 60%;"/><br />
+		<label>Last name</label>
+			<input type="text" ng-init="data.last_name=lastName" ng-model="data.last_name" style="width: 60%;"/><br />
+		<label >Username</label>
+			<input class="username_setting" type="text" ng-init="data.username=username" ng-model="data.username" style="width: 60%; margin-bottom: 0;"/><br />
+			<div class="setting_url">
+			<span>Your custom URL: wittycircle.com/{{data.username}}</span> <br />
+			</div>
+		<label class="setting_email">Email</label>
+			<input type="email" ng-init="data.email=email" ng-model="data.email" style="width: 60%;"/><br />
+		<button type="submit" ng-click="generalUpdate()">Save changes</button>
+	</form>
+</div>

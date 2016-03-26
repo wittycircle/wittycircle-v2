@@ -1,0 +1,254 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name wittyApp.controller: MeetCtrl
+ * @description
+ * # MeetCtrl
+ * Controller of the wittyApp
+ **/
+
+
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, showbottomAlert, $mdBottomSheet, Profile) {
+
+
+	/*** Meet Card Page ***/
+		$scope.$parent.seo = {
+			pageTitle: "Wittycircle | Meet",
+			pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+		};
+
+		$scope.$parent.card = {
+			title: "Meet",
+			type: "Meet page",
+			url: "http://www.wittycircle.com/meet",
+			image: "http://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
+		};
+
+
+	$scope.limit = 16;
+	
+	$http.get('http://127.0.0.1/skills').success(function(res) {
+		$scope.skills = res.skills;
+		if ($stateParams.skillParams) {
+			$scope.skillList = $stateParams.skillParams;
+		}
+	});
+
+	$scope.resizePicSmall = function(url) {
+		url = Picture.resizePicture(url, 200, 100, "fill");
+		return url;
+	}
+
+	Users.getCardProfiles(function(result){
+		$scope.cardProfiles = result.data;
+		if ($rootScope.globals.currentUser) {
+			Profile.getFollowedUser(result.data, function(res){
+				$scope.followed = res;
+			});
+		}	
+	});
+
+	$scope.expand = function(value) {
+		$scope.limit = $scope.limit + value;
+	};
+
+	$scope.$on("$destroy", function(){
+		var container = $('.custom-popover');
+		if (container.length) {
+			$mdBottomSheet.hide();
+			$('.md-bottom-sheet-backdrop').css('display', 'none')
+			$('#page-wrap').css('display', 'none');
+		}
+	});
+
+	/*****-- FUNCTION --*****/
+	setTimeout(function() {
+	    if (!$rootScope.globals.currentUser) {
+	  		$(window).scroll(function () {
+	  			if ($('#meet-body-page')[0]) {
+	  				var x = $(window).scrollTop();
+	  				var container = $('.custom-popover');
+	  				if (x > 350) {
+	  					if (!container.length) {
+	  						$mdBottomSheet.hide();
+	  						showbottomAlert.pop_it_persistance();
+	  						setTimeout(function() {
+	  							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
+	  							$('#page-wrap').css('display', 'block');
+	  						}, 150);
+	  					}
+	  				}
+	  				if (x < 350) {
+	  					if (container.length) {
+	  						$mdBottomSheet.hide();
+	  						$('.md-bottom-sheet-backdrop').css('display', 'none')
+	  						$('#page-wrap').css('display', 'none');
+	  					}
+	  				}
+	  			}
+	  		});
+	    }
+	}, 1000);
+
+	$scope.mHelp = "Anything";
+	$scope.getAnything = function(help) {
+		$scope.mHelp = help;
+	};
+
+	/*** SECTION SEARCH MEET ***/
+	$scope.skillList = [];
+	$scope.count = -1;
+	$scope.skillSearch = [];
+	$scope.searchSkill = function(name) {
+		$scope.skillName = [];
+
+		if (document.getElementById('labelNoText')) {
+			document.getElementById('labelNoText').id = "labelText";
+			document.getElementById('labelNoText2').id = "labelText2";
+			document.getElementById('labelText').style.display = "block";
+			document.getElementById('labelText2').style.color = "white";
+		}
+		document.getElementById('msabox1').style.display = "none";
+		document.getElementById('msabox2').style.display = "none";
+
+		if ($scope.skillList.length < 5) {
+			if ($scope.skillList.length == 0) {
+				$scope.skillList.push({sName: name});
+				document.getElementById('input-msa').style.display = "none";
+
+			}
+			else {
+				for(var i = 0; i < $scope.skillList.length; i++) {
+					if ($scope.skillList[i].sName === name)
+						break;
+				}
+				if (i == $scope.skillList.length) {
+					$scope.skillList.push({sName: name});
+					document.getElementById('input-msa').style.display = "none";
+				}
+			}
+		}
+		if ($scope.skillList.length == 5)
+			$scope.fullList = true;
+		$http.post('http://127.0.0.1/skills/search/users', $scope.skillList).success(function(res) {
+			$scope.skillSearch = res.data;
+		});
+
+	}
+
+	$scope.removeSkill = function(name) {
+
+		var x = document.getElementsByClassName('meet-skill-list');
+		var index;
+
+		for (var i = 0; i < $scope.skillList.length; i++) {
+			if ($scope.skillList[i].sName === name) {
+				x[i].className = "meet-skill-list animated fadeOut";
+				index = i;
+				break ;
+			}
+		}
+		if (index >= 0)
+			$scope.skillList.splice(index, 1);
+		if ($scope.skillList.length < 5)
+			$scope.fullList = false;
+		$http.post('http://127.0.0.1/skills/search/users', $scope.skillList).success(function(res) {
+			$scope.skillSearch = res.data;
+		});
+	}
+
+	/*** SECTION PROFILE CARD ***/
+	$scope.goToProfile = function(id) {
+		console.log(id);
+		Users.getUserIdByProfileId(id).then(function(data) {
+			$location.path('/' + data.userId.username);
+		});
+	};
+
+	$scope.followUserFromCard = function(id, index, $event) {
+		if (!$rootScope.globals.currentUser) {
+			showbottomAlert.pop_it($event);
+		} else {
+			Users.getUserIdByProfileId(id).then(function(data) {
+				if ($rootScope.globals.currentUser.id !== data.userId.id) {
+					Profile.followUser(data.userId.username, function(res) {
+						if (res.success) {
+							if (res.msg === "User followed")
+							$scope.followed[index] = true;
+							else
+							$scope.followed[index] = false;
+						}
+					});
+				}
+			});
+		}
+	};
+
+	$(document).ready(function() {
+		$('.meet-body-cards').mouseup(function(e) {
+			if ($rootScope.globals.currentUser) {
+				var id      = e.target.id;
+				var index   = e.target.id.slice(3);
+				var idName  = "fop" + index;
+				var idName2 = "foc" + index;
+
+				if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
+
+					if (document.getElementById(idName).className === "fa fa-plus" || document.getElementById(idName).className === "fa fa-plus animated fadeIn") {
+						document.getElementById(idName).className = "fa fa-plus animated fadeOut";
+						document.getElementById(idName2).className = "fa fa-check animated fadeIn";
+					} else {
+						document.getElementById(idName).className = "fa fa-plus animated fadeIn";
+						document.getElementById(idName2).className = "fa fa-check animated fadeOut";
+					}
+				}
+			}
+		});
+	});
+})
+.directive('preGoLocation', function() {
+	return {
+    	require: 'ngModel',
+	    link: function(scope, element, attrs, model) {
+			var options = {
+				types: ['(cities)'],
+			};
+
+			scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
+
+			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
+				scope.$apply(function() {
+					model.$setViewValue(element.val());
+					var x = model.$viewValue.indexOf(',');
+					scope.searchML = model.$viewValue.slice(0, x);
+				});
+			});
+
+			scope.$watch('meetLocation', function(value) {
+				if (!value)
+					scope.searchML = [];
+				if (value) {
+					var checkCountry = value.indexOf('United States');
+					if (checkCountry >= 0) {
+						scope.meetLocation = value.slice(0, checkCountry - 2);
+						var x = scope.meetLocation.length;
+					} else {
+						var x = value.length;
+						if (x > 11) {
+							$("#msai").css('width', function() {
+								var el = $('<span />', {
+								text : value,
+								css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
+								}).appendTo('body');
+								var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 20;
+								el.remove();
+								return w.toString() + "px";
+							});
+						}
+					}
+				}
+			});
+    	}	
+	}
+});

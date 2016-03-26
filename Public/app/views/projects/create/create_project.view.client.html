@@ -1,0 +1,50 @@
+<section id="createProject-page" ng-init="initiateProject()">
+  <header id="viewProject-header" ng-style="{'background-image': 'url(' + imagecover + ')' , 'background-position': imagecoverposition}" ng-class="{ 'addcursormove': cursorpt}">
+  <div class="viewProject-filter" ng-if="dragcv"></div>
+  <div class="viewProject-title" ng-if="dragcv">
+    <h1>{{state}}</h1>
+    <h4>{{state_description}}</h4>
+  </div>
+  <div class="savingposition" ng-if="dragcv == false">
+    <p class="drag_text">
+      Drag to Reposition Cover
+    </p>
+    <button class="btn_save_position" ng-click="savePosition(project, project_category.obj, places_after.obj, state_choose.obj)">Save</button>
+    <button class="btn_cancel_position" ng-click="cancelPosition()">Cancel</button>
+  </div>
+  <div class="viewProject-bottom" ng-if="dragcv">
+    <div class="viewProject-nav">
+      <ul class="viewProject-category center-block">
+        <li class="li_nav_before" ng-class="{'li_nav': isVisible(0), 'nav-project-active': isActive(0)}">
+          <a ng-click="canGotoThis('basics', 0)"><span class="circle_number">1</span> Basics</a>
+        </li>
+        <li class="li_nav_before" ng-class="{'li_nav': isVisible(1), 'nav-project-active': isActive(1)}">
+          <a ng-click="canGotoThis('story', 1)"><span class="circle_number">2</span> Story</a>
+        </li>
+        <li class="li_nav_before" ng-class="{'li_nav': isVisible(2), 'nav-project-active': isActive(2)}">
+          <a ng-click="canGotoThis('people', 2)"><span class="circle_number">3</span> People</a>
+        </li>
+        <li class="li_nav_before" ng-class="{'li_nav': isVisible(3), 'nav-project-active': isActive(3)}">
+          <a ng-click="canGotoThis('needs', 3)"><span class="circle_number">4</span> Needs</a>
+        </li>
+        <li class="li_nav_before" ng-class="{'li_nav': isVisible(4), 'nav-project-active': isActive(4)}">
+          <a ng-click="canGotoThis('community', 4)"><span class="circle_number">5</span> Community</a>
+        </li>
+      </ul>
+
+      <ul class="viewProject-option">
+        <li class="view_preview animated fadeIn" ng-show="$state.includes('createproject.basics') == false" ng-click="back()">Back</li>
+
+          <button style="margin-top:13px;" type="submit" ng-click="finish(project.public_id, project.title, project, project_category.obj, places_after.obj, state_choose.obj)"><i ng-if="isSaved" class="fa fa-check"></i> {{isSavedText}}</button>
+
+      </ul>
+
+    </div>
+  </div>
+</header>
+<div id="form-views" ui-view></div>
+</section>
+
+<script>
+
+</script>

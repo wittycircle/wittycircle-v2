@@ -1,0 +1,39 @@
+<section id="modal_feedbacks">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-md-10">
+        <h4 class="modal-title">Add a question to your project</h4>
+      </div>
+      <div class="col-md-2">
+        <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()"></img>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Title</h4>
+        <input ng-model="feedbacks.title">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Description (optional)</h4>
+        <textarea ng-model="feedbacks.description"></textarea>
+        <div>
+          <p class="counter-project-description" ng-if="feedbacks.description.length < 190 ">
+            {{feedbacks.description.length}}/195
+          </p>
+          <p class="counter-project-description" ng-if="feedbacks.description.length >= 190 ">
+            <span class="counter-project-description-alert"><i class="fa fa-exclamation-triangle"></i>{{feedbacks.description.length}}</span>/195
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center modal-question-project">
+      <button class="back-button" ng-click="dismiss()">Cancel</button>
+      <button class="go-button" ng-click="addquestion()" >Publish</button>
+    </div>
+  </div>
+</section>

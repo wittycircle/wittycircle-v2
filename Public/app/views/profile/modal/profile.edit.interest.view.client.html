@@ -1,0 +1,28 @@
+<section id="profile-interest-body">
+	<div class="profile-body-nav">
+		<li class="sbnin">Interests</li>
+		<img src="/images/cross-icon.svg" ng-click="dismiss()"></li>
+	</div>
+
+	<div class="profile-interest-search">
+		<div class="profile-interest-header">
+			<h4>What are you into?</h4>
+		</div>
+		<div class="profile-interest-select sss">
+			<li ng-repeat="profileInterest in profileInterests track by $index">
+				<h4>{{profileInterest.interest_name}} <i class="fa fa-times" ng-click="removeInterest(profileInterest)"></i></h4>
+			</li>
+		</div>
+		<div class="profile-interest-inSearch">
+			<input type="search" ng-model="interestSearch" placeholder="Search for a specific hobby, topic...">
+		</div>
+		<div class="profile-interest-list sss">
+			<li ng-repeat="cInterest in cInterests | filter: interestSearch | limitTo : 34 track by $index" ng-click="getInterest(cInterest)">
+				<h4>{{cInterest.name}}</h4>
+			</li>
+		</div>
+		<div class="profile-interest-button">
+			<button type="submit" ng-click="saveInterest()"><i ng-if="saveText === 'Saved'" class="fa fa-check"></i>{{saveText}}</button>
+		</div>
+	</div>
+</section>

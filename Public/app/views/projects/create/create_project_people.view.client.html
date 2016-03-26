@@ -1,0 +1,83 @@
+<div id="form-project-1">
+  <div class="container-fluid container-custom-project">
+    <div class="row pdt-tp">
+      <div class="col-md-12">
+        <h5>Invite your teammates</h5>
+        <p class="p-book">
+          Inviting users to your team allow them to edit your project.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="people-add-users text-center" ng-click="findandadduser()">
+          <img src="images/users.png">
+          <h5 class="text-red">
+            <img src="/images/search-icon-r.svg" />Search for Wittycircle users
+          </h5>
+          <p>
+            They will be added to your team
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 team">
+        <h4 class="team_members">Already part of your team</h4>
+        <div class="row pdt-20 hovered-texture-list">
+          <div class="col-md-2">
+            <img height="50px" width="50px" class="img-circle" ng-src="{{currentUser.profile_picture_icon}}" ng-show="profile.profile_picture !== null" />
+          </div>
+          <div class="col-md-7 pull-left">
+            <h5>{{currentUser.first_name}} {{currentUser.last_name}}</h5>
+            <p>
+              {{currentUser.location_city !== null ? currentUser.location_city : "Unknow City"}} {{currentUser.location_country !== null ? currentUser.location_country : "Unknow Country"}} {{currentUser.location_state !== null ? currentUser.location_state : "Unknow Country"}}
+            </p>
+          </div>
+          <div class="col-md-3">
+            <img class="picto_delete pull-right" src="images/picto_lock.png">
+          </div>
+        </div>
+        <div class="row pdt-20 hovered-texture-list" ng-repeat="profile in involved_users | toArray:false | filter:usersearched | limitTo:5">
+          <div class="col-md-2">
+            <img height="50px" width="50px" class="img-circle" ng-src="{{profile.profile_picture}}" ng-show="profile.profile_picture !== null" />
+          </div>
+          <div class="col-md-7 pull-left">
+            <h5>{{profile.first_name}} {{profile.last_name}}</h5>
+            <p>
+              Pending...
+            </p>
+            <p>
+              {{profile.location_city !== null ? profile.location_city : "Unknow City"}} {{profile.location_country !== null ? profile.location_country : "Unknow Country"}} {{profile.location_state !== null ? profile.location_state : "Unknow Country"}}
+            </p>
+          </div>
+          <div class="col-md-3">
+            <!--<button class="go-button mgr-tp-10 center-block" ng-click="deleteInvolvedUser(project.id, profile.id, involved_users)">Delete</button>-->
+            <img class="picto_delete pull-right" src="images/picto_close_thin.png" ng-click="deleteInvolvedUser(project.id, profile.id, involved_users)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div id="form-project-1">
+  <div class="row">
+    <div class="container-fluid container-custom-project">
+      <div class="row state-project">
+        <div class="col-md-12 text-center">
+          <button class="back-button" ng-click="back()">Back</button>
+          <button class="go-button" ui-sref="createproject.needs">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<script>
+
+$(function() {
+  $(document).ready(function() {
+    window.scrollTo(0, 0);
+  });
+});
+
+</script>

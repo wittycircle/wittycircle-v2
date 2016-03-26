@@ -1,0 +1,9 @@
+/Public/node_modules
+/Public/dist
+/Public/.sass-cache
+/Public/bower_components
+/Public/.tmp
+/Public/docs
+/Public/.DS_Store
+.DS_Store
+/node_modules

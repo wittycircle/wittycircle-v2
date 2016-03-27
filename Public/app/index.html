@@ -568,9 +568,11 @@
     <script src="scripts/app.js"></script>
 	<script src="scripts/witty.custom.filter.js"></script>
     <script src="scripts/cloudinary_config.js"></script>
-
-    <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js">
-	  <!-- services -->
+    <!-- including config module before the rest of the module and right after the main module -->
+    <script text="text/javascript" src="modules/projects/config/projects-config.config.client.js"></script>
+    <!-- routes -->
+    <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js"></script>
+    <!-- services -->
     <script src="scripts/redactor/redactor.js"></script>
     <script src="services/users.service.client.js"></script>
     <script src="services/io.service.client.js"></script>
@@ -615,7 +617,7 @@
     <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <!--<script src="controllers/projects/view_project.controller.client.js"></script>-->
-    <!--<script src="controllers/projects/view2.js"></script>-->
+    <!--<script src="modules/projects/controllers/view2.js"></script>-->
     <script src="controllers/projects/my_projects.controller.client.js"></script>
     <script src="controllers/notification/notification.controller.client.js"></script>
     <!--<script src="services/header.service.client.js"></script> add to the header view html cuz of the build -->

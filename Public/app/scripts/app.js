@@ -1,13 +1,5 @@
 
 console.log("You're looking under the ground, find a bug ? Help us to improve our platform at hello@wittycircle.com");
-/**
- * @ngdoc overview
- * @name wittyApp
- * @description
- * # wittyApp
- *
- * Main module of the application.
- **/
 
 var wittyCircleApp = angular
   .module('wittyApp', [

@@ -222,6 +222,8 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     }
   };
 
+  //stopped here
+
   $scope.unfollowButton = function(i) {
     if ($scope.followText === "Following" && i == 0)
       $scope.followText = "Unfollow ?";

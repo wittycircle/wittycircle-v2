@@ -6,19 +6,19 @@
 			<h4 data-ng-bind="::vm.project.description"></h4>
 			<div class="viewProject-info">
 				<li class="stickers-icon">
-					<img src="/images/stickers-icon-white.png">
+					<img src="/images/stickers-icon-white.png" alt="icon-category">
 					<h5 data-ng-bind="::vm.category.name"></h5>
 				</li>
 				<li class="location-icon">
-					<img src="/images/location-icon-white.png">
+					<img src="/images/location-icon-white.png" alt="icon-location">
 					<h5 data-ng-bind="(vm.project.location_city) + ', ' + (vm.project.location_country)"></h5>
 				</li>
 				<li class="user-icon">
-					<img src="/images/user-icon-white.png">
+					<img src="/images/user-icon-white.png" alt="icon-followers">
 					<h5><span data-ng-bind="vm.project_followers.length"></span> followers</h5>
 				</li>
 				<li class="ng-cloak">
-					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="goToProfile(vm.project.user.id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img ng-click="goToProfile(user.id)" class="img-circle" height="30px" width="30px" ng-repeat="user in involved_users" ng-src="{{user.profile_picture}}" />
+					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="vm.goToProfile(vm.project.creator_user_id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img data-ng-click="vm.goToProfile(user.id)" class="img-circle" height="30px" width="30px" data-ng-repeat="user in vm.involved_users" data-ng-src="{{user.profile_picture}}" />
 					</h5>
 				</li>
 			</div>
@@ -27,12 +27,12 @@
 			<div class="viewProject-nav">
 				<ul class="viewProject-category">
 					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
-					<li ui-sref=".feedback">Feedback <div class="circle_number" ng-bind="totalNumber" ng-if="totalNumber != false"></div></li>
-					<li ui-sref=".openings">Get involved <div class="circle_number" ng-bind="openingsNumber" ng-if="openingsNumber"></div></li></li>
+					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="totalNumber" data-ng-if="totalNumber"></div></li>
+					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="openingsNumber" data-ng-if="openingsNumber"></div></li>
 				</ul>
 
 				<ul class="viewProject-option">
-					<li data-ng-if="!editable || editable" ng-click="goToMessage(project.creator_user_id)">Contact</li>
+					<li data-ng-if="!editable || editable" data-ng-click="vm.goToMessage(project.creator_user_id)">Contact</li>
 					<!--<li>Share</li>-->
 					<li id="sharer">
 						Share
@@ -62,7 +62,7 @@
 						</li>
 					</li>
 					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: project.public_id})" ng-if="editable"><img src="../images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-					<button type="submit" ng-if="loggedUser && (!editable || editable == false)" ng-click="followProject(project.public_id)"><span><i ng-if="followText === 'Follow'" class="fa fa-plus"></i><i ng-if="followText !== 'Follow'" class="fa fa-check"></i></span>{{followText}}</button>
+					<button type="submit" ng-if="loggedUser && (!editable || editable == false)" ng-click="followProject()"><span><i ng-if="followText === 'Follow'" class="fa fa-plus"></i><i ng-if="followText !== 'Follow'" class="fa fa-check"></i></span>{{followText}}</button>
 					<button type="submit" ng-if="!loggedUser" ng-click="showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
 				</ul>
 			</div>

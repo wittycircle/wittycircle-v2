@@ -16,7 +16,7 @@ var pool	= mysql.createConnection(dbconfig.connection);
 var configAuth = require('./controllers/auth');
 
 // Mandrill mail api
-var mandrill = require('mandrill-api/mandrill'); 
+var mandrill = require('mandrill-api/mandrill');
 
 pool.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
@@ -55,14 +55,16 @@ module.exports = function(passport) {
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, email, password, done) { // callback with email and password from our form
+            console.log(email);
             pool.query("SELECT * FROM users WHERE email = ?", [email], function(err, rows){
                 if (err)
                     return done(err);
                 if (!rows.length) {
                     return done(null, false);
                 }
-		if (rows[0].password === "")
-		    return done(null, false);
+        		if (rows[0].password === "") {
+        		    return done(null, false);
+                }
                 // if the user is found but the password is wrong
                 if (!bcrypt.compareSync(password, rows[0].password))
                     return done(null, false); // create the loginMessage and save it to session as flashdata */
@@ -88,7 +90,7 @@ module.exports = function(passport) {
 	var info = profile._json;
 	var facebook_info = {
 	    facebook_id		: profile.id,
-	    facebook_token	: token, 
+	    facebook_token	: token,
 	};
 	var username1 = []; // username's array to get all username possibility
 	var firstName = info.first_name.replace(/\s+/g, ''); // remove all white space from first and last name
@@ -100,9 +102,9 @@ module.exports = function(passport) {
             username1.push(firstName + '.' + lastName.slice(0, i));
 	};
 	process.nextTick(function() {
-	    pool.query('SELECT * FROM `users` WHERE `profile_id` IN (SELECT `id` FROM `profiles` WHERE `facebook_id` = ?)', [profile.id], 
+	    pool.query('SELECT * FROM `users` WHERE `profile_id` IN (SELECT `id` FROM `profiles` WHERE `facebook_id` = ?)', [profile.id],
 		       function(err, rows) { // find the user in the database based on their facebook id
-			
+
 			   if (err)  return done(err);
 			   if (!info.email) return done(err);
 			   if (!rows.length) {
@@ -148,18 +150,18 @@ module.exports = function(passport) {
 													if (err) throw err;
 													pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
 														   function(err, save) {
-														       if (err) { 
+														       if (err) {
 															   throw err;
 														       }
 														       console.log("OK!!!!!");
 														       var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-														       
+
 														       var template_name = "welcome";
 														       var template_content = [{
 															      "name": "welcome",
 															      "content": "content",
 															  }];
-														       
+
 														       var message = {
 															      "html": "<p>HTML content</p>",
 															      "subject": "Welcome to Wittycircle",
@@ -248,7 +250,7 @@ module.exports = function(passport) {
                 callback(result);
             });
         };
-    
+
     // =========================================================================
     // TWITTER =================================================================
     // =========================================================================
@@ -294,7 +296,7 @@ module.exports = function(passport) {
     // =========================================================================
     // GOOGLE ==================================================================
     // =========================================================================
-    
+
     function getGooglePicture(url, render) {
 	if (url) {
 	    if (url === "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg?sz=50")

@@ -1,10 +1,3 @@
-/**
- * @ngdoc factory
- * @name wittyApp.facory:Beauty_encode
- * @description
- * # Beauty_encode
- * Factory in the wittyApp.
- */
  (function () {
      'use strict';
 

@@ -1,12 +1,13 @@
-var tf = require('../tools/project_functions');
+var tf            = require('../tools/project_functions');
 var algoliaClient = require('../algo/algolia').algoliaClient;
-var Project = algoliaClient.initIndex('Projects');
+var Project       = algoliaClient.initIndex('Projects');
+var _             = require('underscore');
 
 
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
     if (elem) {
-        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem, 
+        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -20,7 +21,7 @@ function getUsername(elem, callback) {
 
 function getProjectTitle(elem, callback) {
     if (elem) {
-        pool.query("SELECT title FROM projects WHERE id = ?", elem, 
+        pool.query("SELECT title FROM projects WHERE id = ?", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -199,7 +200,7 @@ exports.getProjectsFromCategory = function(req, res){
 exports.getProjectsCreatedByUser = function(req, res){
     req.checkParams('user_id', 'User id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
-    if (errors) { 
+    if (errors) {
         return res.status(400).send(errors);
     }
     else {
@@ -271,32 +272,6 @@ exports.getProjectsCreatedByUser = function(req, res){
     }
 };
 
-/*exports.involveUserInProject = function(req, res){
-    if (!req.isAuthenticated()) {
-	   return res.status(400).send({message: "user is not authenticated"});
-    } else {
-        req.checkBody('project_id', 'Project id must be an integrer').isInt().min(1);
-        req.checkBody('user_id', 'User_id must be an integrer').isInt().min(1);
-        var errors = req.validationErrors(true);
-
-        if (errors) {
-    	   return res.status(400).send(errors);
-        } else {
-            req.body.invited_by = req.user.id;
-    	    pool.query("INSERT into project_users set ?", 
-            req.body, 
-            function(err, result) {
-        	    if (err) {
-        		  console.log(new Date());
-        		  console.log("Error getting projects in projects.js/involvedUserInProject" + "\n");
-        		  throw err;
-        	    }
-        	    res.send(result);
-    	    });
-        }
-    }	
-};*/
-
 exports.getProjectsInvolvedByUser = function(req, res){
     req.checkParams('user_id', 'User id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
@@ -307,10 +282,10 @@ exports.getProjectsInvolvedByUser = function(req, res){
         [req.params.user_id],
         function (err, results, fields) {
             if(err){
-		var date = new Date();
-		console.log(date);
-		console.log("Error getting projects in projects.js/getProjectsInvolvedByUser" + "\n");
-                throw err;
+            	var date = new Date();
+            	console.log(date);
+            	console.log("Error getting projects in projects.js/getProjectsInvolvedByUser" + "\n");
+              throw err;
             }
             res.send(results);
         });
@@ -334,6 +309,64 @@ exports.getInvolvedUserOfProject = function(req, res){
     	});
     }
 };
+
+exports.getAllUsersInvolvedByPublicId = function(req, res) {
+  req.checkParams('public_id', 'Public id parameter must be an integrer').isInt().min(1);
+
+  var errors = req.validationErrors(true);
+  if (errors) {
+    return res.status(400).send(errors);
+  } else {
+    pool.query("SELECT * FROM project_users WHERE project_id = (SELECT id FROM projects WHERE public_id = ?)",
+    req.params.public_id,
+    function(er, results) {
+      if (er) {
+        console.log(new Date());
+        console.log('eror in getAllUsersInvolvedByPublicId');
+        throw er;
+      } else {
+        var editable = false;
+        var show = false;
+        var involver = false;
+        function recursive(index){
+            if(index !== results.length){
+                if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 0) {
+                  show = true;
+                  pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
+                  [results[index].invited_by],
+                  function (err, result, field) {
+                      if(err){
+                          throw err;
+                      }
+                      involver = result[0];
+                  });
+                }
+                if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
+                  editable = true;
+                }
+                //if (results[index].n_accept === 1) {
+                  pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
+                  [results[index].user_id],
+                  function (err, result, field) {
+                      if(err){
+                          throw err;
+                      }
+                      results[index].user_profile = result[0];
+                      recursive(index + 1);
+                  });
+                //}
+                //} else {
+                  //recursive(index + 1);
+                //}
+            } else {
+                res.send({content: results, editable: editable, show: show, involver: involver});
+            }
+        }
+        recursive(0);
+      }
+    });
+  }
+}
 
 exports.acceptInvolvment = function(req, res){
     req.checkParams('project_id', 'Project id must be a integrer').isInt().min(1);
@@ -407,7 +440,7 @@ exports.deleteUserInvolved = function(req, res) {
 			    });
 			});
                     });
-		    
+
 		});
 	});
     }
@@ -496,7 +529,7 @@ exports.updateProject = function(req, res){
 	return res.status(400).send(errors);
     } else {
         pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
-            if (err) { 
+            if (err) {
                 var date = new Date();
                 console.log(date);
                 console.log("Error getting projects in projects.js/createProject");

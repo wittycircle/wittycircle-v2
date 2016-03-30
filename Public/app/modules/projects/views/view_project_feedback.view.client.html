@@ -6,10 +6,10 @@
           <h3 class="subtitle-feedbacks">Help the team</h3>
         </div>
         <div class="col-md-6">
-          <a class="link_top pull-right" ng-if="editable && feedNumber" ui-sref="updateproject.community({public_id: project.public_id})"><i class="fa fa-plus"></i> Add/Delete a question</a>
+          <a class="link_top pull-right" data-ng-if="vm.editable && (vm.questions.length > 0)" data-ui-sref="updateproject.community({public_id: vm.project.public_id})"><i class="fa fa-plus"></i> Add/Delete a question</a>
         </div>
       </div>
-      <div class="cards-feedbacks-two animated fadeIn" ng-repeat="question in questions">
+      <div class="cards-feedbacks-two animated fadeIn" ng-repeat="question in vm.questions">
         <div id="cards" class="row feedback_description" ng-click="deployReplies(question)">
           <div class="img-feedback">
             <img class="img-circle img-responsive" height="36px" width="36px" ng-src="{{question.creator_img}}">

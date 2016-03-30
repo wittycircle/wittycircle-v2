@@ -40,17 +40,17 @@ exports.login = function (req, res, next) {
 	}
 	req.logIn(user, function(err) {
 	    if (err) {
-		res.send({success: false});
-		console.log('error in login');
-		return next(err); 
+    	    res.send({success: false});
+    		console.log('error in login');
+    		return next(err);
 	    } else {
-		var get_user = {
-		    id		: user.id,
-		    email	: user.email,
-		    profile_id	: user.profile_id,
-		    username	: user.username
-		};
-		res.send({success: true, user: get_user});
+    		var get_user = {
+    		    id		: user.id,
+    		    email	: user.email,
+    		    profile_id	: user.profile_id,
+    		    username	: user.username
+    		};
+    		res.send({success: true, user: get_user});
 	    }
 	});
     })(req, res, next);

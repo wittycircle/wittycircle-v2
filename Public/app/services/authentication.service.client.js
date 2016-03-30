@@ -33,7 +33,7 @@
 
         // Login fonction to api Rest
         function Login(email, password, callback) {
-            $http({
+            /*$http({
                   url: "http://127.0.0.1/api/login",
                   dataType: "json",
                   method: "POST",
@@ -45,6 +45,13 @@
                 .success(function (response) {
                     callback(response);
                 });
+                */
+            var data = {};
+            data.email = email;
+            data.password = password;
+            $http.post('http://127.0.0.1/api/login', data).success(function (response) {
+                callback(response);
+            });
         }
 
         // Setting Credentials and user object to $cookieStore

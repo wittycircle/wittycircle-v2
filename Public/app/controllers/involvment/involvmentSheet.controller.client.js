@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('wittyApp').controller('InvolvmentSheetCtrl', function ($scope, $mdBottomSheet, $rootScope, $http, $timeout) {
+angular.module('wittyProjectModule').controller('InvolvmentSheetCtrl', function ($scope, $mdBottomSheet, $rootScope, $http, $timeout) {
 
   $scope.hasJoined = false;
   $scope.hasDeclined = false;

@@ -46,8 +46,8 @@
          };
 
          function getFeedbacksbyProjectPublicIdUnresolved(public_id) {
-             if (public_id) {
-                return $http.get('http://127.0.0.1/project' + public_id + '/feedbacks/public');
+            if (public_id) {
+                return $http.get('http://127.0.0.1/project/' + public_id + '/feedbacks/public');
             } else {
                 return null;
             }

@@ -1,13 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name wittyApp.controller:LoginCtrl
- * @description
- * # LoginCtrl
- * Controller of the wittyApp
- */
-angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $window, $scope, Authentication, $rootScope) {
+angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $window, $scope, Authentication, $rootScope, $state) {
 
    // $scope.dismiss = function () {
    //   $modalInstance.dismiss();

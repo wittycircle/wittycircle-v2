@@ -1,28 +1,29 @@
 /* Load Globals */
 //require('./globals');
 /* Load Server Modules */
-var express		= require('express.io');
+var express		    = require('express.io');
 var bodyParser		= require('body-parser');
 var cookieParser	= require('cookie-parser');
-var Validator		= require('express-validator');
-var app			= express();
-var server		= require('http').createServer(app);
-var cors		= require('cors');
-var session		= require('express-session');
+var Validator		  = require('express-validator');
+var app			      = express();
+var _             = require('underscore');
+var server		    = require('http').createServer(app);
+var cors		      = require('cors');
+var session		    = require('express-session');
 //var RedisStore          = require('connect-redis')(session);
 //var redis               = require("redis");
 //var client              = redis.createClient();
-var passport		= require('passport');
-var flash		= require('connect-flash');
+var passport		  = require('passport');
+var flash		      = require('connect-flash');
 var cloudinary		= require('cloudinary');
-var multer		= require('multer');
-var fs			= require('fs');
-var io			= require('socket.io')(server);
+var multer		    = require('multer');
+var fs			      = require('fs');
+var io			      = require('socket.io')(server);
 var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
-var mandrill            = require('mandrill-api/mandrill');
-var mandrill_client     = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-var FileReader = require('filereader')
-  , fileReader = new FileReader();
+var mandrill      = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+var FileReader    = require('filereader')
+  , fileReader    = new FileReader();
 
 //var algoliaClient = require('./algo/algolia').algoliaClient;
 
@@ -84,16 +85,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-/*app.use(express.static(__dirname + '/Public/app'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+//app.use(express.static(__dirname + '/Public/app'));
+//app.use(express.static(__dirname + '/Public/bower_components'));
 
-app.use(express.static('Public/app'));
+//app.engine('html', require('ejs').renderFile);
+//app.set('view engine', 'html');
 
-app.use(bodyParser.json({limit: '50mb'}));
+//app.use(express.static('Public/app'));
+
+
+app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
-}));*/
+}));
 
 
 app.use(Validator({

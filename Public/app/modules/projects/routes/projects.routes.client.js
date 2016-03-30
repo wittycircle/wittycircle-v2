@@ -44,11 +44,12 @@
         controller: 'viewProjectCtrl',
         controllerAs: 'vm',
         resolve: {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
-                         'modules/projects/controllers/view2.js'
+                         'modules/projects/controllers/view-project.controller.client.js',
+                         'modules/projects/services/involvment.service.client.js'
                      ]);
-            }],
+            }],*/
             projectResolve: function(Projects, $stateParams) {
                     return Projects.getProjectbyPublicId($stateParams.public_id);
             },
@@ -71,8 +72,11 @@
                     });
                     return defer.promise;
             },
-            initFeedbacksResolve: function($stateParams, Feedbacks) {
-                return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
+            project_FeedbacksResolve: function($stateParams, Feedbacks) {
+              return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
+            },
+            project_InvolvmentResolve: function($stateParams, Project_Involvment) {
+              return Project_Involvment.getAllUsersInvolvedByPublicId($stateParams.public_id);
             }
         }
       })

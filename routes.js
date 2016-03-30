@@ -209,6 +209,7 @@ app.delete('/project/:id', projects.deleteProject);
 app.put('/project/increment/:id', projects.incrementViewProject);
 //app.post('/project/involve', projects.involveUserInProject);
 app.get('/project/:project_id/involved', projects.getInvolvedUserOfProject);
+app.get('/project/involved_users/:public_id', projects.getAllUsersInvolvedByPublicId)
 app.post('/project/involvment/accepted/:project_id/:user_id', projects.acceptInvolvment);
 app.post('/project/involvment/declined/:project_id/:user_id', projects.declineInvolvment);
 app.delete('/project/:project_id/involved/:user_id', projects.deleteUserInvolved);
@@ -327,8 +328,8 @@ app.get('/picture/cover', ensureAuth, picture.getRandomCoverPicture);
 app.post('/picture/get/cover', picture.getCoverPicture);
 
 
-app.get('*', function(req, res) {
-    res.sendfile('./Public/dist/index.html');
-});
+/*app.get('*', function(req, res) {
+    res.sendfile('./Public/app/index.html');
+});*/
 
 };

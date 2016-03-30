@@ -3,11 +3,13 @@
     'use strict';
 
     angular.module('wittyProjectModule')
-        .controller('viewProjectCtrl', ['project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state',
-        function(project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state) {
+        .controller('viewProjectCtrl', ['project_InvolvmentResolve','project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout',
+        function(project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout) {
 
             /*jshint validate this*/
             var vm = this;
+
+            console.time('loading viewProjectCtrl');
 
             // var
             // list all var needed to be initialized at the start of controller
@@ -90,7 +92,7 @@
                     }
                 });
                 // resolve the project_followers
-                vm.project_followers = project_followersResolve.data[0];
+                vm.project_followers = project_followersResolve.data;
                 if (vm.project.main_video) {
                   vm.config = {
                                 preload: "auto",
@@ -131,7 +133,18 @@
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
 
-                /*$http.get('http://127.0.0.1/project/' + $scope.project.id + '/involved').success(function (response) {
+                //console.log(project_InvolvmentResolve);
+
+                if (project_InvolvmentResolve.data.show === true) {
+                  if (project_InvolvmentResolve.data.involver) {
+                    $scope.involver = project_InvolvmentResolve.data.involver;
+                    $timeout(function () {
+                      showbottomAlert.pop_it_involvment($scope);
+                    }, 1000);
+                  }
+                }
+
+                /*$http.get('http://127.0.0.1/project/' + vm.project.id + '/involved').success(function (response) {
                   Object.keys(response).forEach(function (key) {
                     if (currentUser && currentUser.id == response[key].user_id && response[key].n_accept === 0) {
                       Users.getProfileByUserId(response[key].invited_by, function(result) {
@@ -159,7 +172,8 @@
                       });
                     }
                   });
-              });*/
+                });*/
+
             }
 
 
@@ -175,8 +189,8 @@
                         });
                     }
                 } else {
-                    console.log('error in goToMessage in ViewProjectCtrl: no id is provided');
-                    console.log(id);
+                    console.error('error in goToMessage in ViewProjectCtrl: no id is provided');
+                    console.error(id);
                     return;
                 }
             };
@@ -203,14 +217,38 @@
                         Project_Follow.followProject(project_id, function (response) {
                             if (response.success) {
                                 if (response.msg === "Project followed")
-                                    $scope.followText = "Following";
+                                    vm.followText = "Following";
                                 else
-                                    $scope.followText = "Follow";
+                                    vm.followText = "Follow";
                             }
                         });
                     }
                 }
             };
+
+
+            ///////////////////////////////////////
+            ////////////// FEEDBACKS //////////////
+            //////////////////////////////////////
+
+            // function
+            // init Feedbacks
+            $scope.initFeedbacks = function () {
+              $scope.questions = Feedbacks.getFeedbacksbyProjectPublicId($stateParams.public_id, function(response) {
+                //$scope.questions = addUsertoFeedbacks(response);
+                $scope.questions = addRepliestoFeedbacks(response);
+                //$scope.repliesNumber = countObjInArray($scope.questions)
+                $scope.feedNumber = countObjInArray(response);
+                $scope.totalNumber = $scope.totalNumber + $scope.feedNumber;
+              });
+            };
+
+            function initFeedbacks() {
+                vm.questions = project_FeedbacksResolve.data;
+            }
+
+
+            console.timeEnd('loading viewProjectCtrl');
 
     }]);
 

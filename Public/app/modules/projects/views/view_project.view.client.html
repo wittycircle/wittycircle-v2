@@ -27,12 +27,12 @@
 			<div class="viewProject-nav">
 				<ul class="viewProject-category">
 					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
-					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="totalNumber" data-ng-if="totalNumber"></div></li>
-					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="openingsNumber" data-ng-if="openingsNumber"></div></li>
+					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="vm.totalNumber" data-ng-if="vm.totalNumber"></div></li>
+					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openingsNumber" data-ng-if="vm.openingsNumber"></div></li>
 				</ul>
 
 				<ul class="viewProject-option">
-					<li data-ng-if="!editable || editable" data-ng-click="vm.goToMessage(project.creator_user_id)">Contact</li>
+					<li data-ng-if="!editable || editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
 					<!--<li>Share</li>-->
 					<li id="sharer">
 						Share

@@ -1,12 +1,12 @@
-<md-bottom-sheet class="md-grid custom-popover" layout="column" ng-cloak>
+<md-bottom-sheet class="md-grid custom-popover" layout="column">
   <section id="popover-login">
       <div class="popover-container involvment-popover">
-        <div class="popover-text" ng-if="hasJoined === false && hasDeclined === false">
+        <div class="popover-text" data-ng-if="hasJoined === false && hasDeclined === false">
           <h1>pending approval.</h1>
-          <img height="36px" class="img-circle" ng-src={{::involver.content.profile_picture_icon}} />
-          <p>{{::involver.content.first_name}} {{::involver.content.last_name}} invited you to join this project</p>
+          <img height="36px" class="img-circle" data-ng-src={{::involver.profile_picture_icon}} />
+          <p>{{::involver.first_name}} {{::involver.last_name}} invited you to join this project</p>
         </div>
-        <div class="popover-text" ng-if="hasJoined === true && hasDeclined === false">
+        <div class="popover-text" data-ng-if="hasJoined === true && hasDeclined === false">
           <h1>joined !</h1>
           <p>You can now edit this project</p>
         </div>
@@ -16,10 +16,10 @@
         </div>
         <div class="popover-button-involvment" ng-if="hasJoined === false">
           <div class="join">
-            <button ng-click="joinProject()">Join</button>
+            <button data-ng-click="joinProject()">Join</button>
           </div>
           <div class="decline">
-            <button ng-click="declineProject()">Decline</button>
+            <button data-ng-click="declineProject()">Decline</button>
           </div>
         </div>
       </div>

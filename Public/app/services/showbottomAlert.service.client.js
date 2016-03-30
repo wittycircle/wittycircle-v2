@@ -1,10 +1,3 @@
-/**
- * @ngdoc service
- * @name wittyApp.showbottomAlert
- * @description
- * # showbottomAlert
- * Factory in the wittyApp.
- */
   (function () {
       'use strict';
 
@@ -12,8 +5,8 @@
           .module('wittyApp')
           .factory('showbottomAlert', showbottomAlert);
 
-      showbottomAlert.$inject = ['$http', '$cookieStore', '$rootScope', '$resource', '$q', '$mdBottomSheet'];
-      function showbottomAlert($http, $cookieStore, $rootScope, $resource, $q, $mdBottomSheet, $scope) {
+      showbottomAlert.$inject = ['$http', '$rootScope', '$mdBottomSheet'];
+      function showbottomAlert($http, $rootScope, $mdBottomSheet) {
           var service = {};
 
           service.pop_it              = pop_it;

@@ -155,15 +155,15 @@
                         </a>
                         <ul id="hdmenu" class="header-dropdown-menu"> <!-- style="display: none;" -->
                             <li><a href="" data-ui-sref="profile({username: user.username})">My Profile</a></li>
-                            <li><a href="/my-projects">Projects</a></li>
-                            <li><a href="/setting">Settings</a></li>
+                            <li><a href="#/my-projects">Projects</a></li>
+                            <li><a href="#/setting">Settings</a></li>
                             <li><a ng-click="logout()">Log out</a></li>
                         </ul>
                     </div>
                     <div id="hdropm" class="header-dropdown-mailbox header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()">
                         <div class="header-dropdown-head">
                             <h4>Inbox</h4>
-                            <a href="/messages">Write A New Message</a>
+                            <a href="#/messages">Write A New Message</a>
                         </div>
                         <div class="header-dropdown-lists">
                             <div ng-if="!dialogues.length" class="header-noMessage-text">
@@ -618,11 +618,14 @@
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <!--<script src="controllers/projects/view_project.controller.client.js"></script>-->
     <!--<script src="modules/projects/controllers/view2.js"></script>-->
+    <script src='modules/projects/controllers/view-project.controller.client.js'></script>
+    <script src='modules/projects/services/involvment.service.client.js'></script>
+    
     <script src="controllers/projects/my_projects.controller.client.js"></script>
     <script src="controllers/notification/notification.controller.client.js"></script>
     <!--<script src="services/header.service.client.js"></script> add to the header view html cuz of the build -->
     <script src="controllers/projects/update_project.controller.client.js"></script>
-	<script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
+	  <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <script src="controllers/projects/my_projects.controller.client.js"></script>
     <script src="controllers/presentation/discover.controller.client.js"></script>

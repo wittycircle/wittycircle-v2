@@ -1,9 +1,9 @@
  (function () {
-     'use strict';
+    'use strict';
 
-     angular
-         .module('wittyProjectModule')
-         .factory('Project_Involvment', Project_Involvment);
+    angular
+        .module('wittyProjectModule')
+        .factory('Project_Involvment', Project_Involvment);
 
      Project_Involvment.$inject = ['$http', '$rootScope', '$q', 'Users'];
      function Project_Involvment($http, $rootScope, $q, Users) {

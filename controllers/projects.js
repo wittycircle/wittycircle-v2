@@ -609,7 +609,7 @@ exports.getProjectFeedbacks = function(req, res){
     }
 };
 
-exports.getProjectFeedbacksPublic = function(req, res){
+exports.getProjectFeedbacksPublic = function (req, res){
     req.checkParams('public_id', 'public_id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
     if (errors) {
@@ -621,19 +621,60 @@ exports.getProjectFeedbacksPublic = function(req, res){
             if(err){
                 var date = new Date();
                 console.log(date);
-                console.log("Error getting projects in projects.js/getProjectFeedbacksPublic");
+                console.log('Error getting projects in projects.js/getProjectFeedbacksPublic');
                 console.log(err);
-                console.log("\n");
+                console.log('\n');
                 throw err;
             }
-            res.send(results);
+            function recursive (index) {
+              if (results[index]) {
+                  pool.query('SELECT * FROM `feedback_replies` WHERE `feedback_id` = ?',
+                  results[index].id,
+                  function (err, response) {
+                    if (err) {
+                      console.log(new Date());
+                      throw err;
+                    }
+                    if (response.length === 1) {
+                      results[index].replies = response[0];
+                    }
+                    if (response.length > 1) {
+                      results[index].replies = response;
+                    }
+
+                    function recursive2 (index2) {
+                      if (response[index2]) {
+                        pool.query('SELECT * FROM profiles WHERE id = (SELECT profile_id FROM users WHERE id = ?)',
+                        response[index2].user_id,
+                        function (err, rez) {
+                          if (err) {
+                            console.log(new Date());
+                            throw err;
+                          }
+                          //console.log(rez);
+                          results[index].replies[index2].profile = rez[0];
+                          //console.log(results[index].replies[index2]);
+                        });
+                      } else {
+                        return;
+                      }
+                      recursive2(index2 + 1);
+                    }
+                    recursive2(0);
+                    recursive(index + 1);
+                  });
+              } else {
+                  return res.send(results);
+              }
+            }
+            recursive(0);
         });
     }
 };
 
-exports.deleteProject = function(req, res){
+exports.deleteProject = function (req, res){
     if (!req.isAuthenticated()) {
-	res.status(400).send({message: "User is not logged in"});
+	     res.status(400).send({message: "User is not logged in"});
     }
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
@@ -710,16 +751,16 @@ exports.getAllProjectMembers = function(req, res) {
                             console.log(new Date());
                             throw err;
                         }
-                        function recursiv(index) {
+                        function recursiv (index) {
                             if (response[index]) {
                                 if (response[index].user_id === req.user.id) {
-                                    return res.send({message: "success"});
+                                    return res.send({message: 'success'});
                                 }
                                 recursiv(index + 1);
                             } else {
-                                return res.send({message: "not found"});
+                                return res.send({message: 'not found'});
                             }
-                        };
+                        }
                         recursiv(0);
                     });
                 }

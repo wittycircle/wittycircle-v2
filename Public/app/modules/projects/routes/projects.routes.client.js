@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     'use strict';
 
@@ -8,8 +8,8 @@
         url: '/create-project',
         templateUrl: 'views/projects/create/create_project.view.client.html',
         controller: 'CreateProjectCtrl',
-        resolve:{
-            auth: function($q, $rootScope, $stateParams) {
+        resolve: {
+            auth: function ($q, $rootScope, $stateParams) {
               if ($rootScope.globals.currentUser) {
                 return true;
               } else {
@@ -47,24 +47,25 @@
             /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/view-project.controller.client.js',
-                         'modules/projects/services/involvment.service.client.js'
+                         'modules/projects/services/involvment.service.client.js',
+                         'modules/projects/controllers/involvmentSheet.controller.client.js'
                      ]);
             }],*/
-            projectResolve: function(Projects, $stateParams) {
+            projectResolve: function (Projects, $stateParams) {
                     return Projects.getProjectbyPublicId($stateParams.public_id);
             },
             project_followersResolve: function(Projects, Project_Follow, $stateParams) {
                     return Project_Follow.getProjectFollowers($stateParams.public_id);
             },
-            project_categoryResolve: function($q, $stateParams, Categories, Projects) {
+            project_categoryResolve: function ($q, $stateParams, Categories, Projects) {
                     var defer = $q.defer();
 
-                    Projects.getProjectbyPublicId($stateParams.public_id).then(function(result) {
+                    Projects.getProjectbyPublicId($stateParams.public_id).then(function (result) {
                         defer.resolve(Categories.getCategoryUnresolved(result.data[0].category_id));
                     });
                     return defer.promise;
             },
-            project_creatorUserResolve: function($q, $stateParams, Users, Projects) {
+            project_creatorUserResolve: function ($q, $stateParams, Users, Projects) {
                     var defer = $q.defer();
 
                     Projects.getProjectbyPublicId($stateParams.public_id).then(function(result) {
@@ -72,11 +73,11 @@
                     });
                     return defer.promise;
             },
-            project_FeedbacksResolve: function($stateParams, Feedbacks) {
-              return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
-            },
-            project_InvolvmentResolve: function($stateParams, Project_Involvment) {
+            project_InvolvmentResolve: function ($stateParams, Project_Involvment) {
               return Project_Involvment.getAllUsersInvolvedByPublicId($stateParams.public_id);
+            },
+            project_FeedbacksResolve: function ($stateParams, Feedbacks) {
+              return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
             }
         }
       })

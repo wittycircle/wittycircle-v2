@@ -1,15 +1,19 @@
-(function() {
+(function () {
 
     'use strict';
 
-    angular.module('wittyProjectModule')
-        .controller('viewProjectCtrl', ['project_InvolvmentResolve','project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout',
-        function(project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout) {
 
-            /*jshint validate this*/
+    angular
+        .module('wittyProjectModule')
+        .controller('viewProjectCtrl', viewProjectCtrl);
+
+    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow'];
+    function viewProjectCtrl (project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow) {
+
             var vm = this;
 
             console.time('loading viewProjectCtrl');
+
 
             // var
             // list all var needed to be initialized at the start of controller
@@ -28,18 +32,19 @@
             vm.followProject = followProject;
 
             init();
+            initFeedbacks();
 
             // function
             // used to adjust background position of the image cover
-            function adjustSize(str) {
+            function adjustSize (str) {
               var res;
               var nbr;
               var a;
 
-              res = str.split(" ");
-              a = res[1].indexOf("%");
-              if (a == -1) {
-                nbr = parseInt(res[1]);
+              res = str.split(' ');
+              a = res[1].indexOf('%');
+              if (a === -1) {
+                nbr = parseInt(res[1], 10);
                 if (nbr < 0) {
                   var p = (nbr / 1080) * 100;
                   p = Math.abs(p);
@@ -48,8 +53,8 @@
                   nbr = nbr;
                 }
                 res[1] = nbr.toString();
-                res[1] += "%";
-                res = res.join(" ");
+                res[1] += '%';
+                res = res.join(' ');
               } else {
                 return str;
               }
@@ -58,20 +63,20 @@
 
             // function
             // used to parse url for remove trailing white-space and replace it whit a dash
-            function encodeUrl(url) {
+            function encodeUrl (url) {
               url = Beauty_encode.encodeUrl(url);
               return url;
             }
 
             // function
             // used it to pop the md bottom sheet taken from angular-material.
-            function showbottomAl(event) {
+            function showbottomAl (event) {
               showbottomAlert.pop_it(event);
             };
 
             // function
             // used to init the app and pass all the resolve ot it
-            function init() {
+            function init () {
                 var err;
 
                 vm.project = projectResolve.data[0];
@@ -95,12 +100,12 @@
                 vm.project_followers = project_followersResolve.data;
                 if (vm.project.main_video) {
                   vm.config = {
-                                preload: "auto",
+                                preload: 'auto',
                                 sources: [
-                                    {src: $sce.trustAsResourceUrl(vm.project.main_video), type: "video/mp4"}
+                                    {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
                                 ],
                                 theme: {
-                                    url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                                    url: 'http://www.videogular.com/styles/themes/default/latest/videogular.css'
                                 },
                                 plugins: {
                                     controls: {
@@ -115,7 +120,7 @@
                   vm.no_follow = false;
                 } else {
                   vm.no_follow = true;
-                  /*if (vm.loggedUser) {
+                  if (vm.loggedUser) {
                     Project_Follow.checkFollowProject(vm.project.id, function(response) {
                       if (!response.follow)
                         vm.followText = "Following";
@@ -128,13 +133,10 @@
                     $http.post('http://127.0.0.1/history/project/'+ currentUser.id, history).then(function (response) {
                       //console.log(response);
                     });
-                }*/
+                  }
                 }
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
-
-                //console.log(project_InvolvmentResolve);
-
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
                     $scope.involver = project_InvolvmentResolve.data.involver;
@@ -177,15 +179,15 @@
             }
 
 
-            function goToMessage(id) {
+            function goToMessage (id) {
                 if (id && id !== null && id !== undefined && typeof id === 'number') {
                     if (!currentUser) {
                         showbottomAlert.pop_it();
                         return;
                     }
                     if (id !== currentUser.id) {
-                        Users.getProfileByUserId(id, function(res) {
-                            $state.go('messages', {profile_id : res.content.profile_id});
+                        Users.getProfileByUserId(id, function (res) {
+                            $state.go('messages', {profile_id: res.content.profile_id});
                         });
                     }
                 } else {
@@ -195,10 +197,10 @@
                 }
             };
 
-            function goToProfile(id) {
+            function goToProfile (id) {
                 if (id && id !== null && id !== undefined && typeof id === 'number') {
-                    Users.getUserIdByProfileId(id).then(function(response) {
-                        $state.go('profile', {username : response.userId.username});
+                    Users.getUserIdByProfileId(id).then(function (response) {
+                        $state.go('profile', {username: response.userId.username});
                     });
                 } else {
                     console.log('error in goToProfile in ViewProjectCtrl: no id is provided');
@@ -208,7 +210,7 @@
             };
 
 
-            function followProject() {
+            function followProject () {
                 var project_id;
 
                 project_id = projectResolve.id;
@@ -216,10 +218,10 @@
                     if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
                         Project_Follow.followProject(project_id, function (response) {
                             if (response.success) {
-                                if (response.msg === "Project followed")
-                                    vm.followText = "Following";
+                                if (response.msg === 'Project followed')
+                                    vm.followText = 'Following';
                                 else
-                                    vm.followText = "Follow";
+                                    vm.followText = 'Follow';
                             }
                         });
                     }
@@ -243,13 +245,14 @@
               });
             };
 
-            function initFeedbacks() {
+            function initFeedbacks () {
                 vm.questions = project_FeedbacksResolve.data;
+                console.log(vm.questions);
             }
 
 
             console.timeEnd('loading viewProjectCtrl');
 
-    }]);
+    }
 
 })();

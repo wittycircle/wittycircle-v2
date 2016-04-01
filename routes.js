@@ -90,7 +90,7 @@ app.get('/profile', ensureAuth, function(req, res) {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {
-		successRedirect : 'http://www.wittycircle.com',
+	    successRedirect : 'http://www.wittycircle.com',
 	    failureRedirect : 'http://www.wittycircle.com'
 	}));
 

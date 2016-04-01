@@ -16,8 +16,7 @@ angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 
 	$scope.card = {
 		title: "Wittycircle",
-		type: "Marketplace",
 		url: "http://www.wittycircle.com",
-		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456926920/footer_discover_tzxces.jpg"
+		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png"
 	};
 });

@@ -41,7 +41,7 @@
 		$scope.$parent.card = {
 			title: "Wittycircle | Discover",
 			url: "http://www.wittycircle.com/discover",
-			image: "http://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png",
+			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
 		};
 
     $scope.encodeUrl = function(url) {

@@ -6,6 +6,7 @@ var bodyParser		= require('body-parser');
 var cookieParser	= require('cookie-parser');
 var Validator		= require('express-validator');
 var app			= express();
+var morgan		= require('morgan');
 var _			= require('underscore');
 var server		= require('http').createServer(app);
 var https		= require('https');
@@ -30,6 +31,7 @@ var httpsOption		= {
 
 require('./passport')(passport);
 
+//app.use(morgan('combined'));
 app.use(cookieParser());
 
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));

@@ -1,25 +1,26 @@
 'use strict';
 
-describe('viewProjectCtrl unit test', function () {
+describe('TermsCtrl unit test', function () {
 
   // load the controller's module
-  beforeEach(module('wittyProjectModule'));
-  //beforeEach(angular.mock.module("wittyProjectModule"));
+  //beforeEach(module('wittyApp'));
+  //beforeEach(module('wittyApp'));
+  beforeEach(angular.mock.module("wittyApp"));
 
-  var viewProjectCtrl;
+  var TermsCtrl;
   var scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    viewProjectCtrl = $controller('viewProjectCtrl', {
+    TermsCtrl = $controller('TermsCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('testing controller', function() {
-      expect(viewProjectCtrl).toBeDefined();
+      expect(TermsCtrl).toBeDefined();
   });
 
 });

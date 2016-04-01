@@ -74,22 +74,35 @@ module.exports = function(config) {
       'bower_components/videogular-angulartics/vg-analytics.js',
       'bower_components/angular-socialshare/angular-socialshare.js',
       'bower_components/cloudinary-core/cloudinary-core.js',
-      'bower_components/cloudinary_ng/js/angular.cloudinary.js',
-      'bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js',
       'bower_components/angular-redactor/angular-redactor.js',
       'bower_components/oclazyload/dist/ocLazyLoad.js',
       // endbower
+      // script other
+      'bower_components/blueimp-load-image/js/load-image.all.min.js',
+      'bower_components/angular-redactor/angular-redactor-2.js',
+      'bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
+      'bower_components/blueimp-file-upload/js/jquery.iframe-transport.js',
+      'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+      'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js',
+      'bower_components/blueimp-file-upload/js/jquery.fileupload-image.js',
+      'bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js',
+      'bower_components/cloudinary_ng/js/angular.cloudinary.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/angular-socialshare/0.2.4-beta/angular-socialshare.js',
+      // end script other
       "app/scripts/app.js",
-      "app/modules/**/*.routes.client.js",
-      //"app/**/*.controller.js",
+      //"app/modules/projects/config/projects-config.config.client.js",
+      //"app/modules/**/config/*.config.client.js",
+      //"app/controllers/core/terms.controller.client.js",
       "app/**/*.js",
       //"test/mock/**/*.js",
-      "test/spec/**/*test.js"
+      "test/spec/**/*.test.js"
     ],
 
     // list of files / patterns to exclude
     exclude: [
         'bower_components/blueimp-file-upload/js/jquery.fileupload.js',
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-image.js',
+        'bower_components/blueimp-file-upload/js/jquery.fileupload-process.js',
     ],
 
     // web server port
@@ -104,7 +117,8 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+      "PhantomJS",
+      "Chrome"
     ],
 
     // Which plugins to enable
@@ -115,7 +129,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
+    singleRun: true,
 
     colors: true,
 

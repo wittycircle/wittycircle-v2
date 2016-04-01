@@ -26,6 +26,7 @@
     "morgan": "~1.7.0"
   },
   "devDependencies": {
-    "ejs": "^2.3.3"
+    "ejs": "^2.3.3",
+    "reload": "~0.7.0"
   }
 }

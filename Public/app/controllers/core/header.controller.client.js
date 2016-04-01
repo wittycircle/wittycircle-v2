@@ -103,7 +103,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       .success(function(response) {
         if (response.success) {
           Authentication.ClearCredentials(function(res) {
-            window.location.replace('http://localhost');
+            window.location.replace('http://www.wittycircle.com');
           });
         }
       }).error(function (response) {

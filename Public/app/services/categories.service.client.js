@@ -18,6 +18,7 @@
 
          service.getCategories = getCategories;
          service.getCategory = getCategory;
+	 service.getCategoryUnresolved = getCategoryUnresolved;
 
          return service;
 

@@ -10,6 +10,7 @@ var morgan		= require('morgan');
 var _			= require('underscore');
 var server		= require('http').createServer(app);
 var https		= require('https');
+var reload		= require('reload');
 var session		= require('express-session');
 var RedisStore          = require('connect-redis')(session);
 var redis               = require("redis");
@@ -140,5 +141,6 @@ require('./algolia')(app, algoliaClient);
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
+reload(server, app);
 server.listen(80);
 https.createServer(httpsOption, app).listen(443);

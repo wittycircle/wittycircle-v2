@@ -62,33 +62,33 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	});
 
 	/*****-- FUNCTION --*****/
-	setTimeout(function() {
-	    if (!$rootScope.globals.currentUser) {
-	  		$(window).scroll(function () {
-	  			if ($('#meet-body-page')[0]) {
-	  				var x = $(window).scrollTop();
-	  				var container = $('.custom-popover');
-	  				if (x > 350) {
-	  					if (!container.length) {
-	  						$mdBottomSheet.hide();
-	  						showbottomAlert.pop_it_persistance();
-	  						setTimeout(function() {
-	  							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
-	  							$('#page-wrap').css('display', 'block');
-	  						}, 150);
-	  					}
-	  				}
-	  				if (x < 350) {
-	  					if (container.length) {
-	  						$mdBottomSheet.hide();
-	  						$('.md-bottom-sheet-backdrop').css('display', 'none')
-	  						$('#page-wrap').css('display', 'none');
-	  					}
-	  				}
-	  			}
-	  		});
-	    }
-	}, 1000);
+	// setTimeout(function() {
+	//     if (!$rootScope.globals.currentUser) {
+	//   		$(window).scroll(function () {
+	//   			if ($('#meet-body-page')[0]) {
+	//   				var x = $(window).scrollTop();
+	//   				var container = $('.custom-popover');
+	//   				if (x > 350) {
+	//   					if (!container.length) {
+	//   						$mdBottomSheet.hide();
+	//   						showbottomAlert.pop_it_persistance();
+	//   						setTimeout(function() {
+	//   							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
+	//   							$('#page-wrap').css('display', 'block');
+	//   						}, 150);
+	//   					}
+	//   				}
+	//   				if (x < 350) {
+	//   					if (container.length) {
+	//   						$mdBottomSheet.hide();
+	//   						$('.md-bottom-sheet-backdrop').css('display', 'none')
+	//   						$('#page-wrap').css('display', 'none');
+	//   					}
+	//   				}
+	//   			}
+	//   		});
+	//     }
+	// }, 1000);
 
 	$scope.mHelp = "Anything";
 	$scope.getAnything = function(help) {

@@ -162,12 +162,11 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** SECTION PROFILE CARD ***/
 	$scope.goToProfile = function(id) {
-		console.log(id);
-		Users.getUserIdByProfileId(id).then(function(data) {
-			$location.path('/' + data.userId.username);
-		});
+	    Users.getUserIdByProfileId(id).then(function(data) {
+		$location.path('/' + data.userId.username);
+	    });
 	};
-
+    
 	$scope.followUserFromCard = function(id, index, $event) {
 		if (!$rootScope.globals.currentUser) {
 			showbottomAlert.pop_it($event);

@@ -246,8 +246,8 @@ var wittyCircleApp = angular
 
 
       //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
-      $locationProvider.html5Mode(true);
       $locationProvider.hashPrefix('!');
+      $locationProvider.html5Mode(true);
 
   })
   .run(function ($rootScope, $cookieStore, $location) {

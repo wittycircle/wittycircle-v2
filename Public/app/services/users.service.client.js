@@ -28,7 +28,7 @@
           service.count                 = count;
           service.sendNumber            = sendNumber;
           service.getUserIdByProfileId  = getUserIdByProfileId;
-	      service.updateUser            = updateUser;
+	  service.updateUser            = updateUser;
           service.getProfileByUserId    = getProfileByUserId;
           service.getProfilesByProfileId= getProfilesByProfileId;
 
@@ -72,15 +72,23 @@
             });
           };
 
-          function getUserIdByProfileId(profile_id, callback) {
-            $http.get('/userId/' + profile_id).success(function(res) {
-                if (res.success){
-                  callback(res.userId);
-                } else
-                  callback(false);
-              });
+	  function getUserIdByProfileId(profile_id) {
+              var defer = $q.defer();
+	      
+              return $http.get('/userId/' + profile_id)
+		  .then(function(response) {
+                      defer.resolve(response.data);
+                      if (response.data.userId){
+			  property = {
+			      "id": response.data.userId.id,
+			  };
+                      }
+                      return defer.promise;
+		  }, function(response) {
+                      return defer.promise;
+		  });
           };
-
+	  
           function getUsers() {
               var data = [];
               var ret;

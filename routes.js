@@ -90,8 +90,8 @@ app.get('/profile', ensureAuth, function(req, res) {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {
-		successRedirect : 'http://localhost',
-	    failureRedirect : 'http://localhost'
+		successRedirect : 'http://www.wittycircle.com',
+	    failureRedirect : 'http://www.wittycircle.com'
 	}));
 
 /* Twitter Users */	
@@ -106,8 +106,8 @@ app.get('/auth/twitter/callback',
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
 	passport.authenticate('google', {
-	    successRedirect : 'http://localhost',
-	    failureRedirect : 'http://localhost'
+	    successRedirect : 'http://www.wittycircle.com',
+	    failureRedirect : 'http://www.wittycircle.com'
 	}));
 
 /* View */

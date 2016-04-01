@@ -13,6 +13,7 @@ exports.updateBasic = function(req, res) {
     req.sanitize('genre').Clean(true);
     req.sanitize('birthday').Clean(true);
     req.sanitize('location_city').Clean(true);
+    //req.sanitize('location_country').Clean(true);
 
     var errors = req.validationErrors(true);
     if (errors)

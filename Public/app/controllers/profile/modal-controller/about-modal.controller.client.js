@@ -26,7 +26,7 @@ angular.module('wittyApp').controller('AboutModalCtrl', function (Users, $timeou
         description : $scope.aboutDescription,
       };
       if (profileData.about) {
-        $http.put('http://127.0.0.1/signup/about', profileData).success(function(res) {
+        $http.put('/signup/about', profileData).success(function(res) {
           if (res.success) {
             $scope.aButton  = "Saved";
             $scope.getProfileInfo();

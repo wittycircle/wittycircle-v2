@@ -9,7 +9,7 @@
  **/
 
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, showbottomAlert, $mdBottomSheet, Profile) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, showbottomAlert, $mdBottomSheet, Profile, $timeout) {
 
 
 	/*** Meet Card Page ***/
@@ -19,8 +19,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		};
 
 		$scope.$parent.card = {
-			title: "Meet",
-			type: "Meet page",
+			title: "Wittycircle | Meet",
 			url: "http://www.wittycircle.com/meet",
 			image: "http://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
 		};
@@ -28,7 +27,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	$scope.limit = 16;
 	
-	$http.get('http://127.0.0.1/skills').success(function(res) {
+	$http.get('/skills').success(function(res) {
 		$scope.skills = res.skills;
 		if ($stateParams.skillParams) {
 			$scope.skillList = $stateParams.skillParams;
@@ -131,7 +130,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		}
 		if ($scope.skillList.length == 5)
 			$scope.fullList = true;
-		$http.post('http://127.0.0.1/skills/search/users', $scope.skillList).success(function(res) {
+		$http.post('/search/users', $scope.skillList).success(function(res) {
 			$scope.skillSearch = res.data;
 		});
 
@@ -153,9 +152,12 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			$scope.skillList.splice(index, 1);
 		if ($scope.skillList.length < 5)
 			$scope.fullList = false;
-		$http.post('http://127.0.0.1/skills/search/users', $scope.skillList).success(function(res) {
-			$scope.skillSearch = res.data;
-		});
+		if($scope.skillList[0]) {
+			$http.post('/search/users', $scope.skillList).success(function(res) {
+				$scope.skillSearch = res.data;
+			});
+		} else
+			$scope.skillSearch = [];
 	}
 
 	/*** SECTION PROFILE CARD ***/
@@ -184,6 +186,50 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			});
 		}
 	};
+
+	/*** Search Section ***/
+	$scope.$watchGroup(['mHelp', 'skillSearch', 'searchML'], function(value) {
+		if (value) {
+
+			$('#ldm').css('display', 'block');
+			$('#mbd').css('display', 'none');
+
+			$timeout(function() {
+				$('#ldm').css('display', 'none');
+				$('#mbd').css('display', 'block');
+			}, 500);
+
+			var object = {
+				about: value[0],
+				list: value[1],
+				geo: value[2],
+			};
+			if (value[1] && value[1][0]) {
+				$http.put('/search/users', object).success(function(res) {
+					if (res.success) {
+						$scope.cardProfiles = res.data;
+						if ($rootScope.globals.currentUser) {
+							Profile.getFollowedUser(res.data, function(res){
+								$scope.followed = res;
+							});
+						}	
+					}
+				});
+			} else {
+				if (value[0] !== "Anything" || value[2]) {
+					$http.post('/search/users/al', object).success(function(res) {
+						if (res.success)
+							$scope.cardProfiles = res.data;
+						if ($rootScope.globals.currentUser) {
+							Profile.getFollowedUser(res.data, function(res){
+								$scope.followed = res;
+							});
+						}
+					});
+				}
+			}
+		}
+	});
 
 	$(document).ready(function() {
 		$('.meet-body-cards').mouseup(function(e) {
@@ -221,13 +267,11 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
 					var x = model.$viewValue.indexOf(',');
-					scope.searchML = model.$viewValue.slice(0, x);
+					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
 				});
 			});
 
 			scope.$watch('meetLocation', function(value) {
-				if (!value)
-					scope.searchML = [];
 				if (value) {
 					var checkCountry = value.indexOf('United States');
 					if (checkCountry >= 0) {
@@ -243,6 +287,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 								}).appendTo('body');
 								var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 20;
 								el.remove();
+								if (w < 200)
+									return "200px";
 								return w.toString() + "px";
 							});
 						}

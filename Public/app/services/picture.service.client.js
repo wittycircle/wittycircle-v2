@@ -23,7 +23,7 @@
 
 	    function resizePicture(url, width, height, crop) {
 	        var tab, i, parameter, url_ret;
-
+	        
 	        tab = url.split('/');
 			i = $.inArray('upload', tab);
 			parameter = "w_" + width + "," + "h_" + height + "," + "c_" + crop;

@@ -25,7 +25,7 @@
          return service;
 
          function checkFollowProject(project_id, callback) {
-          $http.get('http://127.0.0.1/follow/project/check/' + project_id).success(function (response) {
+          $http.get('/follow/project/check/' + project_id).success(function (response) {
             callback(response);
           }).error(function (response) {
             callback(response);
@@ -33,24 +33,24 @@
          }
 
          function followProject(project_id, callback) {
-           $http.get('http://127.0.0.1/follow/project/'+ project_id).success(function (response) {
+           $http.get('/follow/project/'+ project_id).success(function (response) {
              callback(response);
            }).error(function (response) {
              callback(response);
            });
-         }
+         };
 
          function getFollowedProject(username, callback) {
-           $http.get('http://127.0.0.1/follow/projects/'+ username).success(function (response) {
+           $http.get('/follow/projects/'+ username).success(function (response) {
                callback(response);
            }).error(function (response) {
              callback(response);
            });
-         }
+         };
 
          function getProjectFollowers(project_id) {
             if (project_id) {
-                return $http.get('http://127.0.0.1/project_followers/' + project_id);
+                return $http.get('/project_followers/' + project_id);
             } else {
                 return null;
             }
@@ -58,7 +58,7 @@
 
           function getProjectFollowersByPublicId(public_id) {
               if (public_id) {
-                  return $http.get('http://127.0.0.1/project_followers/public/' + public_id);
+                  return $http.get('/project_followers/public/' + public_id);
               } else {
                   return null;
               }

@@ -17,7 +17,7 @@ angular.module('wittyApp').controller('InterestsModalCtrl', function ($modalInst
     		interest_name 	: interest.name,
     	};
 
-    	$http.post('http://127.0.0.1/interests/add', object).success(function(res) {
+    	$http.post('/interests/add', object).success(function(res) {
         	if (res.success)
         		$scope.getProfileInterest();
         }); 
@@ -25,7 +25,7 @@ angular.module('wittyApp').controller('InterestsModalCtrl', function ($modalInst
 
     $scope.removeInterest = function(index) {
     	console.log(index);
-    	$http.delete('http://127.0.0.1/interest/delete/' + index.interest_id).success(function(res) {
+    	$http.delete('/interest/delete/' + index.interest_id).success(function(res) {
         	if (res.success)
           		$scope.getProfileInterest();
       	});

@@ -15,41 +15,55 @@ function transformUrlForCard(url) {
 }
 
 exports.getRandomProfilePicture = function(req, res) {
-    var x = Math.floor((Math.random() * 16) + 1);
-    pool.query('SELECT url FROM witty_profile_pictures WHERE id = ?', x,
-	       function(err, data) {
-		   if (err) throw err;
-		   pool.query('UPDATE profiles SET profile_picture = ?, profile_picture_icon = ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [data[0].url, data[0].url, req.user.id],
-			      function(err, done) {
-				  	if (err) throw err;
-						res.send({success: true, url: data[0].url});
-					});
-	       });
+    function recursive() {
+	var x = Math.floor((Math.random() * 16) + 1);
+	pool.query('SELECT url FROM witty_profile_pictures WHERE id = ?', x,
+		   function(err, data) {
+		       if (err) throw err;
+		       if (!data[0])
+			   recursive();
+		       else {
+			   pool.query('UPDATE profiles SET profile_picture = ?, profile_picture_icon = ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [data[0].url, data[0].url, req.user.id],
+				      function(err, done) {
+					  if (err) throw err;
+					  return res.send({success: true, url: data[0].url});
+				      });
+		       }
+		   });
+    };
+    recursive();
 };
 
 exports.getRandomCoverPicture = function(req, res) {
-    var x = Math.floor((Math.random() * 16) + 1);
-    pool.query('SELECT url FROM witty_cover_pictures WHERE id = ?', x,
-	       function(err, data) {
-		   if (err) throw err;
-		   var cover_card = transformUrlForCard(data[0].url);
-		   pool.query('UPDATE profiles SET cover_picture = ?, cover_picture_cards = ?  WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [data[0].url, cover_card, req.user.id],
-			    function(err, result) {
-			  //     	algoliaClient.deleteIndex('Users', function(error) {
-					// 	if (!err) {
-					// 		pool.query('SELECT * FROM profiles', function(err, profile_data) {
-					// 			if (err) throw err;
-					// 			People.addObjects(profile_data, function(err, content) {
-								    if (err) throw err;
-									res.send({success: true, data: data[0].url});
-					// 			});
-					// 	    });
-					// 	}
-					// });
-			    });
-	       });
+    function recursive() {
+	var x = Math.floor((Math.random() * 16) + 1);
+	pool.query('SELECT url FROM witty_cover_pictures WHERE id = ?', x,
+		   function(err, data) {
+		       if (err) throw err;
+		       if (!data[0])
+			   recursive();
+		       else {
+			   var cover_card = transformUrlForCard(data[0].url);
+			   pool.query('UPDATE profiles SET cover_picture = ?, cover_picture_cards = ?  WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [data[0].url, cover_card, req.user.id],
+				      function(err, result) {
+			       		  algoliaClient.deleteIndex('Users', function(error) {
+					      if (!err) {
+						  pool.query('SELECT * FROM profiles', function(err, profile_data) {
+					 	      if (err) throw err;
+					 	      People.addObjects(profile_data, function(err, content) {
+							  if (err) throw err;
+							  return res.send({success: true, data: data[0].url});
+					 	      });
+						  });
+					      }
+					  });
+				      });
+		       };
+		   });
+    };
+    recursive(0);
 };
-
+    
 exports.getCoverPicture = function(req, res) {
     req.checkBody('url', 'url must be a string of characters').isString().min(1);
     var errors = req.validationErrors(true);

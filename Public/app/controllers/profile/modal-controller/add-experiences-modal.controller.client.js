@@ -64,7 +64,7 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($moda
       };
       Locations.setplaces($scope.addExLocation, position);
 
-      $http.post('http://127.0.0.1/experiences', position).success(function(res) {
+      $http.post('/experiences', position).success(function(res) {
         if (res.success) {
           $scope.getProfileExp();
           $modalInstance.dismiss();

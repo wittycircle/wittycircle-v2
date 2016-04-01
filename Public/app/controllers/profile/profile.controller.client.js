@@ -9,6 +9,8 @@
  **/
 angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal, $state, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, showbottomAlert, Skills, Interests, Locations, Projects) {
 
+    var socket = io.connect('http://127.0.0.1');
+    
     if (!$rootScope.globals.currentUser || ($rootScope.globals.currentUser && $rootScope.globals.currentUser.username !== $stateParams.username))
       Users.getProfileView($stateParams.username);
 
@@ -54,7 +56,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     };
 
     $scope.reloadCredential = function() {
-      $http.get('http://127.0.0.1/profile').success(function(res){
+      $http.get('/profile').success(function(res){
         Authentication.SetCredentialsSocial(res.user, res.user_info);
       });
     };
@@ -70,7 +72,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
       if ($rootScope.globals.currentUser) {
         if ($rootScope.globals.currentUser.username !== $stateParams.username) {
-          $http.get('http://127.0.0.1/follow/user/' + $stateParams.username).success(function(res) {
+          $http.get('/follow/user/' + $stateParams.username).success(function(res) {
             if (res.success) {
               $scope.follow         = true;
               $scope.followText     = "Following";
@@ -97,23 +99,23 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         };
       getSchedule();
 
-      $http.get('http://127.0.0.1/skills').success(function(res) {
+      $http.get('/skills').success(function(res) {
         $scope.cSkills              = res.skills;
       });
 
-      $http.get('http://127.0.0.1/interests').success(function(res) {
+      $http.get('/interests').success(function(res) {
         $scope.cInterests           = res.interests;
       });
 
-      $http.get('http://127.0.0.1/follow/projects/' + $stateParams.username).success(function(res) {
+      $http.get('/follow/projects/' + $stateParams.username).success(function(res) {
         $scope.projectsFollow       = res.data.length;
       });
 
-      $http.get('http://127.0.0.1/follow/users/' + $stateParams.username).success(function(res) {
+      $http.get('/follow/users/' + $stateParams.username).success(function(res) {
         $scope.usersFollow          = res.data.length;
       });
 
-      $http.get('http://127.0.0.1/follow/followUsers/' + $stateParams.username).success(function(res) {
+      $http.get('/follow/followUsers/' + $stateParams.username).success(function(res) {
         $scope.followers            = res.data.length;
       });
 
@@ -131,7 +133,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
           $scope.user               = res;
           $scope.profile            = res.profile[0];
           if ($scope.profile.cover_picture) {
-            $http.post('http://127.0.0.1/picture/get/cover', {url: $scope.profile.cover_picture}).success(function(res) {
+            $http.post('/picture/get/cover', {url: $scope.profile.cover_picture}).success(function(res) {
               if (res.success && res.data[0])
                 $scope.randomCover  = true;
               else
@@ -159,9 +161,9 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         $scope.imageProfileLoading           = true;
         Upload.dataUrl(file, true).then(function(url){
           data.url = url;
-          $http.post('http://127.0.0.1/upload', data).success(function(res) {
-            $http.post('http://127.0.0.1/upload/profile_pic_icon', data).success(function(res1) {
-              $http.put('http://127.0.0.1/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
+          $http.post('/upload', data).success(function(res) {
+            $http.post('/upload/profile_pic_icon', data).success(function(res1) {
+              $http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
                 if (res2.success) {
                   $scope.init();
                   $scope.reloadCredential();
@@ -183,8 +185,8 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         $scope.randomCover                = false;
         Upload.dataUrl(file, true).then(function(url){
           data.url = url;
-          $http.post('http://127.0.0.1/upload/profile/cover', data).success(function(res) {
-            $http.put('http://127.0.0.1/profile/picture', {cover_picture: res.secure_url}).success(function(response) {
+          $http.post('/upload/profile/cover', data).success(function(res) {
+            $http.put('/profile/picture', {cover_picture: res.secure_url}).success(function(response) {
               console.log(response);
               if (response.success) {
                 $scope.init();
@@ -197,8 +199,8 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
             console.log(res);
           });
 
-          $http.post('http://127.0.0.1/upload/profile/cover_card', data).success(function(res) {
-            $http.put('http://127.0.0.1/profile/picture', {cover_picture_cards: res.secure_url}).success(function(res) {
+          $http.post('/upload/profile/cover_card', data).success(function(res) {
+            $http.put('/profile/picture', {cover_picture_cards: res.secure_url}).success(function(res) {
             });
           }).error(function(res) {
             console.log(res);
@@ -281,7 +283,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
     /*** SKILLS ***/
     $scope.getProfileSkill        = function() {
-      $http.get('http://127.0.0.1/skills/' + $stateParams.username).success(function(res) {
+      $http.get('/skills/' + $stateParams.username).success(function(res) {
         if (res.success)
           $scope.profileSkills    = res.data;
       });
@@ -311,7 +313,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
     /*** INTEREST ***/
     $scope.getProfileInterest     = function() {
-      $http.get('http://127.0.0.1/interest/' + $stateParams.username).success(function(res) {
+      $http.get('/interest/' + $stateParams.username).success(function(res) {
         if (res.success)
           $scope.profileInterests = res.data;
       });
@@ -348,7 +350,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     $scope.endPeriod            = {};
 
     $scope.getProfileExp          = function() {
-      $http.get('http://127.0.0.1/experiences/' + $stateParams.username).success(function(res) {
+      $http.get('/experiences/' + $stateParams.username).success(function(res) {
         if (res.success)
           $scope.profileExps      = res.data;
       });
@@ -404,7 +406,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     };
 
     $scope.removeExp              = function(id) {
-      $http.delete('http://127.0.0.1/experience/' + id).success(function(res) {
+      $http.delete('/experience/' + id).success(function(res) {
         if (res.success)
           $scope.getProfileExp();
       });
@@ -433,7 +435,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
         Locations.setplaces(scope.profileLocation, object);
         if (object.location_country) {
-          $http.put('http://127.0.0.1/profile/location', object).success(function(res) {
+          $http.put('/profile/location', object).success(function(res) {
             scope.init();
             scope.editLocation();
           });

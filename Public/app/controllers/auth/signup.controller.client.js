@@ -22,7 +22,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
       $location.path('/');
 
     /*** Set Default Cover Picture ***/
-    $http.get('http://127.0.0.1/picture/cover').then(function(response) {
+    $http.get('/picture/cover').then(function(response) {
       $rootScope.globals.currentUser.profile_cover = response.data.data;
       $cookieStore.put('globals', $rootScope.globals);
     });
@@ -67,8 +67,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
     var loadInfoProfile           = function() {
       if (currentUser) {
-        $http.post('http://127.0.0.1/profileId/' + currentUser.id).success(function(res) {
-          $http.post('http://127.0.0.1/profiles/' + res.content.profile_id).success(function(data) {
+        $http.post('/profileId/' + currentUser.id).success(function(res) {
+          $http.post('/profiles/' + res.content.profile_id).success(function(data) {
             $scope.personalInfo       = data.content;
             if (data.content.genre)
               $scope.sexe             = data.content.genre.capitalizeFirstLetter();
@@ -109,11 +109,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     $scope.$on("$destroy", function(){
       if ($stateParams.tagCheckFirst) {
         if (!$scope.signUpPicture)
-          $http.get('http://127.0.0.1/picture/profile');
-        $http.put('http://127.0.0.1/user/checkLog/update');
+          $http.get('/picture/profile');
+        $http.put('/user/checkLog/update');
       }
       $('#main-body').prepend(clone);
-      window.location.replace('http://www.wittycircle.com');
+      window.location.replace('/');
     });
 
     /*
@@ -143,13 +143,13 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /*
     ** Initiate controller to get list of Skills and Interests
     */
-    $scope.skills = $http.get('http://127.0.0.1/skills').success(function (response) {
+    $scope.skills = $http.get('/skills').success(function (response) {
       $scope.skills = response;
     }).error(function (response) {
       console.log('error getting skills');
     });
 
-    $scope.interests = $http.get('http://127.0.0.1/interests').success(function (response) {
+    $scope.interests = $http.get('/interests').success(function (response) {
       $scope.interests = response;
     }).error(function (response) {
       console.log('error gettings interests');
@@ -188,17 +188,19 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
       else {
         Locations.setplaces($scope.basicLocation, $scope.nLocation);
         var timestamp                 = new Date(($scope.formYear + '.' + $scope.formMonth1 + '.' + $scope.formDay).toString());
-
+        console.log(timestamp);
         if (isNaN(timestamp))
           profileData.birthdate       = new Date(Date.UTC($scope.formYear, parseInt($scope.formMonth1, 10) - 1, $scope.formDay, 12, 0, 0)).toISOString();
         else
           profileData.birthdate       = timestamp;
+        console.log(profileData.birthdate);
         profileData.genre             = $scope.sexe;
         profileData.location_country  = $scope.nLocation.location_country;
         profileData.location_city     = $scope.nLocation.location_city;
         profileData.location_state    = $scope.nLocation.location_state;
         console.log(profileData);
-        $http.put('http://127.0.0.1/signup/basic/' + currentUser.id, profileData).success(function(res) {
+        $http.put('/signup/basic/' + currentUser.id, profileData).success(function(res) {
+          console.log(res);
           if (res.success) {
             $scope.canPass = true;
             bClassName.attr('class', inRightBig);
@@ -213,7 +215,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     };
 
     $scope.reloadCredential = function() {
-      $http.get('http://127.0.0.1/profile').success(function(res){
+      $http.get('/profile').success(function(res){
         Authentication.SetCredentialsSocial(res.user, res.user_info);
       });
     };
@@ -224,9 +226,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
         $scope.imageSignupLoading = true;
         Upload.dataUrl(file, true).then(function(url){
           data.url = url;
-          $http.post('http://127.0.0.1/upload', data).success(function(res) {
-            $http.post('http://127.0.0.1/upload/profile_pic_icon', data).success(function(res1) {
-              $http.put('http://127.0.0.1/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res) {
+          $http.post('/upload', data).success(function(res) {
+            $http.post('/upload/profile_pic_icon', data).success(function(res1) {
+              $http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res) {
                 if (res.success) {
                   $scope.reloadCredential();
                   loadInfoProfile();
@@ -251,7 +253,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
       profileData.about = $scope.aboutText;
       profileData.description = $scope.aboutDescription;
       if (profileData.about) {
-        $http.put('http://127.0.0.1/signup/about', profileData).success(function(res) {
+        $http.put('/signup/about', profileData).success(function(res) {
           if (res.success) {
             cClassName.attr('class', inRightBig);
             cClassName.css('display', 'block');
@@ -266,13 +268,13 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     };
 
     /*** Skills ***/
-    $http.get('http://127.0.0.1/skills').success(function(res) {
+    $http.get('/skills').success(function(res) {
       $scope.cSkills = res.skills;
     });
     $scope.sButton         = "Skip";
 
     $scope.getSignUpSkill        = function() {
-      $http.get('http://127.0.0.1/skills/' + $rootScope.globals.currentUser.username).success(function(res) {
+      $http.get('/skills/' + $rootScope.globals.currentUser.username).success(function(res) {
         if (res.success)
           $scope.skillCascade    = res.data;
         if ($scope.skillCascade[0])
@@ -287,14 +289,14 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
         skill_id    : skill.id,
         skill_name  : skill.name,
       };
-      $http.post('http://127.0.0.1/skills/add', object).success(function(res) {
+      $http.post('/skills/add', object).success(function(res) {
         if (res.success)
           $scope.getSignUpSkill();
       });
     };
 
     $scope.removeSkill = function(index) {
-      $http.delete('http://127.0.0.1/skills/delete/' + index).success(function(res) {
+      $http.delete('/skills/delete/' + index).success(function(res) {
         if (res.success)
           $scope.getSignUpSkill();
       });
@@ -310,13 +312,13 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     }
 
     /*** Interests ***/
-    $http.get('http://127.0.0.1/interests').success(function(res) {
+    $http.get('/interests').success(function(res) {
       $scope.cInterests     = res.interests;
     });
     $scope.iButton          = "Skip";
 
     $scope.getSignUpInterest     = function() {
-      $http.get('http://127.0.0.1/interest/' + $rootScope.globals.currentUser.username).success(function(res) {
+      $http.get('/interest/' + $rootScope.globals.currentUser.username).success(function(res) {
         if (res.success)
           $scope.interestList = res.data;
         if ($scope.interestList[0])
@@ -332,14 +334,14 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
         interest_name   : interest.name,
       };
 
-      $http.post('http://127.0.0.1/interests/add', object).success(function(res) {
+      $http.post('/interests/add', object).success(function(res) {
           if (res.success)
             $scope.getSignUpInterest();
         });
     };
 
     $scope.removeInterest = function(index) {
-      $http.delete('http://127.0.0.1/interest/delete/' + index).success(function(res) {
+      $http.delete('/interest/delete/' + index).success(function(res) {
           if (res.success)
               $scope.getSignUpInterest();
         });
@@ -362,7 +364,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     $scope.endPeriod      = {};
 
     $scope.loadEx         = function() {
-      $http.get('http://127.0.0.1/experiences').success(function(res) {
+      $http.get('/experiences').success(function(res) {
         if (res.success)
           $scope.positions  = res.data;
         if ($scope.positions[0])
@@ -444,7 +446,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
       Locations.setplaces($scope.exLocation, position);
 
       if (no === 1) {
-        $http.put('http://127.0.0.1/experience/' + $scope.getIndex, position).success(function(res) {
+        $http.put('/experience/' + $scope.getIndex, position).success(function(res) {
           if (res.success) {
             $scope.loadEx();
             $('#signup-experience-body').fadeIn();
@@ -452,7 +454,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
           }
         });
       } else {
-        $http.post('http://127.0.0.1/experiences', position).success(function(res) {
+        $http.post('/experiences', position).success(function(res) {
           if (res.success) {
             $scope.loadEx();
             $scope.exButton         = "Continue";
@@ -501,7 +503,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     };
 
     $scope.removePosition       = function(id) {
-      $http.delete('http://127.0.0.1/experience/' + id).success(function(res) {
+      $http.delete('/experience/' + id).success(function(res) {
         if (res.success)
           $scope.loadEx();
       });

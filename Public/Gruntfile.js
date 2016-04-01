@@ -38,19 +38,19 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['app/**/*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-           livereload: '<%= connect.options.livereload %>'
-         }
-      },
+      // js: {
+      //   files: ['<%= yeoman.app %>/**/{,*/}*.js'],
+      //   tasks: ['newer:jshint:all'],
+      //   options: {
+      //      livereload: '<%= connect.options.livereload %>'
+      //    }
+      // },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
-        files: ['app/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer:server']
       },
       gruntfile: {
@@ -456,9 +456,9 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
+  if (target === 'dist') {
+   return grunt.task.run(['build', 'connect:dist:keepalive']);
+   }
 
     grunt.task.run([
       'clean:server',

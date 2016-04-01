@@ -2,7 +2,7 @@
 /* ALGOLIA SEARCH ENGINE REAL TIME */
 
 module.exports = function(app, algoliaClient) {
-
+    
     var People	= algoliaClient.initIndex('Users');
     var Project = algoliaClient.initIndex('Projects');
 
@@ -26,7 +26,7 @@ module.exports = function(app, algoliaClient) {
 			console.log(err);
 		});
 	    });
-	}
+	}	    
     });
 
 };

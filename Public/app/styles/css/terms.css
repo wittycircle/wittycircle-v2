@@ -1,0 +1,36 @@
+.termprivacy .home-video-bg {
+  height: 400px; }
+  .termprivacy .home-video-bg img {
+    width: 100%; }
+.termprivacy .terms {
+  padding: 50px 0px;
+  width: 800px; }
+  .termprivacy .terms .mgr_tp_20 {
+    margin-top: 20px; }
+  .termprivacy .terms a {
+    color: #222222;
+    text-decoration: underline; }
+  .termprivacy .terms h2 {
+    color: #222222;
+    font-family: 'FreigLight';
+    font-size: 50px; }
+  .termprivacy .terms h4 {
+    color: #222222;
+    font-size: 44px;
+    font-family: 'FreigLight';
+    margin: 10px 0px;
+    margin-top: 40px; }
+  .termprivacy .terms p {
+    color: #222222;
+    font-family: 'FreigBook';
+    font-size: 18px;
+    padding-left: 3px; }
+  .termprivacy .terms .p_ul {
+    margin-bottom: 0; }
+  .termprivacy .terms ul {
+    margin-left: 20px; }
+    .termprivacy .terms ul li {
+      font-family: 'FreigBook';
+      font-size: 18px; }
+
+/*# sourceMappingURL=terms.css.map */

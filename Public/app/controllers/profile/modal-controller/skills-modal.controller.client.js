@@ -18,14 +18,14 @@ angular.module('wittyApp').controller('SkillsModalCtrl', function ($modalInstanc
         skill_id    : skill.id,
         skill_name  : skill.name,
       };
-      $http.post('http://127.0.0.1/skills/add', object).success(function(res) {
+      $http.post('/skills/add', object).success(function(res) {
         if (res.success)
           $scope.getProfileSkill();
       });
     };
 
     $scope.removeSkill  = function(index) {
-      $http.delete('http://127.0.0.1/skills/delete/' + index.skill_id).success(function(res) {
+      $http.delete('/skills/delete/' + index.skill_id).success(function(res) {
         if (res.success)
           $scope.getProfileSkill();
       });

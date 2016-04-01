@@ -1,76 +1,43 @@
 /* Load Globals */
 //require('./globals');
 /* Load Server Modules */
-var express		    = require('express.io');
+var express		= require('express');
 var bodyParser		= require('body-parser');
 var cookieParser	= require('cookie-parser');
-var Validator		  = require('express-validator');
-var app			      = express();
-var _             = require('underscore');
-var server		    = require('http').createServer(app);
-var cors		      = require('cors');
-var session		    = require('express-session');
-//var RedisStore          = require('connect-redis')(session);
-//var redis               = require("redis");
-//var client              = redis.createClient();
-var passport		  = require('passport');
-var flash		      = require('connect-flash');
+var Validator		= require('express-validator');
+var app			= express();
+var _			= require('underscore');
+var server		= require('http').createServer(app);
+var https		= require('https');
+var session		= require('express-session');
+var RedisStore          = require('connect-redis')(session);
+var redis               = require("redis");
+var client              = redis.createClient();
+var passport		= require('passport');
 var cloudinary		= require('cloudinary');
-var multer		    = require('multer');
-var fs			      = require('fs');
-var io			      = require('socket.io')(server);
+var multer		= require('multer');
+var fs			= require('fs');
+var io			= require('socket.io')(server);
 var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
-var mandrill      = require('mandrill-api/mandrill');
-var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-var FileReader    = require('filereader')
-  , fileReader    = new FileReader();
+var mandrill		= require('mandrill-api/mandrill');
+var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-//var algoliaClient = require('./algo/algolia').algoliaClient;
-
-app.http().io();
-global.connectedUsers = [];
+var algoliaClient	= require('./algo/algolia').algoliaClient;
+var httpsOption		= {
+    key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
+    cert: fs.readFileSync('./ssl_key/wittycircle-cert.pem') 
+};
 
 require('./passport')(passport);
 
-
-var corsOptions = {
-  origin: 'http://localhost:9000', //was localhost9000
-  credentials: true
-};
-
-app.use(cors(corsOptions));
 app.use(cookieParser());
 
-app.io.route('ready', function(req){
-    if(typeof req.session !== 'undefined'){
-        connectedUsers[req.session.user_id] = {
-            emit: function(event_tag, data){
-                req.io.emit(event_tag, data);
-            }
-        };
-    } else {
-        req.io.emit('talk', {message: "User is not Logged in."});
-    }
-});
-
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "http://localhost:9000"); //previously was localhost 9000
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-};
-
-app.configure(function(){
-    app.use(allowCrossDomain);
-});
-
-//app.use(require('prerender-node').set('prerenderServiceUrl', 'http://www.wittycircle.com').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
+app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
-    //store: new RedisStore({ host: '127.0.0.1', port: 80, client: client}),
+    store: new RedisStore({ host: '127.0.0.1', port: 80, client: client, ttl: 86400000}),
     secret: 'wittycircle4ever',
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: {maxAge: 86400000, httpOnly: false },
 }));
@@ -83,15 +50,12 @@ cloudinary.config({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
-//app.use(express.static(__dirname + '/Public/app'));
-//app.use(express.static(__dirname + '/Public/bower_components'));
-
-//app.engine('html', require('ejs').renderFile);
-//app.set('view engine', 'html');
-
-//app.use(express.static('Public/app'));
+app.use(express.static(__dirname + '/Public/'));
+app.use(express.static(__dirname + '/Public/app/'));
+app.use(express.static(__dirname + '/Public/app/styles/css'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 
 app.use(bodyParser.json({limit: '100mb'}));
@@ -168,10 +132,11 @@ String.prototype.capitalize = function() {
 require('./routes')(app, passport);
 
 /* Algolia Search Engine */
-//require('./algolia')(app, algoliaClient);
+require('./algolia')(app, algoliaClient);
 
 /* Socket */
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 server.listen(80);
+https.createServer(httpsOption, app).listen(443);

@@ -29,7 +29,8 @@ var wittyCircleApp = angular
     'angular-redactor',
     'oc.lazyLoad',
     // Custom modules
-    'wittyProjectModule'
+    'wittyProjectModule',
+	'720kb.socialshare'
 ])
   .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
     $stateProvider
@@ -118,7 +119,7 @@ var wittyCircleApp = angular
         templateUrl: 'views/projects/update/update_project.view.client.html',
         controller: 'UpdateProjectCtrl',
         resolve:{ auth: function($q, $stateParams, Projects, $http) {
-                        return $http.get('http://127.0.0.1/project/'+ $stateParams.public_id + '/auth').then(function(response) {
+                        return $http.get('/project/'+ $stateParams.public_id + '/auth').then(function(response) {
                           if (response.data.message === 'success') {
                             return true;
                           } if (response.data.message === 'not found') {
@@ -231,7 +232,7 @@ var wittyCircleApp = angular
 
       // **Redactor configuration
 
-      redactorOptions.imageUpload = 'http://127.0.0.1/upload/redactor';
+      redactorOptions.imageUpload = '/upload/redactor';
       redactorOptions.buttonSource = true;
       redactorOptions.imageResizable = true;
       redactorOptions.imageEditable = true;
@@ -246,7 +247,8 @@ var wittyCircleApp = angular
 
 
       //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
-      //$locationProvider.html5Mode(true);
+      $locationProvider.html5Mode(true);
+      $locationProvider.hashPrefix('!');
 
   })
   .run(function ($rootScope, $cookieStore, $location) {

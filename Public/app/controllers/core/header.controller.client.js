@@ -10,20 +10,22 @@
 angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
-  // $http.get('http://127.0.0.1/api').success(function(res) {
-  //   if (!res.success) {
-  //     Authentication.ClearCredentials();
-  //     $location.path('/');
-  //   }
-  // });
+  function checkCredential() {
+    if ($rootScope.globals.currentUser) {
+      $http.get('/api').success(function(res) {
+        if (!res.success) {
+          Authentication.ClearCredentials();
+          $location.path('/');
+        }
+      });
+    }
+  }; checkCredential();
 
    /*
    **Update in time sidebar after login
    */
-  var url, socket;
-
-  url = "http://127.0.0.1/";
-  socket = io.connect(url);
+  var socket;
+  socket = io.connect('/');
 
   $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
@@ -36,7 +38,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
           username        : res.username,
         };
         socket.emit('register', res.profile[0].first_name + ' ' + res.profile[0].last_name);
-        $http.get('http://127.0.0.1/user/checkLog').success(function(res) {
+        $http.get('/user/checkLog').success(function(res) {
           if (res.value === 0)
             $state.go('signup', {tagCheckFirst: true});
         });
@@ -69,6 +71,8 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     $scope.popSwL = function() {
       var x       = $('#main-signup-modal');
       var filter  = $("#page-wrap");
+      var marge = (x - 600)/2/2;
+
       if (x.css('display') === "none") {
         filter.fadeIn(500);
         x.css({'top': marge.toString() + "px"});
@@ -95,12 +99,13 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     };
 
     $scope.logout = function() {
-      $http.get('http://127.0.0.1/api/logout')
+      $http.get('/api/logout')
       .success(function(response) {
-        Authentication.ClearCredentials(function(res) {
-          //window.location.replace('http://www.wittycircle.com');
-          $state.go('main');
-        });
+        if (response.success) {
+          Authentication.ClearCredentials(function(res) {
+            window.location.replace('http://localhost');
+          });
+        }
       }).error(function (response) {
         console.log('error: cannot logout the user');
       });
@@ -125,15 +130,15 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
 
     $scope.showMessagePage = function(data) {
       if ($rootScope.globals.currentUser) {
-        $http.put('http://127.0.0.1/messages/', {id : data.id});
+        $http.put('/messages/', {id : data.id});
         $state.go('messages', {input: data});
       }
     };
 
-    $scope.getMesssageListOnClick = function() {
-      if (!$scope.listNotifs && !$scope.dialogues[0])
-        $scope.getMessageList();
-    };
+    // $scope.getMesssageListOnClick = function() {
+    //   if (!$scope.listNotifs && !$scope.dialogues[0])
+    //     $scope.getMessageList();
+    // };
 
     socket.on('notification', function(data){
             loadHeaderNotification();
@@ -285,7 +290,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
 
 
 /*** Search Bar ***/
-  var client = algolia.Client("XQX5JQG4ZD", "2db9d4c2f01cd2202a60d29df8fbeae0");
+  var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
   var People = client.initIndex('Users');
   var Project = client.initIndex('Projects');
 

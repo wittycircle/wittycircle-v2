@@ -2,7 +2,7 @@
 	<div class="body-page">
 		<div class="home-video-bg">
 			<video poster="images/poster/poster_discover.jpg" loop muted autoplay>
-	    		<source src="videos/discover.mp4" type="video/mp4">
+	    		<source src="http://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582187/Share_banner_cover/videos_background/Discover.mp4" type="video/mp4">
 	  		</video>
 	  	</div>
 
@@ -19,7 +19,11 @@
 					</div>
 					<aside id="dsd" class="discover-search1-downbox1" style="display: none">
 						<ul>
-							<li ng-repeat="project in projects" ng-click="getProject(project)">{{project}}</li>
+							<li ng-click="getProject('Idea', 1)">Idea</li>
+							<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
+							<li ng-click="getProject('Beta project', 3)">Beta projects</li>
+							<li ng-click="getProject('Live project', 4)">Live projects</li>
+							<li ng-click="getProject('all', 5)">All projects</li>
 						</ul>
 					</aside>
 				</div>
@@ -104,12 +108,14 @@
 	  	</div>
 	</div>
 	<section id="discover-body-content">
-		<div class="discover-body-container presentation-body-container">
+		<div id="hoho" class="loader" style="display: none"></div>
+		<div id="haha" class="discover-body-container presentation-body-container animated fadeIn">
 			<div class="discover-body-title presentation-body-title">
 				<h4>Browse <strong>the projects</strong> <span>below</span> or filter them using our magic tool above.</h4>
 			</div>
 			<div class="discover-body-list">
-				<div class="discover-body-card project-card animated fadeIn" ng-repeat="card in cards | limitTo: limit | wittyFilterDiscover: searchStatus + ' ' + searchCtg + ' ' + searchHelp: searchDL: skillSearch" ng-init="displayProjects((cards | wittyFilterDiscover: searchStatus + ' ' + searchCtg + ' ' + searchHelp: searchDL: skillSearch).length)" ng-if="card.picture_card" ui-sref="viewproject({public_id: card.public_id, title: encodeUrl(card.title)})">
+				
+				<div class="discover-body-card project-card" ng-repeat="card in cards | limitTo: limit"  ng-if="card.picture_card">
 					<div class="card-tag" ng-click="getTagCag(card.category_name)">
 						<div class="card-tag-content">
 							<div class="card-tag-bg"></div>
@@ -117,62 +123,85 @@
 							<h5>{{card.category_name}}</h5>
 						</div>
 					</div>
-					<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url({{ resizePic(card.picture_card, 285, 180, 'fill') }})'}">
-					</div>
-					<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}">
-					<!-- <img ng-src="{{card.picture}}" alt="card-picture"> -->
-					</div>
-					<div class="card-info">
-						<div class="card-title-space">
-							<h4>{{card.title}}</h4>
+					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ encodeUrl(card.title) }}">
+						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url({{ resizePic(card.picture_card, 285, 180, 'fill') }})'}"></div>
+						<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}"></div>
+						<div class="card-info">
+							<div class="card-title-space">
+								<h4>{{card.title}}</h4>
+							</div>
+							<div class="card-status">
+								<span>
+									<img ng-if="card.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
+									<img ng-if="card.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
+									<img ng-if="card.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
+									<img ng-if="card.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
+									{{card.status}}
+								</span>
+							</div>
+							<div class="card-location">
+								<span><img src="/images/location-picto.svg" alt="location-picture" />{{card.location_city}}<i ng-hide="!card.location_country">,</i> {{card.location_country}}</span>
+							</div>
+							<div class="card-description-text">
+								<p>{{card.description}}</p>
+							</div>
+							<div class="card-info-by">
+								<figure class="card-info-by-picture">
+									<img ng-src="{{ resizePic(card.pic, 30, 30, 'fill') }}" alt="card-foot-picture">
+								</figure>
+								<h6>{{card.creator_user_name}}<h6 ng-if="card.usersIn.length">& {{card.usersIn.length}} more</h6></h6>
+							</div>
 						</div>
-						<div class="card-status">
-							<span>
-								<img ng-if="card.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
-								<img ng-if="card.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
-								<img ng-if="card.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
-								<img ng-if="card.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
-								{{card.status}}
-							</span>
-						</div>
-						<div class="card-location">
-							<span><img src="/images/location-picto.svg" alt="location-picture" />{{card.location_city}}<i ng-hide="!card.location_country">,</i> {{card.location_country}}</span>
-						</div>
-						<div class="card-description-text">
-							<p>{{card.description}}</p>
-						</div>
-						<div class="card-info-by" ng-click="goToProfile(card.creator_user_id)">
-							<figure class="card-info-by-picture">
-								<img ng-src="{{resizePic(card.pic, 30, 30, 'fill')}}" alt="card-foot-picture">
-							</figure>
-							<h6>{{card.creator_user_name}} <h6 ng-if="card.usersIn.length">& {{card.usersIn.length}} more</h6></h6>
-							<!-- <aside ng-if="card.usersIn.length" class="card-info-users">
-								<ul>
-									<li ng-repeat="user in card.usersIn">{{user.first_name}}</li>
-								</ul>
-							</aside> -->
-						</div>
-					</div>
+					</a>
 				</div>
 
 				<div ng-if="allowExpand" class="discover-body-loadmore presentation-body-loadmore">
-					<button type="button" ng-click="expand(limit)">Load more</button>
+					<button type="button" ng-click="expand()">Load more</button>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<script>
-		/*function initPage() {
+		function initPage() {
 			$(window).scrollTop(0);
-		}; initPage();*/
+		}; setTimeout(function(){ initPage() }, 1000);
 
 		var scope = angular.element($("#discover-body-page")).scope();
 
-			$("#dsai").on('click', function() {
+			var val = {};
+
+			$("#dsai").on('mouseover', function() {
 				if ($(this).val()) {
+					val.text = $(this).val();
+					val.width = Number($(this).width()) + 20;
 					$(this).val("");
 					$(this).css("width", "200px");
+				}
+			});
+
+			$("#dsai").on('mouseout', function() {
+				if (!$(this).is(':focus')) {
+					if (val.text && val.width) {
+						$(this).val(val.text);
+						$(this).css("width", val.width.toString() + "px");
+					}
+				}
+			});
+
+			$("#dsai").focus(function() {
+				if ($(this).val()) {
+					val.text = $(this).val();
+					val.width = Number($(this).width()) + 20;
+					$(this).val("");
+					$(this).css("width", "200px");
+				}
+			});
+
+			$("#dsai").focusout(function() {
+				if (val.text && val.width) {
+					$(this).val(val.text);
+					$(this).css("width", val.width.toString() + "px");
 				}
 			});
 

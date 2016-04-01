@@ -2,8 +2,7 @@
   <div class="body-page">
     <div id="hvbg" class="home-video-bg">
       <video poster="images/poster/poster_home_signup.jpg" loop muted autoplay>
-        <source src="videos/home.mp4" type="video/mp4">
-        <source src="videos/home.webm" type="video/webm">
+        <source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582130/Share_banner_cover/videos_background/Home.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -141,7 +140,7 @@
                 <h5>{{cardsDisplay.category_name}}</h5>
               </div>
             </div>
-            <div class="card-project-page" ui-sref="viewproject({public_id: cardsDisplay.public_id, title: encodeUrl(cardsDisplay.title)})">
+            <a class="card-project-page" ng-href="/project/{{cardsDisplay.public_id}}/{{encodeUrl(cardsDisplay.title)}}">
               <div class="card-picture">
                 <img ng-src="{{ resizePic(cardsDisplay.picture_card, 285, 180)}}" alt="card-picture">
               </div>
@@ -171,7 +170,7 @@
                   <h6>{{cardsDisplay.creator_user_name}}<h6 ng-if="cardsDisplay.usersIn.length">& {{cardsDisplay.usersIn.length}} more</h6></h6>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
       </div>
 
@@ -201,7 +200,7 @@
                 <h5>{{projectCard.category_name}}</h5>
               </div>
             </div>
-              <div class="card-project-page" ui-sref="viewproject({public_id: projectCard.public_id, title: encodeUrl(projectCard.title)})">
+              <a class="card-project-page" ng-href="/project/{{projectCard.public_id}}/{{encodeUrl(projectCard.title)}}">
                 <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(projectCard.picture, 285, 180) }})'}">
                   <!-- <img ng-src="{{projectCard.picture}}" alt="card-picture"> -->
                 </div>
@@ -231,7 +230,7 @@
                   <h6>{{projectCard.creator_user_name}}<h6 ng-if="projectCard.usersIn.length">& {{projectCard.usersIn.length}} more</h6></h6>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="main-body2-seemore">
             <a href="" data-ui-sref="discover">See more projects</a>

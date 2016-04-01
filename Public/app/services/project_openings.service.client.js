@@ -22,7 +22,7 @@
 
 
         function updateOpenings(opening_id, data, callback) {
-          $http.put('http://127.0.0.1/opening/' + opening_id, data).success(function(response) {
+          $http.put('/opening/' + opening_id, data).success(function(response) {
             callback(response);
           }).error(function(error_response) {
             callback(response);

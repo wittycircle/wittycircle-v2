@@ -52,14 +52,14 @@
 		height: inherit;
 		width: inherit;
 		z-index: 60000;
+		text-align: center;
 
 		.private_text {
 			color: white;
 			font-family: 'FreigMed';
 			font-size: 18px;
-			padding-top: 6%;
-			padding-left: 7.5%;
-			position: absolute;
+			position: relative;
+			top: 70px;
 		}
 	}
 

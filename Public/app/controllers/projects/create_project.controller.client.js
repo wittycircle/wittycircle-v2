@@ -272,10 +272,10 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
       Feedbacks.getFeedbacksbyProjectPublicId($scope.project.public_id, function(response) {
         $scope.questions = addUsertoFeedbacks(response);
       });
-      $http.get('http://127.0.0.1/project/' + response[0].id + '/involved').then(function(response) {
+      $http.get('/project/' + response[0].id + '/involved').then(function(response) {
         $scope.involved_users = addUserToInvolvment(response.data);
       });
-      $http.get('http://127.0.0.1/openings/project/' + response[0].id).then(function(response) {
+      $http.get('/openings/project/' + response[0].id).then(function(response) {
         if (response.data.length == 0) {
           $scope.openings = [];
           $scope.noOpenings = true;
@@ -329,11 +329,11 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     $scope.imageCoverLoading = true;
     Upload.dataUrl(file, true).then(function(url){
       data.url = url;
-      $http.post('http://127.0.0.1/upload/project/cover_card', data).success(function(response) {
+      $http.post('/upload/project/cover_card', data).success(function(response) {
         $scope.picture_card = response.secure_url;
       });
 
-      $http.post('http://127.0.0.1/upload/project/cover', data).success(function(resp) {
+      $http.post('/upload/project/cover', data).success(function(resp) {
         $scope.imagecoverposition = 'center center';
         $scope.imagecover = resp.secure_url;
         $scope.cursorpt = true;
@@ -357,7 +357,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     if ($scope.project.main_video) {
       data.video_id = $scope.project.main_video_id;
       data.project_id = $scope.project.id;
-      $http.post('http://127.0.0.1/upload/delete/videos', data).success(function(response) {
+      $http.post('/upload/delete/videos', data).success(function(response) {
         if (response.result == "ok") {
           $scope.project.main_video = "";
           $scope.config.sources = "";
@@ -368,7 +368,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     } else {
       data.video_id = $scope.project_video_id;
       data.project_id = $scope.project.id;
-      $http.post('http://127.0.0.1/upload/delete/videos', data).success(function(response) {
+      $http.post('/upload/delete/videos', data).success(function(response) {
         console.log($scope.config.sources);
         if (response.result == "ok") {
           $scope.project.main_video = "";
@@ -431,7 +431,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
   };
 
   $scope.deleteInvolvedUser = function(project_id, user_id, involved_users) {
-    $http.delete('http://127.0.0.1/project/' + project_id + '/involved/' + user_id).then(function(response) {
+    $http.delete('/project/' + project_id + '/involved/' + user_id).then(function(response) {
       if (response.status == 200) {
         removeInvolvedUser(involved_users, user_id);
       }
@@ -466,7 +466,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
 
   $scope.deleteOpening = function(opening_id) {
     console.log(opening_id);
-    $http.delete('http://127.0.0.1/opening/' + opening_id).success(function(response) {
+    $http.delete('/opening/' + opening_id).success(function(response) {
       console.log(response);
       if (response.serverStatus == 2) {
         Object.keys($scope.openings).forEach(function (key) {

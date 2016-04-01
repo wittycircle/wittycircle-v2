@@ -64,7 +64,7 @@ angular.module('wittyApp')
 	$scope.checkUsername 	= true;
 
 	var id = $rootScope.globals.currentUser.id;
-	var Url = 'http://127.0.0.1/user/' + id;
+	var Url = '/user/' + id;
 	var UrlC = Url + '/credentials'
 
 	/*** Update Profile ***/
@@ -232,7 +232,7 @@ angular.module('wittyApp')
 
 	$scope.deleteProfile = function() {
 		if ($rootScope.globals.currentUser) {
-			$http.delete('http://127.0.0.1/user/' + $rootScope.globals.currentUser.id, function(res) {
+			$http.delete('/user/' + $rootScope.globals.currentUser.id, function(res) {
 				Authentication.ClearCredentials(function(res) {
 		          	window.location.replace('http://www.wittycircle.com');
 		        });

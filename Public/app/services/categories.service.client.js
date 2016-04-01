@@ -16,20 +16,19 @@
      function Categories($http, $cookieStore, $rootScope, $resource, $q) {
          var service = {};
 
-         service.getCategories          = getCategories;
-         service.getCategory            = getCategory;
-         service.getCategoryUnresolved  = getCategoryUnresolved
+         service.getCategories = getCategories;
+         service.getCategory = getCategory;
 
          return service;
 
          function getCategories(callback) {
-           $http.get('http://127.0.0.1/categories').success(function (response) {
+           $http.get('/categories').success(function (response) {
              callback(response);
            });
          };
 
          function getCategory(id, callback) {
-           $http.get('http://127.0.0.1/category/' + id).success(function (response) {
+           $http.get('/category/' + id).success(function (response) {
              callback(response);
            }).error(function (error_message) {
              callback(error_message);
@@ -38,7 +37,7 @@
 
         function getCategoryUnresolved(id) {
             if (id) {
-                return $http.get('http://127.0.0.1/category/' + id)
+                return $http.get('/category/' + id)
             } else {
                 return null;
             }

@@ -124,86 +124,86 @@ angular.module('wittyApp')
 		}
 	}
 })
-.filter('wittyFilterM', function($timeout) {
+// .filter('wittyFilterM', function($timeout) {
 
-		var x = 0;
-		function searchUser(input, searchText) {
-			var searchTextSplit = searchText.toLowerCase().split(' ');
-			var returnArray = [];
-			var textLen = searchTextSplit.length;
+// 		var x = 0;
+// 		function searchUser(input, searchText) {
+// 			var searchTextSplit = searchText.toLowerCase().split(' ');
+// 			var returnArray = [];
+// 			var textLen = searchTextSplit.length;
 
-			if (searchTextSplit[0] === "anything" && searchTextSplit[1] || searchTextSplit[2])
-				searchTextSplit.splice(0, 1);
+// 			if (searchTextSplit[0] === "anything" && searchTextSplit[1] || searchTextSplit[2])
+// 				searchTextSplit.splice(0, 1);
 
-			function getArray(searchTextSplit) {
-				var count = 0;
-				if (!x) {
-				 	x = 1;
-					if (!searchTextSplit[0]) {
-						return input;
-					}
-				}
-				if (input) {
-					var inputLen = input.length;
-					for (var x = 0, y = 0, check = 0; x < inputLen;) {
-						for (var key in input[x]) {
-							if (isNaN(input[x][key]))
-							{
-								if (key === "about" || key === "description" || key === "location_city" || key === "location_country" || key === "location_state") {
-									var searchKey = input[x][key].toLowerCase().indexOf(searchTextSplit[y]);
-									if (searchTextSplit[y] && searchKey !== -1) {
-										y++;
-										count++;
-										check = 1;
-										break;
-									} else {
-										check = 0;
-									}
-								} else
-									check = 0;
-							}
-						}
-						if (count === searchTextSplit.length) {
-							returnArray.push(input[x]);
-							count = 0;
-							y = 0;
-							x++;
-						}
-						if (!check) {
-							y = 0;
-							count = 0;
-							x++;
-						}
-					}
-					if (!returnArray[0]) {
-						searchTextSplit.pop();
-						return getArray(searchTextSplit);
-					}
-					return returnArray;
-				}
-			}
-			return getArray(searchTextSplit);
-		};
+// 			function getArray(searchTextSplit) {
+// 				var count = 0;
+// 				if (!x) {
+// 				 	x = 1;
+// 					if (!searchTextSplit[0]) {
+// 						return input;
+// 					}
+// 				}
+// 				if (input) {
+// 					var inputLen = input.length;
+// 					for (var x = 0, y = 0, check = 0; x < inputLen;) {
+// 						for (var key in input[x]) {
+// 							if (isNaN(input[x][key]))
+// 							{
+// 								if (key === "about" || key === "description" || key === "location_city" || key === "location_country" || key === "location_state") {
+// 									var searchKey = input[x][key].toLowerCase().indexOf(searchTextSplit[y]);
+// 									if (searchTextSplit[y] && searchKey !== -1) {
+// 										y++;
+// 										count++;
+// 										check = 1;
+// 										break;
+// 									} else {
+// 										check = 0;
+// 									}
+// 								} else
+// 									check = 0;
+// 							}
+// 						}
+// 						if (count === searchTextSplit.length) {
+// 							returnArray.push(input[x]);
+// 							count = 0;
+// 							y = 0;
+// 							x++;
+// 						}
+// 						if (!check) {
+// 							y = 0;
+// 							count = 0;
+// 							x++;
+// 						}
+// 					}
+// 					if (!returnArray[0]) {
+// 						searchTextSplit.pop();
+// 						return getArray(searchTextSplit);
+// 					}
+// 					return returnArray;
+// 				}
+// 			}
+// 			return getArray(searchTextSplit);
+// 		};
 
-		return function(input, searchText, searchSkill) {
+// 		return function(input, searchText, searchSkill) {
 
-			if (searchSkill && searchSkill[0]) {
-				var UserBySkill = [];
-				if (input) {
-					for(var y = 0; y < searchSkill.length; y++) {
-						for(var x = 0; x < input.length; x++) {
-							if (input[x].user_id === searchSkill[y]) {
-								UserBySkill.push(input[x]);
-								break ;
-							}
-						}
-					}
-				}
-				return searchText === "  " ? UserBySkill : searchUser(UserBySkill, searchText);
-			} else
-				return searchUser(input, searchText);
-		}
-})
+// 			if (searchSkill && searchSkill[0]) {
+// 				var UserBySkill = [];
+// 				if (input) {
+// 					for(var y = 0; y < searchSkill.length; y++) {
+// 						for(var x = 0; x < input.length; x++) {
+// 							if (input[x].user_id === searchSkill[y]) {
+// 								UserBySkill.push(input[x]);
+// 								break ;
+// 							}
+// 						}
+// 					}
+// 				}
+// 				return searchText === "  " ? UserBySkill : searchUser(UserBySkill, searchText);
+// 			} else
+// 				return searchUser(input, searchText);
+// 		}
+// })
 .filter('wittyDateFilter', function() {
 
 		return function(input) { // convert default format date to display date's format

@@ -61,7 +61,18 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
         //Need to redirect user to 404
         $location.path('/');
       } else {
-        $scope.project = response[0];
+	  /*** Project Card Page ***/
+	  $scope.$parent.seo = {
+	      pageTitle: response[0].title,
+	      pageDescription: response[0].description
+	  };
+	  
+	  $scope.$parent.card = {
+	      title: response[0].title,
+	      url: $location.absUrl(),
+	      image: response[0].picture,
+	  };
+	  $scope.project = response[0];
         $scope.project.post = $sce.trustAsHtml(response[0].post);
         Projects.incrementViewProject($scope.project.id, function (response) {
            //console.log(response);
@@ -108,7 +119,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
             var history = {};
             history.project_id = $scope.project.id;
             //need to put this one into a service
-            $http.post('http://127.0.0.1/history/project/'+ currentUser.id, history).then(function (response) {
+            $http.post('/history/project/'+ currentUser.id, history).then(function (response) {
               //console.log(response);
             });
           }
@@ -120,7 +131,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
           $scope.project.user = response.profile;
         });
         // Getting the involved users of the project, setting iseditable scope and getting the img-icon of header
-        $http.get('http://127.0.0.1/project/' + $scope.project.id + '/involved').success(function (response) {
+        $http.get('/project/' + $scope.project.id + '/involved').success(function (response) {
           Object.keys(response).forEach(function (key) {
             if (currentUser && currentUser.id == response[key].user_id && response[key].n_accept === 0) {
               Users.getProfileByUserId(response[key].invited_by, function(result) {
@@ -155,7 +166,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
           }
         }
         // GETTINGS THE NEEDS
-        $http.get('http://127.0.0.1/openings/project/' + response[0].id).then(function(res) {
+        $http.get('/openings/project/' + response[0].id).then(function(res) {
           if (res.data.length == 0) {
             $scope.openingsNumber = 0;
           } else {
@@ -173,22 +184,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     $scope.initFeedbacks();
     $scope.initAsks();
 
-    /*** Project Card Page ***/
-    /*
-    $scope.$parent.seo = {
-      pageTitle: $scope.project.title,
-      pageDescription: $scope.project.description
-    };
-
-    $scope.$parent.card = {
-      title: $scope.project.title,
-      type: "Project Page",
-      url: $location.absUrl(),
-      image: $scope.project.picture,
-    };
-    */
   };
-
 
   $scope.goToMessage = function(id) {
     if (!$rootScope.globals.currentUser) {
@@ -222,8 +218,6 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     }
   };
 
-  //stopped here
-
   $scope.unfollowButton = function(i) {
     if ($scope.followText === "Following" && i == 0)
       $scope.followText = "Unfollow ?";
@@ -253,7 +247,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
 
   function addRepliestoFeedbacks(quest) {
     Object.keys(quest).forEach(function (key) {
-      quest[key].replies = $http.get('http://127.0.0.1/feedback_replies/' + quest[key].id).success(function (response) {
+      quest[key].replies = $http.get('/feedback_replies/' + quest[key].id).success(function (response) {
         quest[key].replies = response;
         quest[key].repliesNumber = response.length;
       });
@@ -300,7 +294,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
   }
 
   $scope.isInTheTeam = function(project, reply) {
-    $http.get('http://127.0.0.1/project/' + project.id + '/involved').success(function (response) {
+    $http.get('/project/' + project.id + '/involved').success(function (response) {
       Object.keys(response).forEach(function (key) {
         if (response[key].user_id == reply.user_id) {
           reply.inTeam = true;
@@ -315,7 +309,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
 
 
   $scope.getReplies = function(feedback_id, question) {
-    $http.get('http://127.0.0.1/feedback_replies/' + feedback_id).success(function (response) {
+    $http.get('/feedback_replies/' + feedback_id).success(function (response) {
       if (response != undefined) {
         question.replies = response;
         //question.isCollapse = false;
@@ -335,7 +329,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     data.creator_picture = currentUser.profile_picture_icon;
     data.creator_first_name = currentUser.first_name;
     data.creator_last_name = currentUser.last_name;
-    $http.post('http://127.0.0.1/feedback_replies', data).success(function (response) {
+    $http.post('/feedback_replies', data).success(function (response) {
       if (currentUser.id == question.user_id) {
         question.owned = true;
       }
@@ -347,7 +341,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
   };
 
   $scope.deleteReply = function(reply, question_index) {
-    $http.delete('http://127.0.0.1/feedback_replies/' + reply.id).success(function (response) {
+    $http.delete('/feedback_replies/' + reply.id).success(function (response) {
       if (response.serverStatus == 2) {
         var index = $scope.questions[question_index].replies.indexOf(reply);
         $scope.questions[question_index].replies.splice(index, 1);
@@ -365,7 +359,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
 
   function addRepliestoAsks(quest) {
     Object.keys(quest).forEach(function (key) {
-      quest[key].replies = $http.get('http://127.0.0.1/ask_replies/' + quest[key].id).success(function (response) {
+      quest[key].replies = $http.get('/ask_replies/' + quest[key].id).success(function (response) {
         quest[key].replies = response;
         quest[key].repliesNumber = response.length;
       });
@@ -388,7 +382,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
   };
 
   $scope.initAsks = function () {
-    $http.get('http://127.0.0.1/ask/public_id/' + $stateParams.public_id).success(function (response) {
+    $http.get('/ask/public_id/' + $stateParams.public_id).success(function (response) {
       //$scope.asks = response;
       $scope.asks = addRepliestoAsks(response);
       //$scope.repliesNumber = countObjInArray($scope.questions)
@@ -404,7 +398,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     newAsk.first_name = currentUser.first_name;
     newAsk.last_name = currentUser.last_name;
     newAsk.project_public_id = project.public_id;
-    $http.post('http://127.0.0.1/asks', newAsk).success(function (response) {
+    $http.post('/asks', newAsk).success(function (response) {
       // ok now gonna need to push it etc ...
       $timeout(function () {
         $scope.asks.push(newAsk);
@@ -440,7 +434,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
     data.creator_picture = currentUser.profile_picture_icon;
     data.creator_first_name = currentUser.first_name;
     data.creator_last_name = currentUser.last_name;
-    $http.post('http://127.0.0.1/ask_reply/add', data).success(function (response) {
+    $http.post('/ask_reply/add', data).success(function (response) {
       if (currentUser.id == ask.user_id) {
         ask.owned = true;
       }
@@ -451,7 +445,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
   };
 
   $scope.deleteAskReply = function(ask_reply, question_index) {
-    $http.delete('http://127.0.0.1/ask_reply/delete/' + ask_reply.id).success(function (response) {
+    $http.delete('/ask_reply/delete/' + ask_reply.id).success(function (response) {
       if (response.serverStatus == 2) {
         var index = $scope.asks[question_index].replies.indexOf(ask_reply);
         $scope.asks[question_index].replies.splice(index, 1);

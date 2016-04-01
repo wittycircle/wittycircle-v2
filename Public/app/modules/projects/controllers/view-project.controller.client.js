@@ -130,7 +130,7 @@
                     var history = {};
                     history.project_id = vm.project.id;
                     //need to put this one into a service
-                    $http.post('http://127.0.0.1/history/project/'+ currentUser.id, history).then(function (response) {
+                    $http.post('/history/project/'+ currentUser.id, history).then(function (response) {
                       //console.log(response);
                     });
                   }
@@ -146,7 +146,7 @@
                   }
                 }
 
-                /*$http.get('http://127.0.0.1/project/' + vm.project.id + '/involved').success(function (response) {
+                /*$http.get('/project/' + vm.project.id + '/involved').success(function (response) {
                   Object.keys(response).forEach(function (key) {
                     if (currentUser && currentUser.id == response[key].user_id && response[key].n_accept === 0) {
                       Users.getProfileByUserId(response[key].invited_by, function(result) {

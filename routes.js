@@ -3,25 +3,20 @@ var ensureAuth = require('./controllers/auth').ensureAuthenticated;
 module.exports = function(app, passport){
 
 
-
-/*app.get('/*', function(req, res) {
-    res.sendFile('/public/app/index.html');
-});
-
 /*app.post('/', function(req, res, next) {
 	passport.authenticate('local-login', function (err, user, info) {
 	if (err || !user) {
 	   	res.writeHead(302, {
-		  'Location': 'http://www.wittycircle.com/',
+		  'Location': 'http://localhost:9000/',
 		});
-		return res.end();
+		return res.end(); 
 	}
 	req.logIn(user, function(err) {
 	    if (user) {
 			res.render('/superdev');
 	    } else {
 		res.writeHead(302, {
-			'Location': 'http://www.wittycircle.com/',
+			'Location': 'http://localhost:9000/',
 			    });
 		return res.end();
 	    }
@@ -34,7 +29,7 @@ app.get('/superdev', function(req, res) {
 		res.render('api-page.html');
 	else {
 		res.writeHead(302, {
-		  'Location': 'http://www.wittycircle.com/',
+		  'Location': 'http://localhost:9000/',
 		});
 		return res.end();
 	}
@@ -90,16 +85,16 @@ app.get('/profile', ensureAuth, function(req, res) {
 			      });
 	       });
 });
-
+    
 /* Facebook Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback',
+app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {
-		successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : '/'
+		successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
 
-/* Twitter Users */
+/* Twitter Users */	
 /*app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
@@ -111,8 +106,8 @@ app.get('/auth/twitter/callback',
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
 	passport.authenticate('google', {
-	    successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : '/'
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
 
 /* View */
@@ -140,7 +135,7 @@ app.put('/notification/update/user-follow-by', ensureAuth, notification.updateUs
 app.put('/notification/update/project-follow', ensureAuth, notification.updateProjectFollowNotif);
 app.put('/notification/update/project-follow-by', ensureAuth, notification.updateProjectFollowBy);
 app.put('/notification/update/project-involve', ensureAuth, notification.updateProjectInvolve);
-
+	
 /* Users Specifications */
 var users_specification = require('./controllers/users_specification');
 app.get('/user/:id/profile', users_specification.getUserProfile);
@@ -161,8 +156,6 @@ app.get('/skills', skills.getSkills);
 app.get('/skill/:id', ensureAuth, skills.getSkill);
 app.get('/skills/:username', skills.getSkillsByUsername);
 app.get('/skills/search/:search', skills.searchSkills);
-app.post('/skills/search/projects', skills.getProjectsBySkill);
-app.post('/skills/search/users', skills.getUsersBySkill);
 app.post('/skills/add', ensureAuth,  skills.addSkillsToUser);
 app.post('/skills', skills.createSkill);
 app.put('/skill/:id', skills.updateSkill);
@@ -220,7 +213,6 @@ var project_followers = require('./controllers/project_followers.js');
 app.get('/project_followers/:project_id', project_followers.getProjectFollowers);
 app.get('/project_followers/public/:public_id', project_followers.getProjectFollowersByPublicId);
 
-
 /* Project Openings */
 var openings = require('./controllers/openings');
 app.post('/openings', openings.createProjectOpening);
@@ -254,10 +246,6 @@ app.delete('/ask_reply/delete/:id', asks.deleteAskReplies);
 var polls = require('./controllers/polls');
 app.post('/polls/create/:project_id/:project_creator_id', polls.createPoll);
 app.get('/polls/project/:project_id', polls.getPollsOfProject);
-
-/* Search */
-var search = require('./controllers/search');
-app.get('/search/:search', search.getGlobalSearch);
 
 /* Experiences */
 var experiences = require('./controllers/experiences');
@@ -298,7 +286,7 @@ app.post('/user_followed/get/list', ensureAuth, follow.getListFollowedUser);
 
 /* Auth */
 var auth = require('./controllers/auth');
-app.put('/api', auth.checkLog);
+app.get('/api', auth.checkLog);
 app.post('/api/login', auth.login);
 app.get('/api/logout', auth.logout);
 
@@ -316,7 +304,7 @@ app.get('/image/transformation/resize/:public_id/:width/:height/:crop', upload.r
 /* Redactor */
 app.post('/upload/redactor', upload.redactorImage);
 
-/* History */
+/* History */ 
 var history = require('./controllers/history');
 app.post('/history/project/:id', history.addProjectToUserHistory);
 app.get('/history/project/:id', history.getUserProjectHistory);
@@ -327,9 +315,18 @@ app.get('/picture/profile', ensureAuth, picture.getRandomProfilePicture);
 app.get('/picture/cover', ensureAuth, picture.getRandomCoverPicture);
 app.post('/picture/get/cover', picture.getCoverPicture);
 
+/* Search */
+var search = require('./controllers/search');
+app.post('/search/projects/help/:help', search.getProjectByHelp);
+app.post('/search/projects/skills', search.getProjectsBySkill);
+app.put('/search/projects/skills', search.getProjectBySkillScl);
+app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
+app.post('/search/users', search.getUsersBySkill);
+app.post('/search/users/al', search.getUsersByAl);
+app.put('/search/users', search.getUsersBySkillAl);
 
-/*app.get('*', function(req, res) {
-    res.sendfile('./Public/app/index.html');
-});*/
+app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/Public/app/index.html');
+});
 
 };

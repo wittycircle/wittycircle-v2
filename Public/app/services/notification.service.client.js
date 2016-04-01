@@ -37,7 +37,7 @@
 		};
 
 		function getNotificationList(callback) {
-			$http.get('http://127.0.0.1/notification').success(function(res) {
+			$http.get('/notification').success(function(res) {
 				if (res.success) {
 					getNumberOfRead(res.data, function(number) {
 						callback({data: res.data, number: number});
@@ -125,7 +125,7 @@
 
 		// get view notification list
 		// function getNotifViewList(callback) {
-		// 	$http.get('http://127.0.0.1/view').success(function(res) {
+		// 	$http.get('/view').success(function(res) {
 		// 		var lists = [];
 		// 		var view = res.data;
 		// 		for(var i = 0; i < view.length; i++) {
@@ -150,7 +150,7 @@
 		// get follow notification list
 		// function getNotifUserFollowList(callback) {
 
-		// 	$http.get('http://127.0.0.1/follow/list').success(function(res) {
+		// 	$http.get('/follow/list').success(function(res) {
 		// 		var list = [];
 		// 		var follow = res.data;
 		// 		for(var n = 0; n < follow.length; n++) {
@@ -174,7 +174,7 @@
 
 		// get project follow notification list
 		// function getNotifProjectFollowList(callback) {
-		// 	$http.get("http://127.0.0.1/follow_notification/project").success(function(res) {
+		// 	$http.get("/follow_notification/project").success(function(res) {
 		// 		var lists = [];
 		// 		var projectFollow = res.data;
 		// 		for (var n = 0; n < projectFollow.length; n++) {
@@ -199,7 +199,7 @@
 		// };
 		// get notification list from follow user
 		// function getFollowUserNotif(callback) {
-		// 	$http.get("http://127.0.0.1/user_followed/projectByUserId/byDate").success(function(res) {
+		// 	$http.get("/user_followed/projectByUserId/byDate").success(function(res) {
 		// 		var lists = [];
 		// 		var followUserProject = res.data;
 		// 		for (var n = 0; n < followUserProject.length; n++) {
@@ -226,27 +226,27 @@
 
 		// get view notification list
 		// function getNotifViewList(callback) {
-		// 	$http.get('http://127.0.0.1/view').success(function(res) {
+		// 	$http.get('/view').success(function(res) {
 		// 		callback(res.data);
 		// 	});
 		// };
 
 		// // get follow notification list
 		// function getNotifUserFollowList(callback) {
-		// 	$http.get('http://127.0.0.1/follow/list').success(function(res) {
+		// 	$http.get('/follow/list').success(function(res) {
 		// 		callback(res.data);
 		// 	});
 		// };
 
 		// // get project follow notification list
 		// function getNotifProjectFollowList(callback) {
-		// 	$http.get("http://127.0.0.1/follow_notification/project").success(function(res) {
+		// 	$http.get("/follow_notification/project").success(function(res) {
 		// 		callback(res.data);
 		// 	});
 		// };
 		// // get notification list from follow user
 		// function getFollowUserNotif(callback) {
-		// 	$http.get("http://127.0.0.1/user_followed/projectByUserId/byDate").success(function(res) {
+		// 	$http.get("/user_followed/projectByUserId/byDate").success(function(res) {
 		// 		callback(res.data);
 		// 	});
 		// };

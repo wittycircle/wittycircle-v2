@@ -126,7 +126,7 @@ angular.module('wittyApp').controller('MyProjectCtrl', function (get_CategoryNam
 
   $scope.getProjectHistory = function() {
     if ($rootScope.globals.currentUser) {
-      $http.get('http://127.0.0.1/history/project/'+ $rootScope.globals.currentUser.id).then(function (response) {
+      $http.get('/history/project/'+ $rootScope.globals.currentUser.id).then(function (response) {
         $scope.project_history = createArraybyProjectId(response.data);
         //$scope.project_history = addCategoryNametoProjects(createArraybyProjectId(response.data));
       });

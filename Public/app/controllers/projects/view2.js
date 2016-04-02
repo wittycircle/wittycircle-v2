@@ -78,7 +78,7 @@
             vm.project_followers = response;
           });
           if (!vm.project.picture) {
-            vm.project.picture = "http://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg";
+            vm.project.picture = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg";
           }
           if (vm.project.picture_position) {
             vm.project.picture_position = adjustSize(vm.project.picture_position, vm.project.picture_position_width);

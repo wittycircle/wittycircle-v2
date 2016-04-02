@@ -19,7 +19,6 @@ var passport		= require('passport');
 var cloudinary		= require('cloudinary');
 var multer		= require('multer');
 var fs			= require('fs');
-var io			= require('socket.io')(server);
 var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
 var mandrill		= require('mandrill-api/mandrill');
 var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
@@ -27,7 +26,7 @@ var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 var algoliaClient	= require('./algo/algolia').algoliaClient;
 var httpsOption		= {
     key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
-    cert: fs.readFileSync('./ssl_key/wittycircle-cert.pem') 
+    cert: fs.readFileSync('./ssl_key/secure_key/2_www.wittycircle.com.crt') 
 };
 
 require('./passport')(passport);
@@ -55,6 +54,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(__dirname + '/Public/'));
+//app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
 app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
@@ -138,6 +138,8 @@ require('./routes')(app, passport);
 require('./algolia')(app, algoliaClient);
 
 /* Socket */
+//var ps = https.createServer(httpsOption, app);
+var io = require('socket.io')(server); 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */

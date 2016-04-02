@@ -249,7 +249,6 @@
 		/*** Search Section ***/
 		function searchScl(object) {
 			$http.post('/search/projects/scl', object).success(function(res) {
-				console.log(res);
 				if (!res.success) return getDiscoverCard();
 				$scope.cards = res.data; 
 			});

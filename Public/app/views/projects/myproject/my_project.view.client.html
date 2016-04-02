@@ -30,7 +30,7 @@
 								</div>
 							</div>
 							<div ng-if="!card.picture_card" class="card-picture"
-							ng-style="{'background-image': 'url({{ resizePic('http://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg', 285, 180, 'fill') }})'}">
+							ng-style="{'background-image': 'url({{ resizePic('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg', 285, 180, 'fill') }})'}">
 								<div class="filter_private" ng-if="card.project_visibility == 0">
 									<span class="private_text">PRIVATE</span>
 								</div>
@@ -161,7 +161,7 @@
 					<div class="myProject-body-hETitle">
 						<div class="h-picture">
 							<img ng-if="project.picture_card" ng-src="{{ resizePic(project.picture_card, 60, 60) }}" alt="project-picture">
-							<img ng-if="!project.picture_card" ng-src="{{ resizePic('http://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg', 60, 60, 'fill') }}" alt="project-picture-blank"/>
+							<img ng-if="!project.picture_card" ng-src="{{ resizePic('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg', 60, 60, 'fill') }}" alt="project-picture-blank"/>
 						</div>
 						<div class="h-title-tag">
 							<h3 ng-bind="project.title"></h3>

@@ -90,13 +90,13 @@
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer {
           cursor: pointer; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer:hover .icon-share {
-          display: inline-block;
+          display: block;
           position: absolute; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share {
-          bottom: -72px;
+          bottom: -67px;
           display: none;
           position: absolute;
-          padding: 50px 0px 30px 70px; }
+          padding: 50px 0px 30px 0px; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-lg {
             font-size: inherit; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle {

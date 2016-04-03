@@ -24,10 +24,9 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
    /*
    **Update in time sidebar after login
    */
-  var socket;
-  socket = io.connect('/');
-
-  $rootScope.$watch('globals', function(value) {
+  var socket = io.connect('https://www.wittycircle.com');
+  
+$rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {

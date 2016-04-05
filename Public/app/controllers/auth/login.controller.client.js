@@ -35,7 +35,7 @@ angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $wind
    		if (response.success) {
    			Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, function(res) {
           if (res.success)
-            window.location.href = "http://www.wittycircle.com";
+            window.location.href = "https://www.wittycircle.com";
         });
    		} else {
    			$scope.lf = false;

@@ -2,7 +2,6 @@ var ensureAuth = require('./controllers/auth').ensureAuthenticated;
 
 module.exports = function(app, passport){
 
-
 /*app.post('/', function(req, res, next) {
 	passport.authenticate('local-login', function (err, user, info) {
 	if (err || !user) {
@@ -324,6 +323,7 @@ app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
 app.post('/search/users', search.getUsersBySkill);
 app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
+
 
 app.get('*', function(req, res) {
     res.render(__dirname + '/Public/app/index.html');

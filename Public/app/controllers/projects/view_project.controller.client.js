@@ -17,7 +17,7 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
   $scope.isCollapse = false;
   $scope.totalNumber = 0;
   $scope.involved_users = [];
-  $scope.currentUrl = "http://www.wittycircle.com" + $location.path();
+  $scope.currentUrl = "https://www.wittycircle.com" + $location.path();
 
   $scope.encodeUrl = function(url) {
     url = Beauty_encode.encodeUrl(url);
@@ -72,6 +72,8 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
 	      url: $location.absUrl(),
 	      image: response[0].picture,
 	  };
+	  console.log($scope.$parent.seo);
+	  console.log($scope.$parent.card);
 	  $scope.project = response[0];
         $scope.project.post = $sce.trustAsHtml(response[0].post);
         Projects.incrementViewProject($scope.project.id, function (response) {
@@ -93,14 +95,14 @@ angular.module('wittyApp').controller('ViewProjectCtrl', function($window, $time
                             {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
                         ],
                         theme: {
-                            url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                            url: "https://www.videogular.com/styles/themes/default/latest/videogular.css"
                         },
                         plugins: {
                             controls: {
                                 autoHide: true,
                                 autoHideTime: 2000
                             },
-                            poster: "http://www.videogular.com/assets/images/videogular.png"
+                            poster: "https://www.videogular.com/assets/images/videogular.png"
                         }
                     };
         }

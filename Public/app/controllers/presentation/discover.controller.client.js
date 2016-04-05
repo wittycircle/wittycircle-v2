@@ -40,7 +40,7 @@
 
 		$scope.$parent.card = {
 			title: "Wittycircle | Discover",
-			url: "http://www.wittycircle.com/discover",
+			url: "https://www.wittycircle.com/discover",
 			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
 		};
 

@@ -22,7 +22,6 @@ var fs			= require('fs');
 var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
 var mandrill		= require('mandrill-api/mandrill');
 var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-
 var algoliaClient	= require('./algo/algolia').algoliaClient;
 var httpsOption		= {
     key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
@@ -32,10 +31,9 @@ var httpsOption		= {
 };
 
 require('./passport')(passport);
-
 //app.use(morgan('combined'));
 app.use(cookieParser());
-
+app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
@@ -149,6 +147,6 @@ require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-server.listen(3000);
+//server.listen(3000);
 ps.listen(443);
 

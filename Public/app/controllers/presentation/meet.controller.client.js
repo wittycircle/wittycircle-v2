@@ -20,7 +20,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 		$scope.$parent.card = {
 			title: "Wittycircle | Meet",
-			url: "http://www.wittycircle.com/meet",
+			url: "https://www.wittycircle.com/meet",
 			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
 		};
 

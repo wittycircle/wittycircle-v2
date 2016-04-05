@@ -7,8 +7,8 @@
         .module('wittyProjectModule')
         .controller('viewProjectCtrl', viewProjectCtrl);
 
-    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow'];
-    function viewProjectCtrl (project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow) {
+    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', '$location'];
+    function viewProjectCtrl (project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, $location) {
 
             var vm = this;
 
@@ -80,6 +80,17 @@
                 var err;
 
                 vm.project = projectResolve.data[0];
+		/*** Project Card Page ***/
+		$scope.$parent.seo = {
+		    pageTitle: vm.project.title,
+		    pageDescription: vm.project.description
+		};
+		
+		$scope.$parent.card = {
+		    title: vm.project.title,
+		    url: $location.absUrl(),
+		    image: vm.project.picture,
+		};
                 // setting default cover picture is there is not
                 if (!vm.project.picture) {
                   vm.project.picture = emptyBg;
@@ -247,7 +258,6 @@
 
             function initFeedbacks () {
                 vm.questions = project_FeedbacksResolve.data;
-                console.log(vm.questions);
             }
 
 

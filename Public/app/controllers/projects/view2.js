@@ -18,7 +18,7 @@
     vm.isCollapse = false;
     vm.totalNumber = 0;
     vm.involved_users = [];
-    vm.currentUrl = "http://www.wittycircle.com" + $location.path();
+    vm.currentUrl = "https://www.wittycircle.com" + $location.path();
     //function
     vm.encodeUrl = encodeUrl;
 

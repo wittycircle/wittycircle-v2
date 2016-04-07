@@ -6,7 +6,7 @@
         .factory('Project_Involvment', Project_Involvment);
 
      Project_Involvment.$inject = ['$http', '$rootScope', '$q', 'Users'];
-     function Project_Involvment($http, $rootScope, $q, Users) {
+     function Project_Involvment ($http, $rootScope, $q, Users) {
          var service = {};
 
          service.getUserInvolvedByProjectId = getUserInvolvedByProjectId;
@@ -14,9 +14,7 @@
 
          return service;
 
-         var currentUser = $rootScope.globals.currentUser;
-
-         function getUserInvolvedByProjectId(project_id) {
+         function getUserInvolvedByProjectId (project_id) {
           if (project_id) {
             return $http.get('http://127.0.0.1/project/' + project_id + '/involved');
           } else {
@@ -24,9 +22,9 @@
           }
          }
 
-         function getAllUsersInvolvedByPublicId(public_id) {
+         function getAllUsersInvolvedByPublicId (public_id) {
            if (public_id) {
-             return $http.get('http://127.0.0.1/project/involved_users/' + public_id)
+             return $http.get('http://127.0.0.1/project/involved_users/' + public_id);
            } else {
              return null;
            }

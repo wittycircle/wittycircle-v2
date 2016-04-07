@@ -112,43 +112,43 @@ module.exports = function(app, io, ensureAuth) {
 
 	/*** Follow Project Notification ***/
 	app.get('/follow/project/:id', ensureAuth, function(req, res){
-            req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
-            var errors = req.validationErrors(true);
-            if (errors) {
-		return res.status(400).send(errors);
-            } if (!req.isAuthenticated()) {
-		return res.status(400).send({message: 'User need to be logged'});
-            } else {
-		pool.query("SELECT id, title FROM projects WHERE public_id = ?", [req.params.id], function (err, id) {
+        req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
+        var errors = req.validationErrors(true);
+        if (errors) {
+            return res.status(400).send(errors);
+        } if (!req.isAuthenticated()) {
+            return res.status(400).send({message: 'User need to be logged'});
+        } else {
+            pool.query("SELECT id, title FROM projects WHERE public_id = ?", [req.params.id], function (err, id) {
+                if (err) throw err;
+                pool.query("SELECT * FROM project_followers WHERE user_id = ? && follow_project_id = ?", [req.user.id, id[0].id],
+                function(err, row) {
                     if (err) throw err;
-                    pool.query("SELECT * FROM project_followers WHERE user_id = ? && follow_project_id = ?", [req.user.id, id[0].id],
-                               function(err, row) {
-				   if (err) throw err;
-				   if (!row[0]) {
-                                       pool.query("SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", [req.user.id],
-						  function(err, name) {
-                                                      if (err) throw err;
-                                                      var fullName = name[0].first_name + " " + name[0].last_name;
-                                                      pool.query("INSERT INTO `project_followers` (`user_id`, `follow_project_id`, user_name, follow_project_title, follow_project_public_id) VALUES (?, ?, ?, ?. ?)",
-								 [req.user.id, id[0].id, fullName, id[0].title, req.params.id,],
-								 function (err, results, fields) {
-                                                                     if(err) throw err;
-                                                                     socket.broadcast.emit('follow-project-notification', "user follow project");
-                                                                     socket.broadcast.emit('my-follow-users', req.user.id);
-                                                                     res.send({success: true, msg: "Project followed"});
-								 });
-						  });
-				   } else {
-                                       pool.query("DELETE FROM `project_followers` WHERE `user_id` = ? AND `follow_project_id` = ?", [req.user.id, id[0].id],
-						  function(err, results) {
-                                                      if (err) throw err;
-                                                      socket.broadcast.emit('follow-project-notification', "user unfollow project");
-                                                      res.send({success: true, msg: "Project unfollowed"});
-						  });
-				   }
-                               });
-		});
-            }
+                    if (!row[0]) {
+                        pool.query("SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", [req.user.id],
+                        function(err, name) {
+                            if (err) throw err;
+                            var fullName = name[0].first_name + " " + name[0].last_name;
+                            pool.query("INSERT INTO `project_followers` (`user_id`, `follow_project_id`, user_name, follow_project_title, follow_project_public_id) VALUES (?, ?, ?, ?, ?)",
+                            [req.user.id, id[0].id, fullName, id[0].title, req.params.id,],
+                            function (err, results, fields) {
+                                if(err) throw err;
+                                socket.broadcast.emit('follow-project-notification', "user follow project");
+                                socket.broadcast.emit('my-follow-users', req.user.id);
+                                res.send({success: true, msg: "Project followed"});
+                            });
+                        });
+                    } else {
+                        pool.query("DELETE FROM `project_followers` WHERE `user_id` = ? AND `follow_project_id` = ?", [req.user.id, id[0].id],
+                        function(err, results) {
+                            if (err) throw err;
+                            socket.broadcast.emit('follow-project-notification', "user unfollow project");
+                            res.send({success: true, msg: "Project unfollowed"});
+                        });
+                    }
+                });
+            });
+        }
 	});
 
 	/*** Involve User in Project Notification ***/

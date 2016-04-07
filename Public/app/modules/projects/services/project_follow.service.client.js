@@ -1,10 +1,3 @@
-/**
- * @ngdoc factory
- * @name wittyApp.facory:Project_Follow
- * @description
- * # Project_Follow
- * Factory in the wittyApp.
- **/
  (function () {
      'use strict';
 
@@ -16,10 +9,11 @@
      function Project_Follow($http, $cookieStore, $rootScope, $resource, $q) {
          var service = {};
 
-         service.checkFollowProject     = checkFollowProject;
-         service.followProject          = followProject;
-         service.getFollowedProject     = getFollowedProject;
-         service.getProjectFollowers    = getProjectFollowers;
+         service.checkFollowProject           = checkFollowProject;
+         service.followProject                = followProject;
+         service.getFollowedProject           = getFollowedProject;
+         service.getFollowedProjectUnresolved = getFollowedProjectUnresolved;
+         service.getProjectFollowers          = getProjectFollowers;
 
 
          return service;
@@ -46,6 +40,10 @@
            }).error(function (response) {
              callback(response);
            });
+         }
+
+         function getFollowedProjectUnresolved(username) {
+           return $http.get('http://127.0.0.1/follow/projects/'+ username);
          }
 
          function getProjectFollowers(project_id) {

@@ -28,12 +28,11 @@
 				<ul class="viewProject-category">
 					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
 					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="vm.totalNumber" data-ng-if="vm.totalNumber"></div></li>
-					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openingsNumber" data-ng-if="vm.openingsNumber"></div></li>
+					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openings.length" data-ng-if="vm.openings.length > 0"></div></li>
 				</ul>
 
 				<ul class="viewProject-option">
-					<li data-ng-if="!editable || editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
-					<!--<li>Share</li>-->
+					<li data-ng-if="!vm.editable || vm.editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
 					<li id="sharer">
 						Share
 						<div class="icon-share animated bounceIn">
@@ -42,7 +41,7 @@
 								socialshare-provider="facebook"
 								socialshare-text="this is a desc test"
 								socialshare-hashtags="wittycircle, projects"
-								socialshare-url="{{currentUrl}}"
+								socialshare-url="{{::vm.currentUrl}}"
 								socialshare-type="dialog">
 								  <i class="fa fa-circle fa-stack-1x"></i>
 								  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -51,19 +50,19 @@
 								socialshare
 								socialshare-provider="twitter"
 								socialshare-via="Wittycircle"
-								socialshare-text="Wittycircle - My project {{project.title}} is now live on Wittycircle"
-								socialshare-url="{{currentUrl}}"
+								socialshare-text="Wittycircle - My project {{vm.project.title}} is now live on Wittycircle"
+								socialshare-url="{{::vm.currentUrl}}"
 								socialshare-popup-height="300"
 								socialshare-popup-width="400"
 								socialshare-trigger="click">
 									<i class="fa fa-circle fa-circle-twitter fa-stack-1x"></i>
 									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 								</span>
-						</li>
+						</div>
 					</li>
-					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: project.public_id})" ng-if="editable"><img src="../images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-					<button type="submit" ng-if="loggedUser && (!editable || editable == false)" ng-click="followProject()"><span><i ng-if="followText === 'Follow'" class="fa fa-plus"></i><i ng-if="followText !== 'Follow'" class="fa fa-check"></i></span>{{followText}}</button>
-					<button type="submit" ng-if="!loggedUser" ng-click="showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
+					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false)" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{::vm.followText}}</button>
+					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow2</button>
 				</ul>
 			</div>
 		</div>
@@ -72,10 +71,10 @@
 	<div ui-view>
 		<div class="project-post-container">
 			<div class="project-post-video">
-				<videogular vg-theme="config.theme.url" class="video_custom animated fadeIn" ng-if="config.sources">
-					<vg-media vg-src="config.sources" class="animated fadeIn">
+				<videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">
+					<vg-media vg-src="vm.config.sources" class="animated fadeIn">
 					</vg-media>
-					<vg-controls ng-if="itsOk == 3" vg-autohide="config.plugins.controls.autoHide" vg-autohide-time="config.plugins.controls.autoHideTime">
+					<vg-controls ng-if="itsOk == 3" vg-autohide="vm.config.plugins.controls.autoHide" vg-autohide-time="vm.config.plugins.controls.autoHideTime">
 							<vg-play-pause-button></vg-play-pause-button>
 							<vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
 							<vg-scrub-bar>
@@ -90,7 +89,7 @@
 							<vg-fullscreen-button></vg-fullscreen-button>
 					</vg-controls>
 					<vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
-					<!--<vg-poster vg-url='config.plugins.poster'></vg-poster>-->
+					<!--<vg-poster vg-url='vm.config.plugins.poster'></vg-poster>-->
 				</videogular>
 			</div>
 			<div class="project-post-box">
@@ -101,8 +100,6 @@
 	</div>
 
 <script>
-		window.scrollTo(0, 0);
-
 	   function changeEditPictoB() {
 	   		$("#editButton").find('img').attr("src", '/images/picto-edit-vb.svg');
 	   };

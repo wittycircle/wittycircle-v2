@@ -103,40 +103,46 @@ exports.getMyProjectFollowedBy = function(req, res, callback) {
 	       });
 };
 
-exports.getProjectsFollowedByUsername = function(req, res) {
+exports.getProjectsFollowedByUsername = function (req, res) {
     req.checkParams('username', 'username must be a string of characters').isString().min(1);
     var errors = req.validationErrors(true);
- 
+
     if (errors) return res.status(400).send(errors);
     else {
-	pool.query("SELECT * FROM project_followers WHERE user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username, 
-		   function(err, results) {
-		       if (err) throw err;
-		       if (results[0]) {
-			   var listProject = [];
-			   function recursive(index) {
-			       if (results[index]) {
-				   pool.query("SELECT * FROM `projects` WHERE `id` = ?", results[index].follow_project_id,
-					      function(err, result) {
-						  if (err) throw err;
-						  listProject.push(result[0]);
-						  recursive(index + 1);
-					      });
-			       } else {
-				   if (listProject[0]) {
-				       tf.sortProjectCard(listProject, function(data) {
-					   if (!data)
-					       res.status(400).send('Error');
-					   else
-					       res.status(200).send({success: true, data: data});
-				       });
-				   }
-			       }
-			   };
-			   recursive(0);
-		       } else
-			   res.send({success: true, data: results});
-		   });
+        pool.query("SELECT * FROM project_followers WHERE user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username,
+        function (err, results) {
+            if (err) throw err;
+            if (results[0]) {
+                var listProject = [];
+                function recursive(index) {
+                    if (results[index]) {
+                        pool.query("SELECT * FROM `projects` WHERE `id` = ?", results[index].follow_project_id,
+                        function(err, result) {
+                            if (err) throw err;
+                            listProject.push(result[0]);
+                            recursive(index + 1);
+                        });
+                    } else {
+                        if (listProject[0]) {
+                            tf.sortProjectCard(listProject, function(data) {
+                                if (!data)
+                                res.status(400).send('Error');
+                                else
+                                tf.addUserPictureToProject(data, function (rez) {
+                                    if (!rez) {
+                                        res.status(400).send('Error');
+                                    } else {
+                                        res.status(200).send(rez);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                };
+                recursive(0);
+            } else
+            res.send({success: true, data: results});
+        });
     }
 };
 
@@ -206,7 +212,7 @@ exports.getAllUserFollowed = function(req, res) {
 	       });
 };
 
-exports.getProjectFollowedBy = function(req, res, callback) {    
+exports.getProjectFollowedBy = function(req, res, callback) {
     pool.query('SELECT * FROM user_followers WHERE user_id = ?', [req.user.id],
 	       function(err, result) {
 		   if (err) throw err;
@@ -270,7 +276,7 @@ exports.getUserFollowBy = function(req, res, callback) {
 				      function(err, results) {
 					  if (err) throw err;
 					  for(var i = 0; i < results.length; i++) {
-					      if (results[i].follow_user_id !== req.user.id) 
+					      if (results[i].follow_user_id !== req.user.id)
 						  user_user_follow.push(results[i]);
 					  }
 					  recursive(index + 1);
@@ -317,7 +323,7 @@ exports.getListFollowedUser = function(req, res) {
         recursive(0);
     } else
 	res.send({success: false, msg: "error data!"});
-};    
+};
    /* app.get('/follow/project/:id/unfollow', function(req, res){
 	var session = checkSession(req);
 	req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);

@@ -28,6 +28,9 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
   
 $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
+    if ($scope.log) {
+	$("#hlon").css('display', 'block');
+    }
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
         $scope.user = {

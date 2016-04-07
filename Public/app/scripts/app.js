@@ -29,7 +29,7 @@ var wittyCircleApp = angular
       'oc.lazyLoad',
       '720kb.socialshare',
       // Custom modules
-      'wittyProjectModule',
+      'wittyProjectModule'
    ])
     .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
 	$stateProvider

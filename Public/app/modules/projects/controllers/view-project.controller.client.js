@@ -141,7 +141,7 @@
                                     {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
                                 ],
                                 theme: {
-                                    url: 'https://raw.githubusercontent.com/videogular/bower-videogular-themes-default/master/videogular.min.css'
+                                    url: '../../../styles/css/videogular.css'
                                 },
                                 plugins: {
                                     controls: {

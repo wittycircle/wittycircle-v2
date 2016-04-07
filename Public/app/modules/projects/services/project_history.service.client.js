@@ -20,7 +20,7 @@
              var history = {};
 
              history.project_id = project_id;
-             $http.post('http://127.0.0.1/history/project/'+ $rootScope.globals.currentUser.id, history).success(function (response) {
+             $http.post('/history/project/'+ $rootScope.globals.currentUser.id, history).success(function (response) {
                callback(response);
              });
            } else {
@@ -29,7 +29,7 @@
          }
 
          function getCurrentUserProjectHistoryUnresolved () {
-           return $http.get('http://127.0.0.1/history/project/'+ $rootScope.globals.currentUser.id);
+           return $http.get('/history/project/'+ $rootScope.globals.currentUser.id);
          }
 
 

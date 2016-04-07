@@ -16,7 +16,7 @@
 
         function getNeedsByProjectPublicIdUnresolved (public_id) {
             if (public_id) {
-                return $http.get('http://127.0.0.1/openings/project/' + public_id);
+                return $http.get('/openings/project/' + public_id);
             } else {
                 return false;
             }

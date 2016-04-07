@@ -43,7 +43,7 @@
          };
 
          function getFollowedProjectUnresolved(username) {
-           return $http.get('http://127.0.0.1/follow/projects/'+ username);
+           return $http.get('/follow/projects/'+ username);
          }
 
          function getProjectFollowers(project_id) {

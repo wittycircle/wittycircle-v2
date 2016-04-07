@@ -99,8 +99,6 @@ angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScop
     $scope.categories = Categories.getCategories(function (response) {
       $scope.categories = response;
     });
-    console.log('wesh');
-
     $scope.project = Projects.getProjectbyPublicId(projectId, function (response) {
       $scope.project = response[0];
       if ($scope.project.project_visibility == 1) {
@@ -270,12 +268,15 @@ angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScop
 
   $scope.savebasics = function(data, project_category, places_after, statechoose) {
     data.picture_position = $scope.imagecoverposition;
-    if ($scope.project_video) {
+    if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
       data.main_video = $scope.project_video;
       data.main_video_id = $scope.project_video_id;
+    } else {
+	delete data.main_video;
     }
-    if ($scope.post)
+    if ($scope.post) {
       data.post = $scope.post;
+    }
       data.picture = $scope.imagecover;
       data.picture_card = $scope.picture_card;
       data.category_id = project_category.id;

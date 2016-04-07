@@ -1,19 +1,12 @@
-/**
- * @ngdoc factory
- * @name wittyApp.facory:projects
- * @description
- * # projects
- * Factory in the wittyApp.
- */
  (function () {
      'use strict';
 
      angular
-         .module('wittyApp')
+         .module('wittyProjectModule')
          .factory('Projects', Projects);
 
      Projects.$inject = ['$http', '$cookieStore', '$rootScope', '$resource', '$q'];
-     function Projects($http, $cookieStore, $rootScope, $resource, $q) {
+     function Projects ($http, $cookieStore, $rootScope, $resource, $q) {
          var service = {};
 
          service.getProject = getProject;
@@ -21,8 +14,10 @@
          service.getProjectbyId = getProjectbyId;
          service.updateProject = updateProject;
          service.getUserProject = getUserProject;
+         service.getUserProjectUnresolved = getUserProjectUnresolved;
          service.incrementViewProject = incrementViewProject;
          service.getProjectbyPublicId = getProjectbyPublicId;
+         service.getProjectbyPublicIdUnresolved = getProjectbyPublicIdUnresolved;
          service.deleteProject = deleteProject;
          service.getProjectsInvolvedByUser = getProjectsInvolvedByUser;
          service.checkAuth = checkAuth;
@@ -54,9 +49,9 @@
            }).error(function (response_error) {
              callback(response_error);
            });
-         };
+       };
 
-        function getProjectbyPublicId(public_id) {
+        function getProjectbyPublicIdUnresolved (public_id) {
             if (public_id) {
                 return $http.get('/project/public_id/' + public_id);
             } else {
@@ -77,6 +72,14 @@
              callback(response);
            });
          };
+
+         function getUserProjectUnresolved (user_id) {
+          if (user_id) {
+            return $http.get('/projects/user/' + user_id);
+          } else {
+            return null;
+          }
+         }
 
          function incrementViewProject(project_id, callback) {
            $http.put('/project/increment/'+ project_id).success(function (response) {

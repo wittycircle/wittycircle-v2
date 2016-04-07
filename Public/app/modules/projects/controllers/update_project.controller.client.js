@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name wittyApp.controller:UpdateProjectCtrl
- * @description
- * # UpdateProjectCtrl
- * Controller of the wittyApp
- */
-
-
-angular.module('wittyApp').controller('UpdateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload',
+angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload',
   function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload) {
 
   $scope.currentUser = $rootScope.globals.currentUser;
@@ -23,6 +14,7 @@ angular.module('wittyApp').controller('UpdateProjectCtrl', ['$rootScope', '$scop
     $scope.categories = response;
   });
   $scope.elementPost = {};
+
 
   //$('#viewProject-header').backgroundDraggable();
   var projectId = $stateParams.public_id;
@@ -107,6 +99,8 @@ angular.module('wittyApp').controller('UpdateProjectCtrl', ['$rootScope', '$scop
     $scope.categories = Categories.getCategories(function (response) {
       $scope.categories = response;
     });
+    console.log('wesh');
+
     $scope.project = Projects.getProjectbyPublicId(projectId, function (response) {
       $scope.project = response[0];
       if ($scope.project.project_visibility == 1) {

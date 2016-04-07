@@ -23,8 +23,8 @@ module.exports = function(config) {
     files: [
       // bower:js
       'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-cookies/angular-cookies.js',
@@ -41,7 +41,6 @@ module.exports = function(config) {
       'bower_components/angular-custom-select/dist/angular-custom-select.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-toArrayFilter/toArrayFilter.js',
-      'bower_components/angular-socket-io/socket.js',
       'bower_components/lodash/lodash.js',
       'bower_components/angular-css/angular-css.js',
       'bower_components/moment/moment.js',
@@ -72,7 +71,7 @@ module.exports = function(config) {
       'bower_components/angulartics/src/angulartics-marketo.js',
       'bower_components/angulartics/src/angulartics-intercom.js',
       'bower_components/videogular-angulartics/vg-analytics.js',
-      'bower_components/angular-socialshare/angular-socialshare.js',
+      'bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'bower_components/cloudinary-core/cloudinary-core.js',
       'bower_components/angular-redactor/angular-redactor.js',
       'bower_components/oclazyload/dist/ocLazyLoad.js',

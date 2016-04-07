@@ -234,7 +234,7 @@ angular.module('wittyApp')
 		if ($rootScope.globals.currentUser) {
 			$http.delete('/user/' + $rootScope.globals.currentUser.id, function(res) {
 				Authentication.ClearCredentials(function(res) {
-		          	window.location.replace('http://www.wittycircle.com');
+		          	window.location.replace('https://www.wittycircle.com');
 		        });
 			});
 		}

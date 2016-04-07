@@ -10,7 +10,7 @@
 angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
-  function checkCredential() {
+  /*function checkCredential() {
     if ($rootScope.globals.currentUser) {
       $http.get('/api').success(function(res) {
         if (!res.success) {
@@ -19,16 +19,18 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
         }
       });
     }
-  }; checkCredential();
+  }; checkCredential();*/
 
    /*
    **Update in time sidebar after login
    */
-  var socket;
-  socket = io.connect('/');
-
-  $rootScope.$watch('globals', function(value) {
+  var socket = io.connect('https://www.wittycircle.com');
+  
+$rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
+    if ($scope.log) {
+	$("#hlon").css('display', 'block');
+    }
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
         $scope.user = {
@@ -103,7 +105,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       .success(function(response) {
         if (response.success) {
           Authentication.ClearCredentials(function(res) {
-            window.location.replace('http://localhost');
+            window.location.replace('https://www.wittycircle.com');
           });
         }
       }).error(function (response) {
@@ -162,7 +164,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
 
   $scope.getAllRead = function() {
     if ($rootScope.globals.currentUser) {
-      $http.put(url + 'notification/update/all').success(function(res) {
+      $http.put('/notification/update/all').success(function(res) {
         if (res.success) {
           $scope.getNotifList();
           $scope.checkRead = true;
@@ -187,7 +189,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       Users.getUserbyId(user_notif_id, function(res) {
         if (res.success) {
           if (!check_read) {
-            $http.put(url + "notification/update/view", value).success(function(res) {
+            $http.put("/notification/update/view", value).success(function(res) {
               if (res.success)
                 $scope.getNotifList();
             });
@@ -199,7 +201,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     if (type === "u_follow") {
       Users.getUserbyId(user_notif_id, function(res) {
         if (!check_read) {
-          $http.put(url + 'notification/update/user-follow', value).success(function(res) {
+          $http.put('/notification/update/user-follow', value).success(function(res) {
             if (res.success)
               $scope.getNotifList();
           });
@@ -210,7 +212,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     if (type === "p_follow") {
       Users.getUserbyId(user_notif_id, function(res) {
         if (!check_read) {
-          $http.put(url + 'notification/update/project-follow', value).success(function(res) {
+          $http.put('/notification/update/project-follow', value).success(function(res) {
             if (res.success)
               $scope.getNotifList();
           });
@@ -222,7 +224,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       Projects.getProjectbyId(project_id, function(res) {
         var titleUrl = Beauty_encode.encodeUrl(res[0].title);
         if (!check_read) {
-          $http.put(url + "notification/update/project-follow-by", value).success(function(res) {
+          $http.put("/notification/update/project-follow-by", value).success(function(res) {
             if (res.success)
               $scope.getNotifList();
           });
@@ -233,7 +235,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     if (type === "u_user_follow") {
       Users.getUserbyId(user_followed_id, function(res) {
         if (!check_read) {
-          $http.put(url + 'notification/update/user-follow-by', value).success(function(res) {
+          $http.put('/notification/update/user-follow-by', value).success(function(res) {
             if (res.success)
               $scope.getNotifList();
           });
@@ -245,7 +247,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       Projects.getProjectbyId(project_id, function(res) {
         var titleUrl = Beauty_encode.encodeUrl(res[0].title);
         if (!check_read) {
-          $http.put(url + 'notification/update/project-involve', id).success(function(res) {
+          $http.put('/notification/update/project-involve', id).success(function(res) {
              if (res.success)
                $scope.getNotifList();
           });
@@ -278,7 +280,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
   socket.on('my-follow-users', function(data) {
     if ($rootScope.globals.currentUser) {
       if (data !== $rootScope.globals.currentUser.id) {
-        $http.get(url + "user_followed/" + data).success(function(res) {
+        $http.get("/user_followed/" + data).success(function(res) {
           if (res.success) {
             $scope.getNotifList();
           }

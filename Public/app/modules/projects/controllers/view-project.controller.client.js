@@ -105,6 +105,17 @@
                 var err;
 
                 vm.project = projectResolve.data[0];
+				/*** Project Card Page ***/
+				$scope.$parent.seo = {
+		    		pageTitle: vm.project.title,
+		    		pageDescription: vm.project.description
+				};
+		
+				$scope.$parent.card = {
+		    		title: vm.project.title,
+		    		url: $location.absUrl(),
+		    		image: vm.project.picture,
+				};
                 // setting default cover picture is there is not
                 if (!vm.project.picture) {
                   vm.project.picture = emptyBg;
@@ -130,7 +141,7 @@
                                     {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
                                 ],
                                 theme: {
-                                    url: 'http://www.videogular.com/styles/themes/default/latest/videogular.css'
+                                    url: 'https://raw.githubusercontent.com/videogular/bower-videogular-themes-default/master/videogular.min.css'
                                 },
                                 plugins: {
                                     controls: {

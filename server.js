@@ -6,9 +6,11 @@ var bodyParser		= require('body-parser');
 var cookieParser	= require('cookie-parser');
 var Validator		= require('express-validator');
 var app			= express();
+var morgan		= require('morgan');
 var _			= require('underscore');
 var server		= require('http').createServer(app);
 var https		= require('https');
+var reload		= require('reload');
 var session		= require('express-session');
 var RedisStore          = require('connect-redis')(session);
 var redis               = require("redis");
@@ -17,21 +19,21 @@ var passport		= require('passport');
 var cloudinary		= require('cloudinary');
 var multer		= require('multer');
 var fs			= require('fs');
-var io			= require('socket.io')(server);
 var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
 var mandrill		= require('mandrill-api/mandrill');
 var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-
 var algoliaClient	= require('./algo/algolia').algoliaClient;
 var httpsOption		= {
     key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
-    cert: fs.readFileSync('./ssl_key/wittycircle-cert.pem') 
+    cert: fs.readFileSync('./ssl_key/secure_key/2_www.wittycircle.com.crt'),
+    ciphers: 'ECDHE-RSA-AES256-SHA:AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM',
+    honorCipherOrder: true,
 };
 
 require('./passport')(passport);
-
+//app.use(morgan('combined'));
 app.use(cookieParser());
-
+app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
@@ -51,9 +53,12 @@ cloudinary.config({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(__dirname + '/Public/'));
+//app.use(express.static(__dirname + '/Public/'));
+//app.use(express.static(__dirname + '/Public/dist/styles/'));
+//app.use(express.static(__dirname + '/Public/dist/scripts/'));
+app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
-app.use(express.static(__dirname + '/Public/app/styles/css'));
+//app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -135,8 +140,13 @@ require('./routes')(app, passport);
 require('./algolia')(app, algoliaClient);
 
 /* Socket */
+var ps = https.createServer(httpsOption, app);
+var io = require('socket.io').listen(ps);
+
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
-server.listen(80);
-https.createServer(httpsOption, app).listen(443);
+//reload(server, app);
+//server.listen(80);
+ps.listen(443);
+

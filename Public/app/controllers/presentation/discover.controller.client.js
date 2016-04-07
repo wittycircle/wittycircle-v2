@@ -40,8 +40,8 @@
 
 		$scope.$parent.card = {
 			title: "Wittycircle | Discover",
-			url: "http://www.wittycircle.com/discover",
-			image: "http://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png",
+			url: "https://www.wittycircle.com/discover",
+			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
 		};
 
     $scope.encodeUrl = function(url) {
@@ -69,33 +69,33 @@
 		});
 
 		/*****-- FUNCTION --*****/
-		setTimeout(function() {
-		    if (!$rootScope.globals.currentUser) {
-		  		$(window).scroll(function () {
-		  			if ($('#discover-body-page')[0]) {
-		  				var x = $(window).scrollTop();
-		  				var container = $('.custom-popover');
-		  				if (x > 350) {
-		  					if (!container.length) {
-		  						$mdBottomSheet.hide();
-		  						showbottomAlert.pop_it_persistance();
-		  						setTimeout(function() {
-		  							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
-		  							$('#page-wrap').css('display', 'block');
-		  						}, 150);
-		  					}
-		  				}
-		  				if (x < 350) {
-		  					if (container.length) {
-		  						$mdBottomSheet.hide();
-		  						$('.md-bottom-sheet-backdrop').css('display', 'none')
-		  						$('#page-wrap').css('display', 'none');
-		  					}
-		  				}
-		  			}
-		  		});
-		    }
-		}, 1000);
+		// setTimeout(function() {
+		//     if (!$rootScope.globals.currentUser) {
+		//   		$(window).scroll(function () {
+		//   			if ($('#discover-body-page')[0]) {
+		//   				var x = $(window).scrollTop();
+		//   				var container = $('.custom-popover');
+		//   				if (x > 350) {
+		//   					if (!container.length) {
+		//   						$mdBottomSheet.hide();
+		//   						showbottomAlert.pop_it_persistance();
+		//   						setTimeout(function() {
+		//   							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
+		//   							$('#page-wrap').css('display', 'block');
+		//   						}, 150);
+		//   					}
+		//   				}
+		//   				if (x < 350) {
+		//   					if (container.length) {
+		//   						$mdBottomSheet.hide();
+		//   						$('.md-bottom-sheet-backdrop').css('display', 'none')
+		//   						$('#page-wrap').css('display', 'none');
+		//   					}
+		//   				}
+		//   			}
+		//   		});
+		//     }
+		// }, 1000);
 
 		$scope.goToProfile 		= function(id) {
 			Users.getUserIdByProfileId(id).then(function(data) {
@@ -249,7 +249,6 @@
 		/*** Search Section ***/
 		function searchScl(object) {
 			$http.post('/search/projects/scl', object).success(function(res) {
-				console.log(res);
 				if (!res.success) return getDiscoverCard();
 				$scope.cards = res.data; 
 			});
@@ -283,7 +282,7 @@
 					$('#hoho').css('display', 'none');
 					$('#haha').css('display', 'block');
 				}, 500);
-				console.log(value);
+
 				if (value[2] || value[3]) {
 
 					var object = {

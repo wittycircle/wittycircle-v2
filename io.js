@@ -7,7 +7,7 @@ module.exports = function(app, io, ensureAuth) {
 	return res.status(404).send('Must to be login');
 
     io.on('connection', function(socket) {
-	
+	if (!io.connected) io.connected = true;
 	socket.on('disconnect', function(data) { 
             if (!socket.nickname) return ;
             delete users[socket.nickname]; // delete user in the online users' list when the user is disconnect

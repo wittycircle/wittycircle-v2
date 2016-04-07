@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-ng-cloak id="main-body" data-ng-app="wittyApp" data-ng-controller="HeadCtrl">
+<html lang="en" id="main-body" data-ng-app="wittyApp" data-ng-controller="HeadCtrl">
   <head>
     <meta charset="UTF-8">
     <meta name="fragment" content="!">
-    <title ng-bind="seo.pageTitle"></title>
+    <title>{{ seo.pageTitle }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="content-language" content="en">
     <meta name="description" content="{{ seo.pageDescription }}"/>
@@ -20,22 +20,12 @@
     <meta property="og:url" content="{{ card.url }}" />
     <meta property="og:image" content="{{ card.image }}" />
     <meta name="serp-rank" position="1"/>
-    <!-- <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://twitter.com/wittycircle">
-    <meta name="twitter:title" content="Wittycircle | The creators marketplace">
-    <meta name="twitter:description" content="Have an idea worth spreading? You found the right place. Start with finding skilled peope around you, ask for feedback, support and meet your early fans.">
-    <meta name="twitter:image" content="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg"> -->
     <link rel="icon" type="image/png" href="images/favicons/default-favicon.png" />
-    <link rel="canonical" href="http://www.wittycircle.com" />
+    <link rel="canonical" href="https://www.wittycircle.com" />
     <link rel="publisher" href="https://plus.google.com/104066516895208794319/about" />
 
 
     <base href="/">
-    <style type="text/css">
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-        }
-    </style>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -43,29 +33,29 @@
     <link rel="stylesheet" href="bower_components/oi.select/dist/select.min.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/css/main.css" />
-    <link rel="stylesheet" href="styles/css/projects.css" />
-    <link rel="stylesheet" href="styles/css/signup.css" />
-    <link rel="stylesheet" href="styles/css/home.css" />
-    <link rel="stylesheet" href="styles/css/myProjects.css" />
-    <link rel="stylesheet" href="styles/css/custom-select.css" />
-    <link rel="stylesheet" href="styles/css/create-project.css" />
-    <link rel="stylesheet" href="styles/css/messaging.css" />
-    <link rel="stylesheet" href="styles/css/footer.css" />
-    <link rel="stylesheet" href="styles/css/bfooter.css" />
-    <link rel="stylesheet" href="styles/css/profiles.css" />
-    <link rel="stylesheet" href="styles/css/profiles-modal-edit.css" />
-    <link rel="stylesheet" href="styles/css/setting.css" />
-    <link rel="stylesheet" href="styles/css/header.css" />
-    <link rel="stylesheet" href="styles/css/witty-animate.css" />
-    <link rel="stylesheet" href="styles/css/animate.css">
-    <link rel="stylesheet" href="styles/css/_scss/redactor.css" />
-    <link rel="stylesheet" href="styles/css/presentation.css" />
-    <link rel="stylesheet" href="styles/css/modal.css" />
-    <link rel="stylesheet" href="styles/css/card.css" />
-    <link rel="stylesheet" href="styles/css/video_custom.css" />
-    <link rel="stylesheet" href="styles/css/terms.css" />
-    <link rel="stylesheet" href="styles/css/popover.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/projects.css" />
+    <link rel="stylesheet" href="styles/signup.css" />
+    <link rel="stylesheet" href="styles/home.css" />
+    <link rel="stylesheet" href="styles/myProjects.css" />
+    <link rel="stylesheet" href="styles/custom-select.css" />
+    <link rel="stylesheet" href="styles/create-project.css" />
+    <link rel="stylesheet" href="styles/messaging.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/bfooter.css" />
+    <link rel="stylesheet" href="styles/profiles.css" />
+    <link rel="stylesheet" href="styles/profiles-modal-edit.css" />
+    <link rel="stylesheet" href="styles/setting.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/witty-animate.css" />
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/_scss/redactor.css" />
+    <link rel="stylesheet" href="styles/presentation.css" />
+    <link rel="stylesheet" href="styles/modal.css" />
+    <link rel="stylesheet" href="styles/card.css" />
+    <link rel="stylesheet" href="styles/video_custom.css" />
+    <link rel="stylesheet" href="styles/terms.css" />
+    <link rel="stylesheet" href="styles/popover.css" />
     <!-- endbuild -->
 
     <!-- Font Awesome css -->
@@ -92,7 +82,7 @@
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script   src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
   </head>
   <body>
     <!--[if lte IE 8]>
@@ -136,7 +126,7 @@
                     </ul>
                 </div>
 
-                <div class="header-log-on" ng-show="log">
+                <div id="hlon" class="header-log-on" ng-show="log" style="display: none">
                     <div class="header-notif-mail">
                         <div id="hlogn" class="header-log-notif header-notification" ng-click="getNotifListOnClick()">
                             <img id="notif-w-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png" alt="notif-waves">
@@ -495,13 +485,12 @@
             </div>
         </section>
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -518,7 +507,6 @@
     <script src="bower_components/angular-custom-select/dist/angular-custom-select.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
-    <script src="bower_components/angular-socket-io/socket.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/angular-css/angular-css.js"></script>
     <script src="bower_components/moment/moment.js"></script>
@@ -549,7 +537,7 @@
     <script src="bower_components/angulartics/src/angulartics-marketo.js"></script>
     <script src="bower_components/angulartics/src/angulartics-intercom.js"></script>
     <script src="bower_components/videogular-angulartics/vg-analytics.js"></script>
-    <script src="bower_components/angular-socialshare/angular-socialshare.js"></script>
+    <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
     <script src="bower_components/angular-redactor/angular-redactor.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
@@ -566,9 +554,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-socialshare/0.2.4-beta/angular-socialshare.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,app})  scripts/scripts.js-->
     <script src="scripts/app.js"></script>
-	  <script src="scripts/witty.custom.filter.js"></script>
+    <script src="scripts/witty.custom.filter.js"></script>
     <script src="scripts/cloudinary_config.js"></script>
     <!-- including config module before the rest of the module and right after the main module -->
     <script text="text/javascript" src="modules/projects/config/projects-config.config.client.js"></script>
@@ -634,7 +622,7 @@
     <script src="controllers/notification/notification.controller.client.js"></script>
     <!--<script src="services/header.service.client.js"></script> add to the header view html cuz of the build -->
     <script src="controllers/projects/update_project.controller.client.js"></script>
-	  <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
+    <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <script src="controllers/presentation/discover.controller.client.js"></script>
     <script src="controllers/projects/modal/add-needs.controller.client.js"></script>
@@ -650,7 +638,6 @@
     <!-- endbuild -->
 
     <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
-
     <!-- DOM -->
     <script>
         window.prerenderReady = true;

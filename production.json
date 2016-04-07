@@ -3,5 +3,5 @@
     "append": true,
     "watch": false,
     "script": "server.js",
-    "sourceDir": "/home/ubuntu/wittycircle-rest-api"
+    "sourceDir": "/home/ubuntu/Wittycircle"
 }

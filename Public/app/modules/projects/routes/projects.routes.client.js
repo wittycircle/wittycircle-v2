@@ -98,7 +98,7 @@
         url: '/project/:public_id/update',
         templateUrl: 'modules/projects/views/update/update_project.view.client.html',
         controller: 'UpdateProjectCtrl',
-        /*resolve:{ auth: function($q, $stateParams, Projects, $http) {
+        resolve:{ auth: function($q, $stateParams, Projects, $http) {
                         return $http.get('http://127.0.0.1/project/'+ $stateParams.public_id + '/auth').then(function(response) {
                           if (response.data.message === 'success') {
                             return true;
@@ -107,7 +107,7 @@
                           }
                         });
                       }
-                }*/
+                }
       })
       .state('updateproject.basics', {
         url: '/basics',

@@ -38,19 +38,19 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['app/**/*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-           livereload: '<%= connect.options.livereload %>'
-         }
-      },
+      // js: {
+      //   files: ['<%= yeoman.app %>/**/{,*/}*.js'],
+      //   tasks: ['newer:jshint:all'],
+      //   options: {
+      //      livereload: '<%= connect.options.livereload %>'
+      //    }
+      // },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
-        files: ['app/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer:server']
       },
       gruntfile: {
@@ -71,9 +71,9 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8080,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: 'ec2-52-16-233-115.eu-west-1.compute.amazonaws.com',
         livereload: 35729
       },
       livereload: {
@@ -456,9 +456,9 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
+  if (target === 'dist') {
+   return grunt.task.run(['build', 'connect:dist:keepalive']);
+   }
 
     grunt.task.run([
       'clean:server',

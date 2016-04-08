@@ -5,4 +5,5 @@ angular.module('wittyApp').controller('TermsCtrl',
 
     $scope.test = 4;
 
+
 });

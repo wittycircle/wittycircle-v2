@@ -2,41 +2,42 @@
 console.log("You're looking under the ground, find a bug ? Help us to improve our platform at hello@wittycircle.com");
 
 var wittyCircleApp = angular
-.module('wittyApp', [
-    // Assets Modules
-    'ngAnimate',
-    'ngAria',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.bootstrap',
-    'ui.router',
-    'ngMaterial',
-    'ngMap',
-    'ngFileUpload',
-    'angular-toArrayFilter',
-    'algoliasearch',
-    'door3.css',
-    'angularMoment',
-    'com.2fdevs.videogular',
-    'com.2fdevs.videogular.plugins.controls',
-    'com.2fdevs.videogular.plugins.overlayplay',
-    'com.2fdevs.videogular.plugins.poster',
-    'cloudinary',
-    'angular-redactor',
-    'oc.lazyLoad',
-    // Custom modules
-    'wittyProjectModule'
-])
-.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
-    $stateProvider
-    .state('main', {
+  .module('wittyApp', [
+      // Assets Modules
+      'ngAnimate',
+      'ngAria',
+      'ngCookies',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch',
+      'ui.bootstrap',
+      'ui.router',
+      'ngMaterial',
+      'ngMap',
+      'ngFileUpload',
+      'angular-toArrayFilter',
+      'algoliasearch',
+      'door3.css',
+      'angularMoment',
+      'com.2fdevs.videogular',
+      'com.2fdevs.videogular.plugins.controls',
+      'com.2fdevs.videogular.plugins.overlayplay',
+      'com.2fdevs.videogular.plugins.poster',
+      'cloudinary',
+      'angular-redactor',
+      'oc.lazyLoad',
+      '720kb.socialshare',
+      // Custom modules
+      'wittyProjectModule'
+   ])
+    .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
+	$stateProvider
+	    .state('main', {
         url: '/',
-        params      : { tagStart: '',},
-        templateUrl : 'views/main.html',
-        controller  : 'MainCtrl',
+		params      : { tagStart: '',},
+		templateUrl : 'views/main.html',
+		controller  : 'MainCtrl',
         controllerAs: 'main',
     })
     .state('discover', {
@@ -143,12 +144,12 @@ var wittyCircleApp = angular
 
         // **Redactor configuration
 
-        redactorOptions.imageUpload = 'http://127.0.0.1/upload/redactor';
-        redactorOptions.buttonSource = true;
-        redactorOptions.imageResizable = true;
-        redactorOptions.imageEditable = true;
-        redactorOptions.imageLink = true;
-        redactorOptions.visual = true;// false for html mode
+      redactorOptions.imageUpload = '/upload/redactor';
+      redactorOptions.buttonSource = true;
+      redactorOptions.imageResizable = true;
+      redactorOptions.imageEditable = true;
+      redactorOptions.imageLink = true;
+      redactorOptions.visual = true;// false for html mode
 
         redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
         redactorOptions.plugins = ['imagemanager'];
@@ -157,8 +158,9 @@ var wittyCircleApp = angular
         */
 
 
-        //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
-        //$locationProvider.html5Mode(true);
+      //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
+      $locationProvider.html5Mode(true);
+      $locationProvider.hashPrefix('!');
 
     })
     .run(function ($rootScope, $cookieStore, $location) {

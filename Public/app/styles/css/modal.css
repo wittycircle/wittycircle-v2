@@ -1,0 +1,317 @@
+/*********************** Main Filter **************************/
+#page-wrap {
+  position: absolute;
+  background-color: rgba(33, 33, 33, 0.48);
+  width: 100%;
+  height: 100%;
+  z-index: 499;
+  display: none; }
+
+/*********************** Main SignUp LogIn Css *************************/
+.fb-login {
+  margin-bottom: 15px; }
+  .fb-login button {
+    background-color: #46629E;
+    font-family: 'FreigSem';
+    font-size: 18px;
+    color: white;
+    padding: 10px 20px 10px 15px;
+    border: 1px solid #46629E;
+    border-radius: 4px; }
+    .fb-login button i {
+      padding: 0 15px 0 10px; }
+  .fb-login button:hover {
+    background-color: #344e7a; }
+
+.go-login {
+  margin-bottom: 15px;
+  margin-left: 0; }
+  .go-login button {
+    text-align: left;
+    background-color: white;
+    font-family: 'FreigSem';
+    font-size: 18px;
+    color: #757575;
+    padding: 10px 38px 10px 13px;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    margin: 0; }
+  .go-login button:hover {
+    background-color: #f5f5f5; }
+  .go-login img {
+    padding: 0 15px 0 10px;
+    width: 40px; }
+
+.signup-login-header {
+  background-color: #FAFAFA;
+  border-bottom: 2px solid #e5e5e5;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px; }
+  .signup-login-header h2 {
+    display: inline-block;
+    font-family: 'FreigBook';
+    font-size: 18px;
+    color: #222222;
+    padding: 15px 20px; }
+  .signup-login-header img {
+    position: relative;
+    display: inline-block;
+    float: right;
+    width: 15px;
+    top: 16px;
+    right: 20px; }
+
+.signup-login-social {
+  text-align: center; }
+  .signup-login-social h4 {
+    font-family: 'FreigBook';
+    font-size: 16px;
+    color: #999999;
+    padding: 20px 0;
+    margin-top: 20px; }
+
+.signup-login-old {
+  text-align: center; }
+  .signup-login-old .old-dash {
+    position: relative;
+    display: inline-block;
+    bottom: 4px;
+    width: 15%;
+    height: 20px;
+    border-bottom: 1px solid #e5e5e5; }
+  .signup-login-old h4 {
+    display: inline-block;
+    font-family: 'FreigBook';
+    font-size: 16px;
+    color: #999999;
+    padding: 5px 15px; }
+
+.firstname-input input {
+  background-image: url("/images/littleman.svg");
+  background-repeat: no-repeat;
+  background-position: 5% 50%; }
+
+.lastname-input input {
+  background-image: url("/images/littleman.svg");
+  background-repeat: no-repeat;
+  background-position: 5% 50%; }
+
+.email-input input {
+  background-image: url("/images/mailbox-icon-b.svg");
+  background-repeat: no-repeat;
+  background-position: 2.5% 50%; }
+
+.password-input input {
+  background-image: url("/images/password-icon.svg");
+  background-repeat: no-repeat;
+  background-position: 2.5% 50%; }
+
+/*********************** Main Signup Modal **************************/
+#main-signup-modal {
+  position: fixed;
+  background-color: white;
+  max-width: 600px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 10000000;
+  border-radius: 4px;
+  overflow: hidden;
+  display: none; }
+  #main-signup-modal .signup-modal-social {
+    padding: 0 55px 25px 60px; }
+    #main-signup-modal .signup-modal-social .fb-login {
+      display: inline-block;
+      margin-right: 20px; }
+      #main-signup-modal .signup-modal-social .fb-login button {
+        padding: 10px 20px 10px 10px; }
+    #main-signup-modal .signup-modal-social .go-login {
+      display: inline-block; }
+      #main-signup-modal .signup-modal-social .go-login button {
+        padding: 10px 35px 10px 13px; }
+  #main-signup-modal .signup-modal-old {
+    text-align: center;
+    padding: 0 30px; }
+    #main-signup-modal .signup-modal-old .old-dash {
+      width: 30%; }
+  #main-signup-modal .signup-modal-field {
+    text-align: center;
+    padding: 20px 55px; }
+    #main-signup-modal .signup-modal-field p {
+      font-family: 'FreigBook';
+      font-size: 16px;
+      margin-top: 3px;
+      margin-bottom: 0;
+      color: #ff4d4d; }
+    #main-signup-modal .signup-modal-field .signup-firstname-field,
+    #main-signup-modal .signup-modal-field .signup-lastname-field {
+      display: inline-block;
+      margin-top: 10px;
+      text-align: left; }
+      #main-signup-modal .signup-modal-field .signup-firstname-field input,
+      #main-signup-modal .signup-modal-field .signup-lastname-field input {
+        width: 232px;
+        margin: 0; }
+      #main-signup-modal .signup-modal-field .signup-firstname-field p,
+      #main-signup-modal .signup-modal-field .signup-lastname-field p {
+        font-family: 'FreigBook';
+        font-size: 16px;
+        margin-top: 3px;
+        margin-bottom: 0;
+        color: #ff4d4d; }
+    #main-signup-modal .signup-modal-field .signup-firstname-field {
+      float: left;
+      margin-right: 20px; }
+    #main-signup-modal .signup-modal-field input {
+      display: block;
+      width: 100%;
+      margin: 15px auto 3px auto;
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: #999999;
+      padding: 10px 20px 10px 40px;
+      border: 1px solid #bebebe;
+      border-radius: 4px; }
+    #main-signup-modal .signup-modal-field .signup-email-field,
+    #main-signup-modal .signup-modal-field .signup-password-field {
+      text-align: left; }
+      #main-signup-modal .signup-modal-field .signup-email-field p,
+      #main-signup-modal .signup-modal-field .signup-password-field p {
+        display: inline-block;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        margin-top: 3px;
+        margin-bottom: 0;
+        color: #ff4d4d; }
+      #main-signup-modal .signup-modal-field .signup-email-field .pw-week,
+      #main-signup-modal .signup-modal-field .signup-password-field .pw-week {
+        position: absolute;
+        right: 0;
+        margin-right: 60px;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        color: red; }
+      #main-signup-modal .signup-modal-field .signup-email-field .pw-okey,
+      #main-signup-modal .signup-modal-field .signup-password-field .pw-okey {
+        position: absolute;
+        right: 0;
+        margin-right: 60px;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        color: #FF9933; }
+      #main-signup-modal .signup-modal-field .signup-email-field .pw-strong,
+      #main-signup-modal .signup-modal-field .signup-password-field .pw-strong {
+        position: absolute;
+        right: 0;
+        margin-right: 60px;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        color: #00FF00; }
+  #main-signup-modal .sign-modal-policy {
+    text-align: center;
+    padding: 0 60px; }
+    #main-signup-modal .sign-modal-policy p {
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: #999999; }
+      #main-signup-modal .sign-modal-policy p strong {
+        color: #808080;
+        cursor: pointer; }
+  #main-signup-modal .signup-modal-button {
+    text-align: center;
+    padding: 10px 55px; }
+    #main-signup-modal .signup-modal-button button {
+      background-color: #ff4d4d;
+      width: 234px;
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: white;
+      padding: 8px 20px 10px 15px;
+      border-radius: 4px;
+      border: none;
+      margin-top: 10px; }
+  #main-signup-modal .signup-modal-footer {
+    text-align: center;
+    padding: 20px 60px; }
+    #main-signup-modal .signup-modal-footer h4 {
+      border-top: 1px solid #e5e5e5;
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: #999999;
+      padding: 20px 15px 0 15px; }
+      #main-signup-modal .signup-modal-footer h4 u {
+        cursor: pointer; }
+
+/*********************** Main Login Modal **************************/
+#main-login-modal {
+  position: fixed;
+  background-color: white;
+  max-width: 400px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 10000000;
+  border-radius: 4px;
+  overflow: hidden;
+  display: none; }
+  #main-login-modal .login-modal-email {
+    text-align: center;
+    max-width: 300px;
+    margin: 0 auto; }
+    #main-login-modal .login-modal-email input {
+      display: block;
+      width: 300px;
+      margin: 10px auto;
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: #999999;
+      padding: 10px 20px 10px 40px;
+      border: 1px solid #bebebe;
+      border-radius: 4px; }
+    #main-login-modal .login-modal-email p {
+      font-family: 'FreigBook';
+      font-size: 16px;
+      margin-bottom: 3px;
+      color: #ff4d4d; }
+    #main-login-modal .login-modal-email .email-input,
+    #main-login-modal .login-modal-email .password-input {
+      text-align: left; }
+      #main-login-modal .login-modal-email .email-input p,
+      #main-login-modal .login-modal-email .password-input p {
+        position: relative;
+        bottom: 8px;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        margin-bottom: 0;
+        color: #ff4d4d; }
+    #main-login-modal .login-modal-email .forgot-password {
+      text-align: right; }
+      #main-login-modal .login-modal-email .forgot-password p {
+        font-family: 'FreigBook';
+        font-size: 14px;
+        color: black;
+        text-decoration: underline; }
+  #main-login-modal .signup-login-old {
+    padding: 15px 0; }
+  #main-login-modal .login-modal-footer {
+    text-align: center; }
+    #main-login-modal .login-modal-footer button {
+      background-color: #ff4d4d;
+      width: 234px;
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: white;
+      padding: 6px 20px 10px 15px;
+      border-radius: 4px;
+      border: none;
+      margin-top: 10px; }
+    #main-login-modal .login-modal-footer h4 {
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: #999999;
+      padding: 10px 15px;
+      margin: 10px 0; }
+      #main-login-modal .login-modal-footer h4 u {
+        cursor: pointer; }
+
+/*# sourceMappingURL=modal.css.map */

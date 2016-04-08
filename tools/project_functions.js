@@ -20,33 +20,39 @@ function getUsersInProject(id_list, callback) {
 };
 
 exports.sortProjectCard = function(data, callback) {
-    if (data[0]) {
-        var newProjectCards = [];
-        function recursive(index) {
-            if (data[index]) {
-                pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
-                function(err, result) {
-                    if (err)
-                    throw err;
-                    pool.query('SELECT user_id FROM project_users WHERE project_id = ?',
-                    data[index].id,
+    if (data && data[0]) {
+      var newProjectCards = [];
+
+      function recursive(index) {
+        if (data[index] && typeof data[index].id !== 'undefined') {
+          if (!data[index].picture_card)
+            return recursive(index + 1);
+          else {
+            pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
+              function(err, result) {
+                if (err) throw err;
+                  pool.query('SELECT user_id FROM project_users WHERE project_id = ?', data[index].id,
                     function(err, list_user_id) {
-                        if (err)
-                        throw err;
-                        getUsersInProject(list_user_id, function(username_list) {
-                            data[index].pic       = result[0].profile_picture_icon;
-                            data[index].usersIn   = username_list;
-                            newProjectCards.push(data[index]);
-                            recursive(index + 1);
-                        });
+                      if (err) throw err;
+                      getUsersInProject(list_user_id, function(username_list) {
+                        data[index].pic       = result[0].profile_picture_icon;
+                        data[index].usersIn   = username_list;
+                        newProjectCards.push(data[index]);
+                        return recursive(index + 1);
+                      });
                     });
-                });
-            } else
-            callback(newProjectCards);
+            });
+          }
+        } else {
+          if (newProjectCards[0])
+            return callback(newProjectCards);
+          else
+            return callback(false);
         }
-        recursive(0);
+      };
+      recursive(0);
     } else
-        callback(false);
+        return callback(false);
 };
 
 

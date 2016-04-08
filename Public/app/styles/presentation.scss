@@ -163,6 +163,7 @@
 
 .discover-component {
 	.discover-search1 {
+
 		.discover-search1-text {
 			display: inline-block;
 			margin: 0px 10px;
@@ -234,6 +235,7 @@
 	}
 
 	.discover-search2 {
+
 		#input-dsa::-webkit-input-placeholder {
 			color: white;
 		}
@@ -401,6 +403,8 @@
 }
 
 #discover-body-content {
+	min-height: 400px;
+	
 	.discover-body-container {
 		.discover-body-list {
 			text-align: left;
@@ -417,6 +421,9 @@
 				overflow: hidden;
 			}
 		}
+	}	
+	.loader {
+		margin: 45px auto;
 	}
 }
 
@@ -606,29 +613,32 @@
 		}
 	}
 }
-
 #meet-body-content {
-	max-width: 1000px;
-	margin: 0 auto;
-	-webkit-transition-delay: all 500ms linear;
-	-o-transition-delay: all 500ms linear;
-	-moz-transition-delay: all 500ms linear;
-	-ms-transition-delay: all 500ms linear;
-	-kthtml-transition-delay: all 500ms linear;
-	transition-delay: all 500ms linear;
+	min-height: 400px;
+	
+	.meet-body-container {
+		max-width: 1000px;
+		margin: 0 auto;
+		-webkit-transition-delay: all 500ms linear;
+		-o-transition-delay: all 500ms linear;
+		-moz-transition-delay: all 500ms linear;
+		-ms-transition-delay: all 500ms linear;
+		-kthtml-transition-delay: all 500ms linear;
+		transition-delay: all 500ms linear;
 
-	.meet-body-cards {
-		text-align: left;
-		padding-left: 15px;
+		.meet-body-cards {
+			text-align: left;
+			padding-left: 15px;
 
-		.meet-body-card {
-			display: inline-table;
-			text-align: center;
-			width: 207px;
-			height: 260px;
-			margin: 0px 16px 50px 16px;
-			border: 1px solid #E5E5E5;
-			border-radius: 5px;
+			.meet-body-card {
+				display: inline-table;
+				text-align: center;
+				width: 207px;
+				height: 260px;
+				margin: 0px 16px 50px 16px;
+				border: 1px solid #E5E5E5;
+				border-radius: 5px;
+			}
 		}
 	}
 }

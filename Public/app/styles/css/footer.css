@@ -1,0 +1,114 @@
+#footer-page {
+  background-color: #222222;
+  height: 100%;
+  width: 100%;
+  border-top: 1px solid #767373;
+  text-align: center; }
+  #footer-page .footer-global {
+    max-width: 955px;
+    margin-left: auto;
+    margin-right: auto; }
+    #footer-page .footer-global .footer-info-section {
+      margin-top: 45px;
+      border-bottom: 1px solid black;
+      text-align: left; }
+      #footer-page .footer-global .footer-info-section .footer-about {
+        display: inline-block;
+        text-align: left;
+        padding-right: 15px; }
+      #footer-page .footer-global .footer-info-section .footer-explore {
+        display: inline-block;
+        text-align: left;
+        padding-right: 15px;
+        padding-left: 15px; }
+      #footer-page .footer-global .footer-info-section .footer-no-info {
+        display: inline-block;
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 30px; }
+      #footer-page .footer-global .footer-info-section .footer-meet {
+        display: inline-block;
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px; }
+      #footer-page .footer-global .footer-info-section .footer-no-info2 {
+        position: relative;
+        display: inline-block;
+        text-align: left;
+        padding-top: 30px;
+        padding-left: 15px; }
+      #footer-page .footer-global .footer-info-section .footer-size {
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 185px;
+        vertical-align: top; }
+        #footer-page .footer-global .footer-info-section .footer-size h5 {
+          font-family: 'FreigSem';
+          margin-bottom: 10px;
+          font-size: 18px; }
+        #footer-page .footer-global .footer-info-section .footer-size li {
+          cursor: pointer;
+          color: white;
+          font-family: 'FreigLight';
+          font-size: 14px; }
+        #footer-page .footer-global .footer-info-section .footer-size li:hover {
+          text-decoration: underline; }
+    #footer-page .footer-global .footer-brand-copyright {
+      padding-bottom: 60px;
+      margin-top: 20px;
+      text-align: left; }
+      #footer-page .footer-global .footer-brand-copyright .footer-brand-logo {
+        display: inline-block;
+        margin-right: 10px; }
+        #footer-page .footer-global .footer-brand-copyright .footer-brand-logo figure img {
+          width: 76px;
+          height: auto; }
+      #footer-page .footer-global .footer-brand-copyright .footer-copyright {
+        display: inline-block;
+        padding-right: 10px;
+        padding-left: 10px; }
+        #footer-page .footer-global .footer-brand-copyright .footer-copyright span {
+          font-family: 'FreigLight';
+          font-size: 14px;
+          color: white; }
+      #footer-page .footer-global .footer-brand-copyright .footer-social-media {
+        display: inline-block;
+        position: relative;
+        top: 6px;
+        float: right;
+        margin-right: 10px;
+        margin-left: 10px; }
+        #footer-page .footer-global .footer-brand-copyright .footer-social-media li {
+          display: inline-block; }
+          #footer-page .footer-global .footer-brand-copyright .footer-social-media li a {
+            width: 24px;
+            height: 24px;
+            margin-right: 6px;
+            margin-left: 6px; }
+          #footer-page .footer-global .footer-brand-copyright .footer-social-media li a.fb-logo {
+            display: block;
+            background-image: url("/images/social_media/facebook-logo.png");
+            background-size: 11px;
+            background-repeat: no-repeat;
+            background-position: center; }
+          #footer-page .footer-global .footer-brand-copyright .footer-social-media li a.tw-logo {
+            display: block;
+            position: relative;
+            top: 2px;
+            background-image: url("/images/social_media/twitter-logo.png");
+            background-size: 100%;
+            background-repeat: no-repeat; }
+          #footer-page .footer-global .footer-brand-copyright .footer-social-media li a.gp-logo {
+            display: block;
+            background-image: url("/images/social_media/googleplus-logo.png");
+            background-size: 100%;
+            background-repeat: no-repeat; }
+          #footer-page .footer-global .footer-brand-copyright .footer-social-media li a.ln-logo {
+            display: block;
+            background-image: url("/images/social_media/linkedin-logo.png");
+            background-size: 100%;
+            background-repeat: no-repeat; }
+
+/*# sourceMappingURL=footer.css.map */

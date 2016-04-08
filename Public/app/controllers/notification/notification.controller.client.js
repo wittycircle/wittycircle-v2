@@ -9,7 +9,7 @@
  **/
 angular.module('wittyApp').controller('NotifCtrl', function($http, $interval, $timeout, $location, $scope, Authentication, io, $cookies, $rootScope, $modal, $state, Users) {
 	
-	var url = "http://127.0.0.1/";
+	var url = "/";
 
 	$scope.getNotifList = function () {
 		$http.get(url + "view").success(function(res){

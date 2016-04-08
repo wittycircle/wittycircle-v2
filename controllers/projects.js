@@ -7,7 +7,7 @@ var _             = require('underscore');
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
     if (elem) {
-        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem,
+        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem, 
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -21,7 +21,7 @@ function getUsername(elem, callback) {
 
 function getProjectTitle(elem, callback) {
     if (elem) {
-        pool.query("SELECT title FROM projects WHERE id = ?", elem,
+        pool.query("SELECT title FROM projects WHERE id = ?", elem, 
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -200,7 +200,7 @@ exports.getProjectsFromCategory = function(req, res){
 exports.getProjectsCreatedByUser = function(req, res){
     req.checkParams('user_id', 'User id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
-    if (errors) {
+    if (errors) { 
         return res.status(400).send(errors);
     }
     else {
@@ -300,10 +300,10 @@ exports.getProjectsInvolvedByUser = function(req, res){
         [req.params.user_id],
         function (err, results, fields) {
             if(err){
-            	var date = new Date();
-            	console.log(date);
-            	console.log("Error getting projects in projects.js/getProjectsInvolvedByUser" + "\n");
-              throw err;
+		var date = new Date();
+		console.log(date);
+		console.log("Error getting projects in projects.js/getProjectsInvolvedByUser" + "\n");
+                throw err;
             }
             res.send(results);
         });
@@ -466,7 +466,7 @@ exports.deleteUserInvolved = function(req, res) {
 			    });
 			});
                     });
-
+		    
 		});
 	});
     }
@@ -555,7 +555,7 @@ exports.updateProject = function(req, res){
 	return res.status(400).send(errors);
     } else {
         pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
-            if (err) {
+            if (err) { 
                 var date = new Date();
                 console.log(date);
                 console.log("Error getting projects in projects.js/createProject");
@@ -635,7 +635,7 @@ exports.getProjectFeedbacks = function(req, res){
     }
 };
 
-exports.getProjectFeedbacksPublic = function (req, res){
+exports.getProjectFeedbacksPublic = function(req, res){
     req.checkParams('public_id', 'public_id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
     if (errors) {
@@ -647,9 +647,9 @@ exports.getProjectFeedbacksPublic = function (req, res){
             if(err){
                 var date = new Date();
                 console.log(date);
-                console.log('Error getting projects in projects.js/getProjectFeedbacksPublic');
+                console.log("Error getting projects in projects.js/getProjectFeedbacksPublic");
                 console.log(err);
-                console.log('\n');
+                console.log("\n");
                 throw err;
             }
             function recursive (index) {
@@ -686,9 +686,9 @@ exports.getProjectFeedbacksPublic = function (req, res){
     }
 };
 
-exports.deleteProject = function (req, res){
+exports.deleteProject = function(req, res){
     if (!req.isAuthenticated()) {
-	     res.status(400).send({message: "User is not logged in"});
+	res.status(400).send({message: "User is not logged in"});
     }
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
@@ -765,16 +765,16 @@ exports.getAllProjectMembers = function(req, res) {
                             console.log(new Date());
                             throw err;
                         }
-                        function recursiv (index) {
+                        function recursiv(index) {
                             if (response[index]) {
                                 if (response[index].user_id === req.user.id) {
-                                    return res.send({message: 'success'});
+                                    return res.send({message: "success"});
                                 }
                                 recursiv(index + 1);
                             } else {
-                                return res.send({message: 'not found'});
+                                return res.send({message: "not found"});
                             }
-                        }
+                        };
                         recursiv(0);
                     });
                 }

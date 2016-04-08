@@ -35,7 +35,7 @@ angular.module('wittyApp').controller('AddUserProjectCtrl', function ($q, $scope
     data.project_id = $scope.project.id;
     data.user_id = user.id;
     if (isDouble(user) == false) {
-      $http.post('http://127.0.0.1/project/involve', data).then(function (response) {
+      $http.post('/project/involve', data).then(function (response) {
         //console.log(response);
       });
       user.profile[0].n_read = 0;

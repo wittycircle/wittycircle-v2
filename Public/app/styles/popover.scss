@@ -129,7 +129,7 @@ $blue: #416299;
 						font-family: 'FreigSem';
 						font-size: 18px;
 						background-color: transparent;
-						padding: 8px 40px;
+						padding: 8px 30px;
 						border: 1px solid white;
 						border-radius: 4px;
 					}
@@ -162,10 +162,12 @@ $blue: #416299;
 		.involvment-popover {
 			img{
 				display: inline;
+				margin-right: 5px;
 			}
 			p {
 				display: inline;
 			}
 		}
+
 	}
 }

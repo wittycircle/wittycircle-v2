@@ -99,7 +99,7 @@
         templateUrl: 'modules/projects/views/update/update_project.view.client.html',
         controller: 'UpdateProjectCtrl',
         resolve:{ auth: function($q, $stateParams, Projects, $http) {
-                        return $http.get('http://127.0.0.1/project/'+ $stateParams.public_id + '/auth').then(function(response) {
+                        return $http.get('/project/'+ $stateParams.public_id + '/auth').then(function(response) {
                           if (response.data.message === 'success') {
                             return true;
                           } if (response.data.message === 'not found') {

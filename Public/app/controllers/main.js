@@ -10,7 +10,7 @@
 angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, $mdBottomSheet, Profile, Users, get_CategoryName, showbottomAlert, Authentication, Beauty_encode, Public_id, $location, $http, Projects, $modal, Data_project, Categories) {
 
   // if ($rootScope.globals.currentUser) {
-    $http.get('http://127.0.0.1/profile').success(function(res){
+    $http.get('/profile').success(function(res){
       Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
   // }
@@ -58,7 +58,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
       $scope.shufflerLocation = city + ', ' + country;
   };
 
-  $http.get('http://127.0.0.1/projects/discover').success(function (response) {
+  $http.get('/projects').success(function (response) {
     $scope.projectCards     = response;
     $scope.cardsDisplays    = response.slice(0, 9);
     cardInfos               = response;

@@ -23,7 +23,7 @@
             vm.isCollapse = false;
             vm.totalNumber = 0;
             vm.editable = false;
-            vm.currentUrl = 'http://www.wittycircle.com' + $location.path();
+            vm.currentUrl = 'https://www.wittycircle.com' + $location.path();
             // asks vars
             vm.showAskForm = false;
             vm.newAsk = {};
@@ -105,6 +105,17 @@
                 var err;
 
                 vm.project = projectResolve.data[0];
+				/*** Project Card Page ***/
+				$scope.$parent.seo = {
+		    		pageTitle: vm.project.title,
+		    		pageDescription: vm.project.description
+				};
+		
+				$scope.$parent.card = {
+		    		title: vm.project.title,
+		    		url: $location.absUrl(),
+		    		image: vm.project.picture,
+				};
                 // setting default cover picture is there is not
                 if (!vm.project.picture) {
                   vm.project.picture = emptyBg;
@@ -130,7 +141,7 @@
                                     {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
                                 ],
                                 theme: {
-                                    url: 'http://www.videogular.com/styles/themes/default/latest/videogular.css'
+                                    url: '../../../styles/css/videogular.css'
                                 },
                                 plugins: {
                                     controls: {
@@ -325,7 +336,7 @@
             }
 
             function initAsks () {
-              $http.get('http://127.0.0.1/ask/public_id/' + $stateParams.public_id).success(function (response) {
+              $http.get('/ask/public_id/' + $stateParams.public_id).success(function (response) {
                 vm.asks = response;
                 vm.totalNumber += vm.asks.length;
               });
@@ -337,7 +348,7 @@
                 newAsk.first_name = currentUser.first_name;
                 newAsk.last_name = currentUser.last_name;
                 newAsk.project_public_id = vm.project.public_id;
-                $http.post('http://127.0.0.1/asks', newAsk).success(function (response) {
+                $http.post('/asks', newAsk).success(function (response) {
                     // ok now gonna need to push it etc ...
                     $timeout(function () {
                         newAsk.created_at = new Date();
@@ -374,7 +385,7 @@
               data.creator_picture = currentUser.profile_picture_icon;
               data.creator_first_name = currentUser.first_name;
               data.creator_last_name = currentUser.last_name;
-              $http.post('http://127.0.0.1/ask_reply/add', data).success(function (response) {
+              $http.post('/ask_reply/add', data).success(function (response) {
                 if (currentUser.id == ask.user_id) {
                   ask.owned = true;
                 }
@@ -385,7 +396,7 @@
             };
 
             function deleteAskReply (ask_reply, question_index) {
-              $http.delete('http://127.0.0.1/ask_reply/delete/' + ask_reply.id).success(function (response) {
+              $http.delete('/ask_reply/delete/' + ask_reply.id).success(function (response) {
                 if (response.serverStatus == 2) {
                   var index = vm.asks[question_index].replies.indexOf(ask_reply);
                   vm.asks[question_index].replies.splice(index, 1);

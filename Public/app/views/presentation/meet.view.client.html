@@ -2,7 +2,7 @@
     <div class="body-page">
       <div class="home-video-bg">
         <video poster="images/poster/poster_meet.jpg" loop muted autoplay>
-        	<source src="videos/meet.mp4" type="video/mp4">
+        	<source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582144/Share_banner_cover/videos_background/Meet.mp4" type="video/mp4">
       	</video>
       </div>
 
@@ -80,67 +80,100 @@
     </div>
 
   <section id="meet-body-content">
-    <div class="meet-body-container presentation-body-container">
+
+      <div id="ldm" class="loader" style="display: none"></div>
+      <div id="mbd" class="meet-body-container presentation-body-container animated fadeIn">
         <div class="meet-body-title presentation-body-title">
           <h4>Browse <strong>the users</strong> <span>below</span> or filter them using our magic tool above.</h4>
         </div>
-    </div>
-    <div class="meet-body-cards">
-      <div class="meet-body-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: limit | wittyFilterM: mHelp + ' ' + searchML: skillSearch" ng-if="cardProfile.cover_picture_cards">
-        <div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
-          <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
-            <!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
-            <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
-            ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
-              <!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
+        <div class="meet-body-cards">
+          <div class="meet-body-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: limit" ng-if="cardProfile.cover_picture_cards">
+            <div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
+              <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
+                <!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
+                <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
+                ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
+                  <!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
+                </div>
+              </div>
+              <div class="card-info">
+                <h4>{{cardProfile.first_name}} {{cardProfile.last_name}}</h4>
+                <div class="card-location">
+                  <h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
+                </div>
+                <div class="card-description">
+                  <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
+                </div>
+              </div>
+            </div>
+            <div class="card-follow">
+              <div class="card-followers card-follow-square">
+                <p ng-bind="cardProfile.followers"></p>
+                <h6>followers</h6>
+              </div>
+              <div class="card-following card-follow-square">
+                <p ng-bind="cardProfile.following"></p>
+                <h6>following</h6>
+              </div>
+              <div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfile.id, $index, $event)">
+                <div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+                <div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+                <i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+                <i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+              </div>
             </div>
           </div>
-          <div class="card-info">
-            <h4>{{cardProfile.first_name}} {{cardProfile.last_name}}</h4>
-            <div class="card-location">
-              <h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
-            </div>
-            <div class="card-description">
-              <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
-            </div>
-          </div>
-        </div>
-        <div class="card-follow">
-          <div class="card-followers card-follow-square">
-            <p ng-bind="cardProfile.followers"></p>
-            <h6>followers</h6>
-          </div>
-          <div class="card-following card-follow-square">
-            <p ng-bind="cardProfile.following"></p>
-            <h6>following</h6>
-          </div>
-          <div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfile.id, $index, $event)">
-            <div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
-            <div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
-            <i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
-            <i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
-          </div>
-        </div>
-      </div>
 
-      <div class="meet-body-loadmore presentation-body-loadmore">
-        <button type="button" ng-click="expand(4)">Load more</button>
+          <div class="meet-body-loadmore presentation-body-loadmore">
+            <button type="button" ng-click="expand(4)">Load more</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
   <script>
-    /*function initPage() {
+    function initPage() {
       $(window).scrollTop(0);
-    }; setTimeout(function(){ initPage() }, 1000);*/
+    }; setTimeout(function(){ initPage() }, 1000);
 
     var scope = angular.element($("#meet-body-page")).scope();
 
-    $("#msai").on('click', function() {
+    var val = {};
+
+    $("#msai").on('mouseover', function() {
       if ($(this).val()) {
+        val.text = $(this).val();
+        val.width = Number($(this).width()) + 20;
         $(this).val("");
         $(this).css("width", "200px");
       }
     });
+
+    $("#msai").on('mouseout', function() {
+      if (!$(this).is(':focus')) {
+        if (val.text && val.width) {
+          $(this).val(val.text);
+          $(this).css("width", val.width.toString() + "px");
+        }
+      }
+    });
+
+    $("#msai").focus(function() {
+      if ($(this).val()) {
+        val.text = $(this).val();
+        val.width = Number($(this).width()) + 20;
+        $(this).val("");
+        $(this).css("width", "200px");
+      }
+    });
+
+    $("#msai").focusout(function() {
+      if (val.text && val.width) {
+        $(this).val(val.text);
+        $(this).css("width", val.width.toString() + "px");
+      }
+    });
+
     window.onmouseover = function(e) {
       if (scope.skillList.length > 0) {
         if (e.target.id === 'mslist' || e.target.id === 'input-msa' || e.target.id === 'msa') {

@@ -31,7 +31,7 @@
         function get_Name(category_id, callback) {
           var name = "";
 
-          $http.get('http://127.0.0.1/categories').success(function (response) {
+          $http.get('/categories').success(function (response) {
             name = assignName(response, category_id);
             callback(name);
           }).error(function (error_response) {

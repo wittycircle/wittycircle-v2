@@ -23,7 +23,7 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
 
     // $scope.fbSignUp = function () {
 
-    //   $http.get('http://127.0.0.1/auth/facebook')
+    //   $http.get('/auth/facebook')
     //     .success(function(res) {
     //       console.log(res);
     //     });
@@ -82,7 +82,7 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
           return ;
       }
 
-      $http.post('http://127.0.0.1/users', $scope.formData).success(function(res) {
+      $http.post('/users', $scope.formData).success(function(res) {
         if (!res.success) {
           $scope.eat = true;
         } else {

@@ -49,7 +49,7 @@
  	var i = 0;
  	var redirectParams = $stateParams.input;
  	$scope.refreshDialogue = function(check) { // main function to retrieve all dialogues within last information
- 	 	$http.get('http://127.0.0.1/messages/get/all').success(function(res){ // get all dialogues of user
+ 	 	$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
 	 		if (res.success) {
 	 			Users.count();
 	 			$scope.dialogues = res.topic;
@@ -70,10 +70,10 @@
 
  	$scope.showMessage = function(dialogue) { // show all messages between current user and client
  		$scope.tab = dialogue.id;
- 		var url = 'http://127.0.0.1/messages/' + dialogue.id;
+ 		var url = '/messages/' + dialogue.id;
 
  		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
- 			$http.put('http://127.0.0.1/messages/', {id : dialogue.id}).success(function(res){
+ 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
  				if (res.success) {
  					Users.count();
  					$scope.refreshDialogue();
@@ -97,7 +97,7 @@
  	};
 
  	$scope.deleteMessage = function() {
- 		$http.put('http://127.0.0.1/messages', $scope.messages).success(function(res) {
+ 		$http.put('/messages', $scope.messages).success(function(res) {
  			$scope.refreshDialogue();
  			$state.reload();
  		});
@@ -110,13 +110,13 @@
 	});
 
 	$scope.getListUser = function() {
-		$http.post('http://127.0.0.1/profileId/' + $rootScope.globals.currentUser.id).success(function(res) {
+		$http.post('/profileId/' + $rootScope.globals.currentUser.id).success(function(res) {
 			$scope.checkId = res.content.profile_id;
 		});
 	}
 
 	$scope.searchArea = function(profile_id) { // modal new message
-		$http.post('http://127.0.0.1/profiles/' + profile_id).success(function(res) {
+		$http.post('/profiles/' + profile_id).success(function(res) {
 			if (res.success) {
 				$scope.newMessageArea = {
 					first_name: res.content.first_name,
@@ -141,27 +141,13 @@
 			message: $scope.newMessageArea.message
 		}
 		if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {
-			console.log("OK");
 			$scope.socket($scope.createName, $scope.pUser);
 		} else {
 			if ($rootScope.globals.currentUser.id !== $scope.Pi) {
-				$http.post('http://127.0.0.1/messages', $scope.infoMessage).success(function(res){
+				$http.post('/messages', $scope.infoMessage).success(function(res){
 					if (res.success) {
 						Users.count();
-						$http.get('http://127.0.0.1/messages/' + $scope.infoMessage.to_user_id).success(function(res){
-				 			if (res.success) {
-				 				// var last 					= res.messages[res.messages.length - 1];
-				 				// $scope.messages 			= res.messages;
-				 				// $scope.name 				= res.name.first_name;
-				 				// $scope.username 			= res.name.first_name + ' ' + res.name.last_name;
-				 				// $scope.nameuser 			= res.name.username,
-				 				// $scope.profile_my_picture 	= res.picture.my_picture;
-				 				// $scope.profile_user_picture = res.picture.user_picture;
-				 				// $scope.c 					= 0;
-				 				// $scope.newMessageArea.message = [];
-				 				$scope.refreshDialogue(true);
-				 			}
-				 		});
+						$scope.refreshDialogue(true);
 					}
 				});
 			}

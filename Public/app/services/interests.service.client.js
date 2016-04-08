@@ -27,7 +27,7 @@
               var ret;
               var defer = $q.defer();
 
-              data = $resource('http://127.0.0.1/interests');
+              data = $resource('/interests');
               data.query().$promise.then(function(data) {
                   ret = data;
                   defer.resolve(ret);
@@ -41,7 +41,7 @@
             var ret;
             var defer = $q.defer();
 
-            data = $resource('http://127.0.0.1/user/:user_id/interests', {user_id: '@user_id'});
+            data = $resource('/user/:user_id/interests', {user_id: '@user_id'});
             data.query({user_id: user_id}).$promise.then(function(data) {
                 ret = data;
                 defer.resolve(ret);

@@ -1,6 +1,13 @@
 'use strict';
 
-angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $window, $scope, Authentication, $rootScope, $state) {
+/**
+ * @ngdoc function
+ * @name wittyApp.controller:LoginCtrl
+ * @description
+ * # LoginCtrl
+ * Controller of the wittyApp
+ */
+angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $window, $scope, Authentication, $rootScope) {
 
    // $scope.dismiss = function () {
    //   $modalInstance.dismiss();
@@ -28,7 +35,7 @@ angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $wind
    		if (response.success) {
    			Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, function(res) {
           if (res.success)
-            $state.go('main');
+            window.location.href = "https://www.wittycircle.com";
         });
    		} else {
    			$scope.lf = false;

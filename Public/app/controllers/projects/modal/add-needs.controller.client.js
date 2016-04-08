@@ -10,7 +10,7 @@
 angular.module('wittyApp').controller('AddNeedsProjectCtrl', function (Picture, $stateParams, Categories, Public_id, Feedbacks, $q, $scope, $rootScope, $state, $http, Upload, Data_project, Users, $modalInstance) {
 
   /*****-- DATA --*****/
-  $http.get('http://127.0.0.1/skills').success(function(res) {
+  $http.get('/skills').success(function(res) {
     $scope.skills = res.skills;
   });
 
@@ -20,7 +20,7 @@ angular.module('wittyApp').controller('AddNeedsProjectCtrl', function (Picture, 
   $scope.limit = 6;
   $scope.openings_description = "";
 
-  $http.get('http://127.0.0.1/projects').success(function (response) {
+  $http.get('/projects').success(function (response) {
     $scope.cards = response;
   });
   Categories.getCategories(function (response) {
@@ -206,7 +206,7 @@ angular.module('wittyApp').controller('AddNeedsProjectCtrl', function (Picture, 
     if (JSON.stringify(transformSkill()[1]) == 'false') {
       $scope.needs.taggs = false;
     }
-    $http.post('http://127.0.0.1/openings', $scope.needs).success(function(response) {
+    $http.post('/openings', $scope.needs).success(function(response) {
       if (response.serverStatus == 2) {
         $scope.needs.taggs = transformSkill()[1];
         if (JSON.stringify(transformSkill()[1]) == 'false') {
@@ -231,7 +231,7 @@ angular.module('wittyApp').controller('AddNeedsProjectCtrl', function (Picture, 
     if (JSON.stringify(transformSkill()[1]) == 'false') {
       $scope.needs.taggs = false;
     }
-    $http.put('http://127.0.0.1/opening/' + $rootScope.need.id, $scope.needs).success(function(response) {
+    $http.put('/opening/' + $rootScope.need.id, $scope.needs).success(function(response) {
       if (response.serverStatus == 2) {
         $scope.needs.taggs = transformSkill()[1];
         if (JSON.stringify(transformSkill()[1]) == 'false') {

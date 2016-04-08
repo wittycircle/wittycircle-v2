@@ -22,7 +22,7 @@
             var ret;
             var defer = $q.defer();
 
-            data = $resource('http://127.0.0.1/user_email/:email', {email: '@email'});
+            data = $resource('/user_email/:email', {email: '@email'});
             data.query({email: email}).$promise.then(function(data) {
                 ret = data[0].profile[0];
                 defer.resolve(ret);
@@ -34,7 +34,7 @@
         // Login fonction to api Rest
         function Login(email, password, callback) {
             /*$http({
-                  url: "http://127.0.0.1/api/login",
+                  url: "/api/login",
                   dataType: "json",
                   method: "POST",
                   data: { email: email, password: password },
@@ -49,7 +49,7 @@
             var data = {};
             data.email = email;
             data.password = password;
-            $http.post('http://127.0.0.1/api/login', data).success(function (response) {
+            $http.post('/api/login', data).success(function (response) {
                 callback(response);
             });
         }

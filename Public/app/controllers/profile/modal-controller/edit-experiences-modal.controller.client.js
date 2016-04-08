@@ -28,7 +28,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
     };
 
 	$scope.loadEx         	= function() {
-      $http.get('http://127.0.0.1/experiences').success(function(res) {
+      $http.get('/experiences').success(function(res) {
         if (res.success) {
         	$scope.positions  = res.data;
         	$scope.editPosition(indexId);
@@ -106,7 +106,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 		};
 		Locations.setplaces($scope.addExLocation, position);
 
-		$http.put('http://127.0.0.1/experience/' + $scope.getIndex, position).success(function(res) {
+		$http.put('/experience/' + $scope.getIndex, position).success(function(res) {
 			if (res.success) {
 				$scope.getProfileExp();
 				$modalInstance.dismiss();

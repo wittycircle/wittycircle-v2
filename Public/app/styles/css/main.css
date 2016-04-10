@@ -1,8 +1,7 @@
 body {
-  min-width: 1200px;
-  /* suppose you want minimun width of 1200px */
-  width: 100% !important;
-  height: auto; }
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
 
 body:-webkit-scrollbar {
   display: none; }
@@ -10,9 +9,6 @@ body:-webkit-scrollbar {
 h1, h2, h3, h4, h5, h6, a {
   margin: 0;
   color: white; }
-
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important; }
 
 li {
   list-style-type: none; }

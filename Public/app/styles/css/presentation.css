@@ -277,18 +277,22 @@
 .discover-component .discover-search2 .inputfield input {
   color: white; }
 
-#discover-body-content .discover-body-container .discover-body-list {
-  text-align: left;
-  padding-left: 20px; }
-  #discover-body-content .discover-body-container .discover-body-list .discover-body-card {
-    margin: 0 16px 40px 16px;
-    display: inline-block;
-    width: 287px;
-    height: 418px;
-    border: 1px solid #E5E5E5;
-    border-radius: 5px;
-    cursor: pointer;
-    overflow: hidden; }
+#discover-body-content {
+  min-height: 400px; }
+  #discover-body-content .discover-body-container .discover-body-list {
+    text-align: left;
+    padding-left: 20px; }
+    #discover-body-content .discover-body-container .discover-body-list .discover-body-card {
+      margin: 0 16px 40px 16px;
+      display: inline-block;
+      width: 287px;
+      height: 418px;
+      border: 1px solid #E5E5E5;
+      border-radius: 5px;
+      cursor: pointer;
+      overflow: hidden; }
+  #discover-body-content .loader {
+    margin: 45px auto; }
 
 /****** Meet ******/
 .meet-component li {
@@ -402,25 +406,27 @@
     margin: 0px 10px 0px 0px; }
 
 #meet-body-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  -webkit-transition-delay: all 500ms linear;
-  -o-transition-delay: all 500ms linear;
-  -moz-transition-delay: all 500ms linear;
-  -ms-transition-delay: all 500ms linear;
-  -kthtml-transition-delay: all 500ms linear;
-  transition-delay: all 500ms linear; }
-  #meet-body-content .meet-body-cards {
-    text-align: left;
-    padding-left: 15px; }
-    #meet-body-content .meet-body-cards .meet-body-card {
-      display: inline-table;
-      text-align: center;
-      width: 207px;
-      height: 260px;
-      margin: 0px 16px 50px 16px;
-      border: 1px solid #E5E5E5;
-      border-radius: 5px; }
+  min-height: 400px; }
+  #meet-body-content .meet-body-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    -webkit-transition-delay: all 500ms linear;
+    -o-transition-delay: all 500ms linear;
+    -moz-transition-delay: all 500ms linear;
+    -ms-transition-delay: all 500ms linear;
+    -kthtml-transition-delay: all 500ms linear;
+    transition-delay: all 500ms linear; }
+    #meet-body-content .meet-body-container .meet-body-cards {
+      text-align: left;
+      padding-left: 15px; }
+      #meet-body-content .meet-body-container .meet-body-cards .meet-body-card {
+        display: inline-table;
+        text-align: center;
+        width: 207px;
+        height: 260px;
+        margin: 0px 16px 50px 16px;
+        border: 1px solid #E5E5E5;
+        border-radius: 5px; }
 
 /****** Work ******/
 .work-component .wst {

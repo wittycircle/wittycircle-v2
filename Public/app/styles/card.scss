@@ -65,8 +65,7 @@
 
 	.card-picture {
 		height: 180px;
-/*		background-size: auto 285px;
-*/		background-repeat: no-repeat;
+		background-repeat: no-repeat;
 		background-position: center center;
 
 		img {
@@ -105,14 +104,24 @@
 		}
 
 		.card-status {
+			span {
+				display: inline-block;
+			}
+
 			img {
+				display: inline-block;
 				position: relative;
 				bottom: 2px;
 				margin-right: 3px;
 			}
 		}
 		.card-location {
+			span {
+				display: inline-block;
+			}
+
 			img {
+				display: inline-block;
 				position: relative;
 				bottom: 2px;
 				margin-right: 8px;

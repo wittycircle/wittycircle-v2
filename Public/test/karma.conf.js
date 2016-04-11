@@ -22,7 +22,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
-      'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery/jquery.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
@@ -57,6 +57,7 @@ module.exports = function(config) {
       'bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'bower_components/classie/classie.js',
       'bower_components/slick-carousel/slick/slick.min.js',
+      'bower_components/bower-jquery-mobile/jquery.mobile.js',
       // endbower
       // script other
       'bower_components/blueimp-load-image/js/load-image.all.min.js',

@@ -464,6 +464,153 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="main-body3-body-mobile">
+							<div class="main-body3-card profile-card">
+								<div class="card-click-zone" ng-click="goToProfile(cardProfiles[0].id)">
+									<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[0].cover_picture + ')'}">
+										<!-- <img ng-src="{{cardProfiles[0].cover_picture}}"> -->
+										<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[0].profile_picture + ')'}">
+											<!-- <img ng-src="{{cardProfiles[0].profile_picture}}"> -->
+										</div>
+									</div>
+									<div class="card-info">
+										<h4>{{cardProfiles[0].first_name}} {{cardProfiles[0].last_name}}</h4>
+										<div class="card-location">
+											<h6>{{cardProfiles[0].location_city}}<i ng-hide="!cardProfiles[0].location_country">,</i> {{cardProfiles[0].location_country}}</h6>
+										</div>
+										<div class="card-description">
+											<p ng-bind-html="cardProfiles[0].description | cut:true:76:' ...'"></p>
+										</div>
+									</div>
+								</div>
+								<div class="card-follow">
+									<div class="card-followers card-follow-square">
+										<p ng-bind="cardProfiles[0].followers"></p>
+										<h6>followers</h6>
+									</div>
+									<div class="card-following card-follow-square">
+										<p ng-bind="cardProfiles[0].following"></p>
+										<h6>following</h6>
+									</div>
+									<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[0].id, $index, $event)">
+										<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+										<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+										<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+										<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="main-body3-card profile-card">
+								<div class="card-click-zone" ng-click="goToProfile(cardProfiles[1].id)">
+									<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[1].cover_picture + ')'}">
+										<!-- <img ng-src="{{cardProfiles[1].cover_picture}}"> -->
+										<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[1].profile_picture + ')'}">
+											<!-- <img ng-src="{{cardProfiles[1].profile_picture}}"> -->
+										</div>
+									</div>
+									<div class="card-info">
+										<h4>{{cardProfiles[1].first_name}} {{cardProfiles[1].last_name}}</h4>
+										<div class="card-location">
+											<h6>{{cardProfiles[1].location_city}}<i ng-hide="!cardProfiles[1].location_country">,</i> {{cardProfiles[1].location_country}}</h6>
+										</div>
+										<div class="card-description">
+											<p ng-bind-html="cardProfiles[1].description | cut:true:76:' ...'"></p>
+										</div>
+									</div>
+								</div>
+								<div class="card-follow">
+									<div class="card-followers card-follow-square">
+										<p ng-bind="cardProfiles[1].followers"></p>
+										<h6>followers</h6>
+									</div>
+									<div class="card-following card-follow-square">
+										<p ng-bind="cardProfiles[1].following"></p>
+										<h6>following</h6>
+									</div>
+									<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[1].id, $index, $event)">
+										<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+										<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+										<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+										<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="main-body3-card profile-card">
+								<div class="card-click-zone" ng-click="goToProfile(cardProfiles[2].id)">
+									<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[2].cover_picture + ')'}">
+										<!-- <img ng-src="{{cardProfiles[2].cover_picture}}"> -->
+										<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[2].profile_picture + ')'}">
+											<!-- <img ng-src="{{cardProfiles[2].profile_picture}}"> -->
+										</div>
+									</div>
+									<div class="card-info">
+										<h4>{{cardProfiles[2].first_name}} {{cardProfiles[2].last_name}}</h4>
+										<div class="card-location">
+											<h6>{{cardProfiles[2].location_city}}<i ng-hide="!cardProfiles[2].location_country">,</i> {{cardProfiles[2].location_country}}</h6>
+										</div>
+										<div class="card-description">
+											<p ng-bind-html="cardProfiles[2].description | cut:true:76:' ...'"></p>
+										</div>
+									</div>
+								</div>
+								<div class="card-follow">
+									<div class="card-followers card-follow-square">
+										<p ng-bind="cardProfiles[2].followers"></p>
+										<h6>followers</h6>
+									</div>
+									<div class="card-following card-follow-square">
+										<p ng-bind="cardProfiles[2].following"></p>
+										<h6>following</h6>
+									</div>
+									<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[2].id, $index, $event)">
+										<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+										<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+										<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+										<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+									</div>
+								</div>
+							</div>
+
+							<div class="main-body3-card profile-card">
+								<div class="card-click-zone" ng-click="goToProfile(cardProfiles[3].id)">
+									<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[3].cover_picture + ')'}">
+										<!-- <img ng-src="{{cardProfiles[3].cover_picture}}"> -->
+										<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[3].profile_picture + ')'}">
+											<!-- <img ng-src="{{cardProfiles[3].profile_picture}}"> -->
+										</div>
+									</div>
+									<div class="card-info">
+										<h4>{{cardProfiles[3].first_name}} {{cardProfiles[3].last_name}}</h4>
+										<div class="card-location">
+											<h6>{{cardProfiles[3].location_city}}<i ng-hide="!cardProfiles[3].location_country">,</i> {{cardProfiles[3].location_country}}</h6>
+										</div>
+										<div class="card-description">
+											<p ng-bind-html="cardProfiles[3].description | cut:true:76:' ...'"></p>
+										</div>
+									</div>
+								</div>
+								<div class="card-follow">
+									<div class="card-followers card-follow-square">
+										<p ng-bind="cardProfiles[3].followers"></p>
+										<h6>followers</h6>
+									</div>
+									<div class="card-following card-follow-square">
+										<p ng-bind="cardProfiles[3].following"></p>
+										<h6>following</h6>
+									</div>
+									<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[3].id, $index, $event)">
+										<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+										<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+										<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+										<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+									</div>
+								</div>
+							</div>
+
+						</div>
 						<div class="main-body3-seemore">
 							<a ng-href="/meet">Find more users around you</a>
 						</div>
@@ -473,9 +620,9 @@
 			</section>
 			<script>
 					/* Scroll to the top at the beginning */
-					function initPage() {
-						$(window).scrollTop(0);
-					}; setTimeout(function() {initPage()}, 800);
+					// function initPage() {
+					// 	$(window).scrollTop(0);
+					// }; setTimeout(function() {initPage()}, 800);
 
 					$(document).ready(function() {
 						/* Get home video bg according to the screen height */
@@ -493,8 +640,7 @@
 							dots: true,
 							nextArrow: "",
 
-							responsive: [
-							{
+							responsive: [{
 								breakpoint: 768,
 								settings: {
 									arrows: false,
@@ -511,8 +657,36 @@
 									centerPadding: '40px',
 									slidesToShow: 1
 								}
-							}
-							]
+							}]
+						});
+
+						$('.main-body3-body-mobile').slick({
+							centerMode: true,
+							centerPadding: '60px',
+							slidesToShow: 3,
+							variableWidth: true,
+							mobileFirst: true,
+							dots: true,
+							nextArrow: "",
+
+							responsive: [{
+								breakpoint: 768,
+								settings: {
+									arrows: false,
+									centerMode: true,
+									centerPadding: '40px',
+									slidesToShow: 3
+								}
+							},
+							{
+								breakpoint: 480,
+								settings: {
+									arrows: false,
+									centerMode: true,
+									centerPadding: '40px',
+									slidesToShow: 1
+								}
+							}]
 						});
 					});
 

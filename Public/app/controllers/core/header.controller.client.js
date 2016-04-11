@@ -342,13 +342,20 @@ $rootScope.$watch('globals', function(value) {
     });
   };
 
+  function unslickElem() {
+    $('.main-body2-body-mobile').slick('unslick');
+    $('.main-body3-body-mobile').slick('unslick');
+  };
+
   $scope.goToStart = function() {
-    $state.go('main', {tagStart: true});
+    unslickElem();
+    $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
   };
 
   $scope.bfGoToStart = function() {
+    unslickElem();
     $(window).scrollTop(0);
-    $state.go('main', {tagStart: true});
+    $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };
 
 

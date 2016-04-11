@@ -33,17 +33,17 @@
         <div class="header-log-off-mobile">
             <img id="showRightPush" src="/images/littleman.svg">
         </div>
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+        <nav class="header-log-off-mblist cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 <!-- 			<h3>Menu</h3> -->
 			<a id="mologin" href="" ng-hide="log">Log In</a>
 			<a id="mosignup" href="" ng-click="opensignup('lg')" ng-hide="log">Sign Up</a>
 		</nav>
-        <div class="header-log-off" ng-hide="log">
+        <nav class="header-log-off" ng-hide="log">
             <ul id='hnlog' class="header-nav-log">
                 <li class="lsu"><a id="mologin" href="">Log In</a></li>
                 <li class="lsu"><a id="mosignup" href="" ng-click="opensignup('lg')">Sign Up</a></li>
             </ul>
-        </div>
+        </nav>
         <hr />
 
         <div id="hlon" class="header-log-on" ng-show="log" style="display: none">
@@ -176,16 +176,46 @@
     <script>
 
     	$(document).ready(function() {
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-				showRightPush = document.getElementById( 'showRightPush' ),
-				body = document.body;
+			var menuRight       = document.getElementById( 'cbp-spmenu-s2' ),
+				showRightPush   = document.getElementById( 'showRightPush' ),
+                cLogin          = document.getElementById('mologin'),
+                cSignUp         = document.getElementById('mosignup'),
+				body            = document.body;
 
 			showRightPush.onclick = function() {
 				classie.toggle( this, 'active' );
 				classie.toggle( body, 'cbp-spmenu-push-toleft' );
 				classie.toggle( menuRight, 'cbp-spmenu-open' );
+                if ($('body').hasClass("cbp-spmenu-push-toleft"))
+                    $('body').css('overflow-y', 'hidden');
+                else
+                    $('body').css('overflow-y', 'auto');
 				disableOther( 'showRightPush' );
 			};
+
+            cLogin.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toleft' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                $('body').css('overflow-y', 'auto');
+                disableOther( 'showRightPush' );
+            };
+
+            cSignUp.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toleft' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                $('body').css('overflow-y', 'auto');
+                disableOther( 'showRightPush' );
+            }
+
+            $( '#cbp-spmenu-s2' ).on("swiperight", function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toleft' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                $('body').css('overflow-y', 'auto');
+                disableOther( 'showRightPush' );
+            });
 
 			function disableOther( button ) {
 				if( button !== 'showRightPush' ) {

@@ -3,25 +3,25 @@
   position: absolute;
   height: 392px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .bf2-filter {
   position: absolute;
   height: 300px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .bf3-filter {
   position: absolute;
   height: 270px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .bf4-filter {
   position: absolute;
   height: 302px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); }
+  background-color: rgba(0, 0, 0, 0.5); }
 
 .bf-info {
   background-image: url("/images/backgrounds/background-footer1.jpg");
@@ -163,5 +163,50 @@
       .bf4-info .bf4-component .bf4-text a:hover {
         text-decoration: none;
         color: white; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+/* Exception media query width */
+@media only screen and (max-width: 955px) {
+  #bfooter-1 .bf-filter {
+    position: absolute;
+    background-image: url("/images/backgrounds/background-footer1.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-color: none;
+    height: 590px;
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6); }
+  #bfooter-1 .bf-info {
+    padding: 50px 0;
+    background-image: none; }
+    #bfooter-1 .bf-info .bf-component {
+      margin-bottom: 20px; }
+      #bfooter-1 .bf-info .bf-component h6 {
+        padding-top: 5px;
+        padding-bottom: 10px; } }
+@media only screen and (max-width: 635px) {
+  #bfooter-1 .bf-filter {
+    position: absolute;
+    background-image: url("/images/backgrounds/background-footer1.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-color: none;
+    height: 836px;
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6); }
+  #bfooter-1 .bf-info {
+    padding: 50px 0;
+    background-image: none; }
+    #bfooter-1 .bf-info .bf-component {
+      margin-bottom: 20px; }
+      #bfooter-1 .bf-info .bf-component h6 {
+        padding-top: 5px;
+        padding-bottom: 10px; } }
 
 /*# sourceMappingURL=bfooter.css.map */

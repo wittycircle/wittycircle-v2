@@ -1,3 +1,7 @@
+html {
+	height: auto;
+}
+
 /*********************** Main Filter **************************/
 
 #page-wrap {
@@ -161,6 +165,10 @@
 	border-radius: 4px;
 	overflow: hidden;
 	display: none;
+
+	#closeCrossS2 {
+		display: none;
+	}
 
 	.signup-modal-social {
 		padding: 0 55px 25px 60px;
@@ -346,6 +354,10 @@
 	overflow: hidden;
 	display: none;
 
+	#closeCrossL2 {
+		display: none;
+	}
+
 	.login-modal-email {
 		text-align: center;
 		max-width: 300px;
@@ -429,3 +441,236 @@
 	}
 }
 
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+
+@media only screen and (max-width: 736px) {
+	/* Media query signup modal */
+	#main-signup-modal {
+		position: absolute;
+
+		header {
+			display: none;
+		}
+
+		.signup-modal-social {
+
+			padding: 0 15px 10px 15px;
+			h4 {
+				padding: 0;
+				margin: 15px 0 15px 0;
+			}
+
+			.fb-login {
+				width: 231px;
+				margin-right: 10px;
+				margin-left: 10px;
+				margin-bottom: 10px;
+
+				i {
+					position: relative;
+					margin-right: 23px;
+					padding: 0;
+					left: 5px;
+				}
+
+				button {
+					width: 231px;
+					padding-right: 5px;
+				}
+			}
+		}
+
+		#closeCrossS2 {
+			display: block;
+			position: relative;
+			width: 100%;
+			height: 30px;
+			background-image: url('/images/cross-icon.svg');
+			background-size: 15px;
+			background-repeat: no-repeat;
+			background-position: 95% ;
+			top: 10px;
+		}
+
+		.signup-modal-old {
+			text-align: center;
+			padding: 0 30px;
+
+			.old-dash {
+				width: 10%;
+			}
+		}
+
+		.signup-modal-field {
+			padding: 15px 25px;
+			.signup-firstname-field {
+				width: 100%;
+				margin-right: 0;
+
+				input {
+					width: 100%;
+					background-position: 2.5% 50%;
+				}
+			}
+
+			.signup-lastname-field {
+				width: 100%;
+				margin-top: 0px;
+
+				input {
+					width: 100%;
+					margin-top: 15px;
+					background-position: 2.5% 50%;
+				}
+			}
+
+			input {
+				width: 100%;
+				margin-top: 15px;
+			}
+		}
+
+		.sign-modal-policy {
+			padding: 0 20px;
+		}
+
+		.signup-modal-button {
+			padding: 10px 20px;
+		}
+
+		.signup-modal-footer {
+			padding: 10px 30px;
+
+			h4 {
+				padding: 15px;
+			}
+		}
+	}
+
+	/* Media query login modal */
+	#main-login-modal {
+		max-width: 100%;
+		position: absolute;
+		top: 0px;
+		
+		#closeCrossL2 {
+			display: block;
+			position: relative;
+			width: 100%;
+			height: 30px;
+			background-image: url('/images/cross-icon.svg');
+			background-size: 15px;
+			background-repeat: no-repeat;
+			background-position: 95% ;
+			top: 10px;
+		}
+
+		header {
+			display: none;
+		}
+
+		.login-modal-social {
+			padding-bottom: 0px;
+			h4 {
+				padding: 0;
+				margin: 30px 0 20px 0;
+			}
+
+			.fb-login {
+				margin-bottom: 15px;
+			}
+		}
+
+		.signup-login-old {
+			padding: 10px 0 15px 0;
+		}
+
+		.login-modal-email {
+			margin: 0;
+			max-width: 100%;
+			padding: 0 200px;
+
+			.email-input {
+				input {
+					width: 100%;
+					margin: 15px 0;
+				}
+			}
+
+			.password-input {
+				input {
+					width: 100%;
+					margin: 15px 0;
+				}
+			}
+
+		}
+
+		.login-modal-footer {
+			button {
+				margin-top: 25px;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 667px) {
+
+	#main-login-modal {
+
+		.login-modal-email {
+			padding: 0 150px;
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) {
+
+	#main-login-modal {
+
+		.login-modal-email {
+			padding: 0 30px;
+		}
+
+		.login-modal-footer {
+			button {
+				margin-top: 15px;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+
+	#main-login-modal {
+
+		.login-modal-social {
+			padding-bottom: 0px;
+			h4 {
+				padding: 0;
+				margin-top: 5px;
+				margin-bottom: 15px;
+			}
+
+			.fb-login {
+				margin-bottom: 10px;
+			}
+		}
+
+		.login-modal-email {
+			padding: 0 20px;
+
+			.email-input {
+				input {
+					margin: 10px 0;
+				}
+			}
+
+			.password-input {
+				input {
+					margin: 10px 0;
+				}
+			}
+		}
+	}
+}

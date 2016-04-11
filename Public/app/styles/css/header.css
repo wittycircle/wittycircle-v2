@@ -483,7 +483,8 @@
       #header-section #header-content .header-log-off-mobile img {
         width: 20px; }
     #header-section #header-content #cbp-spmenu-s2 {
-      display: inline-block; }
+      display: inline-block;
+      border-left: 1px solid #999999; }
     #header-section #header-content hr {
       display: block;
       width: 85%;
@@ -512,9 +513,6 @@
     color: #999999;
     font-family: 'FreigBook';
     font-size: 16px; }
-
-  .cbp-spmenu a:hover {
-    background: #222222; }
 
   .cbp-spmenu a:active {
     background: #FAFAFA;

@@ -3,6 +3,7 @@
 		<h2>Sign Up</h2>
 		<img id="closeCrossS" src="/images/cross-icon.svg" style="cursor: pointer">
 	</header>
+    <div id="closeCrossS2"></div>
 	<div class="signup-modal-social signup-login-social">
         <h4>Log in with a social network:</h4>
         <div class="fb-login">
@@ -62,22 +63,39 @@
             var x = $(window).height();
             var margeS = (x - 600)/2/2;
 
+            if (x <= 736) {
+                margeS = -5;
+            }
             $(document).mouseup(function (e) {
                 var container2 = $("#main-signup-modal");
 
 
-                if (e.target.id === "mosignup" || e.target.id === "closeCrossS" || container2.is(e.target) || container2.has(e.target).length || container2.css('display') === "block") {
-                    if ((!container2.is(e.target) && !container2.has(e.target).length && e.target.id !== "mosignup") || e.target.id === "closeCrossS") {
+                if (e.target.id === "mosignup" || e.target.id === "closeCrossS" || e.target.id === "closeCrossS2" || container2.is(e.target) || container2.has(e.target).length || container2.css('display') === "block") {
+                    if ((!container2.is(e.target) && !container2.has(e.target).length && e.target.id !== "mosignup") || e.target.id === "closeCrossS" | e.target.id === "closeCrossS2") {
                         filter.fadeOut(500);
-                        container2.animate({top: '-700px'}, 400, function() {
-                            container2.hide(100, function() {
-                                container2.css({'top': margeS.toString() + "px"});
+                        if (x > 736) {
+                            container2.animate({top: '-700px'}, 400, function() {
+                                container2.hide(100, function() {
+                                    container2.css({'top': margeS.toString() + "px"});
+                                });
                             });
-                        });
+                        } else {
+                            $('#headerCore').show();
+                            $('#bodyCore').show();
+                            $('#footerCore').show();
+                            container2.hide();
+                        }
                     } else {
-                        filter.fadeIn(300);
+                         if (x > 736) {
+                            filter.fadeIn(200);
+                            container2.fadeIn();
+                        } else {
+                            container2.show();
+                            $('#headerCore').hide();
+                            $('#bodyCore').hide();
+                            $('#footerCore').hide();
+                        }
                         container2.css({'top': margeS.toString() + "px"});
-                        container2.fadeIn();
                     }
                 }
             });

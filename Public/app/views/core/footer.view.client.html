@@ -1,53 +1,55 @@
 <section id="footer-page">
     <div class="footer-global">
         <div class="footer-info-section">
-            <div class="footer-about footer-size">
+            <div id="fta" class="footer-about footer-size">
                 <h5>About Wittycircle</h5>
-                <ul>
+                <ul id="ftal" class="footer-list">
                     <li><a href="/terms">Terms of use</a></li>
                     <li><a href="/privacy">Privacy settings</a></li>
                 </ul>
             </div>
-            <div class="footer-explore footer-size">
+            <div id="fte" class="footer-explore footer-size">
                 <h5>Explore Projects</h5>
-                <ul>
-                    <li><a ui-sref="discover({tagParams: 'Art'})">Art</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Craft'})">Craft</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Design'})">Design</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Fashion'})">Fashion</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Film & Video'})">Film & Video</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Food'})">Food</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Games'})">Games</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Green'})">Green</a></li>
-                </ul>
+                <div id="ftel" class="footer-list">
+                    <ul>
+                        <li><a ui-sref="discover({tagParams: 'Art'})">Art</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Craft'})">Craft</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Design'})">Design</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Fashion'})">Fashion</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Film & Video'})">Film & Video</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Food'})">Food</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Games'})">Games</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Green'})">Green</a></li>
+                    </ul>
+
+                    <ul class="footer-explore-more">
+                        <li><a ui-sref="discover({tagParams: 'Heritage'})">Heritage</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Charity'})">Charity</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Music'})">Music</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Pubashing'})">Publishing</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Science'})">Science</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Sport'})">Sport</a></li>
+                        <li><a ui-sref="discover({tagParams: 'Technology'})">Technology</a></li>
+                        <li><a ui-sref="discover">More...</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-no-info footer-size">
-                <ul>
-                    <li><a ui-sref="discover({tagParams: 'Heritage'})">Heritage</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Charity'})">Charity</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Music'})">Music</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Pubashing'})">Publishing</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Science'})">Science</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Sport'})">Sport</a></li>
-                    <li><a ui-sref="discover({tagParams: 'Technology'})">Technology</a></li>
-                    <li><a ui-sref="discover">More...</a></li>
-                </ul>
-            </div>
-            <div class="footer-meet footer-size">
+            <div id="ftm" class="footer-meet footer-size">
                 <h5>Meet...</h5>
-                <ul>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Graphic Design'}, {'sName': 'Product Design'}]})">Designers</a></li>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Content Writing'}]})">Writers</a></li>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Web Development'}, {'sName': 'Computer Engineering'}]})">Developers</a></li>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Manufacturing Design'}, {'sName': 'Electronics'}]})">Engineers</a></li>
-                </ul>
-            </div>
-            <div class="footer-no-info2 footer-size">
-                <ul>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Entrepreneurship'}, {'sName': 'Business Development'}]})">Business developers</a></li>
-                    <li><a ui-sref="meet({skillParams: [{'sName': 'Civil Law'}, {'sName': 'Contract Law'}]})">Legal advisors</a></li>
-                    <li><a href="/meet">More...</a></li>
-                </ul>
+                <div id="ftml" class="footer-list">
+                    <ul>
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Graphic Design'}, {'sName': 'Product Design'}]})">Designers</a></li>
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Content Writing'}]})">Writers</a></li>
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Web Development'}, {'sName': 'Computer Engineering'}]})">Developers</a></li>
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Manufacturing Design'}, {'sName': 'Electronics'}]})">Engineers</a></li>
+                    </ul>
+
+                    <ul class="footer-meet-more">
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Entrepreneurship'}, {'sName': 'Business Development'}]})">Business developers</a></li>
+                        <li><a ui-sref="meet({skillParams: [{'sName': 'Civil Law'}, {'sName': 'Contract Law'}]})">Legal advisors</a></li>
+                        <li><a href="/meet">More...</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -68,4 +70,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            var container1 = $("#fta"),
+                container2 = $("#fte"),
+                container3 = $("#ftm"),
+                list1 = $("#ftal"),
+                list2 = $("#ftel"),
+                list3 = $("#ftml")
+
+            container1.on('click', function() {
+                list3.slideUp(200);
+                list2.slideUp(200);
+                list1.slideToggle(200);
+            });
+
+            container2.on('click', function() {
+                list3.slideUp(200);
+                list1.slideUp(200);
+                list2.slideToggle(200);
+            });
+
+            container3.on('click', function() {
+                list1.slideUp(200);
+                list2.slideUp(200);
+                list3.slideToggle(200);
+            });
+        });
+    </script>
 </section>

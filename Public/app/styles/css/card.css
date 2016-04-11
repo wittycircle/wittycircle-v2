@@ -128,7 +128,8 @@
   height: 260px;
   margin: 0px 16px 40px 16px;
   border: 1px solid #E5E5E5;
-  border-radius: 4px; }
+  border-radius: 4px;
+  background-color: white; }
   .profile-card .card-picture {
     height: 40px;
     border-top-left-radius: 4px;

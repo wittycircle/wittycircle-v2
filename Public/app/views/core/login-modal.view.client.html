@@ -3,6 +3,8 @@
         <h2>Log In</h2>
         <img id="closeCrossL" src="/images/cross-icon.svg" style="cursor: pointer">
     </header>
+
+    <div id="closeCrossL2"></div>
     <div class="login-modal-social signup-login-social">
         <h4>Log in with a social network:</h4>
         <div class="fb-login">
@@ -22,47 +24,67 @@
         <div class="old-dash"></div>
     </div>
     <form>
-    <div class="login-modal-email">
-        <p ng-if="!lf">Incorrect password/email</p>
-        <div class="email-input">
-            <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
-            <p ng-if='!lef'>This is a required field</p>
+        <div class="login-modal-email">
+            <p ng-if="!lf">Incorrect password/email</p>
+            <div class="email-input">
+                <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
+                <p ng-if='!lef'>This is a required field</p>
+            </div>
+            <div class="password-input">
+                <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
+                <p ng-if='!lpf'>This is a required field</p>
+            </div>
+            <div class="forgot-password">
+                <p>Forgot password?</p>
+            </div>
         </div>
-        <div class="password-input">
-            <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
-            <p ng-if='!lpf'>This is a required field</p>
+        <div class="login-modal-footer">
+            <button type="submit" ng-click='login()'>Log In</button>
+            <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
         </div>
-        <div class="forgot-password">
-            <p>Forgot password?</p>
-        </div>
-    </div>
-    <div class="login-modal-footer">
-        <button type="submit" ng-click='login()'>Log In</button>
-        <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
-    </div>
     </form>
     <script>
         $(function() {
 
             var filter = $("#page-wrap");
             var x = $(window).height();
-            var margL = (x - 551)/2/2;
+            var margL;
 
+            console.log(x);
+            if (x <= 736)
+                margL = -5;
+            else
+                margL = (x - 550)/2/2;
             $(document).mouseup(function (e) {
                 var container = $("#main-login-modal");
 
-                if (e.target.id === "mologin" || e.target.id === "closeCrossL" || container.is(e.target) || container.has(e.target).length || container.css('display') === "block") {
-                    if ((!container.is(e.target) && !container.has(e.target).length && e.target.id !== "mologin") || e.target.id === "closeCrossL") {
-                        filter.fadeOut(500);
-                        container.animate({top: '-700px'}, 400, function() {
-                            container.hide(100, function() {
-                                container.css({'top': margL.toString() + "px"});
+                if (e.target.id === "mologin" || e.target.id === "closeCrossL" || e.target.id === "closeCrossL2" || container.is(e.target) || container.has(e.target).length || container.css('display') === "block") {
+                    console.log("OK");
+                    if ((!container.is(e.target) && !container.has(e.target).length && e.target.id !== "mologin") || e.target.id === "closeCrossL" || e.target.id === "closeCrossL2") {
+                        filter.fadeOut(400);
+                        if (x > 736) {
+                            container.animate({top: '-700px'}, 400, function() {
+                                container.hide(100, function() {
+                                    container.css({'top': margL.toString() + "px"});
+                                });
                             });
-                        });
+                        } else {
+                            $('#headerCore').show();
+                            $('#bodyCore').show();
+                            $('#footerCore').show();
+                            container.hide();
+                        }
                     } else {
-                        filter.fadeIn(300);
+                        if (x > 736) {
+                            filter.fadeIn(200);
+                            container.fadeIn();
+                        } else {
+                            $('#headerCore').hide();
+                            $('#bodyCore').hide();
+                            $('#footerCore').hide();
+                            container.fadeIn(100);
+                        }
                         container.css({'top': margL.toString() + "px"});
-                        container.fadeIn();
                     }
                 }
 

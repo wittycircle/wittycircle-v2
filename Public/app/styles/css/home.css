@@ -1,9 +1,9 @@
 /*.header-home {
-  background-image: url('/images/grad.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-top: -80px;
-  height: 700px;
+background-image: url('/images/grad.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+margin-top: -80px;
+height: 700px;
 }*/
 @keyframes appear {
   from {
@@ -24,13 +24,13 @@ button {
   transition: all 200ms linear; }
 
 /*.home-video {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width:
-    overflow: hidden;
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+width:
+overflow: hidden;
 }*/
 .body-page {
   height: auto; }
@@ -181,7 +181,7 @@ button {
     #main-start-project .main-start-component .main-second-text {
       display: inline-block;
       /*      margin-left: 10px;
-            margin-right: 10px;*/ }
+      margin-right: 10px;*/ }
     #main-start-project .main-start-component .dropdown-projects {
       display: inline-block; }
       #main-start-project .main-start-component .dropdown-projects .main-projects-component {
@@ -586,6 +586,8 @@ button {
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
       text-align: center;
       opacity: 0.3; }
+    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
+      display: none; }
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
       text-align: center;
       padding: 50px 20px 90px 20px; }
@@ -685,7 +687,7 @@ button {
     background-color: #F5F5F5; }
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
       text-align: center;
-      padding: 30px 20px 35px 20px; }
+      padding: 30px 20px 20px 20px; }
       #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title {
         margin-top: 0; }
         #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h1 {
@@ -697,6 +699,14 @@ button {
         display: none; }
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
       display: none; }
+    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
+      display: block;
+      text-align: center;
+      margin-bottom: 50px; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile .profile-card {
+        position: relative;
+        top: 10px;
+        margin: 0 10px 20px 10px; }
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
       padding: 20px 20px 40px 20px; } }
 /* Width 414px iPhone6Plus */
@@ -761,17 +771,17 @@ button {
     display: none; } }
 /*/* Width 480px horizontal iPhone4 
 @media only screen and (min-width: 321px) and (max-width: 480px) {
-  .home-image-bg {
-    height: 400px;
-  }
+.home-image-bg {
+height: 400px;
+}
 
-  #main-discover {
-    top: 110px;
+#main-discover {
+top: 110px;
 
-    .main-title-text-mobile {
-      display: none
-    }
-  }
+.main-title-text-mobile {
+display: none
+}
+}
 }*/
 
 /*# sourceMappingURL=home.css.map */

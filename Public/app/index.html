@@ -95,14 +95,14 @@
         <div id="page-wrap"></div>
         <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
         <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-        <div data-ng-include="'views/core/header.view.client.html'"></div>
-        <section ui-view autoscroll="true"></section>
-        <div data-ng-include="'views/core/footer.view.client.html'"></div>
+        <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -137,6 +137,7 @@
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/classie/classie.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="bower_components/bower-jquery-mobile/jquery.mobile.js"></script>
     <!-- endbower -->
     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
     <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>

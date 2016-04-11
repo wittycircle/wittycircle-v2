@@ -1,6 +1,6 @@
 <header id="header-section" data-ng-controller="HeaderCtrl">
     <section id="header-content" class="cbp-spmenu-push">
-    	<div class="header-searchBar-mobile">
+    	<div id="hsmobile" class="header-searchBar-mobile">
     		<figure>
             	<img src="/images/search-icon-w.svg">
             </figure>
@@ -222,6 +222,13 @@
 					classie.toggle( showRightPush, 'disabled' );
 				}
 			};
+
+            $( '#hsmobile' ).on('click', function() {
+                $('#headerCore').hide();
+                $('#bodyCore').hide();
+                $('#footerCore').hide();
+                $('#hsfmobile').show();
+            });
     	});
         /*** HEADER SCRIPT DOM ***/
 

@@ -292,16 +292,23 @@ $rootScope.$watch('globals', function(value) {
 
 
 /*** Search Bar ***/
-  var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
-  var People = client.initIndex('Users');
+  var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+  var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
+  var PAndP   = client.initIndex('PAndP');
 
-  $scope.$watch('searchName', function() {
-    if ($scope.searchName) {
+  $scope.$watch('searchName', function(value) {
+    if (value) {
       $scope.searchProjects();
       $scope.searchUsers();
     }
   });
+
+  $scope.$watch('searchNameM', function(value) {
+    if (value) {
+      $scope.searchUsersAndProjects(value)
+    }
+  })
 
   $scope.searchProjects = function() {
     if ($scope.searchName) {
@@ -335,6 +342,24 @@ $rootScope.$watch('globals', function(value) {
     }
   };
 
+  $http.get('/projects/discover').success(function(res) {
+    $scope.resultHits = res;
+  });
+
+  $scope.searchUsersAndProjects = function(value) {
+      PAndP.search(value)
+        .then(function searchSuccess(content) {
+          if (!content.hits[0]) {
+            $scope.notFoundProject = true;
+          } else {
+            $scope.notFoundProject = false;
+            $scope.resultHits = content.hits;
+          }
+        }, function searchFailure(err) {
+            console.log(err);
+        });
+  };
+
   $scope.goToProfile = function(id) {
     Users.getUserIdByProfileId(id).then(function(data) {
       if (data.userId)
@@ -358,6 +383,11 @@ $rootScope.$watch('globals', function(value) {
     $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };
 
+  $scope.limitM = 5;
+  $scope.moreMobile = function() {
+    $scope.limitM += 5;
+  };
+ 
 
 /*** All watch function ***/
   $scope.$watch('notifBubble', function(value, old) {

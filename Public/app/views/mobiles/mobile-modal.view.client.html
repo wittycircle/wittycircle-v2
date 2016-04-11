@@ -1,0 +1,55 @@
+<section id="hsfmobile" data-ng-controller="HeaderCtrl">
+	<div class="home-mobile-search">
+		<div id="scmobile" class="searchCrossMobile"></div>
+		<input class="home-searchField-mobile" type="search" placeholder="Search for projects and people..." ng-model="searchNameM" />
+	</div>
+	<div class="home-findField-mobile">
+		<div class="home-find-list" ng-repeat="resultHit in resultHits | limitTo : limitM">
+
+			<div ng-if="resultHit.title && resultHit.project_visibility" class="result-project" onclick="getBack()" ui-sref="viewproject({public_id: resultHit.public_id, title: encodeUrl(resultHit.title)})">
+				<div class="home-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.picture_card, 60, 60, 'fill') }})'}"></div>
+				<div class="home-findProject-content">
+		            <div class="home-findProject-title">
+		                <h3>{{resultHit.title}}</h2>
+		            </div>
+		            <div class='home-findProject-tag'>
+		                <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/tag-icon_ruk5r2.png" alt="tag-icon">
+		                <h4>{{resultHit.category_name}}</h4>
+		            </div>
+		        </div>
+		    </div>
+
+		    <div ng-if="!resultHit.title" class="result-people" onclick="getBack()" ng-click="goToProfile(resultHit.id)">
+		        <div class="home-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
+	            <div class="home-findPeople-content">
+	                <div class="home-findPeople-name">
+	                    <h4>{{resultHit.first_name}} {{resultHit.last_name}}</h4>
+	                </div>
+	                <div class="home-findPeople-location">
+	                    <h6>{{resultHit.location_city}}<i ng-hide="!resultHit.location_country">,</i> {{resultHit.location_country}}</h6>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div ng-if="resultHits.length > 5" class="home-find-showmore-mobile">
+	    	<button type="submit" ng-click="moreMobile()">Show more</button>
+	    </div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('#scmobile').on('click', function() {
+				$('#headerCore').show();
+                $('#bodyCore').show();
+                $('#footerCore').show();
+                $('#hsfmobile').hide();
+			});
+		});
+
+		function getBack() {
+			$('#headerCore').show();
+            $('#bodyCore').show();
+            $('#footerCore').show();
+            $('#hsfmobile').hide();
+		}
+	</script>
+</section>

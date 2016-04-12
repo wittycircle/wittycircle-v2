@@ -50,7 +50,7 @@ exports.updateUserExperience = function(req, res){
     req.checkBody('location_city', 'Error Message').optional().isString().max(128);
     req.checkBody('location_state', 'Error Message').optional().isString().max(128);
     req.checkBody('location_country', 'Error Message').optional().isString().max(128);
-    req.checkBody('description', 'Error Message').optional().isString();
+    req.checkBody('description', 'Error Message').optional().max(128);
 
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);

@@ -1,0 +1,212 @@
+/********* Before Footer Home 1**********/
+.bf-filter {
+  position: absolute;
+  height: 392px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.bf2-filter {
+  position: absolute;
+  height: 300px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.bf3-filter {
+  position: absolute;
+  height: 270px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.bf4-filter {
+  position: absolute;
+  height: 302px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+
+.bf-info {
+  background-image: url("/images/backgrounds/background-footer1.jpg");
+  background-position: center center;
+  background-size: cover;
+  padding: 70px 0;
+  text-align: center; }
+  .bf-info .bf-component {
+    position: relative;
+    z-index: 20;
+    display: inline-block;
+    width: 316px;
+    color: #fff; }
+    .bf-info .bf-component h4 {
+      font-family: 'FreigLight';
+      font-size: 36px;
+      margin: 10px 0px; }
+    .bf-info .bf-component h6 {
+      font-family: 'FreigBook';
+      font-size: 17px;
+      padding: 20px 16px;
+      line-height: 20px; }
+    .bf-info .bf-component button {
+      clear: both;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      background-color: transparent;
+      width: 180px;
+      height: 46px;
+      border: 2px solid white;
+      border-radius: 4px;
+      font-family: 'FreigSem';
+      font-size: 18px; }
+    .bf-info .bf-component button:hover {
+      background-color: white;
+      color: #222222; }
+
+/********* Before Footer Discover 2**********/
+.bf2-info {
+  background-image: url("https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456926920/footer_discover_tzxces.jpg");
+  background-position: center center;
+  background-size: cover;
+  padding: 95px 0px;
+  text-align: center; }
+  .bf2-info .bf2-component {
+    color: white;
+    position: relative;
+    z-index: 20; }
+    .bf2-info .bf2-component h3 {
+      font-family: 'FreigLight';
+      font-size: 36px; }
+    .bf2-info .bf2-component button {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      background-color: #FF4D4D;
+      width: 230px;
+      height: 46px;
+      border: 2px solid #FF4D4D;
+      border-radius: 4px;
+      font-family: 'FreigSem';
+      font-size: 18px; }
+    .bf2-info .bf2-component button:hover {
+      background-color: #D94242;
+      border: 2px solid #D94242; }
+
+/********* Before Footer Meet 3**********/
+.bf3-info {
+  background-image: url("/images/backgrounds/background-footer3.jpg");
+  background-position: center center;
+  background-size: cover;
+  padding: 39px 0px;
+  text-align: center; }
+  .bf3-info .bf3-component {
+    color: white;
+    position: relative;
+    z-index: 20; }
+    .bf3-info .bf3-component h4 {
+      font-family: 'FreigLight';
+      font-size: 36px; }
+    .bf3-info .bf3-component button {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      background-color: #FF4D4D;
+      width: 230px;
+      height: 46px;
+      border: 2px solid #FF4D4D;
+      border-radius: 4px;
+      font-family: 'FreigSem';
+      font-size: 18px; }
+    .bf3-info .bf3-component button:hover {
+      background-color: #D94242;
+      border: 2px solid #D94242; }
+    .bf3-info .bf3-component .bf3-text {
+      padding: 15px 0;
+      margin: 15px 0; }
+      .bf3-info .bf3-component .bf3-text a {
+        font-family: 'FreigSem';
+        text-decoration: underline;
+        font-size: 16px; }
+      .bf3-info .bf3-component .bf3-text a:hover {
+        text-decoration: none;
+        color: white; }
+
+/********* Before Footer Work 4**********/
+.bf4-info {
+  background-image: url("/images/backgrounds/background-footer4.jpg");
+  background-position: center center;
+  background-size: cover;
+  padding: 30px 0px;
+  text-align: center; }
+  .bf4-info .bf4-component {
+    color: white;
+    position: relative;
+    z-index: 20; }
+    .bf4-info .bf4-component h4 {
+      font-family: 'FreigLight';
+      line-height: 50px;
+      font-size: 36px; }
+    .bf4-info .bf4-component button {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background-color: #FF4D4D;
+      width: 230px;
+      height: 46px;
+      border: 2px solid #FF4D4D;
+      border-radius: 4px;
+      font-family: 'FreigSem';
+      font-size: 18px; }
+    .bf4-info .bf4-component button:hover {
+      background-color: #D94242;
+      border: 2px solid #D94242; }
+    .bf4-info .bf4-component .bf4-text {
+      padding: 15px 0;
+      margin: 12px 0; }
+      .bf4-info .bf4-component .bf4-text a {
+        font-family: 'FreigSem';
+        text-decoration: underline;
+        font-size: 16px; }
+      .bf4-info .bf4-component .bf4-text a:hover {
+        text-decoration: none;
+        color: white; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+/* Exception media query width */
+@media only screen and (max-width: 955px) {
+  #bfooter-1 .bf-filter {
+    position: absolute;
+    background-image: url("/images/backgrounds/background-footer1.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-color: none;
+    height: 590px;
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6); }
+  #bfooter-1 .bf-info {
+    padding: 50px 0;
+    background-image: none; }
+    #bfooter-1 .bf-info .bf-component {
+      margin-bottom: 20px; }
+      #bfooter-1 .bf-info .bf-component h6 {
+        padding-top: 5px;
+        padding-bottom: 10px; } }
+@media only screen and (max-width: 635px) {
+  #bfooter-1 .bf-filter {
+    position: absolute;
+    background-image: url("/images/backgrounds/background-footer1.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-color: none;
+    height: 836px;
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6); }
+  #bfooter-1 .bf-info {
+    padding: 50px 0;
+    background-image: none; }
+    #bfooter-1 .bf-info .bf-component {
+      margin-bottom: 20px; }
+      #bfooter-1 .bf-info .bf-component h6 {
+        padding-top: 5px;
+        padding-bottom: 10px; } }
+
+/*# sourceMappingURL=bfooter.css.map */

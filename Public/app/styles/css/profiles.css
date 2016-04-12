@@ -1,0 +1,535 @@
+a:hover {
+  color: white; }
+
+#profile-header {
+  position: relative;
+  height: 410px;
+  width: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+  #profile-header h2 {
+    font-family: 'FreigSem';
+    font-size: 36px; }
+  #profile-header h5 {
+    font-family: 'FreigBook';
+    font-size: 17px; }
+  #profile-header .filter {
+    position: absolute;
+    height: 410px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); }
+  #profile-header .profile-cover-first {
+    position: absolute;
+    width: 280px;
+    left: 0;
+    right: 0;
+    top: 25%;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 50; }
+    #profile-header .profile-cover-first p {
+      font-family: 'FreigBook';
+      font-size: 21px;
+      color: white;
+      margin-bottom: 15px; }
+    #profile-header .profile-cover-first a {
+      font-family: 'FreigSem';
+      font-size: 15px;
+      color: white;
+      padding: 8px 15px;
+      background-color: #ff4d4d;
+      border-radius: 4px;
+      cursor: pointer;
+      -webkit-transition: all 200ms linear;
+      -o-transition: all 200ms linear;
+      -moz-transition: all 200ms linear;
+      -ms-transition: all 200ms linear;
+      -kthtml-transition: all 200ms linear;
+      transition: all 200ms linear; }
+      #profile-header .profile-cover-first a .fa-camera {
+        font-size: 16px;
+        margin-right: 5px; }
+    #profile-header .profile-cover-first a:hover {
+      background-color: #d94242; }
+  #profile-header .profile-contents {
+    position: relative;
+    top: 140px;
+    z-index: 49;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto; }
+    #profile-header .profile-contents .profile-upload-cover {
+      position: relative;
+      top: -50px;
+      display: none;
+      float: right;
+      cursor: pointer;
+      margin-right: 15px;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 5px 10px;
+      border-radius: 4px; }
+      #profile-header .profile-contents .profile-upload-cover p {
+        display: inline-block;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: white;
+        margin: 0; }
+      #profile-header .profile-contents .profile-upload-cover i {
+        display: inline-block;
+        margin-right: 10px; }
+      #profile-header .profile-contents .profile-upload-cover .fa-camera {
+        color: white;
+        font-size: 18px;
+        -webkit-transition: all 150ms linear;
+        -o-transition: all 150ms linear;
+        -moz-transition: all 150ms linear;
+        -ms-transition: all 150ms linear;
+        -kthtml-transition: all 150ms linear;
+        transition: all 150ms linear; }
+    #profile-header .profile-contents .profile-upload-cover:hover {
+      background-color: rgba(0, 0, 0, 0.5); }
+      #profile-header .profile-contents .profile-upload-cover:hover .fa-camera {
+        transform: scale(0.9, 0.9); }
+    #profile-header .profile-contents .profile-info {
+      display: inline-block; }
+      #profile-header .profile-contents .profile-info .spinner-item {
+        height: 9px;
+        width: 9px; }
+      #profile-header .profile-contents .profile-info .profile-update-picture {
+        position: absolute;
+        height: inherit;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none; }
+        #profile-header .profile-contents .profile-info .profile-update-picture .fa-camera {
+          position: absolute;
+          top: 47%;
+          left: 45%;
+          color: #e5e5e5;
+          -webkit-transition: all 100ms linear;
+          -o-transition: all 100ms linear;
+          -moz-transition: all 100ms linear;
+          -ms-transition: all 100ms linear;
+          -kthtml-transition: all 100ms linear;
+          transition: all 100ms linear;
+          font-size: 20px; }
+      #profile-header .profile-contents .profile-info .profile-info-picture {
+        display: inline-block;
+        position: relative;
+        margin: 0px 10px;
+        border-radius: 50%;
+        width: 154px;
+        height: 154px;
+        overflow: hidden; }
+        #profile-header .profile-contents .profile-info .profile-info-picture img {
+          width: auto;
+          height: 154px;
+          border-radius: 50%; }
+      #profile-header .profile-contents .profile-info .profile-info-picture2 {
+        display: inline-block;
+        position: relative;
+        margin: 0px 10px;
+        border: 3px solid white;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 154px;
+        height: 154px; }
+        #profile-header .profile-contents .profile-info .profile-info-picture2 img {
+          width: auto;
+          height: 154px; }
+      #profile-header .profile-contents .profile-info .profile-upload-picture {
+        width: 154px;
+        height: auto; }
+      #profile-header .profile-contents .profile-info .profile-info-cv {
+        display: inline-block;
+        position: relative;
+        float: right;
+        top: 55px;
+        margin: 0 10px; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .info-line {
+          margin-bottom: 5px; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location .location-name-city {
+          display: inline-block; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location h5 {
+          display: inline-block; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location img {
+          display: inline-block;
+          width: auto;
+          height: 16px;
+          outline: 0; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location input {
+          position: relative;
+          bottom: 3px;
+          width: 100%;
+          padding: 4px 10px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          font-family: 'FreigBook';
+          font-size: 16px;
+          color: #222222; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location .location-name {
+          display: inline-block;
+          position: relative;
+          margin: 0px 10px 0px 5px;
+          top: 2px; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .location-name h5 {
+            top: 10px;
+            font-size: 16px; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .location-name input {
+            background-color: transparent;
+            border-bottom: 1px solid white;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-radius: 0;
+            color: white; }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social {
+          display: inline-block;
+          float: right;
+          margin: 0 20px; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li {
+            display: inline-block; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a {
+              width: 20px;
+              height: 20px;
+              margin: 0 4px; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a.website {
+              display: block;
+              background-image: url("/images/social_media/website-logo.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 100%; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a.fb {
+              display: block;
+              background-image: url("/images/social_media/facebook-logo.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 9px; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a.tw {
+              display: block;
+              background-image: url("/images/social_media/twitter-logo.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 100%; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a.gp {
+              display: block;
+              background-image: url("/images/social_media/googleplus-logo.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 100%; }
+            #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social li a.ln {
+              display: block;
+              background-image: url("/images/social_media/linkedin-logo.png");
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: 100%; }
+  #profile-header .profile-bottom {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 72px;
+    background-color: rgba(0, 0, 0, 0.5); }
+    #profile-header .profile-bottom .profile-bottom-info {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 1000px;
+      height: inherit; }
+      #profile-header .profile-bottom .profile-bottom-info .profile-follow {
+        display: inline-block;
+        position: relative;
+        margin-left: 15px;
+        padding: 0 10px;
+        top: 8px; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-follow .follower {
+          display: inline-block;
+          position: relative;
+          margin: 0 8px;
+          text-align: center; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .follower h2 {
+            font-family: 'FreigSem';
+            font-size: 19px; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .follower h5 {
+            font-size: 14px; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-follow .follow,
+        #profile-header .profile-bottom .profile-bottom-info .profile-follow .followed {
+          position: relative;
+          bottom: 14px;
+          text-align: center; }
+      #profile-header .profile-bottom .profile-bottom-info .profile-user-projects {
+        display: inline-block;
+        position: relative;
+        bottom: 5px;
+        cursor: pointer;
+        margin-left: 109px;
+        height: inherit; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-text {
+          display: inline-block;
+          margin-right: 5px;
+          padding: 27px 0; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-text h6 {
+            font-family: 'FreigBook';
+            font-size: 15px; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-picture {
+          display: inline-block;
+          height: inherit;
+          float: right;
+          padding: 15px 0; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-picture .profile-pp {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin: 0 4px;
+            overflow: hidden; }
+            #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-picture .profile-pp img {
+              width: auto;
+              height: 40px; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-picture .profile-arrow {
+            display: inline-block;
+            float: right;
+            padding: 11px 0; }
+            #profile-header .profile-bottom .profile-bottom-info .profile-user-projects .profile-projects-picture .profile-arrow img {
+              margin-left: 5px;
+              width: 15px;
+              -webkit-transition: all 150ms linear;
+              -o-transition: all 150ms linear;
+              -moz-transition: all 150ms linear;
+              -ms-transition: all 150ms linear;
+              -kthtml-transition: all 150ms linear;
+              transition: all 150ms linear; }
+      #profile-header .profile-bottom .profile-bottom-info .profile-user-options {
+        display: inline-block;
+        float: right;
+        padding: 0px 0px 0px 40px;
+        position: relative;
+        height: 70px;
+        position: relative;
+        top: 0; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-options a {
+          font-family: 'FreigBook';
+          font-size: 16px;
+          cursor: pointer; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-text-link {
+          display: inline-block;
+          margin: 23px 7px; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-follow-link {
+          display: inline-block;
+          background-color: transparent;
+          margin: 17px 7px 0 7px;
+          border: 1px solid white;
+          border-radius: 4px;
+          padding: 6px 15px 7px 15px;
+          color: white;
+          font-family: 'FreigSem';
+          font-size: 16px;
+          float: right;
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-follow-link .fa-plus {
+            font-size: 14px;
+            margin-right: 10px; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-follow-link .fa-check {
+            font-size: 14px;
+            margin-right: 10px; }
+        #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-follow-link:hover {
+          background-color: white;
+          color: black; }
+
+#profile-slideDown .profile-slideDown-container .profile-slideDown-project {
+  max-width: 1000px;
+  padding: 70px 15px 0px 15px;
+  margin: 0 auto; }
+  #profile-slideDown .profile-slideDown-container .profile-slideDown-project .profile-slideDown-article {
+    display: inline-block;
+    text-align: center; }
+    #profile-slideDown .profile-slideDown-container .profile-slideDown-project .profile-slideDown-article .profile-slideDown-card {
+      margin: 0 16px 0 16px;
+      display: inline-block;
+      width: 287px;
+      height: 418px;
+      border: 1px solid #E5E5E5;
+      border-radius: 5px;
+      overflow: hidden; }
+    #profile-slideDown .profile-slideDown-container .profile-slideDown-project .profile-slideDown-article .profile-slideDown-text p {
+      font-family: 'FreigBook';
+      font-size: 15px;
+      color: #999999;
+      padding: 15px 0; }
+#profile-slideDown .profile-slideDown-container .profile-slideDown-close {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 2px solid #e5e5e5;
+  background-color: #FAFAFA;
+  cursor: pointer; }
+  #profile-slideDown .profile-slideDown-container .profile-slideDown-close p {
+    font-family: 'FreigSem';
+    font-size: 18px;
+    color: #222222;
+    margin: 15px 0; }
+
+#profile-corps {
+  position: relative;
+  z-index: 1;
+  background-color: #FAFAFA; }
+  #profile-corps h2 {
+    display: inline-block;
+    font-family: 'FreigLight';
+    font-size: 36px;
+    color: #222222;
+    padding-bottom: 10px; }
+  #profile-corps .profile-contents {
+    max-width: 1024px;
+    margin: 0 auto;
+    background-color: white; }
+    #profile-corps .profile-contents .profile-aside {
+      display: inline-block;
+      float: left;
+      padding: 40px 40px;
+      width: 370px; }
+      #profile-corps .profile-contents .profile-aside li {
+        display: inline-block;
+        font-family: 'FreigSem';
+        font-size: 13px;
+        text-transform: uppercase;
+        padding: 2px 4px;
+        border-radius: 4px;
+        margin-bottom: 5px;
+        margin-right: 4px;
+        -webkit-transition: all 100ms linear;
+        -o-transition: all 100ms linear;
+        -moz-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+        -kthtml-transition: all 100ms linear;
+        transition: all 100ms linear; }
+      #profile-corps .profile-contents .profile-aside .profile-first-aside {
+        margin: 20px 0; }
+        #profile-corps .profile-contents .profile-aside .profile-first-aside .profile-edit-skills {
+          display: inline-block;
+          position: relative;
+          bottom: 6px;
+          margin-left: 10px;
+          outline: 0; }
+        #profile-corps .profile-contents .profile-aside .profile-first-aside .profile-aside-skills {
+          padding-left: 5px;
+          padding-top: 4px; }
+          #profile-corps .profile-contents .profile-aside .profile-first-aside .profile-aside-skills li {
+            background-color: #222222;
+            color: white;
+            cursor: pointer; }
+          #profile-corps .profile-contents .profile-aside .profile-first-aside .profile-aside-skills li:hover {
+            background-color: #999999; }
+      #profile-corps .profile-contents .profile-aside .profile-second-aside {
+        margin: 20px 0; }
+        #profile-corps .profile-contents .profile-aside .profile-second-aside img {
+          display: inline-block;
+          position: relative;
+          bottom: 5px;
+          margin-left: 10px;
+          outline: 0; }
+        #profile-corps .profile-contents .profile-aside .profile-second-aside .profile-aside-interests {
+          padding-left: 5px;
+          padding-top: 4px; }
+          #profile-corps .profile-contents .profile-aside .profile-second-aside .profile-aside-interests li {
+            background-color: #999999;
+            color: white; }
+          #profile-corps .profile-contents .profile-aside .profile-second-aside .profile-aside-interests li:hover {
+            background-color: #222222; }
+    #profile-corps .profile-contents .profile-main {
+      display: inline-block;
+      width: 630px;
+      padding-top: 40px;
+      padding-right: 20px;
+      padding-bottom: 200px;
+      min-height: 800px; }
+      #profile-corps .profile-contents .profile-main .profile-main-about {
+        margin-top: 20px;
+        margin-bottom: 20px; }
+        #profile-corps .profile-contents .profile-main .profile-main-about img {
+          display: inline-block;
+          position: relative;
+          bottom: 5px;
+          margin-left: 10px;
+          outline: 0; }
+        #profile-corps .profile-contents .profile-main .profile-main-about p {
+          font-family: 'FreigBook';
+          font-size: 18px;
+          color: #222222;
+          margin-bottom: 20px;
+          line-height: 28px; }
+      #profile-corps .profile-contents .profile-main .profile-main-experience {
+        margin-top: 60px; }
+        #profile-corps .profile-contents .profile-main .profile-main-experience .fa-plus {
+          display: inline-block;
+          position: relative;
+          bottom: 2px;
+          margin-left: 10px;
+          outline: 0;
+          font-size: 15px;
+          color: #999999; }
+          #profile-corps .profile-contents .profile-main .profile-main-experience .fa-plus span {
+            position: relative;
+            font-family: 'FreigSem';
+            font-size: 15px;
+            margin-left: 2px;
+            bottom: 1px; }
+        #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp {
+          padding-bottom: 10px;
+          border-bottom: 1px solid #E5E5E5; }
+          #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post {
+            padding-top: 10px; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post h3 {
+              display: inline-block;
+              font-family: 'FreigSem';
+              color: #222222;
+              font-size: 18px;
+              padding-right: 8px;
+              padding-top: 2px;
+              padding-bottom: 2px;
+              border-right: 1px solid black; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post h4 {
+              display: inline-block;
+              font-family: 'FreigBook';
+              color: #222222;
+              font-size: 18px;
+              padding-left: 8px; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post .profile-exp-option {
+              float: right;
+              position: relative;
+              top: 2px;
+              margin-right: 10px; }
+              #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post .profile-exp-option img {
+                width: 16px;
+                height: 16px;
+                outline: 0; }
+              #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-post .profile-exp-option .fa-trash {
+                color: #999999;
+                font-size: 16px;
+                outline: 0; }
+          #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-period {
+            margin-top: 3px; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-period span {
+              font-family: 'FreigBook';
+              font-size: 14px;
+              color: #999999; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-period .exp-location {
+              margin-left: 10px; }
+          #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-description {
+            margin-top: 4px; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-description h6 {
+              font-family: 'FreigBook';
+              font-size: 14px;
+              color: #222222;
+              line-height: 18px; }
+      #profile-corps .profile-contents .profile-main .profile-main-portfolio {
+        margin-top: 20px; }
+
+/*# sourceMappingURL=profiles.css.map */

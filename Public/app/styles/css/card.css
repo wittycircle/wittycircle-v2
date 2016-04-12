@@ -1,0 +1,359 @@
+/**** PROJECT CARD ****/
+.project-card .card-tag .card-tag-content {
+  position: absolute;
+  margin-top: 19px;
+  margin-left: 20px;
+  z-index: 0; }
+  .project-card .card-tag .card-tag-content .card-tag-bg {
+    position: absolute;
+    background-color: #222222;
+    border-radius: 4px;
+    height: 24px;
+    width: 100%;
+    -webkit-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    -kthtml-transition: all 100ms linear;
+    transition: all 100ms linear; }
+  .project-card .card-tag .card-tag-content img {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 1px;
+    width: 16px;
+    height: 16px;
+    z-index: 100; }
+  .project-card .card-tag .card-tag-content h5 {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    top: 1px;
+    font-family: 'FreigSem';
+    font-size: 13px;
+    text-transform: uppercase;
+    z-index: 100; }
+.project-card .card-tag-content:hover > .card-tag-bg {
+  transform: scale(1.02, 1.1); }
+.project-card .filter_private {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: inherit;
+  width: inherit;
+  z-index: 60000;
+  text-align: center; }
+  .project-card .filter_private .private_text {
+    color: white;
+    font-family: 'FreigMed';
+    font-size: 18px;
+    position: relative;
+    top: 70px; }
+.project-card .card-picture {
+  height: 180px;
+  background-repeat: no-repeat;
+  background-position: center center; }
+  .project-card .card-picture img {
+    height: 180px;
+    width: 100%;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px; }
+.project-card .card-info {
+  padding: 15px 20px 10px 20px;
+  background-color: white;
+  text-align: left; }
+  .project-card .card-info .card-title-space {
+    height: 40px;
+    margin-bottom: 4px;
+    overflow: hidden; }
+    .project-card .card-info .card-title-space h4 {
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: #222222;
+      line-height: 20px;
+      vertical-align: center; }
+  .project-card .card-info span {
+    display: list-item;
+    list-style-type: none;
+    font-family: 'FreigBook';
+    font-size: 14px;
+    color: #999999; }
+  .project-card .card-info .card-status span {
+    display: inline-block; }
+  .project-card .card-info .card-status img {
+    display: inline-block;
+    position: relative;
+    bottom: 2px;
+    margin-right: 3px; }
+  .project-card .card-info .card-location span {
+    display: inline-block; }
+  .project-card .card-info .card-location img {
+    display: inline-block;
+    position: relative;
+    bottom: 2px;
+    margin-right: 8px;
+    margin-left: 1px; }
+  .project-card .card-info .card-description-text {
+    height: 75px;
+    margin-bottom: 17px;
+    overflow: hidden; }
+    .project-card .card-info .card-description-text p {
+      margin: 10px 0;
+      font-family: 'FreigBook';
+      font-size: 14;
+      color: #222222;
+      line-height: 21px; }
+  .project-card .card-info .card-info-by .card-info-by-picture {
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    width: 30px;
+    height: 30px; }
+    .project-card .card-info .card-info-by .card-info-by-picture img {
+      max-height: 100%; }
+  .project-card .card-info .card-info-by h6 {
+    display: inline-block;
+    font-family: 'FreigBook';
+    font-size: 14px;
+    color: #999999;
+    margin-left: 5px;
+    position: relative;
+    bottom: 10px; }
+  .project-card .card-info .card-info-by .card-info-users {
+    position: relative;
+    z-index: 1000000; }
+
+/**** PROFILE CARD ****/
+.profile-card {
+  display: inline-table;
+  width: 207px;
+  height: 260px;
+  margin: 0px 16px 40px 16px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  background-color: white; }
+  .profile-card .card-picture {
+    height: 40px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; }
+    .profile-card .card-picture .card-profile-picture {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border: 2px solid white;
+      border-radius: 50%;
+      bottom: 10px;
+      overflow: hidden;
+      margin-right: auto;
+      margin-left: auto;
+      background-size: auto 60px;
+      background-repeat: no-repeat;
+      background-position: center center; }
+  .profile-card .card-info {
+    padding: 20px;
+    height: 163px;
+    width: 207px;
+    overflow: hidden; }
+    .profile-card .card-info h4 {
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: #222222;
+      margin-bottom: 4px;
+      word-break: break-word; }
+    .profile-card .card-info .card-location {
+      height: 16px; }
+      .profile-card .card-info .card-location h6 {
+        font-family: 'FreigBook';
+        font-size: 13px;
+        color: #999999;
+        margin-bottom: 15px; }
+    .profile-card .card-info .card-description {
+      height: 60px;
+      margin-top: 10px;
+      overflow: hidden; }
+      .profile-card .card-info .card-description p {
+        height: 60px;
+        font-family: 'FreigBook';
+        font-size: 14px;
+        color: #222222;
+        text-align: left;
+        word-break: break-word; }
+  .profile-card .card-follow {
+    border-top: 1px solid #F5F5F5;
+    		/*.tooltips {
+    			display: block;
+    		}
+    
+    		.tooltips tip {
+    			min-width: 80px !important;
+    			height: 25px !important;
+    			padding: 4px 16px 0px 16px;
+    			border-radius: 4px;
+    		}
+    
+    		.tooltips._top tip {
+    			left: 171.5px;
+    			top: 16px;
+    		}
+    
+    		.tooltips tip-tip {
+    			font-family: 'FreigSem';
+    			font-size: 13px;
+    		}
+    
+    		@-webkit-keyframes animate-tooltip {
+    			0% {opacity: 0;}
+    			50% {opacity: .5;}
+    			60% {opacity: .8;}
+    			70% {opacity: .9;}
+    			90% {opacity: 1;}
+    		}
+    
+    		@-moz-keyframes animate-tooltip {
+    			0% {opacity: 0;}
+    			50% {opacity: .5;}
+    			60% {opacity: .8;}
+    			70% {opacity: .9;}
+    			90% {opacity: 1;}
+    		}
+    
+    		@-ms-keyframes animate-tooltip {
+    			0% {opacity: 0;}
+    			50% {opacity: .5;}
+    			60% {opacity: .8;}
+    			70% {opacity: .9;}
+    			90% {opacity: 1;}
+    		}
+    
+    		@keyframes animate-tooltip {
+    			0% {opacity: 0; top: 19px;}
+    			50% {opacity: .5; top: 16px;}
+    			60% {opacity: .8;}
+    			70% {opacity: .9;}
+    			90% {opacity: 1;}
+    		}*/ }
+    .profile-card .card-follow h6 {
+      font-family: 'FreigBook';
+      font-size: 12px;
+      color: #222222; }
+    .profile-card .card-follow p {
+      font-family: 'FreigSem';
+      font-size: 14px;
+      margin-bottom: 0px; }
+    .profile-card .card-follow .card-follow-square {
+      display: inline-block;
+      width: calc(100% / 3);
+      padding: 10px 0;
+      float: left;
+      border-left: 1px solid #F5F5F5; }
+    .profile-card .card-follow .card-followers {
+      border-left: none; }
+    .profile-card .card-follow .card-plus {
+      position: relative;
+      height: 54px;
+      right: 0px;
+      width: calc(100% / 3);
+      border-right: 0;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      border-left: 1px solid #F5F5F5;
+      -webkit-transition: all 100ms linear;
+      -o-transition: all 100ms linear;
+      -moz-transition: all 100ms linear;
+      -ms-transition: all 100ms linear;
+      -kthtml-transition: all 100ms linear;
+      transition: all 100ms linear; }
+      .profile-card .card-follow .card-plus .tooltipw {
+        display: block;
+        background: black;
+        bottom: 38px;
+        left: -7.5px;
+        font-family: 'FreigSem';
+        font-size: 13px;
+        color: #fff;
+        opacity: 0;
+        width: 80px;
+        padding: 3px 0;
+        border-radius: 4px;
+        pointer-events: none;
+        position: absolute;
+        -webkit-transform: translateY(10px);
+        -moz-transform: translateY(10px);
+        -ms-transform: translateY(10px);
+        -o-transform: translateY(10px);
+        transform: translateY(10px);
+        -webkit-transition: all .25s ease-out;
+        -moz-transition: all .25s ease-out;
+        -ms-transition: all .25s ease-out;
+        -o-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+        /*-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+        -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+        -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+        -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);*/ }
+      .profile-card .card-follow .card-plus .tooltipw:before {
+        bottom: -20px;
+        content: " ";
+        display: block;
+        height: 20px;
+        left: 0;
+        position: absolute; }
+      .profile-card .card-follow .card-plus .tooltipw:after {
+        border-left: solid transparent 6px;
+        border-right: solid transparent 6px;
+        border-top: solid black 6px;
+        bottom: -5px;
+        content: " ";
+        height: 0;
+        left: 50%;
+        margin-left: -7px;
+        position: absolute; }
+      .profile-card .card-follow .card-plus i {
+        position: absolute;
+        right: 28px;
+        padding-top: 11px; }
+      .profile-card .card-follow .card-plus .fa-plus {
+        color: #416299;
+        padding-right: 2px;
+        -webkit-transition: all 100ms linear;
+        -o-transition: all 100ms linear;
+        -moz-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+        -kthtml-transition: all 100ms linear;
+        transition: all 100ms linear;
+        -webkit-animation-duration: 0.2s;
+        -moz-animation-duration: 0.2s;
+        -ms-animation-duration: 0.2s;
+        -o-animation-duration: 0.2s;
+        animation-duration: 0.2s; }
+      .profile-card .card-follow .card-plus .fa-check {
+        color: #416299;
+        -webkit-transition: all 100ms linear;
+        -o-transition: all 100ms linear;
+        -moz-transition: all 100ms linear;
+        -ms-transition: all 100ms linear;
+        -kthtml-transition: all 100ms linear;
+        transition: all 100ms linear;
+        -webkit-animation-duration: 0.2s;
+        -moz-animation-duration: 0.2s;
+        -ms-animation-duration: 0.2s;
+        -o-animation-duration: 0.2s;
+        animation-duration: 0.2s; }
+    .profile-card .card-follow .card-plus:hover {
+      background-color: #F5F5F5; }
+      .profile-card .card-follow .card-plus:hover .tooltipw {
+        opacity: 1;
+        pointer-events: auto;
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        -o-transform: translateY(0px);
+        transform: translateY(0px); }
+      .profile-card .card-follow .card-plus:hover .fa-plus {
+        color: #999999; }
+      .profile-card .card-follow .card-plus:hover .fa-check {
+        color: #999999; }
+
+/*# sourceMappingURL=card.css.map */

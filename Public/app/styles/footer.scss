@@ -19,6 +19,7 @@
 				display: inline-block;
 				text-align: left;
 				width: 220px;
+				margin-right: 40px;
 			}
 
 			.footer-explore {
@@ -34,14 +35,6 @@
 					float: right;
 				}
 			}
-/*
-			.footer-no-info {
-				display: inline-block;
-				text-align: left;
-				padding-left: 15px;
-				padding-right: 15px;
-				padding-top: 30px;
-			}*/
 
 			.footer-meet {
 				display: inline-block;
@@ -57,20 +50,11 @@
 				}
 			}
 
-/*			.footer-no-info2 {
-				position: relative;
-				display: inline-block;
-				text-align: left;
-				padding-top: 30px;
-				padding-left: 15px;
-			}*/
-
 			.footer-size {
 				position: relative;
 				margin-top: 20px;
 				margin-bottom: 40px;
-/*				width: 185px;
-*/				vertical-align: top;
+				vertical-align: top;
 				padding-left: 15px;
 				padding-right: 15px;
 
@@ -187,9 +171,13 @@
 					background-position: 99% 50%;
 				}
 
+				.footer-about {
+					margin-right: 0;
+				}				
+
 				.footer-explore {
 					ul {
-						width: 150px;
+						width: 130px;
 					}
 
 					.footer-explore-more {
@@ -199,7 +187,7 @@
 
 				.footer-meet {
 					ul {
-						width: 150px;
+						width: 130px;
 					}
 
 					.footer-meet-more {

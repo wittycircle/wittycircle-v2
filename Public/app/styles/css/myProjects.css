@@ -1,0 +1,479 @@
+/*** VIEW PROJECT PAGE ***/
+#viewProject-page #viewProject-header {
+  position: relative;
+  height: 390px;
+  text-align: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-animation-duration: 0.6s; }
+  #viewProject-page #viewProject-header .viewProject-filter {
+    position: absolute;
+    width: 100%;
+    height: 390px;
+    background-color: rgba(0, 0, 0, 0.5); }
+  #viewProject-page #viewProject-header .viewProject-title {
+    position: relative;
+    top: 140px;
+    z-index: 50; }
+    #viewProject-page #viewProject-header .viewProject-title h1 {
+      font-family: 'FreigSem';
+      font-size: 42px;
+      color: white; }
+    #viewProject-page #viewProject-header .viewProject-title h4 {
+      font-family: 'FreigBook';
+      font-size: 21px;
+      color: white;
+      margin: 7px 0; }
+  #viewProject-page #viewProject-header .viewProject-info {
+    padding: 20px 0; }
+    #viewProject-page #viewProject-header .viewProject-info li {
+      display: inline-block;
+      margin-right: 20px; }
+      #viewProject-page #viewProject-header .viewProject-info li h5 {
+        display: inline-block;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: white; }
+        #viewProject-page #viewProject-header .viewProject-info li h5 img {
+          outline: none;
+          margin-left: 5px;
+          margin-right: 0px; }
+    #viewProject-page #viewProject-header .viewProject-info .stickers-icon img {
+      width: 20px;
+      height: auto; }
+    #viewProject-page #viewProject-header .viewProject-info .location-icon img,
+    #viewProject-page #viewProject-header .viewProject-info .user-icon img {
+      width: 13px;
+      height: auto; }
+  #viewProject-page #viewProject-header .viewProject-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4); }
+    #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 35px;
+      text-align: left; }
+      #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category {
+        display: inline-block; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category li {
+          display: inline-block;
+          padding: 20px 15px;
+          font-family: 'FreigSem';
+          font-size: 17px;
+          color: white;
+          webkit-transition: all 150ms linear;
+          -o-transition: all 150ms linear;
+          -moz-transition: all 150ms linear;
+          -ms-transition: all 150ms linear;
+          -kthtml-transition: all 150ms linear;
+          transition: all 150ms linear; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category li:hover {
+          cursor: pointer;
+          background-color: black; }
+      #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option {
+        display: inline-block;
+        float: right; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option li {
+          padding: 20px 15px;
+          display: inline-block;
+          font-family: 'FreigBook';
+          font-size: 17px;
+          color: white;
+          webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer {
+          cursor: pointer; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer:hover .icon-share {
+          display: block;
+          position: absolute; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share {
+          bottom: -67px;
+          display: none;
+          position: absolute;
+          padding: 50px 0px 30px 0px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-lg {
+            font-size: inherit; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle {
+            color: #3B5998;
+            font-size: 35px;
+            -webkit-transition: all 100ms linear;
+            -o-transition: all 100ms linear;
+            -moz-transition: all 100ms linear;
+            -ms-transition: all 100ms linear;
+            -kthtml-transition: all 100ms linear;
+            transition: all 100ms linear; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-facebook {
+            color: white;
+            font-size: 16px;
+            display: inline; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle-twitter {
+            color: #1dcaff;
+            -webkit-transition: all 100ms linear;
+            -o-transition: all 100ms linear;
+            -moz-transition: all 100ms linear;
+            -ms-transition: all 100ms linear;
+            -kthtml-transition: all 100ms linear;
+            transition: all 100ms linear; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-twitter {
+            display: inline;
+            font-size: 16px; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle {
+          color: #2f4779; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle-twitter {
+          color: #1ab5e5; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button {
+          /*						width: 105px;
+          						margin-left: 15px;
+          						font-family: 'FreigSem';
+          						font-size: 15px;
+          						color: white;
+          						background-color: transparent;
+          						padding: 5px 10px 5px 0px;
+          						border: 1px solid white;
+          						border-radius: 4px;*/
+          background-color: transparent;
+          margin: 15px 7px 0 7px;
+          border: 1px solid white;
+          border-radius: 4px;
+          padding: 6px 15px 7px 15px;
+          color: white;
+          font-family: 'FreigSem';
+          font-size: 16px;
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button .fa-plus {
+            font-size: 14px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button .fa-check {
+            font-size: 14px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button span {
+            position: relative;
+            top: 1px;
+            margin-right: 10px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button img {
+            width: 16px;
+            height: auto;
+            position: relative;
+            bottom: 2px;
+            margin-right: 4px; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option li:hover {
+          background-color: black; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button:hover {
+          background-color: white;
+          color: black; }
+
+/*** MY PROJECT PAGE ***/
+#myProject-page {
+  /* GLOBAL CSS */
+  /* SECTION CSS */ }
+  #myProject-page .card-title-space {
+    height: 40px;
+    margin-bottom: 4px;
+    overflow: hidden; }
+    #myProject-page .card-title-space h4 {
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: #222222;
+      line-height: 20px;
+      vertical-align: center; }
+  #myProject-page .no_feedbacks {
+    margin: 50px 0px; }
+    #myProject-page .no_feedbacks .title_no_comments {
+      font-family: 'FreigBook';
+      font-size: 24px;
+      color: #999999; }
+    #myProject-page .no_feedbacks .text_no_comments {
+      font-family: 'FreigBook';
+      font-size: 18px;
+      color: #999999; }
+    #myProject-page .no_feedbacks .button_post_comment {
+      margin-top: 20px;
+      font-family: 'FreigSem';
+      font-size: 18px;
+      color: white;
+      background-color: #FF4D4D;
+      padding: 7px 20px;
+      border: 2px solid #FF4D4D;
+      border-radius: 4px; }
+    #myProject-page .no_feedbacks .button_post_comment:hover {
+      background-color: #D94242;
+      border: 2px solid #D94242; }
+  #myProject-page .icon_location {
+    margin-right: 8px !important; }
+  #myProject-page .icon_status {
+    margin-right: 5px !important; }
+  #myProject-page h1 {
+    font-family: 'FreigSem';
+    font-size: 42px;
+    margin-bottom: 20px; }
+  #myProject-page h4 {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    color: #999999;
+    -webkit-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    -kthtml-transition: all 200ms linear;
+    transition: all 200ms linear; }
+  #myProject-page h3 {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    color: #999999;
+    margin-bottom: 10px;
+    -webkit-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    -kthtml-transition: all 200ms linear;
+    transition: all 200ms linear; }
+  #myProject-page .myProject-body-card {
+    margin: 0 16px 40px 16px;
+    display: inline-block;
+    width: 287px;
+    height: 418px;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer; }
+    #myProject-page .myProject-body-card .card-picture {
+      height: 180px; }
+      #myProject-page .myProject-body-card .card-picture img {
+        max-height: 100%;
+        width: 100%;
+        min-height: 100%; }
+    #myProject-page .myProject-body-card .card-tag .card-tag-content {
+      position: absolute;
+      margin-top: 19px;
+      margin-left: 20px; }
+      #myProject-page .myProject-body-card .card-tag .card-tag-content .card-tag-bg {
+        position: absolute;
+        background-color: #222222;
+        border-radius: 5px;
+        height: 22px;
+        width: 100%;
+        -webkit-transition: all 50ms linear;
+        -o-transition: all 50ms linear;
+        -moz-transition: all 50ms linear;
+        -ms-transition: all 50ms linear;
+        -kthtml-transition: all 50ms linear;
+        transition: all 50ms linear; }
+      #myProject-page .myProject-body-card .card-tag .card-tag-content img {
+        position: relative;
+        display: inline-block;
+        margin-left: 10px;
+        width: 16px;
+        height: 16px;
+        z-index: 100; }
+      #myProject-page .myProject-body-card .card-tag .card-tag-content h5 {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        font-family: 'FreigSem';
+        font-size: 13px;
+        text-transform: uppercase;
+        z-index: 100; }
+    #myProject-page .myProject-body-card .card-tag-content:hover > .card-tag-bg {
+      transform: scale(1.02, 1.1); }
+    #myProject-page .myProject-body-card .card-info {
+      padding: 20px;
+      background-color: white;
+      text-align: left; }
+      #myProject-page .myProject-body-card .card-info h4 {
+        font-family: 'FreigSem';
+        font-size: 18px;
+        color: #222222;
+        margin-bottom: 5px; }
+      #myProject-page .myProject-body-card .card-info span {
+        display: list-item;
+        list-style-type: none;
+        font-family: 'FreigBook';
+        font-size: 14px;
+        color: #999999; }
+      #myProject-page .myProject-body-card .card-info p {
+        height: 75px;
+        margin: 10px 0;
+        font-family: 'FreigBook';
+        font-size: 14;
+        color: #222222;
+        line-height: 21px; }
+      #myProject-page .myProject-body-card .card-info .card-info-by .card-info-by-picture {
+        border-radius: 50%;
+        overflow: hidden;
+        display: inline-block;
+        width: 30px;
+        height: 30px; }
+        #myProject-page .myProject-body-card .card-info .card-info-by .card-info-by-picture img {
+          max-height: 100%;
+          width: 100%; }
+      #myProject-page .myProject-body-card .card-info .card-info-by h6 {
+        display: inline-block;
+        font-family: 'FreigBook';
+        font-size: 14px;
+        color: #999999;
+        margin-left: 5px;
+        position: relative;
+        bottom: 10px; }
+  #myProject-page #myProject-header {
+    height: 220px;
+    text-align: center;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat; }
+    #myProject-page #myProject-header .myProject-filter {
+      position: absolute;
+      width: 100%;
+      height: 220px;
+      background-color: rgba(0, 0, 0, 0.5); }
+    #myProject-page #myProject-header .myProject-title {
+      position: relative;
+      top: 90px;
+      z-index: 50; }
+      #myProject-page #myProject-header .myProject-title h1 {
+        color: white; }
+      #myProject-page #myProject-header .myProject-title h5 {
+        font-family: 'FreigBook';
+        font-size: 15px;
+        color: white;
+        margin: 7px 0; }
+  #myProject-page #myProject-mp {
+    border-bottom: 1px solid #e5e5e5; }
+    #myProject-page #myProject-mp .myProject-body-mp {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 0; }
+      #myProject-page #myProject-mp .myProject-body-mp .myProject-body-mpTitle {
+        margin-bottom: 50px;
+        margin-left: 16px; }
+        #myProject-page #myProject-mp .myProject-body-mp .myProject-body-mpTitle h1 {
+          font-family: 'FreigLight';
+          color: #222222;
+          z-index: 50; }
+  #myProject-page #myProject-pledge {
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #fafafa; }
+    #myProject-page #myProject-pledge .myProject-body-pledge {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 0; }
+      #myProject-page #myProject-pledge .myProject-body-pledge .myProject-body-pTitle {
+        margin-bottom: 50px;
+        margin-left: 16px; }
+        #myProject-page #myProject-pledge .myProject-body-pledge .myProject-body-pTitle h1 {
+          font-family: 'FreigLight';
+          color: #222222; }
+  #myProject-page #myProject-followed {
+    border-bottom: 1px solid #e5e5e5; }
+    #myProject-page #myProject-followed .card-picture img {
+      min-height: 180px; }
+    #myProject-page #myProject-followed .myProject-body-followed {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 0; }
+      #myProject-page #myProject-followed .myProject-body-followed .myProject-body-fTitle {
+        margin-bottom: 50px;
+        margin-left: 16px; }
+        #myProject-page #myProject-followed .myProject-body-followed .myProject-body-fTitle h1 {
+          display: inline-block;
+          font-family: 'FreigLight';
+          color: #222222; }
+        #myProject-page #myProject-followed .myProject-body-followed .myProject-body-fTitle h6 {
+          display: inline-block;
+          font-family: 'FreigLight';
+          font-size: 16px;
+          color: #999999; }
+  #myProject-page #myProject-history {
+    background-color: #fafafa; }
+    #myProject-page #myProject-history .myProject-body-history {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 0; }
+      #myProject-page #myProject-history .myProject-body-history .myProject-body-hTitle {
+        margin-bottom: 50px;
+        margin-left: 16px; }
+        #myProject-page #myProject-history .myProject-body-history .myProject-body-hTitle h1 {
+          display: inline-block;
+          font-family: 'FreigLight';
+          color: #222222; }
+        #myProject-page #myProject-history .myProject-body-history .myProject-body-hTitle h6 {
+          display: inline-block;
+          font-family: 'FreigLight';
+          font-size: 16px;
+          color: #999999; }
+      #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer {
+        margin: 0 16px; }
+        #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement {
+          cursor: pointer;
+          padding: 20px 20px;
+          border-bottom: 1px solid #e5e5e5;
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+          #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle {
+            display: inline-block; }
+            #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-picture {
+              display: inline-block; }
+              #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-picture img {
+                width: 60px;
+                height: 60px;
+                border-radius: 5px; }
+            #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag {
+              display: inline-block;
+              float: right;
+              margin: 5px 15px 5px 15px; }
+              #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag .card-tag .card-tag-content {
+                position: absolute; }
+                #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag .card-tag .card-tag-content .card-tag-bg {
+                  position: absolute;
+                  background-color: #222222;
+                  border-radius: 4px;
+                  height: 22px;
+                  width: 100%;
+                  -webkit-transition: all 50ms linear;
+                  -o-transition: all 50ms linear;
+                  -moz-transition: all 50ms linear;
+                  -ms-transition: all 50ms linear;
+                  -kthtml-transition: all 50ms linear;
+                  transition: all 50ms linear; }
+                #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag .card-tag .card-tag-content img {
+                  position: relative;
+                  display: inline-block;
+                  margin-left: 10px;
+                  width: 16px;
+                  height: 16px;
+                  z-index: 100; }
+                #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag .card-tag .card-tag-content h5 {
+                  position: relative;
+                  display: inline-block;
+                  margin-right: 10px;
+                  font-family: 'FreigSem';
+                  font-size: 13px;
+                  text-transform: uppercase;
+                  z-index: 100; }
+              #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hETitle .h-title-tag .card-tag-content:hover > .card-tag-bg {
+                transform: scale(1.02, 1.1); }
+          #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hDate {
+            display: inline-block;
+            float: right; }
+            #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement .myProject-body-hDate span {
+              font-family: 'FreigMed';
+              font-size: 16px;
+              color: #999999; }
+        #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement:hover {
+          background-color: #f5f5f5; }
+          #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement:hover h3 {
+            color: #23527C; }
+
+/*# sourceMappingURL=myProjects.css.map */

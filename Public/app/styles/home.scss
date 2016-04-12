@@ -13,6 +13,10 @@ margin-top: -80px;
 height: 700px;
 }*/
 
+button {
+       padding: 0;
+}
+
 @keyframes appear {
 	from {
 		opacity: 0;
@@ -165,7 +169,7 @@ overflow: hidden;
 
 		.button-start-project {
 			display: inline-block;
-			margin: 3px 10px 3px 8px;
+			margin: 3px 12px 3px 10px;	 
 			button {
 				width: 150px;
 				height: 45px;

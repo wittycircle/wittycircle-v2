@@ -1,0 +1,569 @@
+.large-Modal .modal-dialog {
+  width: 900px;
+  height: 700px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 30px auto; }
+
+.small-Modal .modal-dialog {
+  width: 502px;
+  height: 700px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 30px auto; }
+
+/*** ABOUT PART ***/
+#profile-about-body {
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -kthtml-animation-duration: 0.5s;
+  animation-duration: 0.5s; }
+  #profile-about-body .profile-body-nav {
+    border-bottom: 1px solid #e5e5e5; }
+    #profile-about-body .profile-body-nav li {
+      display: inline-block;
+      font-family: 'FreigBook';
+      font-size: 18px;
+      padding: 15px 20px;
+      color: #999999;
+      cursor: pointer; }
+    #profile-about-body .profile-body-nav img {
+      display: inline-block;
+      width: 18px;
+      height: auto;
+      float: right;
+      margin-top: 18px;
+      margin-right: 20px;
+      outline: 0; }
+  #profile-about-body button {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    background-color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    border-radius: 4px;
+    padding: 6px 15px 8px 15px;
+    color: white; }
+  #profile-about-body button:hover {
+    border: 1px solid #d94242;
+    background-color: #d94242; }
+  #profile-about-body .disabled-button {
+    opacity: 0.3;
+    cursor: default; }
+  #profile-about-body h4 {
+    font-family: 'FreigBook';
+    font-size: 18px;
+    color: #222222; }
+  #profile-about-body .profile-about-status {
+    padding: 25px 30px;
+    text-align: left; }
+    #profile-about-body .profile-about-status .profile-status-general {
+      padding: 0 15px;
+      text-align: center; }
+      #profile-about-body .profile-about-status .profile-status-general .ssa {
+        display: inline-block; }
+        #profile-about-body .profile-about-status .profile-status-general .ssa h1 {
+          font-family: 'FreigLight';
+          font-size: 36px;
+          color: #222222; }
+      #profile-about-body .profile-about-status .profile-status-general .ssa2 {
+        margin-left: 5px;
+        cursor: pointer; }
+        #profile-about-body .profile-about-status .profile-status-general .ssa2 h1 {
+          display: inline-block;
+          border-bottom: 1px solid #416299;
+          color: #416299;
+          text-transform: lowercase; }
+        #profile-about-body .profile-about-status .profile-status-general .ssa2 img {
+          display: inline-block;
+          position: relative;
+          margin-left: 4px;
+          bottom: 3px;
+          width: 15px;
+          height: auto;
+          -webkit-transition-duration: 0.2s;
+          -o-transition-duration: 0.2s;
+          -moz-transition-duration: 0.2s;
+          -ms-transition-duration: 0.2s;
+          -kthtml-transition-duration: 0.2s;
+          transition-duration: 0.2s; }
+      #profile-about-body .profile-about-status .profile-status-general .profile-status-dropdown {
+        display: inline-block; }
+        #profile-about-body .profile-about-status .profile-status-general .profile-status-dropdown .ssa2-dropdown {
+          position: absolute;
+          display: none;
+          margin-left: 10px;
+          margin-top: 4px;
+          background-color: white;
+          border-radius: 8px;
+          box-shadow: 0px 2px 8px #e5e5e5;
+          text-align: left; }
+          #profile-about-body .profile-about-status .profile-status-general .profile-status-dropdown .ssa2-dropdown li {
+            border-radius: 4px;
+            padding: 5px 20px;
+            font-family: 'FreigBook';
+            font-size: 18px;
+            color: #999999;
+            cursor: pointer; }
+          #profile-about-body .profile-about-status .profile-status-general .profile-status-dropdown .ssa2-dropdown li:hover {
+            background-color: #f5f5f5; }
+      #profile-about-body .profile-about-status .profile-status-general .profile-status-area1 {
+        margin-top: 15px; }
+      #profile-about-body .profile-about-status .profile-status-general .profile-status-area2 {
+        margin-top: 10px; }
+  #profile-about-body .profile-about-aboutarea {
+    text-align: left;
+    padding: 10px 30px; }
+    #profile-about-body .profile-about-aboutarea h4 {
+      margin: 0 15px; }
+    #profile-about-body .profile-about-aboutarea .profile-aboutarea-text {
+      padding: 0 15px;
+      margin-top: 20px; }
+      #profile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea {
+        width: 100%;
+        height: 150px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 10px 15px;
+        resize: none;
+        font-family: 'FreigBook';
+        font-size: 16px; }
+      #profile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea:focus {
+        outline: none; }
+  #profile-about-body .profile-about-button {
+    padding: 10px 30px 20px 30px;
+    text-align: center; }
+    #profile-about-body .profile-about-button button {
+      display: inline-block; }
+    #profile-about-body .profile-about-button span {
+      margin-right: 20px;
+      font-family: 'FreigBook';
+      font-size: 18px;
+      color: #999999;
+      cursor: pointer; }
+
+/***** SKILL PART *****/
+#profile-skill-body {
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -kthtml-animation-duration: 0.5s;
+  animation-duration: 0.5s; }
+  #profile-skill-body .profile-body-nav {
+    border-bottom: 1px solid #e5e5e5; }
+    #profile-skill-body .profile-body-nav li {
+      display: inline-block;
+      font-family: 'FreigBook';
+      font-size: 18px;
+      padding: 15px 20px;
+      color: #999999;
+      cursor: pointer; }
+    #profile-skill-body .profile-body-nav img {
+      display: inline-block;
+      width: 18px;
+      height: auto;
+      float: right;
+      margin-top: 18px;
+      margin-right: 20px;
+      outline: 0; }
+  #profile-skill-body button {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    background-color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    border-radius: 4px;
+    padding: 6px 15px 8px 15px;
+    color: white; }
+  #profile-skill-body button:hover {
+    border: 1px solid #d94242;
+    background-color: #d94242; }
+  #profile-skill-body .disabled-button {
+    opacity: 0.3;
+    cursor: default; }
+  #profile-skill-body .profile-skill-search {
+    padding: 20px 50px 20px 50px; }
+    #profile-skill-body .profile-skill-search .profile-skill-header {
+      margin-bottom: 20px;
+      text-align: left; }
+      #profile-skill-body .profile-skill-search .profile-skill-header h4 {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #222222; }
+    #profile-skill-body .profile-skill-search .profile-skill-inSearch {
+      text-align: left;
+      border-top: 1px solid #e5e5e5;
+      padding: 20px 0; }
+      #profile-skill-body .profile-skill-search .profile-skill-inSearch input {
+        width: 710px;
+        border: 1px solid #999999;
+        border-radius: 4px;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: #222222;
+        padding: 5px 45px;
+        background-image: url("/images/search-icon-b.svg");
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: 2% 50%; }
+    #profile-skill-body .profile-skill-search .profile-skill-select {
+      padding-bottom: 10px; }
+      #profile-skill-body .profile-skill-search .profile-skill-select li {
+        background-color: #222222; }
+      #profile-skill-body .profile-skill-search .profile-skill-select li:hover {
+        background-color: #999999; }
+      #profile-skill-body .profile-skill-search .profile-skill-select .fa-times {
+        margin-left: 5px; }
+      #profile-skill-body .profile-skill-search .profile-skill-select .fa-times:focus {
+        outline: 0; }
+    #profile-skill-body .profile-skill-search .profile-skill-list {
+      max-height: 240px;
+      overflow: hidden; }
+      #profile-skill-body .profile-skill-search .profile-skill-list li {
+        background-color: #999999; }
+      #profile-skill-body .profile-skill-search .profile-skill-list li:hover {
+        background-color: #222222; }
+    #profile-skill-body .profile-skill-search .sss {
+      text-align: left;
+      -webkit-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      -ms-transition-duration: 0.3s;
+      -kthtml-transition-duration: 0.3s;
+      transition-duration: 0.3s; }
+      #profile-skill-body .profile-skill-search .sss li {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        cursor: pointer;
+        -webkit-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -ms-transition-duration: 0.3s;
+        -kthtml-transition-duration: 0.3s;
+        transition-duration: 0.3s; }
+        #profile-skill-body .profile-skill-search .sss li h4 {
+          font-family: 'FreigSem';
+          font-size: 14px;
+          color: white; }
+    #profile-skill-body .profile-skill-search .profile-skill-button {
+      padding: 20px 30px 10px 30px;
+      text-align: center;
+      /*button {
+      	display: inline-block;
+      	padding: 6px 30px 8px 30px;
+      }*/ }
+      #profile-skill-body .profile-skill-search .profile-skill-button span {
+        margin-right: 20px;
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #999999;
+        cursor: pointer; }
+
+/*** INTEREST PART ***/
+#profile-interest-body {
+  background-color: white;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-animation-duration: 0.5s;
+  -o-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+  -kthtml-animation-duration: 0.5s;
+  animation-duration: 0.5s; }
+  #profile-interest-body .profile-body-nav {
+    border-bottom: 1px solid #e5e5e5; }
+    #profile-interest-body .profile-body-nav li {
+      display: inline-block;
+      font-family: 'FreigBook';
+      font-size: 18px;
+      padding: 15px 20px;
+      color: #999999;
+      cursor: pointer; }
+    #profile-interest-body .profile-body-nav img {
+      display: inline-block;
+      width: 18px;
+      height: auto;
+      float: right;
+      margin-top: 18px;
+      margin-right: 20px;
+      outline: 0; }
+  #profile-interest-body button {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    background-color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    border-radius: 4px;
+    padding: 6px 15px 8px 15px;
+    color: white; }
+  #profile-interest-body button:hover {
+    border: 1px solid #d94242;
+    background-color: #d94242; }
+  #profile-interest-body .disabled-button {
+    opacity: 0.3;
+    cursor: default; }
+  #profile-interest-body .profile-interest-search {
+    padding: 20px 50px 20px 50px; }
+    #profile-interest-body .profile-interest-search .profile-interest-header {
+      margin-bottom: 20px;
+      text-align: left; }
+      #profile-interest-body .profile-interest-search .profile-interest-header h4 {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #222222; }
+    #profile-interest-body .profile-interest-search .profile-interest-inSearch {
+      text-align: left;
+      border-top: 1px solid #e5e5e5;
+      padding: 20px 0; }
+      #profile-interest-body .profile-interest-search .profile-interest-inSearch input {
+        width: 710px;
+        border: 1px solid #999999;
+        border-radius: 4px;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: #222222;
+        padding: 5px 45px;
+        background-image: url("/images/search-icon-b.svg");
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: 2% 50%; }
+    #profile-interest-body .profile-interest-search .profile-interest-select {
+      padding-bottom: 10px; }
+      #profile-interest-body .profile-interest-search .profile-interest-select li {
+        background-color: #222222; }
+      #profile-interest-body .profile-interest-search .profile-interest-select li:hover {
+        background-color: #999999; }
+      #profile-interest-body .profile-interest-search .profile-interest-select .fa-times {
+        margin-left: 5px; }
+      #profile-interest-body .profile-interest-search .profile-interest-select .fa-times:focus {
+        outline: 0; }
+    #profile-interest-body .profile-interest-search .profile-interest-list {
+      max-height: 250px;
+      overflow: hidden; }
+      #profile-interest-body .profile-interest-search .profile-interest-list li {
+        background-color: white;
+        border: 1px solid #999999; }
+        #profile-interest-body .profile-interest-search .profile-interest-list li h4 {
+          color: #999999; }
+      #profile-interest-body .profile-interest-search .profile-interest-list li:hover {
+        background-color: #999999; }
+        #profile-interest-body .profile-interest-search .profile-interest-list li:hover h4 {
+          color: white; }
+    #profile-interest-body .profile-interest-search .sss {
+      text-align: left;
+      -webkit-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      -ms-transition-duration: 0.3s;
+      -kthtml-transition-duration: 0.3s;
+      transition-duration: 0.3s; }
+      #profile-interest-body .profile-interest-search .sss li {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        cursor: pointer;
+        -webkit-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -ms-transition-duration: 0.3s;
+        -kthtml-transition-duration: 0.3s;
+        transition-duration: 0.3s; }
+        #profile-interest-body .profile-interest-search .sss li h4 {
+          font-family: 'FreigSem';
+          font-size: 14px; }
+    #profile-interest-body .profile-interest-search .profile-interest-button {
+      padding: 20px 30px 10px 30px;
+      text-align: center; }
+      #profile-interest-body .profile-interest-search .profile-interest-button span {
+        margin-right: 20px;
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #999999;
+        cursor: pointer; }
+
+/*** EXPERIENCE MODAL PART ***/
+#profile-experience-modal {
+  background-color: white;
+  border-radius: 4px;
+  z-index: 100; }
+  #profile-experience-modal button {
+    font-family: 'FreigSem';
+    font-size: 17px;
+    background-color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    border-radius: 4px;
+    padding: 6px 15px 8px 15px;
+    color: white; }
+  #profile-experience-modal button:hover {
+    border: 1px solid #d94242;
+    background-color: #d94242; }
+  #profile-experience-modal p {
+    margin-top: 6px;
+    font-family: 'FreigBook';
+    font-size: 14px;
+    color: red; }
+  #profile-experience-modal .profile-modal-title {
+    background-color: #fafafa;
+    text-align: left;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    border-radius: 4px; }
+    #profile-experience-modal .profile-modal-title h3 {
+      display: inline-block;
+      font-family: "FreigBook";
+      font-size: 18px;
+      color: #222222; }
+    #profile-experience-modal .profile-modal-title img {
+      display: inline-block;
+      width: 16px;
+      float: right;
+      margin-top: 4px;
+      cursor: pointer;
+      outline: 0; }
+  #profile-experience-modal .profile-modal-body {
+    padding: 0 20px;
+    text-align: left; }
+    #profile-experience-modal .profile-modal-body label {
+      font-family: "FreigSem";
+      font-size: 14px;
+      color: #222222; }
+    #profile-experience-modal .profile-modal-body .sminput {
+      margin: 20px 0; }
+      #profile-experience-modal .profile-modal-body .sminput input {
+        width: 100%;
+        padding: 8px 15px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: #222222; }
+    #profile-experience-modal .profile-modal-body .profile-modal-period {
+      margin: 20px 0; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period h4 {
+        font-family: 'FreigBook';
+        font-size: 17px;
+        color: #999999; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown {
+        display: inline-block; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .tp-month {
+          display: inline-block;
+          width: 120px;
+          margin-right: 10px;
+          padding: 10px 15px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          background-image: url("/images/arrow-down-icon-b.svg");
+          background-repeat: no-repeat;
+          background-position: 90% 51%;
+          cursor: pointer; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-month-dropdown {
+          position: absolute;
+          height: 172px;
+          width: 120px;
+          background-color: white;
+          overflow: scroll;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          text-align: center;
+          display: none; }
+          #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-month-dropdown li {
+            font-family: 'FreigBook';
+            font-size: 17px;
+            color: #999999;
+            padding: 5px 20px;
+            cursor: pointer; }
+          #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-month-dropdown li:hover {
+            background-color: #f5f5f5; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown {
+        display: inline-block; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .tp-year {
+          display: inline-block;
+          width: 80px;
+          padding: 10px 15px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          background-image: url("/images/arrow-down-icon-b.svg");
+          background-repeat: no-repeat;
+          background-position: 90% 51%;
+          cursor: pointer; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-year-dropdown {
+          position: absolute;
+          height: 172px;
+          width: 80px;
+          background-color: white;
+          overflow: scroll;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          display: none;
+          text-align: center; }
+          #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-year-dropdown li {
+            font-family: 'FreigBook';
+            font-size: 17px;
+            color: #999999;
+            padding: 5px 20px;
+            cursor: pointer; }
+          #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-year-dropdown li:hover {
+            background-color: #f5f5f5; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-dash {
+        display: inline-block;
+        height: 4px;
+        width: 12px;
+        border-top: 1px solid #e5e5e5;
+        margin: 0 6px; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period .time-period p {
+        display: inline-block; }
+      #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-checkbox {
+        margin-top: 5px;
+        float: right;
+        margin-right: 60px; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-checkbox input[type='checkbox'] {
+          display: inline-block;
+          background-color: white;
+          border-radius: 4px;
+          border: 1px solid #999999; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-checkbox input[type='checkbox']:checked {
+          background-color: black; }
+        #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-checkbox h5 {
+          display: inline-block;
+          font-family: 'FreigBook';
+          font-size: 14px;
+          color: #999999; }
+    #profile-experience-modal .profile-modal-body .profile-modal-description {
+      margin: 30px 0; }
+      #profile-experience-modal .profile-modal-body .profile-modal-description textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px 15px;
+        font-family: 'FreigBook';
+        font-size: 16px;
+        color: #222222;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        resize: none; }
+      #profile-experience-modal .profile-modal-body .profile-modal-description textarea:focus {
+        outline: 0; }
+    #profile-experience-modal .profile-modal-body .profile-modal-button {
+      text-align: center;
+      margin-bottom: 30px; }
+      #profile-experience-modal .profile-modal-body .profile-modal-button button {
+        padding: 6px 20px 8px 20px; }
+
+/*# sourceMappingURL=profiles-modal-edit.css.map */

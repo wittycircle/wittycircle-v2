@@ -18,7 +18,7 @@
 		        </div>
 		    </div>
 
-		    <div ng-if="!resultHit.title" class="result-people" onclick="getBack()" ng-click="goToProfile(resultHit.id)">
+		    <div ng-if="!resultHit.title" class="result-people" onclick="getBack('hsf')" ng-click="goToProfile(resultHit.id)">
 		        <div class="home-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
 	            <div class="home-findPeople-content">
 	                <div class="home-findPeople-name">
@@ -34,29 +34,12 @@
 	    	<button type="submit" ng-click="moreMobile()">Show more</button>
 	    </div>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$('#scmobile').on('click', function() {
-				$('#headerCore').show();
-                $('#bodyCore').show();
-                $('#footerCore').show();
-                $('#hsfmobile').hide();
-			});
-		});
-
-		function getBack() {
-			$('#headerCore').show();
-            $('#bodyCore').show();
-            $('#footerCore').show();
-            $('#hsfmobile').hide();
-		}
-	</script>
 </section>
 
 
 <section id="hmmobile" data-ng-controller="HeaderCtrl">
 	<div class="header-dropdown-head">
-        <h4 onclick="mBackTo()">Back</h4>
+        <h4 onclick="BackTo('mail')">Back</h4>
         <img src="/images/write-icon-g.svg" alt="new message" />
     </div>
     <div class="header-dropdown-lists">
@@ -74,44 +57,12 @@
             </div>
         </div>
     </div>
-    <script>
-
-		$(document).ready(function() {
-			$('#nmcmobile').on('click', function() {
-				$('#headerCore').show();
-                $('#bodyCore').show();
-                $('#footerCore').show();
-                $('#hmmobile').hide();
-			});
-		});
-
-		// function getBack() {
-		// 	$('#headerCore').show();
-  //           $('#bodyCore').show();
-  //           $('#footerCore').show();
-  //           $('#hmmobile').hide();
-		// };
-
-		function mBackTo() {
-			var body = document.body;
-
-			$('#headerCore').show();
-            $('#bodyCore').show();
-            $('#footerCore').show();
-            $('#hmmobile').hide();
-
-            classie.toggle( body, 'body-push-right' );
-            setTimeout(function() {
-            	classie.toggle( body, 'body-push-right' );
-            }, 200)
-		};
-	</script>
 </section>
 
 
 <section id="hnmobile" data-ng-controller="HeaderCtrl">
 	<div class="header-dropdown-head">
-        <h4 onclick="nBackTo()">Back</h4>
+        <h4 onclick="BackTo()">Back</h4>
         <h5 id="hmaar" ng-click="getAllRead()">Mark As All Read <i ng-if="checkRead" class="fa fa-check"></i></h5>
     </div>
     <div class="header-dropdown-lists">
@@ -134,35 +85,4 @@
             </div>
         </div>
     </div>
-    <script>
-		$(document).ready(function() {
-			$('#ncmobile').on('click', function() {
-				$('#headerCore').show();
-                $('#bodyCore').show();
-                $('#footerCore').show();
-                $('#hnmobile').hide();
-			});
-		});
-
-		function getBack() {
-			$('#headerCore').show();
-            $('#bodyCore').show();
-            $('#footerCore').show();
-            $('#hnmobile').hide();
-		}
-
-		function nBackTo() {
-			var body = document.body;
-
-			$('#headerCore').show();
-            $('#bodyCore').show();
-            $('#footerCore').show();
-            $('#hnmobile').hide();
-
-            classie.toggle( body, 'body-push-right' );
-            setTimeout(function() {
-            	classie.toggle( body, 'body-push-right' );
-            }, 200)
-		};
-	</script>
 </section>

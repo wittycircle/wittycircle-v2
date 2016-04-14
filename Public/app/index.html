@@ -85,8 +85,7 @@
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<!--     <script src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script> -->
-    <script src="http://localhost:8001/vogue-client.js"></script>
+    <!-- <script src="http://localhost:8001/vogue-client.js"></script> -->
   </head>
   <body class="cbp-spmenu-push">
     <!--[if lte IE 8]>
@@ -101,7 +100,7 @@
         <section id="bodyCore" ui-view autoscroll="true"></section>
         <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en" async defer></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
@@ -134,7 +133,7 @@
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
     <script src="bower_components/angular-redactor/angular-redactor.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
@@ -152,6 +151,7 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app})  scripts/scripts.js-->
+    <script src="scripts/general.js" async></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/witty.custom.filter.js"></script>
     <script src="scripts/cloudinary_config.js"></script>

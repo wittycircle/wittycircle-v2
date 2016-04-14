@@ -475,13 +475,58 @@
       display: none; }
     #header-section #header-content .header-log-off {
       display: none; }
+    #header-section #header-content #hlon {
+      display: none; }
     #header-section #header-content .header-log-off-mobile {
       display: inline-block;
       position: relative;
       float: right;
       top: 8px; }
+      #header-section #header-content .header-log-off-mobile .header-mobile-bubble {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ff4d4d;
+        border-radius: 50%;
+        margin-left: 12px;
+        margin-top: 4px; }
       #header-section #header-content .header-log-off-mobile img {
         width: 20px; }
+    #header-section #header-content .header-log-aside {
+      overflow: scroll; }
+      #header-section #header-content .header-log-aside .log-on .log-on-list h2 {
+        margin-top: 25px;
+        font-family: "FreigMed";
+        font-size: 21px;
+        color: black;
+        padding-bottom: 10px; }
+      #header-section #header-content .header-log-aside .log-on .log-on-list .header-log-avatar {
+        margin-bottom: 20px; }
+        #header-section #header-content .header-log-aside .log-on .log-on-list .header-log-avatar img {
+          border-radius: 50%; }
+      #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs {
+        margin-bottom: 10px; }
+        #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-mail,
+        #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-notif {
+          display: inline-block; }
+        #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-mobile-buble {
+          position: absolute;
+          margin-left: 25px;
+          margin-top: -5px;
+          font-family: 'Arial';
+          font-weight: 600;
+          font-size: 12px;
+          border-radius: 10px;
+          text-align: center;
+          padding: 1px 7px;
+          color: white;
+          background-color: #ff4d4d; }
+        #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs img {
+          width: 25px;
+          height: auto;
+          margin: 0 10px; }
+      #header-section #header-content .header-log-aside .log-on .log-on-list .header-mobile-menu li {
+        display: block; }
     #header-section #header-content #cbp-spmenu-s2 {
       display: inline-block;
       border-left: 1px solid #999999; }

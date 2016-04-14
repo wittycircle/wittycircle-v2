@@ -9,7 +9,7 @@
     <meta name="description" content="{{ seo.pageDescription }}"/>
     <meta name="keywords" content="wittycircle, witty, circle, creator, marketplace, idea, live, beta, drafted, project, place, crowdfunding, feedback, ask, support, discover, meet, work, network, designer, writer, developer, engineer, investment" />
     <meta name="robots" content="all" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="language" content="english" />
     <meta name="Copyright" content="Wittygroup SAS" />
     <meta name="Distribution" content="Global" />
@@ -85,11 +85,12 @@
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script>
+<!--     <script src="https://code.jquery.com/jquery-2.2.1.min.js"   integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="   crossorigin="anonymous"></script> -->
+    <script src="http://localhost:8001/vogue-client.js"></script>
   </head>
   <body class="cbp-spmenu-push">
     <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
     <![endif]-->
 
         <div id="page-wrap"></div>
@@ -103,7 +104,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -132,21 +133,21 @@
     <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
-    <script src="bower_components/cloudinary-core/cloudinary-core.min.js"></script>
+    <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
     <script src="bower_components/angular-redactor/angular-redactor.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/classie/classie.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
     <!-- endbower -->
-    <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
-    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<!--     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
+ -->    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
+<!--     <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
+    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script> -->
     <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
     <!-- endbuild -->
 

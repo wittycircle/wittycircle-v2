@@ -84,29 +84,39 @@ app.get('/profile', ensureAuth, function(req, res) {
 			      });
 	       });
 });
-    
+
+/* AUTHENTICATION API PUBLIC */
+/* Facebook Users */
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+// app.get('/auth/facebook/callback', 
+// 	passport.authenticate('facebook', {
+// 	    successRedirect : 'http://www.wittycircle.com',
+// 	    failureRedirect : 'http://www.wittycircle.com'
+// 	}));
+
+/* Google Users */
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+// app.get('/auth/google/callback',
+// 	passport.authenticate('google', {
+// 	    successRedirect : 'http://www.wittycircle.com',
+// 	    failureRedirect : 'http://www.wittycircle.com'
+// 	}));
+
+/* AUTHENTICATION API DEV */
 /* Facebook Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {
-	    successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : 'http://www.wittycircle.com'
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
-
-/* Twitter Users */	
-/*app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback',
-        passport.authenticate('twitter', {
-            successRedirect : 'http://wittycircle.netlify.com/#/',
-            failureRedirect : '/'
-        }));*/
 
 /* Google Users */
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
 	passport.authenticate('google', {
-	    successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : 'http://www.wittycircle.com'
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
 
 /* View */

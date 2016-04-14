@@ -10,27 +10,26 @@
 angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
-  /*function checkCredential() {
+  function checkCredential() {
     if ($rootScope.globals.currentUser) {
       $http.get('/api').success(function(res) {
         if (!res.success) {
-          Authentication.ClearCredentials();
-          $location.path('/');
+          Authentication.ClearCredentials(function(res) {
+            if (res)
+              $location.path('/');
+          });
         }
       });
     }
-  }; checkCredential();*/
+  }; checkCredential();
 
    /*
    **Update in time sidebar after login
    */
-  var socket = io.connect('https://www.wittycircle.com');
+  var socket = io.connect('http://127.0.0.1:80');
   
 $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
-    if ($scope.log) {
-	$("#hlon").css('display', 'block');
-    }
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
         $scope.user = {
@@ -46,6 +45,13 @@ $rootScope.$watch('globals', function(value) {
         });
       });
     }
+  });
+
+  $scope.$on('$stateChangeStart', function(scope, next, current) {
+    $('#headerCore').show();
+    $('#bodyCore').show();
+    $('#footerCore').show();
+    $('#hsfmobile').hide();
   });
 
    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
@@ -105,7 +111,8 @@ $rootScope.$watch('globals', function(value) {
       .success(function(response) {
         if (response.success) {
           Authentication.ClearCredentials(function(res) {
-            window.location.replace('https://www.wittycircle.com');
+            if (res)
+              window.location.replace('https://www.wittycircle.com');
           });
         }
       }).error(function (response) {

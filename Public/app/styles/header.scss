@@ -731,14 +731,87 @@
 				display: none;
 			}
 
+			#hlon {
+				display: none;
+			}
+
 			.header-log-off-mobile {
 				display: inline-block;
 				position: relative;
 				float: right;
 				top: 8px;
 
+				.header-mobile-bubble {
+					position: absolute;
+					width: 10px;
+					height: 10px;
+					background-color: #ff4d4d;
+					border-radius: 50%;
+					margin-left: 12px;
+					margin-top: 4px;
+				}
+
 				img {
 					width: 20px;
+				}
+			}
+
+			.header-log-aside {
+				overflow: scroll;
+				.log-on {
+
+					.log-on-list {
+						h2 {
+							margin-top: 25px;
+							font-family: "FreigMed";
+							font-size: 21px;
+							color: black;
+							padding-bottom: 10px;
+						}
+
+						.header-log-avatar {
+							margin-bottom: 20px;
+
+							img {
+								border-radius: 50%;
+							}
+						}
+
+						.log-on-notifs {
+							margin-bottom: 10px;
+
+							.log-on-mail,
+							.log-on-notif {
+								display: inline-block;	
+							}
+
+							.log-mobile-buble {
+								position: absolute;
+								margin-left: 25px;
+								margin-top: -5px;
+								font-family: 'Arial';
+								font-weight: 600;
+								font-size: 12px;
+								border-radius: 10px;
+								text-align: center;
+								padding: 1px 7px;
+								color: white;
+								background-color: #ff4d4d;
+							}
+
+							img {
+								width: 25px;
+								height: auto;
+								margin: 0 10px;
+							}
+						}
+
+						.header-mobile-menu {
+							li {
+								display: block;
+							}
+						}
+					}
 				}
 			}
 

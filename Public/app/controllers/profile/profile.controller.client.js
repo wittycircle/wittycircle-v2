@@ -9,7 +9,7 @@
  **/
 angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal, $state, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, showbottomAlert, Skills, Interests, Locations, Projects) {
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1:80');
     
     if (!$rootScope.globals.currentUser || ($rootScope.globals.currentUser && $rootScope.globals.currentUser.username !== $stateParams.username))
       Users.getProfileView($stateParams.username);

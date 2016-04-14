@@ -71,7 +71,7 @@ exports.getFollowUser = function(req, res) {
 	pool.query('SELECT * FROM user_followers WHERE user_id = ? && follow_user_id IN (SELECT id FROM users WHERE username = ?)', [req.user.id, req.params.username],
 		   function(err, result) {
 		       if (err) throw err;
-		       if (result.length)
+		       if (result.length) 
 			   res.send({success: true});
 		       else
 			   res.send({success: false});

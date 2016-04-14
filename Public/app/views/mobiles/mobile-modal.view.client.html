@@ -1,12 +1,11 @@
+
 <section id="hsfmobile" data-ng-controller="HeaderCtrl">
-	<div class="home-mobile-search">
 		<div id="scmobile" class="searchCrossMobile"></div>
 		<input class="home-searchField-mobile" type="search" placeholder="Search for projects and people..." ng-model="searchNameM" />
-	</div>
 	<div class="home-findField-mobile">
 		<div class="home-find-list" ng-repeat="resultHit in resultHits | limitTo : limitM">
 
-			<div ng-if="resultHit.title && resultHit.project_visibility" class="result-project" onclick="getBack()" ui-sref="viewproject({public_id: resultHit.public_id, title: encodeUrl(resultHit.title)})">
+			<div ng-if="resultHit.title && resultHit.project_visibility" class="result-project" ui-sref="viewproject({public_id: resultHit.public_id, title: encodeUrl(resultHit.title)})">
 				<div class="home-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.picture_card, 60, 60, 'fill') }})'}"></div>
 				<div class="home-findProject-content">
 		            <div class="home-findProject-title">
@@ -51,5 +50,119 @@
             $('#footerCore').show();
             $('#hsfmobile').hide();
 		}
+	</script>
+</section>
+
+
+<section id="hmmobile" data-ng-controller="HeaderCtrl">
+	<div class="header-dropdown-head">
+        <h4 onclick="mBackTo()">Back</h4>
+        <img src="/images/write-icon-g.svg" alt="new message" />
+    </div>
+    <div class="header-dropdown-lists">
+        <div ng-if="!dialogues.length" class="header-noMessage-text">
+            <p>No message yet</p>
+        </div>
+        <div class="header-dropdown-list" href ng-click="showMessagePage(dialogue)" class='mnd-all' ng-class="{ 'unread-active' : !dialogue.read && dialogue.sender != currentUsername }" ng-repeat="dialogue in dialogues track by $index">
+            <div class="header-list-picture">
+                <img ng-if="dialogue.pic" ng-src="{{ resizePic(dialogue.pic, 48, 48, 'fill') }}" alt="header-message-avatar">
+            </div>
+            <div class="header-list-message">
+                <h4>{{dialogue.to_username}}</h4>
+                <p>{{dialogue.last_message}}</p>
+                <span>{{dialogue.date}}</span>
+            </div>
+        </div>
+    </div>
+    <script>
+
+		$(document).ready(function() {
+			$('#nmcmobile').on('click', function() {
+				$('#headerCore').show();
+                $('#bodyCore').show();
+                $('#footerCore').show();
+                $('#hmmobile').hide();
+			});
+		});
+
+		// function getBack() {
+		// 	$('#headerCore').show();
+  //           $('#bodyCore').show();
+  //           $('#footerCore').show();
+  //           $('#hmmobile').hide();
+		// };
+
+		function mBackTo() {
+			var body = document.body;
+
+			$('#headerCore').show();
+            $('#bodyCore').show();
+            $('#footerCore').show();
+            $('#hmmobile').hide();
+
+            classie.toggle( body, 'body-push-right' );
+            setTimeout(function() {
+            	classie.toggle( body, 'body-push-right' );
+            }, 200)
+		};
+	</script>
+</section>
+
+
+<section id="hnmobile" data-ng-controller="HeaderCtrl">
+	<div class="header-dropdown-head">
+        <h4 onclick="nBackTo()">Back</h4>
+        <h5 id="hmaar" ng-click="getAllRead()">Mark As All Read <i ng-if="checkRead" class="fa fa-check"></i></h5>
+    </div>
+    <div class="header-dropdown-lists">
+        <div ng-if="!listNotifs.length" class="header-noNotif-text">
+            <p>Nothing happened yet</p>
+        </div>
+        <div class="header-dropdown-list" href="" onclick="getBack()" ng-click="showUserProfile(listNotif.user_notif_id, listNotif.user_followed_id, listNotif.type_notif, listNotif.project_id, listNotif.n_read)" ng-repeat="listNotif in listNotifs" ng-class="{ 'unread-active' : !listNotif.n_read }">
+            <div class="header-list-picture">
+                <img ng-src="{{ resizePic(listNotif.pic, 48, 48, 'fill') }}" alt="header-notif-avatar">
+            </div>
+            <div class="header-list-message">
+                <h4>{{listNotif.user_notif_username}}</h4>
+                <h5 ng-if="listNotif.type_notif === 'u_follow'">is now following you.</h5>
+                <h5 ng-if="listNotif.type_notif === 'view'">viewed your profile.</h5>
+                <h5 ng-if="listNotif.type_notif === 'p_follow'">followed <strong>{{listNotif.project_title}}</strong></h5>
+                <h5 ng-if="listNotif.type_notif === 'p_user_follow'">followed <strong>{{listNotif.project_title}}</strong> </h5>
+                <h5 ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></h5>
+                <h5 ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></h5>
+                <p>{{listNotif.date_of_view | wittyDateFilter}}<p>
+            </div>
+        </div>
+    </div>
+    <script>
+		$(document).ready(function() {
+			$('#ncmobile').on('click', function() {
+				$('#headerCore').show();
+                $('#bodyCore').show();
+                $('#footerCore').show();
+                $('#hnmobile').hide();
+			});
+		});
+
+		function getBack() {
+			$('#headerCore').show();
+            $('#bodyCore').show();
+            $('#footerCore').show();
+            $('#hnmobile').hide();
+		}
+
+		function nBackTo() {
+			var body = document.body;
+
+			$('#headerCore').show();
+            $('#bodyCore').show();
+            $('#footerCore').show();
+            $('#hnmobile').hide();
+
+            classie.toggle( body, 'body-push-right' );
+            setTimeout(function() {
+            	classie.toggle( body, 'body-push-right' );
+            }, 200)
+		};
 	</script>
 </section>

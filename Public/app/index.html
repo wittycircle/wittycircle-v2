@@ -27,38 +27,38 @@
 
     <base href="/">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/css/vendor.css -->
+    <!-- build:css(.) styles//vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/oi.select/dist/select.min.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/css/main.css -->
-    <link rel="stylesheet" href="styles/css/main.css" />
-    <link rel="stylesheet" href="styles/css/projects.css" />
-    <link rel="stylesheet" href="styles/css/signup.css" />
-    <link rel="stylesheet" href="styles/css/home.css" />
-    <link rel="stylesheet" href="styles/css/myProjects.css" />
-    <link rel="stylesheet" href="styles/css/custom-select.css" />
-    <link rel="stylesheet" href="styles/css/create-project.css" />
-    <link rel="stylesheet" href="styles/css/messaging.css" />
-    <link rel="stylesheet" href="styles/css/footer.css" />
-    <link rel="stylesheet" href="styles/css/bfooter.css" />
-    <link rel="stylesheet" href="styles/css/profiles.css" />
-    <link rel="stylesheet" href="styles/css/profiles-modal-edit.css" />
-    <link rel="stylesheet" href="styles/css/setting.css" />
-    <link rel="stylesheet" href="styles/css/header.css" />
-    <link rel="stylesheet" href="styles/css/witty-animate.css" />
-    <link rel="stylesheet" href="styles/css/animate.css">
-    <link rel="stylesheet" href="styles/css/_scss/redactor.css" />
-    <link rel="stylesheet" href="styles/css/presentation.css" />
-    <link rel="stylesheet" href="styles/css/modal.css" />
-    <link rel="stylesheet" href="styles/css/card.css" />
-    <link rel="stylesheet" href="styles/css/video_custom.css" />
-    <link rel="stylesheet" href="styles/css/terms.css" />
-    <link rel="stylesheet" href="styles/css/popover.css" />
-    <link rel="stylesheet" href="styles/css/mobile-modal.css" />
+    <!-- build:css(.tmp) styles//main.css -->
+    <link rel="stylesheet" href="styles//main.css" />
+    <link rel="stylesheet" href="styles//projects.css" />
+    <link rel="stylesheet" href="styles//signup.css" />
+    <link rel="stylesheet" href="styles//home.css" />
+    <link rel="stylesheet" href="styles//myProjects.css" />
+    <link rel="stylesheet" href="styles//custom-select.css" />
+    <link rel="stylesheet" href="styles//create-project.css" />
+    <link rel="stylesheet" href="styles//messaging.css" />
+    <link rel="stylesheet" href="styles//footer.css" />
+    <link rel="stylesheet" href="styles//bfooter.css" />
+    <link rel="stylesheet" href="styles//profiles.css" />
+    <link rel="stylesheet" href="styles//profiles-modal-edit.css" />
+    <link rel="stylesheet" href="styles//setting.css" />
+    <link rel="stylesheet" href="styles//header.css" />
+    <link rel="stylesheet" href="styles//witty-animate.css" />
+    <link rel="stylesheet" href="styles//animate.css">
+    <link rel="stylesheet" href="styles//_scss/redactor.css" />
+    <link rel="stylesheet" href="styles//presentation.css" />
+    <link rel="stylesheet" href="styles//modal.css" />
+    <link rel="stylesheet" href="styles//card.css" />
+    <link rel="stylesheet" href="styles//video_custom.css" />
+    <link rel="stylesheet" href="styles//terms.css" />
+    <link rel="stylesheet" href="styles//popover.css" />
+    <link rel="stylesheet" href="styles//mobile-modal.css" />
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -102,10 +102,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en" async defer></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -128,13 +127,14 @@
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/classie/classie.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <script src="bower_components/oi.select/dist/select-tpls.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
 <!--     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
  -->    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
@@ -217,10 +217,11 @@
     <script src="directives/uisrefif.directive.client.js"></script>
     <!-- script custom -->
     <script src="scripts/draggable_background.js"></script>
+    <!-- endbuild -->
+
     <!-- algolia angular -->
     <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
-    <!-- endbuild -->
-    
+
     <!-- DOM -->
     <script>
         window.prerenderReady = true;

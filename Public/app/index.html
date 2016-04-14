@@ -84,7 +84,6 @@
 
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <!-- <script src="http://localhost:8001/vogue-client.js"></script> -->
   </head>
   <body class="cbp-spmenu-push">
@@ -106,6 +105,7 @@
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -113,17 +113,12 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
-    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="bower_components/oi.select/dist/select-tpls.min.js"></script>
     <script src="bower_components/angular-custom-select/dist/angular-custom-select.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/angular-css/angular-css.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/videogular/videogular.js"></script>
@@ -133,12 +128,13 @@
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
-    <script src="bower_components/angular-redactor/angular-redactor.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/classie/classie.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/oi.select/dist/select-tpls.min.js"></script>
     <!-- endbower -->
 <!--     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
  -->    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
@@ -151,8 +147,8 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app})  scripts/scripts.js-->
-    <script src="scripts/general.js" async></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/general.js"></script>
     <script src="scripts/witty.custom.filter.js"></script>
     <script src="scripts/cloudinary_config.js"></script>
     <!-- including config module before the rest of the module and right after the main module -->
@@ -160,9 +156,9 @@
     <!-- routes -->
     <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js"></script>
     <!-- services -->
+    <script src="scripts/socket.io.js"></script>
     <script src="scripts/redactor/redactor.js"></script>
     <script src="services/users.service.client.js"></script>
-    <script src="services/io.service.client.js"></script>
     <script src="services/authentication.service.client.js"></script>
     <script src="services/projects.service.client.js"></script>
     <script src="services/data_auth.service.client.js"></script>
@@ -176,7 +172,6 @@
     <script src="services/public_id.service.client.js"></script>
     <script src="services/beauty_encode.service.client.js"></script>
     <script src="services/getCategoryName.service.client.js"></script>
-    <script src="services/header.service.client.js"></script>
     <script src="services/notification.service.client.js"></script>
     <script src="services/feedbacks.service.client.js"></script>
     <script src="services/showbottomAlert.service.client.js"></script>
@@ -216,18 +211,16 @@
     <script src="controllers/projects/my_projects.controller.client.js"></script>
     <script src="controllers/presentation/discover.controller.client.js"></script>
     <script src="controllers/projects/modal/add-needs.controller.client.js"></script>
-    <script src="controllers/core/terms.controller.client.js"></script>
-    <script src="controllers/core/privacy.controller.client.js"></script>
     <script src="controllers/projects/modal/delete-project.controller.client.js"></script>
 
 	  <!-- directives -->
-    <script src="directives/redactor/redactor.directive.client.js"></script>
     <script src="directives/uisrefif.directive.client.js"></script>
     <!-- script custom -->
     <script src="scripts/draggable_background.js"></script>
+    <!-- algolia angular -->
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
     <!-- endbuild -->
-
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
+    
     <!-- DOM -->
     <script>
         window.prerenderReady = true;

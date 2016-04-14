@@ -7,7 +7,9 @@
  * # HeaderCtrl
  * Controller of the wittyApp
  **/
-angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
+angular.module('wittyApp')
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'showbottomAlert', '$mdBottomSheet', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
+  function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
   function checkCredential() {
@@ -416,4 +418,4 @@ $rootScope.$watch('globals', function(value) {
           document.getElementById('notifMailbox').style.display = "none";
       }
     });
-});
+}]);

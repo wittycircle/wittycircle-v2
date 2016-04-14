@@ -4,6 +4,7 @@ console.log("You're looking under the ground, find a bug ? Help us to improve ou
 var wittyCircleApp = angular
   .module('wittyApp', [
       // Assets Modules
+      'ui.bootstrap',
       'ngAnimate',
       'ngAria',
       'ngCookies',
@@ -11,14 +12,11 @@ var wittyCircleApp = angular
       'ngRoute',
       'ngSanitize',
       'ngTouch',
-      'ui.bootstrap',
       'ui.router',
       'ngMaterial',
-      'ngMap',
       'ngFileUpload',
       'angular-toArrayFilter',
       'algoliasearch',
-      'door3.css',
       'angularMoment',
       'com.2fdevs.videogular',
       'com.2fdevs.videogular.plugins.controls',
@@ -186,12 +184,10 @@ var wittyCircleApp = angular
       .state('terms', {
         url: '/terms',
         templateUrl: 'views/core/terms.view.client.html',
-        controller: 'TermsCtrl'
       })
       .state('privacy', {
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
-        controller: 'PrivacyCtrl'
       })
       .state('profile', {
         url: '/:username',

@@ -306,7 +306,6 @@
 		});
 
 		$scope.$watch('dmobile.general', function(value) {
-			console.log(value);
 			if (value)
 				$('body').css('overflow', 'hidden');
 			else

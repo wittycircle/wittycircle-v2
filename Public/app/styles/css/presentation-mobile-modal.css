@@ -35,6 +35,6 @@
     position: relative;
     top: 50px;
     height: 400px;
-    overflow: auto; }
+    overflow: scroll; }
 
 /*# sourceMappingURL=presentation-mobile-modal.css.map */

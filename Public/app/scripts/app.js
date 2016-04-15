@@ -4,7 +4,6 @@ console.log("You're looking under the ground, find a bug ? Help us to improve ou
 var wittyCircleApp = angular
   .module('wittyApp', [
       // Assets Modules
-      'ui.bootstrap',
       'ngAnimate',
       'ngAria',
       'ngCookies',
@@ -13,6 +12,7 @@ var wittyCircleApp = angular
       'ngSanitize',
       'ngTouch',
       'ui.router',
+      'ui.bootstrap',
       'ngMaterial',
       'ngFileUpload',
       'angular-toArrayFilter',

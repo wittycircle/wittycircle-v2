@@ -1,8 +1,8 @@
 <header id="header-section" data-ng-controller="HeaderCtrl">
     <section id="header-content" class="cbp-spmenu-push">
-    	<div id="hsmobile" class="header-searchBar-mobile">
-    		<figure>
-            	<img src="/images/search-icon-w.svg">
+        <div id="hsmobile" class="header-searchBar-mobile">
+            <figure>
+                <img src="/images/search-icon-w.svg">
             </figure>
         </div>
 
@@ -35,10 +35,10 @@
             <img src="/images/littleman.svg">
         </div>
         <nav class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-<!-- 			<h3>Menu</h3> -->
+<!--            <h3>Menu</h3> -->
             <div class="log-of" ng-hide="log">
-    			<a id="mologin" href="">Log In</a>
-    			<a id="mosignup" href="" ng-click="opensignup('lg')">Sign Up</a>
+                <a id="mologin" href="">Log In</a>
+                <a id="mosignup" href="" ng-click="opensignup('lg')">Sign Up</a>
             </div>
             <div class="log-on" ng-hide="!log">
                 <div class="log-on-list">
@@ -64,7 +64,7 @@
                     </ul>
                 </div>
             </div>
-		</nav>
+        </nav>
         <nav class="header-log-off" ng-hide="log">
             <ul id='hnlog' class="header-nav-log">
                 <li class="lsu"><a id="mologin" href="">Log In</a></li>
@@ -200,4 +200,6 @@
             </div>
         </div>
     </section>
+
+    <script src="js/header.dom.js"></script>
 </header>

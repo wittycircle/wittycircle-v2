@@ -319,20 +319,21 @@
             color: #222222; }
   #header-section #header-findField {
     display: none;
-    position: relative;
+    position: absolute;
     z-index: -1;
-    -webkit-animation-duration: 250ms;
-    -moz-animation-duration: 250ms;
-    margin-right: auto;
-    margin-left: auto;
-    max-height: 615px;
     width: 660px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-height: 615px;
     background-color: white;
     border-top: 1px dashed #e5e5e5;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     box-shadow: 0px 5px 10px #999999;
-    overflow: hidden; }
+    overflow: hidden;
+    -webkit-animation-duration: 250ms;
+    -moz-animation-duration: 250ms; }
     #header-section #header-findField .header-notFound {
       text-align: center; }
       #header-section #header-findField .header-notFound h5 {

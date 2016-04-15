@@ -110,7 +110,7 @@
 		    		pageTitle: vm.project.title,
 		    		pageDescription: vm.project.description
 				};
-		
+
 				$scope.$parent.card = {
 		    		title: vm.project.title,
 		    		url: $location.absUrl(),
@@ -232,6 +232,7 @@
                 if (vm.project.public_id) {
                     if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
                         Project_Follow.followProject(vm.project.public_id, function (response) {
+                            console.log(response);
                             if (response.success) {
                                 if (response.msg === 'Project followed')
                                     vm.followText = 'Following';

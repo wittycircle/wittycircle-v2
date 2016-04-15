@@ -31,7 +31,7 @@ exports.sortProjectCard = function(data, callback) {
             pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
               function(err, result) {
                 if (err) throw err;
-                  pool.query('SELECT user_id FROM project_users WHERE project_id = ?', data[index].id,
+                  pool.query('SELECT user_id FROM project_users WHERE project_id = ? AND n_read = 1', data[index].id,
                     function(err, list_user_id) {
                       if (err) throw err;
                       getUsersInProject(list_user_id, function(username_list) {

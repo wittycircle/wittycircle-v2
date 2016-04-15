@@ -7,7 +7,7 @@ var _             = require('underscore');
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
     if (elem) {
-        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem, 
+        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -21,7 +21,7 @@ function getUsername(elem, callback) {
 
 function getProjectTitle(elem, callback) {
     if (elem) {
-        pool.query("SELECT title FROM projects WHERE id = ?", elem, 
+        pool.query("SELECT title FROM projects WHERE id = ?", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -76,7 +76,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` ORDER BY view DESC",
+    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 ORDER BY view DESC",
     function (err, results, fields) {
         if (err) {
 	    var date = new Date();
@@ -200,7 +200,7 @@ exports.getProjectsFromCategory = function(req, res){
 exports.getProjectsCreatedByUser = function(req, res){
     req.checkParams('user_id', 'User id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
-    if (errors) { 
+    if (errors) {
         return res.status(400).send(errors);
     }
     else {
@@ -466,7 +466,7 @@ exports.deleteUserInvolved = function(req, res) {
 			    });
 			});
                     });
-		    
+
 		});
 	});
     }
@@ -555,7 +555,7 @@ exports.updateProject = function(req, res){
 	return res.status(400).send(errors);
     } else {
         pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
-            if (err) { 
+            if (err) {
                 var date = new Date();
                 console.log(date);
                 console.log("Error getting projects in projects.js/createProject");

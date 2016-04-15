@@ -22,24 +22,33 @@
         <div class="old-dash"></div>
     </div>
     <form>
-    <div class="login-modal-email">
-        <p ng-if="!lf">Incorrect password/email</p>
-        <div class="email-input">
-            <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
-            <p ng-if='!lef'>This is a required field</p>
+        <div class="login-modal-email">
+            <p ng-if="!lf">Incorrect password/email</p>
+            <div class="email-input">
+                <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
+                <p ng-if='!lef'>This is a required field</p>
+            </div>
+            <div class="password-input">
+                <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
+                <p ng-if='!lpf'>This is a required field</p>
+            </div>
+            <div class="forgot-password">
+                <p data-ng-click="showResetPassword()" data-ng-bind="TextReset"></p>
+            </div>
+            <div data-ng-show="showReset">
+                <input type="text" ng-model='ereset' placeholder="E-mail used for your account"/>
+            </div>
+            <div data-ng-show="validateReset === true">
+                <span class="validate-p" data-ng-bind="textValidateReset">
+            </div>
+            <div data-ng-show="validateReset === 2">
+                <p class="validate-p" data-ng-bind="textValidateReset"></p>
+            </div>
         </div>
-        <div class="password-input">
-            <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
-            <p ng-if='!lpf'>This is a required field</p>
+        <div class="login-modal-footer">
+            <button ng-click='login()' data-ng-bind="textButton"></button>
+            <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
         </div>
-        <div class="forgot-password">
-            <p>Forgot password?</p>
-        </div>
-    </div>
-    <div class="login-modal-footer">
-        <button type="submit" ng-click='login()'>Log In</button>
-        <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
-    </div>
     </form>
     <script>
         $(function() {

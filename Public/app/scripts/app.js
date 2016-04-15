@@ -29,7 +29,8 @@ var wittyCircleApp = angular
       'oc.lazyLoad',
       '720kb.socialshare',
       // Custom modules
-      'wittyProjectModule'
+      'wittyProjectModule',
+      'wittyValidateAccountModule'
    ])
     .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
 	$stateProvider
@@ -65,6 +66,16 @@ var wittyCircleApp = angular
         params      : { tagCheckFirst: false},
         templateUrl : 'views/auth/signup.html',
         controller  : 'SignupCtrl'
+    })
+    .state('password_reset', {
+        url: '/password/reset/:token',
+        templateUrl: 'views/core/reset-password.view.client.html',
+        controller: 'ResetPasswordCtrl',
+        resolve: {
+            access: function($q, $rootScope, Authentication, $stateParams) {
+                return Authentication.ResetPasswordTokenValidation($stateParams.token);
+            }
+        }
     })
     .state('setting', {
         url: '/setting',

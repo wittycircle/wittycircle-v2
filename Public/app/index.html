@@ -56,6 +56,7 @@
     <link rel="stylesheet" href="styles/css/video_custom.css" />
     <link rel="stylesheet" href="styles/css/terms.css" />
     <link rel="stylesheet" href="styles/css/popover.css" />
+    <link rel="stylesheet" href="styles/css/reset.css"  />
     <!-- endbuild -->
 
     <!-- Font Awesome css -->
@@ -93,399 +94,16 @@
         <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
         <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
 
-        <header id="header-section" data-ng-controller="HeaderCtrl">
-            <section id="header-content">
-                <div class="header-brand" role="navigation">
-                    <figure class="header-brand-picture">
-                        <a href="/"><img id="hbp" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg" alt="wittycircle-logo"></a>
-                    </figure>
-                </div>
+        <!-- HEADER -->
+        <div data-ng-include="'core/views/header.view.core.client.html'"></div>
 
-                <div class="header-navigation">
-                    <ul id='hnl' class="header-nav-list">
-                        <li class="normal" ><a href="/discover">Discover</a></li>
-                        <li class="normal"><a href="/meet" >Meet</a></li>
-                        <div class="list-soon">
-                            <li class="normal"><a>Work<sup>soon</sup></a></li>
-                        </div>
-                        <div class="strong-start">
-                            <li ng-click="goToStart()"><a><strong>Start</strong></a></li>
-                        </div>
-                    </ul>
-
-                    <div id='hsb' class="header-searchBar">
-                        <label for="iff"></label>
-                        <input id="iff" type="search" placeholder="Search for projects and people..." name="search" ng-model="searchName" oninput="showFindField()" autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="header-log-off" ng-hide="log">
-                    <ul id='hnlog' class="header-nav-log">
-                        <li class="lsu"><a id="mologin" href="">Log In</a></li>
-                        <li class="lsu"><a id="mosignup" href="" ng-click="opensignup('lg')">Sign Up</a></li>
-                    </ul>
-                </div>
-
-                <div id="hlon" class="header-log-on" ng-show="log" style="display: none">
-                    <div class="header-notif-mail">
-                        <div id="hlogn" class="header-log-notif header-notification" ng-click="getNotifListOnClick()">
-                            <img id="notif-w-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png" alt="notif-waves">
-                            <div id="notifBubble" class="header-bubble">{{notifBubble}}</div>
-                        </div>
-                        <div id="hlogm" class="header-log-mailbox header-notification" ng-click="getMesssageListOnClick()">
-                            <img id="notif-m-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png" alt="notif-mailbox">
-                            <div id="notifMailbox" class="header-bubble-mailbox">{{numberNotif}}</div>
-                        </div>
-                    </div>
-                    <div id="hlo" class="header-user" ng-class="{'header-user2': !user.profile_picture}">
-                        <figure ng-if="user.profile_picture" id="hlo" class="header-log-avatar">
-                            <img id="hlo" ng-src="{{ resizePic(user.profile_picture, 36, 36, 'fill') }}" alt="profile-avatar">
-                        </figure>
-                        <a id="hlo" class="header-log-dropdown" id="dropdownMenu1">
-                        {{user.first_name}} {{user.last_name}}
-                            <span class="caret-home"><img id="c-img" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg" alt="caret-icon"></span>
-                        </a>
-                        <ul id="hdmenu" class="header-dropdown-menu" style="display: none;">
-                            <li><a href="" data-ui-sref="profile({username: user.username})">My Profile</a></li>
-                            <li><a href="/my-projects">Projects</a></li>
-                            <li><a href="/setting">Settings</a></li>
-                            <li><a ng-click="logout()">Log out</a></li>
-                        </ul>
-                    </div>
-                    <div id="hdropm" class="header-dropdown-mailbox header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()" style="display: none;">
-                        <div class="header-dropdown-head">
-                            <h4>Inbox</h4>
-                            <a href="/messages">Write A New Message</a>
-                        </div>
-                        <div class="header-dropdown-lists">
-                            <div ng-if="!dialogues.length" class="header-noMessage-text">
-                                <p>No message yet</p>
-                            </div>
-                            <div class="header-dropdown-list" href ng-click="showMessagePage(dialogue)" class='mnd-all' ng-class="{ 'unread-active' : !dialogue.read && dialogue.sender != currentUsername }" ng-repeat="dialogue in dialogues track by $index">
-                                <div class="header-list-picture">
-                                    <img ng-if="dialogue.pic" ng-src="{{ resizePic(dialogue.pic, 48, 48, 'fill') }}" alt="header-message-avatar">
-                                </div>
-                                <div class="header-list-message">
-                                    <h4>{{dialogue.to_username}}</h4>
-                                    <p>{{dialogue.last_message}}</p>
-                                    <span>{{dialogue.date}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="hdropn" class="header-dropdown-notif header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()" style="display: none;">
-                        <div class="header-dropdown-head">
-                            <h4>Notifications</h4>
-                            <h4 ng-if="notifBubble">({{notifBubble}})</h4>
-                            <h5 id="hmaar" ng-click="getAllRead()">Mark As All Read <i ng-if="checkRead" class="fa fa-check"></i></h5>
-                        </div>
-                        <div class="header-dropdown-lists">
-                            <div ng-if="!listNotifs.length" class="header-noNotif-text">
-                                <p>Nothing happened yet</p>
-                            </div>
-                            <div class="header-dropdown-list" href ng-click="showUserProfile(listNotif.user_notif_id, listNotif.user_followed_id, listNotif.type_notif, listNotif.project_id, listNotif.n_read)" ng-repeat="listNotif in listNotifs" ng-class="{ 'unread-active' : !listNotif.n_read }">
-                                <div class="header-list-picture">
-                                    <img ng-src="{{ resizePic(listNotif.pic, 48, 48, 'fill') }}" alt="header-notif-avatar">
-                                </div>
-                                <div class="header-list-message">
-                                    <h4>{{listNotif.user_notif_username}}</h4>
-                                    <h5 ng-if="listNotif.type_notif === 'u_follow'">is now following you.</h5>
-                                    <h5 ng-if="listNotif.type_notif === 'view'">viewed your profile.</h5>
-                                    <h5 ng-if="listNotif.type_notif === 'p_follow'">followed <strong>{{listNotif.project_title}}</strong></h5>
-                                    <h5 ng-if="listNotif.type_notif === 'p_user_follow'">followed <strong>{{listNotif.project_title}}</strong> </h5>
-                                    <h5 ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></h5>
-                                    <h5 ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></h5>
-                                    <p>{{listNotif.date_of_view | wittyDateFilter}}<p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="header-findField" class="animated fadeInDown">
-                <div class="header-find-projects">
-                    <div class="header-find-title">
-                        <h1>Projects</h1>
-                    </div>
-                    <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility" ui-sref="viewproject({public_id: projectHit.public_id, title: encodeUrl(projectHit.title)})">
-                        <div class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
-                        <div class="header-findProject-content">
-                            <div class="header-findProject-title">
-                                <h2>{{projectHit.title}}</h2>
-                            </div>
-                            <div class='header-findProject-tag'>
-                                <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/tag-icon_ruk5r2.png" alt="tag-icon">
-                                <h3>{{projectHit.category_name}}</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="header-find-seemore">
-                        <a href="/discover">See more projects</a>
-                    </div>
-                </div>
-
-                <div class="header-find-people">
-                    <div class="header-find-title">
-                        <h1>People</h1>
-                    </div>
-                    <div class="header-find-list" ng-repeat="peopleHit in peopleHits | limitTo : 5" ng-click="goToProfile(peopleHit.id)">
-                        <div class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
-                        <div class="header-findPeople-content">
-                            <div class="header-findPeople-name">
-                                <h4>{{peopleHit.first_name}} {{peopleHit.last_name}}</h4>
-                            </div>
-                            <div class="header-findPeople-location">
-                                <h6>{{peopleHit.location_city}}<i ng-hide="!peopleHit.location_country">,</i> {{peopleHit.location_country}}</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="header-find-seemore">
-                        <a href="/meet">See more people</a>
-                    </div>
-                </div>
-            </section>
-            <script>
-                /*** HEADER SCRIPT DOM ***/
-
-                    window.onclick = function(e) {
-
-                    /*** ----- section header ----- ***/
-                    var container = document.getElementById('header-section');
-                        if (container) {
-                            if (e.target.id === "hlo" && document.getElementById('hdmenu').style.display === "none") {
-                                document.getElementById('c-img').style.transform = "rotate(180deg)";
-                                document.getElementById('hdmenu').style.display = "block";
-                            } else {
-                                document.getElementById('c-img').style.transform = "rotate(0)";
-                                document.getElementById('hdmenu').style.display = "none";
-                            }
-
-                        /*** ----- section modal log ----- ***/
-                            // if (e.target.id === "mologin" && document.getElementById('main-login-modal')) {
-                            //  if (document.getElementById('main-login-modal').style.display === "none") {
-                            //      document.getElementById('main-login-modal').className = "animated fadeIn";
-                            //      document.getElementById('main-login-modal').style.display = "block";
-                            //  } else {
-                            //      document.getElementById('main-login-modal').className = "animated fadeOut";
-                            //      document.getElementById('main-login-modal').style.display = "none";
-                            //  }
-                            // }
-
-                        /*** section mailbox ***/
-                            if ((e.target.id === "hlogm" || e.target.id === "notif-m-i" || e.target.id === "notifMailbox") && document.getElementById('hdropm').style.display === "none") {
-                                document.getElementById('hdropm').style.display = "block";
-                            } else {
-                                document.getElementById('hdropm').style.display = "none";
-                            }
-
-                        /*** section notif ***/
-                            if ((e.target.id === "hlogn" || e.target.id === "notif-w-i" || e.target.id === "notifBubble" || e.target.id === "hmaar") && document.getElementById('hdropn').style.display === "none") {
-                                document.getElementById('hdropn').style.display = "block";
-                            } else {
-                                document.getElementById('hdropn').style.display = "none";
-                            }
-
-                        /*** ----- section meet ----- ***/
-                            if (e.target.id == 'msat' && document.getElementById('msdbox2').style.display == "none") {
-                              document.getElementById('msdbox2').style.display = "block";
-                              document.querySelectorAll("#msat img")[0].style.transform = "rotate(-180deg)";
-                            } else {
-                                if (document.getElementById('msdbox2')) {
-                                    document.getElementById('msdbox2').style.display = "none";
-                                    document.querySelectorAll("#msat img")[0].style.transform = "rotate(0)";
-                                }
-                            }
-
-                            //*** add skill ***//
-
-                            if ((e.target.id === 'input-msa2' || e.target.id === 'input-msa') && document.getElementById('msabox1').style.display === "none" && document.getElementById('msabox2').style.display === "none") {
-                                document.getElementById('msabox1').style.display = "block";
-                            } else {
-                                if (document.getElementById('msabox1'))
-                                    document.getElementById('msabox1').style.display = "none";
-                            }
-
-                            /*** ------ section message ------ ***/
-
-                            if (e.target.id === "mhop" && document.getElementById('mobox')) {
-                                document.getElementById('mobox').style.display = "block";
-                                document.getElementById('mhop-i').style.transform = "rotate(180deg)";
-                            } else {
-                                if (document.getElementById('mobox')) {
-                                    document.getElementById('mobox').style.display = "none";
-                                    document.getElementById('mhop-i').style.transform = "rotate(0)";
-                                }
-                            }
-
-                            /*** section messaging modal ***/
-
-                            // message modal
-                            if (document.getElementById('messages-newpost-modal') && e.target.id === 'mhn' || e.target.id === 'mmo' || e.target.id === 'mmoinput') {
-                                document.getElementById('messages-newpost-modal').style.display = "block";
-                            } else {
-                                if (document.getElementById('messages-newpost-modal')) {
-                                    document.getElementById('messages-newpost-modal').style.display = "none";
-                                    document.getElementById('messages-modal-searchArea').style.display = "block";
-                                    document.getElementById('messages-modal-newMessageArea').style.display = "none";
-                                }
-                            }
-
-                            // confirm delete modal
-                            if (e.target.id === 'mcdm' || e.target.id === 'mcdc' && document.getElementById('messages-confirmDelete-modal')) {
-                                document.getElementById('messages-confirmDelete-modal').style.display = "block";
-                            } else {
-                                if (document.getElementById('messages-confirmDelete-modal'))
-                                    document.getElementById('messages-confirmDelete-modal').style.display = "none";
-                            }
-                        }
-                    }
-
-                    function preventScroll() {
-                        document.body.style.position = "fixed";
-                        document.body.style.overflow = "scroll";
-                    }
-
-                    function allowScroll() {
-                        document.body.style.position = "static";
-                    }
-
-                    /*** Search Field Header ***/
-
-                    $('#main-body').on('click', function(e) {
-                        var container2  = $('#header-findField');
-                        var container   = $('#iff');
-                        var val         = $('#iff').val();
-                        var header      = document.getElementById('header-section');
-
-                        if (header) {
-                            if (val && container.is(e.target)) {
-                                document.getElementById('header-content').style.backgroundColor = "white";
-                                document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg";
-                                document.getElementById('hnl').className = "header-nav-list2";
-                                document.getElementById('hsb').className = "header-searchBar2";
-                                document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png";
-                                document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg";
-                                document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg";
-                                document.getElementsByClassName('header-log-dropdown')[0].style.color = "#999999";
-                                document.getElementById('header-findField').style.display = "block";
-                                document.getElementById('hnlog').className = "header-nav-log2";
-                            } else {
-                                document.getElementById('header-content').style.backgroundColor = "transparent";
-                                document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
-                                document.getElementById('hnl').className = "header-nav-list";
-                                document.getElementById('hsb').className = "header-searchBar";
-                                document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
-                                document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
-                                document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
-                                document.getElementsByClassName('header-log-dropdown')[0].style.color = "white";
-                                document.getElementById('header-findField').style.display = "none";
-                                document.getElementById('hnlog').className = "header-nav-log";
-                            }
-                        }
-                    });
-
-                    function showFindField() {
-                        var x = document.getElementById('iff').value;
-                        if (x) {
-                            document.getElementById('header-content').style.backgroundColor = "white";
-                            document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg";
-                            document.getElementById('hnl').className = "header-nav-list2";
-                            document.getElementById('hsb').className = "header-searchBar2";
-                            document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png";
-                            document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg";
-                            document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg";
-                            document.getElementsByClassName('header-log-dropdown')[0].style.color = "#999999";
-                            document.getElementById('header-findField').style.display = "block";
-                            document.getElementById('hnlog').className = "header-nav-log2";
-                        } else {
-                            document.getElementById('header-content').style.backgroundColor = "transparent";
-                            document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
-                            document.getElementById('hnl').className = "header-nav-list";
-                            document.getElementById('hsb').className = "header-searchBar";
-                            document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
-                            document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
-                            document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
-                            document.getElementsByClassName('header-log-dropdown')[0].style.color = "white";
-                            document.getElementById('header-findField').style.display = "none";
-                            document.getElementById('hnlog').className = "header-nav-log";
-                        }
-                    }
-            </script>
-        </header>
         <section ui-view autoscroll="true"></section>
-        <section id="footer-page">
-            <div class="footer-global">
-                <div class="footer-info-section">
-                    <div class="footer-about footer-size">
-                        <h5>About Wittycircle</h5>
-                        <ul>
-                            <li><a href="/terms">Terms of use</a></li>
-                            <li><a href="/privacy">Privacy settings</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-explore footer-size">
-                        <h5>Explore Projects</h5>
-                        <ul>
-                            <li><a ui-sref="discover({tagParams: 'Art'})">Art</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Craft'})">Craft</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Design'})">Design</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Fashion'})">Fashion</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Film & Video'})">Film & Video</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Food'})">Food</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Games'})">Games</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Green'})">Green</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-no-info footer-size">
-                        <ul>
-                            <li><a ui-sref="discover({tagParams: 'Heritage'})">Heritage</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Charity'})">Charity</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Music'})">Music</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Pubashing'})">Publishing</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Science'})">Science</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Sport'})">Sport</a></li>
-                            <li><a ui-sref="discover({tagParams: 'Technology'})">Technology</a></li>
-                            <li><a ui-sref="discover">More...</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-meet footer-size">
-                        <h5>Meet...</h5>
-                        <ul>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Graphic Design'}, {'sName': 'Product Design'}]})">Designers</a></li>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Content Writing'}]})">Writers</a></li>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Web Development'}, {'sName': 'Computer Engineering'}]})">Developers</a></li>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Manufacturing Design'}, {'sName': 'Electronics'}]})">Engineers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-no-info2 footer-size">
-                        <ul>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Entrepreneurship'}, {'sName': 'Business Development'}]})">Business developers</a></li>
-                            <li><a ui-sref="meet({skillParams: [{'sName': 'Civil Law'}, {'sName': 'Contract Law'}]})">Legal advisors</a></li>
-                            <li><a href="/meet">More...</a></li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="footer-brand-copyright">
-                    <div class="footer-brand-logo">
-                        <figure>
-                            <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457893080/footer-logo_rzbse8.png" alt="footer-brand-logo">
-                        </figure>
-                    </div>
-                    <div class="footer-copyright">
-                        <span class="copyright"><strong>&copy; 2016 Wittycircle Inc</strong>.</span>
-                    </div>
-                    <div class="footer-social-media">
-                        <ul>
-                            <li class="fb"><a href="https://www.facebook.com/wittycircle" class="fb-logo" target="_blank"></a></li>
-                            <li class="tw"><a href="https://twitter.com/wittycircle" class="tw-logo" target="_blank"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- FOOTER -->
+        <footer data-ng-include="'core/views/footer.view.core.client.html'"></footer>
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>-->
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -539,6 +157,7 @@
     <script src="scripts/cloudinary_config.js"></script>
     <!-- including config module before the rest of the module and right after the main module -->
     <script text="text/javascript" src="modules/projects/config/projects-config.config.client.js"></script>
+    <script text="text/javascript" src="modules/validate-account/config/validate-account.config.client.js"></script>
     <!-- routes -->
     <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js"></script>
     <!-- services -->
@@ -582,6 +201,7 @@
     <script src="controllers/presentation/discover.controller.client.js"></script>
     <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
+    <!-- MODULE PROJECT -->
     <script src="modules/projects/controllers/view-project.controller.client.js"></script>
     <script src="modules/projects/controllers/involvmentSheet.controller.client.js"></script>
     <script src="modules/projects/controllers/my-project.controller.client.js"></script>
@@ -592,8 +212,10 @@
     <script src="modules/projects/services/involvment.service.client.js"></script>
     <script src="modules/projects/services/feedbacks.service.client.js"></script>
     <script src="modules/projects/services/needs.service.client.js"></script>
+    <!-- MODULE VALIDATE ACCOUNT -->
+    <script src="modules/validate-account/routes/validate-account.routes.client.js"></script>
+    <script src="modules/validate-account/controller/validate-account.controller.client.js"></script>
     <script src="controllers/notification/notification.controller.client.js"></script>
-    <script src="controllers/projects/update_project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <script src="controllers/presentation/discover.controller.client.js"></script>
@@ -601,6 +223,7 @@
     <script src="controllers/core/terms.controller.client.js"></script>
     <script src="controllers/core/privacy.controller.client.js"></script>
     <script src="controllers/projects/modal/delete-project.controller.client.js"></script>
+    <script src="controllers/core/reset-password.controller.client.js"></script>
 
 	  <!-- directives -->
     <script src="directives/redactor/redactor.directive.client.js"></script>

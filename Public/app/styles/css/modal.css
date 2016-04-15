@@ -273,6 +273,8 @@
       font-size: 16px;
       margin-bottom: 3px;
       color: #ff4d4d; }
+    #main-login-modal .login-modal-email span .validate-p {
+      color: #222 !important; }
     #main-login-modal .login-modal-email .email-input,
     #main-login-modal .login-modal-email .password-input {
       text-align: left; }
@@ -290,7 +292,8 @@
         font-family: 'FreigBook';
         font-size: 14px;
         color: black;
-        text-decoration: underline; }
+        text-decoration: underline;
+        outline: none; }
   #main-login-modal .signup-login-old {
     padding: 15px 0; }
   #main-login-modal .login-modal-footer {

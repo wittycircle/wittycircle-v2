@@ -65,7 +65,7 @@ angular.module('wittyApp')
 
 	var id = $rootScope.globals.currentUser.id;
 	var Url = '/user/' + id;
-	var UrlC = Url + '/credentials'
+	var UrlC = Url + '/credentials';
 
 	/*** Update Profile ***/
 	var refresh = function () {

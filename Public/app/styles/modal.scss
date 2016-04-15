@@ -370,6 +370,10 @@
 			color: #ff4d4d;
 		}
 
+		span .validate-p {
+			color: #222 !important;
+		}
+
 		.email-input,
 		.password-input {
 			text-align: left;
@@ -392,6 +396,7 @@
 				font-size: 14px;
 				color: black;
 				text-decoration: underline;
+				outline: none;
 			}
 		}
 	}
@@ -428,4 +433,3 @@
 		}
 	}
 }
-

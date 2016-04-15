@@ -2,47 +2,6 @@ var ensureAuth = require('./controllers/auth').ensureAuthenticated;
 
 module.exports = function(app, passport){
 
-/*app.post('/', function(req, res, next) {
-	passport.authenticate('local-login', function (err, user, info) {
-	if (err || !user) {
-	   	res.writeHead(302, {
-		  'Location': 'http://localhost:9000/',
-		});
-		return res.end(); 
-	}
-	req.logIn(user, function(err) {
-	    if (user) {
-			res.render('/superdev');
-	    } else {
-		res.writeHead(302, {
-			'Location': 'http://localhost:9000/',
-			    });
-		return res.end();
-	    }
-	});
-    })(req, res, next);
-});
-
-app.get('/superdev', function(req, res) {
-	if (req.isAuthenticated() && req.user.superdev === 1)
-		res.render('api-page.html');
-	else {
-		res.writeHead(302, {
-		  'Location': 'http://localhost:9000/',
-		});
-		return res.end();
-	}
-});*/
-/*app.get('/api/login', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.send('getting login ok');
-});
-
-app.get('/api/logout', function(req, res) {
-    req.logout();
-    res.send('logout done');
-});*/
-
 /* Users */
 var users = require('./controllers/users');
 app.get('/user/checkLog', ensureAuth, users.checkFirstLog);
@@ -62,6 +21,8 @@ app.put('/profiles/view/:username', users.updateProfileView);
 app.put('/user/:id/credentials', ensureAuth, users.updateUserCredentials);
 app.put('/user/checkLog/update', ensureAuth, users.updateFirstLog);
 app.delete('/user/:id', users.deleteUser);
+app.get('/user/valid/:token', users.getUsersValidateMail);
+app.post('/user/valid/:token', users.ValidateAccount)
 
 /* Profile */
 var profile = require('./controllers/profile');
@@ -84,16 +45,16 @@ app.get('/profile', ensureAuth, function(req, res) {
 			      });
 	       });
 });
-    
+
 /* Facebook Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
 	    successRedirect : 'http://www.wittycircle.com',
 	    failureRedirect : 'http://www.wittycircle.com'
 	}));
 
-/* Twitter Users */	
+/* Twitter Users */
 /*app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback',
         passport.authenticate('twitter', {
@@ -134,7 +95,7 @@ app.put('/notification/update/user-follow-by', ensureAuth, notification.updateUs
 app.put('/notification/update/project-follow', ensureAuth, notification.updateProjectFollowNotif);
 app.put('/notification/update/project-follow-by', ensureAuth, notification.updateProjectFollowBy);
 app.put('/notification/update/project-involve', ensureAuth, notification.updateProjectInvolve);
-	
+
 /* Users Specifications */
 var users_specification = require('./controllers/users_specification');
 app.get('/user/:id/profile', users_specification.getUserProfile);
@@ -288,6 +249,9 @@ var auth = require('./controllers/auth');
 app.get('/api', auth.checkLog);
 app.post('/api/login', auth.login);
 app.get('/api/logout', auth.logout);
+app.post('/api/resetpassword', auth.ResetPassword);
+app.get('/api/resetpassword/:token', auth.getUserForResetPassword);
+app.post('/api/updatepasswordreset', auth.updatePasswordReset);
 
 /* Upload */
 var upload = require('./controllers/upload');
@@ -303,7 +267,7 @@ app.get('/image/transformation/resize/:public_id/:width/:height/:crop', upload.r
 /* Redactor */
 app.post('/upload/redactor', upload.redactorImage);
 
-/* History */ 
+/* History */
 var history = require('./controllers/history');
 app.post('/history/project/:id', history.addProjectToUserHistory);
 app.get('/history/project/:id', history.getUserProjectHistory);

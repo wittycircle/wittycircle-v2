@@ -1,0 +1,34 @@
+<section id="dmmodal" ng-if="dmobile.general" class="animated fadeIn">
+	<header class="discover-mobile-modal-header">
+			<h5>{{dmobile.headerText}}</h5>
+			<img src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()"/>
+	</header>
+	<div id="dsamodal" class="discover-mobile-search1 d-mobile-search" ng-if="dmobile.modal === 1">
+		<ul>
+			<li ng-click="getProject('Idea', 1)">Idea</li>
+			<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
+			<li ng-click="getProject('Beta project', 3)">Beta projects</li>
+			<li ng-click="getProject('Live project', 4)">Live projects</li>
+			<li ng-click="getProject('all', 5)">All projects</li>
+		</ul>
+	</div>
+
+	<div id="dscmodal" class="discover-mobile-search2 d-mobile-search" ng-if="dmobile.modal === 2">
+		<ul>
+			<li ng-repeat="category in categories" ng-click="getCategory(category.name)">{{category.name}}</li>
+		</ul>
+	</div>
+
+	<div id="dshmodal" class="discover-mobile-search3 d-mobile-search" ng-if="dmobile.modal === 3">
+		<ul>
+			<!-- <li ng-repeat="help in helps" ng-click="getHelp(help)" ng-disabled="help === 'Freelancer' || help === 'Fundings'">{{help}}<sup ng-if="help == 'Freelancer' || help == 'Fundings'">soon</sup></li> -->
+			<li ng-click="getHelp('Teammate')">Teammate</li>
+			<li>Freelancer<sup>soon</sup></li>
+			<li ng-click="getHelp('Feedback')">Feedback</li>
+			<li ng-click="getHelp('Mentor')">Mentor</li>
+			<li ng-click="getHelp('Tips')">Tips</li>
+			<li>Fundings<sup>soon</sup></li>
+			<li ng-click="getHelp('Any help')">Any help</li>
+		</ul>
+	</div>
+</section>

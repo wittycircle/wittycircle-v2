@@ -238,18 +238,44 @@
 			-ms-filter: blur(2px) brightness(0.6);;
 			filter: blur(2px) brightness(0.6);;
 		}
+	}
+}
 
-		.bf-info {
-			padding: 50px 0;
-			background-image: none;
-			.bf-component {
-				margin-bottom: 20px;
+@media only screen and (max-width: 736px) {
+	#bfooter-2 {
+		height: 184px;
 
-				h6 {
-					padding-top: 5px;
-					padding-bottom: 10px;
-				}
-			}
+		.bf2-filter {
+			position: absolute;
+			background-image: url('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456926920/footer_discover_tzxces.jpg');
+			background-position: center center;
+			background-size: cover;
+			background-color: none;
+			height: 185px;
+			-webkit-filter: blur(2px) brightness(0.6);;
+			-moz-filter: blur(2px) brightness(0.6);;
+			-o-filter: blur(2px) brightness(0.6);;
+			-ms-filter: blur(2px) brightness(0.6);;
+			filter: blur(2px) brightness(0.6);;
+		}
+
+		.bf2-info {
+			padding: 40px 0;
+		}
+
+		h3 {
+			font-family: 'FreigLight';
+			font-size: 27px;
+			padding: 0 15px;
+		}
+
+		button {
+			width: auto;
+			height: auto;
+			margin-top: 15px;
+			margin-bottom: 10px;
+			border-radius: 4px;
+			padding: 5px 25px 7px 25px;
 		}
 	}
 }

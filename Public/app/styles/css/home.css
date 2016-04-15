@@ -613,7 +613,7 @@ overflow: hidden;
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
 @media only screen and (max-width: 736px) {
   /* Main video background to Main image background */
-  #hvbg {
+  .home-video-bg {
     display: none; }
 
   .home-image-bg {

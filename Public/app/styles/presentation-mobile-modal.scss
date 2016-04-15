@@ -1,0 +1,52 @@
+
+#dmmodal {
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.93);
+	width: 100%;
+	height: 100%;
+	padding: 0px 20px;
+	z-index: 200;
+	-webkit-animation-duration: 0.3s;
+	-moz-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+
+	li {
+		font-family: 'FreigLight';
+		font-size: 36px;
+		color: #404040;
+		cursor: pointer;
+	}
+
+	li:focus {
+		color: #416299;
+	}
+
+	.discover-mobile-modal-header {
+		position: fixed;
+		width: 90%;
+		z-index: 300;
+
+		h5 {
+			display: inline-block;
+			padding: 20px 0px 15px 0px;
+			font-family: 'FreigMed';
+			font-size: 16px;
+			color: #999999;
+		}
+
+		img {
+			position: relative;
+			display: inline-block;
+			width: 15px;
+			float: right;
+			top: 20px;
+		}
+	}
+	.d-mobile-search {
+		position: relative;
+		top: 50px;
+		height: 400px;
+		overflow: auto;
+
+	}
+}

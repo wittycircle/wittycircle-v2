@@ -1,10 +1,12 @@
 <div id="discover-body-page">
+	<div data-ng-include="'views/mobiles/discover-mobile-modal.view.client.html'"></div>
 	<div class="body-page">
 		<div class="home-video-bg">
 			<video poster="images/poster/poster_discover.jpg" loop muted autoplay>
 	    		<source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582187/Share_banner_cover/videos_background/Discover.mp4" type="video/mp4">
 	  		</video>
 	  	</div>
+	  	<div class="discover-image-bg"></div>
 
 	  	<div class="discover-component presentation-component">
 	  		<div class="discover-title presentation-title">
@@ -12,8 +14,8 @@
 	  		</div>
 
 	  		<div class="discover-search1">
-	  			<div class="discover-search1-dropdown">
-	  				<div id="dsa" class="discover-search1-ap searchbox">
+	  			<div class="discover-search1-dropdown discover-search1-dropdown1-mobile">
+	  				<div id="dsa" class="discover-search1-ap searchbox" ng-click="opendmodal(1)">
 	  					<h2 id="dsa">{{cProject}}</h2>
 						<img id="dsa" src="/images/arrow-down-icon-w.svg">
 					</div>
@@ -30,7 +32,7 @@
 				<div class="discover-search1-text">
 					<h2>about</h2>
 				</div>
-				<div class="discover-search1-dropdown">
+				<div class="discover-search1-dropdown discover-search1-dropdown2-mobile" ng-click="opendmodal(2)">
 					<div id="dst" class="discover-search1-technology searchbox">
 						<h2 id="dst">{{ctgName}}</h2>
 						<img id="dst" src="/images/arrow-down-icon-w.svg">
@@ -46,8 +48,8 @@
 	  		<div class="discover-search2">
 	  			<div class="discover-search2-text">
 						<h2>looking for</h2>
-					</div>
-				<div class="discover-search2-dropdown">
+				</div>
+				<div class="discover-search2-dropdown" ng-click="opendmodal(3)">
 					<div id="dsa2" class="discover-search2-ah searchbox">
 						<h2 id="dsa2">{{cHelp}}</h2>
 						<img id="dsa2" src="/images/arrow-down-icon-w.svg">
@@ -98,11 +100,21 @@
 						</ul>
 					</aside>
 				</div>
-				<div class="discover-search2-text">
+				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox">
+					<h2>Anything</h2>
+					<img src="/images/arrow-down-icon-w.svg">
+				</div>
+				<div class="bomobi discover-search2-text">
+					<h2>near</h2>
+				</div>
+				<div class="discover-search2-text-mobile">
 					<h2>near</h2>
 				</div>
 				<div class="discover-search2-anylocation inputfield">
 					<input id="dsai" type="text" pre-dis-location="" types="['geocode']" placeholder="any location" ng-model="discoverLocation">
+				</div>
+				<div class="discover-search2-anylocation-mobile searchbox">
+					<h2>any location</h2>
 				</div>
 	  		</div>
 	  	</div>
@@ -167,8 +179,10 @@
 			$(window).scrollTop(0);
 		}; setTimeout(function(){ initPage() }, 1000);
 
+		var x = $(window).width();
 		var scope = angular.element($("#discover-body-page")).scope();
 
+		if (x > 736) {
 			var val = {};
 
 			$("#dsai").on('mouseover', function() {
@@ -217,10 +231,12 @@
 					}
 				}
 			};
+		}
 
-			document.getElementById('discover-body-page').onclick = function(e) {
+		document.getElementById('discover-body-page').onclick = function(e) {
+			if (x > 736) {
 				/*** DownBox DOM ***/
-				if (e.target.id == 'dsa' && document.getElementById('dsd').style.display == "none") {
+				if (e.target.id === 'dsa' && document.getElementById('dsd').style.display === "none") {
 					document.getElementById('dsd').style.display = "block";
 					document.querySelectorAll("#dsa img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -230,7 +246,7 @@
 					}
 				}
 
-				if (e.target.id == 'dst' && document.getElementById('dsd2').style.display == "none") {
+				if (e.target.id === 'dst' && document.getElementById('dsd2').style.display === "none") {
 					document.getElementById('dsd2').style.display = "block";
 					document.querySelectorAll("#dst img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -240,7 +256,7 @@
 					}
 				}
 
-				if (e.target.id == 'dsa2' && document.getElementById('dsd3').style.display == "none") {
+				if (e.target.id === 'dsa2' && document.getElementById('dsd3').style.display === "none") {
 					document.getElementById('dsd3').style.display = "block";
 					document.querySelectorAll("#dsa2 img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -266,7 +282,8 @@
 								document.getElementById('dComma').style.display = "none";
 					}
 				}
-			};
+			}
+		};
 
 		function changePlh() {
 			if (document.getElementById('labelText'))
@@ -306,9 +323,9 @@
 		};
 
 		function getSearchBox() {
-			var x = document.getElementById('input-dsa2').value;
+			var val = document.getElementById('input-dsa2').value;
 
-			if (x) {
+			if (val) {
 				if (document.getElementById('labelText')) {
 					document.getElementById('labelText').style.display = "none";
 					document.getElementById('labelText2').style.display = "none";

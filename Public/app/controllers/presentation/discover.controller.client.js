@@ -23,7 +23,7 @@
 	 	$scope.helps = ['Teammate', 'Freelancer', 'Feedback', 'Mentor', 'Tips', 'Fundings', 'Any help'];
 	 	$scope.cProject = 'All Projects';
 	 	$scope.cHelp = 'Any help';
-	 	$scope.limit = 12;
+	 	$scope.limit = 9;
 
 	 	function getDiscoverCard() {
 		 	$http.get('/projects/discover').success(function(res) {
@@ -31,6 +31,31 @@
 		 	});
 		}; getDiscoverCard();
 
+
+		/*** Discover Mobile ***/
+		$scope.dmobile = {};
+		$scope.opendmodal = function(value) {
+			
+			if ($(window).width() <= 736) {
+				$scope.dmobile.modal	= value;
+				if (value === 1)
+					$scope.dmobile.headerText = "Show me the...";
+				if (value === 2)
+					$scope.dmobile.headerText = "Show me projects about...";
+				if (value === 3)
+					$scope.dmobile.headerText = "Show me projects looking for...";
+				if (value === 4)
+					$scope.dmobile.headerText = "Show me projects in...";
+				if (value === 5)
+					$scope.dmobile.headerText = "Show me projects near...";
+				$scope.dmobile.general 	= true;
+			}
+		};
+
+		$scope.closemmodal = function() {
+			$('#dmmodal').css("display", "none");
+			$scope.dmobile.general 	= false;
+		}
 
 		/*** Discover Card Page ***/
 		$scope.$parent.seo = {
@@ -44,9 +69,9 @@
 			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
 		};
 
-    $scope.encodeUrl = function(url) {
-      return Beauty_encode.encodeUrl(url);
-    }
+	    $scope.encodeUrl = function(url) {
+	      return Beauty_encode.encodeUrl(url);
+	    }
 
 		Categories.getCategories(function (response) {
 			$scope.categories = response;
@@ -104,6 +129,7 @@
 		};
 		/*** get project name ***/
 		$scope.getProject 		= function (pName, number) {
+			$scope.dmobile.general 	= false;
 			switch (number) {
 				case 1:
 					$scope.cProject = "Idea";
@@ -132,6 +158,7 @@
 		$scope.getCategory 		= function (cName) {
 			$scope.ctgName 		= cName;
 			$scope.searchCtg 	= cName;
+			$scope.dmobile.general 	= false;
 		};
 
 		/*** get tag category name ***/
@@ -142,33 +169,40 @@
 
 		/*** get help name ***/
 		$scope.getHelp = function(hName) {
-			if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
-				document.getElementById('dstext').style.display = "inline-block";
-				document.getElementById('dsdrop1').style.display = "inline-block";
-				// setTimeout(function() {
-				// 	document.getElementById('dsdrop1').style.display = "inline-block";
-				// }, 400);
-			} else {
-				document.getElementById('dstext').style.display = "none";
-				document.getElementById('dsdrop1').style.display = "none";
-			}
-			$scope.cHelp	 		= hName;
-			$scope.searchHelp 		= hName;
-			if ($scope.cHelp === 'Feedback') {
-				$scope.skillList 	= [];
-				if (document.getElementById('labelNoText')) {
-					document.getElementById('labelNoText').id = "labelText";
-					document.getElementById('labelNoText2').id = "labelText2";
-					document.getElementById('labelText').style.display = "block";
-					document.getElementById('labelText2').style.color = "white";
+			$scope.dmobile.general 	= false;
+
+			if ($(window).width() > 736) {
+				if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
+					document.getElementById('dstext').style.display = "inline-block";
+					document.getElementById('dsdrop1').style.display = "inline-block";
+					// setTimeout(function() {
+					// 	document.getElementById('dsdrop1').style.display = "inline-block";
+					// }, 400);
+				} else {
+					document.getElementById('dstext').style.display = "none";
+					document.getElementById('dsdrop1').style.display = "none";
 				}
-				document.getElementById('dsabox1').style.display = "none";
-				document.getElementById('dsabox2').style.display = "none";
-				document.getElementById('input-dsa').style.display = "inline-block";
-				$scope.displaySk = true;
+				$scope.cHelp	 		= hName;
+				$scope.searchHelp 		= hName;
+				if ($scope.cHelp === 'Feedback') {
+					$scope.skillList 	= [];
+					if (document.getElementById('labelNoText')) {
+						document.getElementById('labelNoText').id = "labelText";
+						document.getElementById('labelNoText2').id = "labelText2";
+						document.getElementById('labelText').style.display = "block";
+						document.getElementById('labelText2').style.color = "white";
+					}
+					document.getElementById('dsabox1').style.display = "none";
+					document.getElementById('dsabox2').style.display = "none";
+					document.getElementById('input-dsa').style.display = "inline-block";
+					$scope.displaySk = true;
+				}
+				else
+					$scope.displaySk = false;
+			} else {
+				$scope.cHelp	 		= hName;
+				$scope.searchHelp 		= hName;
 			}
-			else
-				$scope.displaySk = false;
 		};
 
 		/*** expand project list ***/
@@ -269,6 +303,14 @@
 		$scope.$watch('cards', function(value) {
 			if (value)
 				value.length > 6 ? $scope.allowExpand = true : $scope.allowExpand = false;
+		});
+
+		$scope.$watch('dmobile.general', function(value) {
+			console.log(value);
+			if (value)
+				$('body').css('overflow', 'hidden');
+			else
+				$('body').css('overflow', 'auto');
 		});
 
 		$scope.$watchGroup(['searchStatus', 'searchCtg', 'searchHelp', 'skillSearch', 'searchDL'], function(value) {

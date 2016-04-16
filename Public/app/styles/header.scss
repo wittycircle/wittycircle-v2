@@ -55,8 +55,6 @@
 				-ms-transition: all 100ms linear;
 				-kthtml-transition: all 100ms linear;
 				transition: all 100ms linear;
-				-webkit-transform: translateZ(0);
-				
 			}
 
 			.header-nav-list {
@@ -681,20 +679,13 @@
 
 	/* Main start project */
 	#header-section {
-		
 		#header-content {
 			padding: 12px 20px 0px 20px;
 			text-align: center;
 
-
 			.header-navigation-mobile {
 				display: block;
 				text-align: left;
-				-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 				.header-nav-list {
 					padding: 0;
 					margin: 0;
@@ -718,7 +709,6 @@
 						text-align: right;
 					}
 				}
-
 			}
 
 			.header-searchBar-mobile {
@@ -726,7 +716,6 @@
 				position: relative;
 				float: left;
 				top: 8px;
-
 			}
 
 			.header-brand {
@@ -850,11 +839,6 @@
 
 			background: white;
 			position: fixed;
-			-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 		}
 
 		.cbp-spmenu h3 {
@@ -892,31 +876,16 @@
 		.cbp-spmenu-vertical a {
 			border-bottom: 1px solid #e5e5e5;
 			padding: 1em;
-			-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 		}
 
 		/* Vertical menu that slides from the left or right */
 
 		.cbp-spmenu-right {
 			right: -240px;
-			-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 		}
 
 		.cbp-spmenu-right.cbp-spmenu-open {
 			right: 0px;
-			-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 		}
 
 		/* Push classes applied to the body */
@@ -928,7 +897,6 @@
 		}
 		.cbp-spmenu-push-toleft {
 			left: -240px;
-
 		}
 
 		/* Transitions */
@@ -938,7 +906,11 @@
 			-webkit-transition: all 0.3s ease;
 			-moz-transition: all 0.3s ease;
 			transition: all 0.3s ease;
-			
+			-webkit-transform: none;
+			-moz-transform: none;
+			-ms-transform: none;
+			-o-transform: none;
+			transform: none;
 		}
 }
 

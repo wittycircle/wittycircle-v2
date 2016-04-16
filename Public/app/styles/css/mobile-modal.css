@@ -18,10 +18,12 @@
   left: 0 !important; }
 
 .body-push-right {
+  -webkit-transform-style: preserve-3d;
   position: relative;
   animation: body-mobile-push-right 0.2s; }
 
 .push-right {
+  -webkit-transform-style: preserve-3d;
   position: relative;
   animation: mobile-push-right 0.2s; }
 
@@ -220,6 +222,7 @@
     #hnmobile .header-dropdown-lists .header-dropdown-list {
       padding: 10px;
       border-top: 1px solid #e5e5e5;
+      -webkit-transform-style: preserve-3d;
       -webkit-transition: all 200ms linear;
       -o-transition: all 200ms linear;
       -moz-transition: all 200ms linear;

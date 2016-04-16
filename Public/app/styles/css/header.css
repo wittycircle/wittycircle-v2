@@ -42,11 +42,7 @@
         -ms-transition: all 100ms linear;
         -kthtml-transition: all 100ms linear;
         transition: all 100ms linear;
-        -webkit-transform: translateZ(0);
-        -moz-transform: translateZ(0);
-        -ms-transform: translateZ(0);
-        -o-transform: translateZ(0);
-        transform: translateZ(0); }
+        -webkit-transform: translateZ(0); }
       #header-section #header-content .header-navigation .header-nav-list {
         display: inline-block; }
         #header-section #header-content .header-navigation .header-nav-list li a {
@@ -451,7 +447,12 @@
     text-align: center; }
     #header-section #header-content .header-navigation-mobile {
       display: block;
-      text-align: left; }
+      text-align: left;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0); }
       #header-section #header-content .header-navigation-mobile .header-nav-list {
         padding: 0;
         margin: 0; }
@@ -547,7 +548,12 @@
   /* General styles for all menus */
   .cbp-spmenu {
     background: white;
-    position: fixed; }
+    position: fixed;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
 
   .cbp-spmenu h3 {
     color: #222222;
@@ -578,14 +584,29 @@
 
   .cbp-spmenu-vertical a {
     border-bottom: 1px solid #e5e5e5;
-    padding: 1em; }
+    padding: 1em;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
 
   /* Vertical menu that slides from the left or right */
   .cbp-spmenu-right {
-    right: -240px; }
+    right: -240px;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
 
   .cbp-spmenu-right.cbp-spmenu-open {
-    right: 0px; }
+    right: 0px;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
 
   /* Push classes applied to the body */
   .cbp-spmenu-push {
@@ -601,11 +622,6 @@
   .cbp-spmenu-push {
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    transform: translateZ(0); } }
+    transition: all 0.3s ease; } }
 
 /*# sourceMappingURL=header.css.map */

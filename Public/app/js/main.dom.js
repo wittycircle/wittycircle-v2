@@ -3,7 +3,7 @@ var x = $(window).width();
 $(document).ready(function() { 
 
     if (x > 736) {
-        var y       = $(this).scrollTop(),
+        var y,
             mbdown  = $('#mbdown'),
             mbbox   = $('#mbbox'),
             mbb2    = $('.main-body2-body'),
@@ -65,6 +65,7 @@ $(document).ready(function() {
         });
 
         $(this).scroll(function() {
+            y = $(this).scrollTop();
             if (mbb2.css('display') !== "none" && y > 400) {
                 mbb2.fadeTo("slow", 1);
             }

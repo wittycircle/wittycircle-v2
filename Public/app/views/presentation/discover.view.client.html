@@ -100,21 +100,15 @@
 						</ul>
 					</aside>
 				</div>
-				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox">
+				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox" ng-click="opendmodal(4)">
 					<h2>Anything</h2>
 					<img src="/images/arrow-down-icon-w.svg">
 				</div>
 				<div class="bomobi discover-search2-text">
 					<h2>near</h2>
 				</div>
-				<div class="discover-search2-text-mobile">
-					<h2>near</h2>
-				</div>
 				<div class="discover-search2-anylocation inputfield">
 					<input id="dsai" type="text" pre-dis-location="" types="['geocode']" placeholder="any location" ng-model="discoverLocation">
-				</div>
-				<div class="discover-search2-anylocation-mobile searchbox">
-					<h2>any location</h2>
 				</div>
 	  		</div>
 	  	</div>
@@ -123,7 +117,7 @@
 		<div id="hoho" class="loader" style="display: block"></div>
 		<div id="haha" class="discover-body-container presentation-body-container animated fadeIn">
 			<div class="discover-body-title presentation-body-title">
-				<h4>Browse <strong>the projects</strong> <span>below</span> or filter them using our magic tool above.</h4>
+				<h4>Browse <span>the projects below</span> or filter them using our magic tool above.</h4>
 			</div>
 			<div class="discover-body-list">
 				
@@ -136,7 +130,7 @@
 						</div>
 					</div>
 					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ encodeUrl(card.title) }}">
-						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url({{card.picture_card}})'}"></div>
+						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url(' + card.picture_card + ')'}"></div>
 						<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}"></div>
 						<div class="card-info">
 							<div class="card-title-space">
@@ -180,10 +174,18 @@
 		}; setTimeout(function(){ initPage() }, 1000);
 
 		var x = $(window).width();
+		var val = {};
 		var scope = angular.element($("#discover-body-page")).scope();
 
+		$("#dsai").focus(function() {
+			if ($(this).val()) {
+				val.text = $(this).val();
+				val.width = Number($(this).width()) + 20;
+				$(this).val("");
+				$(this).css("width", "200px");
+			}
+		});
 		if (x > 736) {
-			var val = {};
 
 			$("#dsai").on('mouseover', function() {
 				if ($(this).val()) {

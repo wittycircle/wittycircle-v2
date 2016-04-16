@@ -32,7 +32,12 @@
     -moz-transition: all 150ms linear;
     -ms-transition: all 150ms linear;
     -kthtml-transition: all 150ms linear;
-    transition: all 150ms linear; }
+    transition: all 150ms linear;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
   .presentation-component .presentation-title {
     padding-top: 15px;
     padding-bottom: 20px; }
@@ -55,7 +60,12 @@
     -moz-transition: all 100ms linear;
     -ms-transition: all 100ms linear;
     -kthtml-transition: all 100ms linear;
-    transition: all 100ms linear; }
+    transition: all 100ms linear;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
   .presentation-component .inputfield input:focus {
     color: white; }
   .presentation-component .downbox {
@@ -548,8 +558,6 @@
         padding: 5px 15px 5px 10px; }
       .discover-component .discover-search2 #dsdrop1m img {
         display: inline-block; }
-    .discover-component .discover-search2 .bomobi {
-      display: none; }
     .discover-component .discover-search2 .discover-search2-text-mobile {
       display: table-cell; }
       .discover-component .discover-search2 .discover-search2-text-mobile h2 {
@@ -558,13 +566,28 @@
       margin-bottom: 10px; }
     .discover-component .discover-search2 .discover-search2-dropdown2-mobile {
       margin-bottom: 10px; }
-    .discover-component .discover-search2 .discover-search2-anylocation {
-      display: none; }
-    .discover-component .discover-search2 .discover-search2-anylocation-mobile {
+    .discover-component .discover-search2 .bomobi {
       display: table-cell;
-      margin-left: 10px; }
-      .discover-component .discover-search2 .discover-search2-anylocation-mobile h2 {
-        padding: 6px 15px 7px 10px; }
+      padding-right: 10px; }
+    .discover-component .discover-search2 .discover-search2-anylocation {
+      display: table-cell; }
+      .discover-component .discover-search2 .discover-search2-anylocation ::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: white; }
+      .discover-component .discover-search2 .discover-search2-anylocation :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: white;
+        opacity: 1; }
+      .discover-component .discover-search2 .discover-search2-anylocation ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: white;
+        opacity: 1; }
+      .discover-component .discover-search2 .discover-search2-anylocation :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: white; }
+      .discover-component .discover-search2 .discover-search2-anylocation input {
+        font-size: 27px;
+        padding: 2px 10px; }
     .discover-component .discover-search2 #dsdrop1 {
       display: none; } }
 @media only screen and (max-width: 320px) {

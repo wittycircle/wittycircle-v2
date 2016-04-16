@@ -1,7 +1,7 @@
 <section id="dmmodal" ng-if="dmobile.general" class="animated fadeIn">
 	<header class="discover-mobile-modal-header">
 			<h5>{{dmobile.headerText}}</h5>
-			<img src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()"/>
+			<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()"/>
 	</header>
 	<div id="dsamodal" class="discover-mobile-search1 d-mobile-search" ng-if="dmobile.modal === 1">
 		<ul>
@@ -30,5 +30,26 @@
 			<li>Fundings<sup>soon</sup></li>
 			<li ng-click="getHelp('Any help')">Any help</li>
 		</ul>
+	</div>
+
+	<div id="dskmodal" class="discover-mobile-search3 d-mobile-search" ng-if="dmobile.modal === 4">
+		<ul class="select-list">
+			<li ng-repeat="skillM in skillListM">{{skillM.sName}} <i class="fa fa-times" ng-click="removeSkill(skillM.sName)"></i></li>
+		</ul>
+		<div class="discover-mobile-search-skill">
+			<input type="text" placeholder="Search for a specific skill..." ng-model="skillName">
+		</div>
+			<ul ng-if="!skillName">
+				<h3>Popular skills</h3>
+				<div class="discover-mobile-skillList1">
+					<li ng-repeat="skill in skills | limitTo: 10" class="animated fadeIn" ng-click="searchSkill(skill.name)"><i class="fa fa-plus" aria-hidden="true"></i> {{skill.name}}</li>
+				</div>
+			</ul>		
+			<ul ng-if="skillName">
+				<div class="discover-mobile-skillList1 discover-mobile-skillList2">
+					<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
+				</div>
+				<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+			</ul>
 	</div>
 </section>

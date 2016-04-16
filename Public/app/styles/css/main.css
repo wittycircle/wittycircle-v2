@@ -117,7 +117,7 @@ label {
 
 .pac-icon {
   padding: 10px;
-  background-image: url("/images/location-picto.svg");
+  background-image: url("/images/location-picto.svg") !important;
   background-repeat: no-repeat;
   background-size: 13px auto;
   background-position: center top; }

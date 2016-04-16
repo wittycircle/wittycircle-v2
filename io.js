@@ -16,6 +16,7 @@ module.exports = function(app, io, ensureAuth) {
 	
 	/*** Register Users ***/
 	socket.on('register', function(username){ // save all users connected on socket
+		console.log(username);
 	    if (username in users) { // check if user is already exist
 	    	socket.broadcast.emit('userOnline', users); // Get Users Online
 	    } else {
@@ -30,7 +31,6 @@ module.exports = function(app, io, ensureAuth) {
         socket.emit('userOnline', users);
         socket.broadcast.emit('userOnline', users);
     };
-
 
 	/*** View Notification ***/
 	socket.on('view-notification', function(view_user) {
@@ -113,7 +113,8 @@ module.exports = function(app, io, ensureAuth) {
 
 	/*** Follow Project Notification ***/
 	app.get('/follow/project/:id', ensureAuth, function(req, res){
-            req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
+		console.log(req.id);
+        req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
             var errors = req.validationErrors(true);
             if (errors) {
 		return res.status(400).send(errors);

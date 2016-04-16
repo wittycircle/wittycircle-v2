@@ -1,20 +1,37 @@
 
 #dmmodal {
-	position: absolute;
-	background-color: rgba(255, 255, 255, 0.93);
+	position: fixed;
+	background-color: rgba(255, 255, 255, 0.98);
 	width: 100%;
-	height: 100%;
+	height: 100vh;
+	top: 0;
 	padding: 0px 20px;
 	z-index: 200;
 	-webkit-animation-duration: 0.3s;
 	-moz-animation-duration: 0.3s;
 	animation-duration: 0.3s;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
 
 	li {
 		font-family: 'FreigLight';
 		font-size: 36px;
-		color: #404040;
+		color: #222222;
 		cursor: pointer;
+		-webkit-transition: all 100ms linear;
+		-o-transition: all 100ms linear;
+		-moz-transition: all 100ms linear;
+		-ms-transition: all 100ms linear;
+		-kthtml-transition: all 100ms linear;
+		transition: all 100ms linear;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
 	}
 
 	li:focus {
@@ -23,7 +40,8 @@
 
 	.discover-mobile-modal-header {
 		position: fixed;
-		width: 90%;
+		width: inherit;
+		padding-right: 40px;
 		z-index: 300;
 
 		h5 {
@@ -35,18 +53,132 @@
 		}
 
 		img {
-			position: relative;
 			display: inline-block;
 			width: 15px;
+			padding: 20px 0 15px 0;
 			float: right;
-			top: 20px;
 		}
+	}
+	.discover-mobile-search2 {
+		height: 400px;
+		overflow-y: scroll;
+		overflow-x: hidden; 
+		-webkit-overflow-scrolling: touch;
 	}
 	.d-mobile-search {
 		position: relative;
-		top: 50px;
-		height: 400px;
-		overflow: scroll;
+		top: 55px;
+	}
 
+	.discover-mobile-search3 {
+
+		.select-list {
+			margin-bottom: 15px;
+
+			li {
+				display: inline-block;
+				font-family: 'FreigSem';
+				font-size: 14px;
+				text-transform: uppercase;
+				padding: 2px 8px 3px 8px;
+				color: white;
+				background-color: #416299;
+				border-radius: 4px;
+				margin-bottom: 6px;
+				margin-right: 6px;
+				line-height: normal;
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+
+			.fa-times {
+				margin-left: 5px;
+			}
+
+			.fa-times:focus {
+				outline: 0;
+			}
+		}
+
+		.discover-mobile-search-skill {
+			input {
+				width: 100%;
+				padding: 8px 5px 8px 45px;
+				background-image: url('/images/search-icon-b.svg');
+				background-repeat: no-repeat;
+				background-position: 5% 50%;
+				background-size: 19px;
+				font-family: 'FreigBook';
+				font-size: 16px;
+				color: #416299;
+				border: 1px solid #cecece;
+				border-radius: 4px;
+				margin-bottom: 15px;
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+
+			input:focus {
+				background-image: url('/images/search-icon-blue.svg');
+				border: 1px solid #416299;
+			}
+		}
+
+		.discover-mobile-skillList1 {
+			position: relative;
+			padding-bottom: 10px;
+			height: 320px;
+			overflow-y: scroll;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.discover-mobile-skillList2 {
+			padding-top: 5px;
+			height: 340px;
+		}
+
+		li {
+			font-size: 32px;
+			line-height: 35px;
+			margin-bottom: 10px;
+		}
+
+		h3 {
+			font-family: 'FreigLight';
+			font-size: 24px;
+			color: #999999;
+			margin-top: 5px;
+			margin-bottom: 6px;
+		}
+
+		.fa-plus {
+			font-size: 24px;
+			margin-right: 10px;
+		}
+
+		span {
+			font-family: "FreigBook";
+			font-size: 15px;
+			margin: 0 auto;
+		}
 	}
 }

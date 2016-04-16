@@ -597,10 +597,6 @@
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
-    -webkit-transform: none;
-    -moz-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none; } }
+    -webkit-transform-style: preserve-3d; } }
 
 /*# sourceMappingURL=header.css.map */

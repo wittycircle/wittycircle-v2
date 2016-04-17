@@ -359,6 +359,9 @@ a:hover {
 .profile-save-mobile {
   display: none; }
 
+#profile-mobile-slideDown {
+  display: none; }
+
 #profile-slideDown .profile-slideDown-container .profile-slideDown-project {
   max-width: 1000px;
   padding: 70px 15px 0px 15px;
@@ -644,7 +647,6 @@ a:hover {
               color: white; }
           #profile-header .profile-contents .profile-info .profile-mobile-user-options .profile-mobile-connect .profile-follow-link {
             margin: 0 5px;
-            position: relative;
             display: inline-block;
             font-family: 'FreigSem';
             font-size: 16px;
@@ -652,8 +654,7 @@ a:hover {
             padding: 4px 12px 6px 12px;
             border: 1px solid #416299;
             border-radius: 4px;
-            background-color: #416299;
-            bottom: 1px; }
+            background-color: #416299; }
             #profile-header .profile-contents .profile-info .profile-mobile-user-options .profile-mobile-connect .profile-follow-link i {
               margin-right: 8px;
               position: relative;
@@ -702,6 +703,34 @@ a:hover {
           background-size: 13px;
           background-position: center center;
           margin-right: 10px; }
+
+  #profile-slideDown {
+    display: none; }
+
+  #profile-mobile-slideDown {
+    display: none; }
+    #profile-mobile-slideDown .profile-mobile-cardProject {
+      margin-top: 20px; }
+      #profile-mobile-slideDown .profile-mobile-cardProject .profile-slideDown-card {
+        margin: 0 16px 0 16px;
+        display: inline-block;
+        width: 260px;
+        height: 418px;
+        border: 1px solid #E5E5E5;
+        border-radius: 5px;
+        overflow: hidden; }
+    #profile-mobile-slideDown .profile-mobile-slideDown-close {
+      text-align: center;
+      margin-top: 60px;
+      border-top: 1px solid #e5e5e5;
+      border-bottom: 2px solid #e5e5e5;
+      background-color: #FAFAFA;
+      cursor: pointer; }
+      #profile-mobile-slideDown .profile-mobile-slideDown-close p {
+        font-family: 'FreigSem';
+        font-size: 18px;
+        color: #222222;
+        margin: 15px 0; }
 
   #profile-corps .profile-contents {
     display: none; }
@@ -768,7 +797,8 @@ a:hover {
         padding-bottom: 10px;
         border-bottom: 1px solid #E5E5E5; }
         #profile-corps .profile-mobile-contents .profile-mobile-experience .profile-exp-list .profile-exp img {
-          float: none; }
+          float: none;
+          top: 0; }
         #profile-corps .profile-mobile-contents .profile-mobile-experience .profile-exp-list .profile-exp .profile-exp-post {
           padding-top: 10px; }
           #profile-corps .profile-mobile-contents .profile-mobile-experience .profile-exp-list .profile-exp .profile-exp-post h3 {

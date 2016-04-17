@@ -492,6 +492,11 @@ a:hover {
 	display: none;
 }
 
+
+#profile-mobile-slideDown {
+	display: none;
+}
+
 #profile-slideDown {
 	.profile-slideDown-container {
 		.profile-slideDown-project {
@@ -891,7 +896,6 @@ a:hover {
 
 						.profile-follow-link {
 							margin: 0 5px;
-							position: relative;
 							display: inline-block;
 							font-family: 'FreigSem';
 							font-size: 16px;
@@ -900,7 +904,6 @@ a:hover {
 							border: 1px solid #416299;
 							border-radius: 4px;
 							background-color: #416299;
-							bottom: 1px;
 
 							i {
 								margin-right: 8px;
@@ -989,6 +992,44 @@ a:hover {
 					background-position: center center;
 					margin-right: 10px;
 				}
+			}
+		}
+	}
+
+	#profile-slideDown { 
+		display: none
+	}
+
+	#profile-mobile-slideDown {
+		display: none;
+
+		.profile-mobile-cardProject {
+			margin-top: 20px;
+
+			.profile-slideDown-card {
+				margin: 0 16px 0 16px;
+				display: inline-block;
+				width: 260px;
+				height: 418px;
+				border: 1px solid #E5E5E5;
+				border-radius: 5px;
+				overflow: hidden;	
+			}
+		}
+
+		.profile-mobile-slideDown-close {
+			text-align: center;
+			margin-top: 60px;
+			border-top: 1px solid #e5e5e5;
+			border-bottom: 2px solid #e5e5e5;
+			background-color: #FAFAFA;
+			cursor: pointer;
+
+			p {
+				font-family: 'FreigSem';
+				font-size: 18px;
+				color: #222222;
+				margin: 15px 0;
 			}
 		}
 	}
@@ -1089,6 +1130,7 @@ a:hover {
 
 						img {
 							float: none;
+							top: 0;
 						}
 
 						.profile-exp-post {

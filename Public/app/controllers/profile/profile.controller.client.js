@@ -7,7 +7,7 @@
 * # ProfileCtrl
 * Controller of the wittyApp
 **/
-angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal , $state, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, Skills, Interests, Locations, Projects) {
+angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal , $state, $timeout, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, Skills, Interests, Locations, Projects) {
 
     console.time('loading profile');
 
@@ -82,7 +82,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         });
     };
 
-    function init() {
+    $scope.init = function() {
         Profile.getUserbyUsername(vm.paramUsername).then(function(res) {
             if (res) {
                 Projects.getUserProject(res.id, function(res) {
@@ -170,7 +170,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
                 $location.path('/');
             }
         });
-    }; init();
+    }; $scope.init();
 
     /*** Go to Discover ***/
     function goToDiscover(category) {
@@ -449,11 +449,20 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
                 $scope.getProfileExp();
         });
     };
+
+    $scope.getSlideProjects = function() {
+        if ($scope.initSlide) {
+            $('#profile-mobile-slideDown').slideToggle();
+        } else 
+            $scope.initSlide = true;
+    };
+
     console.timeEnd('loading profile');
 })
 .directive('profileLocationSearch', function($http, Locations) {
     return {
         require: 'ngModel',
+        scope: false,
         link: function(scope, element, attrs, model) {
             var options = {
                 types: ['(cities)'],
@@ -472,6 +481,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
             scope.$watch('profileLocation', function(value) {
                 var object = {};
 
+                scope.profileLocation = value;
                 Locations.setplaces(scope.profileLocation, object);
                 if (object.location_country) {
                     $http.put('/profile/location', object).success(function(res) {
@@ -480,6 +490,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
                     });
                 }
             });
+
 
             scope.$watch('displayLocation2', function(value) {
                 if (value) {
@@ -491,4 +502,24 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
             });
         }
     };
+})
+.directive('slickSlider', function () {
+    return {
+        restrict: 'A',         
+        scope: {'data': '=',
+            'check': '=',
+        },
+        replace: true,
+        link: function (scope, element, attrs) {
+            var isInitialized = false;
+
+            scope.$watchGroup(['data', 'check'], function(newVal, oldVal) {
+                if (newVal[0] && newVal[0].length > 0 && newVal[1] && !isInitialized) {
+                    $('#profile-mobile-slideDown').slideToggle();
+                    $(element).slick(scope.$eval(attrs.slickSlider));
+                    isInitialized = true;
+                }
+            });
+        }
+    }
 });

@@ -55,7 +55,7 @@
 							<h5 >{{profile.location_city}}<i ng-hide="!profile.location_country">,</i></h5> <h5>{{profile.location_state}}</h5>
 							 <h5 ng-if="!profile.location_state">{{profile.location_country}}</h5>
 						</div>
-						<input ng-if="vm.modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
+						<input ng-if="modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
 					</div>
 					<img id="location-input2" ng-if="vm.trueUser" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
 				</div>
@@ -143,7 +143,7 @@
 		<div ng-if="inProjects.length" class="profile-mobile-user-projects">
 			<h5>Involved in <b>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length === 1">project<span></b></h5>
 		</div>
-		<div class="profile-mobile-projects-picture">
+		<div class="profile-mobile-projects-picture" ng-click="getSlideProjects()">
 			<div class="profile-pp" ng-repeat="inProject in inProjects | limitTo: 3 track by $index" ng-style="{'background-image': 'url({{ resizePic(inProject.picture, '', 35, 'fill') }})'}">
 			</div>
 			<div class="profile-pp-arrow"></div>
@@ -155,6 +155,55 @@
 	<span ng-click="vm.closeMobileEdit()">Cancel</span>
 	<button type="submit"><i class="fa fa-check"></i> Save changes</button>
 </section> -->
+
+<section id="profile-mobile-slideDown">
+	<div class="profile-mobile-cardProject" data="inProjects" check="initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true,}'>
+		<div class="profile-slideDown-card project-card" ng-repeat="cardProject in inProjects track by $index">
+			<div class="card-tag" ng-click="goToDiscover(cardProject.category_name)">
+				<div class="card-tag-content">
+					<div class="card-tag-bg">
+					</div>
+					<img src="/images/tag-icon.png">
+					<h5>{{cardProject.category_name}}</h5>
+				</div>
+			</div>
+			<div class="card-project-page" ui-sref="viewproject({public_id: cardProject.public_id, title: encodeUrl(cardProject.title)})">
+				<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProject.picture, 285, 180, 'fill') }})'}">
+				<!-- <img ng-src="{{cardProject.picture}}" alt="card-picture"> -->
+				</div>
+				<div class="card-info">
+					<div class="card-title-space">
+						<h4>{{cardProject.title}}</h4>
+					</div>
+					<div class="card-status">
+						<span>
+							<img ng-if="cardProject.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
+							<img ng-if="cardProject.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
+							<img ng-if="cardProject.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
+							<img ng-if="cardProject.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
+							{{cardProject.status}}
+						</span>
+					</div>
+					<div class="card-location">
+						<span><img src="/images/location-picto.svg" alt="location-picture" />{{cardProject.location_city}}<i ng-hide="!cardProject.location_country">,</i> {{cardProject.location_country}}</span>
+					</div>
+					<div class="card-description-text">
+						<p>{{cardProject.description}}</p>
+					</div>
+					<div class="card-info-by">
+						<figure class="card-info-by-picture">
+							<img ng-src="{{ resizePic(cardProject.pic, 30, 30) }}" alt="card-foot-picture">
+						</figure>
+						<h6>{{cardProject.creator_user_name}} <h6 ng-if="cardProject.usersIn.length">& {{cardProject.usersIn.length}} more</h6></h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="pmsc" class="profile-mobile-slideDown-close" ng-click="getSlideProjects()">
+		<p>Close this panel</p>
+	</div>
+</section>
 
 <section id="profile-slideDown" style="display: none">
 	<div class="profile-slideDown-container">
@@ -398,5 +447,7 @@
 			$('#profile-slideDown').slideToggle();
 
 		});
+	} else {
+
 	}
 </script>

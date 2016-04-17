@@ -31,6 +31,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	$scope.openmmodal = function(value) {
 		
 		if (ww <= 736) {
+			$('body').css('overflow-y', 'hidden');
 			$scope.mmobile.modal	= value;
 			if (value === 1)
 				$scope.mmobile.headerText = "Someone with specific skills?";
@@ -39,7 +40,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			if (value === 3)
 				$scope.mmobile.headerText = "Show me projects near...";
 			$scope.mmobile.general 	= true;
-			$('body').css('overflow-y', 'hidden');
 		}
 	};
 
@@ -117,6 +117,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	$scope.mHelp = "Anything";
 	$scope.getAnything = function(help) {
 		$scope.mHelp = help;
+		if (ww <= 736)
+			$scope.closemmodal();
 	};
 
 	/*** SECTION SEARCH MEET ***/

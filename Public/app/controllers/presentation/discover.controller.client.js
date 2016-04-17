@@ -38,6 +38,7 @@
 		$scope.opendmodal = function(value) {
 			
 			if (ww <= 736) {
+				$('body').css('overflow-y', 'hidden');
 				$scope.dmobile.modal	= value;
 				if (value === 1)
 					$scope.dmobile.headerText = "Show me the...";
@@ -50,7 +51,6 @@
 				if (value === 5)
 					$scope.dmobile.headerText = "Show me projects near...";
 				$scope.dmobile.general 	= true;
-				$('body').css('overflow-y', 'hidden');
 			}
 		};
 
@@ -132,7 +132,8 @@
 		};
 		/*** get project name ***/
 		$scope.getProject 		= function (pName, number) {
-			$scope.dmobile.general 	= false;
+			if (ww <= 736)
+				$scope.closemmodal();
 			switch (number) {
 				case 1:
 					$scope.cProject = "Idea";
@@ -161,7 +162,8 @@
 		$scope.getCategory 		= function (cName) {
 			$scope.ctgName 		= cName;
 			$scope.searchCtg 	= cName;
-			$scope.dmobile.general 	= false;
+			if (ww <= 736)
+				$scope.closemmodal();
 		};
 
 		/*** get tag category name ***/
@@ -172,7 +174,8 @@
 
 		/*** get help name ***/
 		$scope.getHelp = function(hName) {
-			$scope.dmobile.general 	= false;
+			if (ww <= 736)
+				$scope.closemmodal();
 
 			if (ww > 736) {
 				if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {

@@ -40,11 +40,6 @@
 		-ms-transition: all 150ms linear;
 		-kthtml-transition: all 150ms linear;
 		transition: all 150ms linear;
-		-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
 	}
 
 	.presentation-title {
@@ -815,12 +810,27 @@
 	}
 
 	/****** Discover mobile ******/
-
 	.discover-image-bg {
 		height: 480px;
 	}
 
 	#discover-body-content {
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+
 		.discover-body-container {
 			.discover-body-list {
 				text-align: center;
@@ -931,6 +941,23 @@
 	}
 
 	/****** Meet mobile ******/
+	#meet-body-content {
+		min-height: 400px;
+		
+		.meet-body-container {
+
+			.meet-body-cards {
+				padding: 0;
+				text-align: center;
+				margin: 10px 0;
+
+				.meet-body-card {
+					margin: 0px 14px 25px 14px
+				}
+			}
+		}
+	}
+
 	.meet-image-bg {
 		height: 380px;
 	}
@@ -996,24 +1023,13 @@
 
 @media only screen and (max-width: 320px) {
 
+}
+
+@media only screen and (max-width: 320px) {
+
 	/****** Discover mobile ******/
 	#discover-body-content {
 		.discover-body-container {
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 			.discover-body-list {
 				.discover-body-card {
 					width: 270px;
@@ -1029,21 +1045,6 @@
 		min-height: 400px;
 		
 		.meet-body-container {
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 
 			.meet-body-cards {
 				padding: 0;

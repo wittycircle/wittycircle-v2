@@ -772,6 +772,8 @@ a:hover {
       float: right;
       position: relative;
       top: 15px; }
+    #profile-corps .profile-mobile-contents img:focus {
+      outline: 0; }
     #profile-corps .profile-mobile-contents .profile-mobile-skills {
       margin-bottom: 15px; }
       #profile-corps .profile-mobile-contents .profile-mobile-skills .profile-mobile-skills-list li {

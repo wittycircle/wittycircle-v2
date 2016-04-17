@@ -49,6 +49,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		$scope.mmobile.general 	= false;
 	}
 
+	Users.getCardProfiles(function(result){
+		$scope.cardProfiles = result.data;
+		if ($rootScope.globals.currentUser) {
+			Profile.getFollowedUser(result.data, function(res){
+				$scope.followed = res;
+			});
+		}	
+	});
 
 	$scope.limit = 12;
 	
@@ -63,15 +71,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		url = Picture.resizePicture(url, 200, 100, "fill");
 		return url;
 	}
-
-	Users.getCardProfiles(function(result){
-		$scope.cardProfiles = result.data;
-		if ($rootScope.globals.currentUser) {
-			Profile.getFollowedUser(result.data, function(res){
-				$scope.followed = res;
-			});
-		}	
-	});
 
 	$scope.expand = function(value) {
 		$scope.limit = $scope.limit + value;

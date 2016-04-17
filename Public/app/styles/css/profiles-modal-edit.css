@@ -260,7 +260,9 @@
         #profile-skill-body .profile-skill-search .sss li h4 {
           font-family: 'FreigSem';
           font-size: 14px;
-          color: white; }
+          color: white;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale; }
     #profile-skill-body .profile-skill-search .profile-skill-button {
       padding: 20px 30px 10px 30px;
       text-align: center;

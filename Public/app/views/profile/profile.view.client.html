@@ -1,4 +1,4 @@
-<section id="profile-header" onmouseover="displayEditC()" onmouseleave="hideEditC()">
+<section id="profile-header">
 	<div ng-if="!imageCoverLoading" class="filter"></div>
 	<div ng-if="imageCoverLoading" class="spinner-load">
 		<div class="spinner__item1 spinner-item"></div>
@@ -13,7 +13,7 @@
 	</div>
 	<div class="profile-contents">
 		<div class="profile-info">
-			<div onmouseover="displayEditP()" onmouseleave="hideEditP()" ng-class="{'profile-info-picture2': !profile.profile_picture}" class="profile-info-picture">
+			<div id="pip" ng-class="{'profile-info-picture2': !profile.profile_picture}" class="profile-info-picture">
 				<div ng-if="imageProfileLoading" class="spinner-load">
 					<div class="spinner__item1 spinner-item"></div>
 					<div class="spinner__item2 spinner-item"></div>
@@ -31,7 +31,12 @@
 				<div class="name info-line">
 					<h1>{{profile.first_name}} {{profile.last_name}}</h1>
 				</div>
-				<div id="location-input" class="location" ng-mouseover="showEditL()" ng-mouseleave="hideEditL()">
+
+				<div class="info-about">
+					<h3>Looking to {{profile.about | lowercase}}</h3>
+				</div>
+
+				<div id="location-input" class="location" ng-mouseover="vm.showEditL()" ng-mouseleave="vm.hideEditL()">
 					<img ng-if="profile.location_city" src="/images/location-icon.png" alt="location-icon" />
 					<div class="location-name">
 						<div class="location-name-city" ng-if="!modifyLocation">
@@ -40,16 +45,60 @@
 						</div>
 						<input ng-if="modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
 					</div>
-					<img id="location-input2" ng-if="showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
+					<img id="location-input2" ng-if="vm.showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
+				</div>
+
+				<div id="location-input-mobile" class="location">
+					<img ng-if="profile.location_city" src="/images/location-icon.png" alt="location-icon" />
+					<div class="location-name">
+						<div class="location-name-city" ng-if="!modifyLocation">
+							<h5 >{{profile.location_city}}<i ng-hide="!profile.location_country">,</i></h5> <h5>{{profile.location_state}}</h5>
+							 <h5 ng-if="!profile.location_state">{{profile.location_country}}</h5>
+						</div>
+						<input ng-if="vm.modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
+					</div>
+					<img id="location-input2" ng-if="vm.trueUser" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
+				</div>
+			</div>
+
+			<div class="profile-follow-mobile">
+				<div class="follow-project follower">
+					<h2 ng-bind="projectsFollow"></h2>
+					<h5 ng-if="projectsFollow <= 1">project<br /> followed</h5>
+					<h5 ng-if="projectsFollow > 1">projects<br /> followed</h5>
+				</div>
+				<div class="followed follower">
+					<h2 ng-bind="usersFollow"></h2>
+					<h5>following</h5>
+				</div>
+				<div class="follow follower">
+					<h2 ng-bind="followers"></h2>
+					<h5>followers</h5>
+				</div>
+			</div>
+			<!-- <div id="pebutton" ng-if="vm.trueUser" class="profile-edit-mobile" ng-click="vm.openMobileEdit()">
+				<button type="submit">Edit my profile</button>
+			</div> -->
+
+			<div class="profile-mobile-user-options">
+				<div class="profile-mobile-connect">
+					<div class="profile-text-link">
+						<a ng-click="goToMessage(profile.id)">Message</a>
+					</div>
+					<button class="profile-follow-link" type="button" ng-click="followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
+				</div>
+				<div class="profile-mobile-edit-photo">
 				</div>
 			</div>
 		</div>
+
 		<div id="puc" ng-if="canUploadCover && !randomCover && !imageCoverLoading" class="profile-upload-cover" ngf-select="uploadProfileCover(coverProfile)" ng-model="coverProfile">
 			<i class="fa fa-camera"></i> <p>Update Cover Picture</p>
 		</div>
+
 	</div>
 
-	<div class="profile-bottom">
+	<div id="inpro" class="profile-bottom">
 		<div class="profile-bottom-info">
 			<div class="profile-follow">
 				<div class="follow-project follower">
@@ -65,7 +114,7 @@
 					<h5>Followers</h5>
 				</div>
 			</div>
-			<div ng-if="inProjects.length" class="profile-user-projects" onclick="slideToggle()">
+			<div ng-if="inProjects.length" class="profile-user-projects">
 				<div class="profile-projects-text">
 					<h6>Involved in <strong>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length == 1">project<span></strong></h6>
 				</div>
@@ -89,7 +138,23 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="profile-bottom-mobile">
+		<div ng-if="inProjects.length" class="profile-mobile-user-projects">
+			<h5>Involved in <b>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length === 1">project<span></b></h5>
+		</div>
+		<div class="profile-mobile-projects-picture">
+			<div class="profile-pp" ng-repeat="inProject in inProjects | limitTo: 3 track by $index" ng-style="{'background-image': 'url({{ resizePic(inProject.picture, '', 35, 'fill') }})'}">
+			</div>
+			<div class="profile-pp-arrow"></div>
+		</div>
+	</div>
 </section>
+
+<!-- <section id="psmb" class="profile-save-mobile">
+	<span ng-click="vm.closeMobileEdit()">Cancel</span>
+	<button type="submit"><i class="fa fa-check"></i> Save changes</button>
+</section> -->
 
 <section id="profile-slideDown" style="display: none">
 	<div class="profile-slideDown-container">
@@ -207,6 +272,60 @@
 			</div> -->
 		</div>
 	</div>
+
+	<div class="profile-mobile-contents">
+		<div class="profile-mobile-about">
+			<h2>About</h2>
+			<img ng-if="vm.trueUser" ng-click="openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
+			<p ng-bind-html="profile.description"></p>
+		</div>
+
+		<div class="profile-mobile-skills">
+			<h2>Skills</h2>
+			<img ng-if="vm.trueUser" ng-click="openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
+			<div class="profile-mobile-skills-list">
+				<ul>
+					<li ng-repeat="profileSkill in profileSkills">{{profileSkill.skill_name}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="profile-mobile-interests">
+			<h2>Interests</h2>
+			<img ng-if="vm.trueUser" ng-click="openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
+			<div class="profile-mobile-interests-list">
+				<ul>
+					<li ng-repeat="profileInterest in profileInterests">{{profileInterest.interest_name}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="profile-mobile-experience">
+			<div class="profile-experience-header">
+				<h2>Experience</h2>
+				<i ng-if="vm.trueUser" class="fa fa-plus" ng-click="openAddE()"><span>Add position</span></i>
+			</div>
+			<div class="profile-exp-list">
+				<div class="profile-exp" ng-mouseover="showEditE($index)" ng-mouseleave="hideEditE()" ng-repeat="profileExp in profileExps track by $index">
+					<div class="profile-exp-post">
+					<h3>{{profileExp.title}} <span>| &nbsp;{{profileExp.company}}</span></h3>
+					<div class="profile-exp-option" ng-if="showEditExp == $index">
+						<img ng-click="openEditE($index)" class="profile-edit-exp" src="/images/picto-edit-b.svg">
+						<i class="fa fa-trash" ng-click="removeExp(profileExp.id)"></i>
+					</div>
+					</div>
+					<div class="profile-exp-period">
+						<span class="exp-period"><i class="fa fa-calendar"></i> {{profileExp.date_from | wittyDateFilterEx}} - {{profileExp.date_to | wittyDateFilterEx}}</span>
+						<span ng-if="!profileExp.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{profileExp.location_city}}, {{profileExp.location_country}}</span>
+						<span ng-if="profileExp.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{profileExp.location_city}}, {{profileExp.location_state | uppercase}}</span>
+					</div>
+					<div class="profile-exp-description">
+						<h6>{{profileExp.description}}</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <script>
@@ -223,56 +342,61 @@
 	// 	});
 	// });
 
+	var x = $(window).width();
+
 	function initPage() {
       $(window).scrollTop(0);
     }; initPage();
 
-	function displayEditC() {
-		$('#puc').fadeIn(300);
-	};
+    if (x > 736) {
+		$('#profile-header').mouseover(function() {
+			$('#puc').fadeIn(300);
+		});
 
-	function hideEditC() {
-		$('#puc').fadeOut(300);
-	};
+		$('#profile-header').mouseleave(function() {
+			$('#puc').fadeOut(300);
+		});
 
-	function displayEditP() {
-		$('#pupe').fadeIn(300);
-	};
+		$('#pip').mouseover(function() {
+			$('#pupe').fadeIn(300);
+		});
 
-	function hideEditP() {
-		$('#pupe').fadeOut(200);
-	};
+		$('#pip').mouseleave(function() {
+			$('#pupe').fadeOut(200);
+		});
 
-	function displayText() {
-		$('.profile-update-text').fadeIn();
-	};
+		// function displayText() {
+		// 	$('.profile-update-text').fadeIn();
+		// };
 
-	function hideText() {
-		$('.profile-update-text').fadeOut();
-	};
+		// function hideText() {
+		// 	$('.profile-update-text').fadeOut();
+		// };
 
-	function slideToggle() {
-		if ($('#profile-slideDown').css('display') === "none") {
-			$('#ppa').css({
-				'-webkit-transform': 'rotate(-180deg)',
-				'-o-transform': 'rotate(-180deg)',
-				'-moz-transform': 'rotate(-180deg)',
-				'-ms-transform': 'rotate(-180deg)',
-				'-kthtml-transform': 'rotate(-180deg)',
-				'transform': 'rotate(-180deg)'
-			});
-		}
-		if ($('#profile-slideDown').css('display') === "block") {
-			$('#ppa').css({
-				'-webkit-transform': 'rotate(0)',
-				'-o-transform': 'rotate(0)',
-				'-moz-transform': 'rotate(0)',
-				'-ms-transform': 'rotate(0)',
-				'-kthtml-transform': 'rotate(0)',
-				'transform': 'rotate(0)'
-			});
-		}
-		$('#profile-slideDown').slideToggle();
+		$('#inpro').on('click', function() {
+			console.log("OK");
+			if ($('#profile-slideDown').css('display') === "none") {
+				$('#ppa').css({
+					'-webkit-transform': 'rotate(-180deg)',
+					'-o-transform': 'rotate(-180deg)',
+					'-moz-transform': 'rotate(-180deg)',
+					'-ms-transform': 'rotate(-180deg)',
+					'-kthtml-transform': 'rotate(-180deg)',
+					'transform': 'rotate(-180deg)'
+				});
+			}
+			if ($('#profile-slideDown').css('display') === "block") {
+				$('#ppa').css({
+					'-webkit-transform': 'rotate(0)',
+					'-o-transform': 'rotate(0)',
+					'-moz-transform': 'rotate(0)',
+					'-ms-transform': 'rotate(0)',
+					'-kthtml-transform': 'rotate(0)',
+					'transform': 'rotate(0)'
+				});
+			}
+			$('#profile-slideDown').slideToggle();
 
-	};
+		});
+	}
 </script>

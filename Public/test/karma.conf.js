@@ -31,6 +31,7 @@ module.exports = function(config) {
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-custom-select/dist/angular-custom-select.min.js',
       'bower_components/ng-file-upload/ng-file-upload.js',
@@ -51,7 +52,6 @@ module.exports = function(config) {
       'bower_components/slick-carousel/slick/slick.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/oi.select/dist/select-tpls.min.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       // endbower
       // script other
       'bower_components/blueimp-load-image/js/load-image.all.min.js',

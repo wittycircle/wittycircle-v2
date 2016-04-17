@@ -200,6 +200,14 @@ a:hover {
 					margin-bottom: 5px;
 				}
 
+				.info-about {
+					display: none;
+				}
+
+				#location-input-mobile {
+					display: none;
+				}
+
 				.location {
 
 					.location-name-city {
@@ -300,6 +308,18 @@ a:hover {
 						}
 					}
 				}
+			}
+
+			.profile-mobile-user-options {
+				display: none;
+			}
+
+			.profile-follow-mobile {
+				display: none;
+			}
+
+			.profile-edit-mobile {
+				display: none;
 			}
 		}
 
@@ -464,6 +484,14 @@ a:hover {
 	}
 }
 
+.profile-bottom-mobile {
+	display: none;
+}
+
+.profile-save-mobile {
+	display: none;
+}
+
 #profile-slideDown {
 	.profile-slideDown-container {
 		.profile-slideDown-project {
@@ -529,6 +557,10 @@ a:hover {
 
 	background-color: #FAFAFA;
 
+	.profile-mobile-contents {
+		display: none;
+	}
+
 	.profile-contents {
 		max-width: 1024px;
 		margin: 0 auto;
@@ -548,6 +580,8 @@ a:hover {
 				border-radius: 4px;
 				margin-bottom: 5px;
 				margin-right: 4px;
+				-webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;	
 				-webkit-transition: all 100ms linear;
 				-o-transition: all 100ms linear;
 				-moz-transition: all 100ms linear;
@@ -739,3 +773,466 @@ a:hover {
 		}
 	}
 }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+
+	#profile-header {
+		height: 480px;
+
+		.filter {
+			height: inherit;
+		}
+
+		.profile-contents {
+			position: static;
+			padding-top: 105px;
+			text-align: center;
+
+			.profile-upload-cover {
+				display: none;
+			}
+
+			.profile-info {
+				display: block;
+
+				.profile-update-picture {
+					display: none;
+				}
+
+				.profile-info-picture {
+					display: block;
+					margin: 0px auto;
+					width: 110px;
+					height: 110px;
+					border: 2px solid white;
+					
+					img {
+						width: auto;
+						height: 110px;
+						border-radius: 50%;
+					}
+				}
+
+				.profile-info-cv {
+					display: block;
+					top: 0;
+					float: none;
+					margin: 10px 0px 6px 0px;
+
+					.info-line {
+						margin-bottom: 5px;
+						padding: 0 20px;
+
+						h1 {
+							font-size: 27px;
+						}
+					}
+
+					.info-about {
+						display: block;
+						padding: 0 20px;
+						margin-bottom: 5px;
+
+						h3 {
+							font-family: 'FreigBook';
+							font-size: 16px;
+						}
+					}
+
+					#location-input {
+						display: none;
+					}
+
+					#location-input-mobile {
+						display: block;
+					}
+				}
+
+				.profile-follow-mobile {
+					display: block;
+					position: relative;
+					margin-bottom: 12px;
+
+					h2 {
+						font-family: "FreigMed";
+						font-size: 24px;
+					}
+
+					h5 {
+						font-size: 14px;
+					}
+
+					.follower {
+						display: inline-block;
+						vertical-align: top;
+						margin: 0 10px;
+					}
+				}
+
+				.profile-mobile-user-options {
+					display: inline-block;
+					position: relative;
+
+					.profile-mobile-connect {
+						.profile-text-link {
+							margin: 0 5px;
+							display: inline-block;
+							border: 1px solid white;
+							border-radius: 4px;
+							padding: 4px 20px 6px 20px;
+
+							a {
+								font-family: 'FreigBook';
+								font-size: 16px;
+								color: white;
+							}
+						}
+
+						.profile-follow-link {
+							margin: 0 5px;
+							position: relative;
+							display: inline-block;
+							font-family: 'FreigSem';
+							font-size: 16px;
+							color: white;
+							padding: 4px 12px 6px 12px;
+							border: 1px solid #416299;
+							border-radius: 4px;
+							background-color: #416299;
+							bottom: 1px;
+
+							i {
+								margin-right: 8px;
+								position: relative;
+								top: 1px;
+							}
+						}
+					}
+				}
+
+
+/*				.profile-edit-mobile {
+					display: block;
+					position: relative;
+
+					button {
+						background-image: url('/images/picto-edit-w.svg');
+						background-repeat: no-repeat;;
+						background-position: 8% 50%;
+						font-family: "FreigBook";
+						font-size: 16px;
+						color: white;
+						background-color: transparent;
+						border: 2px solid white;
+						border-radius: 4px;
+						padding: 5px 10px 5px 35px;
+					}
+				}*/
+
+				.profile-edit-mobile:active {
+					background-color: white;
+				}
+			}
+		}
+
+		.profile-bottom {
+			display: none;	
+		}
+
+		.profile-bottom-mobile {
+			display: block;
+			position: absolute;
+			width: 100%;
+			bottom: 0;
+			padding: 5px 0;
+			background-color: rgba(0, 0, 0, 0.5);
+
+			h5 {
+				font-family: "FreigBook";
+				font-size: 14px;
+				color: white;
+			}
+
+			.profile-mobile-user-projects {
+				display: inline-block;
+				vertical-align: top;
+				padding-top: 12px;
+				margin-left: 20px;
+			}
+
+			.profile-mobile-projects-picture {
+				display: inline-block;
+				float: right;
+
+				.profile-pp {
+					display: inline-block;
+					position: relative;
+					top: 2px;
+					width: 35px;
+					height: 35px;
+					background-repeat: no-repeat;
+					background-size: cover;
+					background-position: center center;
+					border-radius: 4px;
+					margin: 0px 2px;
+					overflow: hidden;
+				}
+
+				.profile-pp-arrow {
+					display: inline-block;
+					width: 20px;
+					height: 35px;
+					background-image: url('/images/arrow-down-icon-w.svg');
+					background-repeat: no-repeat;
+					background-size: 13px;
+					background-position: center center;
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+
+	#profile-corps {
+		.profile-contents {
+			display: none;
+		}
+
+		.profile-mobile-contents {
+			display: block;
+			padding: 20px;
+
+			p {
+				font-family: 'FreigBook';
+				font-size: 18px;
+				color: #222222;
+				margin-bottom: 20px;
+				line-height: 24px;
+			}
+
+			li {
+				display: inline-block;
+				font-family: 'FreigSem';
+				font-size: 13px;
+				text-transform: uppercase;
+				padding: 2px 4px;
+				border-radius: 4px;
+				margin-bottom: 5px;
+				margin-right: 4px;
+				-webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;	
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+			}
+
+			img {
+				float: right;
+				position: relative;
+				top: 15px;
+			}
+
+			.profile-mobile-skills {
+				margin-bottom: 15px;
+
+				.profile-mobile-skills-list {
+
+					li {
+						background-color: #222222;
+						color: white;
+						cursor: pointer;
+					}
+				}
+			}
+
+			.profile-mobile-interests {
+				margin-bottom: 15px;
+
+				.profile-mobile-interests-list {
+					li {
+						background-color: #999999;
+						color: white;
+						cursor: pointer;
+					}
+				}
+			}
+
+			.profile-mobile-experience {
+				margin-top: 20px;
+				margin-bottom: 25px;
+
+				.fa-plus {
+					display: inline-block;
+					position: relative;
+					bottom: 2px;
+					margin-left: 10px;
+					outline: 0;
+					font-size: 15px;
+					color: #999999;
+
+					span {
+						position: relative;
+						font-family: 'FreigSem';
+						font-size: 15px;
+						margin-left: 2px;
+						bottom: 1px;
+					}
+				}
+
+				.profile-exp-list {
+					.profile-exp {
+						padding-bottom: 10px;
+						border-bottom: 1px solid #E5E5E5;
+
+						img {
+							float: none;
+						}
+
+						.profile-exp-post {
+							padding-top: 10px;
+
+								h3 {
+									display: inline-block;
+									font-family: 'FreigSem';
+									color: #222222;
+									font-size: 18px;
+									padding-right: 8px;
+									padding-top: 2px;
+									padding-bottom: 2px;
+								}
+								span {
+									display: inline-block;
+									font-family: 'FreigBook';
+									color: #222222;
+									font-size: 18px;
+									padding-left: 8px;
+								}
+
+							.profile-exp-option {
+								float: right;
+								position: relative;
+								top: 2px;
+								margin-right: 10px;
+
+								img {
+									width: 16px;
+									height: 16px;
+									outline: 0;
+								}
+
+								.fa-trash {
+									color: #999999;
+									font-size: 16px;
+									outline: 0;
+								}
+							}
+						}
+
+						.profile-exp-period {
+							margin-top: 3px;
+							span {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								color: #999999;
+							}
+
+							.exp-location {
+								margin-left: 10px;
+							}
+						}
+
+						.profile-exp-description {
+							margin-top: 4px;
+							h6 {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								color: #222222;
+								line-height: 18px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+/*	.profile-save-mobile {
+		display: none;
+		position: fixed;
+		width: 100%;
+		text-align: center;
+		background-color: white;
+		z-index: 99999;
+		border-top: 1px solid #e5e5e5;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+
+		span {
+			font-family: "FreigBook";
+			font-size: 16px;
+			color: #999999;
+			margin-right: 10px;
+			margin-left: 30px;
+		}
+
+		span:focus {
+			outline: 0;
+		}
+
+		button {
+			font-family: "FreigMed";
+			font-size: 16px;
+			color: white;
+			background-color: #FF4D4D;
+			border: none;
+			border-radius: 4px;
+			padding: 6px 8px 8px 8px;
+			margin: 12px 0;
+
+			i {
+				margin-right: 5px;
+			}
+		}
+	}*/
+}
+
+/*.animate-psm-open {
+	display: block;
+	-webkit-animation: downToUp 0.3s;
+	animation: downToUp 0.3s;
+	bottom: 0px;
+}
+
+.animate-psm-close {
+	display: block;
+	bottom: -61px;
+	-webkit-animation: UpToDown 0.3s;
+	animation: UpToDown 0.3s;
+}
+
+@-webkit-keyframes downToUp {
+    0%   {bottom: -61px;}
+    100%  {bottom: 0px;}
+}
+
+@-webkit-keyframes UpToDown {
+    0%   {bottom: 0px;}
+    100%  {bottom: -61px;}
+}*/
+

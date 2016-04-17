@@ -1,0 +1,39 @@
+<section id="mmmodal" ng-if="mmobile.general" class="animated fadeIn">
+
+	<header class="presentation-mobile-modal-header">
+		<h5>{{mmobile.headerText}}</h5>
+		<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()"/>
+		<h4 ng-if="skillListM[0]" class="animated fadeIn" ng-click="closemmodal()">I'm good <i class="fa fa-check"></i></h4>
+	</header>
+
+	<div id="mskmodal" class="discover-mobile-search3 d-mobile-search" ng-if="mmobile.modal === 1">
+		<ul class="select-list">
+			<li ng-repeat="skillM in skillListM">{{skillM.sName}} <i class="fa fa-times" ng-click="removeSkill(skillM.sName)"></i></li>
+		</ul>
+		<div class="discover-mobile-search-skill">
+			<input type="text" placeholder="Search for a specific skill..." ng-model="skillName">
+		</div>
+		<ul ng-if="!skillName">
+			<h3>Popular skills</h3>
+			<div class="discover-mobile-skillList1">
+				<li ng-repeat="skill in skills | limitTo: 10" class="animated fadeIn" ng-click="searchSkill(skill.name)"><i class="fa fa-plus" aria-hidden="true"></i> {{skill.name}}</li>
+			</div>
+		</ul>		
+		<ul ng-if="skillName">
+			<div class="discover-mobile-skillList1 discover-mobile-skillList2">
+				<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
+			</div>
+			<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+		</ul>
+	</div>
+
+	<div id="msamodal" class="discover-mobile-search1 d-mobile-search" ng-if="mmobile.modal === 2">
+		<ul>
+            <li ng-click="getAnything('Discover new things')" >Discover new things</li>
+            <li ng-click="getAnything('Join projects')" >Join projects</li>
+            <li ng-click="getAnything('Find teammates')">Find teammates</li>
+            <li>Get freelance misson <sup>soon</sup></li>
+        </ul>
+	</div>
+
+</section>

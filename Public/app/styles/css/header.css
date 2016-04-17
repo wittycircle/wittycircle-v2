@@ -442,15 +442,12 @@
 @media only screen and (min-width: 320px) and (max-width: 736px) {
   /* Main start project */
   #header-section #header-content {
-    -webkit-transform-style: preserve-3d;
     padding: 12px 20px 0px 20px;
     text-align: center; }
     #header-section #header-content .header-navigation-mobile {
-      -webkit-transform-style: preserve-3d;
       display: block;
       text-align: left; }
       #header-section #header-content .header-navigation-mobile .header-nav-list {
-        -webkit-transform-style: preserve-3d;
         padding: 0;
         margin: 0; }
         #header-section #header-content .header-navigation-mobile .header-nav-list li {
@@ -467,7 +464,6 @@
         #header-section #header-content .header-navigation-mobile .header-nav-list .right {
           text-align: right; }
     #header-section #header-content .header-searchBar-mobile {
-      -webkit-transform-style: preserve-3d;
       display: inline-block;
       position: relative;
       float: left;
@@ -488,11 +484,8 @@
       display: inline-block;
       position: relative;
       float: right;
-      top: 8px;
-      width: 30px;
-      height: 30px; }
+      top: 8px; }
       #header-section #header-content .header-log-off-mobile .header-mobile-bubble {
-        -webkit-transform-style: preserve-3d;
         position: absolute;
         width: 10px;
         height: 10px;
@@ -503,7 +496,6 @@
       #header-section #header-content .header-log-off-mobile img {
         width: 20px; }
     #header-section #header-content .header-log-aside {
-      -webkit-transform-style: preserve-3d;
       overflow: scroll; }
       #header-section #header-content .header-log-aside .log-on .log-on-list h2 {
         margin-top: 25px;
@@ -521,7 +513,6 @@
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-notif {
           display: inline-block; }
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-mobile-buble {
-          -webkit-transform-style: preserve-3d;
           position: absolute;
           margin-left: 25px;
           margin-top: -5px;
@@ -540,7 +531,6 @@
       #header-section #header-content .header-log-aside .log-on .log-on-list .header-mobile-menu li {
         display: block; }
     #header-section #header-content #cbp-spmenu-s2 {
-      -webkit-transform-style: preserve-3d;
       display: inline-block;
       border-left: 1px solid #999999; }
     #header-section #header-content hr {
@@ -553,7 +543,6 @@
 
   /* General styles for all menus */
   .cbp-spmenu {
-    -webkit-transform-style: preserve-3d;
     background: white;
     position: fixed; }
 
@@ -607,7 +596,6 @@
   /* Transitions */
   .cbp-spmenu,
   .cbp-spmenu-push {
-    -webkit-transform-style: preserve-3d;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease; } }

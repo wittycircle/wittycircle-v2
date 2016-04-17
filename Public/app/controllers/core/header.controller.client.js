@@ -8,8 +8,8 @@
  * Controller of the wittyApp
  **/
 angular.module('wittyApp')
-.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'showbottomAlert', '$mdBottomSheet', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
-  function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
+  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
   function checkCredential() {
@@ -78,18 +78,18 @@ $rootScope.$watch('globals', function(value) {
     //     }
     // });
 
-    $scope.popSwL = function() {
-      var x       = $('#main-signup-modal');
-      var filter  = $("#page-wrap");
-      var marge = (x - 600)/2/2;
+    // $scope.popSwL = function() {
+    //   var x       = $('#main-signup-modal');
+    //   var filter  = $("#page-wrap");
+    //   var marge = (x - 600)/2/2;
 
-      if (x.css('display') === "none") {
-        filter.fadeIn(500);
-        x.css({'top': marge.toString() + "px"});
-        $mdBottomSheet.cancel();
-        x.fadeIn();
-      }
-    };
+    //   if (x.css('display') === "none") {
+    //     filter.fadeIn(500);
+    //     x.css({'top': marge.toString() + "px"});
+    //     $mdBottomSheet.cancel();
+    //     x.fadeIn();
+    //   }
+    // };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
     //   console.log(value);

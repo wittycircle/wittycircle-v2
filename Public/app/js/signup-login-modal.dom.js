@@ -5,8 +5,8 @@ $(document).ready(function() {
         mlogmodal   = $("#main-login-modal"),
         msigmodal   = $("#main-signup-modal"),
         filter      = $("#page-wrap"),
-        margS       = (x - 600)/2/2,
-        margL       = (x - 550)/2/2,
+        margeS       = (x - 600)/2/2,
+        margeL       = (x - 550)/2/2,
         container   = $(this);
 
     $(this).on('click', function(e) {
@@ -18,7 +18,7 @@ $(document).ready(function() {
                 if (y > 736) {
                     mlogmodal.animate({top: '-700px'}, 400, function() {
                         mlogmodal.hide(100, function() {
-                            mlogmodal.css({'top': margL.toString() + "px"});
+                            mlogmodal.css({'top': margeL.toString() + "px"});
                         });
                     });
                 } else {
@@ -30,7 +30,7 @@ $(document).ready(function() {
             } else {
                 if (y > 736) {
                     filter.fadeIn(200);
-                    mlogmodal.css({'top': margL.toString() + "px"});
+                    mlogmodal.css({'top': margeL.toString() + "px"});
                     mlogmodal.fadeIn();
                 } else {
                     $('#headerCore').hide();
@@ -72,7 +72,7 @@ $(document).ready(function() {
 
         // Login modal * Switch to sign up
         if (eTarget.id === "switchToS" && (mlogmodal.css('display') === "block")) {
-            msigmodal.css({'top': margL.toString() + "px"});
+            msigmodal.css({'top': margeL.toString() + "px"});
             msigmodal.fadeIn();
             mlogmodal.fadeOut();
         }

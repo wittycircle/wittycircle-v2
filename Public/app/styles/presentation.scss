@@ -473,6 +473,11 @@
 	}
 
 	#meet-search1 {
+
+		.meet-search1-dropdown-mobile {
+			display: none;
+		}
+
 		.meet-search1-dropdown {
 			display: inline-block;
 			margin: 0px 10px 10px 0px;
@@ -721,10 +726,9 @@
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 @media only screen and (max-width: 736px) {
-	.discover-image-bg {
+	.presentation-image-bg {
 		display: block;
 		width: 100%;
-		height: 480px;
 		background-image: url("/images/poster/poster_discover.jpg");
 		background-size: cover;
 		background-position: center center;
@@ -780,7 +784,12 @@
 		}
 	}
 
-	/*** Discover mobile body ***/
+	/****** Discover mobile ******/
+
+	.discover-image-bg {
+		height: 480px;
+	}
+
 	#discover-body-content {
 		.discover-body-container {
 			.discover-body-list {
@@ -802,7 +811,6 @@
 		}
 	}
 
-	/****** Discover ******/
 	.discover-component {
 		.discover-search1 {
 
@@ -892,11 +900,73 @@
 		}
 	}
 
+	/****** Meet mobile ******/
+	.meet-image-bg {
+		height: 380px;
+	}
+
+	.meet-component {
+		.meet-title {
+			padding: 15px 0 10px 0;
+		}
+
+		#meet-search1 { 
+			.meet-search1-text {
+				margin-bottom: 10px;
+			}
+
+			#msdrop1 {
+				display: none;
+			}
+
+			.meet-search1-dropdown-mobile {
+				display: inline-block;
+				margin-bottom: 10px;
+				margin-right: 20px;
+
+				h2 {
+					display: inline-block;
+					padding-left: 10px;
+				}
+
+				.meet-cross-bg {
+					display: inline-block;
+					vertical-align: middle;
+					background-image: url('/images/arrow-down-icon-w.svg');
+					background-repeat: no-repeat;
+					background-position: 45% 28%;
+					background-size: 14px;
+					height: 30px;
+					width: 26px;
+				}
+			}
+
+			.meet-search1-text2 {
+				display: table-cell;
+				padding-right: 10px;
+				padding-bottom: 20px;
+			}
+
+			.meet-search1-dropdown {
+				display: table-cell;
+			}
+
+			.meet-search2-text2 {
+				margin-bottom: 10px;
+			}
+
+			.meet-search2-anylocation {
+				input {
+					font-size: 27px;
+				}
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 320px) {
 
-	/*** Discover mobile body ***/
+	/****** Discover mobile ******/
 	#discover-body-content {
 		.discover-body-container {
 			.discover-body-list {
@@ -906,6 +976,29 @@
 			}
 		}	
 		.loader {
+		}
+	}
+
+	/****** Meet mobile ******/
+	#meet-body-content {
+		min-height: 400px;
+		
+		.meet-body-container {
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+
+			.meet-body-cards {
+				padding: 0;
+				text-align: center;
+				margin: 10px 0;
+
+				.meet-body-card {
+					margin: 0px 16px 25px 16px
+				}
+			}
 		}
 	}
 }

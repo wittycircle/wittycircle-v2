@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, showbottomAlert, $mdBottomSheet, Beauty_encode, algolia, $timeout) {
+ 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout) {
 
  		/*** ALGOLIA ***/
  		var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
@@ -33,10 +33,11 @@
 
 
 		/*** Discover Mobile ***/
+		var ww = $(window).width();
 		$scope.dmobile = {};
 		$scope.opendmodal = function(value) {
 			
-			if ($(window).width() <= 736) {
+			if (ww <= 736) {
 				$scope.dmobile.modal	= value;
 				if (value === 1)
 					$scope.dmobile.headerText = "Show me the...";
@@ -49,11 +50,13 @@
 				if (value === 5)
 					$scope.dmobile.headerText = "Show me projects near...";
 				$scope.dmobile.general 	= true;
+				$('body').css('overflow-y', 'hidden');
 			}
 		};
 
 		$scope.closemmodal = function() {
 			$('#dmmodal').css("display", "none");
+			$('body').css('overflow-y', 'scroll');
 			$scope.dmobile.general 	= false;
 		}
 
@@ -83,15 +86,15 @@
 				$scope.ctgName = "Art";
 		});
 
-		$scope.$on("$destroy", function(){
-			$scope.skills = 0;
-			var container = $('.custom-popover');
-			if (container.length) {
-				$mdBottomSheet.hide();
-				$('.md-bottom-sheet-backdrop').css('display', 'none')
-				$('#page-wrap').css('display', 'none');
-			}
-		});
+		// $scope.$on("$destroy", function(){
+		// 	$scope.skills = 0;
+		// 	var container = $('.custom-popover');
+		// 	if (container.length) {
+		// 		$mdBottomSheet.hide();
+		// 		$('.md-bottom-sheet-backdrop').css('display', 'none')
+		// 		$('#page-wrap').css('display', 'none');
+		// 	}
+		// });
 
 		/*****-- FUNCTION --*****/
 		// setTimeout(function() {
@@ -171,7 +174,7 @@
 		$scope.getHelp = function(hName) {
 			$scope.dmobile.general 	= false;
 
-			if ($(window).width() > 736) {
+			if (ww > 736) {
 				if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
 					document.getElementById('dstext').style.display = "inline-block";
 					document.getElementById('dsdrop1').style.display = "inline-block";
@@ -221,7 +224,7 @@
 		$scope.searchSkill = function(name) {
 			$scope.skillName = [];
 
-			if ($(window).width() > 736) {
+			if (ww > 736) {
 				if (document.getElementById('labelNoText')) {
 					document.getElementById('labelNoText').id = "labelText";
 					document.getElementById('labelNoText2').id = "labelText2";
@@ -286,7 +289,7 @@
 
 			var index;
 
-			if ($(window).width() > 736) {
+			if (ww > 736) {
 				var x = document.getElementsByClassName('discover-skill-list');
 				for (var i = 0; i < $scope.skillList.length; i++) {
 					if ($scope.skillList[i].sName === name) {
@@ -447,7 +450,7 @@
 								if (y > 736)
 									return w.toString() + "px";
 								else
-									return "280px";
+									return "260px";
 							});
 						}
 					}

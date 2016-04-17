@@ -17,6 +17,11 @@ h1, h2, h3, h4, h5, h6, a {
   color: white;
 }
 
+h1, h2, h3, h5, h6, input, label, button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 li {
   list-style-type: none;
 }
@@ -25,6 +30,9 @@ ul {
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+input {
 }
 
 button:focus {
@@ -40,9 +48,9 @@ a:focus {
   color: white;
 }
 
-label {
+/*label {
   font-weight: normal !important;
-}
+}*/
 
 /*@font-face {
 .no-pdt {

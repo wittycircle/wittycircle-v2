@@ -1,7 +1,7 @@
 <section id="dmmodal" ng-if="dmobile.general" class="animated fadeIn">
-	<header class="discover-mobile-modal-header">
+	<header class="presentation-mobile-modal-header">
 			<h5>{{dmobile.headerText}}</h5>
-			<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()"/>
+			<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()" ng-cloak/>
 	</header>
 	<div id="dsamodal" class="discover-mobile-search1 d-mobile-search" ng-if="dmobile.modal === 1">
 		<ul>

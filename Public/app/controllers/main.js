@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the wittyApp
  **/
-angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, $mdBottomSheet, Profile, Users, get_CategoryName, showbottomAlert, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, Categories) {
+angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, Categories) {
 
   // if ($rootScope.globals.currentUser) {
     $http.get('/profile').success(function(res){
@@ -153,7 +153,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
   $scope.savedata = function ($event) {
     if (!$rootScope.globals.currentUser) {
-      showbottomAlert.pop_it($event);
+      
     }
     else {
       var data          = {};
@@ -206,7 +206,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
   $scope.followUserFromCard = function(id, index, $event) {
     if (!$rootScope.globals.currentUser) {
-      showbottomAlert.pop_it($event);
+      
     } else {
       Users.getUserIdByProfileId(id).then(function(data) {
         if ($rootScope.globals.currentUser.id !== data.userId.id) {

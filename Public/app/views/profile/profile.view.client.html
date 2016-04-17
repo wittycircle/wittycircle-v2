@@ -81,14 +81,13 @@
 			</div> -->
 
 			<div class="profile-mobile-user-options">
-				<div class="profile-mobile-connect">
+				<div ng-if="!vm.trueUser" class="profile-mobile-connect">
 					<div class="profile-text-link">
 						<a ng-click="goToMessage(profile.id)">Message</a>
 					</div>
 					<button class="profile-follow-link" type="button" ng-click="followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
 				</div>
-				<div class="profile-mobile-edit-photo">
-				</div>
+				<button id="pmepb" ng-if="vm.trueUser" class="profile-mobile-edit-photo"><i class="fa fa-camera"></i> Update picture</button>
 			</div>
 		</div>
 
@@ -151,6 +150,19 @@
 	</div>
 </section>
 
+<div id="pmephotos" class="profile-mobile-edit-photos" ng-if="vm.trueUser">
+	<div class="profile-mobile-edit-cover" ngf-select="uploadProfileCover(coverProfile)" ng-model="coverProfile">
+		Change your cover picture
+	</div>
+
+	<hr />
+	<div class="profile-mobile-edit-profile" ng-if="!imageProfileLoading && canUpload" id="pupe" ngf-select="uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
+            accept="image/*"
+            ngf-pattern="'image/*'">
+		Upload a new profile photo
+	</div>
+</div>
+
 <!-- <section id="psmb" class="profile-save-mobile">
 	<span ng-click="vm.closeMobileEdit()">Cancel</span>
 	<button type="submit"><i class="fa fa-check"></i> Save changes</button>
@@ -204,6 +216,8 @@
 		<p>Close this panel</p>
 	</div>
 </section>
+
+
 
 <section id="profile-slideDown" style="display: none">
 	<div class="profile-slideDown-container">
@@ -398,56 +412,79 @@
     }; initPage();
 
     if (x > 736) {
-		$('#profile-header').mouseover(function() {
-			$('#puc').fadeIn(300);
+
+    	$(document).ready(function() {
+			$('#profile-header').mouseover(function() {
+				$('#puc').fadeIn(300);
+			});
+
+			$('#profile-header').mouseleave(function() {
+				$('#puc').fadeOut(300);
+			});
+
+			$('#pip').mouseover(function() {
+				$('#pupe').fadeIn(300);
+			});
+
+			$('#pip').mouseleave(function() {
+				$('#pupe').fadeOut(200);
+			});
+
+			// function displayText() {
+			// 	$('.profile-update-text').fadeIn();
+			// };
+
+			// function hideText() {
+			// 	$('.profile-update-text').fadeOut();
+			// };
+
+			$('#inpro').on('click', function() {
+				console.log("OK");
+				if ($('#profile-slideDown').css('display') === "none") {
+					$('#ppa').css({
+						'-webkit-transform': 'rotate(-180deg)',
+						'-o-transform': 'rotate(-180deg)',
+						'-moz-transform': 'rotate(-180deg)',
+						'-ms-transform': 'rotate(-180deg)',
+						'-kthtml-transform': 'rotate(-180deg)',
+						'transform': 'rotate(-180deg)'
+					});
+				}
+				if ($('#profile-slideDown').css('display') === "block") {
+					$('#ppa').css({
+						'-webkit-transform': 'rotate(0)',
+						'-o-transform': 'rotate(0)',
+						'-moz-transform': 'rotate(0)',
+						'-ms-transform': 'rotate(0)',
+						'-kthtml-transform': 'rotate(0)',
+						'transform': 'rotate(0)'
+					});
+				}
+				$('#profile-slideDown').slideToggle();
+
+			});
 		});
 
-		$('#profile-header').mouseleave(function() {
-			$('#puc').fadeOut(300);
-		});
-
-		$('#pip').mouseover(function() {
-			$('#pupe').fadeIn(300);
-		});
-
-		$('#pip').mouseleave(function() {
-			$('#pupe').fadeOut(200);
-		});
-
-		// function displayText() {
-		// 	$('.profile-update-text').fadeIn();
-		// };
-
-		// function hideText() {
-		// 	$('.profile-update-text').fadeOut();
-		// };
-
-		$('#inpro').on('click', function() {
-			console.log("OK");
-			if ($('#profile-slideDown').css('display') === "none") {
-				$('#ppa').css({
-					'-webkit-transform': 'rotate(-180deg)',
-					'-o-transform': 'rotate(-180deg)',
-					'-moz-transform': 'rotate(-180deg)',
-					'-ms-transform': 'rotate(-180deg)',
-					'-kthtml-transform': 'rotate(-180deg)',
-					'transform': 'rotate(-180deg)'
-				});
-			}
-			if ($('#profile-slideDown').css('display') === "block") {
-				$('#ppa').css({
-					'-webkit-transform': 'rotate(0)',
-					'-o-transform': 'rotate(0)',
-					'-moz-transform': 'rotate(0)',
-					'-ms-transform': 'rotate(0)',
-					'-kthtml-transform': 'rotate(0)',
-					'transform': 'rotate(0)'
-				});
-			}
-			$('#profile-slideDown').slideToggle();
-
-		});
 	} else {
+
+		$(document).ready(function() {
+
+			$('body').click(function(e) {
+
+				if (!$('#pmephotos').hasClass('animate-pmep-close') && $('#pmephotos').css('display') === "block") {
+					$('#pmephotos').removeClass('animate-pmep-open');
+					$('#pmephotos').addClass('animate-pmep-close');
+				} else {
+					if (e.target.id === "pmepb") {
+						if ($('#pmephotos').hasClass('animate-pmep-close')) {
+							console.log("OK");
+							$('#pmephotos').removeClass('animate-pmep-close');
+						}
+						$('#pmephotos').addClass("animate-pmep-open");
+					}
+				}
+			});
+		});
 
 	}
 </script>

@@ -659,8 +659,16 @@ a:hover {
               margin-right: 8px;
               position: relative;
               top: 1px; }
-        #profile-header .profile-contents .profile-info .profile-edit-mobile:active {
-          background-color: white; }
+          #profile-header .profile-contents .profile-info .profile-mobile-user-options button {
+            padding: 4px 15px 6px 15px;
+            background-color: transparent;
+            border: 1px solid white;
+            border-radius: 4px;
+            font-family: 'FreigBook';
+            font-size: 18px;
+            color: white; }
+            #profile-header .profile-contents .profile-info .profile-mobile-user-options button i {
+              margin-right: 8px; }
     #profile-header .profile-bottom {
       display: none; }
     #profile-header .profile-bottom-mobile {
@@ -894,29 +902,70 @@ a:hover {
   				margin-right: 5px;
   			}
   		}
-  	}*/ }
-/*.animate-psm-open {
-	display: block;
-	-webkit-animation: downToUp 0.3s;
-	animation: downToUp 0.3s;
-	bottom: 0px;
-}
+  	}*/
+  .profile-mobile-edit-photos {
+    display: none;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 99999;
+    text-align: center;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
+    .profile-mobile-edit-photos .profile-mobile-edit-cover {
+      font-family: 'FreigBook';
+      font-size: 18px;
+      color: #999999;
+      padding: 20px 0 10px 0;
+      border-top: 1px solid #e5e5e5; }
+    .profile-mobile-edit-photos hr {
+      margin: 15px 0; }
+    .profile-mobile-edit-photos .profile-mobile-edit-profile {
+      font-family: 'FreigBook';
+      font-size: 18px;
+      color: #999999;
+      padding: 10px 0 20px 0; }
 
-.animate-psm-close {
-	display: block;
-	bottom: -61px;
-	-webkit-animation: UpToDown 0.3s;
-	animation: UpToDown 0.3s;
-}
+  .profile-edit-mobile:active {
+    background-color: white; } }
+.animate-pmep-open {
+  display: block;
+  -webkit-animation: downToUp 0.1s;
+  animation: downToUp 0.1s;
+  bottom: 0px; }
+
+.animate-pmep-close {
+  display: block;
+  bottom: -160px;
+  -webkit-animation: UpToDown 0.2s;
+  animation: UpToDown 0.2s; }
 
 @-webkit-keyframes downToUp {
-    0%   {bottom: -61px;}
-    100%  {bottom: 0px;}
-}
-
+  0% {
+    bottom: -130px; }
+  25% {
+    bottom: -100px; }
+  50% {
+    bottom: -60px; }
+  100% {
+    bottom: 0px; } }
 @-webkit-keyframes UpToDown {
-    0%   {bottom: 0px;}
-    100%  {bottom: -61px;}
-}*/
+  0% {
+    bottom: 0px; }
+  100% {
+    bottom: -160px; } }
 
 /*# sourceMappingURL=profiles.css.map */

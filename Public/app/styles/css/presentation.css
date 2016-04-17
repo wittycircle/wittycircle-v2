@@ -525,11 +525,6 @@
       color: none; }
 
   .presentation-body-loadmore button {
-    -webkit-filter: blur(2px) brightness(0.6);
-    -moz-filter: blur(2px) brightness(0.6);
-    -o-filter: blur(2px) brightness(0.6);
-    -ms-filter: blur(2px) brightness(0.6);
-    filter: blur(2px) brightness(0.6);
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
@@ -661,11 +656,6 @@
 @media only screen and (max-width: 320px) {
   /****** Discover mobile ******/
   #discover-body-content .discover-body-container {
-    -webkit-filter: blur(2px) brightness(0.6);
-    -moz-filter: blur(2px) brightness(0.6);
-    -o-filter: blur(2px) brightness(0.6);
-    -ms-filter: blur(2px) brightness(0.6);
-    filter: blur(2px) brightness(0.6);
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
@@ -688,11 +678,6 @@
   #meet-body-content {
     min-height: 400px; }
     #meet-body-content .meet-body-container {
-      -webkit-filter: blur(2px) brightness(0.6);
-      -moz-filter: blur(2px) brightness(0.6);
-      -o-filter: blur(2px) brightness(0.6);
-      -ms-filter: blur(2px) brightness(0.6);
-      filter: blur(2px) brightness(0.6);
       -webkit-transform: translateZ(0);
       -moz-transform: translateZ(0);
       -ms-transform: translateZ(0);

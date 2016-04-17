@@ -524,6 +524,34 @@
       background-color: none;
       color: none; }
 
+  .presentation-body-loadmore button {
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
+  .presentation-body-loadmore button:hover {
+    background-color: transparent;
+    color: #222222; }
+  .presentation-body-loadmore button:focus {
+    background-color: #222222;
+    color: white; }
+
   /****** Discover mobile ******/
   .discover-image-bg {
     height: 480px; }
@@ -632,18 +660,54 @@
     font-size: 27px; } }
 @media only screen and (max-width: 320px) {
   /****** Discover mobile ******/
-  #discover-body-content .discover-body-container .discover-body-list .discover-body-card {
-    width: 270px; }
+  #discover-body-content .discover-body-container {
+    -webkit-filter: blur(2px) brightness(0.6);
+    -moz-filter: blur(2px) brightness(0.6);
+    -o-filter: blur(2px) brightness(0.6);
+    -ms-filter: blur(2px) brightness(0.6);
+    filter: blur(2px) brightness(0.6);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
+    #discover-body-content .discover-body-container .discover-body-list .discover-body-card {
+      width: 270px; }
 
   /****** Meet mobile ******/
   #meet-body-content {
     min-height: 400px; }
     #meet-body-content .meet-body-container {
+      -webkit-filter: blur(2px) brightness(0.6);
+      -moz-filter: blur(2px) brightness(0.6);
+      -o-filter: blur(2px) brightness(0.6);
+      -ms-filter: blur(2px) brightness(0.6);
+      filter: blur(2px) brightness(0.6);
       -webkit-transform: translateZ(0);
       -moz-transform: translateZ(0);
       -ms-transform: translateZ(0);
       -o-transform: translateZ(0);
-      transform: translateZ(0); }
+      transform: translateZ(0);
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      -o-perspective: 1000;
+      perspective: 1000;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
       #meet-body-content .meet-body-container .meet-body-cards {
         padding: 0;
         text-align: center;

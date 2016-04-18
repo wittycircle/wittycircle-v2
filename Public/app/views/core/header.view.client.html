@@ -43,7 +43,7 @@
             <div class="log-on" ng-hide="!log">
                 <div class="log-on-list">
                     <h2>{{user.first_name}} {{user.last_name}}</h2>
-                    <figure ng-if="user.profile_picture" class="header-log-avatar">
+                    <figure ng-if="user.profile_picture" class="header-log-avatar" data-ui-sref="profile({username: user.username})">
                         <img ng-src="{{ resizePic(user.profile_picture, 90, 90, 'fill') }}" alt="profile-avatar">
                     </figure>
                     <div class="log-on-notifs">

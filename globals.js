@@ -4,7 +4,7 @@ global.pool  = mysql.createPool({
   host            : 'localhost',
   database        : 'wittydb',
   user            : 'root',
-  password        : 'mwitty4!',
+  password        : 'greggreg',
 });
 
 global.crypto = require('crypto');

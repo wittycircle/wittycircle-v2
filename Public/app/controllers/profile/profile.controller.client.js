@@ -10,7 +10,7 @@
 angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal, $state, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, showbottomAlert, Skills, Interests, Locations, Projects) {
 
     var socket = io.connect('https://www.wittycircle.com');
-    
+
     if (!$rootScope.globals.currentUser || ($rootScope.globals.currentUser && $rootScope.globals.currentUser.username !== $stateParams.username))
       Users.getProfileView($stateParams.username);
 
@@ -63,6 +63,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
     $scope.init = function () {
       Profile.getUserbyUsername($stateParams.username).then(function(res) {
+          //TODO: res is actually sending the password ..
         if (res) {
           Projects.getUserProject(res.id, function(res) {
             $scope.inProjects = res;
@@ -107,8 +108,10 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         $scope.cInterests           = res.interests;
       });
 
-      $http.get('/follow/projects/' + $stateParams.username).success(function(res) {
-        $scope.projectsFollow       = res.data.length;
+      $http.get('/follow/projects/number/' + $stateParams.username).success(function(res) {
+          if (res.number) {
+              $scope.projectsFollow = res.number;
+          }
       });
 
       $http.get('/follow/users/' + $stateParams.username).success(function(res) {

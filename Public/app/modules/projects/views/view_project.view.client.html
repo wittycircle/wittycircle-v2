@@ -39,29 +39,35 @@
 								<span class="fa-stack fa-lg"
 								socialshare
 								socialshare-provider="facebook"
-								socialshare-text="this is a desc test"
+								socialshare-text="{{'Wittycircle | ' + vm.project.title}}"
 								socialshare-hashtags="wittycircle, projects"
 								socialshare-url="{{::vm.currentUrl}}"
-								socialshare-type="dialog">
+								socialshare-description="{{vm.project.description}}"
+								socialshare-media="{{ resizePic(vm.project.picture, 450, 300)}}"
+								socialshare-via="487284094736758"
+								socialshare-ref="wittycircle, project, creator, marketplace"
+								socialshare-display="popup"
+								socialshare-source="https://www.wittycircle.com"
+								socialshare-type="feed">
 								  <i class="fa fa-circle fa-stack-1x"></i>
 								  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
 								</span>
 								<span class="fa-stack fa-lg"
 								socialshare
 								socialshare-provider="twitter"
-								socialshare-via="Wittycircle"
-								socialshare-text="Wittycircle - My project {{vm.project.title}} is now live on Wittycircle"
 								socialshare-url="{{::vm.currentUrl}}"
-								socialshare-popup-height="300"
-								socialshare-popup-width="400"
-								socialshare-trigger="click">
+								socialshare-text="{{vm.project.title}} is now live on @Wittycircle, the creators marketplace."
+								socialshare-hashtags="{{vm.project.title}}, projects, creators"
+								socialshare-trigger="click"
+								socialshare-popup-height="400"
+								socialshare-popup-width="800">
 									<i class="fa fa-circle fa-circle-twitter fa-stack-1x"></i>
 									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 								</span>
 						</div>
 					</li>
-					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false)" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{::vm.followText}}</button>
+					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button>
 					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
 				</ul>
 			</div>

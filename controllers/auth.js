@@ -3,6 +3,8 @@ const mandrill = require('mandrill-api/mandrill');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 
+
+//TODO: CGAMHE Server url
 /** DEV **/
 exports.facebookAuth = {
     'clientID'      : '793713660760465',
@@ -118,7 +120,7 @@ exports.ResetPassword = function (req, res) {
 
                         var message = {
                             "html": "<p>HTML content</p>",
-                            "subject": "Welcome to Wittycircle",
+                            "subject": "Reset your Wittycircle password",
                             "from_email": "noreply@wittycircle.com",
                             "from_name": "Wittycircle",
                             "to": [{

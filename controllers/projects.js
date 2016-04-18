@@ -223,11 +223,11 @@ exports.getProjectsCreatedByUser = function(req, res){
                         };
                         tf.sortProjectCard(results, function(data) {
                             if (!data)
-                                return res.status(400).send('Error');
+                                return res.status(400).send('Error00');
                             else {
                                 tf.addUserPictureToProject(data, function (rez) {
                                   if (!rez)
-                                    return res.status(400).send('Error');
+                                    return res.status(400).send('Error01');
                                   else
                                     return res.send(rez);
                                 })
@@ -248,7 +248,7 @@ exports.getProjectsCreatedByUser = function(req, res){
                     throw err;
                }
                 if (results[0]) {
-                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?)",
+                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ? AND n_accept = 1) AND project_visibility = 1",
                     [req.params.user_id],
                     function (eror, rez) {
                         for (var i = rez.length - 1; i >= 0; i--) {
@@ -256,11 +256,11 @@ exports.getProjectsCreatedByUser = function(req, res){
                         };
                         tf.sortProjectCard(results, function(data) {
                           if (!data)
-                              return res.status(400).send('Error');
+                              return res.status(400).send('Error1');
                           else {
                               tf.addUserPictureToProject(data, function (rez) {
                                 if (!rez)
-                                  return res.status(400).send('Error');
+                                  return res.status(400).send('Error2');
                                 else
                                   return res.send(rez);
                               })
@@ -268,7 +268,7 @@ exports.getProjectsCreatedByUser = function(req, res){
                         });
                     });
                 } else {
-                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?) AND project_visibility = 1",
+                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ? AND n_accept = 1) AND project_visibility = 1",
                     [req.params.user_id],
                     function (eror, rez) {
                         tf.sortProjectCard(rez, function(data) {
@@ -277,7 +277,9 @@ exports.getProjectsCreatedByUser = function(req, res){
                             else {
                                 tf.addUserPictureToProject(data, function (rez) {
                                   if (!rez)
-                                    return res.status(400).send('Error');
+                                    {
+                                        return res.status(400).send('Error3');
+                                    }
                                   else
                                     return res.send(rez);
                                 })
@@ -345,7 +347,7 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
       } else {
         var editable = false;
         var show     = false;
-        var involver = false;
+        var involver = {};
         var userIn   = [];
         function recursive (index) {
             if(results[index]) {
@@ -353,10 +355,11 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                   show = true;
                   pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
                   [results[index].invited_by],
-                  function (err, result, field) {
+                  function (err, result) {
                       if(err){
                           throw err;
                       }
+                      console.log(result);
                       involver = result[0];
                   });
                 }

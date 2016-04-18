@@ -3,7 +3,7 @@ module.exports = {
     'connection': {
         'host': 'localhost',
         'user': 'root',
-        'password': 'mwitty4!'
+        'password': 'greggreg'
     },
     'database': 'wittydb',
     'users_table': 'users'

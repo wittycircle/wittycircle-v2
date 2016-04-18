@@ -27,7 +27,7 @@
          }
 
          function followProject(project_id, callback) {
-           $http.get('/follow/project/'+ project_id).success(function (response) {
+           $http.put('/follow/project/' + project_id).success(function (response) {
              callback(response);
            }).error(function (response) {
              callback(response);

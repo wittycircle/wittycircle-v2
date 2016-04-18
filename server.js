@@ -134,7 +134,7 @@ String.prototype.capitalize = function() {
 };
 
 /* REST API */
-require('./routes')(app, passport);
+require('./routes')(app, passport, io);
 
 /* Algolia Search Engine */
 require('./algolia')(app, algoliaClient);
@@ -142,10 +142,9 @@ require('./algolia')(app, algoliaClient);
 /* Socket */
 //var ps = https.createServer(httpsOption, app);
 var io = require('socket.io').listen(server);
-
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-//server.listen(9000);
-ps.listen(443);
+server.listen(9000);
+//ps.listen(443);

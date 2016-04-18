@@ -138,7 +138,7 @@ angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScop
       $http.get('/project/' + response[0].id + '/involved').then(function(response) {
         $scope.involved_users = addUserToInvolvment(response.data);
       });
-      $http.get('/openings/project/' + response[0].id).then(function(response) {
+      $http.get('/openings/project/' + response[0].public_id).then(function(response) {
         if (response.data.length == 0) {
           $scope.openings = [];
           $scope.noOpenings = true;
@@ -201,19 +201,6 @@ angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScop
       $http.post('/upload/project/cover_card', data).success(function(response) {
         $scope.picture_card = response.secure_url;
       });
-
-      /*var fr = new FileReader;
-      fr.onload = function() {
-          var img = new Image;
-          img.onload = function() {
-              console.log(img.width);
-
-              data.width = img.width;
-              data.height = img.height;
-          };
-          img.src = fr.result;
-      };
-      fr.readAsDataURL(file);*/
 
       $http.post('/upload/project/cover', data).success(function(resp) {
         $scope.imagecoverposition = 'center center';

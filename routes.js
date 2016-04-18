@@ -234,6 +234,7 @@ app.get('/follow/user/:username', ensureAuth, follow.getFollowUser);
 //app.get('/follow/list', ensureAuth, follow.getFollowList);
 app.get('/follow/project/check/:id', ensureAuth, follow.checkFollowProject);
 app.get('/follow/projects/:username', follow.getProjectsFollowedByUsername);
+app.get('/follow/projects/number/:username', follow.getNumberProjectFollowed)
 app.get('/follow/users/:username', follow.getFollowing);
 app.get('/follow/followUsers/:username', follow.getFollowers);
 //*** Attention! the function to get follow project is in io.js file.
@@ -287,7 +288,6 @@ app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
 app.post('/search/users', search.getUsersBySkill);
 app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
-
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/Public/app/index.html');

@@ -24,9 +24,10 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
    /*
    **Update in time sidebar after login
    */
-  var socket = io.connect('https://www.wittycircle.com');
-  
-$rootScope.$watch('globals', function(value) {
+   //TODO: change to the server url
+   var socket = io.connect('http://localhost:9000');
+
+   $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
     if ($scope.log) {
 	$("#hlon").css('display', 'block');

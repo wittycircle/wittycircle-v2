@@ -25,9 +25,9 @@ exports.sortProjectCard = function(data, callback) {
 
       function recursive(index) {
         if (data[index] && typeof data[index].id !== 'undefined') {
-          if (!data[index].picture_card)
-            return recursive(index + 1);
-          else {
+          //if (!data[index].picture_card)
+            //return recursive(index + 1);
+          //else {
             pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
               function(err, result) {
                 if (err) throw err;
@@ -42,7 +42,7 @@ exports.sortProjectCard = function(data, callback) {
                       });
                     });
             });
-          }
+          //}
         } else {
           if (newProjectCards[0])
             return callback(newProjectCards);

@@ -52,6 +52,7 @@
 
             // $scope value
             $scope.showdelete = false;
+            $scope.editable = false;
 
             init();
             isEditable();
@@ -176,7 +177,7 @@
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
                     $scope.involver = project_InvolvmentResolve.data.involver;
-                    $scope.project_id = vm.project.id;
+                    $scope.project = vm.project;
                     $timeout(function () {
                       showbottomAlert.pop_it_involvment($scope);
                     }, 1000);
@@ -193,6 +194,7 @@
             function isEditable() {
               if (currentUser && vm.project && vm.project.creator_user_id === currentUser.id) {
                 vm.editable = true;
+                $scope.ediatble = true;
               }
             }
 
@@ -232,7 +234,6 @@
                 if (vm.project.public_id) {
                     if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
                         Project_Follow.followProject(vm.project.public_id, function (response) {
-                            console.log(response);
                             if (response.success) {
                                 if (response.msg === 'Project followed')
                                     vm.followText = 'Following';

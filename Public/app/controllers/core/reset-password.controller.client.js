@@ -33,7 +33,7 @@ function ($scope, $rootScope, $http, access) {
                     password: $scope.new_password,
                 };
                 $http.post('/api/updatepasswordreset', data).success(function (response) {
-                    $scope.textValidateOk = 'Password save ! You can now login with your new Password';
+                    $scope.textValidateOk = 'You can now login with your new password.';
                     console.log(response);
                 }).error(function (err_message) {
                     console.log(err_message);

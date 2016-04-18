@@ -52,6 +52,7 @@
 
             // $scope value
             $scope.showdelete = false;
+            $scope.editable = false;
 
             init();
             isEditable();
@@ -173,10 +174,11 @@
                 }
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
+                console.log(project_InvolvmentResolve);
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
-                    $scope.involver = project_InvolvmentResolve.data.involver;
-                    $scope.project_id = vm.project.id;
+                    $scope.involver = project_InvolvmentResolve.data.involver[0];
+                    $scope.project = vm.project;
                     $timeout(function () {
                       showbottomAlert.pop_it_involvment($scope);
                     }, 1000);
@@ -193,6 +195,7 @@
             function isEditable() {
               if (currentUser && vm.project && vm.project.creator_user_id === currentUser.id) {
                 vm.editable = true;
+                $scope.ediatble = true;
               }
             }
 
@@ -232,7 +235,6 @@
                 if (vm.project.public_id) {
                     if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
                         Project_Follow.followProject(vm.project.public_id, function (response) {
-                            console.log(response);
                             if (response.success) {
                                 if (response.msg === 'Project followed')
                                     vm.followText = 'Following';
@@ -251,7 +253,6 @@
 
             // function
             // init Feedbacks
-            // TODO:0 finish writing the getting method of init feedbacks
             function initFeedbacks () {
                 vm.questions = project_FeedbacksResolve.data;
                 vm.totalNumber = vm.totalNumber + vm.questions.length;

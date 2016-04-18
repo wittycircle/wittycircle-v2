@@ -28,6 +28,10 @@
     {
       "name": "FIXME",
       "hidden": false
+    },
+    {
+      "name": "o",
+      "hidden": false
     }
   ],
   "marked": {

@@ -10,7 +10,7 @@
 angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
-  /*function checkCredential() {
+  function checkCredential() {
     if ($rootScope.globals.currentUser) {
       $http.get('/api').success(function(res) {
         if (!res.success) {
@@ -19,14 +19,15 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
         }
       });
     }
-  }; checkCredential();*/
+  }; checkCredential();
 
    /*
    **Update in time sidebar after login
    */
-  var socket = io.connect('https://www.wittycircle.com');
-  
-$rootScope.$watch('globals', function(value) {
+   //TODO: change to the server url
+   var socket = io.connect('https://wittycircle.com');
+
+   $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
     if ($scope.log) {
 	$("#hlon").css('display', 'block');

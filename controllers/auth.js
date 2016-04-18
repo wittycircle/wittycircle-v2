@@ -3,8 +3,10 @@ const mandrill = require('mandrill-api/mandrill');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 
+
+//TODO: CGAMHE Server url
 /** DEV **/
-exports.facebookAuth = {
+/*exports.facebookAuth = {
     'clientID'      : '793713660760465',
     'clientSecret'  : '07591de283d45f6657dcf79aefcadb25',
     'callbackURL'   : 'http://developers.wittycircle.com/auth/facebook/callback'
@@ -14,11 +16,11 @@ exports.googleAuth = {
     'clientID'      : '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
     'clientSecret'  : 'qjVoxMQ-eU85H3ODsm86N5Fq',
     'callbackURL'   : 'http://developers.wittycircle.com/auth/google/callback'
-};
+};*/
 
 /** PUBLIC **/
 
-/*exports.facebookAuth = {
+exports.facebookAuth = {
     'clientID'      : '487284094736758',
     'clientSecret'  : '01638b636efc1d6dce71c43138c7c88f',
     'callbackURL'   : 'http://www.wittycircle.com/auth/facebook/callback'
@@ -29,7 +31,7 @@ exports.googleAuth = {
     'clientSecret'  : 'EUQK_lzSb9Ba-z288oagNThx',
     'callbackURL'   : 'http://www.wittycircle.com/auth/google/callback'
 };
-*/
+
 exports.checkLog = function(req, res) {
     if (req.isAuthenticated())
 	res.send({success: true});
@@ -118,7 +120,7 @@ exports.ResetPassword = function (req, res) {
 
                         var message = {
                             "html": "<p>HTML content</p>",
-                            "subject": "Welcome to Wittycircle",
+                            "subject": "Reset your Wittycircle password",
                             "from_email": "noreply@wittycircle.com",
                             "from_name": "Wittycircle",
                             "to": [{

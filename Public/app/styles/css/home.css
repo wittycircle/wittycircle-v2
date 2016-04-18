@@ -810,13 +810,11 @@ overflow: hidden;
       display: none; }
     #main-discover .main-button-discover {
       margin-top: 30px;
-      margin-bottom: 30px;
-      /*			.button-discover {
-      				margin: 0 4px 0 0;
-      			}
-      			.button-start-project {
-      				margin: 0 0 0 4px;
-      			}*/ } }
+      margin-bottom: 30px; }
+      #main-discover .main-button-discover .button-discover {
+        margin: 5px 10px 5px 8px; }
+      #main-discover .main-button-discover .button-start-project {
+        margin: 6px 12px 3px 10px; } }
 /* Width 320px iPhone4 */
 @media only screen and (max-width: 320px) {
   #main-discover {

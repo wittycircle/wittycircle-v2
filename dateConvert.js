@@ -5,19 +5,22 @@ exports.convertDate = function(date, callback) { // convert default format date 
     var WDay            = date.getDay();
 
     // get timestamp
-    var dateNow         = new Date();
-    var dateNowParse    = dateNow.getTime();
-    var parseDate       = date.getTime();
+        dateNow         = new Date(),
+        dateNowParse    = dateNow.getTime(),
+        parseDate       = date.getTime(),
 
     // get second, min, hour and day passed between now and a specific date by getting passed timestamp
-    var gPS     = (dateNowParse - parseDate) / 1000;
-    var gPMin   = gPS / 60;
-    var gPH     = gPMin / 60;
-    var gPD     = gPH / 24;
+        gPS     = (dateNowParse - parseDate) / 1000,
+        gPMin   = gPS / 60,
+        gPH     = gPMin / 60,
+        gPD     = gPH / 24,
+        gPM     = gPD / 30,
+        gPY     = gPM / 12;
+
 
     // get date, month, year
-    var gdate   = date.getDate();
-    var gmonth  = date.getMonth() + 1;
+        gdate   = date.getDate(),
+        gmonth  = date.getMonth() + 1,
 
     // all case
     if (gPS >= 0 && gPS <= 10)          {var d = "Just now"; callback(d);}
@@ -34,5 +37,9 @@ exports.convertDate = function(date, callback) { // convert default format date 
                                          if (WDay == 5) {var d = "Saturday"; callback(d);}
                                          if (WDay == 6) {var d = "Sunday"; callback(d);} }
     else if (gPD > 7 && gPD <= 30)      {var d = gdate + "/" + gmonth; callback(d);}
+    else if (gPM >= 1 && gPM < 2)           {d = Math.floor(gPM) + " month ago"; return (d);}
+    else if (gPM >= 2 && gPM <= 12)         {d = Math.floor(gPM) + " months ago"; return (d);}
+    else if (gPY >= 1 && gPY < 2)           {d = Math.floor(gPY) + " year ago"; return (d);}
+    else if (gPY >= 2)                  {d = Math.floor(gPY) + " years ago"; return (d);}
     else                                {var d = date; callback(d);}
 };

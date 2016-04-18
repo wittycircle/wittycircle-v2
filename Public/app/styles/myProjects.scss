@@ -518,8 +518,12 @@ $blue: #416299;
 				h1 {
 					font-family: 'FreigLight';
 					color: #222222;
-          z-index: 50;
+          			z-index: 50;
 				}
+			}
+
+			#discover-body-content {
+				min-height: 0;
 			}
 
 		}

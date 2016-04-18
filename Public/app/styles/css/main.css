@@ -15,7 +15,7 @@ h1, h2, h3, h5, h6, p, input, label, button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-input {
+input, textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; }

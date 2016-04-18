@@ -360,6 +360,8 @@
           font-family: 'FreigLight';
           color: #222222;
           z-index: 50; }
+      #myProject-page #myProject-mp .myProject-body-mp #discover-body-content {
+        min-height: 0; }
   #myProject-page #myProject-pledge {
     border-bottom: 1px solid #e5e5e5;
     background-color: #fafafa; }

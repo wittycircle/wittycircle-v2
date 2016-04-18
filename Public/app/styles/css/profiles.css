@@ -623,7 +623,8 @@ a:hover {
           #profile-header .profile-contents .profile-info .profile-info-cv #location-input {
             display: none; }
           #profile-header .profile-contents .profile-info .profile-info-cv #location-input-mobile {
-            display: block; }
+            display: block;
+            margin-bottom: 10px; }
         #profile-header .profile-contents .profile-info .profile-follow-mobile {
           display: block;
           position: relative;

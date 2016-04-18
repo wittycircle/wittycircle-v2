@@ -208,7 +208,7 @@ angular.module('wittyApp')
 
 		return function(input) { // convert default format date to display date's format
 
-			var date, WDay, gdate, gmonth, dateNow, dateNowParse, gPS, gPMin, gPH, gPD, d;
+			var date, WDay, gdate, gmonth, dateNow, dateNowParse, gPS, gPMin, gPH, gPD, gPM, gPY, d;
 
 			date 		= new Date(input);
 			dateNow     = new Date();
@@ -227,8 +227,11 @@ angular.module('wittyApp')
 			gPMin   = gPS / 60;
 			gPH     = gPMin / 60;
 			gPD     = gPH / 24;
+			gPM 	= gPD / 30;
+			gPY		= gPM / 12;
 
-			// get date, month, yea
+			console.log(gmonth);
+			// get date, month, year
 
 			// all case
 			if (gPS >= 0 && gPS <= 10)          {d = "Just now"; return (d);}
@@ -246,7 +249,11 @@ angular.module('wittyApp')
 			                                 if (WDay == 4) {d = "Friday"; return (d);}
 			                                 if (WDay == 5) {d = "Saturday"; return (d);}
 			                                 if (WDay == 6) {d = "Sunday"; return (d);} }
-			else if (gPD > 7 && gPD <= 30)      {d = gdate + "/" + gmonth; return (d);}
+			else if (gPD > 7 && gPD <= 31)      {d = gdate + "/" + gmonth; return (d);}
+			else if (gPM >= 1 && gPM < 2)      		{d = Math.floor(gPM) + " month ago"; return (d);}
+			else if (gPM >= 2 && gPM <= 12)      	{d = Math.floor(gPM) + " months ago"; return (d);}
+			else if (gPY >= 1 && gPY < 2)      		{d = Math.floor(gPY) + " year ago"; return (d);}
+			else if (gPY >= 2)      			{d = Math.floor(gPY) + " years ago"; return (d);}
 			else                                {d = date; return (d);}
 		}
 })

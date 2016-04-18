@@ -774,6 +774,10 @@ $blue: #416299;
 							border-right: 1px solid #222222;
 						}
 
+						li:hover {
+							background-color: transparent;
+						}
+
 						.last-li {
 							border-right: none;
 						}

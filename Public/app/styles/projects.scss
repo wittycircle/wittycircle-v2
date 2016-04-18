@@ -996,3 +996,9 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
 }
+
+@media only screen and (max-width: 736px) {
+  .project-post-box, .project-post-video {
+    border: none;
+  }
+}

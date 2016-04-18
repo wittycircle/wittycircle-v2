@@ -516,6 +516,8 @@
         font-family: 'FreigBook';
         padding: 10px 20px 10px 15px;
         border-right: 1px solid #222222; }
+      #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category li:hover {
+        background-color: transparent; }
       #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category .last-li {
         border-right: none; } }
 @media only screen and (max-width: 320px) {

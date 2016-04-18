@@ -25,7 +25,7 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
    **Update in time sidebar after login
    */
    //TODO: change to the server url
-   var socket = io.connect('https://wittycircle.com');
+   var socket = io.connect('https://www.wittycircle.com');
 
    $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();

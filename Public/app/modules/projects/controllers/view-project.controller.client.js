@@ -174,9 +174,10 @@
                 }
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
+                console.log(project_InvolvmentResolve);
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
-                    $scope.involver = project_InvolvmentResolve.data.involver;
+                    $scope.involver = project_InvolvmentResolve.data.involver[0];
                     $scope.project = vm.project;
                     $timeout(function () {
                       showbottomAlert.pop_it_involvment($scope);
@@ -252,7 +253,6 @@
 
             // function
             // init Feedbacks
-            // TODO:0 finish writing the getting method of init feedbacks
             function initFeedbacks () {
                 vm.questions = project_FeedbacksResolve.data;
                 vm.totalNumber = vm.totalNumber + vm.questions.length;

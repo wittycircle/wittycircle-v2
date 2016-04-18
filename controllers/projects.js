@@ -347,7 +347,7 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
       } else {
         var editable = false;
         var show     = false;
-        var involver = {};
+        var involver = [];
         var userIn   = [];
         function recursive (index) {
             if(results[index]) {
@@ -359,8 +359,8 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       if(err){
                           throw err;
                       }
-                      console.log(result);
-                      involver = result[0];
+                      involver.push(result[0]);
+                      recursive(index + 1);
                   });
                 }
                 // TODO: Splice the result in results when accept == 0 and user_id is not equal to the req.user
@@ -383,12 +383,12 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       userIn.push(result[0]);
                       recursive(index + 1);
                   });
-                //}
-                } else {
-                  recursive(index + 1);
                 }
+                //} else {
+                  //recursive(index + 1);
+                //}
             } else {
-                res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
+                return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }
         }
         recursive(0);

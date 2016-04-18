@@ -132,7 +132,7 @@ exports.createMessage = function(req, res){
 		   function (err, data) {
 		       if (err) throw err;
 		       pool.query('SELECT first_name, last_name, CASE id WHEN ? then 1 WHEN ? then 2 END AS myorder FROM profiles WHERE id in (?, ?) ORDER BY myorder',
-				  [data[0].profile_id, data[1].profile_id, data[0].profile_id, data[1].profile_id], 
+				  [data[0].profile_id, data[1].profile_id, data[0].profile_id, data[1].profile_id],
 				  function(err, result) {
 				      if (err) throw err;
 				      req.body.parent_id	= req.body.from_user_id + req.body.to_user_id;
@@ -141,9 +141,6 @@ exports.createMessage = function(req, res){
 //				      req.body.m_read		= 1;
 				      pool.query('INSERT INTO `messages` SET ?', req.body, function(err, result) {
 					  if (err) throw err;
-					  if(typeof connectedUsers[req.body.to_user_id] !== 'undefined'){
-					      connectedUsers[req.body.to_user_id].emit('message', {message: req.body.message});
-					  }
 					  res.send({success: true});
 				      });
 				  });
@@ -152,7 +149,7 @@ exports.createMessage = function(req, res){
 };
 
 exports.getAllConversation = function(req, res) {
-    pool.query('SELECT * FROM messages WHERE from_user_id = ? || to_user_id = ? ORDER BY creation_date DESC', [req.user.id, req.user.id],  
+    pool.query('SELECT * FROM messages WHERE from_user_id = ? || to_user_id = ? ORDER BY creation_date DESC', [req.user.id, req.user.id],
 	       function(err, data) {
 		   	if (err) throw err;
 			   	if (data[0]) {
@@ -172,13 +169,13 @@ exports.updateConversation = function(req, res) {
 };
 
 exports.getSpecificConversation =  function(req, res) { // get all messages of a specific client by his id
-    pool.query('SELECT * FROM messages WHERE from_user_id = ? && to_user_id = ? || from_user_id = ? && to_user_id = ? ORDER BY creation_date ASC', 
-    	[req.params.id, req.user.id, req.user.id, req.params.id], 
+    pool.query('SELECT * FROM messages WHERE from_user_id = ? && to_user_id = ? || from_user_id = ? && to_user_id = ? ORDER BY creation_date ASC',
+    	[req.params.id, req.user.id, req.user.id, req.params.id],
     		function(err, data) {
                    if (err) throw err;
                    pool.query('SELECT first_name, last_name, profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', req.params.id,  function(err, profile) {
                        if (err) throw err;
-                       		pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', req.user.id, function(err, picture) {		   					
+                       		pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', req.user.id, function(err, picture) {
                        			if (err) throw err;
                        			pool.query('SELECT username FROM users WHERE id = ?', req.params.id, function(err, username) {
                        				if (err) throw err;

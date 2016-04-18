@@ -382,9 +382,11 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
   };
 
   $scope.savebasics = function(data, project_category, places_after, statechoose) {
-    if ($scope.project_video) {
+    if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
       data.main_video = $scope.project_video;
       data.main_video_id = $scope.project_video_id;
+    } else {
+        delete data.main_video;
     }
     if (statechoose != undefined) {
       data.status = statechoose;

@@ -9,7 +9,7 @@ exports.getNumberProjectFollowed = function (req, res) {
     if (errors) {
         return res.status(400).send(errors);
     } else {
-        pool.query('SELECT id FROM project_followers WHERE user_id = (SELECT user_id FROM users WHERE username = ?)',
+        pool.query('SELECT id FROM project_followers WHERE user_id = (SELECT id FROM users WHERE username = ?)',
         [req.params.username],
         function (err, rows) {
             if (err) {

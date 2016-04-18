@@ -726,7 +726,7 @@
 			.header-brand {
 				position: relative;
 				float: none;
-				left: 10px;
+				left: 0px;
 			}
 
 			.header-navigation {
@@ -782,6 +782,8 @@
 
 							img {
 								border-radius: 50%;
+								width: 90px;
+								height: 90px;
 							}
 						}
 

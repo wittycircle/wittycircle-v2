@@ -473,7 +473,7 @@
     #header-section #header-content .header-brand {
       position: relative;
       float: none;
-      left: 10px; }
+      left: 0px; }
     #header-section #header-content .header-navigation {
       display: none; }
     #header-section #header-content .header-log-off {
@@ -506,7 +506,9 @@
       #header-section #header-content .header-log-aside .log-on .log-on-list .header-log-avatar {
         margin-bottom: 20px; }
         #header-section #header-content .header-log-aside .log-on .log-on-list .header-log-avatar img {
-          border-radius: 50%; }
+          border-radius: 50%;
+          width: 90px;
+          height: 90px; }
       #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs {
         margin-bottom: 10px; }
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-mail,

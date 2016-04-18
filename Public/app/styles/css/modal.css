@@ -329,7 +329,8 @@ html {
     #main-signup-modal header {
       display: none; }
     #main-signup-modal .signup-modal-social {
-      padding: 0 15px 10px 15px; }
+      padding: 0 15px 10px 15px;
+      margin-top: 40px; }
       #main-signup-modal .signup-modal-social h4 {
         padding: 0;
         margin: 15px 0 15px 0; }
@@ -347,15 +348,16 @@ html {
           width: 231px;
           padding-right: 5px; }
     #main-signup-modal #closeCrossS2 {
-      display: block;
+      top: 10px;
+      display: inline-block;
       position: relative;
-      width: 100%;
-      height: 30px;
+      width: 60px;
+      height: 40px;
+      float: right;
       background-image: url("/images/cross-icon.svg");
       background-size: 15px;
       background-repeat: no-repeat;
-      background-position: 95%;
-      top: 10px; }
+      background-position: 50%; }
     #main-signup-modal .signup-modal-old {
       text-align: center;
       padding: 0 30px; }
@@ -394,19 +396,20 @@ html {
     position: absolute;
     top: 0px; }
     #main-login-modal #closeCrossL2 {
-      display: block;
+      display: inline-block;
       position: relative;
-      width: 100%;
-      height: 30px;
+      width: 60px;
+      height: 40px;
+      float: right;
       background-image: url("/images/cross-icon.svg");
       background-size: 15px;
       background-repeat: no-repeat;
-      background-position: 95%;
-      top: 10px; }
+      background-position: 50%; }
     #main-login-modal header {
       display: none; }
     #main-login-modal .login-modal-social {
-      padding-bottom: 0px; }
+      padding-bottom: 0px;
+      margin-top: 40px; }
       #main-login-modal .login-modal-social h4 {
         padding: 0;
         margin: 30px 0 20px 0; }

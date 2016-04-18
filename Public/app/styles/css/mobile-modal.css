@@ -100,7 +100,8 @@
         display: inline-block;
         width: 60px;
         height: 60px;
-        border-radius: 50%; }
+        border-radius: 50%;
+        background-size: cover; }
       #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content {
         display: inline-block;
         vertical-align: top;

@@ -41,15 +41,15 @@
 				$('body').css('overflow-y', 'hidden');
 				$scope.dmobile.modal	= value;
 				if (value === 1)
-					$scope.dmobile.headerText = "Show me the...";
+					$scope.dmobile.headerText = "Show me...";
 				if (value === 2)
 					$scope.dmobile.headerText = "Show me projects about...";
 				if (value === 3)
 					$scope.dmobile.headerText = "Show me projects looking for...";
 				if (value === 4)
 					$scope.dmobile.headerText = "Someone with specific skills?";
-				if (value === 5)
-					$scope.dmobile.headerText = "Show me projects near...";
+				// if (value === 5)
+				// 	$scope.dmobile.headerText = "Show me projects near...";
 				$scope.dmobile.general 	= true;
 			}
 		};
@@ -136,8 +136,8 @@
 				$scope.closemmodal();
 			switch (number) {
 				case 1:
-					$scope.cProject = "Idea";
-					$scope.searchStatus = pName;
+					$scope.cProject = "Ideas";
+					$scope.searchStatus = "Idea";
 					break ;
 				case 2:
 					$scope.cProject = "Drafted projects";

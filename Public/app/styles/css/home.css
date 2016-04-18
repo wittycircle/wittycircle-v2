@@ -70,10 +70,13 @@ overflow: hidden;
   width: 100%;
   height: 550px;
   overflow: hidden;
-  background-color: black;
+  background-image: url("images/poster/poster_home_signup.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   -webkit-filter: brightness(0.4);
-  -moz-filter: brightnss(0.4);
-  -o-filter: brightnss(0.4);
+  -moz-filter: brightness(0.4);
+  -o-filter: brightness(0.4);
   -ms-filter: brightness(0.4);
   filter: brightness(0.4); }
   .home-video-bg video {
@@ -620,7 +623,7 @@ overflow: hidden;
   border-left: 11px solid transparent;
   border-right: 11px solid transparent; }
 
-/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 @media only screen and (max-width: 736px) {
   /* Main video background to Main image background */
   .home-video-bg {
@@ -630,9 +633,19 @@ overflow: hidden;
     display: block;
     width: 100%;
     height: 480px;
-    background-image: url("/images/dark-road.jpg");
+    background-image: url("/images/bg_mobile/bg_home_mobile.jpg");
     background-size: cover;
-    background-position: center center; }
+    background-position: center center;
+    -webkit-filter: brightness(0.6);
+    -moz-filter: brightness(0.6);
+    -o-filter: brightness(0.6);
+    -ms-filter: brightness(0.6);
+    filter: brightness(0.6);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0); }
 
   /* Main text content */
   #main-discover {
@@ -649,7 +662,7 @@ overflow: hidden;
     #main-discover .main-title-market-mobile {
       display: block; }
       #main-discover .main-title-market-mobile h1 {
-        font-family: 'FreigMed';
+        font-family: 'FreigLight';
         font-size: 38px; }
     #main-discover .main-title-text {
       display: none; }
@@ -797,11 +810,13 @@ overflow: hidden;
       display: none; }
     #main-discover .main-button-discover {
       margin-top: 30px;
-      margin-bottom: 30px; }
-      #main-discover .main-button-discover .button-discover {
-        margin: 0 4px 0 0; }
-      #main-discover .main-button-discover .button-start-project {
-        margin: 0 0 0 4px; } }
+      margin-bottom: 30px;
+      /*			.button-discover {
+      				margin: 0 4px 0 0;
+      			}
+      			.button-start-project {
+      				margin: 0 0 0 4px;
+      			}*/ } }
 /* Width 320px iPhone4 */
 @media only screen and (max-width: 320px) {
   #main-discover {

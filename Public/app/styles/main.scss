@@ -17,9 +17,15 @@ h1, h2, h3, h4, h5, h6, a {
   color: white;
 }
 
-h1, h2, h3, h5, h6, input, label, button {
+h1, h2, h3, h5, h6, p, input, label, button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 li {

@@ -168,6 +168,12 @@
     color: white; }
 
 /****** Discover ******/
+#discover-body-page .home-video-bg {
+  background-image: url("images/poster/poster_discover.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
 .discover-component .discover-search1 .discover-search1-text {
   display: inline-block;
   margin: 0px 10px; }
@@ -409,6 +415,12 @@
     margin: 45px auto; }
 
 /****** Meet ******/
+#meet-body-page .home-video-bg {
+  background-image: url("images/poster/poster_discover.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
 .meet-component li {
   padding: 10px 20px 5px 20px;
   font-family: 'FreigBook';
@@ -433,44 +445,7 @@
   -webkit-animation-duration: 0.4s;
   -moz-animation-duration: 0.4s;
   -o-animation-duration: 0.4s;
-  -ms-animation-duration: 0.4s;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-.meet-component #meet-search1 .meet-search1-anyskill input::-webkit-input-placeholder {
-  -webkit-transition: all 200ms linear;
-  -o-transition: all 200ms linear;
-  -moz-transition: all 200ms linear;
-  -ms-transition: all 200ms linear;
-  -kthtml-transition: all 200ms linear;
-  transition: all 200ms linear;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
+  -ms-animation-duration: 0.4s; }
 .meet-component #meet-search1 #input-msa::-webkit-input-placeholder {
   color: white; }
 .meet-component #meet-search1 #input-msa2::-webkit-input-placeholder {
@@ -637,30 +612,7 @@
 @media only screen and (max-width: 736px) {
   .presentation-image-bg {
     display: block;
-    width: 100%;
-    background-image: url("/images/poster/poster_discover.jpg");
-    background-size: cover;
-    background-position: center center;
-    -webkit-filter: brightness(0.7);
-    -moz-filter: brightness(0.7);
-    -o-filter: brightness(0.7);
-    -ms-filter: brightness(0.7);
-    filter: brightness(0.7);
-    -webkit-transform: translateZ(0);
-    -moz-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    -o-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    -ms-perspective: 1000;
-    -o-perspective: 1000;
-    perspective: 1000;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden; }
+    width: 100%; }
 
   /*** Presentation Mobile ***/
   .presentation-component {
@@ -687,6 +639,9 @@
 
   .presentation-body-title {
     padding: 25px 20px 20px 20px; }
+    .presentation-body-title h4 {
+      font-family: 'FreigBook';
+      font-size: 16px; }
 
   .presentation-body-loadmore {
     padding: 0px 20px 20px 20px; }
@@ -719,7 +674,30 @@
 
   /****** Discover mobile ******/
   .discover-image-bg {
-    height: 480px; }
+    height: 480px;
+    background-image: url("/images/bg_mobile/bg_discover_mobile.jpg");
+    background-size: cover;
+    background-position: center center;
+    -webkit-filter: brightness(0.6);
+    -moz-filter: brightness(0.6);
+    -o-filter: brightness(0.6);
+    -ms-filter: brightness(0.6);
+    filter: brightness(0.6);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
 
   #discover-body-content {
     -webkit-transform: translateZ(0);
@@ -783,20 +761,6 @@
       padding-right: 10px; }
     .discover-component .discover-search2 .discover-search2-anylocation {
       display: table-cell; }
-      .discover-component .discover-search2 .discover-search2-anylocation ::-webkit-input-placeholder {
-        /* WebKit, Blink, Edge */
-        color: white; }
-      .discover-component .discover-search2 .discover-search2-anylocation :-moz-placeholder {
-        /* Mozilla Firefox 4 to 18 */
-        color: white;
-        opacity: 1; }
-      .discover-component .discover-search2 .discover-search2-anylocation ::-moz-placeholder {
-        /* Mozilla Firefox 19+ */
-        color: white;
-        opacity: 1; }
-      .discover-component .discover-search2 .discover-search2-anylocation :-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: white; }
       .discover-component .discover-search2 .discover-search2-anylocation input {
         font-size: 27px;
         padding: 2px 10px; }
@@ -814,7 +778,30 @@
         margin: 0px 14px 25px 14px; }
 
   .meet-image-bg {
-    height: 380px; }
+    height: 480px;
+    background-image: url("/images/bg_mobile/bg_meet_mobile.jpg");
+    background-size: cover;
+    background-position: center center;
+    -webkit-filter: brightness(0.7);
+    -moz-filter: brightness(0.7);
+    -o-filter: brightness(0.7);
+    -ms-filter: brightness(0.7);
+    filter: brightness(0.7);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
 
   .meet-component .meet-title {
     padding: 15px 0 10px 0; }

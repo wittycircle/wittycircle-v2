@@ -36,9 +36,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			if (value === 1)
 				$scope.mmobile.headerText = "Someone with specific skills?";
 			if (value === 2)
-				$scope.mmobile.headerText = "Show me projects looking for...";
-			if (value === 3)
-				$scope.mmobile.headerText = "Show me projects near...";
+				$scope.mmobile.headerText = "Show me people looking to...";
+			// if (value === 3)
+			// 	$scope.mmobile.headerText = "Show me projects near...";
 			$scope.mmobile.general 	= true;
 		}
 	};

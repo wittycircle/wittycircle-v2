@@ -74,6 +74,18 @@ $(document).ready(function() {
             }
         });
     } else {
+
+        var val = {};
+
+        $("#searchTextField").focus(function() {
+            if ($(this).val()) {
+                val.text = $(this).val();
+                val.width = Number($(this).width()) + 20;
+                $(this).val("");
+                $(this).css("width", "200px");
+            }
+        });
+
         //** Main slide carousel
         $('.main-body2-body-mobile').slick({
             centerMode: true,
@@ -84,6 +96,7 @@ $(document).ready(function() {
             dots: true,
             nextArrow: "",
             swipeToSlide: true,
+            speed: 100,
 
             responsive: [{
                 breakpoint: 768,
@@ -113,6 +126,7 @@ $(document).ready(function() {
             mobileFirst: true,
             dots: true,
             nextArrow: "",
+            speed: 100,
 
             responsive: [{
                 breakpoint: 768,

@@ -42,6 +42,8 @@ $blue: #416299;
 				font-size: 21px;
 				color: white;
 				margin: 7px 0;
+				-webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
 			}
 		}
 
@@ -698,6 +700,112 @@ $blue: #416299;
 					h3 {
 						color: #23527C;
 					}
+				}
+			}
+		}
+	}
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+	#viewProject-page {
+		#viewProject-header {
+			height: 450px;
+			background-position: center center !important;
+
+			.viewProject-filter {
+				height: 450px;
+			}
+
+			.viewProject-title {
+				top: 105px;
+				padding: 0 15px;
+
+				.viewProject-title-info {
+					min-height: 120px;
+					h1 {
+						font-size: 34px;
+					}
+
+					h4 {
+						font-size: 18px;
+					}
+				}
+			}
+
+			.viewProject-info {
+				padding: 0 10px;
+				text-align: center;
+				margin-top: 15px;
+
+				li {
+					margin: 0;
+					margin-right: 10px;
+					margin-bottom: 10px;
+				}
+
+				.location-icon {
+					
+					img {
+						position: relative;
+						bottom: 2px;
+					}
+				}
+			}
+
+			.viewProject-bottom {
+
+				.viewProject-nav {
+					padding: 10px 0px;
+					text-align: center;
+
+					.viewProject-option {
+						display: none;
+					}
+
+					.viewProject-category {
+						li {
+							font-family: 'FreigBook';
+							padding: 10px 20px 10px 15px;
+							border-right: 1px solid #222222;
+						}
+
+						.last-li {
+							border-right: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	#viewProject-page {
+		#viewProject-header {
+
+			.viewProject-title {
+				top: 105px;
+				padding: 0 15px;
+
+					h1 {
+						font-size: 34px;
+					}
+
+					h4 {
+						font-size: 18px;
+					}
+			}
+
+			.viewProject-info {
+				padding: 0 10px;
+				text-align: center;
+				margin-top: 15px;
+
+				li {
+					display: block;
+					margin-right: 0px;
+					margin-bottom: 5px;
 				}
 			}
 		}

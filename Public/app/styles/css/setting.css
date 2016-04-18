@@ -194,4 +194,48 @@
 .password-body-setting .password-button {
   text-align: center; }
 
+@media screen and (max-width: 739px) {
+  #setting-page button {
+    margin-top: 20px;
+    margin-bottom: 10px; }
+  #setting-page .setting-filter {
+    height: 160px; }
+  #setting-page #setting-header {
+    height: 160px; }
+    #setting-page #setting-header .setting-header-title {
+      display: none; }
+    #setting-page #setting-header .setting-navbar {
+      position: relative;
+      top: 115px; }
+      #setting-page #setting-header .setting-navbar .setting-navbar-list {
+        text-align: center; }
+        #setting-page #setting-header .setting-navbar .setting-navbar-list .setting-navbar-notif {
+          display: none; }
+        #setting-page #setting-header .setting-navbar .setting-navbar-list li {
+          padding: 10px 30px; }
+  #setting-page #setting-body .setting-box {
+    padding: 15px 20px; }
+  #setting-page #setting-body .sg-field {
+    padding: 5px 0; }
+    #setting-page #setting-body .sg-field input {
+      width: 100%; }
+  #setting-page #setting-body .setting-general-username span {
+    margin-left: 0; }
+  #setting-page #setting-body .setting-general .setting-general-firstname p,
+  #setting-page #setting-body .setting-general .setting-general-lastname p,
+  #setting-page #setting-body .setting-general .setting-general-email p,
+  #setting-page #setting-body .setting-general .setting-general-username p {
+    position: relative;
+    left: 0px;
+    font-family: 'FreigBook';
+    color: red;
+    margin-bottom: 0; }
+  #setting-page #setting-body .setting-password .setting-password-current h5,
+  #setting-page #setting-body .setting-password .setting-password-new h5,
+  #setting-page #setting-body .setting-password .setting-password-confirm h5 {
+    position: relative;
+    left: 0px;
+    font-family: 'FreigBook';
+    color: red; } }
+
 /*# sourceMappingURL=setting.css.map */

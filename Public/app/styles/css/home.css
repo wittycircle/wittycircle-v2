@@ -162,7 +162,7 @@ overflow: hidden;
 /*********************** Main start project ***************************/
 #main-start-project {
   position: absolute;
-  width: 1000px;
+  max-width: 1000px;
   z-index: 50;
   text-align: left;
   top: 170px;
@@ -649,8 +649,8 @@ overflow: hidden;
     #main-discover .main-title-market-mobile {
       display: block; }
       #main-discover .main-title-market-mobile h1 {
-        font-family: 'FreigLight';
-        font-size: 42px; }
+        font-family: 'FreigMed';
+        font-size: 38px; }
     #main-discover .main-title-text {
       display: none; }
     #main-discover .main-title-text-mobile {
@@ -664,6 +664,59 @@ overflow: hidden;
         font-size: 21px;
         line-height: 28px;
         opacity: 0.9; }
+
+  #main-start-project {
+    top: 110px;
+    padding: 0 20px 10px 20px; }
+    #main-start-project .main-title-sp {
+      padding: 0;
+      margin-bottom: 10px; }
+      #main-start-project .main-title-sp h1 {
+        font-size: 27px;
+        padding: 0; }
+    #main-start-project .main-start-component .main-project-component {
+      padding: 0;
+      margin: 0; }
+      #main-start-project .main-start-component .main-project-component .dropdown-projects {
+        margin-bottom: 10px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component h2 {
+          padding: 0;
+          padding-left: 10px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component img {
+          margin-bottom: 12px; }
+      #main-start-project .main-start-component .main-project-component .main-second-text {
+        display: table-cell; }
+      #main-start-project .main-start-component .main-project-component .dropdown-categories {
+        display: table-cell;
+        padding-bottom: 10px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component h2 {
+          padding: 0;
+          padding-left: 10px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component img {
+          margin-bottom: 12px; }
+    #main-start-project .main-start-component .main-location-component {
+      padding: 0;
+      margin: 0; }
+      #main-start-project .main-start-component .main-location-component .main-project-title {
+        margin-bottom: 15px; }
+        #main-start-project .main-start-component .main-location-component .main-project-title input {
+          height: auto;
+          font-size: 27px; }
+      #main-start-project .main-start-component .main-location-component .main-geolocation input {
+        height: auto;
+        font-size: 27px; }
+    #main-start-project .main-start-component h2 {
+      font-size: 27px; }
+    #main-start-project .main-button-project {
+      margin: 0;
+      text-align: right;
+      margin-top: 20px; }
+      #main-start-project .main-button-project .main-button-start {
+        margin-left: 15px; }
+        #main-start-project .main-button-project .main-button-start button {
+          width: auto;
+          height: auto;
+          padding: 6px 15px; }
 
   /* Main start project */
   #main-body-content {

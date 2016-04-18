@@ -363,10 +363,11 @@ $font-h3: 'Open Sans', sans-serif;
 .project-post-video {
   max-width: 800px;
   margin: 0px auto;
-  padding: 30px;
+  padding: 0px 30px;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 4px;
+  overflow: hidden;
 
   vg-overlay-play .play {
     font-size: 50px;
@@ -439,7 +440,7 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   img {
-    width: 738px;
+    width: 100%;
     height: auto;
   }
 

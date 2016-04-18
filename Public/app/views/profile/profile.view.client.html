@@ -169,7 +169,7 @@
 </section> -->
 
 <section id="profile-mobile-slideDown">
-	<div class="profile-mobile-cardProject" data="inProjects" check="initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true,}'>
+	<div class="profile-mobile-cardProject" data="inProjects" check="initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "30px", variableWidth: true,}'>
 		<div class="profile-slideDown-card project-card" ng-repeat="cardProject in inProjects track by $index">
 			<div class="card-tag" ng-click="goToDiscover(cardProject.category_name)">
 				<div class="card-tag-content">

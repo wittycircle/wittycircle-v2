@@ -276,10 +276,11 @@
 .project-post-video {
   max-width: 800px;
   margin: 0px auto;
-  padding: 30px;
+  padding: 0px 30px;
   background-color: white;
   border: 1px solid #ddd;
-  border-radius: 4px; }
+  border-radius: 4px;
+  overflow: hidden; }
   .project-post-box vg-overlay-play .play,
   .project-post-video vg-overlay-play .play {
     font-size: 50px; }
@@ -341,7 +342,7 @@
   .custom-project-post figure {
     width: inherit; }
   .custom-project-post img {
-    width: 738px;
+    width: 100%;
     height: auto; }
   .custom-project-post p {
     font-family: 'FreigBook';

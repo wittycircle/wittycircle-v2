@@ -300,7 +300,8 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
           } else
             var x = value.length;
             if (x > 11) {
-              var x = value.length;
+              var x = value.length,
+                  y = $(window).width();
               if (x > 11) {
                 $("#searchTextField").css('width', function() {
                   var el = $('<span />', {
@@ -309,7 +310,10 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
                   }).appendTo('body');
                   var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
                   el.remove();
-                  return w.toString() + "px";
+                  if (y > 736)
+                    return w.toString() + "px";
+                  else
+                    return "260px";
                 });
               } else
                   $("#searchTextField").css('width', '200px');

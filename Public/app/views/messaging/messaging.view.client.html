@@ -354,14 +354,19 @@
 			messlist.on('click', function() {
 				classie.remove( mbmm, 'left-to-right-message');
 				classie.add( mbmm, 'right-to-left-message');
-				$('#messages-body-messages-mobile').show();
-				$('body').css('overflow-y', 'hidden');
+				$('#messages-body-messages-mobile').show(function() {
+					footer.hide();
+					header.hide();
+					mblm.hide();
+				});
 			});
 
 			backToList.on('click', function() {
 				classie.remove( mbmm, 'right-to-left-message');
 				classie.add( mbmm, 'left-to-right-message');
-				$('body').css('overflow-y', 'scroll');
+				header.show();
+				mblm.show();
+				footer.show();
 			})
 
 			$(window).scroll(function () {

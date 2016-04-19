@@ -119,7 +119,7 @@ $scope.initiateProject = function () {
                     {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
                 ],
                 theme: {
-                    url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                    url: "styles/videogular.scss"
                 },
                 plugins: {
                     controls: {
@@ -244,7 +244,6 @@ $scope.deleteVideo = function() {
                 $scope.config.sources = [];
                 $scope.project_video = [];
                 $scope.project_video_id = [];
-                console.log($scope.videoproject);
                 $scope.videoproject = false;
             }
         }).error(function(error_message) {
@@ -258,14 +257,16 @@ $scope.savebasics = function(data, project_category, places_after, statechoose) 
     if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
         data.main_video = $scope.project_video;
         data.main_video_id = $scope.project_video_id;
-    } else {
+    } if (!$scope.project_video && $scope.project.main_video) {
         delete data.main_video;
     }
     if ($scope.post) {
         data.post = $scope.post;
     }
     data.picture = $scope.imagecover;
-    data.picture_card = $scope.picture_card;
+    if ($scope.picture_card) {
+        data.picture_card = $scope.picture_card;
+    }
     data.category_id = project_category.id;
     if (statechoose != undefined) {
         data.status = statechoose;
@@ -343,9 +344,7 @@ $scope.updateOpening = function(opening, index) {
 };
 
 $scope.deleteOpening = function(opening_id) {
-    console.log(opening_id);
     $http.delete('/opening/' + opening_id).success(function(response) {
-        console.log(response);
         if (response.serverStatus == 2) {
             Object.keys($scope.openings).forEach(function (key) {
                 if ($scope.openings[key].id == opening_id) {
@@ -466,7 +465,7 @@ $scope.uploadVideo = function() {
                     {src: $sce.trustAsResourceUrl(url), type: "video/mp4"}
                 ],
                 theme: {
-                    url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                    url: "styles/videogular.css"
                 },
                 plugins: {
                     controls: {

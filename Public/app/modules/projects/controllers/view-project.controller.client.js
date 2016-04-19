@@ -174,7 +174,6 @@
                 }
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
-                console.log(project_InvolvmentResolve);
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
                     $scope.involver = project_InvolvmentResolve.data.involver[0];

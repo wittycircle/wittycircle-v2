@@ -239,3 +239,141 @@
 		}
 	</script>
 </div>
+
+<div id="messages-body-page-mobile">
+	<section id="messages-body-list-mobile">
+		<div id="mslm" class="messages-search-list-mobile">
+			<input type="search" placeholder="Search users or messages" ng-model="searchContact" />
+		</div>
+
+		<div id="messlist" class="messages-convers-list-mobile">
+			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
+
+				<div class="messages-list-picture">
+					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
+				</div>
+
+				<div class="messages-list-object">
+					<div class="messages-list-user">
+						<i ng-if="onlineUser[dialogue.to_username]" class="online-icon"></i>
+						<i ng-if="!onlineUser[dialogue.to_username]" class="offline-icon"></i>
+						<h4>{{dialogue.to_username}}</h4>
+					</div>
+					<div class="messages-list-text">
+						<p>{{dialogue.last_message}}</p>
+					</div>
+					<span>{{dialogue.date}}</span>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<section id="messages-body-messages-mobile">
+		<div id="mbom" class="messages-body-option-mobile">
+			<div class="messages-backTo-mobile">
+				<h3><i class="fa fa-chevron-left"></i> All conversations</h3>
+			</div>
+			<div class="messages-option-action-mobile">
+				<a href="">Actions</a>
+				<span><img src="/images/arrow-down-icon-b.svg"></span>
+			</div>
+		</div>
+
+		<div class="messages-body-conversation-mobile">
+			<div class="messages-body-textos">
+				<div class="messages-cb-texto" ng-repeat="message in messages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
+						<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{message.from_username}}</h4>
+							<p>{{message.creation_date | wittyDateFilter }}</p>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{message.message}}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="messages-cb-texto" ng-repeat="liveMessage in liveMessages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-src="{{ resizePic(liveMessage.from_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{liveMessage.from_username}}</h4>
+							<span>{{liveMessage.date | wittyDateFilter }}</span>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{liveMessage.message}}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="messages-cb-texto" ng-repeat="offMessage in offMessages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-src="{{ resizePic(offMessage.from_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{offMessage.from_username}}</h4>
+							<span>{{offMessage.date | wittyDateFilter }}</span>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{offMessage.message}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="messages-conversation-textarea">
+			<div class="textarea-box">
+				<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message"></textarea>
+			</div>
+			<div id="textbtn" class="textarea-button">
+				<button type="submit" ng-click="socket(username, nameuser)">Send</button>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		$(document).ready(function() {
+			var mslm 		= document.getElementById('mslm'),
+				list 		= $('.messages-convers-list-mobile'),
+				mbmm 		= document.getElementById('messages-body-messages-mobile'),
+				mblm 		= $('#messages-body-list-mobile'),
+				messlist 	= $('#messlist'),
+				backToList 	= $('.messages-backTo-mobile'),
+				footer 		= $('#footer-page'),
+				header 		= $('#header-section');
+
+			messlist.on('click', function() {
+				classie.remove( mbmm, 'left-to-right-message');
+				classie.add( mbmm, 'right-to-left-message');
+				$('#messages-body-messages-mobile').show();
+				$('body').css('overflow-y', 'hidden');
+			});
+
+			backToList.on('click', function() {
+				classie.remove( mbmm, 'right-to-left-message');
+				classie.add( mbmm, 'left-to-right-message');
+				$('body').css('overflow-y', 'scroll');
+			})
+
+			$(window).scroll(function () {
+				if ($(this).scrollTop() >= 85) {
+					classie.add(mslm, 'body-fixed');
+					list.css('padding-top', '40px');
+				} else {
+					classie.remove(mslm, 'body-fixed');
+					list.css('padding-top', '0px');
+				}
+			});
+		});
+
+	</script>
+</div>

@@ -230,7 +230,6 @@ angular.module('wittyApp')
 			gPM 	= gPD / 30;
 			gPY		= gPM / 12;
 
-			console.log(gmonth);
 			// get date, month, year
 
 			// all case

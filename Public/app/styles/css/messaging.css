@@ -873,7 +873,22 @@
     top: 0;
     background-color: white;
     z-index: 100000;
-    overflow: hidden; }
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; }
 
   #messages-body-page-mobile {
     display: block; }
@@ -881,18 +896,48 @@
       padding-top: 85px;
       width: 100%;
       /* messages-body-list-mobile */ }
-      #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile input {
-        width: 100%;
-        font-family: 'FreigBook';
-        font-size: 16px;
-        color: #999999;
-        background-image: url("/images/search-icon-b.svg");
-        background-repeat: no-repeat;
-        background-position: 4% 50%;
-        padding: 10px 5px 10px 45px;
+      #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile {
+        padding: 4px 10px;
         border: 1px solid #e5e5e5;
-        border-left: 0;
-        border-right: 0; }
+        background-color: #fafafa;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        -ms-perspective: 1000;
+        -o-perspective: 1000;
+        perspective: 1000;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden; }
+        #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile input {
+          display: inline-block;
+          width: 85%;
+          font-family: 'FreigBook';
+          font-size: 16px;
+          color: #999999;
+          background-image: url("/images/search-icon-b.svg");
+          background-repeat: no-repeat;
+          background-position: 4% 50%;
+          padding: 10px 5px 10px 45px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px; }
+        #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile {
+          display: inline-block;
+          text-align: center;
+          width: 12%;
+          margin-left: 5px; }
+          #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile img {
+            background-color: white;
+            position: relative;
+            bottom: 3px;
+            left: 3px;
+            width: 26px; }
       #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile {
         min-height: 574px; }
         #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list {
@@ -952,157 +997,6 @@
                 margin-top: 4px; }
             #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list .messages-list-object span {
               font-family: 'FreigBook';
-              font-size: 14px; }
-    #messages-body-page-mobile #messages-body-messages-mobile {
-      display: none;
-      position: fixed;
-      top: 0;
-      z-index: 100000;
-      width: 100%;
-      /* messages-body-messages-mobile */ }
-      #messages-body-page-mobile #messages-body-messages-mobile h3, #messages-body-page-mobile #messages-body-messages-mobile a {
-        font-family: 'FreigSem';
-        font-size: 16px;
-        color: black; }
-      #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile {
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 10000;
-        background-color: white;
-        padding: 10px 20px 10px 20px;
-        border: 1px solid #e5e5e5;
-        border-right: 0;
-        border-left: 0; }
-        #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile {
-          display: inline-block;
-          /*					i {
-          						position: relative;
-          						top: 1px;
-          					}*/ }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile .fa-chevron-left {
-            font-size: 13px;
-            margin-right: 2px; }
-        #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile {
-          display: inline-block;
-          float: right;
-          position: relative;
-          bottom: 2px; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile a {
-            font-family: 'FreigBook';
-            color: #999999; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span {
-            margin-left: 2px; }
-            #messages-body-page-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span img {
-              width: 12px; }
-      #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile {
-        position: absolute;
-        background-color: white;
-        width: 100vw;
-        height: 100vh;
-        padding-top: 44px;
-        padding-bottom: 63px;
-        overflow-y: scroll; }
-        #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto {
-          padding: 10px 20px;
-          border-top: 1px solid #f5f5f5; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture {
-            display: inline-block;
-            width: 15%;
-            float: left; }
-            #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture img {
-              border-radius: 50%;
-              width: 35px;
-              height: 35px; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto {
-            display: inline-block;
-            padding: 0px 0px 0px 5px;
-            width: 85%; }
-            #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name h4 {
-              display: inline-block;
-              font-family: 'FreigSem';
-              font-size: 16px;
-              color: #222222; }
-            #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name p {
-              font-family: 'FreigBook';
-              font-size: 14px;
-              color: #999999; }
-            #messages-body-page-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
-              font-family: 'FreigBook';
-              font-size: 15px;
-              line-height: 25px;
-              word-wrap: break-word;
-              margin-bottom: 0; }
-      #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea {
-        position: fixed;
-        bottom: 0;
-        background-color: white;
-        width: 100%;
-        z-index: 10000;
-        text-align: center;
-        border-top: 1px solid #e5e5e5;
-        padding: 0 10px;
-        padding-top: 5px; }
-        #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box {
-          display: inline-block;
-          width: 84%; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea:focus {
-            outline: 0; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea {
-            resize: none;
-            width: 100%;
-            font-family: 'FreigBook';
-            font-size: 14px;
-            border: 1px solid #e5e5e5;
-            border-radius: 5px;
-            padding: 5px 10px; }
-        #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button {
-          display: inline-block;
-          text-align: right;
-          width: 16%;
-          height: inherit;
-          padding-top: 12px;
-          float: right; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button {
-            font-family: 'FreigSem';
-            font-size: 14px;
-            background-color: #ff4d4d;
-            border: 1px solid #ff4d4d;
-            border-radius: 4px;
-            padding: 4px;
-            color: white; }
-          #messages-body-page-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button:hover {
-            border: 1px solid #d94242;
-            background-color: #d94242; }
-    #messages-body-page-mobile .right-to-left-message {
-      -webkit-animation: rightToLeft 0.3s;
-      /* Chrome, Safari, Opera */
-      animation: rightToLeft 0.3s; }
-    #messages-body-page-mobile .left-to-right-message {
-      right: -400px;
-      -webkit-animation: leftToRight 0.3s;
-      /* Chrome, Safari, Opera */
-      animation: leftToRight 0.3s; }
-
-  @-webkit-keyframes rightToLeft {
-    0% {
-      right: -300px; }
-    100% {
-      right: 0px; } }
-  @keyframes rightToLeft {
-    0% {
-      right: -300px; }
-    100% {
-      right: 0px; } }
-  @-webkit-keyframes leftToRight {
-    0% {
-      right: 0; }
-    100% {
-      right: -300px; } }
-  @keyframes leftToRight {
-    0% {
-      right: 0px; }
-    100% {
-      right: -300px; } } }
+              font-size: 14px; } }
 
 /*# sourceMappingURL=messaging.css.map */

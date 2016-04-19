@@ -22,9 +22,7 @@ $(document).ready(function() {
                         });
                     });
                 } else {
-                    $('#headerCore').show();
-                    $('#bodyCore').show();
-                    $('#footerCore').show();
+                    $('#body-section').show();
                     mlogmodal.hide();
                 }
             } else {
@@ -33,9 +31,7 @@ $(document).ready(function() {
                     mlogmodal.css({'top': margeL.toString() + "px"});
                     mlogmodal.fadeIn();
                 } else {
-                    $('#headerCore').hide();
-                    $('#bodyCore').hide();
-                    $('#footerCore').hide();
+                    $('#body-section').hide();
                     mlogmodal.fadeIn(100);
                 }
             }
@@ -51,9 +47,7 @@ $(document).ready(function() {
                         });
                     });
                 } else {
-                    $('#headerCore').show();
-                    $('#bodyCore').show();
-                    $('#footerCore').show();
+                    $('#body-section').show();
                     msigmodal.hide();
                 }
             } else {
@@ -63,9 +57,7 @@ $(document).ready(function() {
                     msigmodal.fadeIn();
                 } else {
                     msigmodal.show();
-                    $('#headerCore').hide();
-                    $('#bodyCore').hide();
-                    $('#footerCore').hide();
+                    $('#body-section').hide();
                 }
             }
         }

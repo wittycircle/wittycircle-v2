@@ -11,33 +11,25 @@ $(document).ready(function(){
 
     //* Search modal
    scmobile.on('click', function() {
-        $('#headerCore').show();
-        $('#bodyCore').show();
-        $('#footerCore').show();
+        $('#body-section').show();
         hsfmobile.hide();
     });
 
     //* Mail Modal  
     nmcmobile.on('click', function() {
-        $('#headerCore').show();
-        $('#bodyCore').show();
-        $('#footerCore').show();
+        $('#body-section').show();
         hmmobile.hide();
     });
 
     //* Notif Modal 
     ncmobile.on('click', function() {
-        $('#headerCore').show();
-        $('#bodyCore').show();
-        $('#footerCore').show();
+        $('#body-section').show();
         hnmobile.hide();
     });
 });
 
 function BackTo(value) {
-	$('#headerCore').show();
-    $('#bodyCore').show();
-    $('#footerCore').show();
+	$('#body-section').show();
     if (value === "mail")
     	$('#hmmobile').hide();
     else
@@ -50,9 +42,7 @@ function BackTo(value) {
 };
 
 function getBack(value) {
-	$('#headerCore').show();
-    $('#bodyCore').show();
-    $('#footerCore').show();
+	$('#body-section').show();
     if (value === "hsf") 
     	$('#hsfmobile').hide();
     else

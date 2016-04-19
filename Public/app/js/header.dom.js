@@ -23,6 +23,7 @@ $(document).ready(function() {
     if (y > 736) {
         var meetCon     = document.getElementById('meet-body-page');
         var messCon     = document.getElementById('messages-body-page');
+
         /* Meet DOM variable */
         if (meetCon) {
             var msabox1     = document.getElementById('msabox1'),
@@ -31,19 +32,20 @@ $(document).ready(function() {
                 msatImg     = document.querySelectorAll("#msat img");
         }
 
-        /* Message DOM variable */
-        if (messCon) {
-            var mobox       = document.getElementById('mobox'),
-                mhopI       = document.getElementById('mhop-i'),
-                mnmodal     = document.getElementById('messages-newpost-modal'),
-                mmsearch    = document.getElementById('messages-modal-searchArea'),
-                mmnew       = document.getElementById('messages-modal-newMessageArea'),
-                mcdmodal    = document.getElementById('messages-confirmDelete-modal');
-        }
-
         window.onclick = function(e) {
             var eTarget     = e.target.id;
 
+            var messCon     = document.getElementById('messages-body-page');
+
+            /* Message DOM variable */
+            if (messCon) {
+                var mobox       = document.getElementById('mobox'),
+                    mhopI       = document.getElementById('mhop-i'),
+                    mnmodal     = document.getElementById('messages-newpost-modal'),
+                    mmsearch    = document.getElementById('messages-modal-searchArea'),
+                    mmnew       = document.getElementById('messages-modal-newMessageArea'),
+                    mcdmodal    = document.getElementById('messages-confirmDelete-modal');
+            }
             /*** ----- section header ----- ***/
             if (headerCon) {
                 if (eTarget === "hlo" && hdmenu.style.display === "none") {
@@ -99,6 +101,8 @@ $(document).ready(function() {
                             msabox1.style.display = "none";
                     }
                 }
+
+                                    console.log("OK");
 
                 if (messCon) {
                     /*** ------ section message ------ ***/
@@ -239,9 +243,7 @@ $(document).ready(function() {
             classTog( menuRight, 'cbp-spmenu-open' );
             bodyJq.css('overflow-y', 'auto');
             disableOther( 'showRightPush' );
-            $( '#headerCore' ).hide();
-            $( '#bodyCore' ).hide();
-            $( '#footerCore' ).hide();
+            $('#body-section').hide();
             hmmobile.show();
         });
 
@@ -251,16 +253,12 @@ $(document).ready(function() {
             classTog( menuRight, 'cbp-spmenu-open' );
             bodyJq.css('overflow-y', 'auto');
             disableOther( 'showRightPush' );
-            $( '#headerCore' ).hide();
-            $( '#bodyCore' ).hide();
-            $( '#footerCore' ).hide();
+            $('#body-section').hide();
             hnmobile.show();
         });
 
         $( '#hsmobile' ).on('click', function() {
-            $( '#headerCore' ).hide();
-            $( '#bodyCore' ).hide();
-            $( '#footerCore' ).hide();
+            $('#body-section').hide();
             $( '#hsfmobile' ).show();
         });
     }

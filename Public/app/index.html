@@ -97,12 +97,17 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
     <![endif]-->
         <div id="page-wrap"></div>
-        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
-        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'"></div>
-        <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-        <section id="bodyCore" ui-view autoscroll="true"></section>
-        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+        <section id="modal-section">
+            <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+            <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+            <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'"></div>
+            <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'"></div>
+        </section>
+        <section id="body-section">
+            <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+            <section id="bodyCore" ui-view autoscroll="true"></section>
+            <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+        </section>
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en" ></script>
     <!-- build:js(.) scripts/vendor.js -->

@@ -329,3 +329,382 @@
 		}
 	}
 }
+
+
+/* Mobile modal new message */
+
+#message-modal-mobile {
+	.new-messages-modal-write-mobile {
+		display: none;
+	}
+
+	.new-messages-modal-mobile {
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		display: none;
+		overflow: hidden;
+
+		.new-messages-modal-header {
+			float: right;
+			padding: 10px 20px;
+
+			img {
+				width: 16px;
+			}
+		}
+
+		.new-messages-search-mobile {
+			padding: 0 20px;
+			padding-bottom: 10px;
+
+			input {
+				margin-top: 5px;
+				display: inline-block;
+				width: 100%;
+				font-family: 'FreigBook';
+				font-size: 16px;
+				color: #999999;
+				background-image: url('/images/search-icon-b.svg');
+				background-repeat: no-repeat;
+				background-position: 4% 50%;
+				padding: 10px 5px 10px 45px;
+				border: 1px solid #e5e5e5;
+				border-radius: 4px;
+			}
+		}
+
+		.messages-users-mobile-found {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			padding-bottom: 150px;
+			overflow-y: scroll;
+
+			.messages-newpost-user {
+				padding: 12px 20px 12px 20px;
+				border-bottom: 1px solid #f5f5f5;
+				cursor: pointer;
+
+				.messages-newpost-puser {
+					display: inline-block;
+
+					img {
+						display: inline-block;
+						width: 40px;
+						height: 40px;
+						border-radius: 50%;
+						float: left;
+					}
+
+					.messages-newpost-iuser {
+						display: inline-block;
+						position: relative;
+						padding: 0 10px;
+
+						h3 {
+							font-family: 'FreigSem';
+							font-size: 18px;
+							color: #222222;
+							margin-bottom: 3px;
+						}
+
+						h5 {
+							font-family: 'FreigBook';
+							font-size: 14px;
+							color: #999999;
+						}
+					}
+				}
+			}
+
+			.messages-newpost-user:hover {
+				background-color: white;
+			}
+		}
+		.messages-newpost-footer {
+			text-align: center;
+			padding: 10px 0;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
+			background-color: white;
+
+			img {
+				width: 35px;
+				height: 35px;
+			}
+		}
+	}
+
+	#messages-body-messages-mobile {
+		display: none;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		width: 100%;
+		height: 100%;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+
+		
+		.messages-conversation-textarea {
+			position: fixed;
+			bottom: 0;
+			background-color: white;
+			width: 100%;
+			z-index: 100000;
+			text-align: center;
+			border-top: 1px solid #e5e5e5;
+			padding: 0 10px;
+			padding-top: 5px;
+
+			.textarea-box {
+				display: inline-block;
+				width: 84%;
+				textarea:focus {
+					outline: 0;
+				}
+
+				textarea {
+					resize: none;
+					width: 100%;
+					font-family: 'FreigBook';
+					font-size: 14px;
+					border: 1px solid #e5e5e5;
+					border-radius: 5px;
+					padding: 5px 10px;
+				}
+			}
+
+			.textarea-button {
+				display: inline-block;
+				text-align: right;
+				width: 16%;
+				height: inherit;
+				padding-top: 12px;
+				float: right;
+
+				button {
+					font-family: 'FreigSem';
+					font-size: 14px;
+					background-color: #ff4d4d;
+					border: 1px solid #ff4d4d;
+					border-radius: 4px;
+					padding: 4px;
+					color: white;
+				}
+
+				button:hover {
+					border: 1px solid #d94242;
+					background-color: #d94242;
+				}
+			}
+		}
+
+		/* messages-body-messages-mobile */
+
+		h3, a{
+			font-family: 'FreigSem';
+			font-size: 16px;
+			color: black;
+		}
+
+		.messages-body-option-mobile {
+			position: fixed;
+			width: 100%;
+			top: 0;
+			z-index: 10000;
+			background-color: white;
+			padding: 10px 20px 10px 20px;
+			border: 1px solid #e5e5e5;
+			border-right: 0;
+			border-left: 0;
+			
+			.messages-backTo-mobile {
+				display: inline-block;
+
+/*					i {
+					position: relative;
+					top: 1px;
+				}*/
+
+				.fa-chevron-left {
+					font-size: 13px;
+					margin-right: 2px;
+				}
+			}
+
+			.messages-option-action-mobile {
+				display: inline-block;
+				float: right;
+				position: relative;
+				bottom: 2px;
+
+				a {
+					font-family: 'FreigBook';
+					color: #999999;
+				}
+
+				span {
+					margin-left: 2px;
+
+					img {
+						width: 12px;
+					}
+				}
+			}
+		}
+
+		.messages-body-conversation-mobile {
+			position: absolute;
+			background-color: white;
+			width: 100vw;
+			height: 100vh;
+			padding-top: 44px;
+			padding-bottom: 63px;
+			overflow-y: scroll;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+
+			.messages-body-textos {
+				.messages-cb-texto {
+					padding: 10px 20px;
+					border-top: 1px solid #f5f5f5;
+
+					.messages-texto-picture {
+						display: inline-block;
+						width: 15%;
+
+						float: left;
+
+						img {
+							border-radius: 50%;
+							width: 35px;
+							height: 35px;
+						}
+					}
+
+					.messages-texto {
+						display: inline-block;
+						padding: 0px 0px 0px 5px;
+						width: 85%;
+
+						.messages-texto-name {
+							h4 {
+								display: inline-block;
+								font-family: 'FreigSem';
+								font-size: 16px;
+								color: #222222;
+							}
+
+							p {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								color: #999999;
+							}
+						}
+
+						.messages-texto-text {
+
+							p {
+								font-family: 'FreigBook';
+								font-size: 15px;
+								line-height: 25px;
+								word-wrap: break-word;
+								margin-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.right-to-left-message {
+	-webkit-animation: rightToLeft 0.3s; /* Chrome, Safari, Opera */ 
+	animation: rightToLeft 0.3s;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-ms-perspective: 1000;
+	-o-perspective: 1000;
+	perspective: 1000;	
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.left-to-right-message {
+	right: -400px;
+	-webkit-animation: leftToRight 0.3s; /* Chrome, Safari, Opera */ 
+	animation: leftToRight 0.3s;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-ms-perspective: 1000;
+	-o-perspective: 1000;
+	perspective: 1000;	
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+@-webkit-keyframes rightToLeft {
+    0% {right: -300px;}
+    100% {right: 0px;}
+} 
+
+@keyframes rightToLeft {
+    0% {right: -300px;}
+    100% {right: 0px;}
+}
+
+@-webkit-keyframes leftToRight {
+    0% {right: 0;}
+    100% {right: -300px;}
+} 
+
+@keyframes leftToRight {
+    0% {right: 0px;}
+    100% {right: -300px;}
+}

@@ -9,7 +9,7 @@
  **/
 
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert) {
 
 
 	/*** Meet Card Page ***/

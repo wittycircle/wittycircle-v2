@@ -27,7 +27,7 @@ var wittyCircleApp = angular
       '720kb.socialshare',
       // Custom modules
       'wittyProjectModule',
-	  'wittyValidateAccountModule'
+      'wittyValidateAccountModule'
    ])
     .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
 	$stateProvider
@@ -112,6 +112,18 @@ var wittyCircleApp = angular
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
       })
+	.state('noaccess1', {
+	    url: '/projects',
+	    resolve: {
+		security: function ($q, $state) {
+		    var deferred = $q.defer();
+		    //return $q.reject("Not Authorized");
+		    $state.go('main');
+		    deferred.reject();
+		    return deferred.promise;
+		}
+	    }
+	})
       .state('profile', {
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',

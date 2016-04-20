@@ -24,7 +24,10 @@
  	function scrollDownMessage() {
  		setTimeout(function() {
 			var h = document.getElementById('mcb');
+		    if (h !== null)
+		    {
 			h.scrollTop = h.scrollHeight;
+		    }
 		}, 500);
  	};
 

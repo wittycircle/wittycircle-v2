@@ -20,7 +20,7 @@
              $mdBottomSheet.show({
                templateUrl: 'views/core/popover-login.view.client.html',
                controller: 'HeaderCtrl',
-               clickOutsideToClose: false,
+               clickOutsideToClose: true,
                disableParentScroll: false,
                targetEvent: $event
              });

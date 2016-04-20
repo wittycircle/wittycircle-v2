@@ -257,7 +257,7 @@ $scope.savebasics = function(data, project_category, places_after, statechoose) 
     if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
         data.main_video = $scope.project_video;
         data.main_video_id = $scope.project_video_id;
-    } if (!$scope.project_video && $scope.project.main_video) {
+    } if (!$scope.project_video && !$scope.project.main_video) {
         delete data.main_video;
     }
     if ($scope.post) {
@@ -425,11 +425,15 @@ $scope.uploadVideo = function() {
             $scope.$apply();
         },
         fail: function (e, data) {
+	    //console.log(e);
+	    //console.log(data);
             $scope.status = "Upload failed";
             $scope.$apply();
         }
     })
     .on("cloudinaryprogress", function (e, data) {
+	    //console.log(e);
+            //console.log(data);
         if (data.files[0].size > 100000000) {
             $scope.status = "File too large!";
             return ;

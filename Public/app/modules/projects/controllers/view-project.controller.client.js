@@ -218,9 +218,11 @@
             };
 
             function goToProfile (id) {
+		console.log(id);
                 if (id && id !== null && id !== undefined && typeof id === 'number') {
-                    Users.getUserIdByProfileId(id).then(function (response) {
-                        $state.go('profile', {username: response.userId.username});
+                    Users.getUserbyId(id, function (response) {
+			console.log(response);
+                        $state.go('profile', {username: response.data.username});
                     });
                 } else {
                     console.log('error in goToProfile in ViewProjectCtrl: no id is provided');

@@ -1,0 +1,56 @@
+<section id="dmmodal" ng-if="dmobile.general" class="animated fadeIn">
+	<header class="presentation-mobile-modal-header">
+			<h5>{{dmobile.headerText}}</h5>
+			<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()" ng-cloak/>
+			<h4 ng-if="skillListM[0]" class="animated fadeIn" ng-click="closemmodal()">I'm good <i class="fa fa-check"></i></h4>
+	</header>
+	<div id="dsamodal" class="discover-mobile-search1 d-mobile-search" ng-if="dmobile.modal === 1">
+		<ul>
+			<li ng-click="getProject('Ideas', 1)">Ideas</li>
+			<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
+			<li ng-click="getProject('Beta project', 3)">Beta projects</li>
+			<li ng-click="getProject('Live project', 4)">Live projects</li>
+			<li ng-click="getProject('all', 5)">All projects</li>
+		</ul>
+	</div>
+
+	<div id="dscmodal" class="discover-mobile-search2 d-mobile-search" ng-if="dmobile.modal === 2">
+		<ul>
+			<li ng-repeat="category in categories" ng-click="getCategory(category.name)">{{category.name}}</li>
+		</ul>
+	</div>
+
+	<div id="dshmodal" class="discover-mobile-search3 d-mobile-search" ng-if="dmobile.modal === 3">
+		<ul>
+			<!-- <li ng-repeat="help in helps" ng-click="getHelp(help)" ng-disabled="help === 'Freelancer' || help === 'Fundings'">{{help}}<sup ng-if="help == 'Freelancer' || help == 'Fundings'">soon</sup></li> -->
+			<li ng-click="getHelp('Teammate')">Teammate</li>
+			<li>Freelancer<sup>soon</sup></li>
+			<li ng-click="getHelp('Feedback')">Feedback</li>
+			<li ng-click="getHelp('Mentor')">Mentor</li>
+			<li ng-click="getHelp('Tips')">Tips</li>
+			<li>Fundings<sup>soon</sup></li>
+			<li ng-click="getHelp('Any help')">Any help</li>
+		</ul>
+	</div>
+
+	<div id="dskmodal" class="discover-mobile-search3 d-mobile-search" ng-if="dmobile.modal === 4">
+		<ul class="select-list">
+			<li ng-repeat="skillM in skillListM">{{skillM.sName}} <i class="fa fa-times" ng-click="removeSkill(skillM.sName)"></i></li>
+		</ul>
+		<div class="discover-mobile-search-skill">
+			<input type="text" placeholder="Search for a specific skill..." ng-model="skillName">
+		</div>
+			<ul ng-if="!skillName">
+				<h3>Popular skills</h3>
+				<div class="discover-mobile-skillList1">
+					<li ng-repeat="skill in skills | limitTo: 10" class="animated fadeIn" ng-click="searchSkill(skill.name)"><i class="fa fa-plus" aria-hidden="true"></i> {{skill.name}}</li>
+				</div>
+			</ul>		
+			<ul ng-if="skillName">
+				<div class="discover-mobile-skillList1 discover-mobile-skillList2">
+					<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
+				</div>
+				<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+			</ul>
+	</div>
+</section>

@@ -1,8 +1,8 @@
 body {
-  min-width: 1200px;
-  /* suppose you want minimun width of 1200px */
-  width: 100% !important;
-  height: auto; }
+  width: 100%;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
 
 body:-webkit-scrollbar {
   display: none; }
@@ -11,8 +11,14 @@ h1, h2, h3, h4, h5, h6, a {
   margin: 0;
   color: white; }
 
-[ng\:cloak], [ng-cloak], .ng-cloak {
-  display: none !important; }
+h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+input, textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
 
 li {
   list-style-type: none; }
@@ -32,9 +38,9 @@ a:focus {
   text-decoration: none;
   color: white; }
 
-label {
-  font-weight: normal !important; }
-
+/*label {
+  font-weight: normal !important;
+}*/
 /*@font-face {
 .no-pdt {
   padding: 0;
@@ -120,7 +126,7 @@ label {
 
 .pac-icon {
   padding: 10px;
-  background-image: url("/images/location-picto.svg");
+  background-image: url("/images/location-picto.svg") !important;
   background-repeat: no-repeat;
   background-size: 13px auto;
   background-position: center top; }

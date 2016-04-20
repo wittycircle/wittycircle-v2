@@ -3,6 +3,7 @@
 		<h2>Sign Up</h2>
 		<img id="closeCrossS" src="/images/cross-icon.svg" style="cursor: pointer">
 	</header>
+    <div id="closeCrossS2"></div>
 	<div class="signup-modal-social signup-login-social">
         <h4>Log in with a social network:</h4>
         <div class="fb-login">
@@ -55,51 +56,5 @@
     <div class="signup-modal-footer">
     	<h4>Already have an account? <strong><u id="switchToL" >Sign in</u></strong></h4>
     </div>
-    <script>
-        $(function() {
-
-            var filter = $("#page-wrap");
-            var x = $(window).height();
-            var margeS = (x - 600)/2/2;
-
-            $(document).mouseup(function (e) {
-                var container2 = $("#main-signup-modal");
-
-
-                if (e.target.id === "mosignup" || e.target.id === "closeCrossS" || container2.is(e.target) || container2.has(e.target).length || container2.css('display') === "block") {
-                    if ((!container2.is(e.target) && !container2.has(e.target).length && e.target.id !== "mosignup") || e.target.id === "closeCrossS") {
-                        filter.fadeOut(500);
-                        container2.animate({top: '-700px'}, 400, function() {
-                            container2.hide(100, function() {
-                                container2.css({'top': margeS.toString() + "px"});
-                            });
-                        });
-                    } else {
-                        filter.fadeIn(300);
-                        container2.css({'top': margeS.toString() + "px"});
-                        container2.fadeIn();
-                    }
-                }
-            });
-
-            $('.signup-modal-field').keypress(function(e) {
-                if (e.which === 13 || e.keycode === 13) {
-                    $('.signup-modal-button button').click();
-                }
-            });
-
-            $(document).ready(function(){
-                $('#switchToL').on('click', function() {
-                    var x = $('#main-signup-modal');
-                    var y = $("#main-login-modal");
-                    if (x.css('display') === "block") {
-                        y.css({'top': margeS.toString() + "px"});
-                        y.fadeIn();
-                        x.fadeOut();
-                    }
-                });
-
-            });
-        });
-    </script>
+    <script src="js/signup-login-modal.dom.js"></script>
 </section>

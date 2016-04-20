@@ -2,39 +2,35 @@
 console.log("You're looking under the ground, find a bug ? Help us to improve our platform at hello@wittycircle.com");
 
 var wittyCircleApp = angular
-.module('wittyApp', [
-    // Assets Modules
-    'ngAnimate',
-    'ngAria',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-    'ui.bootstrap',
-    'ui.router',
-    'ngMaterial',
-    'ngMap',
-    'ngFileUpload',
-    'angular-toArrayFilter',
-    'algoliasearch',
-    'door3.css',
-    'angularMoment',
-    'com.2fdevs.videogular',
-    'com.2fdevs.videogular.plugins.controls',
-    'com.2fdevs.videogular.plugins.overlayplay',
-    'com.2fdevs.videogular.plugins.poster',
-    'cloudinary',
-    'angular-redactor',
-    'oc.lazyLoad',
-    '720kb.socialshare',
-    // Custom modules
-    'wittyProjectModule',
-    'wittyValidateAccountModule'
-])
-.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
-    $stateProvider
-    .state('main', {
+  .module('wittyApp', [
+      // Assets Modules
+      'ngAria',
+      'ngCookies',
+      'ngResource',
+      'ngRoute',
+      'ngSanitize',
+      'ngTouch',
+      'ui.router',
+      'ui.bootstrap',
+      'ngFileUpload',
+      'angular-toArrayFilter',
+      'algoliasearch',
+      'angularMoment',
+      'com.2fdevs.videogular',
+      'com.2fdevs.videogular.plugins.controls',
+      'com.2fdevs.videogular.plugins.overlayplay',
+      'com.2fdevs.videogular.plugins.poster',
+      'cloudinary',
+      'angular-redactor',
+      'oc.lazyLoad',
+      '720kb.socialshare',
+      // Custom modules
+      'wittyProjectModule',
+	  'wittyValidateAccountModule'
+   ])
+    .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
+	$stateProvider
+	    .state('main', {
         url: '/',
         params      : { tagStart: '',},
         templateUrl : 'views/main.html',
@@ -110,17 +106,16 @@ var wittyCircleApp = angular
     .state('terms', {
         url: '/terms',
         templateUrl: 'views/core/terms.view.client.html',
-        controller: 'TermsCtrl'
-    })
-    .state('privacy', {
+      })
+      .state('privacy', {
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
-        controller: 'PrivacyCtrl'
-    })
-    .state('profile', {
+      })
+      .state('profile', {
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
+        controllerAs: 'vm',
         // css: '../styles/profiles.css',
         resolve:{
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {

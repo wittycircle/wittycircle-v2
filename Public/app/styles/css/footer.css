@@ -15,35 +15,31 @@
       #footer-page .footer-global .footer-info-section .footer-about {
         display: inline-block;
         text-align: left;
-        padding-right: 15px; }
+        width: 220px;
+        margin-right: 40px; }
       #footer-page .footer-global .footer-info-section .footer-explore {
         display: inline-block;
-        text-align: left;
-        padding-right: 15px;
-        padding-left: 15px; }
-      #footer-page .footer-global .footer-info-section .footer-no-info {
-        display: inline-block;
-        text-align: left;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-top: 30px; }
+        text-align: left; }
+        #footer-page .footer-global .footer-info-section .footer-explore ul {
+          display: inline-block;
+          width: 150px; }
+        #footer-page .footer-global .footer-info-section .footer-explore .footer-explore-more {
+          float: right; }
       #footer-page .footer-global .footer-info-section .footer-meet {
         display: inline-block;
-        text-align: left;
-        padding-left: 15px;
-        padding-right: 15px; }
-      #footer-page .footer-global .footer-info-section .footer-no-info2 {
-        position: relative;
-        display: inline-block;
-        text-align: left;
-        padding-top: 30px;
-        padding-left: 15px; }
+        text-align: left; }
+        #footer-page .footer-global .footer-info-section .footer-meet ul {
+          display: inline-block;
+          width: 150px; }
+        #footer-page .footer-global .footer-info-section .footer-meet .footer-meet-more {
+          float: right; }
       #footer-page .footer-global .footer-info-section .footer-size {
         position: relative;
         margin-top: 20px;
         margin-bottom: 40px;
-        width: 185px;
-        vertical-align: top; }
+        vertical-align: top;
+        padding-left: 15px;
+        padding-right: 15px; }
         #footer-page .footer-global .footer-info-section .footer-size h5 {
           font-family: 'FreigSem';
           margin-bottom: 10px;
@@ -56,7 +52,7 @@
         #footer-page .footer-global .footer-info-section .footer-size li:hover {
           text-decoration: underline; }
     #footer-page .footer-global .footer-brand-copyright {
-      padding-bottom: 60px;
+      padding: 0 15px 60px 15px;
       margin-top: 20px;
       text-align: left; }
       #footer-page .footer-global .footer-brand-copyright .footer-brand-logo {
@@ -110,5 +106,52 @@
             background-image: url("/images/social_media/linkedin-logo.png");
             background-size: 100%;
             background-repeat: no-repeat; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+@media only screen and (max-width: 736px) {
+  #footer-page .footer-global .footer-info-section {
+    margin-top: 0px;
+    padding: 0 20px;
+    text-align: left;
+    border-bottom: none; }
+    #footer-page .footer-global .footer-info-section h5 {
+      background-image: url("/images/arrow-down-icon-w.svg");
+      background-repeat: no-repeat;
+      background-position: 99% 50%; }
+    #footer-page .footer-global .footer-info-section .footer-about {
+      margin-right: 0; }
+    #footer-page .footer-global .footer-info-section .footer-explore ul {
+      width: 130px; }
+    #footer-page .footer-global .footer-info-section .footer-explore .footer-explore-more {
+      float: none; }
+    #footer-page .footer-global .footer-info-section .footer-meet ul {
+      width: 130px; }
+    #footer-page .footer-global .footer-info-section .footer-meet .footer-meet-more {
+      position: relative;
+      float: none;
+      bottom: 17.5px; }
+    #footer-page .footer-global .footer-info-section .footer-size {
+      width: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      border-bottom: 1px solid black;
+      padding: 0; }
+      #footer-page .footer-global .footer-info-section .footer-size h5 {
+        margin: 20px 0; }
+    #footer-page .footer-global .footer-info-section .footer-list {
+      display: none;
+      margin-bottom: 20px; }
+  #footer-page .footer-global .footer-brand-copyright {
+    text-align: center;
+    padding: 0 15px 20px 15px; }
+    #footer-page .footer-global .footer-brand-copyright .footer-brand-logo {
+      display: block;
+      margin: 0 0 10px 0; }
+    #footer-page .footer-global .footer-brand-copyright .footer-copyright {
+      display: block;
+      margin-bottom: 10px; }
+    #footer-page .footer-global .footer-brand-copyright .footer-social-media {
+      display: block;
+      float: none; } }
 
 /*# sourceMappingURL=footer.css.map */

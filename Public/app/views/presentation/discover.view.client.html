@@ -103,9 +103,9 @@
 				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox" ng-click="opendmodal(4)">
 					<h2 ng-if="!skillListM.length">Anything</h2>
 					<img ng-if="!skillListM.length" src="/images/arrow-down-icon-w.svg">
-					<div class="discover-skillList">
-						<h2 ng-if="skillListM[0]">
-							{{skillListM | sortSkill: skillListM}},
+					<div ng-if="skillListM[0]" class="discover-skillList">
+						<h2>
+							{{skillListM | sortSkill: skillListM}}
 						</h2>
 					</div>
 				</div>

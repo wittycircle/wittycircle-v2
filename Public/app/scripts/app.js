@@ -94,7 +94,6 @@ var wittyCircleApp = angular
         params: {profile_id: null, input: null, userOn: null},
         templateUrl: 'views/messaging/messaging.view.client.html',
         controller: 'MessageCtrl',
-        controllerAs: 'vm',
         resolve:{
             auth: function($q, $rootScope, $stateParams) {
                 if ($rootScope.globals.currentUser) {

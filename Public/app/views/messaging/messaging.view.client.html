@@ -78,7 +78,7 @@
 			</div>
 		</header>
 
-		<section id="messages-body">
+		<section id="messages-body" data-ng-controller="MessageCtrl">
 			<div class="messages-component">
 				<div class="messages-contact-list">
 					<div class="messages-search">
@@ -86,7 +86,7 @@
 					</div>
 
 					<div class="messages-contact">
-						<div class="messages-list" onclick="scrollToBottom()" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="vm.showMessage(dialogue)">
+						<div class="messages-list" onclick="scrollToBottom()" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
 							<div class="messages-list-picture">
 						<img ng-src="{{ resizePic(dialogue.pic, 50, 50, 'fill') }}" alt="profile-picture">
 							</div>
@@ -254,7 +254,7 @@
 		</div>
 
 		<div id="messlist" class="messages-convers-list-mobile">
-			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="vm.showMessage(dialogue)">
+			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
 
 				<div class="messages-list-picture">
 					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
@@ -291,8 +291,8 @@
 					header 		= document.getElementById('headerCore');
 
 				messlist.on('click', function() {
-					classie.remove( mbmm, 'left-to-right-message');
-					classie.add( mbmm, 'right-to-left-message');
+					classie.remove( document.getElementById('messages-body-messages-mobile'), 'left-to-right-message');
+					classie.add( document.getElementById('messages-body-messages-mobile'), 'right-to-left-message');
 					$('#messages-body-messages-mobile').show()
 					$('#body-section').hide();
 				});

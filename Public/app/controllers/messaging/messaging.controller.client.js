@@ -9,9 +9,12 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users) {
+ 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout) {
 
  	var socket = io.connect('/');
+
+ 	/* Function vm */
+
 	if ($rootScope.globals.currentUser) {
  	    $scope.my_id = $rootScope.globals.currentUser.id;
  	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
@@ -91,14 +94,15 @@
  		$http.get(url).success(function(res){
  			if (res.success) {
  				var last 					= res.messages[res.messages.length - 1];
- 				$scope.messages 			= res.messages;
- 				$scope.name 				= res.name.first_name;
- 				$scope.username 			= res.name.first_name + ' ' + res.name.last_name;
- 				$scope.nameuser 			= res.name.username,
- 				$scope.profile_my_picture 	= res.picture.my_picture;
- 				$scope.profile_user_picture = res.picture.user_picture;
- 				$scope.c 					= 0;
- 				$scope.show 				= true;
+ 				$scope.$parent.messages		= res.messages;
+ 				$scope.$parent.name 				= res.name.first_name;
+ 				$scope.$parent.username 			= res.name.first_name + ' ' + res.name.last_name;
+ 				$scope.$parent.nameuser 			= res.name.username,
+ 				$scope.$parent.profile_my_picture 	= res.picture.my_picture;
+ 				$scope.$parent.profile_user_picture = res.picture.user_picture;
+ 				$scope.$parent.c 					= 0;
+ 				$scope.$parent.show 				= true;
+ 				console.log($scope.$parent.messages);
  			}
  			$scope.offMessages = [];
  		});

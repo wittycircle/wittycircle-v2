@@ -1,4 +1,4 @@
-<section id="message-modal-mobile" data-ng-controller="MessageCtrl">
+<section id="message-modal-mobile">
 	<section id="nmmmobile" class="new-messages-modal-mobile animated fadeIn">
 		<div class="new-messages-modal-header">
 			<div class="closeMessage"><img src="/images/cross-icon.svg" /></div>
@@ -37,7 +37,7 @@
 		</div> -->
 	</section>
 
-	<section id="messages-body-messages-mobile" >
+	<section id="messages-body-messages-mobile">
 		<div id="mbom" class="messages-body-option-mobile">
 			<div class="messages-backTo-mobile">
 				<h3><i class="fa fa-chevron-left"></i> All conversations</h3>
@@ -50,7 +50,7 @@
 
 		<div class="messages-body-conversation-mobile">
 			<div class="messages-body-textos">
-				<div class="messages-cb-texto" ng-repeat="message in $parent.messages track by $index">
+				<div class="messages-cb-texto" ng-repeat="message in $parent.messages ">
 					<div class="messages-texto-picture">
 						<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
 						<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">

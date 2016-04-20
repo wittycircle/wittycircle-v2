@@ -12,7 +12,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     console.time('loading profile');
 
     var vm = this;
-    var socket = io.connect('http://127.0.0.1:80');
+    var socket = io.connect('https://www.wittycircle.com');
 
     /* Vm Variable */
     vm.currentUser = $rootScope.globals.currentUser || false;
@@ -131,7 +131,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
             $scope.cInterests           = res.interests;
         });
 
-      $http.get('/follow/projects/number/' + vm.paramUsername)).success(function(res) {
+      $http.get('/follow/projects/number/' + vm.paramUsername).success(function(res) {
           if (res.number) {
               $scope.projectsFollow = res.number;
           }

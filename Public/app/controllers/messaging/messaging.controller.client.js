@@ -12,9 +12,15 @@
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users) {
 
  	var socket = io.connect('/');
- 	$scope.my_id = $rootScope.globals.currentUser.id;
- 	$scope.backPic = $rootScope.globals.currentUser.profile_cover;
- 	
+	if ($rootScope.globals.currentUser) {
+ 	    $scope.my_id = $rootScope.globals.currentUser.id;
+ 	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
+
+	    /***   DATA ***/
+            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
+            $scope.currentUsername = $rootScope.globals.currentUser.username;
+	}
+	$scope.onlineUser = $stateParams.userOn;
  	function scrollDownMessage() {
  		setTimeout(function() {
 			var h = document.getElementById('mcb');
@@ -30,11 +36,6 @@
  		}
  	};
 
- 	/***   DATA ***/
- 	$scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
- 	$scope.onlineUser = $stateParams.userOn;
- 	$scope.currentUsername = $rootScope.globals.currentUser.username;
- 	
  	socket.emit('register', $scope.userOnlineName);
 
  	socket.on('userOnline', function(data){

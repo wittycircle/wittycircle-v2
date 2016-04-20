@@ -33,7 +33,7 @@ var httpsOption		= {
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());
-// app.use(require('express-force-domain')('https://www.wittycircle.com') );
+app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({

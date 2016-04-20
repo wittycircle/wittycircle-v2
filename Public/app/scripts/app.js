@@ -12,6 +12,7 @@ var wittyCircleApp = angular
       'ngTouch',
       'ui.router',
       'ui.bootstrap',
+      'ngMaterial',
       'ngFileUpload',
       'angular-toArrayFilter',
       'algoliasearch',

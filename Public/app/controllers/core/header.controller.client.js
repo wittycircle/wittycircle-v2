@@ -8,8 +8,8 @@
  * Controller of the wittyApp
  **/
 angular.module('wittyApp')
-.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 'Header', 
-  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia, Header) {
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
+  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
   function checkCredential() {
@@ -305,7 +305,7 @@ angular.module('wittyApp')
 
 
 /*** Search Bar ***/
-  var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+  var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
   var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
   var PAndP   = client.initIndex('PAndP');

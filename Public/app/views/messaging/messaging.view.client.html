@@ -86,7 +86,7 @@
 					</div>
 
 					<div class="messages-contact">
-						<div class="messages-list" onclick="scrollToBottom()" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
+						<div class="messages-list" onclick="scrollToBottom()" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="vm.showMessage(dialogue)">
 							<div class="messages-list-picture">
 						<img ng-src="{{ resizePic(dialogue.pic, 50, 50, 'fill') }}" alt="profile-picture">
 							</div>
@@ -192,48 +192,53 @@
 		</section>
 	</section>
 	<script>
-		/*** MODAL ***/
-		$('#mhn').on('mouseover', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
-		});
 
-		$('#mhn').on('mouseleave', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
-		});
+		var x = $(window).width();
 
-		function showUserList() {
-			var x = document.getElementById('mmoinput').value;
+		if (x > 736) {
+			/*** MODAL ***/
+			$('#mhn').on('mouseover', function() {
+				$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
+			});
 
-			if (x) {
-				document.getElementById('mmolist').style.display = "block";
-				document.getElementById('messages-modals').style.top = "15%";
-				document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 5px 20px";
-			} else {
-				document.getElementById('mmolist').style.display = "none";
-				document.getElementById('messages-modals').style.top = "30%";
-				document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 30px 20px";
+			$('#mhn').on('mouseleave', function() {
+				$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
+			});
+
+			function showUserList() {
+				var x = document.getElementById('mmoinput').value;
+
+				if (x) {
+					document.getElementById('mmolist').style.display = "block";
+					document.getElementById('messages-modals').style.top = "15%";
+					document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 5px 20px";
+				} else {
+					document.getElementById('mmolist').style.display = "none";
+					document.getElementById('messages-modals').style.top = "30%";
+					document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 30px 20px";
+				}
 			}
-		}
 
-		setTimeout(function() {
-				var h = document.getElementById('mcb');
-				if (h) {
-					h.scrollTop = h.scrollHeight;
-				}
-		}, 1000);
-
-		function scrollToBottom() {
 			setTimeout(function() {
-				var h = document.getElementById('mcb');
-				if (h) {
-					h.scrollTop = h.scrollHeight;
-				}
-			}, 200);
-		}
+					var h = document.getElementById('mcb');
+					if (h) {
+						h.scrollTop = h.scrollHeight;
+					}
+			}, 1000);
 
-		function showNewMessageArea() {
-			document.getElementById('messages-modal-searchArea').style.display = "none";
-			document.getElementById('messages-modal-newMessageArea').style.display = "block";
+			function scrollToBottom() {
+				setTimeout(function() {
+					var h = document.getElementById('mcb');
+					if (h) {
+						h.scrollTop = h.scrollHeight;
+					}
+				}, 200);
+			}
+
+			function showNewMessageArea() {
+				document.getElementById('messages-modal-searchArea').style.display = "none";
+				document.getElementById('messages-modal-newMessageArea').style.display = "block";
+			}
 		}
 	</script>
 </div>
@@ -249,7 +254,7 @@
 		</div>
 
 		<div id="messlist" class="messages-convers-list-mobile">
-			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
+			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="vm.showMessage(dialogue)">
 
 				<div class="messages-list-picture">
 					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
@@ -273,38 +278,41 @@
 
 	<script>
 
-		$(document).ready(function() {
-			var mslm 		= document.getElementById('mslm'),
-				list 		= $('.messages-convers-list-mobile'),
-				mbmm 		= document.getElementById('messages-body-messages-mobile'),
-				mblm 		= $('#messages-body-list-mobile'),
-				messlist 	= $('#messlist'),
-				nmmobile 	= $('#nmmobile'),
-				footer 		= document.getElementById('footerCore'),
-				header 		= document.getElementById('headerCore');
+		var x = $(window).width();
+		if (x <= 736) {
+			$(document).ready(function() {
+				var mslm 		= document.getElementById('mslm'),
+					list 		= $('.messages-convers-list-mobile'),
+					mbmm 		= document.getElementById('messages-body-messages-mobile'),
+					mblm 		= $('#messages-body-list-mobile'),
+					messlist 	= $('#messlist'),
+					nmmobile 	= $('#nmmobile'),
+					footer 		= document.getElementById('footerCore'),
+					header 		= document.getElementById('headerCore');
 
-			messlist.on('click', function() {
-				classie.remove( mbmm, 'left-to-right-message');
-				classie.add( mbmm, 'right-to-left-message');
-				$('#messages-body-messages-mobile').show()
-				$('#body-section').hide();
-			});
+				messlist.on('click', function() {
+					classie.remove( mbmm, 'left-to-right-message');
+					classie.add( mbmm, 'right-to-left-message');
+					$('#messages-body-messages-mobile').show()
+					$('#body-section').hide();
+				});
 
-			nmmobile.click(function() {
-				$('.new-messages-modal-mobile').show();
-				$('#body-section').hide();
-			});
+				nmmobile.click(function() {
+					$('.new-messages-modal-mobile').show();
+					$('#body-section').hide();
+				});
 
-			$(window).scroll(function () {
-				if ($(this).scrollTop() >= 85) {
-					classie.add(mslm, 'body-fixed');
-					list.css('padding-top', '54px');
-				} else {
-					classie.remove(mslm, 'body-fixed');
-					list.css('padding-top', '0px');
-				}
+				$(window).scroll(function () {
+					if ($(this).scrollTop() >= 85) {
+						classie.add(mslm, 'body-fixed');
+						list.css('padding-top', '54px');
+					} else {
+						classie.remove(mslm, 'body-fixed');
+						list.css('padding-top', '0px');
+					}
+				});
 			});
-		});
+		}
 
 	</script>
 </div>

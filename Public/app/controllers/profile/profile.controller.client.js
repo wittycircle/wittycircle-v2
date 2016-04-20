@@ -12,7 +12,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     console.time('loading profile');
 
     var vm = this;
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('https://127.0.0.1');
 
     /* Vm Variable */
     vm.currentUser = $rootScope.globals.currentUser || false;

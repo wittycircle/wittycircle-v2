@@ -46,6 +46,29 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
     }
   });
 
+  /*** MOBILE ***/
+  var ww = $(window).width();
+  $scope.mamobile = {};
+  $scope.openmamodal = function(value) {
+    
+    if (ww <= 736) {
+      $('body').css('overflow-y', 'hidden');
+      $scope.mamobile.modal  = value;
+      if (value === 1)
+        $scope.mamobile.headerText = "Show me...";
+      if (value === 2)
+        $scope.mamobile.headerText = "Show me projects about...";
+      $scope.mamobile.general  = true;
+      console.log($scope.mamobile.general);
+    }
+  };
+
+  $scope.closemmodal = function() {
+    $('#mainmmodal').css("display", "none");
+    $('body').css('overflow-y', 'scroll');
+    $scope.mamobile.general  = false;
+  }
+
   /************ SECTION SUFFLER *************/
   var cardInfos = {};
   var n = 0;
@@ -144,10 +167,14 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
   };
 
   $scope.getProject = function(pName) {
+    if (ww <= 736)
+        $scope.closemmodal();
     $scope.statusProject = pName;
   };
 
   $scope.getCategory = function(cName) {
+    if (ww <= 736)
+        $scope.closemmodal();
     $scope.ctgName = cName;
   };
 

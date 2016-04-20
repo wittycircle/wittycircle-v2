@@ -21,10 +21,13 @@
             $scope.currentUsername = $rootScope.globals.currentUser.username;
 	}
 	$scope.onlineUser = $stateParams.userOn;
+
  	function scrollDownMessage() {
  		setTimeout(function() {
 			var h = document.getElementById('mcb');
-			h.scrollTop = h.scrollHeight;
+			if (h) {
+				h.scrollTop = h.scrollHeight;
+			}
 		}, 500);
  	};
 
@@ -77,6 +80,7 @@
 
  		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
  			$http.put('/messages/', {id : dialogue.id}).success(function(res){
+ 				console.log(res);
  				if (res.success) {
  					Users.count();
  					$scope.refreshDialogue();
@@ -85,7 +89,6 @@
  		}
 
  		$http.get(url).success(function(res){
- 			console.log(res);
  			if (res.success) {
  				var last 					= res.messages[res.messages.length - 1];
  				$scope.messages 			= res.messages;
@@ -95,6 +98,7 @@
  				$scope.profile_my_picture 	= res.picture.my_picture;
  				$scope.profile_user_picture = res.picture.user_picture;
  				$scope.c 					= 0;
+ 				$scope.show 				= true;
  			}
  			$scope.offMessages = [];
  		});
@@ -204,5 +208,4 @@
 	 		}
 	 	}
  	};
-
 });

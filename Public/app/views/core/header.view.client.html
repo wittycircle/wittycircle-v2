@@ -34,7 +34,7 @@
             <div ng-if="notifBubble || numberNotif" class="header-mobile-bubble"></div>
             <img src="/images/littleman-w.svg">
         </div>
-        <nav class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+        <nav md-swipe-right="onSwipeRight()" class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 <!--            <h3>Menu</h3> -->
             <div class="log-of" ng-hide="log">
                 <a id="mologin" href="">Log In</a>
@@ -65,6 +65,7 @@
                 </div>
             </div>
         </nav>
+        <md-divider></md-divider>
         <nav class="header-log-off" ng-hide="log">
             <ul id='hnlog' class="header-nav-log">
                 <li class="lsu"><a id="mologin" href="">Log In</a></li>

@@ -894,7 +894,7 @@
     display: block; }
     #messages-body-page-mobile #messages-body-list-mobile {
       padding-top: 85px;
-      width: 100%;
+      width: 100vw;
       /* messages-body-list-mobile */ }
       #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile {
         padding: 4px 10px;
@@ -917,7 +917,7 @@
         backface-visibility: hidden; }
         #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile input {
           display: inline-block;
-          width: 85%;
+          width: 72%;
           font-family: 'FreigBook';
           font-size: 16px;
           color: #999999;
@@ -930,8 +930,10 @@
         #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile {
           display: inline-block;
           text-align: center;
-          width: 12%;
-          margin-left: 5px; }
+          float: right;
+          position: fixed;
+          top: 14px;
+          margin-left: 25px; }
           #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile img {
             background-color: white;
             position: relative;
@@ -998,5 +1000,20 @@
             #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list .messages-list-object span {
               font-family: 'FreigBook';
               font-size: 14px; } }
+@media only screen and (max-width: 414px) {
+  #messages-body-page-mobile #messages-body-list-mobile {
+    /* messages-body-list-mobile */ }
+    #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile {
+      margin-left: 20px; } }
+@media only screen and (max-width: 375px) {
+  #messages-body-page-mobile #messages-body-list-mobile {
+    /* messages-body-list-mobile */ }
+    #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile {
+      margin-left: 15px; } }
+@media only screen and (max-width: 320px) {
+  #messages-body-page-mobile #messages-body-list-mobile {
+    /* messages-body-list-mobile */ }
+    #messages-body-page-mobile #messages-body-list-mobile .messages-search-list-mobile .new-messages-mobile {
+      margin-left: 5px; } }
 
 /*# sourceMappingURL=messaging.css.map */

@@ -29,13 +29,13 @@ angular.module('wittyApp')
    **Update in time sidebar after login
    */
    //TODO: change to the server url
-   var socket = io.connect('https://www.wittycircle.com');
+   var socket = io.connect('http://127.0.0.1');
 
    $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
-    if ($scope.log) {
-	$("#hlon").css('display', 'block');
-    }
+ //    if ($scope.log) {
+	// $("#hlon").css('display', 'block');
+ //    }
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
         $scope.user = {
@@ -93,6 +93,30 @@ angular.module('wittyApp')
         $mdBottomSheet.cancel();
         x.fadeIn();
       }
+    };
+
+    $scope.onSwipeRight = function(ev) {
+
+      var bodyJq          = $( 'body' ),
+          classTog        = classie.toggle,
+          thiss            = document.getElementById('header-section'),
+          menuRight       = document.getElementById( 'cbp-spmenu-s2' ),
+          showRightPush   = document.getElementById( 'showRightPush' ),
+          body            = document.body;
+
+        function disableOther( button ) {
+            if( button !== 'showRightPush' ) {
+                classTog( showRightPush, 'disabled' );
+            }
+        };
+          classTog( thiss, 'active' );
+          classTog( body, 'cbp-spmenu-push-toleft' );
+          classTog( menuRight, 'cbp-spmenu-open' );
+          if (bodyJq.hasClass("cbp-spmenu-push-toleft"))
+              bodyJq.css('overflow-y', 'hidden');
+          else
+              bodyJq.css('overflow-y', 'auto');
+          disableOther( 'showRightPush' );
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
@@ -305,7 +329,11 @@ angular.module('wittyApp')
 
 
 /*** Search Bar ***/
+  /* Dev API Key */
   var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+  /* Public API Key */
+  //var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+  
   var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
   var PAndP   = client.initIndex('PAndP');

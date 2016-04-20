@@ -312,5 +312,37 @@ angular.module('wittyApp')
 
         return value + (tail || ' ...');
     };
+})
+.filter('sortSkill', function () {
+    return function (input) {
+
+        if (input && input[0]) {
+        	var text = "";
+        	var lengthText;
+        	var index;
+        	var i = 0;
+
+        	while (i < input.length) {
+        		if (i > 0 )
+        			text += ', ';
+        		text += input[i].sName;
+        		i++;
+        	}
+
+
+        	lengthText = text.length;
+        	for (var n = 0; text.length > 50; n++) {
+	        	index = text.lastIndexOf(",");
+	        	text = text.substring(0, index);
+
+	        	if (text.length <= 50)
+	        		break ;
+	        }
+	        if (lengthText > 50)
+	        	text = text + ", ...";
+
+        	return text;
+        }
+    };
 });
 

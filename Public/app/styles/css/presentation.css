@@ -740,14 +740,22 @@
   .discover-component .discover-search1 .discover-search1-dropdown2-mobile {
     display: inline-block; }
   .discover-component .discover-search2 {
-    border-spacing: 0p; }
+    border-spacing: 0p;
+    padding-right: 20px; }
     .discover-component .discover-search2 #dsdrop1m {
-      display: inline-block; }
+      display: inline-block;
+      max-width: 230px; }
       .discover-component .discover-search2 #dsdrop1m h2 {
         display: inline-block;
         padding: 5px 15px 5px 10px; }
+      .discover-component .discover-search2 #dsdrop1m .discover-skillList h2 {
+        font-size: 21px;
+        padding: 0;
+        padding-left: 5px; }
       .discover-component .discover-search2 #dsdrop1m img {
         display: inline-block; }
+    .discover-component .discover-search2 .discover-search2-text {
+      margin-bottom: 10px; }
     .discover-component .discover-search2 .discover-search2-text-mobile {
       display: table-cell; }
       .discover-component .discover-search2 .discover-search2-text-mobile h2 {

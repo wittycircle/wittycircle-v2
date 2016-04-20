@@ -694,7 +694,8 @@ overflow: hidden;
         margin-bottom: 10px; }
         #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component h2 {
           padding: 0;
-          padding-left: 10px; }
+          padding-left: 10px;
+          padding-top: 3px; }
         #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component img {
           margin-bottom: 12px; }
       #main-start-project .main-start-component .main-project-component .main-second-text {

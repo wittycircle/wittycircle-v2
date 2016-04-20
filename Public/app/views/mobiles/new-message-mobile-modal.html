@@ -37,7 +37,7 @@
 		</div> -->
 	</section>
 
-	<section id="messages-body-messages-mobile">
+	<section id="messages-body-messages-mobile" >
 		<div id="mbom" class="messages-body-option-mobile">
 			<div class="messages-backTo-mobile">
 				<h3><i class="fa fa-chevron-left"></i> All conversations</h3>
@@ -50,7 +50,7 @@
 
 		<div class="messages-body-conversation-mobile">
 			<div class="messages-body-textos">
-				<div class="messages-cb-texto" ng-repeat="message in messages track by $index">
+				<div class="messages-cb-texto" ng-repeat="message in $parent.messages track by $index">
 					<div class="messages-texto-picture">
 						<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
 						<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">
@@ -73,7 +73,7 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{liveMessage.from_username}}</h4>
-							<span>{{liveMessage.date | wittyDateFilter }}</span>
+							<p>{{liveMessage.date | wittyDateFilter }}</p>
 						</div>
 						<div class="messages-texto-text">
 							<p>{{liveMessage.message}}</p>
@@ -88,7 +88,7 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{offMessage.from_username}}</h4>
-							<span>{{offMessage.date | wittyDateFilter }}</span>
+							<p>{{offMessage.date | wittyDateFilter }}</p>
 						</div>
 						<div class="messages-texto-text">
 							<p>{{offMessage.message}}</p>

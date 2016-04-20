@@ -2,19 +2,21 @@
 	<header id="viewProject-header" data-ng-style="{'background-image': 'url(' + resizePic(vm.project.picture, 1200, 410) + ')', 'background-position': vm.project.picture_position}">
 		<div class="viewProject-filter"></div>
 		<div class="viewProject-title">
-			<h1 data-ng-bind="::vm.project.title"></h1>
-			<h4 data-ng-bind="::vm.project.description"></h4>
+			<div class="viewProject-title-info">
+				<h1 data-ng-bind="::vm.project.title"></h1>
+				<h4 data-ng-bind="::vm.project.description"></h4>
+			</div>
 			<div class="viewProject-info">
 				<li class="stickers-icon">
 					<img src="/images/stickers-icon-white.png" alt="icon-category">
 					<h5 data-ng-bind="::vm.category.name"></h5>
 				</li>
 				<li class="location-icon">
-					<img src="/images/location-icon-white.png" alt="icon-location">
+					<img src="/images/location-picto-w.svg" alt="icon-location">
 					<h5 data-ng-bind="(vm.project.location_city) + ', ' + (vm.project.location_country)"></h5>
 				</li>
 				<li class="user-icon">
-					<img src="/images/user-icon-white.png" alt="icon-followers">
+					<img src="/images/littleman-w.svg" alt="icon-followers">
 					<h5><span data-ng-bind="vm.project_followers.length"></span> followers</h5>
 				</li>
 				<li class="ng-cloak">
@@ -28,7 +30,7 @@
 				<ul class="viewProject-category">
 					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
 					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="vm.totalNumber" data-ng-if="vm.totalNumber"></div></li>
-					<li data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openings.length" data-ng-if="vm.openings.length > 0"></div></li>
+					<li class="last-li" data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openings.length" data-ng-if="vm.openings.length > 0"></div></li>
 				</ul>
 
 				<ul class="viewProject-option">

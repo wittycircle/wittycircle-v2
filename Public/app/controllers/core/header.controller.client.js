@@ -7,15 +7,19 @@
  * # HeaderCtrl
  * Controller of the wittyApp
  **/
-angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
+angular.module('wittyApp')
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 'Header', 
+  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia, Header) {
 
   /*** CHECK LOG ***/
   function checkCredential() {
     if ($rootScope.globals.currentUser) {
       $http.get('/api').success(function(res) {
         if (!res.success) {
-          Authentication.ClearCredentials();
-          $location.path('/');
+          Authentication.ClearCredentials(function(res) {
+            if (res)
+              $location.path('/');
+          });
         }
       });
     }
@@ -47,6 +51,13 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
         });
       });
     }
+  });
+
+  $scope.$on('$stateChangeStart', function(scope, next, current) {
+    $('#headerCore').show();
+    $('#bodyCore').show();
+    $('#footerCore').show();
+    $('#hsfmobile').hide();
   });
 
    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
@@ -106,7 +117,8 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
       .success(function(response) {
         if (response.success) {
           Authentication.ClearCredentials(function(res) {
-            window.location.replace('https://www.wittycircle.com');
+            if (res)
+              window.location.replace('https://www.wittycircle.com');
           });
         }
       }).error(function (response) {
@@ -293,16 +305,23 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
 
 
 /*** Search Bar ***/
-  var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
-  var People = client.initIndex('Users');
+  var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+  var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
+  var PAndP   = client.initIndex('PAndP');
 
-  $scope.$watch('searchName', function() {
-    if ($scope.searchName) {
+  $scope.$watch('searchName', function(value) {
+    if (value) {
       $scope.searchProjects();
       $scope.searchUsers();
     }
   });
+
+  $scope.$watch('searchNameM', function(value) {
+    if (value) {
+      $scope.searchUsersAndProjects(value)
+    }
+  })
 
   $scope.searchProjects = function() {
     if ($scope.searchName) {
@@ -336,6 +355,24 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     }
   };
 
+  $http.get('/projects/discover').success(function(res) {
+    $scope.resultHits = res;
+  });
+
+  $scope.searchUsersAndProjects = function(value) {
+      PAndP.search(value)
+        .then(function searchSuccess(content) {
+          if (!content.hits[0]) {
+            $scope.notFoundProject = true;
+          } else {
+            $scope.notFoundProject = false;
+            $scope.resultHits = content.hits;
+          }
+        }, function searchFailure(err) {
+            console.log(err);
+        });
+  };
+
   $scope.goToProfile = function(id) {
     Users.getUserIdByProfileId(id).then(function(data) {
       if (data.userId)
@@ -343,15 +380,27 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
     });
   };
 
+  function unslickElem() {
+    $('.main-body2-body-mobile').slick('unslick');
+    $('.main-body3-body-mobile').slick('unslick');
+  };
+
   $scope.goToStart = function() {
-    $state.go('main', {tagStart: true});
+    unslickElem();
+    $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
   };
 
   $scope.bfGoToStart = function() {
+    unslickElem();
     $(window).scrollTop(0);
-    $state.go('main', {tagStart: true});
+    $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };
 
+  $scope.limitM = 5;
+  $scope.moreMobile = function() {
+    $scope.limitM += 5;
+  };
+ 
 
 /*** All watch function ***/
   $scope.$watch('notifBubble', function(value, old) {
@@ -373,4 +422,4 @@ angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $
           document.getElementById('notifMailbox').style.display = "none";
       }
     });
-});
+}]);

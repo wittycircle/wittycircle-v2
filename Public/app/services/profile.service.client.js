@@ -33,6 +33,8 @@
         function followUser(username, callback) {
             $http.post('/follow/user/' + username).success(function(res){
                 callback(res);
+            }).error(function(err) {
+                console.log(err);
             });
         };
 

@@ -1,0 +1,136 @@
+<section id="message-modal-mobile" data-ng-controller="MessageCtrl">
+	<section id="nmmmobile" class="new-messages-modal-mobile animated fadeIn">
+		<div class="new-messages-modal-header">
+			<div class="closeMessage"><img src="/images/cross-icon.svg" /></div>
+		</div>
+
+		<div class="new-messages-search-mobile">
+			<input type="search" placeholder="Search a username" ng-model="searchName">
+		</div>
+
+		<div id="mprofilef" class="messages-users-mobile-found">
+			<div ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 20" ng-click="searchArea(profile.profile[0], profile.id, profile.username)" onclick="showNewMessageArea()">
+				<div class="messages-newpost-puser">
+					<img ng-src="{{ profile.profile[0].profile_picture}}" alt="witty-userpicture">
+					<div class="messages-newpost-iuser">
+						<h3>{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
+						<h5 >{{profile.profile[0].location_city}}, {{profile.profile[0].location_country}}</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="messages-newpost-footer">
+			<img src="/images/witty-logo-icon-b.svg">
+		</div>
+	</section>
+
+	<section id="nmmwmobile" class="new-messages-modal-write-mobile">
+		<div class="messages-newMessageArea-to">
+			<label>To : </label>
+			<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
+		</div>
+		<!-- <div class="messages-newMessageArea-text">
+			<textarea ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
+		</div>
+		<div class="messages-newMessageArea-send">
+			<button type="submit" ng-click="createNewMessage()">Send</button>
+		</div> -->
+	</section>
+
+	<section id="messages-body-messages-mobile">
+		<div id="mbom" class="messages-body-option-mobile">
+			<div class="messages-backTo-mobile">
+				<h3><i class="fa fa-chevron-left"></i> All conversations</h3>
+			</div>
+			<div class="messages-option-action-mobile">
+				<a href="">Actions</a>
+				<span><img src="/images/arrow-down-icon-b.svg"></span>
+			</div>
+		</div>
+
+		<div class="messages-body-conversation-mobile">
+			<div class="messages-body-textos">
+				<div class="messages-cb-texto" ng-repeat="message in messages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
+						<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{message.from_username}}</h4>
+							<p>{{message.creation_date | wittyDateFilter }}</p>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{message.message}}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="messages-cb-texto" ng-repeat="liveMessage in liveMessages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-src="{{ resizePic(liveMessage.from_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{liveMessage.from_username}}</h4>
+							<span>{{liveMessage.date | wittyDateFilter }}</span>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{liveMessage.message}}</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="messages-cb-texto" ng-repeat="offMessage in offMessages track by $index">
+					<div class="messages-texto-picture">
+						<img ng-src="{{ resizePic(offMessage.from_picture, 50, 50, 'fill') }}">
+					</div>
+					<div class="messages-texto">
+						<div class="messages-texto-name">
+							<h4>{{offMessage.from_username}}</h4>
+							<span>{{offMessage.date | wittyDateFilter }}</span>
+						</div>
+						<div class="messages-texto-text">
+							<p>{{offMessage.message}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="messages-conversation-textarea">
+			<div class="textarea-box">
+				<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message"></textarea>
+			</div>
+			<div id="textbtn" class="textarea-button">
+				<button type="submit" ng-click="socket(username, nameuser)">Send</button>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		$(document).ready(function() {
+			var mif = $('#mprofilef'),
+				nmmmobile = $('#nmmmobile'),
+				nmmwmobile = $('#nmmwmobile'),
+				mbmm 		= document.getElementById('messages-body-messages-mobile'),
+				closeMessage = $('.closeMessage');
+
+			closeMessage.click(function() {
+				$('#body-section').show()
+				$('.new-messages-modal-mobile').hide();
+			});
+
+			$('#mbom').on('click', function() {
+				classie.remove( mbmm, 'right-to-left-message');
+				classie.add( mbmm, 'left-to-right-message');
+				$('#body-section').show()
+			});
+
+			$('#mprofilef').click(function() {
+				nmmmobile.hide();
+				nmmwmobile.show();
+			});
+		});
+	</script>
+</section>

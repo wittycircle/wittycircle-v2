@@ -26,12 +26,12 @@
 					<input id="mmoinput" type="search" placeholder="Search a username" ng-model="searchName" oninput="showUserList()">
 				</div>
 				<div id="mmolist" class="messages-newpost-users" style="display: none;">
-					<div id="mmo" ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 5" ng-click="searchArea(profile.id)" onclick="showNewMessageArea()" ng-click="searchArea(profile.id)">
+					<div id="mmo" ng-if="checkId != profile.profile[0].id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 5" ng-click="searchArea(profile.profile[0], profile.id, profile.username)" onclick="showNewMessageArea()">
 						<div id="mmo" class="messages-newpost-puser">
-							<img id="mmo" ng-src="{{ resizePic(profile.profile_picture, 60, 60, 'fill') }}" alt="witty-userpicture">
+							<img id="mmo" ng-src="{{ resizePic(profile.profile[0].profile_picture, 60, 60, 'fill') }}" alt="witty-userpicture">
 							<div id="mmo" class="messages-newpost-iuser">
-								<h3 id="mmo">{{profile.first_name}} {{profile.last_name}}</h3>
-								<h5 id="mmo" >{{profile.location_city}}, {{profile.location_country}}</h5>
+								<h3 id="mmo">{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
+								<h5 id="mmo" >{{profile.profile[0].location_city}}, {{profile.profile[0].location_country}}</h5>
 							</div>
 						</div>
 					</div>
@@ -192,20 +192,18 @@
 		</section>
 	</section>
 	<script>
-		var socket = io.connect('/');
-
 		/*** MODAL ***/
-
 		$('#mhn').on('mouseover', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg')
+			$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
 		});
 
 		$('#mhn').on('mouseleave', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon.svg')
+			$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
 		});
 
 		function showUserList() {
 			var x = document.getElementById('mmoinput').value;
+
 			if (x) {
 				document.getElementById('mmolist').style.display = "block";
 				document.getElementById('messages-modals').style.top = "15%";
@@ -237,5 +235,76 @@
 			document.getElementById('messages-modal-searchArea').style.display = "none";
 			document.getElementById('messages-modal-newMessageArea').style.display = "block";
 		}
+	</script>
+</div>
+
+<div id="messages-body-page-mobile">
+
+	<section id="messages-body-list-mobile">
+		<div id="mslm" class="messages-search-list-mobile">
+			<input type="search" placeholder="Search users or messages" ng-model="searchContact" />
+			<div id="nmmobile" class="new-messages-mobile">
+				<img src="/images/write-icon-g.svg" alt="new message">
+			</div>
+		</div>
+
+		<div id="messlist" class="messages-convers-list-mobile">
+			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
+
+				<div class="messages-list-picture">
+					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
+				</div>
+
+				<div class="messages-list-object">
+					<div class="messages-list-user">
+						<i ng-if="onlineUser[dialogue.to_username]" class="online-icon"></i>
+						<i ng-if="!onlineUser[dialogue.to_username]" class="offline-icon"></i>
+						<h4>{{dialogue.to_username}}</h4>
+					</div>
+					<div class="messages-list-text">
+						<p>{{dialogue.last_message}}</p>
+					</div>
+					<span>{{dialogue.date}}</span>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+		$(document).ready(function() {
+			var mslm 		= document.getElementById('mslm'),
+				list 		= $('.messages-convers-list-mobile'),
+				mbmm 		= document.getElementById('messages-body-messages-mobile'),
+				mblm 		= $('#messages-body-list-mobile'),
+				messlist 	= $('#messlist'),
+				nmmobile 	= $('#nmmobile'),
+				footer 		= document.getElementById('footerCore'),
+				header 		= document.getElementById('headerCore');
+
+			messlist.on('click', function() {
+				classie.remove( mbmm, 'left-to-right-message');
+				classie.add( mbmm, 'right-to-left-message');
+				$('#messages-body-messages-mobile').show()
+				$('#body-section').hide();
+			});
+
+			nmmobile.click(function() {
+				$('.new-messages-modal-mobile').show();
+				$('#body-section').hide();
+			});
+
+			$(window).scroll(function () {
+				if ($(this).scrollTop() >= 85) {
+					classie.add(mslm, 'body-fixed');
+					list.css('padding-top', '54px');
+				} else {
+					classie.remove(mslm, 'body-fixed');
+					list.css('padding-top', '0px');
+				}
+			});
+		});
+
 	</script>
 </div>

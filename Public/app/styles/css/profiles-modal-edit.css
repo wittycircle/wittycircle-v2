@@ -18,6 +18,9 @@
   margin: 30px auto; }
 
 /*** ABOUT PART ***/
+#profile-mobile-about-body {
+  display: none; }
+
 #profile-about-body {
   background-color: white;
   border-radius: 4px;
@@ -237,12 +240,12 @@
         background-color: #222222; }
     #profile-skill-body .profile-skill-search .sss {
       text-align: left;
-      -webkit-transition-duration: 0.3s;
-      -o-transition-duration: 0.3s;
-      -moz-transition-duration: 0.3s;
-      -ms-transition-duration: 0.3s;
-      -kthtml-transition-duration: 0.3s;
-      transition-duration: 0.3s; }
+      -webkit-transition-duration: 0.2s;
+      -o-transition-duration: 0.2s;
+      -moz-transition-duration: 0.2s;
+      -ms-transition-duration: 0.2s;
+      -kthtml-transition-duration: 0.2s;
+      transition-duration: 0.2s; }
       #profile-skill-body .profile-skill-search .sss li {
         display: inline-block;
         padding: 5px 10px;
@@ -251,16 +254,18 @@
         border-radius: 4px;
         text-transform: uppercase;
         cursor: pointer;
-        -webkit-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        -ms-transition-duration: 0.3s;
-        -kthtml-transition-duration: 0.3s;
-        transition-duration: 0.3s; }
+        -webkit-transition-duration: 0.2s;
+        -o-transition-duration: 0.2s;
+        -moz-transition-duration: 0.2s;
+        -ms-transition-duration: 0.2s;
+        -kthtml-transition-duration: 0.2s;
+        transition-duration: 0.2s; }
         #profile-skill-body .profile-skill-search .sss li h4 {
           font-family: 'FreigSem';
           font-size: 14px;
-          color: white; }
+          color: white;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale; }
     #profile-skill-body .profile-skill-search .profile-skill-button {
       padding: 20px 30px 10px 30px;
       text-align: center;
@@ -269,6 +274,7 @@
       	padding: 6px 30px 8px 30px;
       }*/ }
       #profile-skill-body .profile-skill-search .profile-skill-button span {
+        display: none;
         margin-right: 20px;
         font-family: 'FreigBook';
         font-size: 18px;
@@ -366,12 +372,12 @@
           color: white; }
     #profile-interest-body .profile-interest-search .sss {
       text-align: left;
-      -webkit-transition-duration: 0.3s;
-      -o-transition-duration: 0.3s;
-      -moz-transition-duration: 0.3s;
-      -ms-transition-duration: 0.3s;
-      -kthtml-transition-duration: 0.3s;
-      transition-duration: 0.3s; }
+      -webkit-transition-duration: 0.2s;
+      -o-transition-duration: 0.2s;
+      -moz-transition-duration: 0.2s;
+      -ms-transition-duration: 0.2s;
+      -kthtml-transition-duration: 0.2s;
+      transition-duration: 0.2s; }
       #profile-interest-body .profile-interest-search .sss li {
         display: inline-block;
         padding: 5px 10px;
@@ -380,15 +386,17 @@
         border-radius: 4px;
         text-transform: uppercase;
         cursor: pointer;
-        -webkit-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        -ms-transition-duration: 0.3s;
-        -kthtml-transition-duration: 0.3s;
-        transition-duration: 0.3s; }
+        -webkit-transition-duration: 0.2s;
+        -o-transition-duration: 0.2s;
+        -moz-transition-duration: 0.2s;
+        -ms-transition-duration: 0.2s;
+        -kthtml-transition-duration: 0.2s;
+        transition-duration: 0.2s; }
         #profile-interest-body .profile-interest-search .sss li h4 {
           font-family: 'FreigSem';
-          font-size: 14px; }
+          font-size: 14px;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale; }
     #profile-interest-body .profile-interest-search .profile-interest-button {
       padding: 20px 30px 10px 30px;
       text-align: center; }
@@ -565,5 +573,214 @@
       margin-bottom: 30px; }
       #profile-experience-modal .profile-modal-body .profile-modal-button button {
         padding: 6px 20px 8px 20px; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+  .large-Modal .modal-dialog {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0px auto; }
+    .large-Modal .modal-dialog .modal-content {
+      border: none;
+      height: 100%;
+      border-radius: 0; }
+
+  .small-Modal .modal-dialog {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0px auto; }
+    .small-Modal .modal-dialog .modal-content {
+      border: none;
+      height: 100%;
+      border-radius: 0; }
+
+  #profile-about-body {
+    display: none; }
+
+  #profile-mobile-about-body {
+    display: block; }
+    #profile-mobile-about-body .profile-body-nav {
+      border-bottom: 1px solid #e5e5e5; }
+      #profile-mobile-about-body .profile-body-nav li {
+        display: inline-block;
+        font-family: 'FreigBook';
+        font-size: 18px;
+        padding: 10px 20px;
+        color: #999999;
+        cursor: pointer; }
+      #profile-mobile-about-body .profile-body-nav img {
+        display: inline-block;
+        width: 14px;
+        height: auto;
+        float: right;
+        margin-top: 16px;
+        margin-right: 20px;
+        outline: 0; }
+    #profile-mobile-about-body .profile-about-status h1 {
+      font-family: 'FreigBook';
+      font-size: 27px;
+      color: #222222; }
+    #profile-mobile-about-body .profile-about-status .profile-status-general {
+      text-align: left;
+      margin: 20px 0;
+      padding: 0 30px; }
+      #profile-mobile-about-body .profile-about-status .profile-status-general .general-dropdown .ssa2-dropdown {
+        display: none;
+        position: absolute;
+        margin-top: 4px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0px 2px 8px #e5e5e5;
+        text-align: left; }
+        #profile-mobile-about-body .profile-about-status .profile-status-general .general-dropdown .ssa2-dropdown li {
+          border-radius: 4px;
+          padding: 10px 30px;
+          font-family: 'FreigBook';
+          font-size: 18px;
+          color: #999999;
+          cursor: pointer; }
+      #profile-mobile-about-body .profile-about-status .profile-status-general .general-dropdown .general-dropdown-text h1 {
+        display: inline-block;
+        color: #416299; }
+      #profile-mobile-about-body .profile-about-status .profile-status-general .general-dropdown .general-dropdown-text img {
+        display: inline-block;
+        width: 16px;
+        margin-left: 5px;
+        margin-bottom: 5px; }
+    #profile-mobile-about-body .profile-about-aboutarea {
+      text-align: left;
+      padding: 10px 30px; }
+      #profile-mobile-about-body .profile-about-aboutarea h4 {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #222222; }
+      #profile-mobile-about-body .profile-about-aboutarea .profile-aboutarea-text {
+        padding: 0 0px;
+        margin-top: 20px; }
+        #profile-mobile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea {
+          width: 100%;
+          height: 350px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          padding: 10px 15px;
+          resize: none;
+          font-family: 'FreigBook';
+          font-size: 16px; }
+        #profile-mobile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea:focus {
+          outline: none; }
+    #profile-mobile-about-body .profile-about-button {
+      text-align: center; }
+      #profile-mobile-about-body .profile-about-button span {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        color: #999999;
+        margin-right: 10px; }
+      #profile-mobile-about-body .profile-about-button button {
+        font-family: 'FreigSem';
+        font-size: 18px;
+        background-color: #ff4d4d;
+        border: 1px solid #ff4d4d;
+        border-radius: 4px;
+        padding: 6px 15px 8px 15px;
+        color: white;
+        margin-bottom: 18px; }
+
+  #profile-skill-body {
+    border-radius: 0; }
+    #profile-skill-body .profile-body-nav li {
+      padding: 10px 20px; }
+    #profile-skill-body .profile-body-nav img {
+      width: 14px;
+      margin-top: 15px; }
+    #profile-skill-body .profile-skill-search {
+      padding: 10px 20px; }
+      #profile-skill-body .profile-skill-search .sss li {
+        padding: 5px 8px; }
+        #profile-skill-body .profile-skill-search .sss li h4 {
+          font-size: 13px; }
+      #profile-skill-body .profile-skill-search .profile-skill-header {
+        margin-bottom: 10px; }
+      #profile-skill-body .profile-skill-search .profile-skill-select li {
+        margin-right: 5px;
+        margin-bottom: 5px; }
+      #profile-skill-body .profile-skill-search .profile-skill-inSearch {
+        padding: 15px 15px 15px 0; }
+        #profile-skill-body .profile-skill-search .profile-skill-inSearch input {
+          width: 100% !important;
+          padding-left: 35px !important;
+          padding-right: 10px !important;
+          background-position: 5% 50% !important; }
+      #profile-skill-body .profile-skill-search .profile-skill-list {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch; }
+        #profile-skill-body .profile-skill-search .profile-skill-list li {
+          margin-right: 5px;
+          margin-bottom: 5px; }
+      #profile-skill-body .profile-skill-search .profile-skill-button span {
+        display: inline-block; }
+
+  #profile-interest-body {
+    border-radius: 0; }
+    #profile-interest-body .profile-body-nav li {
+      padding: 10px 20px; }
+    #profile-interest-body .profile-body-nav img {
+      width: 14px;
+      margin-top: 15px; }
+    #profile-interest-body .profile-interest-search {
+      padding: 10px 20px; }
+      #profile-interest-body .profile-interest-search .sss li {
+        padding: 5px 8px; }
+        #profile-interest-body .profile-interest-search .sss li h4 {
+          font-size: 13px; }
+      #profile-interest-body .profile-interest-search .profile-interest-header {
+        margin-bottom: 10px; }
+      #profile-interest-body .profile-interest-search .profile-interest-select li {
+        margin-right: 5px;
+        margin-bottom: 5px; }
+      #profile-interest-body .profile-interest-search .profile-interest-inSearch {
+        padding: 15px 15px 15px 0; }
+        #profile-interest-body .profile-interest-search .profile-interest-inSearch input {
+          width: 100% !important;
+          padding-left: 35px !important;
+          padding-right: 10px !important;
+          background-position: 5% 50% !important; }
+      #profile-interest-body .profile-interest-search .profile-interest-list {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch; }
+        #profile-interest-body .profile-interest-search .profile-interest-list li {
+          margin-right: 5px;
+          margin-bottom: 5px; }
+      #profile-interest-body .profile-interest-search .profile-interest-button span {
+        display: inline-block; }
+
+  #profile-experience-modal {
+    border-radius: 0; }
+    #profile-experience-modal .profile-modal-title {
+      padding: 10px 20px; }
+    #profile-experience-modal .profile-modal-body .sminput {
+      margin: 15px 0; }
+    #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown {
+      margin-bottom: 10px; }
+    #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .tp-checkbox {
+      margin: 0; }
+    #profile-experience-modal .profile-modal-body .profile-modal-description {
+      margin-bottom: 10px; }
+    #profile-experience-modal .profile-modal-body .profile-modal-button {
+      margin-bottom: 0;
+      padding-bottom: 20px; } }
+@media only screen and (max-width: 374px) {
+  #profile-mobile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea {
+    height: 200px; } }
 
 /*# sourceMappingURL=profiles-modal-edit.css.map */

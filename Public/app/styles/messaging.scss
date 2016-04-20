@@ -1,5 +1,12 @@
 
+@media only screen and (min-width: 737px) {
+
 /*** MESSAGING MODALS ***/
+
+#messages-body-page-mobile {
+	display: none;
+}
+
 #messages-modals {
 	position: fixed;
 	background-color: white;
@@ -1100,3 +1107,189 @@ textarea:focus {
 }*/
 
 /*/*/
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+
+@media only screen and (max-width: 736px) {
+/*	#header-section {
+		display: none;
+	}
+	#footer-page {
+		display: none;
+	}*/
+
+	#messages-body-page {
+		display: none;
+	}
+
+	.body-fixed {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		background-color: white;
+		z-index: 100000;
+		overflow: hidden;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	#messages-body-page-mobile {
+		display: block;
+
+		#messages-body-list-mobile {
+			padding-top: 85px;
+			width: 100%;
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				padding: 4px 10px;
+				border: 1px solid #e5e5e5;
+				background-color: #fafafa;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-perspective: 1000;
+				-moz-perspective: 1000;
+				-ms-perspective: 1000;
+				-o-perspective: 1000;
+				perspective: 1000;	
+				-webkit-backface-visibility: hidden;
+				-moz-backface-visibility: hidden;
+				-ms-backface-visibility: hidden;
+				-o-backface-visibility: hidden;
+				backface-visibility: hidden;
+
+				input {
+					display: inline-block;
+					width: 85%;
+					font-family: 'FreigBook';
+					font-size: 16px;
+					color: #999999;
+					background-image: url('/images/search-icon-b.svg');
+					background-repeat: no-repeat;
+					background-position: 4% 50%;
+					padding: 10px 5px 10px 45px;
+					border: 1px solid #e5e5e5;
+					border-radius: 4px;
+				}
+
+				.new-messages-mobile {
+					display: inline-block;
+					text-align: center;
+					width: 12%;
+					margin-left: 5px;
+
+					img {
+						background-color: white;
+						position: relative;
+						bottom: 3px;
+						left: 3px;
+						width: 26px;
+					}
+				}
+			}
+
+			.messages-convers-list-mobile {
+				min-height: 574px;
+
+				.messages-list {
+					width: 100%;
+					border-bottom: 1px solid #e5e5e5;
+
+					.messages-list-picture {
+						display: inline-block;
+						float: left;
+						width: 50px;
+						height: 50px;
+						border-radius: 50%;
+						overflow: hidden;
+						margin: 13px 10px 15px 10px;
+
+						img {
+							max-width: 100%;
+							max-height: 100%;
+						}
+					}
+
+					.messages-list-object {
+						display: inline-block;
+						padding: 10px 10px 9px 4px;
+
+						.messages-list-user {
+							.online-icon {
+								display: inline-block;
+								width: 10px;
+								height: 10px;
+								background: #57C428;
+								-moz-border-radius: 50px;
+								-webkit-border-radius: 50px;
+								border-radius: 50px;
+								margin-right: 5px;
+							}
+
+							.offline-icon {
+								display: inline-block;
+								position: relative;
+								float: left;
+								top: 5px;
+								width: 10px;
+								height: 10px;
+								background: gray;
+								-moz-border-radius: 50px;
+								-webkit-border-radius: 50px;
+								border-radius: 50px;
+								margin-right: 5px;
+							}
+
+							h4 {
+								display: inline-block;
+								font-family: 'FreigMed';
+								font-size: 16px;
+								color: black;
+								max-width: 230px;
+							}
+						}
+
+						.messages-list-text {
+							max-width: 200px;
+
+							p {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								word-wrap: break-word;
+								max-height: 40px;
+								overflow: hidden;
+								line-height: 18px;
+								margin-bottom: 0px;
+								margin-top: 4px;
+							}
+						}
+
+						span {
+							font-family: 'FreigBook';
+							font-size: 14px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

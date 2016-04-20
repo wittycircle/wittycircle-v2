@@ -1,9 +1,5 @@
 
 
-@media screen and (min-width: 809px) {
-
-}
-
 #setting-page {
 	button {
 		margin-top: 35px;
@@ -283,4 +279,92 @@
 
 .password-body-setting .password-button {
 	text-align: center;
+}
+
+@media screen and (max-width: 739px) {
+	#setting-page {
+
+		button {
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+
+		.setting-filter {
+			height: 160px;
+		}
+
+		#setting-header {
+			height: 160px;
+
+			.setting-header-title {
+				display: none;
+			}
+
+			.setting-navbar {
+				position: relative;
+				top: 115px;
+
+				.setting-navbar-list {
+					text-align: center;
+
+					.setting-navbar-notif {
+						display: none;
+					}
+
+					li {
+						padding: 10px 30px;
+					}
+				}
+			}
+		}
+
+		#setting-body {
+			.setting-box {
+				padding: 15px 20px;
+			}
+
+			.sg-field {
+				padding: 5px 0;
+				input {
+					width: 100%;
+				}
+			}
+
+			.setting-general-username {
+				span {
+					margin-left: 0;
+				}
+			}
+
+			.setting-general {
+
+				.setting-general-firstname,
+				.setting-general-lastname,
+				.setting-general-email,
+				.setting-general-username {
+					p {
+						position: relative;
+						left: 0px;
+						font-family: 'FreigBook';
+						color: red;
+						margin-bottom: 0;
+					}
+				}
+			}
+			
+			.setting-password {
+
+				.setting-password-current,
+				.setting-password-new,
+				.setting-password-confirm {
+					h5 {
+						position: relative;
+						left: 0px;
+						font-family: 'FreigBook';
+						color: red;
+					}
+				}
+			}
+		}
+	}
 }

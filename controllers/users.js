@@ -92,7 +92,7 @@ exports.getProfileIdByUserId = function(req, res) {
 };
 
 exports.getUsers = function(req, res){
-    pool.query('SELECT id, profile_id FROM `users`',
+    pool.query('SELECT id, profile_id, username FROM `users`',
     function (err, results, fields) {
         if(err){
             throw err;

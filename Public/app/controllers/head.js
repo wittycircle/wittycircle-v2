@@ -9,6 +9,7 @@
  **/
 
 angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
+
 	$scope.seo = {
 		pageTitle: "Wittycircle | The creators marketplace",
 		pageDescription: "Have an idea worth spreading? You found the right place. Start with finding skilled peope around you, ask for feedback, support and meet your early fans.",

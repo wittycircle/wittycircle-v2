@@ -1,3 +1,6 @@
+html {
+  height: auto; }
+
 /*********************** Main Filter **************************/
 #page-wrap {
   position: absolute;
@@ -118,6 +121,8 @@
   border-radius: 4px;
   overflow: hidden;
   display: none; }
+  #main-signup-modal #closeCrossS2 {
+    display: none; }
   #main-signup-modal .signup-modal-social {
     padding: 0 55px 25px 60px; }
     #main-signup-modal .signup-modal-social .fb-login {
@@ -254,6 +259,8 @@
   border-radius: 4px;
   overflow: hidden;
   display: none; }
+  #main-login-modal #closeCrossL2 {
+    display: none; }
   #main-login-modal .login-modal-email {
     text-align: center;
     max-width: 300px;
@@ -316,5 +323,137 @@
       margin: 10px 0; }
       #main-login-modal .login-modal-footer h4 u {
         cursor: pointer; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+@media only screen and (max-width: 736px) {
+  /* Media query signup modal */
+  #main-signup-modal {
+    position: absolute; }
+    #main-signup-modal header {
+      display: none; }
+    #main-signup-modal .signup-modal-social {
+      padding: 0 15px 10px 15px;
+      margin-top: 40px; }
+      #main-signup-modal .signup-modal-social h4 {
+        padding: 0;
+        margin: 15px 0 15px 0; }
+      #main-signup-modal .signup-modal-social .fb-login {
+        width: 231px;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px; }
+        #main-signup-modal .signup-modal-social .fb-login i {
+          position: relative;
+          margin-right: 23px;
+          padding: 0;
+          left: 5px; }
+        #main-signup-modal .signup-modal-social .fb-login button {
+          width: 231px;
+          padding-right: 5px; }
+    #main-signup-modal #closeCrossS2 {
+      top: 10px;
+      display: inline-block;
+      position: relative;
+      width: 60px;
+      height: 40px;
+      float: right;
+      background-image: url("/images/cross-icon.svg");
+      background-size: 15px;
+      background-repeat: no-repeat;
+      background-position: 50%; }
+    #main-signup-modal .signup-modal-old {
+      text-align: center;
+      padding: 0 30px; }
+      #main-signup-modal .signup-modal-old .old-dash {
+        width: 10%; }
+    #main-signup-modal .signup-modal-field {
+      padding: 15px 25px; }
+      #main-signup-modal .signup-modal-field .signup-firstname-field {
+        width: 100%;
+        margin-right: 0; }
+        #main-signup-modal .signup-modal-field .signup-firstname-field input {
+          width: 100%;
+          background-position: 2.5% 50%; }
+      #main-signup-modal .signup-modal-field .signup-lastname-field {
+        width: 100%;
+        margin-top: 0px; }
+        #main-signup-modal .signup-modal-field .signup-lastname-field input {
+          width: 100%;
+          margin-top: 15px;
+          background-position: 2.5% 50%; }
+      #main-signup-modal .signup-modal-field input {
+        width: 100%;
+        margin-top: 15px; }
+    #main-signup-modal .sign-modal-policy {
+      padding: 0 20px; }
+    #main-signup-modal .signup-modal-button {
+      padding: 10px 20px; }
+    #main-signup-modal .signup-modal-footer {
+      padding: 10px 30px; }
+      #main-signup-modal .signup-modal-footer h4 {
+        padding: 15px; }
+
+  /* Media query login modal */
+  #main-login-modal {
+    max-width: 100%;
+    position: absolute;
+    top: 0px; }
+    #main-login-modal #closeCrossL2 {
+      display: inline-block;
+      position: relative;
+      width: 60px;
+      height: 40px;
+      float: right;
+      background-image: url("/images/cross-icon.svg");
+      background-size: 15px;
+      background-repeat: no-repeat;
+      background-position: 50%; }
+    #main-login-modal header {
+      display: none; }
+    #main-login-modal .login-modal-social {
+      padding-bottom: 0px;
+      margin-top: 40px; }
+      #main-login-modal .login-modal-social h4 {
+        padding: 0;
+        margin: 30px 0 20px 0; }
+      #main-login-modal .login-modal-social .fb-login {
+        margin-bottom: 15px; }
+    #main-login-modal .signup-login-old {
+      padding: 10px 0 15px 0; }
+    #main-login-modal .login-modal-email {
+      margin: 0;
+      max-width: 100%;
+      padding: 0 200px; }
+      #main-login-modal .login-modal-email .email-input input {
+        width: 100%;
+        margin: 15px 0; }
+      #main-login-modal .login-modal-email .password-input input {
+        width: 100%;
+        margin: 15px 0; }
+    #main-login-modal .login-modal-footer button {
+      margin-top: 25px; } }
+@media only screen and (max-width: 667px) {
+  #main-login-modal .login-modal-email {
+    padding: 0 150px; } }
+@media only screen and (max-width: 480px) {
+  #main-login-modal .login-modal-email {
+    padding: 0 30px; }
+  #main-login-modal .login-modal-footer button {
+    margin-top: 15px; } }
+@media only screen and (max-width: 320px) {
+  #main-login-modal .login-modal-social {
+    padding-bottom: 0px; }
+    #main-login-modal .login-modal-social h4 {
+      padding: 0;
+      margin-top: 5px;
+      margin-bottom: 15px; }
+    #main-login-modal .login-modal-social .fb-login {
+      margin-bottom: 10px; }
+  #main-login-modal .login-modal-email {
+    padding: 0 20px; }
+    #main-login-modal .login-modal-email .email-input input {
+      margin: 10px 0; }
+    #main-login-modal .login-modal-email .password-input input {
+      margin: 10px 0; } }
 
 /*# sourceMappingURL=modal.css.map */

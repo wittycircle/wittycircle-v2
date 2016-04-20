@@ -9,7 +9,7 @@
     <meta name="description" content="{{ seo.pageDescription }}"/>
     <meta name="keywords" content="wittycircle, witty, circle, creator, marketplace, idea, live, beta, drafted, project, place, crowdfunding, feedback, ask, support, discover, meet, work, network, designer, writer, developer, engineer, investment" />
     <meta name="robots" content="all" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0" />
     <meta name="language" content="english" />
     <meta name="Copyright" content="Wittygroup SAS" />
     <meta name="Distribution" content="Global" />
@@ -24,13 +24,20 @@
     <link rel="canonical" href="https://www.wittycircle.com" />
     <link rel="publisher" href="https://plus.google.com/104066516895208794319/about" />
 
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-    ng-cloak {
+            display: none !important;
+        }
+    </style>
 
     <base href="/">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/css/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/oi.select/dist/select.min.css" />
+<!--     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+ -->    <link rel="stylesheet" href="bower_components/oi.select/dist/select.min.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/css/main.css -->
     <link rel="stylesheet" href="styles/css/main.css" />
@@ -56,12 +63,14 @@
     <link rel="stylesheet" href="styles/css/video_custom.css" />
     <link rel="stylesheet" href="styles/css/terms.css" />
     <link rel="stylesheet" href="styles/css/popover.css" />
-    <link rel="stylesheet" href="styles/css/reset.css"  />
+	<link rel="stylesheet" href="styles/css/reset.css"  />
+    <link rel="stylesheet" href="styles/css/mobile-modal.css" />
+    <link rel="stylesheet" href="styles/css/presentation-mobile-modal.css" />
     <!-- endbuild -->
 
-    <!-- Font Awesome css -->
+    <!-- Font Awesome.css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- End Font Awesome css -->
+    <!-- End Font Awesome.css -->
     <script>
         <!-- Google Analytics -->
 
@@ -82,25 +91,23 @@
 
     </script>
     <noscript>Your browser does not support JavaScript!</noscript>
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="cbp-spmenu-push">
     <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
     <![endif]-->
-
         <div id="page-wrap"></div>
-        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
-        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-
-        <!-- HEADER -->
-        <div data-ng-include="'core/views/header.view.core.client.html'"></div>
-
-        <section ui-view autoscroll="true"></section>
-
-        <!-- FOOTER -->
-        <footer data-ng-include="'core/views/footer.view.core.client.html'"></footer>
+        <section id="modal-section">
+            <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+            <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+            <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'"></div>
+            <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'"></div>
+        </section>
+        <section id="body-section">
+            <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+            <section id="bodyCore" ui-view autoscroll="true"></section>
+            <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+        </section>
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
     <!--<script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>-->
@@ -109,7 +116,6 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -118,15 +124,10 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
-    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
-    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="bower_components/oi.select/dist/select-tpls.min.js"></script>
     <script src="bower_components/angular-custom-select/dist/angular-custom-select.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/angular-css/angular-css.js"></script>
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/videogular/videogular.js"></script>
@@ -136,19 +137,22 @@
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-    <script src="bower_components/angular-redactor/angular-redactor.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+    <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
+    <script src="bower_components/classie/classie.js"></script>
+    <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/oi.select/dist/select-tpls.min.js"></script>
     <!-- endbower -->
-    <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
-    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<!--     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
+ -->    <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
+<!--     <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
+    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script> -->
     <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-socialshare/0.2.4-beta/angular-socialshare.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app})  scripts/scripts.js-->
@@ -161,9 +165,9 @@
     <!-- routes -->
     <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js"></script>
     <!-- services -->
+    <script src="scripts/socket.io.js"></script>
     <script src="scripts/redactor/redactor.js"></script>
     <script src="services/users.service.client.js"></script>
-    <script src="services/io.service.client.js"></script>
     <script src="services/authentication.service.client.js"></script>
     <script src="services/data_auth.service.client.js"></script>
     <script src="services/skills.service.client.js"></script>
@@ -175,7 +179,6 @@
     <script src="services/public_id.service.client.js"></script>
     <script src="services/beauty_encode.service.client.js"></script>
     <script src="services/getCategoryName.service.client.js"></script>
-    <script src="services/header.service.client.js"></script>
     <script src="services/notification.service.client.js"></script>
     <script src="services/showbottomAlert.service.client.js"></script>
     <script src="services/locations.service.client.js"></script>
@@ -220,19 +223,18 @@
     <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
     <script src="controllers/presentation/discover.controller.client.js"></script>
     <script src="controllers/projects/modal/add-needs.controller.client.js"></script>
-    <script src="controllers/core/terms.controller.client.js"></script>
-    <script src="controllers/core/privacy.controller.client.js"></script>
     <script src="controllers/projects/modal/delete-project.controller.client.js"></script>
     <script src="controllers/core/reset-password.controller.client.js"></script>
 
 	  <!-- directives -->
-    <script src="directives/redactor/redactor.directive.client.js"></script>
     <script src="directives/uisrefif.directive.client.js"></script>
     <!-- script custom -->
     <script src="scripts/draggable_background.js"></script>
     <!-- endbuild -->
 
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
+    <!-- algolia angular -->
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
+
     <!-- DOM -->
     <script>
         window.prerenderReady = true;

@@ -11,6 +11,7 @@
  angular.module('wittyApp')
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users) {
 
+ 	var socket = io.connect('/');
  	$scope.my_id = $rootScope.globals.currentUser.id;
  	$scope.backPic = $rootScope.globals.currentUser.profile_cover;
  	
@@ -33,6 +34,7 @@
  	$scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
  	$scope.onlineUser = $stateParams.userOn;
  	$scope.currentUsername = $rootScope.globals.currentUser.username;
+ 	
  	socket.emit('register', $scope.userOnlineName);
 
  	socket.on('userOnline', function(data){
@@ -82,6 +84,7 @@
  		}
 
  		$http.get(url).success(function(res){
+ 			console.log(res);
  			if (res.success) {
  				var last 					= res.messages[res.messages.length - 1];
  				$scope.messages 			= res.messages;
@@ -104,8 +107,7 @@
  	};
 
  	/***   MODAL   ***/
-
- 	Users.getProfiles().then(function (resource) {
+ 	Users.getUsers().then(function (resource) {
 		$scope.profiles = resource;
 	});
 
@@ -115,23 +117,16 @@
 		});
 	}
 
-	$scope.searchArea = function(profile_id) { // modal new message
-		$http.post('/profiles/' + profile_id).success(function(res) {
-			if (res.success) {
-				$scope.newMessageArea = {
-					first_name: res.content.first_name,
-					last_name: res.content.last_name,
-				};
-				$scope.createName = res.content.first_name + ' ' + res.content.last_name;
-			}
-		});
- 		Users.getUserIdByProfileId(profile_id).then(function(id) {
- 			if (id.success && id.userId) {
-	 			$scope.Pi = id.userId.id;
-	 			$scope.pUser = id.userId.username;
-		 	} else 
-		 		console.log("user not found !");
-		});
+	$scope.searchArea = function(profile, user_id, username) { // modal new message
+
+		$scope.newMessageArea = {
+			first_name: profile.first_name,
+			last_name: profile.last_name,
+		};
+		$scope.createName = profile.first_name + ' ' + profile.last_name;
+		$scope.Pi = user_id;
+	 	$scope.pUser = username;
+
 	};
 
 	$scope.createNewMessage = function() {

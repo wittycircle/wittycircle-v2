@@ -1,263 +1,277 @@
 <div id="meet-body-page">
+    <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
+
     <div class="body-page">
-      <div class="home-video-bg">
-        <video poster="images/poster/poster_meet.jpg" loop muted autoplay>
-        	<source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582144/Share_banner_cover/videos_background/Meet.mp4" type="video/mp4">
-      	</video>
-      </div>
-
-    	<div class="meet-component presentation-component">
-    		<div class="meet-title presentation-title">
-    			<h2>Who do you want to meet ?</h2>
-    		</div>
-    		<div id="meet-search1">
-          <div class="meet-search1-text">
-            <h2>Someone skilled in</h2>
-          </div>
-          <div id="mslist" class="meet-skill-list animated fadeIn" ng-repeat="skill in skillList">
-            <div id="mslist" class="meet-skill-tag searchbox">
-              <h2 id="mslist">{{skill.sName}}</h2>
-              <div id="mslist" class="meet-skill-cross" ng-click="removeSkill(skill.sName)">
-                <img id="mslist" src="/images/cross-icon.svg">
-              </div>
+        <div class="home-video-bg">
+            <video poster="images/poster/poster_meet.jpg" loop muted autoplay>
+                <source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582144/Share_banner_cover/videos_background/Meet.mp4" type="video/mp4">
+                </video>
             </div>
-            <span id="mslist" ng-hide="$last">,</span>
-            <span id="mComma" ng-if="$last && !fullList">,</span>
-          </div>
-    			<div id="msdrop1" class="meet-search1-dropdown" ng-show="!fullList">
-    				<div class="meet-search1-anyskill inputfield" ng-show="!fullList">
-              <input auto-complete id="input-msa" class="animated fadeIn" onfocus="getDropdown()" onfocusout="hideDropdown()" onmouseover="changePlh()" onmouseout="normalPlh()" type="text" oninput="getSearchBox()" ng-model="skillName">
-              <label id="labelText" class="animated fadeIn" style="display: block">Anything</label>
-              <label id="labelText2" class="animated fadeIn" style="display: none">add skill</label>
-    				</div>
-            <aside id="msabox1" class="meet-search1-popularskills downbox" style="display: none">
-              <ul>
-                <h3>Popular skills:</h3>
-                <li ng-repeat="skill in skills | limitTo: 5" ng-click="searchSkill(skill.name)">{{skill.name}}</li>
-              </ul>
-            </aside>
-    				<aside id="msabox2" class="meet-search1-downbox1 downbox" style="display: none">
-    					<ul>
-                <li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 5">{{skillS.name}}</li>
-                <span ng-show="(skills | filter: skillName).length === 0">No skill found...</span>
-              </ul>
-    				</aside>
-    			</div>
-          <div class="meet-search1-text2">
-            <h2 ng-if="mHelp !== 'Anything'">looking to</h2>
-            <h2 ng-if="mHelp === 'Anything'">looking for</h2>
-          </div>
+            <div class="meet-image-bg presentation-image-bg"></div>
 
-          <!-- DIV general en display inline block si tu veux que le text soit sur la meme ligne avec d'autre text-->
-    			<div id="msat" class="meet-search1-dropdown">
+            <div class="meet-component presentation-component">
+                <div class="meet-title presentation-title">
+                    <h2>Who do you want to meet ?</h2>
+                </div>
+                <div id="meet-search1">
+                    <div class="meet-search1-text">
+                        <h2>Someone skilled in</h2>
+                    </div>
+                    <div id="mslist" class="meet-skill-list animated fadeIn" ng-repeat="skill in skillList">
+                        <div id="mslist" class="meet-skill-tag searchbox">
+                            <h2 id="mslist">{{skill.sName}}</h2>
+                            <div id="mslist" class="meet-skill-cross" ng-click="removeSkill(skill.sName)">
+                                <img id="mslist" src="/images/cross-icon.svg">
+                            </div>
+                        </div>
+                        <span id="mslist" ng-hide="$last">,</span>
+                        <span id="mComma" ng-if="$last && !fullList">,</span>
+                    </div>
+                    <div id="msdrop1" class="meet-search1-dropdown" ng-show="!fullList">
+                        <div class="meet-search1-anyskill inputfield" ng-show="!fullList">
+                            <input auto-complete id="input-msa" class="animated fadeIn" onfocus="getDropdown()" onfocusout="hideDropdown()" onmouseover="changePlh()" onmouseout="normalPlh()" type="text" oninput="getSearchBox()" ng-model="skillName">
+                            <label id="labelText" class="animated fadeIn" style="display: block">Anything</label>
+                            <label id="labelText2" class="animated fadeIn" style="display: none">add skill</label>
+                        </div>
+                        <aside id="msabox1" class="meet-search1-popularskills downbox" style="display: none">
+                            <ul>
+                                <h3>Popular skills:</h3>
+                                <li ng-repeat="skill in skills | limitTo: 5" ng-click="searchSkill(skill.name)">{{skill.name}}</li>
+                            </ul>
+                        </aside>
+                        <aside id="msabox2" class="meet-search1-downbox1 downbox" style="display: none">
+                            <ul>
+                                <li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 5">{{skillS.name}}</li>
+                                <span ng-show="(skills | filter: skillName).length === 0">No skill found...</span>
+                            </ul>
+                        </aside>
+                    </div>
 
-            <!-- DIV display title doit etre dans la div general-->
-    				<div id="msat" class="meet-search-anything searchbox">
-    					<h2 id="msat">{{mHelp}}</h2>
-    					<img id="msat" src="/images/arrow-down-icon-w.svg">
-    				</div>
+                    <div id="msdrop1m" class="meet-search1-dropdown-mobile searchbox" ng-click="openmmodal(1)">
+                        <h2>Anything</h2>
+                        <div class="meet-cross-bg"></div>
+                    </div>
+                    <div class="meet-search1-text2">
+                        <h2 ng-if="mHelp !== 'Anything'">looking to</h2>
+                        <h2 ng-if="mHelp === 'Anything'">looking for</h2>
+                    </div>
 
-            <!-- DIV dropdown  doit etre dans la div general en position absolute-->
-    				<aside id="msdbox2" class="meet-search1-downbox2 downbox" style="display: none">
-    					<ul>
-                <li ng-click="getAnything('Discover new things')" >Discover new things</li>
-                <li ng-click="getAnything('Join projects')" >Join projects</li>
-                <li ng-click="getAnything('Find teammates')">Find teammates</li>
-                <li>Get freelance misson <sup>soon</sup></li>
-              </ul>
-    				</aside>
+                    <!-- DIV general en display inline block si tu veux que le text soit sur la meme ligne avec d'autre text-->
+                    <div id="msat" class="meet-search1-dropdown" ng-click="openmmodal(2)">
 
-    			</div>
+                        <!-- DIV display title doit etre dans la div general-->
+                        <div class="meet-search-anything searchbox">
+                            <h2>{{mHelp}}</h2>
+                            <img src="/images/arrow-down-icon-w.svg">
+                        </div>
+
+                        <!-- DIV dropdown  doit etre dans la div general en position absolute-->
+                        <aside id="msdbox2" class="meet-search1-downbox2 downbox" style="display: none">
+                            <ul>
+                                <li ng-click="getAnything('Discover new things')" >Discover new things</li>
+                                <li ng-click="getAnything('Join projects')" >Join projects</li>
+                                <li ng-click="getAnything('Find teammates')">Find teammates</li>
+                                <li>Get freelance misson <sup>soon</sup></li>
+                            </ul>
+                        </aside>
+
+                    </div>
 
 
-          <div class="meet-search2-text2">
-            <h2>near</h2>
-          </div>
-          <div class="meet-search2-anylocation inputfield">
-            <input id="msai" type="text" pre-go-location="" types="['geocode']" placeholder="Any location" ng-model="meetLocation">
-          </div>
-    	</div>
-    </div>
+                    <div class="meet-search2-text2">
+                        <h2>near</h2>
+                    </div>
+                    <div class="meet-search2-anylocation inputfield">
+                        <input id="msai" type="text" pre-go-location="" types="['geocode']" placeholder="Any location" ng-model="meetLocation">
+                    </div>
+                </div>
+            </div>
 
-  <section id="meet-body-content">
+            <section id="meet-body-content">
 
-      <div id="ldm" class="loader" style="display: none"></div>
-      <div id="mbd" class="meet-body-container presentation-body-container animated fadeIn">
-        <div class="meet-body-title presentation-body-title">
-          <h4>Browse <strong>the users</strong> <span>below</span> or filter them using our magic tool above.</h4>
+                <div id="ldm" class="loader" style="display: none"></div>
+                <div id="mbd" class="meet-body-container presentation-body-container animated fadeIn">
+                    <div class="meet-body-title presentation-body-title">
+                        <h4>Browse <strong>the users</strong> <span>below</span> or filter them using our magic tool above.</h4>
+                    </div>
+                    <div class="meet-body-cards">
+                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: limit" ng-if="cardProfile.cover_picture_cards">
+                            <div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
+                                <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
+                                    <!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
+                                    <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
+                                    ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
+                                    <!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
+                                </div>
+                            </div>
+                            <div class="card-info">
+                                <h4>{{cardProfile.first_name}} {{cardProfile.last_name}}</h4>
+                                <div class="card-location">
+                                    <h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
+                                </div>
+                                <div class="card-description">
+                                    <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-follow">
+                            <div class="card-followers card-follow-square">
+                                <p ng-bind="cardProfile.followers"></p>
+                                <h6>followers</h6>
+                            </div>
+                            <div class="card-following card-follow-square">
+                                <p ng-bind="cardProfile.following"></p>
+                                <h6>following</h6>
+                            </div>
+                            <div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfile.id, $index, $event)">
+                                <div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
+                                <div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
+                                <i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
+                                <i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meet-body-loadmore presentation-body-loadmore">
+                        <button type="button" ng-click="expand(4)">Load more</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="meet-body-cards">
-          <div class="meet-body-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: limit" ng-if="cardProfile.cover_picture_cards">
-            <div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
-              <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
-                <!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
-                <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
-                ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
-                  <!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
-                </div>
-              </div>
-              <div class="card-info">
-                <h4>{{cardProfile.first_name}} {{cardProfile.last_name}}</h4>
-                <div class="card-location">
-                  <h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
-                </div>
-                <div class="card-description">
-                  <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
-                </div>
-              </div>
-            </div>
-            <div class="card-follow">
-              <div class="card-followers card-follow-square">
-                <p ng-bind="cardProfile.followers"></p>
-                <h6>followers</h6>
-              </div>
-              <div class="card-following card-follow-square">
-                <p ng-bind="cardProfile.following"></p>
-                <h6>following</h6>
-              </div>
-              <div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfile.id, $index, $event)">
-                <div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
-                <div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
-                <i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
-                <i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
-              </div>
-            </div>
-          </div>
+    </section>
+    <script>
+        function initPage() {
+            $(window).scrollTop(0);
+        }; setTimeout(function(){ initPage() }, 1000);
 
-          <div class="meet-body-loadmore presentation-body-loadmore">
-            <button type="button" ng-click="expand(4)">Load more</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    function initPage() {
-      $(window).scrollTop(0);
-    }; setTimeout(function(){ initPage() }, 1000);
+        var x = $(window).width();
+        var val = {};
+        var scope = angular.element($("#meet-body-page")).scope();
 
-    var scope = angular.element($("#meet-body-page")).scope();
+        $("#msai").focus(function() {
+            if ($(this).val()) {
+                val.text = $(this).val();
+                val.width = Number($(this).width()) + 20;
+                $(this).val("");
+                $(this).css("width", "200px");
+            }
+        });
 
-    var val = {};
+        if (x > 736) {
+            $("#msai").on('mouseover', function() {
+                if ($(this).val()) {
+                    val.text = $(this).val();
+                    val.width = Number($(this).width()) + 20;
+                    $(this).val("");
+                    $(this).css("width", "200px");
+                }
+            });
 
-    $("#msai").on('mouseover', function() {
-      if ($(this).val()) {
-        val.text = $(this).val();
-        val.width = Number($(this).width()) + 20;
-        $(this).val("");
-        $(this).css("width", "200px");
-      }
-    });
+            $("#msai").on('mouseout', function() {
+                if (!$(this).is(':focus')) {
+                    if (val.text && val.width) {
+                        $(this).val(val.text);
+                        $(this).css("width", val.width.toString() + "px");
+                    }
+                }
+            });
 
-    $("#msai").on('mouseout', function() {
-      if (!$(this).is(':focus')) {
-        if (val.text && val.width) {
-          $(this).val(val.text);
-          $(this).css("width", val.width.toString() + "px");
+            $("#msai").focusout(function() {
+                if (val.text && val.width) {
+                    $(this).val(val.text);
+                    $(this).css("width", val.width.toString() + "px");
+                }
+            });
+
+            window.onmouseover = function(e) {
+                if (scope.skillList.length > 0) {
+                    if (e.target.id === 'mslist' || e.target.id === 'input-msa' || e.target.id === 'msa') {
+                        if (document.getElementById('input-msa')) {
+                            document.getElementById('input-msa').style.display = "block";
+                            document.getElementById('msdrop1').style.display = "inline-block";
+                            if (document.getElementById('mComma'))
+                                document.getElementById('mComma').style.display = "inline-block";
+                        }
+                    }
+                }
+            }
+
+            /*** Skill DOM ***/
+            document.getElementById('main-body').onclick = function(e) {
+                if (scope.skillList.length > 0) {
+                    if (e.target.id !== 'mslist' || e.target.id !== 'input-msa' || e.target.id !== 'msa' || e.target.id !== 'input-msa2') {
+                        if (document.getElementById('input-msa')) {
+                            document.getElementById('input-msa').style.display = "none";
+                            document.getElementById('msdrop1').style.display = "none";
+                            if (document.getElementById('mComma'))
+                                document.getElementById('mComma').style.display = "none";
+                        }
+
+                    }
+                }
+                if (e.target.id === "msat") {
+                    $('#msdbox2').toggle();   
+                }
+            }
+
+            function changePlh() {
+                if (document.getElementById('labelText'))
+                {
+                    document.getElementById('labelText').style.display = "none";
+                    document.getElementById('labelText2').style.display = "block";
+                }
+            }
+
+            function normalPlh() {
+                if (document.getElementById('labelText')) {
+                    document.getElementById('labelText').style.display = "block";
+                    document.getElementById('labelText2').style.display = "none";
+                }
+            }
+
+            function getDropdown() {
+                document.getElementById("input-msa").onmouseout = function() {changePlh()};
+                if (document.getElementById('labelText')) {
+                    document.getElementById('labelText').style.display = "none";
+                    document.getElementById('labelText2').style.display = "block";
+                    document.getElementById('labelText2').style.color = "#999999";
+                }
+                document.getElementById('input-msa').id = "input-msa2";
+            }
+
+            function hideDropdown() {
+                document.getElementById('input-msa2').id = "input-msa";
+                if (document.getElementById('labelText')) {
+                    document.getElementById('labelText').style.display = "block";
+                    document.getElementById('labelText2').style.display = "none";
+                    document.getElementById('labelText2').style.color = "white";
+                }
+                document.getElementById("input-msa").onmouseout = function() {normalPlh()};
+            // document.getElementById("input-msa").onmouseover = "changePlh()";
+            // document.getElementById("input-msa").onmouseout = "normalPlh()";
+            }
+
+            function getSearchBox() {
+                var value = document.getElementById('input-msa2').value;
+
+                if (value) {
+                    if (document.getElementById('labelText')) {
+                        document.getElementById('labelText').style.display = "none";
+                        document.getElementById('labelText2').style.display = "none";
+                        document.getElementById('labelText').id = "labelNoText";
+                        document.getElementById('labelText2').id = "labelNoText2";
+                    }
+                    document.getElementById('msabox1').style.display = "none";
+                    document.getElementById('msabox2').style.display = "block";
+                } else {
+                    document.getElementById('labelNoText').id = "labelText";
+                    document.getElementById('labelNoText2').id = "labelText2";
+                    document.getElementById('labelText2').style.display = "block";
+                    document.getElementById('msabox2').style.display = "none";
+                    document.getElementById('msabox1').style.display = "block";
+                }
+            }
         }
-      }
-    });
-
-    $("#msai").focus(function() {
-      if ($(this).val()) {
-        val.text = $(this).val();
-        val.width = Number($(this).width()) + 20;
-        $(this).val("");
-        $(this).css("width", "200px");
-      }
-    });
-
-    $("#msai").focusout(function() {
-      if (val.text && val.width) {
-        $(this).val(val.text);
-        $(this).css("width", val.width.toString() + "px");
-      }
-    });
-
-    window.onmouseover = function(e) {
-      if (scope.skillList.length > 0) {
-        if (e.target.id === 'mslist' || e.target.id === 'input-msa' || e.target.id === 'msa') {
-          if (document.getElementById('input-msa')) {
-            document.getElementById('input-msa').style.display = "block";
-            document.getElementById('msdrop1').style.display = "inline-block";
-            if (document.getElementById('mComma'))
-              document.getElementById('mComma').style.display = "inline-block";
-          }
-        }
-      }
-    }
-
-    /*** Skill DOM ***/
-    document.getElementById('main-body').onclick = function(e) {
-      if (scope.skillList.length > 0) {
-        if (e.target.id !== 'mslist' || e.target.id !== 'input-msa' || e.target.id !== 'msa' || e.target.id !== 'input-msa2')
-          if (document.getElementById('input-msa')) {
-            document.getElementById('input-msa').style.display = "none";
-            document.getElementById('msdrop1').style.display = "none";
-            if (document.getElementById('mComma'))
-              document.getElementById('mComma').style.display = "none";
-          }
-
-      }
-    }
-
-    function changePlh() {
-      if (document.getElementById('labelText'))
-      {
-        document.getElementById('labelText').style.display = "none";
-        document.getElementById('labelText2').style.display = "block";
-      }
-    }
-
-    function normalPlh() {
-      if (document.getElementById('labelText')) {
-        document.getElementById('labelText').style.display = "block";
-        document.getElementById('labelText2').style.display = "none";
-      }
-    }
-
-    function getDropdown() {
-      document.getElementById("input-msa").onmouseout = function() {changePlh()};
-      if (document.getElementById('labelText')) {
-        document.getElementById('labelText').style.display = "none";
-        document.getElementById('labelText2').style.display = "block";
-        document.getElementById('labelText2').style.color = "#999999";
-      }
-      document.getElementById('input-msa').id = "input-msa2";
-    }
-
-    function hideDropdown() {
-      document.getElementById('input-msa2').id = "input-msa";
-      if (document.getElementById('labelText')) {
-        document.getElementById('labelText').style.display = "block";
-        document.getElementById('labelText2').style.display = "none";
-        document.getElementById('labelText2').style.color = "white";
-      }
-      document.getElementById("input-msa").onmouseout = function() {normalPlh()};
-      // document.getElementById("input-msa").onmouseover = "changePlh()";
-      // document.getElementById("input-msa").onmouseout = "normalPlh()";
-    }
-
-    function getSearchBox() {
-      var x = document.getElementById('input-msa2').value;
-
-      if (x) {
-        if (document.getElementById('labelText')) {
-          document.getElementById('labelText').style.display = "none";
-          document.getElementById('labelText2').style.display = "none";
-          document.getElementById('labelText').id = "labelNoText";
-          document.getElementById('labelText2').id = "labelNoText2";
-        }
-        document.getElementById('msabox1').style.display = "none";
-        document.getElementById('msabox2').style.display = "block";
-      } else {
-        document.getElementById('labelNoText').id = "labelText";
-        document.getElementById('labelNoText2').id = "labelText2";
-        document.getElementById('labelText2').style.display = "block";
-        document.getElementById('msabox2').style.display = "none";
-        document.getElementById('msabox1').style.display = "block";
-      }
-    }
-  </script>
+</script>
 </div>
 <div data-ng-include="'views/bfooter/bfooter-3.view.client.html'"></div>

@@ -554,12 +554,6 @@ html {
 		}
 	}
 
-	/* Media query login modal */
-	#main-login-modal {
-		max-width: 100%;
-		position: absolute;
-		top: 0px;
-		
 		#closeCrossL2 {
 			display: inline-block;
 			position: relative;

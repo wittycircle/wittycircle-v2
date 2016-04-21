@@ -378,15 +378,14 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       if(err){
                           throw err;
                       }
-                      //results[index].user_profile = result[0];
                       results.splice(index, 1);
                       userIn.push(result[0]);
-                      recursive(index + 1);
+                      return recursive(index + 1);
                   });
                 }
-                //} else {
-                  //recursive(index + 1);
-                //}
+                else if (results[index].user_id !== req.user.id) {
+                  recursive(index + 1);
+                }
             } else {
                 return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }

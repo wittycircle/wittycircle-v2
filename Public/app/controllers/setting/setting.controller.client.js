@@ -155,6 +155,7 @@ angular.module('wittyApp')
 
 			if (($scope.newPass.password === $scope.newPass.confirmPass) && $scope.newPass.password.length >= 8) {
 				$http.put(UrlC, pass).success(function(res){
+				    console.log(res);
 					if (res.success) {
 						$rootScope.globals.currentUser.password = $scope.newPass.password;
 						$scope.newPass.password 				= [];
@@ -183,7 +184,6 @@ angular.module('wittyApp')
 				password: $scope.newPass.password,
 				currentPass: $scope.newPass.currentPass
 			};
-
 			if (!$scope.newPass.currentPass)
 				$scope.checkCurrentPass = true;
 			else

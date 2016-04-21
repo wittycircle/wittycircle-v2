@@ -41,7 +41,6 @@ exports.getOpeningsOfProject = function(req, res) {
               result[index].taggs = JSON.parse(result[index].taggs);
               recursive(index + 1);
           } else {
-              console.log(result);
               return res.send(result);
           }
       }

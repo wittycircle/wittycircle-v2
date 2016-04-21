@@ -200,7 +200,11 @@ angular.module('wittyApp').controller('AddNeedsProjectCtrl', function (Picture, 
     }
     $scope.needs.project_id = $scope.project.id;
     $scope.needs.status = $scope.cHelp;
-    $scope.needs.picture = Picture.resizePicture($scope.project.picture, 200, 200, "fill");
+    if ($scope.project.picture) {
+	$scope.needs.picture = Picture.resizePicture($scope.project.picture, 200, 200, "fill");
+    } else {
+	$scope.needs.picture = Picture.resizePicture("https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg", 200, 200, "fill");
+    }
     $scope.needs.skill = transformSkill()[0];
     $scope.needs.taggs = JSON.stringify(transformSkill()[1]);
     if (JSON.stringify(transformSkill()[1]) == 'false') {

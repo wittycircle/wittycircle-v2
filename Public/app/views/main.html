@@ -82,7 +82,7 @@
 						<h2>in</h2>
 					</div>
 					<div class="main-geolocation">
-						<input id="searchTextField" type="text" ng-value="displayLocation" google-place="" ng-model="selectedlocation" placeholder="Boston, MA">
+						<input id="searchTextField" type="text" ng-value="displayLocation" google-place="" onmouseover="changePlaceholder()" onmouseout="resetPlaceholder()" ng-model="selectedlocation" placeholder="Boston, MA">
 					</div>
 				</div>
 			</div>
@@ -622,3 +622,21 @@
 		<script src="../js/main.dom.js"></script>
 </div>
 <div data-ng-include="'views/bfooter/bfooter-1.view.client.html'"></div>
+
+<script>
+
+function changePlaceholder() {
+   if (document.getElementById('searchTextField'))
+      {
+          $('#searchTextField').attr("placeholder", "Add location");
+      }
+  };
+
+function resetPlaceholder() {
+   if (document.getElementById('searchTextField'))
+      {
+          $('#searchTextField').attr("placeholder", "Boston, MA").fadeIn();
+      }
+  };
+
+</script>

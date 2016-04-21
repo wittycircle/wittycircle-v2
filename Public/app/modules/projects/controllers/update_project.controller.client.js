@@ -466,7 +466,7 @@ $scope.uploadVideo = function() {
             $scope.config = {
                 preload: "auto",
                 sources: [
-                    {src: $sce.trustAsResourceUrl(url), type: "video/mp4"}
+                    {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
                 ],
                 theme: {
                     url: "styles/videogular.css"

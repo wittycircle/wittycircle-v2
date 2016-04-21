@@ -683,7 +683,7 @@ exports.updateUserCredentials = function(req, res){
                 return res.send({success: true});
             });
         } else {
-            //if (bcrypt.compareSync(req.body.curentPass, req.user.password)) {
+            //if (bcrypt.compareSync(req.body.currentPass, req.user.password)) {
                 pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
                 function(err, result) {
                     if (err) throw err;

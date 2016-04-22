@@ -119,6 +119,10 @@ angular.module('wittyApp')
           disableOther( 'showRightPush' );
     };
 
+    $scope.showMessagePageMobile = function() {
+      window.location.href = "http://localhost/messages";
+    };
+
     // $rootScope.$watch('notifBubble', function(value, old) {
     //   console.log(value);
     //   if (value)
@@ -174,14 +178,18 @@ angular.module('wittyApp')
       }
     };
 
+    $scope.showMessageMobile = function(dialogue) {
+      $rootScope.dialogueMM = dialogue;
+    };
+
     // $scope.getMesssageListOnClick = function() {
     //   if (!$scope.listNotifs && !$scope.dialogues[0])
     //     $scope.getMessageList();
     // };
 
     socket.on('notification', function(data){
-            loadHeaderNotification();
-            $scope.getMessageList();
+      loadHeaderNotification();
+      $scope.getMessageList();
     });
 
 /*** All notifications ***/

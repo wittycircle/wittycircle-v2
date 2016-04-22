@@ -43,13 +43,13 @@
     <section id="hmmobile" data-ng-controller="HeaderCtrl">
     	<div class="header-dropdown-head">
             <h4 onclick="BackTo('mail')">Back</h4>
-            <img src="/images/write-icon-g.svg" alt="new message" />
+            <img id="newmnm" src="/images/write-icon-g.svg" alt="new message" />
         </div>
-        <div class="header-dropdown-lists">
+        <div id="hddownlistm" class="header-dropdown-lists">
             <div ng-if="!dialogues.length" class="header-noMessage-text">
                 <p>No message yet</p>
             </div>
-            <div class="header-dropdown-list" href ng-click="showMessagePage(dialogue)" class='mnd-all' ng-class="{ 'unread-active' : !dialogue.read && dialogue.sender != currentUsername }" ng-repeat="dialogue in dialogues track by $index">
+            <div class="header-dropdown-list" ng-click="showMessageMobile(dialogue)" class='mnd-all' ng-class="{ 'unread-active' : !dialogue.read && dialogue.sender != currentUsername }" ng-repeat="dialogue in dialogues track by $index">
                 <div class="header-list-picture">
                     <img ng-if="dialogue.pic" ng-src="{{ resizePic(dialogue.pic, 48, 48, 'fill') }}" alt="header-message-avatar">
                 </div>
@@ -59,6 +59,10 @@
                     <span>{{dialogue.date}}</span>
                 </div>
             </div>
+        </div>
+
+        <div class="header-message-footer-mobile" ng-click="showMessagePageMobile()">
+            <h4>See all messages</h4>
         </div>
     </section>
 

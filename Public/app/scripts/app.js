@@ -116,6 +116,7 @@ var wittyCircleApp = angular
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
+        controllerAs: 'vm',
         // css: '../styles/profiles.css',
         resolve:{
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {

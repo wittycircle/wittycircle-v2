@@ -841,4 +841,223 @@
         #signup-page #signup-experience-modal .signup-modal-body .signup-modal-button button {
           padding: 6px 20px 8px 20px; }
 
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+  #signup-page {
+    height: auto;
+    background-image: none;
+    background-color: #fafafa; }
+    #signup-page .filter {
+      display: none; }
+    #signup-page .signup-body-nav li {
+      padding: 5px 15px; }
+    #signup-page #signup-basic-body {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      background-color: #fafafa; }
+      #signup-page #signup-basic-body .signup-body-info {
+        padding: 20px; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture {
+          display: block;
+          width: 100%;
+          border-right: none;
+          padding: 0;
+          margin-bottom: 20px; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text p {
+            display: none; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2 {
+            margin: 10px auto;
+            height: 150px;
+            width: 150px;
+            background-size: 110px;
+            background-position: center top; }
+            #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2 img {
+              width: auto;
+              height: 150px;
+              display: none; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-info {
+          display: block;
+          width: 100%;
+          padding: 0; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-info label {
+            margin-bottom: 10px; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-info .signup-info-gender .signup-radio {
+            background-color: white; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-bd .signup-bd-box .signup-bd-day {
+          margin-right: 10px;
+          margin-bottom: 15px; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-bd .bd-box {
+          background-color: white; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-bd .bd-box h4 {
+            font-size: 16px; }
+    #signup-page #signup-about-body {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      background-color: #fafafa; }
+      #signup-page #signup-about-body .signup-about-status {
+        padding: 20px 10px; }
+        #signup-page #signup-about-body .signup-about-status .signup-status-general {
+          text-align: left; }
+          #signup-page #signup-about-body .signup-about-status .signup-status-general .ssa h1 {
+            font-size: 32px; }
+          #signup-page #signup-about-body .signup-about-status .signup-status-general .ssa2 {
+            margin-left: 0; }
+      #signup-page #signup-about-body .signup-about-aboutarea {
+        padding: 20px 10px; }
+    #signup-page #signup-skill-body {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      background-color: #fafafa; }
+      #signup-page #signup-skill-body .signup-skill-search {
+        padding: 10px 20px; }
+        #signup-page #signup-skill-body .signup-skill-search .sss li {
+          padding: 5px 8px; }
+          #signup-page #signup-skill-body .signup-skill-search .sss li h4 {
+            font-size: 13px; }
+        #signup-page #signup-skill-body .signup-skill-search .signup-skill-header {
+          margin-bottom: 10px; }
+        #signup-page #signup-skill-body .signup-skill-search .signup-skill-select li {
+          margin-right: 5px;
+          margin-bottom: 5px; }
+        #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch {
+          padding: 15px 15px 15px 0; }
+          #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+            width: 89%;
+            padding-left: 80px;
+            padding-right: 10px;
+            background-position: 5% 50%; }
+        #signup-page #signup-skill-body .signup-skill-search .signup-skill-list {
+          overflow-y: scroll;
+          overflow-x: hidden;
+          -webkit-overflow-scrolling: touch; }
+          #signup-page #signup-skill-body .signup-skill-search .signup-skill-list li {
+            margin-right: 5px;
+            margin-bottom: 5px; }
+        #signup-page #signup-skill-body .signup-skill-search .signup-skill-button span {
+          display: inline-block; }
+    #signup-page #signup-interest-body {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      background-color: #fafafa; }
+      #signup-page #signup-interest-body .signup-interest-search {
+        padding: 10px 20px; }
+        #signup-page #signup-interest-body .signup-interest-search .sss li {
+          padding: 5px 8px; }
+          #signup-page #signup-interest-body .signup-interest-search .sss li h4 {
+            font-size: 13px; }
+        #signup-page #signup-interest-body .signup-interest-search .signup-interest-header {
+          margin-bottom: 10px; }
+        #signup-page #signup-interest-body .signup-interest-search .signup-interest-select li {
+          margin-right: 5px;
+          margin-bottom: 5px; }
+        #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch {
+          padding: 15px 15px 15px 0; }
+          #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+            width: 89%;
+            padding-left: 80px;
+            padding-right: 10px;
+            background-position: 5% 50%; }
+        #signup-page #signup-interest-body .signup-interest-search .signup-interest-list {
+          overflow-y: scroll;
+          overflow-x: hidden;
+          -webkit-overflow-scrolling: touch; }
+          #signup-page #signup-interest-body .signup-interest-search .signup-interest-list li {
+            margin-right: 5px;
+            margin-bottom: 5px; }
+        #signup-page #signup-interest-body .signup-interest-search .signup-interest-button span {
+          display: inline-block; }
+    #signup-page #signup-experience-body {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      background-color: #fafafa; }
+      #signup-page #signup-experience-body .signup-experience-add .signup-experience-title {
+        padding: 20px 20px 10px 20px; }
+      #signup-page #signup-experience-body .signup-experience-add .signup-main-experience {
+        padding: 0px 20px; }
+        #signup-page #signup-experience-body .signup-experience-add .signup-main-experience .signup-exp-list .signup-exp .signup-exp-post h3 {
+          border-right: 0; }
+    #signup-page #signup-experience-modal {
+      position: static;
+      top: 0;
+      border-radius: 0;
+      -webkit-animation-duration: 0.2s;
+      -o-animation-duration: 0.2s;
+      -moz-animation-duration: 0.2s;
+      -ms-animation-duration: 0.2s;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      -o-perspective: 1000;
+      perspective: 1000;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
+      #signup-page #signup-experience-modal .signup-modal-title {
+        padding: 10px 20px; }
+      #signup-page #signup-experience-modal .signup-modal-body .sminput {
+        margin: 15px 0; }
+      #signup-page #signup-experience-modal .signup-modal-body .signup-modal-period .time-period .time-period-dropdown {
+        margin-bottom: 10px; }
+      #signup-page #signup-experience-modal .signup-modal-body .signup-modal-period .time-period .tp-checkbox {
+        margin: 0; }
+      #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description {
+        margin-bottom: 10px; }
+      #signup-page #signup-experience-modal .signup-modal-body .signup-modal-button {
+        margin-bottom: 0;
+        padding-bottom: 20px; } }
+@media only screen and (max-width: 667px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 90%;
+    padding-left: 65px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 90%;
+    padding-left: 65px; } }
+@media only screen and (max-width: 640px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 90%;
+    padding-left: 60px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 90%;
+    padding-left: 60px; } }
+@media only screen and (max-width: 480px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 87%;
+    padding-left: 55px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 87%;
+    padding-left: 55px; } }
+@media only screen and (max-width: 375px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 87%;
+    padding-left: 45px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 87%;
+    padding-left: 45px; } }
+@media only screen and (max-width: 360px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 87%;
+    padding-left: 45px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 87%;
+    padding-left: 45px; } }
+@media only screen and (max-width: 320px) {
+  #signup-page #signup-skill-body .signup-skill-search .signup-skill-inSearch input {
+    width: 87%;
+    padding-left: 35px; }
+  #signup-page #signup-interest-body .signup-interest-search .signup-interest-inSearch input {
+    width: 87%;
+    padding-left: 35px; } }
+
 /*# sourceMappingURL=signup.css.map */

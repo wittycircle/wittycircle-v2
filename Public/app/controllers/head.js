@@ -20,4 +20,9 @@ angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 		url: "https://www.wittycircle.com",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png"
 	};
+
+	if ($(window).width() <= 736)
+		$scope.mobile = true;
+	else
+		$scope.mobile = false;
 });

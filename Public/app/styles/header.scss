@@ -778,13 +778,10 @@
 						}
 
 						.header-log-avatar {
+							border-radius: 50%;
+							width: 90px;
+							height: 90px;
 							margin-bottom: 20px;
-
-							img {
-								border-radius: 50%;
-								width: 90px;
-								height: 90px;
-							}
 						}
 
 						.log-on-notifs {

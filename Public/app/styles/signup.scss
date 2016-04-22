@@ -1194,3 +1194,494 @@
 		}
 	}
 }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+	#signup-page {
+		height: auto;
+		background-image: none;
+		background-color: #fafafa;
+
+		.filter {
+			display: none;
+		}
+
+		.signup-body-nav {
+			li {
+				padding: 5px 15px;
+			}
+		}
+
+		#signup-basic-body {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			background-color: #fafafa;
+
+			.signup-body-info {
+				padding: 20px;
+
+				.signup-info-picture {
+					display: block;
+					width: 100%;
+					border-right: none;
+					padding: 0;
+					margin-bottom: 20px;
+
+					.signup-dd-text {
+						p {
+							display: none;
+						}
+					}
+
+					.signup-dd-picture-2 {
+						margin: 10px auto;
+						height: 150px;
+						width: 150px;
+						background-size: 110px;
+						background-position: center top;
+
+						img {
+							width: auto;
+							height: 150px;
+							display: none;
+						}
+					}
+				}
+
+				.signup-info-info {
+					display: block;
+					width: 100%;
+					padding: 0;
+
+					label {
+						margin-bottom: 10px;
+					}
+
+					.signup-info-gender {
+						.signup-radio {
+							background-color: white;
+						}
+					}
+				}
+
+				.signup-info-bd {
+					.signup-bd-box {
+						.signup-bd-day {
+							margin-right: 10px;
+							margin-bottom: 15px;
+						}
+
+						.signup-bd-month {
+						}
+					}
+
+					.bd-box {
+						background-color: white;
+						h4 {
+							font-size: 16px ;
+						}
+					}
+				}
+			}
+		}
+
+		#signup-about-body {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			background-color: #fafafa;
+
+			.signup-about-status {
+				padding: 20px 10px;
+
+				.signup-status-general {
+					text-align: left;
+
+					.ssa {
+						h1 {
+							font-size: 32px;
+						}
+					}
+
+					.ssa2 {
+						margin-left: 0;
+					}
+				}
+			}
+
+			.signup-about-aboutarea {
+				padding: 20px 10px;
+			}
+		}
+
+		#signup-skill-body {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			background-color: #fafafa;
+
+			.signup-skill-search {
+				padding: 10px 20px;
+
+				.sss {
+					li {
+						padding: 5px 8px;
+						h4 {
+							font-size: 13px;
+						}
+					}
+				}
+				.signup-skill-header {
+					margin-bottom: 10px;
+				}
+
+				.signup-skill-select {
+					li {
+						margin-right: 5px;
+						margin-bottom: 5px;
+					}
+				}
+
+				.signup-skill-inSearch {
+					padding: 15px 15px 15px 0;
+
+					input {
+						width: 89% ;
+						padding-left: 80px ;
+						padding-right: 10px ;
+						background-position: 5% 50% ;
+					}
+				}
+
+				.signup-skill-list {
+					overflow-y: scroll;
+					overflow-x: hidden; 
+					-webkit-overflow-scrolling: touch;
+
+					li {
+						margin-right: 5px;
+						margin-bottom: 5px;
+					}
+				}
+
+				.signup-skill-button {
+					span {
+						display: inline-block;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			background-color: #fafafa;
+
+			.signup-interest-search {
+				padding: 10px 20px;
+
+				.sss {
+					li {
+						padding: 5px 8px;
+						h4 {
+							font-size: 13px;
+						}
+					}
+				}
+				.signup-interest-header {
+					margin-bottom: 10px;
+				}
+
+				.signup-interest-select {
+					li {
+						margin-right: 5px;
+						margin-bottom: 5px;
+					}
+				}
+
+				.signup-interest-inSearch {
+					padding: 15px 15px 15px 0;
+					input {
+						width: 89% ;
+						padding-left: 80px;
+						padding-right: 10px;
+						background-position: 5% 50%;
+					}
+				}
+
+				.signup-interest-list {
+					overflow-y: scroll;
+					overflow-x: hidden; 
+					-webkit-overflow-scrolling: touch;
+
+					li {
+						margin-right: 5px;
+						margin-bottom: 5px;
+					}
+				}
+
+				.signup-interest-button {
+					span {
+						display: inline-block;
+					}
+				}
+			}
+		}
+
+		#signup-experience-body {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			background-color: #fafafa;
+
+			.signup-experience-add {
+				.signup-experience-title {
+					padding: 20px 20px 10px 20px;
+				}
+				.signup-main-experience {
+					padding: 0px 20px;
+
+					.signup-exp-list {
+						.signup-exp {
+							.signup-exp-post {
+								h3 {
+									border-right: 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		#signup-experience-modal {
+			position: static;
+			top: 0;
+			border-radius: 0;
+			-webkit-animation-duration: 0.2s;
+			-o-animation-duration: 0.2s;
+			-moz-animation-duration: 0.2s;
+			-ms-animation-duration: 0.2s;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+
+			.signup-modal-title {
+				padding: 10px 20px;
+			}
+			.signup-modal-body {
+				.sminput {
+					margin: 15px 0;
+				}
+				.signup-modal-period {
+					.time-period {
+						.time-period-dropdown {
+							margin-bottom: 10px;
+						}
+
+						.tp-checkbox {
+							margin: 0;
+						}
+					}
+				}
+
+				.signup-modal-description {
+					margin-bottom: 10px;
+				}
+
+				.signup-modal-button {
+					margin-bottom: 0;
+					padding-bottom: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 667px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 90% ;
+						padding-left: 65px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 90% ;
+						padding-left: 65px ;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 640px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 90% ;
+						padding-left: 60px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 90% ;
+						padding-left: 60px ;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 55px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 55px ;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 45px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 45px ;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 360px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 45px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 45px ;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+
+	#signup-page {
+		#signup-skill-body {
+			.signup-skill-search {
+				.signup-skill-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 35px ;
+					}
+				}
+			}
+		}
+
+		#signup-interest-body {
+			.signup-interest-search {
+				.signup-interest-inSearch {
+
+					input {
+						width: 87% ;
+						padding-left: 35px ;
+					}
+				}
+			}
+		}
+	}
+}

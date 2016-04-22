@@ -12,7 +12,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     console.time('loading profile');
 
     var vm = this;
-    var socket = io.connect('https://127.0.0.1');
+    var socket = io.connect('http://127.0.0.1');
 
     /* Vm Variable */
     vm.currentUser = $rootScope.globals.currentUser || false;
@@ -32,6 +32,8 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     vm.hideEditL = hideEditL;
     vm.openMobileEdit = openMobileEdit;
     vm.closeMobileEdit =closeMobileEdit;
+
+    console.log(vm.trueUser);
 
     if (!vm.currentUser || (vm.currentUser && !vm.trueUser))
         Users.getProfileView(vm.paramUsername);

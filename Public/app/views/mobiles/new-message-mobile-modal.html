@@ -1,4 +1,4 @@
-<section id="message-modal-mobile">
+<section id="message-modal-mobile" data-ng-controller="MessageCtrl">
 	<section id="nmmmobile" class="new-messages-modal-mobile animated fadeIn">
 		<div class="new-messages-modal-header">
 			<div class="closeMessage"><img src="/images/cross-icon.svg" /></div>
@@ -9,7 +9,7 @@
 		</div>
 
 		<div id="mprofilef" class="messages-users-mobile-found">
-			<div ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 20" ng-click="searchArea(profile.profile[0], profile.id, profile.username)" onclick="showNewMessageArea()">
+			<div ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 20" ng-click="showMessage(profile)">
 				<div class="messages-newpost-puser">
 					<img ng-src="{{ profile.profile[0].profile_picture}}" alt="witty-userpicture">
 					<div class="messages-newpost-iuser">
@@ -22,19 +22,6 @@
 		<div class="messages-newpost-footer">
 			<img src="/images/witty-logo-icon-b.svg">
 		</div>
-	</section>
-
-	<section id="nmmwmobile" class="new-messages-modal-write-mobile">
-		<div class="messages-newMessageArea-to">
-			<label>To : </label>
-			<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
-		</div>
-		<!-- <div class="messages-newMessageArea-text">
-			<textarea ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
-		</div>
-		<div class="messages-newMessageArea-send">
-			<button type="submit" ng-click="createNewMessage()">Send</button>
-		</div> -->
 	</section>
 
 	<section id="messages-body-messages-mobile">
@@ -66,7 +53,7 @@
 					</div>
 				</div>
 
-				<div class="messages-cb-texto" ng-repeat="liveMessage in liveMessages track by $index">
+				<div class="messages-cb-texto" ng-repeat="liveMessage in $parent.liveMessages track by $index">
 					<div class="messages-texto-picture">
 						<img ng-src="{{ resizePic(liveMessage.from_picture, 50, 50, 'fill') }}">
 					</div>
@@ -81,7 +68,7 @@
 					</div>
 				</div>
 
-				<div class="messages-cb-texto" ng-repeat="offMessage in offMessages track by $index">
+				<div class="messages-cb-texto" ng-repeat="offMessage in $parent.offMessages track by $index">
 					<div class="messages-texto-picture">
 						<img ng-src="{{ resizePic(offMessage.from_picture, 50, 50, 'fill') }}">
 					</div>
@@ -100,21 +87,22 @@
 
 		<div class="messages-conversation-textarea">
 			<div class="textarea-box">
-				<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message"></textarea>
+				<textarea placeholder="Reply to {{$parent.name}}..." ng-keyup="keyPress($event.keyCode, $parent.username, $parent.nameuser)" ng-model="socket.message"></textarea>
 			</div>
 			<div id="textbtn" class="textarea-button">
-				<button type="submit" ng-click="socket(username, nameuser)">Send</button>
+				<button type="submit" ng-click="socket($parent.username, $parent.nameuser)">Send</button>
 			</div>
 		</div>
 	</section>
 
 	<script>
 		$(document).ready(function() {
-			var mif = $('#mprofilef'),
-				nmmmobile = $('#nmmmobile'),
-				nmmwmobile = $('#nmmwmobile'),
-				mbmm 		= document.getElementById('messages-body-messages-mobile'),
-				closeMessage = $('.closeMessage');
+			var mif 			= $('#mprofilef'),
+				nmmmobile 		= $('#nmmmobile'),
+				nmmwmobile 		= $('#nmmwmobile'),
+				hmmobile 		= $('#hmmobile'),
+				mbmm 			= document.getElementById('messages-body-messages-mobile'),
+				closeMessage 	= $('.closeMessage');
 
 			closeMessage.click(function() {
 				$('#body-section').show()
@@ -124,12 +112,15 @@
 			$('#mbom').on('click', function() {
 				classie.remove( mbmm, 'right-to-left-message');
 				classie.add( mbmm, 'left-to-right-message');
-				$('#body-section').show()
+				if (hmmobile.css('display') !== "block")
+					$('#body-section').show()
 			});
 
 			$('#mprofilef').click(function() {
+				classie.remove( mbmm, 'left-to-right-message');
+				classie.add( mbmm, 'right-to-left-message');
+				$('#messages-body-messages-mobile').show()
 				nmmmobile.hide();
-				nmmwmobile.show();
 			});
 		});
 	</script>

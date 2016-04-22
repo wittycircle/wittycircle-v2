@@ -1151,12 +1151,14 @@ textarea:focus {
 		display: block;
 
 		#messages-body-list-mobile {
-			padding-top: 85px;
 			width: 100vw;
 
 			/* messages-body-list-mobile */
 			.messages-search-list-mobile {
 
+				position: fixed;
+				top: 0;
+				width: 100%;
 				padding: 4px 10px;
 				border: 1px solid #e5e5e5;
 				background-color: #fafafa;
@@ -1175,12 +1177,14 @@ textarea:focus {
 				-ms-backface-visibility: hidden;
 				-o-backface-visibility: hidden;
 				backface-visibility: hidden;
+				z-index: 100;
 
 				input {
 					display: inline-block;
-					width: 72%;
+					width: 77%;
 					font-family: 'FreigBook';
 					font-size: 16px;
+					background-color: white;
 					color: #999999;
 					background-image: url('/images/search-icon-b.svg');
 					background-repeat: no-repeat;
@@ -1206,9 +1210,22 @@ textarea:focus {
 						width: 26px;
 					}
 				}
+
+				.new-messages-home {
+					display: inline-block;
+					margin-top: 5px;
+					margin-right: 10px;
+					float: right;
+
+					.fa-home {
+						color: #999999;
+						font-size: 30px;
+					}
+				}
 			}
 
 			.messages-convers-list-mobile {
+				padding-top: 54px;
 				min-height: 574px;
 
 				.messages-list {
@@ -1296,12 +1313,66 @@ textarea:focus {
 
 }
 
+@media only screen and (max-width: 667px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 75%;
+				}
+
+				.new-messages-mobile {
+					margin-left: 25px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 70%;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: 414px) { 
 	#messages-body-page-mobile {
 		#messages-body-list-mobile {
 
 			/* messages-body-list-mobile */
 			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 62%;
+				}
 
 				.new-messages-mobile {
 					margin-left: 20px;
@@ -1317,6 +1388,14 @@ textarea:focus {
 
 			/* messages-body-list-mobile */
 			.messages-search-list-mobile {
+				
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 60%;
+				}
 
 				.new-messages-mobile {
 					margin-left: 15px;
@@ -1332,6 +1411,17 @@ textarea:focus {
 
 			/* messages-body-list-mobile */
 			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 60%;
+
+					padding-left: 35px;
+					padding-right: 15px;
+				}
 
 				.new-messages-mobile {
 					margin-left: 5px;

@@ -1,4 +1,4 @@
-<div id="messages-body-page">
+<div id="messages-body-page" ng-if="!mobile">
 	<section id="messages-modals">
 		<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
 			<div id="mmo" class="messages-modal-header">
@@ -243,7 +243,7 @@
 	</script>
 </div>
 
-<div id="messages-body-page-mobile">
+<div id="messages-body-page-mobile" ng-if="mobile">
 
 	<section id="messages-body-list-mobile">
 		<div id="mslm" class="messages-search-list-mobile">
@@ -251,6 +251,7 @@
 			<div id="nmmobile" class="new-messages-mobile">
 				<img src="/images/write-icon-g.svg" alt="new message">
 			</div>
+			<div class="new-messages-home" ng-click="showHomeMobile()"><i class="fa fa-home" aria-hidden="true"></i></div>
 		</div>
 
 		<div id="messlist" class="messages-convers-list-mobile">
@@ -279,10 +280,13 @@
 	<script>
 
 		var x = $(window).width();
+
 		if (x <= 736) {
+			$('#headerCore').hide();
+			$('#footerCore').hide();
+
 			$(document).ready(function() {
-				var mslm 		= document.getElementById('mslm'),
-					list 		= $('.messages-convers-list-mobile'),
+				var list 		= $('.messages-convers-list-mobile'),
 					mbmm 		= document.getElementById('messages-body-messages-mobile'),
 					mblm 		= $('#messages-body-list-mobile'),
 					messlist 	= $('#messlist'),
@@ -291,8 +295,8 @@
 					header 		= document.getElementById('headerCore');
 
 				messlist.on('click', function() {
-					classie.remove( document.getElementById('messages-body-messages-mobile'), 'left-to-right-message');
-					classie.add( document.getElementById('messages-body-messages-mobile'), 'right-to-left-message');
+					classie.remove( mbmm, 'left-to-right-message');
+					classie.add( mbmm, 'right-to-left-message');
 					$('#messages-body-messages-mobile').show()
 					$('#body-section').hide();
 				});
@@ -302,15 +306,15 @@
 					$('#body-section').hide();
 				});
 
-				$(window).scroll(function () {
-					if ($(this).scrollTop() >= 85) {
-						classie.add(mslm, 'body-fixed');
-						list.css('padding-top', '54px');
-					} else {
-						classie.remove(mslm, 'body-fixed');
-						list.css('padding-top', '0px');
-					}
-				});
+				// $(window).scroll(function () {
+				// 	if ($(this).scrollTop() >= 85) {
+				// 		classie.add(mslm, 'body-fixed');
+				// 		list.css('padding-top', '54px');
+				// 	} else {
+				// 		classie.remove(mslm, 'body-fixed');
+				// 		list.css('padding-top', '0px');
+				// 	}
+				// });
 			});
 		}
 

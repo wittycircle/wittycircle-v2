@@ -102,8 +102,6 @@ $(document).ready(function() {
                     }
                 }
 
-                                    console.log("OK");
-
                 if (messCon) {
                     /*** ------ section message ------ ***/
                     if (eTarget === "mhop" && mobox) {
@@ -260,6 +258,15 @@ $(document).ready(function() {
         $( '#hsmobile' ).on('click', function() {
             $('#body-section').hide();
             $( '#hsfmobile' ).show();
+        });
+
+         $( '.header-log-aside' ).on('click', function(e) {
+            if (e.target.id === "hlogavatar") {
+                classTog( body, 'cbp-spmenu-push-toleft' );
+                classTog( menuRight, 'cbp-spmenu-open' );
+                bodyJq.css('overflow-y', 'auto');
+                disableOther( 'showRightPush' );
+            }
         });
     }
 

@@ -16,10 +16,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
 
-    if (!currentUser)
-      $location.path('/');
-    if (!$stateParams.tagCheckFirst)
-      $location.path('/');
+    // if (!currentUser)
+    //   $location.path('/');
+    // if (!$stateParams.tagCheckFirst)
+    //   $location.path('/');
 
     /*** Set Default Cover Picture ***/
     $http.get('/picture/cover').then(function(response) {
@@ -113,7 +113,6 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
         $http.put('/user/checkLog/update');
       }
       $('#main-body').prepend(clone);
-      window.location.replace('/');
     });
 
     /*

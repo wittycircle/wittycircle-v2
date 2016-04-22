@@ -12,9 +12,6 @@
 
             var vm = this;
 
-            console.time('loading viewProjectCtrl');
-
-
             // var
             // list all var needed to be initialized at the start of controller
             var currentUser = $rootScope.globals.currentUser;
@@ -206,8 +203,9 @@
                         return;
                     }
                     if (id !== currentUser.id) {
-                        Users.getProfileByUserId(id, function (res) {
-                            $state.go('messages', {profile_id: res.content.profile_id});
+                        Users.getUserbyId(id, function (res) {
+			    console.log(res);
+                            $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
                         });
                     }
                 } else {
@@ -416,8 +414,6 @@
                     vm.openings = project_NeedsResolve.data;
                 }
             }
-
-            console.timeEnd('loading viewProjectCtrl');
 
     }
 

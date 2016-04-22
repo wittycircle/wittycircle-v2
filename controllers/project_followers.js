@@ -5,7 +5,7 @@ exports.getProjectFollowers = function(req, res) {
     if (errors) {
 	    return res.status(400).send(errors);
     } else {
-	    pool.query("SELECT * FROM project_followers WHERE follow_project_id = ?",
+	    pool.query("SELECT * FROM project_followers WHERE follow_project_id IN (select id from projects where public_id = ?)",
 	    req.params.project_id,
             function (err, result) {
                 if (err) {

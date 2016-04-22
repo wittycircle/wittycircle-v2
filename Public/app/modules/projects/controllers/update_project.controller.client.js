@@ -469,7 +469,7 @@ $scope.uploadVideo = function() {
                     {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
                 ],
                 theme: {
-                    url: "styles/videogular.css"
+                    url: "styles/videogular.scss"
                 },
                 plugins: {
                     controls: {

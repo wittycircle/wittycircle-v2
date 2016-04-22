@@ -91,7 +91,7 @@ var wittyCircleApp = angular
     })
     .state('messages', {
         url: '/messages',
-        params: {profile_id: null, input: null, userOn: null},
+        params: {profile: null, user_id: null, username: null, input: null, userOn: null},
         templateUrl: 'views/messaging/messaging.view.client.html',
         controller: 'MessageCtrl',
         resolve:{

@@ -245,8 +245,10 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     function goToMessage(id) {
         if (!vm.currentUser)
             showbottomAlert.pop_it();
-        else
+        else {
+	    console.log('ici');
             $state.go('messages', {profile_id : id});
+	}
     };
 
     /*** MOBILE EDIT ***/

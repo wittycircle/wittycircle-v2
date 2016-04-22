@@ -256,7 +256,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
                           {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
                       ],
                       theme: {
-                          url: "styles/videogular.scss"
+                          url: "styles/css/videogular.css"
                       },
                       plugins: {
                           controls: {
@@ -594,10 +594,10 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
           $scope.config = {
                          preload: "auto",
                          sources: [
-                             {src: $sce.trustAsResourceUrl(url), type: "video/mp4"}
+                             {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
                          ],
                          theme: {
-                             url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                             url: "styles/css/videogular.css"
                          },
                          plugins: {
                              controls: {

@@ -153,8 +153,8 @@
 		}
 	};
 
-	if ($stateParams.profile_id) {
-		$scope.searchArea($stateParams.profile_id);
+	if ($stateParams.user_id) {
+		$scope.searchArea($stateParams.profile, $stateParams.user_id, $stateParams.username);
 		setTimeout(function() {
 			$('#messages-modal-newMessageArea').fadeIn(function() {
 				$('#messages-modal-searchArea').fadeOut(function(){

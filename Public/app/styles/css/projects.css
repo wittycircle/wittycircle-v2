@@ -350,6 +350,7 @@
     line-height: 26px;
     color: #222;
     text-align: left;
+    margin-bottom: 0;
     word-spacing: 1px; }
   .custom-project-post h1 {
     font-size: 28px; }

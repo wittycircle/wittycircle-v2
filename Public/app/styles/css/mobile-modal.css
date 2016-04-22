@@ -559,7 +559,8 @@
             #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name p {
               font-family: 'FreigBook';
               font-size: 14px;
-              color: #999999; }
+              color: #999999;
+              margin-bottom: 0; }
             #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
               font-family: 'FreigBook';
               font-size: 15px;

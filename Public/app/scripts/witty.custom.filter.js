@@ -318,28 +318,43 @@ angular.module('wittyApp')
 
         if (input && input[0]) {
         	var text = "";
-        	var lengthText;
+        	var lengthText = input.length;
         	var index;
-        	var i = 0;
+        	var i 		= 0,
+        		n 		= 0,
+        		count 	= 0;
 
-        	while (i < input.length) {
-        		if (i > 0 )
-        			text += ', ';
-        		text += input[i].sName;
-        		i++;
-        	}
+    		if (!input[1]) {
+    			text = input[0].sName;
+    			if (text.length > 20)
+    				text = text.substring(0, 16) + "...";
+    		} else {
+    			text = input[0].sName;
+    			if (text.length > 14) {
+    				text = text.substring(0, 13) + "..., +" + (lengthText - 1).toString();
+    			} else 
+    				text += ", +" + (lengthText - 1).toString();
+    		}
 
 
-        	lengthText = text.length;
-        	for (var n = 0; text.length > 50; n++) {
-	        	index = text.lastIndexOf(",");
-	        	text = text.substring(0, index);
+        	// while (i < input.length) {
+        	// 	if (i > 0 )
+        	// 		text += ', ';
+        	// 	text += input[i].sName;
+        	// 	i++;
+        	// }
 
-	        	if (text.length <= 50)
-	        		break ;
-	        }
-	        if (lengthText > 50)
-	        	text = text + ", ...";
+
+        	// lengthText = text.length;
+        	// for (var n = 0; text.length > 50; n++) {
+	        // 	index = text.lastIndexOf(",");
+	        // 	text = text.substring(0, index);
+
+	        // 	if (text.length <= 50)
+	        // 		break ;
+	        // }
+	        // if (lengthText > 50)
+	        // 	text = text + ", ...";
 
         	return text;
         }

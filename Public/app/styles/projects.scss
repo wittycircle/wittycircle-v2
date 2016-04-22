@@ -331,7 +331,6 @@ $font-h3: 'Open Sans', sans-serif;
 
 .project-post-container {
   text-align: center;
-  background-color: #fafafa;
   padding: 40px 0px;
 
   .video-container {
@@ -365,8 +364,6 @@ $font-h3: 'Open Sans', sans-serif;
   margin: 0px auto;
   padding: 0px 30px;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   overflow: hidden;
 
   vg-overlay-play .play {
@@ -485,7 +482,6 @@ $font-h3: 'Open Sans', sans-serif;
 }
 
 #feedback_project {
-  background-color: #fafafa;
 
   .cards_openings {
     margin-bottom: 30px;

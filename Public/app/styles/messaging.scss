@@ -1159,7 +1159,7 @@ textarea:focus {
 				position: fixed;
 				top: 0;
 				width: 100%;
-				padding: 4px 10px;
+				padding: 6px 10px 4px 10px;
 				border: 1px solid #e5e5e5;
 				background-color: #fafafa;
 				-webkit-transform: translateZ(0);
@@ -1202,12 +1202,13 @@ textarea:focus {
 					top: 14px;
 					margin-left: 25px;
 
+
 					img {
 						background-color: white;
 						position: relative;
 						bottom: 3px;
 						left: 3px;
-						width: 26px;
+						width: 20px;
 					}
 				}
 
@@ -1219,7 +1220,7 @@ textarea:focus {
 
 					.fa-home {
 						color: #999999;
-						font-size: 30px;
+						font-size: 23px;
 					}
 				}
 			}
@@ -1313,6 +1314,30 @@ textarea:focus {
 
 }
 
+@media only screen and (max-width: 736px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 76%;
+					padding: 5px 10px 5px 65px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: 667px) { 
 	#messages-body-page-mobile {
 		#messages-body-list-mobile {
@@ -1326,6 +1351,31 @@ textarea:focus {
 
 				input {
 					width: 75%;
+					padding: 5px 10px 5px 55px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 568px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 70%;
+					padding: 5px 10px 5px 55px;
 				}
 
 				.new-messages-mobile {
@@ -1348,7 +1398,8 @@ textarea:focus {
 				}
 
 				input {
-					width: 70%;
+					width: 71%;
+					padding: 5px 10px 5px 50px;
 				}
 
 				.new-messages-mobile {
@@ -1371,11 +1422,12 @@ textarea:focus {
 				}
 
 				input {
-					width: 62%;
+					width: 68%;
+					padding: 5px 10px 5px 35px;
 				}
 
 				.new-messages-mobile {
-					margin-left: 20px;
+					margin-left: 15px;
 				}
 			}
 		}
@@ -1394,11 +1446,12 @@ textarea:focus {
 				}
 
 				input {
-					width: 60%;
+					width: 65%;
+					padding: 5px 10px 5px 40px;
 				}
 
 				.new-messages-mobile {
-					margin-left: 15px;
+					margin-left: 10px;
 				}
 			}
 		}
@@ -1418,13 +1471,11 @@ textarea:focus {
 
 				input {
 					width: 60%;
-
-					padding-left: 35px;
-					padding-right: 15px;
+					padding: 5px 10px 5px 35px;
 				}
 
 				.new-messages-mobile {
-					margin-left: 5px;
+					margin-left: 15px;
 				}
 			}
 		}

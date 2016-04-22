@@ -252,7 +252,6 @@
 
 .project-post-container {
   text-align: center;
-  background-color: #fafafa;
   padding: 40px 0px; }
   .project-post-container .video-container iframe {
     width: 738px;
@@ -278,8 +277,6 @@
   margin: 0px auto;
   padding: 0px 30px;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   overflow: hidden; }
   .project-post-box vg-overlay-play .play,
   .project-post-video vg-overlay-play .play {
@@ -369,344 +366,342 @@
   margin: 0px;
   padding: 0px; }
 
-#feedback_project {
-  background-color: #fafafa; }
-  #feedback_project .cards_openings {
-    margin-bottom: 30px;
-    border-radius: 4px;
-    overflow: hidden; }
-  #feedback_project .cards_openings_body {
-    border: 1px solid #eee;
-    border-radius: 4px;
-    overflow: hidden; }
-  #feedback_project .project-card .card-picture {
-    height: 100px;
-    border-top-right-radius: 4px;
-    overflow: hidden; }
-  #feedback_project .project-card .card-info .card-description-text {
-    height: auto;
-    margin-bottom: 0; }
-  #feedback_project .need_tags .tag_text {
-    background-color: #222;
-    width: auto;
-    display: inline-block;
-    padding: 2px 4px;
+#feedback_project .cards_openings {
+  margin-bottom: 30px;
+  border-radius: 4px;
+  overflow: hidden; }
+#feedback_project .cards_openings_body {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden; }
+#feedback_project .project-card .card-picture {
+  height: 100px;
+  border-top-right-radius: 4px;
+  overflow: hidden; }
+#feedback_project .project-card .card-info .card-description-text {
+  height: auto;
+  margin-bottom: 0; }
+#feedback_project .need_tags .tag_text {
+  background-color: #222;
+  width: auto;
+  display: inline-block;
+  padding: 2px 4px;
+  font-family: 'FreigSem';
+  font-size: 13px;
+  text-transform: uppercase;
+  color: white;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-bottom: 5px; }
+#feedback_project .cards_openings_footer {
+  padding: 15px 0px;
+  background-color: #f9f9f9;
+  border-top: 1px dashed #ddd; }
+  #feedback_project .cards_openings_footer .no_padding {
+    padding: 0px; }
+  #feedback_project .cards_openings_footer .footer_text {
     font-family: 'FreigSem';
-    font-size: 13px;
-    text-transform: uppercase;
-    color: white;
-    border-radius: 4px;
-    margin-right: 4px;
-    margin-bottom: 5px; }
-  #feedback_project .cards_openings_footer {
-    padding: 15px 0px;
-    background-color: #f9f9f9;
-    border-top: 1px dashed #ddd; }
-    #feedback_project .cards_openings_footer .no_padding {
-      padding: 0px; }
-    #feedback_project .cards_openings_footer .footer_text {
-      font-family: 'FreigSem';
-      color: #6e6e6e;
-      margin: 0px;
-      cursor: pointer; }
-    #feedback_project .cards_openings_footer .footer_text:hover {
-      text-decoration: underline;
-      color: #555555; }
-    #feedback_project .cards_openings_footer .icon_footer {
-      cursor: pointer;
-      color: #bbb;
-      font-size: 18px;
-      position: relative;
-      bottom: 1px;
-      outline: none;
-      -webkit-transition: all 100ms linear;
-      -o-transition: all 100ms linear;
-      -moz-transition: all 100ms linear;
-      -ms-transition: all 100ms linear;
-      -kthtml-transition: all 100ms linear;
-      transition: all 100ms linear; }
-    #feedback_project .cards_openings_footer .icon_footer:hover {
-      color: #FF4D4D;
-      -webkit-transition: all 100ms linear;
-      -o-transition: all 100ms linear;
-      -moz-transition: all 100ms linear;
-      -ms-transition: all 100ms linear;
-      -kthtml-transition: all 100ms linear;
-      transition: all 100ms linear; }
-    #feedback_project .cards_openings_footer .icon_footer_2 {
-      cursor: pointer;
-      color: #bbb;
-      font-size: 17px;
-      outline: none;
-      -webkit-transition: all 100ms linear;
-      -o-transition: all 100ms linear;
-      -moz-transition: all 100ms linear;
-      -ms-transition: all 100ms linear;
-      -kthtml-transition: all 100ms linear;
-      transition: all 100ms linear; }
-    #feedback_project .cards_openings_footer .icon_footer_2:hover {
-      color: #FF4D4D;
-      -webkit-transition: all 100ms linear;
-      -o-transition: all 100ms linear;
-      -moz-transition: all 100ms linear;
-      -ms-transition: all 100ms linear;
-      -kthtml-transition: all 100ms linear;
-      transition: all 100ms linear; }
-    #feedback_project .cards_openings_footer .showMess {
-      color: #ccc;
-      font-family: 'FreigSem';
-      font-size: 16px;
-      margin: 0px; }
-  #feedback_project .mgr-bt-20 {
-    margin-bottom: 20px; }
-  #feedback_project .mgr-bt-40 {
-    margin-bottom: 80px !important; }
-  #feedback_project .mgr-tp-40 {
-    margin-top: 40px !important; }
-  #feedback_project .container_header_question {
-    padding: 0px;
+    color: #6e6e6e;
     margin: 0px;
-    width: 100%; }
-  #feedback_project .no_feedbacks {
-    margin: 50px 0px; }
-    #feedback_project .no_feedbacks .title_no_comments {
-      font-family: 'FreigBook';
-      font-size: 24px;
-      color: #999999; }
-    #feedback_project .no_feedbacks .text_no_comments {
-      font-family: 'FreigBook';
-      font-size: 18px;
-      color: #999999; }
-  #feedback_project .number_replies {
-    font-size: 14px; }
-  #feedback_project p {
-    outline: none; }
-  #feedback_project .feedback_textarea_question {
-    margin: 15px 15px 0px 0px; }
-    #feedback_project .feedback_textarea_question .pd-20 {
-      padding: 15px; }
-    #feedback_project .feedback_textarea_question .col-md-11 {
-      padding: 0; }
-  #feedback_project .feedback_description {
-    margin: 0px; }
-    #feedback_project .feedback_description .mgr-bt-20 {
-      margin-bottom: 20px;
-      margin-left: 15px;
-      margin-right: 15px; }
-    #feedback_project .feedback_description .pd-20 {
-      padding: 15px; }
-    #feedback_project .feedback_description .col-md-11 {
-      padding-left: 0px; }
-    #feedback_project .feedback_description .feedback-reply-field {
-      border: 1px solid #e5e5e5;
-      border-radius: 4px; }
-  #feedback_project .feedback_textarea {
-    margin: 0px; }
-    #feedback_project .feedback_textarea .mgr-bt-20 {
-      margin-bottom: 20px;
-      margin-left: 15px;
-      margin-right: 15px; }
-    #feedback_project .feedback_textarea .pd-20 {
-      padding: 15px; }
-    #feedback_project .feedback_textarea .col-md-11 {
-      padding-left: 15px; }
-  #feedback_project .feedback_reply_text {
-    font-size: 16px;
-    font-family: 'FreigBook';
-    color: #222222; }
-  #feedback_project .title {
-    color: #999999;
-    font-size: 14px;
-    margin-bottom: 5px;
-    font-family: 'FreigBook'; }
-  #feedback_project .row-custom-feed {
-    margin: 0px; }
-    #feedback_project .row-custom-feed .replies_container {
-      width: inherit; }
-    #feedback_project .row-custom-feed .nested_replies {
-      width: 91%;
-      margin-left: 70px;
-      height: auto;
-      margin-bottom: 20px;
-      padding: 10px;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px; }
-      #feedback_project .row-custom-feed .nested_replies .try-lol {
-        height: auto;
-        border-left: 3px solid #ddd; }
-    #feedback_project .row-custom-feed .nested_replies_2 {
-      background-color: #fafafa;
-      padding: 15px 0;
-      border-radius: 4px;
-      border: 1px solid #e5e5e5; }
-      #feedback_project .row-custom-feed .nested_replies_2 .col-md-1 {
-        padding: 0; }
-  #feedback_project .animate-if.ng-enter, #feedback_project .animate-if.ng-leave {
-    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s; }
-  #feedback_project .animate-if.ng-enter,
-  #feedback_project .animate-if.ng-leave.ng-leave-active {
-    opacity: 0; }
-  #feedback_project .animate-if.ng-leave,
-  #feedback_project .animate-if.ng-enter.ng-enter-active {
-    opacity: 1; }
-  #feedback_project .text_description_feed p {
-    font-family: 'FreigBook';
-    color: #222222;
-    font-size: 16px; }
-  #feedback_project .textarea_new_reply {
-    width: 100%;
-    border: 1px solid #e5e5e5;
-    border-radius: 4px;
-    resize: none;
-    outline: none;
-    font-family: 'FreigBook';
-    font-size: 16px;
-    color: black;
-    padding: 10px;
-    height: auto;
-    min-height: 100px; }
-  #feedback_project .button_post_comment {
-    font-family: 'FreigSem';
-    font-size: 16px;
-    color: white;
-    background-color: #FF4D4D;
-    padding: 6px 10px;
-    border: 1px solid #FF4D4D;
-    border-radius: 4px; }
-  #feedback_project .post_comment_reply {
-    font-family: 'FreigSem';
-    font-size: 16px;
-    color: white;
-    background-color: #FF4D4D;
-    padding: 6px 10px;
-    border: 1px solid #FF4D4D;
-    border-radius: 4px;
-    margin: 20px 0; }
-  #feedback_project .button_ask {
-    margin: 20px 0; }
-  #feedback_project .button_post_comment:hover {
-    background-color: #D94242;
-    border: 1px solid #D94242; }
-  #feedback_project .replies_title {
-    color: #1a1a1a;
-    text-decoration: underline; }
-  #feedback_project .container-custom-project {
-    max-width: 1000px;
-    float: none;
-    margin: 0 auto; }
-  #feedback_project .feedback_container {
-    max-width: 1000px;
-    padding: 0 50px; }
-  #feedback_project h3 {
-    margin-bottom: 20px; }
-  #feedback_project .link_top {
-    font-family: 'FreigMed';
-    font-size: 16px;
-    padding-top: 10px;
-    color: #FF4D4D;
     cursor: pointer; }
-    #feedback_project .link_top .fa-plus {
-      position: relative;
-      font-size: 14px;
-      top: 1px;
-      margin-right: 2px; }
-  #feedback_project .link_top:hover {
-    color: #D94242; }
-  #feedback_project .cards-feedbacks-two {
-    padding: 10px 10px 0 0;
-    padding-bottom: 10px;
-    background-color: white !important;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    height: auto;
-    -webkit-transition: all 100ms linear;
-    -moz-transition: all 100ms linear;
-    -o-transition: all 100ms linear;
-    -ms-transition: all 100ms linear;
-    transition: all 100ms linear; }
-    #feedback_project .cards-feedbacks-two .from_text {
-      font-family: 'FreigBook' !important;
-      margin-bottom: 5px; }
-      #feedback_project .cards-feedbacks-two .from_text span {
-        font-size: 14px; }
-    #feedback_project .cards-feedbacks-two .underline_user {
-      color: #999999;
-      font-size: 16px;
-      cursor: pointer;
-      text-decoration: underline;
-      -moz-text-decoration-style: dotted;
-      -webkit-text-decoration-style: dotted;
-      text-decoration-style: dotted; }
-    #feedback_project .cards-feedbacks-two .underline_user:hover {
-      color: black; }
-    #feedback_project .cards-feedbacks-two .img-feedback {
-      display: inline-block;
-      padding: 10px 10px 10px 15px;
-      float: left; }
-    #feedback_project .cards-feedbacks-two .text-feedback {
-      display: inline-block; }
-    #feedback_project .cards-feedbacks-two .img-responsive {
-      margin: 0 auto; }
-    #feedback_project .cards-feedbacks-two .picto_delete {
-      text-align: right;
-      padding-top: 20px;
-      outline: none; }
-    #feedback_project .cards-feedbacks-two .feedback_badge {
-      font-family: 'FreigSem' !important;
-      font-size: 10px !important;
-      background-color: #999999;
-      color: white;
-      padding: 0px 5px;
-      border: 1px solid #999999;
-      border-radius: 3px;
-      margin-left: 5px; }
-    #feedback_project .cards-feedbacks-two .delete_icon {
-      color: #ddd;
-      font-size: 20px;
-      outline: none;
-      -webkit-transition: all 200ms linear;
-      -moz-transition: all 200ms linear;
-      -o-transition: all 200ms linear;
-      -ms-transition: all 200ms linear;
-      transition: all 200ms linear; }
-    #feedback_project .cards-feedbacks-two .delete_icon:hover {
-      color: #FF4D4D;
-      -webkit-transition: all 200ms linear;
-      -moz-transition: all 200ms linear;
-      -o-transition: all 200ms linear;
-      -ms-transition: all 200ms linear;
-      transition: all 200ms linear; }
-    #feedback_project .cards-feedbacks-two .fadein,
-    #feedback_project .cards-feedbacks-two .fadeout {
-      -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
-      -moz-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
-      -o-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
-      transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms; }
-    #feedback_project .cards-feedbacks-two .fadein.ng-hide-remove,
-    #feedback_project .cards-feedbacks-two .fadeout.ng-hide-add.ng-hide-add-active {
-      opacity: 0;
-      display: block !important; }
-    #feedback_project .cards-feedbacks-two .fadeout.ng-hide-add,
-    #feedback_project .cards-feedbacks-two .fadein.ng-hide-remove.ng-hide-remove-active {
-      opacity: 1;
-      display: block !important; }
-  #feedback_project .cards-feedbacks-two:hover {
+  #feedback_project .cards_openings_footer .footer_text:hover {
+    text-decoration: underline;
+    color: #555555; }
+  #feedback_project .cards_openings_footer .icon_footer {
     cursor: pointer;
-    border-color: #C9C9C9; }
-  #feedback_project #asks .input_new_ask {
-    padding: 7px 10px;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: 'FreigBook';
+    color: #bbb;
+    font-size: 18px;
+    position: relative;
+    bottom: 1px;
+    outline: none;
+    -webkit-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    -kthtml-transition: all 100ms linear;
+    transition: all 100ms linear; }
+  #feedback_project .cards_openings_footer .icon_footer:hover {
+    color: #FF4D4D;
+    -webkit-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    -kthtml-transition: all 100ms linear;
+    transition: all 100ms linear; }
+  #feedback_project .cards_openings_footer .icon_footer_2 {
+    cursor: pointer;
+    color: #bbb;
+    font-size: 17px;
+    outline: none;
+    -webkit-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    -kthtml-transition: all 100ms linear;
+    transition: all 100ms linear; }
+  #feedback_project .cards_openings_footer .icon_footer_2:hover {
+    color: #FF4D4D;
+    -webkit-transition: all 100ms linear;
+    -o-transition: all 100ms linear;
+    -moz-transition: all 100ms linear;
+    -ms-transition: all 100ms linear;
+    -kthtml-transition: all 100ms linear;
+    transition: all 100ms linear; }
+  #feedback_project .cards_openings_footer .showMess {
+    color: #ccc;
+    font-family: 'FreigSem';
     font-size: 16px;
-    color: black; }
-  #feedback_project #asks .mgr-bt-20 {
+    margin: 0px; }
+#feedback_project .mgr-bt-20 {
+  margin-bottom: 20px; }
+#feedback_project .mgr-bt-40 {
+  margin-bottom: 80px !important; }
+#feedback_project .mgr-tp-40 {
+  margin-top: 40px !important; }
+#feedback_project .container_header_question {
+  padding: 0px;
+  margin: 0px;
+  width: 100%; }
+#feedback_project .no_feedbacks {
+  margin: 50px 0px; }
+  #feedback_project .no_feedbacks .title_no_comments {
+    font-family: 'FreigBook';
+    font-size: 24px;
+    color: #999999; }
+  #feedback_project .no_feedbacks .text_no_comments {
+    font-family: 'FreigBook';
+    font-size: 18px;
+    color: #999999; }
+#feedback_project .number_replies {
+  font-size: 14px; }
+#feedback_project p {
+  outline: none; }
+#feedback_project .feedback_textarea_question {
+  margin: 15px 15px 0px 0px; }
+  #feedback_project .feedback_textarea_question .pd-20 {
+    padding: 15px; }
+  #feedback_project .feedback_textarea_question .col-md-11 {
+    padding: 0; }
+#feedback_project .feedback_description {
+  margin: 0px; }
+  #feedback_project .feedback_description .mgr-bt-20 {
     margin-bottom: 20px;
-    margin-top: 20px; }
-  #feedback_project #asks .no-padding {
-    padding-right: 0px; }
+    margin-left: 15px;
+    margin-right: 15px; }
+  #feedback_project .feedback_description .pd-20 {
+    padding: 15px; }
+  #feedback_project .feedback_description .col-md-11 {
+    padding-left: 0px; }
+  #feedback_project .feedback_description .feedback-reply-field {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px; }
+#feedback_project .feedback_textarea {
+  margin: 0px; }
+  #feedback_project .feedback_textarea .mgr-bt-20 {
+    margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px; }
+  #feedback_project .feedback_textarea .pd-20 {
+    padding: 15px; }
+  #feedback_project .feedback_textarea .col-md-11 {
+    padding-left: 15px; }
+#feedback_project .feedback_reply_text {
+  font-size: 16px;
+  font-family: 'FreigBook';
+  color: #222222; }
+#feedback_project .title {
+  color: #999999;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-family: 'FreigBook'; }
+#feedback_project .row-custom-feed {
+  margin: 0px; }
+  #feedback_project .row-custom-feed .replies_container {
+    width: inherit; }
+  #feedback_project .row-custom-feed .nested_replies {
+    width: 91%;
+    margin-left: 70px;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px; }
+    #feedback_project .row-custom-feed .nested_replies .try-lol {
+      height: auto;
+      border-left: 3px solid #ddd; }
+  #feedback_project .row-custom-feed .nested_replies_2 {
+    background-color: #fafafa;
+    padding: 15px 0;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5; }
+    #feedback_project .row-custom-feed .nested_replies_2 .col-md-1 {
+      padding: 0; }
+#feedback_project .animate-if.ng-enter, #feedback_project .animate-if.ng-leave {
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s; }
+#feedback_project .animate-if.ng-enter,
+#feedback_project .animate-if.ng-leave.ng-leave-active {
+  opacity: 0; }
+#feedback_project .animate-if.ng-leave,
+#feedback_project .animate-if.ng-enter.ng-enter-active {
+  opacity: 1; }
+#feedback_project .text_description_feed p {
+  font-family: 'FreigBook';
+  color: #222222;
+  font-size: 16px; }
+#feedback_project .textarea_new_reply {
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  resize: none;
+  outline: none;
+  font-family: 'FreigBook';
+  font-size: 16px;
+  color: black;
+  padding: 10px;
+  height: auto;
+  min-height: 100px; }
+#feedback_project .button_post_comment {
+  font-family: 'FreigSem';
+  font-size: 16px;
+  color: white;
+  background-color: #FF4D4D;
+  padding: 6px 10px;
+  border: 1px solid #FF4D4D;
+  border-radius: 4px; }
+#feedback_project .post_comment_reply {
+  font-family: 'FreigSem';
+  font-size: 16px;
+  color: white;
+  background-color: #FF4D4D;
+  padding: 6px 10px;
+  border: 1px solid #FF4D4D;
+  border-radius: 4px;
+  margin: 20px 0; }
+#feedback_project .button_ask {
+  margin: 20px 0; }
+#feedback_project .button_post_comment:hover {
+  background-color: #D94242;
+  border: 1px solid #D94242; }
+#feedback_project .replies_title {
+  color: #1a1a1a;
+  text-decoration: underline; }
+#feedback_project .container-custom-project {
+  max-width: 1000px;
+  float: none;
+  margin: 0 auto; }
+#feedback_project .feedback_container {
+  max-width: 1000px;
+  padding: 0 50px; }
+#feedback_project h3 {
+  margin-bottom: 20px; }
+#feedback_project .link_top {
+  font-family: 'FreigMed';
+  font-size: 16px;
+  padding-top: 10px;
+  color: #FF4D4D;
+  cursor: pointer; }
+  #feedback_project .link_top .fa-plus {
+    position: relative;
+    font-size: 14px;
+    top: 1px;
+    margin-right: 2px; }
+#feedback_project .link_top:hover {
+  color: #D94242; }
+#feedback_project .cards-feedbacks-two {
+  padding: 10px 10px 0 0;
+  padding-bottom: 10px;
+  background-color: white !important;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  height: auto;
+  -webkit-transition: all 100ms linear;
+  -moz-transition: all 100ms linear;
+  -o-transition: all 100ms linear;
+  -ms-transition: all 100ms linear;
+  transition: all 100ms linear; }
+  #feedback_project .cards-feedbacks-two .from_text {
+    font-family: 'FreigBook' !important;
+    margin-bottom: 5px; }
+    #feedback_project .cards-feedbacks-two .from_text span {
+      font-size: 14px; }
+  #feedback_project .cards-feedbacks-two .underline_user {
+    color: #999999;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: underline;
+    -moz-text-decoration-style: dotted;
+    -webkit-text-decoration-style: dotted;
+    text-decoration-style: dotted; }
+  #feedback_project .cards-feedbacks-two .underline_user:hover {
+    color: black; }
+  #feedback_project .cards-feedbacks-two .img-feedback {
+    display: inline-block;
+    padding: 10px 10px 10px 15px;
+    float: left; }
+  #feedback_project .cards-feedbacks-two .text-feedback {
+    display: inline-block; }
+  #feedback_project .cards-feedbacks-two .img-responsive {
+    margin: 0 auto; }
+  #feedback_project .cards-feedbacks-two .picto_delete {
+    text-align: right;
+    padding-top: 20px;
+    outline: none; }
+  #feedback_project .cards-feedbacks-two .feedback_badge {
+    font-family: 'FreigSem' !important;
+    font-size: 10px !important;
+    background-color: #999999;
+    color: white;
+    padding: 0px 5px;
+    border: 1px solid #999999;
+    border-radius: 3px;
+    margin-left: 5px; }
+  #feedback_project .cards-feedbacks-two .delete_icon {
+    color: #ddd;
+    font-size: 20px;
+    outline: none;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; }
+  #feedback_project .cards-feedbacks-two .delete_icon:hover {
+    color: #FF4D4D;
+    -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    transition: all 200ms linear; }
+  #feedback_project .cards-feedbacks-two .fadein,
+  #feedback_project .cards-feedbacks-two .fadeout {
+    -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
+    -moz-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
+    -o-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms;
+    transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms; }
+  #feedback_project .cards-feedbacks-two .fadein.ng-hide-remove,
+  #feedback_project .cards-feedbacks-two .fadeout.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    display: block !important; }
+  #feedback_project .cards-feedbacks-two .fadeout.ng-hide-add,
+  #feedback_project .cards-feedbacks-two .fadein.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    display: block !important; }
+#feedback_project .cards-feedbacks-two:hover {
+  cursor: pointer;
+  border-color: #C9C9C9; }
+#feedback_project #asks .input_new_ask {
+  padding: 7px 10px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'FreigBook';
+  font-size: 16px;
+  color: black; }
+#feedback_project #asks .mgr-bt-20 {
+  margin-bottom: 20px;
+  margin-top: 20px; }
+#feedback_project #asks .no-padding {
+  padding-right: 0px; }
 
 @media only screen and (max-width: 736px) {
   .project-post-box, .project-post-video {

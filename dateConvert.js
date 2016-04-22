@@ -37,9 +37,9 @@ exports.convertDate = function(date, callback) { // convert default format date 
                                          if (WDay == 5) {var d = "Saturday"; callback(d);}
                                          if (WDay == 6) {var d = "Sunday"; callback(d);} }
     else if (gPD > 7 && gPD <= 30)      {var d = gdate + "/" + gmonth; callback(d);}
-    else if (gPM >= 1 && gPM < 2)           {d = Math.floor(gPM) + " month ago"; return (d);}
-    else if (gPM >= 2 && gPM <= 12)         {d = Math.floor(gPM) + " months ago"; return (d);}
-    else if (gPY >= 1 && gPY < 2)           {d = Math.floor(gPY) + " year ago"; return (d);}
-    else if (gPY >= 2)                  {d = Math.floor(gPY) + " years ago"; return (d);}
+    else if (gPM >= 1 && gPM < 2)           {d = Math.floor(gPM) + " month ago"; callback (d);}
+    else if (gPM >= 2 && gPM <= 12)         {d = Math.floor(gPM) + " months ago"; callback (d);}
+    else if (gPY >= 1 && gPY < 2)           {d = Math.floor(gPY) + " year ago"; callback (d);}
+    else if (gPY >= 2)                  {d = Math.floor(gPY) + " years ago"; callback (d);}
     else                                {var d = date; callback(d);}
 };

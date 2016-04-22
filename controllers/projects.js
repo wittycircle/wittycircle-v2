@@ -360,7 +360,7 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                           throw err;
                       }
                       involver.push(result[0]);
-                      recursive(index + 1);
+                      return recursive(index + 1);
                   });
                 }
                 // TODO: Splice the result in results when accept == 0 and user_id is not equal to the req.user
@@ -383,9 +383,12 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       return recursive(index + 1);
                   });
                 }
-                else if (results[index].user_id !== req.user.id) {
+                if (req.isAuthenticated() && results[index].user_id !== req.user.id) {
                   recursive(index + 1);
                 }
+                if (!req.isAuthenticated())
+                    recursive(index + 1);
+
             } else {
                 return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }

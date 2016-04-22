@@ -740,14 +740,27 @@
   .discover-component .discover-search1 .discover-search1-dropdown2-mobile {
     display: inline-block; }
   .discover-component .discover-search2 {
-    border-spacing: 0p; }
+    border-spacing: 0;
+    padding-right: 10px; }
     .discover-component .discover-search2 #dsdrop1m {
-      display: inline-block; }
+      display: inline-block;
+      max-width: auto;
+      /*
+      				.discover-skillList {
+      
+      					h2 {
+      						font-size: 21px;
+      						padding: 0;
+      						padding-left: 5px;
+      					}
+      				}*/ }
       .discover-component .discover-search2 #dsdrop1m h2 {
         display: inline-block;
-        padding: 5px 15px 5px 10px; }
+        padding: 6px 10px 7px 10px; }
       .discover-component .discover-search2 #dsdrop1m img {
         display: inline-block; }
+    .discover-component .discover-search2 .discover-search2-text {
+      margin-bottom: 10px; }
     .discover-component .discover-search2 .discover-search2-text-mobile {
       display: table-cell; }
       .discover-component .discover-search2 .discover-search2-text-mobile h2 {
@@ -816,6 +829,10 @@
     .meet-component #meet-search1 .meet-search1-dropdown-mobile h2 {
       display: inline-block;
       padding-left: 10px; }
+    .meet-component #meet-search1 .meet-search1-dropdown-mobile .meet-skillList h2 {
+      font-size: 21px;
+      padding: 0;
+      padding-left: 5px; }
     .meet-component #meet-search1 .meet-search1-dropdown-mobile .meet-cross-bg {
       display: inline-block;
       vertical-align: middle;

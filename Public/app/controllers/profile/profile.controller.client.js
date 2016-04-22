@@ -7,12 +7,12 @@
 * # ProfileCtrl
 * Controller of the wittyApp
 **/
-angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal , $state, $timeout, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, Skills, Interests, Locations, Projects) {
+angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal , $state, $timeout, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, Skills, Interests, Locations, Projects, showbottomAlert) {
 
     console.time('loading profile');
 
     var vm = this;
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     /* Vm Variable */
     vm.currentUser = $rootScope.globals.currentUser || false;
@@ -32,6 +32,8 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     vm.hideEditL = hideEditL;
     vm.openMobileEdit = openMobileEdit;
     vm.closeMobileEdit =closeMobileEdit;
+
+    console.log(vm.trueUser);
 
     if (!vm.currentUser || (vm.currentUser && !vm.trueUser))
         Users.getProfileView(vm.paramUsername);
@@ -59,6 +61,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     }
 
     function followUser() {
+        console.log("OK");
         if (!vm.currentUser)
             showbottomAlert.pop_it();
         else {

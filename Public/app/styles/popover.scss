@@ -19,11 +19,15 @@ $blue: #416299;
 	border-style: none;;
 	color: white;
 	position: fixed;
-	bottom:0%;
+	bottom: 0;
 	z-index: 500;
 
 	#popover-login {
 		padding: 40px 0 55px 0;
+
+		.crossPopover {
+			display: none;
+		}
 
 		.popover-container {
 			max-width: 1000px;
@@ -169,5 +173,107 @@ $blue: #416299;
 			}
 		}
 
+	}
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+
+@media only screen and (max-width: 736px) {
+	.custom-popover {
+		height: inherit;
+		bottom: 80px;
+		background-color: rgba(20, 20, 20, 0.6);
+		padding-bottom: 0;
+
+		#popover-login {
+			position: relative;
+			text-align: center;
+			top: 20%;
+			padding: 0;
+			width: 300px;
+			margin: 0 auto;
+
+			.crossPopover {
+				display: inline-block;
+				float: right;
+				position: relative;
+				top: -80px;
+
+				img {
+					width: 16px;
+				}
+			}
+
+			.popover-container {
+				.popover-text  {
+					text-align: left;
+					margin-left: 30px;
+					margin-bottom: 10px;
+					p {
+						
+					}
+				}
+
+				.popover-button {
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	.custom-popover {
+		height: inherit;
+		bottom: 80px;
+		background-color: rgba(20, 20, 20, 0.6);
+		padding-bottom: 0;
+
+		#popover-login {
+			position: relative;
+			text-align: center;
+			top: 16%;
+			padding: 0;
+
+			.popover-container {
+
+
+				.popover-button {
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.custom-popover {
+		height: inherit;
+		bottom: 80px;
+		background-color: rgba(20, 20, 20, 0.6);
+		padding-bottom: 0;
+
+		#popover-login {
+			position: relative;
+			text-align: center;
+			top: 20%;
+			padding: 0;
+			width: auto;
+			margin: 0;
+
+			.popover-container {
+				.popover-text  {
+					margin-left: 15px;
+					margin-bottom: 10px;
+					p {
+						display: none;
+					}
+				}
+
+				.popover-button {
+					margin: 0 auto;
+				}
+			}
+		}
 	}
 }

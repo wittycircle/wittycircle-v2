@@ -1,5 +1,21 @@
 /* Mobile Animation */
 
+#hsfmobile {
+	display: none;
+}
+
+#message-modal-mobile {
+	display: none;
+}
+
+#hmmobile,
+#hnmobile {
+	display: none;
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+
 @-webkit-keyframes body-mobile-push-right {
 	0%   {left: -150px;}
     100% {left: 0;}
@@ -14,6 +30,27 @@
 	0%   {left: 0;}
     100% {left: 300px;}
 }
+
+@-webkit-keyframes rightToLeft {
+    0% {right: -300px;}
+    100% {right: 0px;}
+} 
+
+@keyframes rightToLeft {
+    0% {right: -300px;}
+    100% {right: 0px;}
+}
+
+@-webkit-keyframes leftToRight {
+    0% {right: 0;}
+    100% {right: -800px;}
+} 
+
+@keyframes leftToRight {
+    0% {right: 0px;}
+    100% {right: -800px;}
+}
+
 
 .search-push-right {
 	left: 0 !important;
@@ -232,6 +269,7 @@
 		overflow-y: scroll;
 		overflow-x: hidden;
 		margin-top: 42px;
+		padding-bottom: 40px;
 		
 		h4, h5, p, span {
 			color: #999999;
@@ -328,12 +366,30 @@
 			}
 		}
 	}
+
+	.header-message-footer-mobile {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		background-color: #fafafa;
+		text-align: center;
+		border-top: 1px solid #e5e5e5;
+
+		h4 {
+			padding: 13px 10px;
+			font-family: 'FreigMed';
+			font-size: 16px;
+			color: #999999;
+		}
+	}
 }
 
 
 /* Mobile modal new message */
 
 #message-modal-mobile {
+	display: block;
+
 	.new-messages-modal-write-mobile {
 		display: none;
 	}
@@ -344,10 +400,30 @@
 		height: 100vh;
 		display: none;
 		overflow: hidden;
+		-webkit-animation-duration: 0.2s;
+		-o-animation-duration: 0.2s;
+		-moz-animation-duration: 0.2s;
+		-ms-animation-duration: 0.2s;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+
 
 		.new-messages-modal-header {
 			float: right;
-			padding: 10px 20px;
+			padding: 10px 25px;
 
 			img {
 				width: 16px;
@@ -361,7 +437,7 @@
 			input {
 				margin-top: 5px;
 				display: inline-block;
-				width: 100%;
+				width: 92%;
 				font-family: 'FreigBook';
 				font-size: 16px;
 				color: #999999;
@@ -469,8 +545,7 @@
 			z-index: 100000;
 			text-align: center;
 			border-top: 1px solid #e5e5e5;
-			padding: 0 10px;
-			padding-top: 5px;
+			padding: 5px 10px;
 
 			.textarea-box {
 				display: inline-block;
@@ -628,6 +703,7 @@
 								font-family: 'FreigBook';
 								font-size: 14px;
 								color: #999999;
+								margin-bottom: 0;
 							}
 						}
 
@@ -669,7 +745,7 @@
 }
 
 .left-to-right-message {
-	right: -400px;
+	right: -800px;
 	-webkit-animation: leftToRight 0.3s; /* Chrome, Safari, Opera */ 
 	animation: leftToRight 0.3s;
 	-webkit-transform: translateZ(0);
@@ -689,22 +765,103 @@
 	backface-visibility: hidden;
 }
 
-@-webkit-keyframes rightToLeft {
-    0% {right: -300px;}
-    100% {right: 0px;}
-} 
-
-@keyframes rightToLeft {
-    0% {right: -300px;}
-    100% {right: 0px;}
 }
 
-@-webkit-keyframes leftToRight {
-    0% {right: 0;}
-    100% {right: -300px;}
-} 
+@media only screen and (max-width: 667px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
 
-@keyframes leftToRight {
-    0% {right: 0px;}
-    100% {right: -300px;}
+			.new-messages-search-mobile {
+
+				input {
+					width: 91%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 90%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 87%;
+				}
+			}
+		}
+	}
+}
+
+
+@media only screen and (max-width: 414px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 86%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 84%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 83%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	#message-modal-mobile {
+		.new-messages-modal-mobile {
+
+			.new-messages-search-mobile {
+
+				input {
+					width: 81%;
+				}
+			}
+		}
+	}
 }

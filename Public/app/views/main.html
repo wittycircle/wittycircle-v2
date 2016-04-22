@@ -1,8 +1,9 @@
 <div id="main-body-page">
+	<div data-ng-include="'views/mobiles/main-mobile-modal.view.client.html'"></div>
 	<div class="body-page">
 		<div id="hvbg" class="home-video-bg">
 			<video poster="images/poster/poster_home_signup.jpg" loop muted autoplay>
-				<source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582130/Share_banner_cover/videos_background/Home.mp4" type="video/mp4">
+				<source src="videos/Home.mp4" type="video/mp4">
 			</video>
 		</div>
 		<div id="hibg" class="home-image-bg"></div>
@@ -43,7 +44,7 @@
 				<div class="col-md-12 main-project-component">
 					<h2 class="main-first-text">I have {{statusprefix}}</h2>
 					<div class="dropdown-projects">
-						<div id="apoc" class="main-projects-component">
+						<div id="apoc" class="main-projects-component" ng-click="openmamodal(1)">
 							<h2 id="apoc" ng-bind="statusProject"></h2>
 							<img id="apoc" src="/images/arrow-down-icon-w.svg">
 						</div>
@@ -60,7 +61,7 @@
 						<h2>about</h2>
 					</div>
 					<div class="dropdown-categories">
-						<div id="acoc" class="main-categories-component">
+						<div id="acoc" class="main-categories-component" ng-click="openmamodal(2)">
 							<h2 id="acoc" ng-bind="ctgName.name"></h2>
 							<img id="acoc" src="/images/arrow-down-icon-w.svg">
 						</div>

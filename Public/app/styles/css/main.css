@@ -16,7 +16,7 @@ h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button, a {
   -moz-osx-font-smoothing: grayscale; }
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
-input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="radio"], input[type="submit"] textarea {
+input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="radio"], input[type="submit"], textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; }

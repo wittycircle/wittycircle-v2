@@ -248,13 +248,14 @@ exports.getProjectsCreatedByUser = function(req, res){
                         }
                         tf.sortProjectCard(results, function(data) {
                             if (!data)
-                                return res.status(400).send('Error00');
+                                return res.send([]);
                             else {
                                 tf.addUserPictureToProject(data, function (rez) {
                                   if (!rez)
-                                    return res.status(400).send('Error01');
-                                  else
+                                    return res.send('Error01');
+                                  else {
                                     return res.send(rez);
+				  }
                                 })
                             }
                         });

@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout) {
+ 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
  	var socket = io.connect('http://127.0.0.1');
  	var x = $(window).width();
@@ -250,8 +250,10 @@
 
 	socket.on('send offline', function(data) { // get all message data from sender offline
 		if (data.success) {
-			if (x <= 736) 
+			if (x <= 736)  {
+				data.date = $filter('wittyDateFilter')(data.date);
 				$scope.$parent.offMessages.push(data);
+			}
 			else
 				$scope.offMessages.push(data);
 			$scope.refreshDialogue();

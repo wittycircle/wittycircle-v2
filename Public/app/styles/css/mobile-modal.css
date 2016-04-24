@@ -171,6 +171,7 @@
       position: fixed;
       width: 100%;
       height: 42px;
+      z-index: 100000;
       padding: 10px;
       background-color: white;
       border-bottom: 1px solid #e5e5e5;
@@ -260,12 +261,31 @@
         -moz-transition: all 200ms linear;
         -ms-transition: all 200ms linear;
         -kthtml-transition: all 200ms linear;
-        transition: all 200ms linear; }
+        transition: all 200ms linear;
+        -webkit-animation-duration: 0.2s;
+        -o-animation-duration: 0.2s;
+        -moz-animation-duration: 0.2s;
+        -ms-animation-duration: 0.2s;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        -ms-perspective: 1000;
+        -o-perspective: 1000;
+        perspective: 1000;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden; }
         #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
         #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
           display: inline-block;
           float: left;
-          width: 50px; }
+          width: 8%; }
           #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img,
           #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img {
             width: 48px;
@@ -274,7 +294,7 @@
         #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
         #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
           display: inline-block;
-          width: 218px;
+          width: 89%;
           margin-left: 15px; }
           #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4,
           #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4 {
@@ -582,24 +602,79 @@
     -o-backface-visibility: hidden;
     backface-visibility: hidden; } }
 @media only screen and (max-width: 667px) {
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+    width: 9%; }
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+    width: 87%; }
+
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 91%; } }
 @media only screen and (max-width: 640px) {
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+    width: 9%; }
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+    width: 87%; }
+
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 90%; } }
 @media only screen and (max-width: 480px) {
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+    width: 12%; }
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+    width: 82%; }
+
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 87%; } }
 @media only screen and (max-width: 414px) {
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 86%; } }
 @media only screen and (max-width: 375px) {
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+    width: 14%; }
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+    width: 80%; }
+
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 84%; } }
 @media only screen and (max-width: 360px) {
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 83%; } }
 @media only screen and (max-width: 320px) {
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+    width: 15%; }
+  #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+  #hnmobile .header-dropdown-lists .header-noMessage-text .header-list-message,
+  #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+    width: 80%; }
+
   #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
     width: 81%; } }
 

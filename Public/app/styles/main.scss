@@ -6,6 +6,27 @@ body {
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   transition: all 0.3s ease;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH superior than 736px **************************/
+@media only screen and (min-width: 737px) {
+  body {
+     min-width:1200px !important; /* suppose you want minimun width of 1200px */
+     width: 100% !important;
+     height: auto !important;
+  }
+}
+
+.body-desktop {
+  min-width:1200px !important; /* suppose you want minimun width of 1200px */
+  width: 100% !important;
+  height: auto !important;
 }
 
 body:-webkit-scrollbar {
@@ -821,3 +842,12 @@ li:focus {
      color: #999999;
   }
 }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+  .pdt-tp-bt-75 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+

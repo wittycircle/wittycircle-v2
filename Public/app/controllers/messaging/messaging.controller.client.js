@@ -11,7 +11,7 @@
  angular.module('wittyApp')
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
- 	var socket = io.connect('https://www.wittycircle.com');
+ 	var socket = io.connect('http://127.0.0.1');
  	var x = $(window).width();
 
  	/* Function vm */

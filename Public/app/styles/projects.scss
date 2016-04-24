@@ -999,4 +999,100 @@ $font-h3: 'Open Sans', sans-serif;
   .project-post-box, .project-post-video {
     border: none;
   }
+
+  .project-post-container {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  #feedback_project {
+
+    .pdt-tp-bt-75 {
+      padding: 30px 30px 70px 30px;
+    }
+
+    h3 {
+      font-size: 27px;
+    }
+
+    h4 {
+      font-size: 21px;
+    }
+
+    .feedback_container {
+      padding: 0 0px;
+    }
+
+    .container-custom-project {
+
+    }
+
+    .no_feedbacks {
+      margin: 20px 0;
+
+      .title_no_comments {
+        font-size: 21px;
+        margin-bottom: 6px;
+      }
+
+      .text_no_comments {
+        font-size: 16px;
+      }
+    }
+
+    .link_top {
+      font-family: 'FreigMed';
+      font-size: 14px;
+      padding-top: 0px;
+      color: $red;
+      cursor: pointer;
+
+      .fa-plus {
+        position: relative;
+        font-size: 14px;
+        top: 1px;
+        margin-right: 5px;
+      }
+    }
+    .link_top:hover {
+      color: $red;
+    }
+
+    .cards_openings_body {
+      width: 260px;
+      margin: 0 auto;
+    }
+
+    .cards_openings_footer {
+      .footer_text {
+        display: none;
+      }
+    }
+
+    .mgr-bt-40 {
+      margin-bottom: 0 !important;
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  
+  #feedback_project {
+    .pdt-tp-bt-75 {
+      padding: 30px 10px 70px 10px;
+    }
+
+    .cards_openings_body {
+        width: 240px;
+        margin: 0 auto;
+      }
+
+    .cards_openings_footer {
+      .footer_text {
+        display: none;
+      }
+    }
+  }
 }

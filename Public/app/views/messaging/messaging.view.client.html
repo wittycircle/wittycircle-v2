@@ -140,7 +140,7 @@
 							<div class="messages-texto">
 								<div class="messages-texto-name">
 									<h4>{{message.from_username}}</h4>
-									<span>{{message.creation_date | wittyDateFilter }}</span>
+									<span>{{message.creation_date }}</span>
 								</div>
 								<div class="messages-texto-text">
 									<p>{{message.message}}</p>
@@ -155,7 +155,7 @@
 							<div class="messages-texto">
 								<div class="messages-texto-name">
 									<h4>{{liveMessage.from_username}}</h4>
-									<span>{{liveMessage.date | wittyDateFilter }}</span>
+									<span>{{liveMessage.date}}</span>
 								</div>
 								<div class="messages-texto-text">
 									<p>{{liveMessage.message}}</p>
@@ -170,7 +170,7 @@
 							<div class="messages-texto">
 								<div class="messages-texto-name">
 									<h4>{{offMessage.from_username}}</h4>
-									<span>{{offMessage.date | wittyDateFilter }}</span>
+									<span>{{offMessage.date}}</span>
 								</div>
 								<div class="messages-texto-text">
 									<p>{{offMessage.message}}</p>
@@ -295,8 +295,8 @@
 					header 		= document.getElementById('headerCore');
 
 				messlist.on('click', function() {
-					classie.remove( mbmm, 'left-to-right-message');
-					classie.add( mbmm, 'right-to-left-message');
+					classie.remove( document.getElementById('messages-body-messages-mobile'), 'left-to-right-message');
+					classie.add( document.getElementById('messages-body-messages-mobile'), 'right-to-left-message');
 					$('#messages-body-messages-mobile').show()
 					$('#body-section').hide();
 				});

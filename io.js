@@ -1,4 +1,5 @@
 /*****Socket*****/
+var cd = require('./dateConvert');
 
 module.exports = function(app, io, ensureAuth) {
     var users = {};
@@ -188,15 +189,21 @@ module.exports = function(app, io, ensureAuth) {
 		}
 		if (username in users) { // check if username is in the list of online user
 		    saveMessage(names, msg, function(infoMessage){
-			socket.emit("send online", infoMessage); // display message to current user
-			socket.broadcast.to(users[username]).emit("send online", infoMessage); // send message to the id corresponding to the username
-			socket.broadcast.emit('notification', "notif");
+		    	cd.convertDate(infoMessage.date, function(newDate) {
+		    		infoMessage.date = newDate; 
+					socket.emit("send online", infoMessage); // display message to current user
+					socket.broadcast.to(users[username]).emit("send online", infoMessage); // send message to the id corresponding to the username
+					socket.broadcast.emit('notification', "notif");
+				});
 		    });
 		} else { // when user is offline, save message to the database
 		    saveMessage(names, msg, function(infoMessage) {
-			socket.emit('send offline', infoMessage);
-			//socket.broadcast.emit("send offline", infoMessage); // display message
-			socket.broadcast.emit('notification', "notif");
+		    	cd.convertDate(infoMessage.date, function(newDate) {
+		    		infoMessage.date = newDate; 
+					socket.emit('send offline', infoMessage);
+					//socket.broadcast.emit("send offline", infoMessage); // display message
+					socket.broadcast.emit('notification', "notif");
+				});
 		    });
 		}
 	    };
@@ -222,11 +229,11 @@ module.exports = function(app, io, ensureAuth) {
 							message          : message
 						    };
 						    pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
-							if (err) throw err;
-							infoMessage.from_picture= result[0].profile_picture_icon;
-							infoMessage.date		= new Date();
-							infoMessage.success		= true;
-							callback(infoMessage);
+								if (err) throw err;
+								infoMessage.from_picture= result[0].profile_picture_icon;
+								infoMessage.date		= new Date();
+								infoMessage.success		= true;
+								callback(infoMessage);
 						    });
 						});
 		       }

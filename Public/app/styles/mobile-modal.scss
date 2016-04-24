@@ -267,7 +267,8 @@
 
 	.header-dropdown-lists {
 		overflow-y: scroll;
-		overflow-x: hidden;
+		overflow-x: hidden; 
+		-webkit-overflow-scrolling: touch;
 		margin-top: 42px;
 		padding-bottom: 40px;
 		
@@ -456,6 +457,8 @@
 			width: 100%;
 			padding-bottom: 150px;
 			overflow-y: scroll;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-newpost-user {
 				padding: 12px 20px 12px 20px;
@@ -517,24 +520,8 @@
 		display: none;
 		position: fixed;
 		top: 0;
-		z-index: 1000;
 		width: 100%;
 		height: 100%;
-		-webkit-transform: translateZ(0);
-		-moz-transform: translateZ(0);
-		-ms-transform: translateZ(0);
-		-o-transform: translateZ(0);
-		transform: translateZ(0);
-		-webkit-perspective: 1000;
-		-moz-perspective: 1000;
-		-ms-perspective: 1000;
-		-o-perspective: 1000;
-		perspective: 1000;	
-		-webkit-backface-visibility: hidden;
-		-moz-backface-visibility: hidden;
-		-ms-backface-visibility: hidden;
-		-o-backface-visibility: hidden;
-		backface-visibility: hidden;
 
 		
 		.messages-conversation-textarea {
@@ -542,14 +529,14 @@
 			bottom: 0;
 			background-color: white;
 			width: 100%;
-			z-index: 100000;
 			text-align: center;
 			border-top: 1px solid #e5e5e5;
-			padding: 5px 10px;
+			padding: 5px 10px 5px 5px;
 
 			.textarea-box {
 				display: inline-block;
 				width: 84%;
+
 				textarea:focus {
 					outline: 0;
 				}
@@ -558,7 +545,7 @@
 					resize: none;
 					width: 100%;
 					font-family: 'FreigBook';
-					font-size: 14px;
+					font-size: 16px;
 					border: 1px solid #e5e5e5;
 					border-radius: 5px;
 					padding: 5px 10px;
@@ -567,10 +554,8 @@
 
 			.textarea-button {
 				display: inline-block;
-				text-align: right;
 				width: 16%;
-				height: inherit;
-				padding-top: 12px;
+				margin-top: 1px;
 				float: right;
 
 				button {
@@ -579,13 +564,14 @@
 					background-color: #ff4d4d;
 					border: 1px solid #ff4d4d;
 					border-radius: 4px;
-					padding: 4px;
+					padding: 14px 8px;
+					margin-left: 5px;
 					color: white;
 				}
 
 				button:hover {
-					border: 1px solid #d94242;
-					background-color: #d94242;
+					border: 1px solid #ff4d4d;
+					background-color: #ff4d4d;
 				}
 			}
 		}
@@ -646,27 +632,15 @@
 
 		.messages-body-conversation-mobile {
 			position: absolute;
+			bottom: 0;
 			background-color: white;
 			width: 100vw;
-			height: 100vh;
+			height: 100%;
 			padding-top: 44px;
 			padding-bottom: 63px;
 			overflow-y: scroll;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-body-textos {
 				.messages-cb-texto {
@@ -711,7 +685,7 @@
 
 							p {
 								font-family: 'FreigBook';
-								font-size: 15px;
+								font-size: 16px;
 								line-height: 25px;
 								word-wrap: break-word;
 								margin-bottom: 0;

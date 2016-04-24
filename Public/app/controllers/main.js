@@ -298,6 +298,26 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
 
 })
+.directive('slickSliderHome', function () {
+    return {
+        restrict: 'A',         
+        scope: {
+          'data': '='
+        },
+        replace: true,
+        link: function (scope, element, attrs) {
+            var isInitialized = false;
+
+            scope.$watch('data', function(newVal, oldVal) {
+                if (newVal && newVal.length > 0 && !isInitialized) {
+                    $(element).slick(scope.$eval(attrs.slickSliderHome));
+
+                    isInitialized = true;
+                }
+            });
+        }
+    }
+})
 .directive('googlePlace', function() {
   return {
     require: 'ngModel',

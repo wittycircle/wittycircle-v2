@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout) {
+ 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
  	var socket = io.connect('http://127.0.0.1');
  	var x = $(window).width();
@@ -113,6 +113,7 @@
 
 	 		$http.get('/messages/' + dialogue.id).success(function(res){
 	 			if (res.success) {
+	 				console.log(res);
 	 				var last 							= res.messages[res.messages.length - 1];
 	 				$scope.$parent.messages				= res.messages;
 	 				$scope.$parent.name 				= res.name.first_name;
@@ -250,8 +251,9 @@
 
 	socket.on('send offline', function(data) { // get all message data from sender offline
 		if (data.success) {
-			if (x <= 736) 
+			if (x <= 736)  {
 				$scope.$parent.offMessages.push(data);
+			}
 			else
 				$scope.offMessages.push(data);
 			$scope.refreshDialogue();
@@ -268,6 +270,11 @@
 		 		else
 		 			msg = "/private " + $scope.newMessageArea.message;
 		 	 	socket.emit('private message', {msg: msg, name: username, adresser: nameuser, sender: $rootScope.globals.currentUser.username});
+		 	 	if (x <= 736) {
+		 	 		$timeout(function() {
+						$('.messages-body-conversation-mobile').scrollTop($('.messages-body-conversation-mobile')[0].scrollHeight);
+					}, 200);
+		 	 	}
 		 	 	if ($scope.socket.message)
 		 	 		delete $scope.socket.message;
 		 	 	if ($scope.newMessageArea && $scope.newMessageArea.message)

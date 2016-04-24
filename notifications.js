@@ -4,7 +4,8 @@
 
 var view	   = require('./controllers/view'),
     follow	 = require('./controllers/follow'),
-    project  = require('./controllers/projects') 
+    project  = require('./controllers/projects'),
+    cd       = require('./dateConvert')
 
 // sort notification list by date
 function notifSortListDesc(list, callback) {
@@ -229,6 +230,22 @@ function getAllNotificationList(req, res, callback) {
     });
 };
 
+function getPrettyDateForAllNotif(array, callback) {
+  if (array && array[0]) {
+    function recursive(index) {
+      if (array[index]) {
+        cd.convertDate(array[index].date_of_view, function(newDate) {
+          array[index].date_of_view = newDate;
+          recursive(index + 1);
+        });
+      } else
+        callback(array);
+
+    }; recursive(0);
+  } else
+    callback(false);
+}
+
 exports.getNotifications = function(req, res) {
     getAllNotificationList(req, res, function(result) {
 	if (result.done) {
@@ -247,8 +264,11 @@ exports.getNotifications = function(req, res) {
 				       notifArray.push(newNotif);
 				       recursive(index + 1);
 				   });
-		    } else
-			res.send({success: true, data: notifArray});
+		    } else {
+            getPrettyDateForAllNotif(notifArray, function(newArray) {
+              res.send({success: true, data: newArray});
+            });
+        }
 		};
 		recursive(0);
 	    });
@@ -320,7 +340,9 @@ exports.updateAllNotif = function(req, res) {
 };
 
 exports.updateProjectInvolve = function(req, res) { // update n_read of view
+  console.log(req.body.id);
     if (typeof req.body.id === "number") {
+      console.log(req.body.id);
       pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
        function(err, result) {
            if (err) throw err;

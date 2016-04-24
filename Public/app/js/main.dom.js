@@ -87,66 +87,64 @@ $(document).ready(function() {
         });
 
         //** Main slide carousel
-        $('.main-body2-body-mobile').slick({
-            centerMode: true,
-            centerPadding: '60px',
-            slidesToShow: 3,
-            variableWidth: true,
-            mobileFirst: true,
-            dots: true,
-            nextArrow: "",
-            swipeToSlide: true,
-            speed: 100,
+        // $('.main-body2-body-mobile').slick({
+        //     centerMode: true,
+        //     centerPadding: '60px',
+        //     slidesToShow: 3,
+        //     variableWidth: true,
+        //     mobileFirst: true,
+        //     dots: true,
+        //     nextArrow: "",
+        //     swipeToSlide: true,
+        //     speed: 100,
 
-            responsive: [{
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 3
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                }
-            }]
-        });
+            // responsive: [{
+            //     breakpoint: 768,
+            //     settings: {
+            //         arrows: false,
+            //         centerMode: true,
+            //         centerPadding: '40px',
+            //         slidesToShow: 3
+            //     }
+            // },
+            // {
+            //     breakpoint: 480,
+            //     settings: {
+            //         arrows: false,
+            //         centerMode: true,
+            //         centerPadding: '40px',
+            //         slidesToShow: 1
+            //     }
+            // }]
+        // });
 
-        $('.main-body3-body-mobile').slick({
-            centerMode: true,
-            centerPadding: '60px',
-            slidesToShow: 3,
-            variableWidth: true,
-            mobileFirst: true,
-            dots: true,
-            nextArrow: "",
-            speed: 100,
+        // $('.main-body3-card').slick({
+        //     centerMode: true,
+        //     centerPadding: '60px',
+        //     variableWidth: true,
+        //     mobileFirst: true,
+        //     dots: true,
+        //     speed: 100,
 
-            responsive: [{
-                breakpoint: 768,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 3
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    arrows: false,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
-                }
-            }]
-        });
+        //     responsive: [{
+        //         breakpoint: 768,
+        //         settings: {
+        //             arrows: false,
+        //             centerMode: true,
+        //             centerPadding: '40px',
+        //             slidesToShow: 3
+        //         }
+        //     },
+        //     {
+        //         breakpoint: 480,
+        //         settings: {
+        //             arrows: false,
+        //             centerMode: true,
+        //             centerPadding: '40px',
+        //             slidesToShow: 1
+        //         }
+        //     }]
+        // });
     }
 });
 

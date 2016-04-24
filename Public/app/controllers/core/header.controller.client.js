@@ -417,8 +417,6 @@ angular.module('wittyApp')
   };
 
   function unslickElem() {
-    $('.main-body2-body-mobile').slick('unslick');
-    $('.main-body3-body-mobile').slick('unslick');
   };
 
   $scope.goToStart = function() {
@@ -436,7 +434,6 @@ angular.module('wittyApp')
   $scope.moreMobile = function() {
     $scope.limitM += 5;
   };
- 
 
 /*** All watch function ***/
   $scope.$watch('notifBubble', function(value, old) {

@@ -240,176 +240,52 @@
 							</a>
 						</div>
 					</div>
-					<div class="main-body2-body-mobile" media="(max-width: 736px)">
-						<div class="main-body2-card project-card">
-							<div class="card-tag" ng-click="goToDiscover(projectCards[0].category_name)">
+
+					<div class="main-body2-body-mobile" data="projectCards" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
+
+						<div class="main-body2-card project-card" ng-repeat="projectCard in projectCards | limitTo: 3">
+							<div class="card-tag" ng-click="goToDiscover(projectCard.category_name)">
 								<div class="card-tag-content">
 									<div class="card-tag-bg">
 									</div>
 									<img src="/images/tag-icon.png">
-									<h5>{{projectCards[0].category_name}}</h5>
+									<h5>{{projectCard.category_name}}</h5>
 								</div>
 							</div>
-							<a class="card-project-page" ng-href="/project/{{projectCards[0].public_id}}/{{encodeUrl(projectCards[0].title)}}">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + projectCards[0].picture_card + ')'}">
-									<!-- <img ng-src="{{projectCards[0].picture}}" alt="card-picture"> -->
+							<a class="card-project-page" ng-href="/project/{{projectCard.public_id}}/{{encodeUrl(projectCard.title)}}">
+								<div class="card-picture" ng-style="{'background-image': 'url({{ projectCard.picture_card }})'}">
+									<!-- <img ng-src="{{projectCard.picture}}" alt="card-picture"> -->
 								</div>
 								<div class="card-info">
 									<div class="card-title-space">
-										<h4>{{projectCards[0].title}}</h4>
+										<h4>{{projectCard.title}}</h4>
 									</div>
 									<div class="card-status">
 										<span>
-											<img ng-if="projectCards[0].status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[0].status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[0].status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[0].status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
-											{{projectCards[0].status}}
+											<img ng-if="projectCard.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
+											<img ng-if="projectCard.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
+											<img ng-if="projectCard.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
+											<img ng-if="projectCard.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
+											{{projectCard.status}}
 										</span>
 									</div>
 									<div class="card-location">
-										<span><img src="/images/location-picto.svg" alt="location-picture" />{{projectCards[0].location_city}}<i ng-hide="!projectCards[0].location_country">,</i> {{projectCards[0].location_country}}</span>
+										<span><img src="/images/location-picto.svg" alt="location-picture" />{{projectCard.location_city}}<i ng-hide="!projectCard.location_country">,</i> {{projectCard.location_country}}</span>
 									</div>
 									<div class="card-description-text">
-										<p>{{projectCards[0].description}}</p>
+										<p>{{projectCard.description}}</p>
 									</div>
 									<div class="card-info-by">
 										<figure class="card-info-by-picture">
-											<img ng-src="{{ resizePic(projectCards[0].pic, 30, 30, 'fill') }}" alt="card-foot-picture">
+											<img ng-src="{{ resizePic(projectCard.pic, 30, 30, 'fill') }}" alt="card-foot-picture">
 										</figure>
-										<h6>{{projectCards[0].creator_user_name}}<h6 ng-if="projectCards[0].usersIn.length">& {{projectCards[0].usersIn.length}} more</h6></h6>
+										<h6>{{projectCard.creator_user_name}}<h6 ng-if="projectCard.usersIn.length">& {{projectCard.usersIn.length}} more</h6></h6>
 									</div>
 								</div>
 							</a>
 						</div>
-
-						<div class="main-body2-card project-card">
-							<div class="card-tag" ng-click="goToDiscover(projectCards[1].category_name)">
-								<div class="card-tag-content">
-									<div class="card-tag-bg">
-									</div>
-									<img src="/images/tag-icon.png">
-									<h5>{{projectCards[1].category_name}}</h5>
-								</div>
-							</div>
-							<a class="card-project-page" ng-href="/project/{{projectCards[1].public_id}}/{{encodeUrl(projectCards[1].title)}}">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + projectCards[1].picture_card + ')'}">
-									<!-- <img ng-src="{{projectCards[1].picture}}" alt="card-picture"> -->
-								</div>
-								<div class="card-info">
-									<div class="card-title-space">
-										<h4>{{projectCards[1].title}}</h4>
-									</div>
-									<div class="card-status">
-										<span>
-											<img ng-if="projectCards[1].status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[1].status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[1].status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[1].status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
-											{{projectCards[1].status}}
-										</span>
-									</div>
-									<div class="card-location">
-										<span><img src="/images/location-picto.svg" alt="location-picture" />{{projectCards[1].location_city}}<i ng-hide="!projectCards[1].location_country">,</i> {{projectCards[1].location_country}}</span>
-									</div>
-									<div class="card-description-text">
-										<p>{{projectCards[1].description}}</p>
-									</div>
-									<div class="card-info-by">
-										<figure class="card-info-by-picture">
-											<img ng-src="{{ resizePic(projectCards[1].pic, 30, 30, 'fill') }}" alt="card-foot-picture">
-										</figure>
-										<h6>{{projectCards[1].creator_user_name}}<h6 ng-if="projectCards[1].usersIn.length">& {{projectCards[1].usersIn.length}} more</h6></h6>
-									</div>
-								</div>
-							</a>
-						</div>
-
-						<div class="main-body2-card project-card">
-							<div class="card-tag" ng-click="goToDiscover(projectCards[2].category_name)">
-								<div class="card-tag-content">
-									<div class="card-tag-bg">
-									</div>
-									<img src="/images/tag-icon.png">
-									<h5>{{projectCards[2].category_name}}</h5>
-								</div>
-							</div>
-							<a class="card-project-page" ng-href="/project/{{projectCards[2].public_id}}/{{encodeUrl(projectCards[2].title)}}">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + projectCards[2].picture_card + ')'}">
-									<!-- <img ng-src="{{projectCards[2].picture}}" alt="card-picture"> -->
-								</div>
-								<div class="card-info">
-									<div class="card-title-space">
-										<h4>{{projectCards[2].title}}</h4>
-									</div>
-									<div class="card-status">
-										<span>
-											<img ng-if="projectCards[2].status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[2].status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[2].status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[2].status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
-											{{projectCards[2].status}}
-										</span>
-									</div>
-									<div class="card-location">
-										<span><img src="/images/location-picto.svg" alt="location-picture" />{{projectCards[2].location_city}}<i ng-hide="!projectCards[2].location_country">,</i> {{projectCards[2].location_country}}</span>
-									</div>
-									<div class="card-description-text">
-										<p>{{projectCards[2].description}}</p>
-									</div>
-									<div class="card-info-by">
-										<figure class="card-info-by-picture">
-											<img ng-src="{{ resizePic(projectCards[2].pic, 30, 30, 'fill') }}" alt="card-foot-picture">
-										</figure>
-										<h6>{{projectCards[2].creator_user_name}}<h6 ng-if="projectCards[2].usersIn.length">& {{projectCards[2].usersIn.length}} more</h6></h6>
-									</div>
-								</div>
-							</a>
-						</div>
-
-						<div class="main-body2-card project-card">
-							<div class="card-tag" ng-click="goToDiscover(projectCards[3].category_name)">
-								<div class="card-tag-content">
-									<div class="card-tag-bg">
-									</div>
-									<img src="/images/tag-icon.png">
-									<h5>{{projectCards[3].category_name}}</h5>
-								</div>
-							</div>
-							<a class="card-project-page" ng-href="/project/{{projectCards[3].public_id}}/{{encodeUrl(projectCards[3].title)}}">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + projectCards[3].picture_card + ')'}">
-									<!-- <img ng-src="{{projectCards[3].picture}}" alt="card-picture"> -->
-								</div>
-								<div class="card-info">
-									<div class="card-title-space">
-										<h4>{{projectCards[3].title}}</h4>
-									</div>
-									<div class="card-status">
-										<span>
-											<img ng-if="projectCards[3].status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[3].status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[3].status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
-											<img ng-if="projectCards[3].status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
-											{{projectCards[3].status}}
-										</span>
-									</div>
-									<div class="card-location">
-										<span><img src="/images/location-picto.svg" alt="location-picture" />{{projectCards[3].location_city}}<i ng-hide="!projectCards[3].location_country">,</i> {{projectCards[3].location_country}}</span>
-									</div>
-									<div class="card-description-text">
-										<p>{{projectCards[3].description}}</p>
-									</div>
-									<div class="card-info-by">
-										<figure class="card-info-by-picture">
-											<img ng-src="{{ resizePic(projectCards[3].pic, 30, 30, 'fill') }}" alt="card-foot-picture">
-										</figure>
-										<h6>{{projectCards[3].creator_user_name}}<h6 ng-if="projectCards[3].usersIn.length">& {{projectCards[3].usersIn.length}} more</h6></h6>
-									</div>
-								</div>
-							</a>
-						</div>
-
 					</div>
+
 					<div class="main-body2-seemore">
 						<a href="/discover">See more projects</a>
 					</div>
@@ -467,35 +343,35 @@
 						</div>
 					</div>
 
-					<div class="main-body3-body-mobile">
-						<div class="main-body3-card profile-card">
-							<div class="card-click-zone" ng-click="goToProfile(cardProfiles[0].id)">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[0].cover_picture + ')'}">
-									<!-- <img ng-src="{{cardProfiles[0].cover_picture}}"> -->
-									<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[0].profile_picture + ')'}">
-										<!-- <img ng-src="{{cardProfiles[0].profile_picture}}"> -->
+					<div class="main-body3-body-mobile" data="cardProfiles" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
+						<div class="main-body3-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: 4 track by $index">
+							<div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
+								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
+									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
+									<div class="card-profile-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60) }})'}">
+										<!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
 									</div>
 								</div>
 								<div class="card-info">
-									<h4>{{cardProfiles[0].first_name}} {{cardProfiles[0].last_name}}</h4>
+									<h4>{{cardProfile.first_name}} {{cardProfile.last_name}}</h4>
 									<div class="card-location">
-										<h6>{{cardProfiles[0].location_city}}<i ng-hide="!cardProfiles[0].location_country">,</i> {{cardProfiles[0].location_country}}</h6>
+										<h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
 									</div>
 									<div class="card-description">
-										<p ng-bind-html="cardProfiles[0].description | cut:true:76:' ...'"></p>
+										<p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
 									</div>
 								</div>
 							</div>
 							<div class="card-follow">
 								<div class="card-followers card-follow-square">
-									<p ng-bind="cardProfiles[0].followers"></p>
+									<p ng-bind="cardProfile.followers"></p>
 									<h6>followers</h6>
 								</div>
 								<div class="card-following card-follow-square">
-									<p ng-bind="cardProfiles[0].following"></p>
+									<p ng-bind="cardProfile.following"></p>
 									<h6>following</h6>
 								</div>
-								<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[0].id, $index, $event)">
+								<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfile.id, $index, $event)">
 									<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
 									<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
 									<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
@@ -503,116 +379,8 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="main-body3-card profile-card">
-							<div class="card-click-zone" ng-click="goToProfile(cardProfiles[1].id)">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[1].cover_picture + ')'}">
-									<!-- <img ng-src="{{cardProfiles[1].cover_picture}}"> -->
-									<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[1].profile_picture + ')'}">
-										<!-- <img ng-src="{{cardProfiles[1].profile_picture}}"> -->
-									</div>
-								</div>
-								<div class="card-info">
-									<h4>{{cardProfiles[1].first_name}} {{cardProfiles[1].last_name}}</h4>
-									<div class="card-location">
-										<h6>{{cardProfiles[1].location_city}}<i ng-hide="!cardProfiles[1].location_country">,</i> {{cardProfiles[1].location_country}}</h6>
-									</div>
-									<div class="card-description">
-										<p ng-bind-html="cardProfiles[1].description | cut:true:76:' ...'"></p>
-									</div>
-								</div>
-							</div>
-							<div class="card-follow">
-								<div class="card-followers card-follow-square">
-									<p ng-bind="cardProfiles[1].followers"></p>
-									<h6>followers</h6>
-								</div>
-								<div class="card-following card-follow-square">
-									<p ng-bind="cardProfiles[1].following"></p>
-									<h6>following</h6>
-								</div>
-								<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[1].id, $index, $event)">
-									<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
-									<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
-									<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
-									<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="main-body3-card profile-card">
-							<div class="card-click-zone" ng-click="goToProfile(cardProfiles[2].id)">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[2].cover_picture + ')'}">
-									<!-- <img ng-src="{{cardProfiles[2].cover_picture}}"> -->
-									<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[2].profile_picture + ')'}">
-										<!-- <img ng-src="{{cardProfiles[2].profile_picture}}"> -->
-									</div>
-								</div>
-								<div class="card-info">
-									<h4>{{cardProfiles[2].first_name}} {{cardProfiles[2].last_name}}</h4>
-									<div class="card-location">
-										<h6>{{cardProfiles[2].location_city}}<i ng-hide="!cardProfiles[2].location_country">,</i> {{cardProfiles[2].location_country}}</h6>
-									</div>
-									<div class="card-description">
-										<p ng-bind-html="cardProfiles[2].description | cut:true:76:' ...'"></p>
-									</div>
-								</div>
-							</div>
-							<div class="card-follow">
-								<div class="card-followers card-follow-square">
-									<p ng-bind="cardProfiles[2].followers"></p>
-									<h6>followers</h6>
-								</div>
-								<div class="card-following card-follow-square">
-									<p ng-bind="cardProfiles[2].following"></p>
-									<h6>following</h6>
-								</div>
-								<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[2].id, $index, $event)">
-									<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
-									<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
-									<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
-									<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="main-body3-card profile-card">
-							<div class="card-click-zone" ng-click="goToProfile(cardProfiles[3].id)">
-								<div class="card-picture" ng-style="{'background-image': 'url(' + cardProfiles[3].cover_picture + ')'}">
-									<!-- <img ng-src="{{cardProfiles[3].cover_picture}}"> -->
-									<div class="card-profile-picture" ng-style="{'background-image': 'url(' + cardProfiles[3].profile_picture + ')'}">
-										<!-- <img ng-src="{{cardProfiles[3].profile_picture}}"> -->
-									</div>
-								</div>
-								<div class="card-info">
-									<h4>{{cardProfiles[3].first_name}} {{cardProfiles[3].last_name}}</h4>
-									<div class="card-location">
-										<h6>{{cardProfiles[3].location_city}}<i ng-hide="!cardProfiles[3].location_country">,</i> {{cardProfiles[3].location_country}}</h6>
-									</div>
-									<div class="card-description">
-										<p ng-bind-html="cardProfiles[3].description | cut:true:76:' ...'"></p>
-									</div>
-								</div>
-							</div>
-							<div class="card-follow">
-								<div class="card-followers card-follow-square">
-									<p ng-bind="cardProfiles[3].followers"></p>
-									<h6>followers</h6>
-								</div>
-								<div class="card-following card-follow-square">
-									<p ng-bind="cardProfiles[3].following"></p>
-									<h6>following</h6>
-								</div>
-								<div id="cfs{{$index}}" class="card-plus card-follow-square" ng-click="followUserFromCard(cardProfiles[3].id, $index, $event)">
-									<div ng-show="!followed[$index]" class="tooltipw">Follow?</div>
-									<div ng-show="followed[$index]" class="tooltipw">Unfollow?</div>
-									<i id="fop{{$index}}" ng-show="!followed[$index]" class="fa fa-plus"></i>
-									<i id="foc{{$index}}" ng-hide="!followed[$index]" class="fa fa-check"></i>
-								</div>
-							</div>
-						</div>
-
 					</div>
+
 					<div class="main-body3-seemore">
 						<a href="/meet">Find more users around you</a>
 					</div>

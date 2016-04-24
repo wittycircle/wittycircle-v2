@@ -241,17 +241,18 @@ angular.module('wittyApp')
 			else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + "  hours ago"; return (d);}
 			else if (gPD >= 1 && gPD < 2)       {d = "Yesterday"; return (d);}
 			else if (gPD >= 2 && gPD <= 3)      {d = Math.floor(gPD) + " days ago"; return (d);}
-			else if (gPD > 3 && gPD <= 7)       {if (WDay == 0) {d = "Monday"; return (d);}
-			                                 if (WDay == 1) {d = "Tuesday"; return (d);}
-			                                 if (WDay == 2) {d = "Wednesday"; return (d);}
-			                                 if (WDay == 3) {d = "Thursday"; return (d);}
-			                                 if (WDay == 4) {d = "Friday"; return (d);}
-			                                 if (WDay == 5) {d = "Saturday"; return (d);}
-			                                 if (WDay == 6) {d = "Sunday"; return (d);} }
+			else if (gPD > 3 && gPD <= 7)   	{	if (WDay == 0) {d = "Monday"; return (d);}
+					                                if (WDay == 1) {d = "Tuesday"; return (d);}
+					                                if (WDay == 2) {d = "Wednesday"; return (d);}
+					                                if (WDay == 3) {d = "Thursday"; return (d);}
+					                                if (WDay == 4) {d = "Friday"; return (d);}
+					                                if (WDay == 5) {d = "Saturday"; return (d);}
+					                                if (WDay == 6) {d = "Sunday"; return (d);} 
+				                             	}
 			else if (gPD > 7 && gPD <= 31)      {d = gdate + "/" + gmonth; return (d);}
-			else if (gPM >= 1 && gPM < 2)      		{d = Math.floor(gPM) + " month ago"; return (d);}
-			else if (gPM >= 2 && gPM <= 12)      	{d = Math.floor(gPM) + " months ago"; return (d);}
-			else if (gPY >= 1 && gPY < 2)      		{d = Math.floor(gPY) + " year ago"; return (d);}
+			else if (gPM >= 1 && gPM < 2)      	{d = Math.floor(gPM) + " month ago"; return (d);}
+			else if (gPM >= 2 && gPM <= 12)     {d = Math.floor(gPM) + " months ago"; return (d);}
+			else if (gPY >= 1 && gPY < 2)      	{d = Math.floor(gPY) + " year ago"; return (d);}
 			else if (gPY >= 2)      			{d = Math.floor(gPY) + " years ago"; return (d);}
 			else                                {d = date; return (d);}
 		}

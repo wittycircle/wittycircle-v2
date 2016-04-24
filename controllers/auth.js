@@ -91,7 +91,7 @@ exports.ResetPassword = function (req, res) {
         var buf = crypto.randomBytes(20);
         var token = buf.toString('hex');
         // TODO: IMPORTANT: change the dev url to the real one
-        var link = 'https://wittycircle.com/password/reset/' + token;
+        var link = 'https://www.wittycircle.com/password/reset/' + token;
 
         pool.query('SELECT id FROM users WHERE email = ?',
         req.body.email_reset,

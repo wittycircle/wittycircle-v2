@@ -249,9 +249,11 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
         if (!vm.currentUser)
             showbottomAlert.pop_it();
         else {
-	    console.log('ici');
-            $state.go('messages', {profile_id : id});
-	}
+            Users.getUserbyId(id, function (res) {
+                if (res.data.username)
+                    $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
+            });
+        }
     };
 
     /*** MOBILE EDIT ***/

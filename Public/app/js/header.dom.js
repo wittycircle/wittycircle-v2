@@ -21,16 +21,7 @@ var y           = $(window).width();
 $(document).ready(function() {
 
     if (y > 736) {
-        var meetCon     = document.getElementById('meet-body-page');
         var messCon     = document.getElementById('messages-body-page');
-
-        /* Meet DOM variable */
-        if (meetCon) {
-            var msabox1     = document.getElementById('msabox1'),
-                msabox2     = document.getElementById('msabox2'),
-                msdbox2     = document.getElementById('msdbox2'),
-                msatImg     = document.querySelectorAll("#msat img");
-        }
 
         window.onclick = function(e) {
             var eTarget     = e.target.id;
@@ -67,6 +58,26 @@ $(document).ready(function() {
                 //  }
                 // }
 
+                /*** ----- section meet ----- ***/
+                console.log(e.target.id);
+                if (e.target.id === 'msat' && document.getElementById('msdbox2').style.display === "none") {
+                    document.getElementById('msdbox2').style.display = "block";
+                    document.querySelectorAll("#msat img")[0].style.transform = "rotate(-180deg)";
+                } else {
+                    if (document.getElementById('msdbox2')) {
+                        document.getElementById('msdbox2').style.display = "none";
+                        document.querySelectorAll("#msat img")[0].style.transform = "rotate(0)";
+                    }
+                }
+
+                //*** add skill ***//
+                if ((e.target.id === 'input-msa2' || e.target.id === 'input-msa') && document.getElementById('msabox1').style.display === "none" && document.getElementById('msabox2').style.display === "none") {
+                    document.getElementById('msabox1').style.display = "block";
+                } else {
+                    if (document.getElementById('msabox1'))
+                        document.getElementById('msabox1').style.display = "none";
+                }
+
                 /*** section mailbox ***/
                 if ((eTarget === "hlogm" || eTarget === "notif-m-i" || eTarget === "notifMailbox") && hdropm.style.display === "none") {
                     hdropm.style.display = "block";
@@ -81,26 +92,6 @@ $(document).ready(function() {
                     hdropn.style.display = "none";
                 }
 
-                /*** ----- section meet ----- ***/
-                if (meetCon) {
-                    if (eTarget == 'msat' && msdbox2.style.display == "none") {
-                        msdbox2.style.display = "block";
-                        msatImg[0].style.transform = "rotate(-180deg)";
-                    } else {
-                        if (msdbox2) {
-                            msdbox2.style.display = "none";
-                            msatImg[0].style.transform = "rotate(0)";
-                        }
-                    }
-
-                    //*** add skill ***//
-                    if ((eTarget === 'input-msa2' || eTarget === 'input-msa') && msabox1.style.display === "none" && msabox2.style.display === "none") {
-                        msabox1.style.display = "block";
-                    } else {
-                        if (msabox1)
-                            msabox1.style.display = "none";
-                    }
-                }
 
                 if (messCon) {
                     /*** ------ section message ------ ***/

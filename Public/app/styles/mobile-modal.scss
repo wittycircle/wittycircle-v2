@@ -321,17 +321,7 @@
 			-ms-transform: translateZ(0);
 			-o-transform: translateZ(0);
 			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
-
+			
 			.header-list-picture {
 				display: inline-block;
 				float: left;
@@ -430,17 +420,6 @@
 		-ms-transform: translateZ(0);
 		-o-transform: translateZ(0);
 		transform: translateZ(0);
-		-webkit-perspective: 1000;
-		-moz-perspective: 1000;
-		-ms-perspective: 1000;
-		-o-perspective: 1000;
-		perspective: 1000;	
-		-webkit-backface-visibility: hidden;
-		-moz-backface-visibility: hidden;
-		-ms-backface-visibility: hidden;
-		-o-backface-visibility: hidden;
-		backface-visibility: hidden;
-
 
 		.new-messages-modal-header {
 			float: right;
@@ -726,16 +705,6 @@
 	-ms-transform: translateZ(0);
 	-o-transform: translateZ(0);
 	transform: translateZ(0);
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	-ms-perspective: 1000;
-	-o-perspective: 1000;
-	perspective: 1000;	
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-ms-backface-visibility: hidden;
-	-o-backface-visibility: hidden;
-	backface-visibility: hidden;
 }
 
 .left-to-right-message {
@@ -747,16 +716,7 @@
 	-ms-transform: translateZ(0);
 	-o-transform: translateZ(0);
 	transform: translateZ(0);
-	-webkit-perspective: 1000;
-	-moz-perspective: 1000;
-	-ms-perspective: 1000;
-	-o-perspective: 1000;
-	perspective: 1000;	
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-ms-backface-visibility: hidden;
-	-o-backface-visibility: hidden;
-	backface-visibility: hidden;
+
 }
 
 }

@@ -419,9 +419,8 @@
   .container-custom-project .redactor-editor p {
     font-family: 'FreigBook';
     font-size: 16px;
-    line-height: 26px;
+    line-height: 21px;
     color: #222;
-    margin-bottom: 0;
     text-align: left; }
   .container-custom-project .redactor-editor h1 {
     font-family: 'FreigBook';
@@ -474,7 +473,8 @@
     #form-project-1 .update-project-story .redactor-editor p {
       font-family: 'FreigBook';
       font-size: 17px;
-      color: black; }
+      color: black;
+      margin-bottom: 0 !important; }
     #form-project-1 .update-project-story .redactor-editor strong {
       color: black; }
 
@@ -673,6 +673,17 @@
   height: 180px;
   position: relative;
   z-index: 0; }
+  .drop_container .text-upload-video {
+    padding-top: 30px; }
+    .drop_container .text-upload-video h5 {
+      color: #FF4D4D;
+      font-family: 'FreigSem';
+      font-size: 16px;
+      margin-bottom: 10px; }
+    .drop_container .text-upload-video p {
+      font-family: 'FreigMed';
+      font-size: 16px;
+      color: #999999; }
   .drop_container .img_up {
     background-size: cover;
     background-repeat: no-repeat;

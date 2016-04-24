@@ -267,7 +267,8 @@
 
 	.header-dropdown-lists {
 		overflow-y: scroll;
-		overflow-x: hidden;
+		overflow-x: hidden; 
+		-webkit-overflow-scrolling: touch;
 		margin-top: 42px;
 		padding-bottom: 40px;
 		
@@ -456,6 +457,8 @@
 			width: 100%;
 			padding-bottom: 150px;
 			overflow-y: scroll;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-newpost-user {
 				padding: 12px 20px 12px 20px;
@@ -652,21 +655,8 @@
 			padding-top: 44px;
 			padding-bottom: 63px;
 			overflow-y: scroll;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-body-textos {
 				.messages-cb-texto {

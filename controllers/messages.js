@@ -160,9 +160,9 @@ exports.getAllConversation = function(req, res) {
 	       function(err, data) {
 		   	if (err) throw err;
 			   	if (data[0]) {
-				   getDialogue(req, data, function(result) {
+				   	getDialogue(req, data, function(result) {
 				       res.send({success: true, topic: result});
-				   });
+				   	});
 				} else
 					res.send({success: false});
 	       	});
@@ -195,7 +195,15 @@ exports.getSpecificConversation =  function(req, res) { // get all messages of a
 										my_picture	: picture[0].profile_picture_icon,
 										user_picture: profile[0].profile_picture_icon,
 									};
-									res.send({success: true, messages: data, name: name, picture: profile_picture});
+									function recursive(index) {
+										if (data[index]) {
+											convertDate(data[index].creation_date, function(newDate) {
+												data[index].creation_date = newDate;
+												recursive(index + 1);
+											});
+										} else
+											res.send({success: true, messages: data, name: name, picture: profile_picture});
+									}; recursive(0);
 								});
 							});
                    });

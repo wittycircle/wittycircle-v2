@@ -45,7 +45,7 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{message.from_username}}</h4>
-							<p>{{message.creation_date | wittyDateFilter }}</p>
+							<p>{{message.creation_date}}</p>
 						</div>
 						<div class="messages-texto-text">
 							<p>{{message.message}}</p>
@@ -60,7 +60,7 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{liveMessage.from_username}}</h4>
-							<p>{{liveMessage.date | wittyDateFilter }}</p>
+							<p>{{liveMessage.date}}</p>
 						</div>
 						<div class="messages-texto-text">
 							<p>{{liveMessage.message}}</p>
@@ -101,7 +101,6 @@
 				nmmmobile 		= $('#nmmmobile'),
 				nmmwmobile 		= $('#nmmwmobile'),
 				hmmobile 		= $('#hmmobile'),
-				textbtn 		= $('#textbtn'),
 				messagesScroll 	= $('.messages-body-conversation-mobile'),
 				currentUrl 		= window.location.href,
 				mbmm 			= document.getElementById('messages-body-messages-mobile'),
@@ -110,12 +109,6 @@
 			closeMessage.click(function() {
 				$('#body-section').show()
 				$('.new-messages-modal-mobile').hide();
-			});
-
-			textbtn.click(function() {
-				setTimeout(function() {
-					$('.messages-body-conversation-mobile').scrollTop($('.messages-body-conversation-mobile')[0].scrollHeight);
-				}, 400);
 			});
 
 			$('#mbom').on('click', function() {

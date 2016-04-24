@@ -38,7 +38,6 @@ angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $wind
         } if ($scope.showReset === true) {
             if ($scope.ereset) {
                 Authentication.ResetPassword($scope.ereset, function (response) {
-                    console.log(response);
                     if (response.message) {
                         $scope.validateReset = 2;
                         $scope.textValidateReset = 'Sorry, no account was found with this email!';

@@ -273,9 +273,9 @@
 
 .project-post-box,
 .project-post-video {
-  max-width: 800px;
+  max-width: 740px;
+  padding: 0 2px;
   margin: 0px auto;
-  padding: 0px 30px;
   background-color: white;
   overflow: hidden; }
   .project-post-box vg-overlay-play .play,
@@ -347,8 +347,8 @@
     line-height: 26px;
     color: #222;
     text-align: left;
-    margin-bottom: 0;
-    word-spacing: 1px; }
+    word-spacing: 1px;
+    margin-bottom: 0; }
   .custom-project-post h1 {
     font-size: 28px; }
   .custom-project-post h1, .custom-project-post h2, .custom-project-post h3, .custom-project-post h4, .custom-project-post h5, .custom-project-post h6 {

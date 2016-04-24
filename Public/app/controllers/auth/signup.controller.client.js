@@ -187,19 +187,15 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
       else {
         Locations.setplaces($scope.basicLocation, $scope.nLocation);
         var timestamp                 = new Date(($scope.formYear + '.' + $scope.formMonth1 + '.' + $scope.formDay).toString());
-        console.log(timestamp);
         if (isNaN(timestamp))
           profileData.birthdate       = new Date(Date.UTC($scope.formYear, parseInt($scope.formMonth1, 10) - 1, $scope.formDay, 12, 0, 0)).toISOString();
         else
           profileData.birthdate       = timestamp;
-        console.log(profileData.birthdate);
         profileData.genre             = $scope.sexe;
         profileData.location_country  = $scope.nLocation.location_country;
         profileData.location_city     = $scope.nLocation.location_city;
         profileData.location_state    = $scope.nLocation.location_state;
-        console.log(profileData);
         $http.put('/signup/basic/' + currentUser.id, profileData).success(function(res) {
-          console.log(res);
           if (res.success) {
             $scope.canPass = true;
             bClassName.attr('class', inRightBig);

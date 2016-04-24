@@ -25,8 +25,6 @@ angular.module('wittyApp')
     }
   }; checkCredential();
 
-  console.log(window.location.href);
-
    /*
    **Update in time sidebar after login
    */

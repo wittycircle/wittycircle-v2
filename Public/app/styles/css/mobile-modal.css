@@ -419,24 +419,8 @@
       display: none;
       position: fixed;
       top: 0;
-      z-index: 1000;
       width: 100%;
       height: 100%;
-      -webkit-transform: translateZ(0);
-      -moz-transform: translateZ(0);
-      -ms-transform: translateZ(0);
-      -o-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-perspective: 1000;
-      -moz-perspective: 1000;
-      -ms-perspective: 1000;
-      -o-perspective: 1000;
-      perspective: 1000;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden;
       /* messages-body-messages-mobile */ }
       #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea {
         position: fixed;
@@ -520,8 +504,7 @@
         padding-top: 44px;
         padding-bottom: 63px;
         overflow-y: scroll;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch; }
+        overflow-x: hidden; }
         #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto {
           padding: 10px 20px;
           border-top: 1px solid #f5f5f5; }

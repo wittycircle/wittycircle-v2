@@ -400,8 +400,7 @@ a:hover {
 
 #profile-corps {
   position: relative;
-  z-index: 1;
-  background-color: #FAFAFA; }
+  z-index: 1; }
   #profile-corps h2 {
     display: inline-block;
     font-family: 'FreigLight';
@@ -552,7 +551,7 @@ a:hover {
             margin-top: 4px; }
             #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-description h6 {
               font-family: 'FreigBook';
-              font-size: 14px;
+              font-size: 15px;
               color: #222222;
               line-height: 18px; }
       #profile-corps .profile-contents .profile-main .profile-main-portfolio {
@@ -857,7 +856,7 @@ a:hover {
           margin-top: 4px; }
           #profile-corps .profile-mobile-contents .profile-mobile-experience .profile-exp-list .profile-exp .profile-exp-description h6 {
             font-family: 'FreigBook';
-            font-size: 14px;
+            font-size: 15px;
             color: #222222;
             line-height: 18px; }
 

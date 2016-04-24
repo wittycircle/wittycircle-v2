@@ -83,9 +83,9 @@
 			<div class="profile-mobile-user-options">
 				<div ng-if="!vm.trueUser" class="profile-mobile-connect">
 					<div class="profile-text-link">
-						<a ng-click="goToMessage(profile.id)">Message</a>
+						<a ng-click="vm.goToMessage(profile.id)">Message</a>
 					</div>
-					<button class="profile-follow-link" type="button" ng-click="followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
+					<button class="profile-follow-link" type="button" ng-click="vm.followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
 				</div>
 				<button id="pmepb" ng-if="vm.trueUser" class="profile-mobile-edit-photo"><i class="fa fa-camera"></i> Update picture</button>
 			</div>
@@ -97,7 +97,7 @@
 
 	</div>
 
-	<div id="inpro" class="profile-bottom">
+	<div class="profile-bottom">
 		<div class="profile-bottom-info">
 			<div class="profile-follow">
 				<div class="follow-project follower">
@@ -113,7 +113,7 @@
 					<h5>Followers</h5>
 				</div>
 			</div>
-			<div ng-if="inProjects.length" class="profile-user-projects">
+			<div ng-if="inProjects.length" class="profile-user-projects" onclick="getDropdownProfile()">
 				<div class="profile-projects-text">
 					<h6>Involved in <strong>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length == 1">project<span></strong></h6>
 				</div>
@@ -131,14 +131,14 @@
 					<a>Share</a>
 				</div> -->
 				<div class="profile-text-link">
-					<a ng-click="goToMessage(profile.id)">Message</a>
+					<a ng-click="vm.goToMessage(profile.id)">Message</a>
 				</div>
-				<button class="profile-follow-link" type="button" ng-click="followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
+				<button class="profile-follow-link" type="button" ng-click="vm.followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
 			</div>
 		</div>
 	</div>
 
-	<div ng-if="inProjects.length" class="profile-bottom-mobile">
+	<div id="inprom" ng-if="inProjects.length" class="profile-bottom-mobile">
 		<div class="profile-mobile-user-projects">
 			<h5>Involved in <b>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length === 1">project<span></b></h5>
 		</div>
@@ -437,8 +437,9 @@
 			// function hideText() {
 			// 	$('.profile-update-text').fadeOut();
 			// };
+		});
 
-			$('#inpro').on('click', function() {
+		function getDropdownProfile() {
 				if ($('#profile-slideDown').css('display') === "none") {
 					$('#ppa').css({
 						'-webkit-transform': 'rotate(-180deg)',
@@ -461,8 +462,7 @@
 				}
 				$('#profile-slideDown').slideToggle();
 
-			});
-		});
+		};
 
 	} else {
 
@@ -481,6 +481,10 @@
 						$('#pmephotos').addClass("animate-pmep-open");
 					}
 				}
+			});
+
+			$('#inprom').on('click', function() {
+				$('#profile-slideDown').slideToggle();
 			});
 		});
 

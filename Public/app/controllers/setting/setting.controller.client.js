@@ -75,6 +75,7 @@ angular.module('wittyApp')
 			$scope.data.email 		= res.data.email;
 			$scope.data.username	= res.data.username;
 			$scope.password 	= res.data.password;
+			console.log(res);
 		});
 	}
 	refresh();
@@ -134,6 +135,7 @@ angular.module('wittyApp')
 	};
 
 	$scope.passwordUpdate = function() {
+		console.log("OK");
 		if (!$rootScope.globals.currentUser.password && $rootScope.globals.currentUser) {
 			var pass = {
 				email: $rootScope.globals.currentUser.email,

@@ -11,15 +11,17 @@ h1, h2, h3, h4, h5, h6, a {
   margin: 0;
   color: white; }
 
-h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button {
+h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button, a {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-input, textarea {
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+input[type="text"], input[type="search"], input[type="password"], input[type="email"], input[type="radio"], input[type="submit"] textarea:focus {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; }
 
+/************************************************************************************************/
 li {
   list-style-type: none; }
 

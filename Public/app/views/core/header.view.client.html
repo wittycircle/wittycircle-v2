@@ -34,7 +34,7 @@
             <div ng-if="notifBubble || numberNotif" class="header-mobile-bubble"></div>
             <img src="/images/littleman-w.svg">
         </div>
-        <nav class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+        <nav md-swipe-right="onSwipeRight()" class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 <!--            <h3>Menu</h3> -->
             <div class="log-of" ng-hide="log">
                 <a id="mologin" href="">Log In</a>
@@ -43,9 +43,7 @@
             <div class="log-on" ng-hide="!log">
                 <div class="log-on-list">
                     <h2>{{user.first_name}} {{user.last_name}}</h2>
-                    <figure ng-if="user.profile_picture" class="header-log-avatar" data-ui-sref="profile({username: user.username})">
-                        <img ng-src="{{ resizePic(user.profile_picture, 90, 90, 'fill') }}" alt="profile-avatar">
-                    </figure>
+                        <img ng-if="user.profile_picture" id="hlogavatar" class="header-log-avatar" ng-src="{{ resizePic(user.profile_picture, 90, 90, 'fill') }}" alt="profile-avatar" data-ui-sref="profile({username: user.username})">
                     <div class="log-on-notifs">
                         <div id="loma" class="log-on-mail">
                             <div ng-if="numberNotif" class="log-mobile-buble">{{numberNotif}}</div>
@@ -64,6 +62,7 @@
                     </ul>
                 </div>
             </div>
+            <md-divider></md-divider>
         </nav>
         <nav class="header-log-off" ng-hide="log">
             <ul id='hnlog' class="header-nav-log">

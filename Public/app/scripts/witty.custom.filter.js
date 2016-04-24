@@ -312,5 +312,52 @@ angular.module('wittyApp')
 
         return value + (tail || ' ...');
     };
+})
+.filter('sortSkill', function () {
+    return function (input) {
+
+        if (input && input[0]) {
+        	var text = "";
+        	var lengthText = input.length;
+        	var index;
+        	var i 		= 0,
+        		n 		= 0,
+        		count 	= 0;
+
+    		if (!input[1]) {
+    			text = input[0].sName;
+    			if (text.length > 20)
+    				text = text.substring(0, 16) + "...";
+    		} else {
+    			text = input[0].sName;
+    			if (text.length > 14) {
+    				text = text.substring(0, 13) + "..., +" + (lengthText - 1).toString();
+    			} else 
+    				text += ", +" + (lengthText - 1).toString();
+    		}
+
+
+        	// while (i < input.length) {
+        	// 	if (i > 0 )
+        	// 		text += ', ';
+        	// 	text += input[i].sName;
+        	// 	i++;
+        	// }
+
+
+        	// lengthText = text.length;
+        	// for (var n = 0; text.length > 50; n++) {
+	        // 	index = text.lastIndexOf(",");
+	        // 	text = text.substring(0, index);
+
+	        // 	if (text.length <= 50)
+	        // 		break ;
+	        // }
+	        // if (lengthText > 50)
+	        // 	text = text + ", ...";
+
+        	return text;
+        }
+    };
 });
 

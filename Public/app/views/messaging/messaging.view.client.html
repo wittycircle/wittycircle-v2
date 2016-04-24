@@ -1,4 +1,4 @@
-<div id="messages-body-page">
+<div id="messages-body-page" ng-if="!mobile">
 	<section id="messages-modals">
 		<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
 			<div id="mmo" class="messages-modal-header">
@@ -78,7 +78,7 @@
 			</div>
 		</header>
 
-		<section id="messages-body">
+		<section id="messages-body" data-ng-controller="MessageCtrl">
 			<div class="messages-component">
 				<div class="messages-contact-list">
 					<div class="messages-search">
@@ -192,53 +192,58 @@
 		</section>
 	</section>
 	<script>
-		/*** MODAL ***/
-		$('#mhn').on('mouseover', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
-		});
 
-		$('#mhn').on('mouseleave', function() {
-			$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
-		});
+		var x = $(window).width();
 
-		function showUserList() {
-			var x = document.getElementById('mmoinput').value;
+		if (x > 736) {
+			/*** MODAL ***/
+			$('#mhn').on('mouseover', function() {
+				$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
+			});
 
-			if (x) {
-				document.getElementById('mmolist').style.display = "block";
-				document.getElementById('messages-modals').style.top = "15%";
-				document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 5px 20px";
-			} else {
-				document.getElementById('mmolist').style.display = "none";
-				document.getElementById('messages-modals').style.top = "30%";
-				document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 30px 20px";
+			$('#mhn').on('mouseleave', function() {
+				$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
+			});
+
+			function showUserList() {
+				var x = document.getElementById('mmoinput').value;
+
+				if (x) {
+					document.getElementById('mmolist').style.display = "block";
+					document.getElementById('messages-modals').style.top = "15%";
+					document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 5px 20px";
+				} else {
+					document.getElementById('mmolist').style.display = "none";
+					document.getElementById('messages-modals').style.top = "30%";
+					document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 30px 20px";
+				}
 			}
-		}
 
-		setTimeout(function() {
-				var h = document.getElementById('mcb');
-				if (h) {
-					h.scrollTop = h.scrollHeight;
-				}
-		}, 1000);
-
-		function scrollToBottom() {
 			setTimeout(function() {
-				var h = document.getElementById('mcb');
-				if (h) {
-					h.scrollTop = h.scrollHeight;
-				}
-			}, 200);
-		}
+					var h = document.getElementById('mcb');
+					if (h) {
+						h.scrollTop = h.scrollHeight;
+					}
+			}, 1000);
 
-		function showNewMessageArea() {
-			document.getElementById('messages-modal-searchArea').style.display = "none";
-			document.getElementById('messages-modal-newMessageArea').style.display = "block";
+			function scrollToBottom() {
+				setTimeout(function() {
+					var h = document.getElementById('mcb');
+					if (h) {
+						h.scrollTop = h.scrollHeight;
+					}
+				}, 200);
+			}
+
+			function showNewMessageArea() {
+				document.getElementById('messages-modal-searchArea').style.display = "none";
+				document.getElementById('messages-modal-newMessageArea').style.display = "block";
+			}
 		}
 	</script>
 </div>
 
-<div id="messages-body-page-mobile">
+<div id="messages-body-page-mobile" ng-if="mobile">
 
 	<section id="messages-body-list-mobile">
 		<div id="mslm" class="messages-search-list-mobile">
@@ -246,6 +251,7 @@
 			<div id="nmmobile" class="new-messages-mobile">
 				<img src="/images/write-icon-g.svg" alt="new message">
 			</div>
+			<div class="new-messages-home" ng-click="showHomeMobile()"><i class="fa fa-home" aria-hidden="true"></i></div>
 		</div>
 
 		<div id="messlist" class="messages-convers-list-mobile">
@@ -273,38 +279,44 @@
 
 	<script>
 
-		$(document).ready(function() {
-			var mslm 		= document.getElementById('mslm'),
-				list 		= $('.messages-convers-list-mobile'),
-				mbmm 		= document.getElementById('messages-body-messages-mobile'),
-				mblm 		= $('#messages-body-list-mobile'),
-				messlist 	= $('#messlist'),
-				nmmobile 	= $('#nmmobile'),
-				footer 		= document.getElementById('footerCore'),
-				header 		= document.getElementById('headerCore');
+		var x = $(window).width();
 
-			messlist.on('click', function() {
-				classie.remove( mbmm, 'left-to-right-message');
-				classie.add( mbmm, 'right-to-left-message');
-				$('#messages-body-messages-mobile').show()
-				$('#body-section').hide();
-			});
+		if (x <= 736) {
+			$('#headerCore').hide();
+			$('#footerCore').hide();
 
-			nmmobile.click(function() {
-				$('.new-messages-modal-mobile').show();
-				$('#body-section').hide();
-			});
+			$(document).ready(function() {
+				var list 		= $('.messages-convers-list-mobile'),
+					mbmm 		= document.getElementById('messages-body-messages-mobile'),
+					mblm 		= $('#messages-body-list-mobile'),
+					messlist 	= $('#messlist'),
+					nmmobile 	= $('#nmmobile'),
+					footer 		= document.getElementById('footerCore'),
+					header 		= document.getElementById('headerCore');
 
-			$(window).scroll(function () {
-				if ($(this).scrollTop() >= 85) {
-					classie.add(mslm, 'body-fixed');
-					list.css('padding-top', '54px');
-				} else {
-					classie.remove(mslm, 'body-fixed');
-					list.css('padding-top', '0px');
-				}
+				messlist.on('click', function() {
+					classie.remove( mbmm, 'left-to-right-message');
+					classie.add( mbmm, 'right-to-left-message');
+					$('#messages-body-messages-mobile').show()
+					$('#body-section').hide();
+				});
+
+				nmmobile.click(function() {
+					$('.new-messages-modal-mobile').show();
+					$('#body-section').hide();
+				});
+
+				// $(window).scroll(function () {
+				// 	if ($(this).scrollTop() >= 85) {
+				// 		classie.add(mslm, 'body-fixed');
+				// 		list.css('padding-top', '54px');
+				// 	} else {
+				// 		classie.remove(mslm, 'body-fixed');
+				// 		list.css('padding-top', '0px');
+				// 	}
+				// });
 			});
-		});
+		}
 
 	</script>
 </div>

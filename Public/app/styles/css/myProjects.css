@@ -482,6 +482,30 @@
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 @media only screen and (max-width: 736px) {
+  #myProject-page #myProject-header {
+    height: 160px; }
+    #myProject-page #myProject-header .myProject-filter {
+      height: 160px; }
+    #myProject-page #myProject-header .myProject-title {
+      display: none; }
+  #myProject-page #myProject-mp .myProject-body-mp {
+    padding: 20px; }
+    #myProject-page #myProject-mp .myProject-body-mp .myProject-body-mpTitle {
+      margin-bottom: 20px;
+      margin-left: 5px; }
+  #myProject-page #myProject-followed .myProject-body-followed {
+    padding: 20px; }
+    #myProject-page #myProject-followed .myProject-body-followed .myProject-body-fTitle {
+      margin-bottom: 20px;
+      margin-left: 5px; }
+      #myProject-page #myProject-followed .myProject-body-followed .myProject-body-fTitle h1 {
+        margin-bottom: 0; }
+  #myProject-page #myProject-history .myProject-body-history .myProject-body-hTitle {
+    margin-bottom: 20px;
+    margin-left: 25px; }
+  #myProject-page #myProject-history .myProject-body-history .myProject-body-hContainer {
+    margin: 0; }
+
   #viewProject-page #viewProject-header {
     height: 450px;
     background-position: center center !important; }

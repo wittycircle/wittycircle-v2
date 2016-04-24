@@ -1,459 +1,577 @@
 /* Mobile Animation */
-@-webkit-keyframes body-mobile-push-right {
-  0% {
-    left: -150px; }
-  100% {
-    left: 0; } }
-@-webkit-keyframes search-mobile-push-right {
-  0% {
-    left: -200px; }
-  100% {
-    left: 0; } }
-@-webkit-keyframes mobile-push-right {
-  0% {
-    left: 0; }
-  100% {
-    left: 300px; } }
-.search-push-right {
-  left: 0 !important; }
-
-.body-push-right {
-  position: relative;
-  animation: body-mobile-push-right 0.2s; }
-
-.push-right {
-  position: relative;
-  animation: mobile-push-right 0.2s; }
-
-/* Mobile modal search home */
 #hsfmobile {
-  display: none;
-  width: 100%; }
-  #hsfmobile .home-searchHeader-mobile {
-    position: fixed;
-    width: 100%;
-    z-index: 10; }
-    #hsfmobile .home-searchHeader-mobile .searchCrossMobile {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-image: url("/images/cross-icon.svg");
-      background-position: center 45%;
-      background-repeat: no-repeat;
-      background-size: 16px; }
-    #hsfmobile .home-searchHeader-mobile .home-searchField-mobile {
-      width: 100%;
-      -webkit-box-sizing: border-box;
-      /* Safari/Chrome, other WebKit */
-      -moz-box-sizing: border-box;
-      /* Firefox, other Gecko */
-      box-sizing: border-box;
-      font-family: 'FreigBook';
-      font-size: 17px;
-      padding: 12px 10px 12px 45px;
-      border: 0;
-      border-bottom: 1px dashed #999999; }
-  #hsfmobile .home-findField-mobile {
-    position: relative;
-    width: 100%;
-    padding: 20px 15px 10px 15px;
-    top: 49px; }
-    #hsfmobile .home-findField-mobile .home-find-list {
-      margin-bottom: 10px;
-      border-bottom: 1px solid #e8e8e8;
-      padding-bottom: 7px; }
-      #hsfmobile .home-findField-mobile .home-find-list .home-findProject-picture {
-        display: inline-block;
-        width: 60px;
-        height: 60px;
-        background-size: auto 60px;
-        background-position: center center;
-        border-radius: 4px; }
-      #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content {
-        display: inline-block;
-        vertical-align: top;
-        margin-top: 3px;
-        margin-left: 15px; }
-        #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-title {
-          margin-bottom: 2px; }
-          #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-title h3 {
-            font-family: 'FreigBook';
-            font-size: 18px;
-            color: black; }
-        #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag {
-          background-color: #222222;
-          display: inline-block;
-          padding: 0 10px 2px 10px;
-          border-radius: 4px;
-          margin-top: 5px; }
-          #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag img {
-            display: inline-block;
-            width: 16px;
-            height: 16px; }
-          #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag h4 {
-            display: inline-block;
-            font-family: 'FreigSem';
-            font-size: 13px;
-            text-transform: uppercase;
-            color: white; }
-      #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-picture {
-        display: inline-block;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-size: cover; }
-      #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content {
-        display: inline-block;
-        vertical-align: top;
-        margin-top: 6px;
-        margin-left: 15px;
-        width: 200px; }
-        #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-name {
-          margin-bottom: 5px; }
-          #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-name h4 {
-            margin-top: 2px;
-            font-family: 'FreigBook';
-            font-size: 18px;
-            color: #222222; }
-        #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-location h6 {
-          font-family: 'FreigBook';
-          font-size: 14px;
-          color: #999999; }
-    #hsfmobile .home-findField-mobile .home-find-showmore-mobile {
-      text-align: center;
-      margin-top: 30px;
-      margin-bottom: 10px; }
-      #hsfmobile .home-findField-mobile .home-find-showmore-mobile button {
-        background-color: white;
-        border: 1px solid #999999;
-        border-radius: 4px;
-        font-family: 'FreigMed';
-        font-size: 16px;
-        padding: 5px 20px; }
+  display: none; }
+
+#message-modal-mobile {
+  display: none; }
 
 #hmmobile,
 #hnmobile {
   display: none; }
-  #hmmobile .header-dropdown-head,
-  #hnmobile .header-dropdown-head {
-    position: fixed;
-    width: 100%;
-    height: 42px;
-    padding: 10px;
-    background-color: white;
-    border-bottom: 1px solid #e5e5e5;
-    top: 0; }
-    #hmmobile .header-dropdown-head h4,
-    #hnmobile .header-dropdown-head h4 {
-      position: relative;
-      z-index: 20;
-      display: inline-block;
-      font-family: 'FreigBook';
-      font-size: 17px;
-      color: #222222; }
-    #hmmobile .header-dropdown-head h5,
-    #hnmobile .header-dropdown-head h5 {
-      display: inline-block;
-      margin-top: 3px;
-      float: right;
-      font-family: 'FreigSem';
-      font-size: 14px;
-      color: #999999; }
-    #hmmobile .header-dropdown-head a,
-    #hnmobile .header-dropdown-head a {
-      display: inline-block;
-      float: right;
-      font-family: 'FreigSem';
-      font-size: 14px;
-      color: #ff4d4d; }
-    #hmmobile .header-dropdown-head img,
-    #hnmobile .header-dropdown-head img {
-      display: inline-block;
-      float: right;
-      height: 20px;
-      margin-right: 5px; }
-    #hmmobile .header-dropdown-head .notifCrossMobile,
-    #hnmobile .header-dropdown-head .notifCrossMobile {
-      display: inline-block;
-      float: right;
-      width: 20px;
-      height: 100%;
-      background-image: url("/images/cross-icon.svg");
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: 14px; }
-  #hmmobile .header-dropdown-lists,
-  #hnmobile .header-dropdown-lists {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin-top: 42px; }
-    #hmmobile .header-dropdown-lists h4, #hmmobile .header-dropdown-lists h5, #hmmobile .header-dropdown-lists p, #hmmobile .header-dropdown-lists span,
-    #hnmobile .header-dropdown-lists h4,
-    #hnmobile .header-dropdown-lists h5,
-    #hnmobile .header-dropdown-lists p,
-    #hnmobile .header-dropdown-lists span {
-      color: #999999; }
-    #hmmobile .header-dropdown-lists .unread-active,
-    #hnmobile .header-dropdown-lists .unread-active {
-      background-color: #f5f5f5; }
-      #hmmobile .header-dropdown-lists .unread-active .header-list-message h4, #hmmobile .header-dropdown-lists .unread-active .header-list-message h5, #hmmobile .header-dropdown-lists .unread-active .header-list-message p, #hmmobile .header-dropdown-lists .unread-active .header-list-message span,
-      #hnmobile .header-dropdown-lists .unread-active .header-list-message h4,
-      #hnmobile .header-dropdown-lists .unread-active .header-list-message h5,
-      #hnmobile .header-dropdown-lists .unread-active .header-list-message p,
-      #hnmobile .header-dropdown-lists .unread-active .header-list-message span {
-        color: #222222; }
-    #hmmobile .header-dropdown-lists .header-noMessage-text,
-    #hmmobile .header-dropdown-lists .header-noNotif-text,
-    #hnmobile .header-dropdown-lists .header-noMessage-text,
-    #hnmobile .header-dropdown-lists .header-noNotif-text {
-      position: absolute;
-      top: 45%;
-      width: 100%;
-      text-align: center; }
-      #hmmobile .header-dropdown-lists .header-noMessage-text p,
-      #hmmobile .header-dropdown-lists .header-noNotif-text p,
-      #hnmobile .header-dropdown-lists .header-noMessage-text p,
-      #hnmobile .header-dropdown-lists .header-noNotif-text p {
-        font-family: 'FreigSem';
-        font-size: 18px;
-        color: #e0e0e0; }
-    #hmmobile .header-dropdown-lists .header-dropdown-list,
-    #hnmobile .header-dropdown-lists .header-dropdown-list {
-      padding: 10px;
-      border-top: 1px solid #e5e5e5;
-      -webkit-transition: all 200ms linear;
-      -o-transition: all 200ms linear;
-      -moz-transition: all 200ms linear;
-      -ms-transition: all 200ms linear;
-      -kthtml-transition: all 200ms linear;
-      transition: all 200ms linear; }
-      #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
-      #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
-        display: inline-block;
-        float: left;
-        width: 50px; }
-        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img,
-        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%; }
-      #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
-      #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
-        display: inline-block;
-        width: 218px;
-        margin-left: 15px; }
-        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4,
-        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4 {
-          display: inline-block;
-          font-family: 'FreigSem';
-          font-size: 16px; }
-        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message h5,
-        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message h5 {
-          display: inline-block;
-          font-family: 'FreigBook'; }
-        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message p,
-        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message p {
-          font-family: 'FreigBook';
-          font-size: 15px;
-          line-height: 18px;
-          word-wrap: break-word;
-          max-height: 36px;
-          overflow: hidden;
-          margin-bottom: 0px; }
-        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message span,
-        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message span {
-          font-family: 'FreigBook';
-          font-size: 13px; }
-    #hmmobile .header-dropdown-lists .header-dropdown-list:hover,
-    #hnmobile .header-dropdown-lists .header-dropdown-list:hover {
-      background-color: #f5f5f5; }
-      #hmmobile .header-dropdown-lists .header-dropdown-list:hover h4, #hmmobile .header-dropdown-lists .header-dropdown-list:hover h5, #hmmobile .header-dropdown-lists .header-dropdown-list:hover p, #hmmobile .header-dropdown-lists .header-dropdown-list:hover span,
-      #hnmobile .header-dropdown-lists .header-dropdown-list:hover h4,
-      #hnmobile .header-dropdown-lists .header-dropdown-list:hover h5,
-      #hnmobile .header-dropdown-lists .header-dropdown-list:hover p,
-      #hnmobile .header-dropdown-lists .header-dropdown-list:hover span {
-        color: #222222; }
 
-/* Mobile modal new message */
-#message-modal-mobile .new-messages-modal-write-mobile {
-  display: none; }
-#message-modal-mobile .new-messages-modal-mobile {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-  overflow: hidden; }
-  #message-modal-mobile .new-messages-modal-mobile .new-messages-modal-header {
-    float: right;
-    padding: 10px 20px; }
-    #message-modal-mobile .new-messages-modal-mobile .new-messages-modal-header img {
-      width: 16px; }
-  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile {
-    padding: 0 20px;
-    padding-bottom: 10px; }
-    #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
-      margin-top: 5px;
-      display: inline-block;
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+  @-webkit-keyframes body-mobile-push-right {
+    0% {
+      left: -150px; }
+    100% {
+      left: 0; } }
+  @-webkit-keyframes search-mobile-push-right {
+    0% {
+      left: -200px; }
+    100% {
+      left: 0; } }
+  @-webkit-keyframes mobile-push-right {
+    0% {
+      left: 0; }
+    100% {
+      left: 300px; } }
+  @-webkit-keyframes rightToLeft {
+    0% {
+      right: -300px; }
+    100% {
+      right: 0px; } }
+  @keyframes rightToLeft {
+    0% {
+      right: -300px; }
+    100% {
+      right: 0px; } }
+  @-webkit-keyframes leftToRight {
+    0% {
+      right: 0; }
+    100% {
+      right: -800px; } }
+  @keyframes leftToRight {
+    0% {
+      right: 0px; }
+    100% {
+      right: -800px; } }
+  .search-push-right {
+    left: 0 !important; }
+
+  .body-push-right {
+    position: relative;
+    animation: body-mobile-push-right 0.2s; }
+
+  .push-right {
+    position: relative;
+    animation: mobile-push-right 0.2s; }
+
+  /* Mobile modal search home */
+  #hsfmobile {
+    display: none;
+    width: 100%; }
+    #hsfmobile .home-searchHeader-mobile {
+      position: fixed;
       width: 100%;
-      font-family: 'FreigBook';
-      font-size: 16px;
-      color: #999999;
-      background-image: url("/images/search-icon-b.svg");
-      background-repeat: no-repeat;
-      background-position: 4% 50%;
-      padding: 10px 5px 10px 45px;
-      border: 1px solid #e5e5e5;
-      border-radius: 4px; }
-  #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    padding-bottom: 150px;
-    overflow-y: scroll; }
-    #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user {
-      padding: 12px 20px 12px 20px;
-      border-bottom: 1px solid #f5f5f5;
-      cursor: pointer; }
-      #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser {
-        display: inline-block; }
-        #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser img {
+      z-index: 10; }
+      #hsfmobile .home-searchHeader-mobile .searchCrossMobile {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-image: url("/images/cross-icon.svg");
+        background-position: center 45%;
+        background-repeat: no-repeat;
+        background-size: 16px; }
+      #hsfmobile .home-searchHeader-mobile .home-searchField-mobile {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;
+        /* Firefox, other Gecko */
+        box-sizing: border-box;
+        font-family: 'FreigBook';
+        font-size: 17px;
+        padding: 12px 10px 12px 45px;
+        border: 0;
+        border-bottom: 1px dashed #999999; }
+    #hsfmobile .home-findField-mobile {
+      position: relative;
+      width: 100%;
+      padding: 20px 15px 10px 15px;
+      top: 49px; }
+      #hsfmobile .home-findField-mobile .home-find-list {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #e8e8e8;
+        padding-bottom: 7px; }
+        #hsfmobile .home-findField-mobile .home-find-list .home-findProject-picture {
           display: inline-block;
-          width: 40px;
-          height: 40px;
+          width: 60px;
+          height: 60px;
+          background-size: auto 60px;
+          background-position: center center;
+          border-radius: 4px; }
+        #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content {
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 3px;
+          margin-left: 15px; }
+          #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-title {
+            margin-bottom: 2px; }
+            #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-title h3 {
+              font-family: 'FreigBook';
+              font-size: 18px;
+              color: black; }
+          #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag {
+            background-color: #222222;
+            display: inline-block;
+            padding: 0 10px 2px 10px;
+            border-radius: 4px;
+            margin-top: 5px; }
+            #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag img {
+              display: inline-block;
+              width: 16px;
+              height: 16px; }
+            #hsfmobile .home-findField-mobile .home-find-list .home-findProject-content .home-findProject-tag h4 {
+              display: inline-block;
+              font-family: 'FreigSem';
+              font-size: 13px;
+              text-transform: uppercase;
+              color: white; }
+        #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-picture {
+          display: inline-block;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          float: left; }
-        #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser {
+          background-size: cover; }
+        #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content {
           display: inline-block;
-          position: relative;
-          padding: 0 10px; }
-          #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser h3 {
-            font-family: 'FreigSem';
-            font-size: 18px;
-            color: #222222;
-            margin-bottom: 3px; }
-          #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser h5 {
+          vertical-align: top;
+          margin-top: 6px;
+          margin-left: 15px;
+          width: 200px; }
+          #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-name {
+            margin-bottom: 5px; }
+            #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-name h4 {
+              margin-top: 2px;
+              font-family: 'FreigBook';
+              font-size: 18px;
+              color: #222222; }
+          #hsfmobile .home-findField-mobile .home-find-list .home-findPeople-content .home-findPeople-location h6 {
             font-family: 'FreigBook';
             font-size: 14px;
             color: #999999; }
-    #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user:hover {
-      background-color: white; }
-  #message-modal-mobile .new-messages-modal-mobile .messages-newpost-footer {
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: white; }
-    #message-modal-mobile .new-messages-modal-mobile .messages-newpost-footer img {
-      width: 35px;
-      height: 35px; }
-#message-modal-mobile #messages-body-messages-mobile {
-  display: none;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  /* messages-body-messages-mobile */ }
-  #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea {
-    position: fixed;
-    bottom: 0;
-    background-color: white;
-    width: 100%;
-    z-index: 100000;
-    text-align: center;
-    border-top: 1px solid #e5e5e5;
-    padding: 0 10px;
-    padding-top: 5px; }
-    #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box {
-      display: inline-block;
-      width: 84%; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea:focus {
-        outline: 0; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea {
-        resize: none;
-        width: 100%;
+      #hsfmobile .home-findField-mobile .home-find-showmore-mobile {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 10px; }
+        #hsfmobile .home-findField-mobile .home-find-showmore-mobile button {
+          background-color: white;
+          border: 1px solid #999999;
+          border-radius: 4px;
+          font-family: 'FreigMed';
+          font-size: 16px;
+          padding: 5px 20px; }
+
+  #hmmobile,
+  #hnmobile {
+    display: none; }
+    #hmmobile .header-dropdown-head,
+    #hnmobile .header-dropdown-head {
+      position: fixed;
+      width: 100%;
+      height: 42px;
+      padding: 10px;
+      background-color: white;
+      border-bottom: 1px solid #e5e5e5;
+      top: 0; }
+      #hmmobile .header-dropdown-head h4,
+      #hnmobile .header-dropdown-head h4 {
+        position: relative;
+        z-index: 20;
+        display: inline-block;
         font-family: 'FreigBook';
-        font-size: 14px;
-        border: 1px solid #e5e5e5;
-        border-radius: 5px;
-        padding: 5px 10px; }
-    #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button {
-      display: inline-block;
-      text-align: right;
-      width: 16%;
-      height: inherit;
-      padding-top: 12px;
-      float: right; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button {
+        font-size: 17px;
+        color: #222222; }
+      #hmmobile .header-dropdown-head h5,
+      #hnmobile .header-dropdown-head h5 {
+        display: inline-block;
+        margin-top: 3px;
+        float: right;
         font-family: 'FreigSem';
         font-size: 14px;
-        background-color: #ff4d4d;
-        border: 1px solid #ff4d4d;
-        border-radius: 4px;
-        padding: 4px;
-        color: white; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button:hover {
-        border: 1px solid #d94242;
-        background-color: #d94242; }
-  #message-modal-mobile #messages-body-messages-mobile h3, #message-modal-mobile #messages-body-messages-mobile a {
-    font-family: 'FreigSem';
-    font-size: 16px;
-    color: black; }
-  #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 10000;
-    background-color: white;
-    padding: 10px 20px 10px 20px;
-    border: 1px solid #e5e5e5;
-    border-right: 0;
-    border-left: 0; }
-    #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile {
-      display: inline-block;
-      /*					i {
-      					position: relative;
-      					top: 1px;
-      				}*/ }
-      #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile .fa-chevron-left {
-        font-size: 13px;
-        margin-right: 2px; }
-    #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile {
-      display: inline-block;
-      float: right;
-      position: relative;
-      bottom: 2px; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile a {
-        font-family: 'FreigBook';
         color: #999999; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span {
-        margin-left: 2px; }
-        #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span img {
-          width: 12px; }
-  #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile {
-    position: absolute;
-    background-color: white;
-    width: 100vw;
-    height: 100vh;
-    padding-top: 44px;
-    padding-bottom: 63px;
-    overflow-y: scroll;
+      #hmmobile .header-dropdown-head a,
+      #hnmobile .header-dropdown-head a {
+        display: inline-block;
+        float: right;
+        font-family: 'FreigSem';
+        font-size: 14px;
+        color: #ff4d4d; }
+      #hmmobile .header-dropdown-head img,
+      #hnmobile .header-dropdown-head img {
+        display: inline-block;
+        float: right;
+        height: 20px;
+        margin-right: 5px; }
+      #hmmobile .header-dropdown-head .notifCrossMobile,
+      #hnmobile .header-dropdown-head .notifCrossMobile {
+        display: inline-block;
+        float: right;
+        width: 20px;
+        height: 100%;
+        background-image: url("/images/cross-icon.svg");
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 14px; }
+    #hmmobile .header-dropdown-lists,
+    #hnmobile .header-dropdown-lists {
+      overflow-y: scroll;
+      overflow-x: hidden;
+      margin-top: 42px;
+      padding-bottom: 40px; }
+      #hmmobile .header-dropdown-lists h4, #hmmobile .header-dropdown-lists h5, #hmmobile .header-dropdown-lists p, #hmmobile .header-dropdown-lists span,
+      #hnmobile .header-dropdown-lists h4,
+      #hnmobile .header-dropdown-lists h5,
+      #hnmobile .header-dropdown-lists p,
+      #hnmobile .header-dropdown-lists span {
+        color: #999999; }
+      #hmmobile .header-dropdown-lists .unread-active,
+      #hnmobile .header-dropdown-lists .unread-active {
+        background-color: #f5f5f5; }
+        #hmmobile .header-dropdown-lists .unread-active .header-list-message h4, #hmmobile .header-dropdown-lists .unread-active .header-list-message h5, #hmmobile .header-dropdown-lists .unread-active .header-list-message p, #hmmobile .header-dropdown-lists .unread-active .header-list-message span,
+        #hnmobile .header-dropdown-lists .unread-active .header-list-message h4,
+        #hnmobile .header-dropdown-lists .unread-active .header-list-message h5,
+        #hnmobile .header-dropdown-lists .unread-active .header-list-message p,
+        #hnmobile .header-dropdown-lists .unread-active .header-list-message span {
+          color: #222222; }
+      #hmmobile .header-dropdown-lists .header-noMessage-text,
+      #hmmobile .header-dropdown-lists .header-noNotif-text,
+      #hnmobile .header-dropdown-lists .header-noMessage-text,
+      #hnmobile .header-dropdown-lists .header-noNotif-text {
+        position: absolute;
+        top: 45%;
+        width: 100%;
+        text-align: center; }
+        #hmmobile .header-dropdown-lists .header-noMessage-text p,
+        #hmmobile .header-dropdown-lists .header-noNotif-text p,
+        #hnmobile .header-dropdown-lists .header-noMessage-text p,
+        #hnmobile .header-dropdown-lists .header-noNotif-text p {
+          font-family: 'FreigSem';
+          font-size: 18px;
+          color: #e0e0e0; }
+      #hmmobile .header-dropdown-lists .header-dropdown-list,
+      #hnmobile .header-dropdown-lists .header-dropdown-list {
+        padding: 10px;
+        border-top: 1px solid #e5e5e5;
+        -webkit-transition: all 200ms linear;
+        -o-transition: all 200ms linear;
+        -moz-transition: all 200ms linear;
+        -ms-transition: all 200ms linear;
+        -kthtml-transition: all 200ms linear;
+        transition: all 200ms linear; }
+        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
+        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
+          display: inline-block;
+          float: left;
+          width: 50px; }
+          #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img,
+          #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%; }
+        #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message,
+        #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message {
+          display: inline-block;
+          width: 218px;
+          margin-left: 15px; }
+          #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4,
+          #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message h4 {
+            display: inline-block;
+            font-family: 'FreigSem';
+            font-size: 16px; }
+          #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message h5,
+          #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message h5 {
+            display: inline-block;
+            font-family: 'FreigBook'; }
+          #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message p,
+          #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message p {
+            font-family: 'FreigBook';
+            font-size: 15px;
+            line-height: 18px;
+            word-wrap: break-word;
+            max-height: 36px;
+            overflow: hidden;
+            margin-bottom: 0px; }
+          #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-message span,
+          #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-message span {
+            font-family: 'FreigBook';
+            font-size: 13px; }
+      #hmmobile .header-dropdown-lists .header-dropdown-list:hover,
+      #hnmobile .header-dropdown-lists .header-dropdown-list:hover {
+        background-color: #f5f5f5; }
+        #hmmobile .header-dropdown-lists .header-dropdown-list:hover h4, #hmmobile .header-dropdown-lists .header-dropdown-list:hover h5, #hmmobile .header-dropdown-lists .header-dropdown-list:hover p, #hmmobile .header-dropdown-lists .header-dropdown-list:hover span,
+        #hnmobile .header-dropdown-lists .header-dropdown-list:hover h4,
+        #hnmobile .header-dropdown-lists .header-dropdown-list:hover h5,
+        #hnmobile .header-dropdown-lists .header-dropdown-list:hover p,
+        #hnmobile .header-dropdown-lists .header-dropdown-list:hover span {
+          color: #222222; }
+    #hmmobile .header-message-footer-mobile,
+    #hnmobile .header-message-footer-mobile {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #fafafa;
+      text-align: center;
+      border-top: 1px solid #e5e5e5; }
+      #hmmobile .header-message-footer-mobile h4,
+      #hnmobile .header-message-footer-mobile h4 {
+        padding: 13px 10px;
+        font-family: 'FreigMed';
+        font-size: 16px;
+        color: #999999; }
+
+  /* Mobile modal new message */
+  #message-modal-mobile {
+    display: block; }
+    #message-modal-mobile .new-messages-modal-write-mobile {
+      display: none; }
+    #message-modal-mobile .new-messages-modal-mobile {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      overflow: hidden;
+      -webkit-animation-duration: 0.2s;
+      -o-animation-duration: 0.2s;
+      -moz-animation-duration: 0.2s;
+      -ms-animation-duration: 0.2s;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      -o-perspective: 1000;
+      perspective: 1000;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden; }
+      #message-modal-mobile .new-messages-modal-mobile .new-messages-modal-header {
+        float: right;
+        padding: 10px 25px; }
+        #message-modal-mobile .new-messages-modal-mobile .new-messages-modal-header img {
+          width: 16px; }
+      #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile {
+        padding: 0 20px;
+        padding-bottom: 10px; }
+        #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+          margin-top: 5px;
+          display: inline-block;
+          width: 92%;
+          font-family: 'FreigBook';
+          font-size: 16px;
+          color: #999999;
+          background-image: url("/images/search-icon-b.svg");
+          background-repeat: no-repeat;
+          background-position: 4% 50%;
+          padding: 10px 5px 10px 45px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px; }
+      #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding-bottom: 150px;
+        overflow-y: scroll; }
+        #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user {
+          padding: 12px 20px 12px 20px;
+          border-bottom: 1px solid #f5f5f5;
+          cursor: pointer; }
+          #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser {
+            display: inline-block; }
+            #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser img {
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              float: left; }
+            #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser {
+              display: inline-block;
+              position: relative;
+              padding: 0 10px; }
+              #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser h3 {
+                font-family: 'FreigSem';
+                font-size: 18px;
+                color: #222222;
+                margin-bottom: 3px; }
+              #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user .messages-newpost-puser .messages-newpost-iuser h5 {
+                font-family: 'FreigBook';
+                font-size: 14px;
+                color: #999999; }
+        #message-modal-mobile .new-messages-modal-mobile .messages-users-mobile-found .messages-newpost-user:hover {
+          background-color: white; }
+      #message-modal-mobile .new-messages-modal-mobile .messages-newpost-footer {
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: white; }
+        #message-modal-mobile .new-messages-modal-mobile .messages-newpost-footer img {
+          width: 35px;
+          height: 35px; }
+    #message-modal-mobile #messages-body-messages-mobile {
+      display: none;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 100%;
+      -webkit-transform: translateZ(0);
+      -moz-transform: translateZ(0);
+      -ms-transform: translateZ(0);
+      -o-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-perspective: 1000;
+      -moz-perspective: 1000;
+      -ms-perspective: 1000;
+      -o-perspective: 1000;
+      perspective: 1000;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+      /* messages-body-messages-mobile */ }
+      #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea {
+        position: fixed;
+        bottom: 0;
+        background-color: white;
+        width: 100%;
+        z-index: 100000;
+        text-align: center;
+        border-top: 1px solid #e5e5e5;
+        padding: 5px 10px; }
+        #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box {
+          display: inline-block;
+          width: 84%; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea:focus {
+            outline: 0; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea {
+            resize: none;
+            width: 100%;
+            font-family: 'FreigBook';
+            font-size: 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 5px;
+            padding: 5px 10px; }
+        #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button {
+          display: inline-block;
+          text-align: right;
+          width: 16%;
+          height: inherit;
+          padding-top: 12px;
+          float: right; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button {
+            font-family: 'FreigSem';
+            font-size: 14px;
+            background-color: #ff4d4d;
+            border: 1px solid #ff4d4d;
+            border-radius: 4px;
+            padding: 4px;
+            color: white; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button:hover {
+            border: 1px solid #d94242;
+            background-color: #d94242; }
+      #message-modal-mobile #messages-body-messages-mobile h3, #message-modal-mobile #messages-body-messages-mobile a {
+        font-family: 'FreigSem';
+        font-size: 16px;
+        color: black; }
+      #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10000;
+        background-color: white;
+        padding: 10px 20px 10px 20px;
+        border: 1px solid #e5e5e5;
+        border-right: 0;
+        border-left: 0; }
+        #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile {
+          display: inline-block;
+          /*					i {
+          					position: relative;
+          					top: 1px;
+          				}*/ }
+          #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-backTo-mobile .fa-chevron-left {
+            font-size: 13px;
+            margin-right: 2px; }
+        #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile {
+          display: inline-block;
+          float: right;
+          position: relative;
+          bottom: 2px; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile a {
+            font-family: 'FreigBook';
+            color: #999999; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span {
+            margin-left: 2px; }
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-option-mobile .messages-option-action-mobile span img {
+              width: 12px; }
+      #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile {
+        position: absolute;
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        padding-top: 44px;
+        padding-bottom: 63px;
+        overflow-y: scroll;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        -ms-perspective: 1000;
+        -o-perspective: 1000;
+        perspective: 1000;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden; }
+        #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto {
+          padding: 10px 20px;
+          border-top: 1px solid #f5f5f5; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture {
+            display: inline-block;
+            width: 15%;
+            float: left; }
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture img {
+              border-radius: 50%;
+              width: 35px;
+              height: 35px; }
+          #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto {
+            display: inline-block;
+            padding: 0px 0px 0px 5px;
+            width: 85%; }
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name h4 {
+              display: inline-block;
+              font-family: 'FreigSem';
+              font-size: 16px;
+              color: #222222; }
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name p {
+              font-family: 'FreigBook';
+              font-size: 14px;
+              color: #999999;
+              margin-bottom: 0; }
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
+              font-family: 'FreigBook';
+              font-size: 15px;
+              line-height: 25px;
+              word-wrap: break-word;
+              margin-bottom: 0; }
+
+  .right-to-left-message {
+    -webkit-animation: rightToLeft 0.3s;
+    /* Chrome, Safari, Opera */
+    animation: rightToLeft 0.3s;
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
@@ -469,97 +587,47 @@
     -ms-backface-visibility: hidden;
     -o-backface-visibility: hidden;
     backface-visibility: hidden; }
-    #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto {
-      padding: 10px 20px;
-      border-top: 1px solid #f5f5f5; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture {
-        display: inline-block;
-        width: 15%;
-        float: left; }
-        #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto-picture img {
-          border-radius: 50%;
-          width: 35px;
-          height: 35px; }
-      #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto {
-        display: inline-block;
-        padding: 0px 0px 0px 5px;
-        width: 85%; }
-        #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name h4 {
-          display: inline-block;
-          font-family: 'FreigSem';
-          font-size: 16px;
-          color: #222222; }
-        #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name p {
-          font-family: 'FreigBook';
-          font-size: 14px;
-          color: #999999; }
-        #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
-          font-family: 'FreigBook';
-          font-size: 15px;
-          line-height: 25px;
-          word-wrap: break-word;
-          margin-bottom: 0; }
 
-.right-to-left-message {
-  -webkit-animation: rightToLeft 0.3s;
-  /* Chrome, Safari, Opera */
-  animation: rightToLeft 0.3s;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-.left-to-right-message {
-  right: -400px;
-  -webkit-animation: leftToRight 0.3s;
-  /* Chrome, Safari, Opera */
-  animation: leftToRight 0.3s;
-  -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden; }
-
-@-webkit-keyframes rightToLeft {
-  0% {
-    right: -300px; }
-  100% {
-    right: 0px; } }
-@keyframes rightToLeft {
-  0% {
-    right: -300px; }
-  100% {
-    right: 0px; } }
-@-webkit-keyframes leftToRight {
-  0% {
-    right: 0; }
-  100% {
-    right: -300px; } }
-@keyframes leftToRight {
-  0% {
-    right: 0px; }
-  100% {
-    right: -300px; } }
+  .left-to-right-message {
+    right: -800px;
+    -webkit-animation: leftToRight 0.3s;
+    /* Chrome, Safari, Opera */
+    animation: leftToRight 0.3s;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden; } }
+@media only screen and (max-width: 667px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 91%; } }
+@media only screen and (max-width: 640px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 90%; } }
+@media only screen and (max-width: 480px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 87%; } }
+@media only screen and (max-width: 414px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 86%; } }
+@media only screen and (max-width: 375px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 84%; } }
+@media only screen and (max-width: 360px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 83%; } }
+@media only screen and (max-width: 320px) {
+  #message-modal-mobile .new-messages-modal-mobile .new-messages-search-mobile input {
+    width: 81%; } }
 
 /*# sourceMappingURL=mobile-modal.css.map */

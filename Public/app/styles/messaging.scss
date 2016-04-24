@@ -1151,13 +1151,15 @@ textarea:focus {
 		display: block;
 
 		#messages-body-list-mobile {
-			padding-top: 85px;
-			width: 100%;
+			width: 100vw;
 
 			/* messages-body-list-mobile */
 			.messages-search-list-mobile {
 
-				padding: 4px 10px;
+				position: fixed;
+				top: 0;
+				width: 100%;
+				padding: 6px 10px 4px 10px;
 				border: 1px solid #e5e5e5;
 				background-color: #fafafa;
 				-webkit-transform: translateZ(0);
@@ -1175,12 +1177,14 @@ textarea:focus {
 				-ms-backface-visibility: hidden;
 				-o-backface-visibility: hidden;
 				backface-visibility: hidden;
+				z-index: 100;
 
 				input {
 					display: inline-block;
-					width: 85%;
+					width: 77%;
 					font-family: 'FreigBook';
 					font-size: 16px;
+					background-color: white;
 					color: #999999;
 					background-image: url('/images/search-icon-b.svg');
 					background-repeat: no-repeat;
@@ -1193,20 +1197,36 @@ textarea:focus {
 				.new-messages-mobile {
 					display: inline-block;
 					text-align: center;
-					width: 12%;
-					margin-left: 5px;
+					float: right;
+					position: fixed;
+					top: 14px;
+					margin-left: 25px;
+
 
 					img {
 						background-color: white;
 						position: relative;
 						bottom: 3px;
 						left: 3px;
-						width: 26px;
+						width: 20px;
+					}
+				}
+
+				.new-messages-home {
+					display: inline-block;
+					margin-top: 5px;
+					margin-right: 10px;
+					float: right;
+
+					.fa-home {
+						color: #999999;
+						font-size: 23px;
 					}
 				}
 			}
 
 			.messages-convers-list-mobile {
+				padding-top: 54px;
 				min-height: 574px;
 
 				.messages-list {
@@ -1292,4 +1312,172 @@ textarea:focus {
 		}
 	}
 
+}
+
+@media only screen and (max-width: 736px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 76%;
+					padding: 5px 10px 5px 65px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 667px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 75%;
+					padding: 5px 10px 5px 55px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 568px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 70%;
+					padding: 5px 10px 5px 55px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 25px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 71%;
+					padding: 5px 10px 5px 50px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 414px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 68%;
+					padding: 5px 10px 5px 35px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+				
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 65%;
+					padding: 5px 10px 5px 40px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 60%;
+					padding: 5px 10px 5px 35px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
 }

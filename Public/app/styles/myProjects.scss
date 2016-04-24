@@ -712,6 +712,60 @@ $blue: #416299;
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 @media only screen and (max-width: 736px) {
+
+	#myProject-page {
+		#myProject-header {
+			height: 160px;
+
+			.myProject-filter {
+				height: 160px;
+			}
+
+			.myProject-title {
+				display: none;
+			}
+		}
+
+		#myProject-mp {
+			.myProject-body-mp {
+				padding: 20px;
+
+				.myProject-body-mpTitle {
+					margin-bottom: 20px;
+					margin-left: 5px;
+				}
+			}
+		}
+
+		#myProject-followed {
+			.myProject-body-followed {
+				padding: 20px;
+
+				.myProject-body-fTitle {
+					margin-bottom: 20px;
+					margin-left: 5px;
+
+					h1 {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+
+		#myProject-history {
+			.myProject-body-history {
+				.myProject-body-hTitle {
+					margin-bottom: 20px;
+				    margin-left: 25px;
+				}
+
+				.myProject-body-hContainer {
+					margin: 0;
+				}
+			}
+		}
+	}
+
 	#viewProject-page {
 		#viewProject-header {
 			height: 450px;

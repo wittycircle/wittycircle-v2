@@ -363,11 +363,6 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       recursive(index + 1);
                   });
                 }
-                // TODO: Splice the result in results when accept == 0 and user_id is not equal to the req.user
-                /*if (results[index].user_id != req.user.id && results[index].n_accept === 0) {
-                    console.log('here');
-                    results.splice(index, 1);
-                }*/
                 if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
                   editable = true;
                 }
@@ -380,15 +375,15 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       }
                       results.splice(index, 1);
                       userIn.push(result[0]);
-                      return recursive(index + 1);
+                      recursive(index + 1);
                   });
                 }
-                if (req.user && results[index].user_id !== req.user.id) {
+                if (req.user && results[index].user_id !== req.user.id && results[index].n_accept != 1) {
                   recursive(index + 1);
                 }
-		if (!req.isAuthenticated()) {
-		    recursive(index + 1);
-		    }
+		if (!req.isAuthenticated() && results[index].n_accept !== 1) {
+		  recursive(index + 1);
+		}
             } else {
                 return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }

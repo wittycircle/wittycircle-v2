@@ -9,7 +9,6 @@
     "angular-resource": "^1.3.0",
     "angular-route": "^1.4.0",
     "angular-sanitize": "^1.3.0",
-    "angular-touch": "^1.5.3",
     "angular-bootstrap": "0.13.3",
     "angular-ui-router": "0.2.15",
     "angular-custom-select": "~0.1.0",

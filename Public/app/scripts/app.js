@@ -9,7 +9,6 @@ var wittyCircleApp = angular
       'ngResource',
       'ngRoute',
       'ngSanitize',
-      'ngTouch',
       'ui.router',
       'ui.bootstrap',
       'ngMaterial',

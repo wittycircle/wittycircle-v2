@@ -49,6 +49,7 @@ $blue: #416299;
 
 		.viewProject-info {
 			padding: 20px 0;
+			margin-bottom: 20px;
 
 			li {
 				display: inline-block;
@@ -82,6 +83,10 @@ $blue: #416299;
 					height: auto;
 				}
 			}
+		}
+
+		.viewProject-mobile-options {
+			display: none;
 		}
 
 		.viewProject-bottom {
@@ -780,8 +785,8 @@ $blue: #416299;
 				padding: 0 15px;
 
 				.viewProject-title-info {
-					min-height: 120px;
-					h1 {
+/*					min-height: 120px;
+*/					h1 {
 						font-size: 34px;
 					}
 
@@ -795,6 +800,7 @@ $blue: #416299;
 				padding: 0 10px;
 				text-align: center;
 				margin-top: 15px;
+				margin-bottom: 15px;
 
 				li {
 					margin: 0;
@@ -811,6 +817,33 @@ $blue: #416299;
 				}
 			}
 
+			.viewProject-mobile-options {
+				display: block;
+
+				button {
+					margin: 0 5px;
+					display: inline-block;
+					font-family: 'FreigSem';
+					font-size: 16px;
+					color: white;
+					padding: 4px 12px 6px 12px;
+					border: 1px solid #416299;
+					border-radius: 4px;
+					background-color: #416299;
+
+					i {
+						margin-right: 8px;
+						position: relative;
+						top: 1px;
+					}
+				}
+
+				#editButton {
+					border: 1px solid white;
+					background-color: transparent;
+				}
+			}
+
 			.viewProject-bottom {
 
 				.viewProject-nav {
@@ -824,7 +857,7 @@ $blue: #416299;
 					.viewProject-category {
 						li {
 							font-family: 'FreigBook';
-							padding: 10px 20px 10px 15px;
+							padding: 10px 10px 10px 10px;
 							border-right: 1px solid #222222;
 						}
 

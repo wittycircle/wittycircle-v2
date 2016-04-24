@@ -27,7 +27,8 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale; }
   #viewProject-page #viewProject-header .viewProject-info {
-    padding: 20px 0; }
+    padding: 20px 0;
+    margin-bottom: 20px; }
     #viewProject-page #viewProject-header .viewProject-info li {
       display: inline-block;
       margin-right: 20px; }
@@ -47,6 +48,8 @@
     #viewProject-page #viewProject-header .viewProject-info .user-icon img {
       width: 13px;
       height: auto; }
+  #viewProject-page #viewProject-header .viewProject-mobile-options {
+    display: none; }
   #viewProject-page #viewProject-header .viewProject-bottom {
     position: absolute;
     bottom: 0;
@@ -515,7 +518,8 @@
       top: 105px;
       padding: 0 15px; }
       #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info {
-        min-height: 120px; }
+        /*					min-height: 120px;
+        */ }
         #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info h1 {
           font-size: 34px; }
         #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info h4 {
@@ -523,7 +527,8 @@
     #viewProject-page #viewProject-header .viewProject-info {
       padding: 0 10px;
       text-align: center;
-      margin-top: 15px; }
+      margin-top: 15px;
+      margin-bottom: 15px; }
       #viewProject-page #viewProject-header .viewProject-info li {
         margin: 0;
         margin-right: 10px;
@@ -531,6 +536,25 @@
       #viewProject-page #viewProject-header .viewProject-info .location-icon img {
         position: relative;
         bottom: 2px; }
+    #viewProject-page #viewProject-header .viewProject-mobile-options {
+      display: block; }
+      #viewProject-page #viewProject-header .viewProject-mobile-options button {
+        margin: 0 5px;
+        display: inline-block;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        color: white;
+        padding: 4px 12px 6px 12px;
+        border: 1px solid #416299;
+        border-radius: 4px;
+        background-color: #416299; }
+        #viewProject-page #viewProject-header .viewProject-mobile-options button i {
+          margin-right: 8px;
+          position: relative;
+          top: 1px; }
+      #viewProject-page #viewProject-header .viewProject-mobile-options #editButton {
+        border: 1px solid white;
+        background-color: transparent; }
     #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav {
       padding: 10px 0px;
       text-align: center; }
@@ -538,7 +562,7 @@
         display: none; }
       #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category li {
         font-family: 'FreigBook';
-        padding: 10px 20px 10px 15px;
+        padding: 10px 10px 10px 10px;
         border-right: 1px solid #222222; }
       #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category li:hover {
         background-color: transparent; }

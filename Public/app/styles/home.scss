@@ -865,12 +865,12 @@ a:hover {
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 
-@media only screen and (max-width: 736px) {
 
-	/* Main video background to Main image background */
+@media only screen and (max-width: 1270px) {
 	.home-video-bg {
 		display: none;
 	}
+
 	.home-image-bg {
 		display: block;
 		width: 100%;
@@ -888,6 +888,14 @@ a:hover {
 		-ms-transform: translateZ(0);
 		-o-transform: translateZ(0);
 		transform: translateZ(0);
+	}
+}
+
+@media only screen and (max-width: 736px) {
+
+	/* Main video background to Main image background */
+	.home-video-bg {
+		display: none;
 	}
 
 	/* Main text content */

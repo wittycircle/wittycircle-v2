@@ -8,8 +8,8 @@
  * Controller of the wittyApp
  **/
 angular.module('wittyApp')
-.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
-  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', '$mdBottomSheet', 
+  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia, $mdBottomSheet) {
 
   /*** CHECK LOG ***/
   function checkCredential() {
@@ -24,6 +24,8 @@ angular.module('wittyApp')
       });
     }
   }; checkCredential();
+
+  console.log(window.location.href);
 
    /*
    **Update in time sidebar after login
@@ -416,7 +418,8 @@ angular.module('wittyApp')
     });
   };
 
-  function unslickElem() {
+  $scope.closePopover = function() {
+    $mdBottomSheet.hide();
   };
 
   $scope.goToStart = function() {

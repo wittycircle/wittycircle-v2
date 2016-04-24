@@ -706,6 +706,54 @@
 
 @media only screen and (max-width: 736px) {
   .project-post-box, .project-post-video {
-    border: none; } }
+    border: none; }
+
+  .project-post-container {
+    text-align: center;
+    padding: 40px 20px; }
+
+  #feedback_project .pdt-tp-bt-75 {
+    padding: 30px 30px 70px 30px; }
+  #feedback_project h3 {
+    font-size: 27px; }
+  #feedback_project h4 {
+    font-size: 21px; }
+  #feedback_project .feedback_container {
+    padding: 0 0px; }
+  #feedback_project .no_feedbacks {
+    margin: 20px 0; }
+    #feedback_project .no_feedbacks .title_no_comments {
+      font-size: 21px;
+      margin-bottom: 6px; }
+    #feedback_project .no_feedbacks .text_no_comments {
+      font-size: 16px; }
+  #feedback_project .link_top {
+    font-family: 'FreigMed';
+    font-size: 14px;
+    padding-top: 0px;
+    color: #FF4D4D;
+    cursor: pointer; }
+    #feedback_project .link_top .fa-plus {
+      position: relative;
+      font-size: 14px;
+      top: 1px;
+      margin-right: 5px; }
+  #feedback_project .link_top:hover {
+    color: #FF4D4D; }
+  #feedback_project .cards_openings_body {
+    width: 260px;
+    margin: 0 auto; }
+  #feedback_project .cards_openings_footer .footer_text {
+    display: none; }
+  #feedback_project .mgr-bt-40 {
+    margin-bottom: 0 !important; } }
+@media only screen and (max-width: 320px) {
+  #feedback_project .pdt-tp-bt-75 {
+    padding: 30px 10px 70px 10px; }
+  #feedback_project .cards_openings_body {
+    width: 240px;
+    margin: 0 auto; }
+  #feedback_project .cards_openings_footer .footer_text {
+    display: none; } }
 
 /*# sourceMappingURL=projects.css.map */

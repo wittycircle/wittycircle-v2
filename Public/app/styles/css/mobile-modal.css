@@ -432,7 +432,7 @@
         padding: 5px 10px; }
         #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box {
           display: inline-block;
-          width: 100%; }
+          width: 84%; }
           #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea:focus {
             outline: 0; }
           #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-box textarea {
@@ -500,11 +500,12 @@
         position: absolute;
         background-color: white;
         width: 100vw;
-        height: 100vh;
+        height: 100%;
         padding-top: 44px;
         padding-bottom: 63px;
         overflow-y: scroll;
-        overflow-x: hidden; }
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch; }
         #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto {
           padding: 10px 20px;
           border-top: 1px solid #f5f5f5; }

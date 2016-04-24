@@ -532,7 +532,8 @@
 
 			.textarea-box {
 				display: inline-block;
-				width: 100%;
+				width: 84%;
+
 				textarea:focus {
 					outline: 0;
 				}
@@ -631,11 +632,12 @@
 			position: absolute;
 			background-color: white;
 			width: 100vw;
-			height: 100vh;
+			height: 100%;
 			padding-top: 44px;
 			padding-bottom: 63px;
 			overflow-y: scroll;
 			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-body-textos {
 				.messages-cb-texto {

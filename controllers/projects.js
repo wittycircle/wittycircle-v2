@@ -220,7 +220,7 @@ exports.getProjectsCreatedByUser = function(req, res){
                     function (eror, rez) {
                         for (var i = rez.length - 1; i >= 0; i--) {
                             results.push(rez[i]);
-                        };
+                        }
                         tf.sortProjectCard(results, function(data) {
                             if (!data)
                                 return res.status(400).send('Error00');
@@ -234,8 +234,35 @@ exports.getProjectsCreatedByUser = function(req, res){
                             }
                         });
                     });
-        	    } else
+        	    } 
+		if (!results[0]) {
+		  pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?)",
+                    [req.params.user_id],
+                    function (eror, rez) {
+			if (eror) {
+			    console.log(new Date());
+			    throw err;
+			}
+                        for (var i = rez.length - 1; i >= 0; i--) {
+                            results.push(rez[i]);
+                        }
+                        tf.sortProjectCard(results, function(data) {
+                            if (!data)
+                                return res.status(400).send('Error00');
+                            else {
+                                tf.addUserPictureToProject(data, function (rez) {
+                                  if (!rez)
+                                    return res.status(400).send('Error01');
+                                  else
+                                    return res.send(rez);
+                                })
+                            }
+                        });
+                    });
+		}
+		/*else {
         		    return res.send(results);
+			}*/
             });
         } else {
             pool.query('SELECT * FROM `projects` WHERE `creator_user_id` = ? AND project_visibility = 1 ',

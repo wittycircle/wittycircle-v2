@@ -692,22 +692,26 @@ overflow: hidden;
       margin: 0; }
       #main-start-project .main-start-component .main-project-component .dropdown-projects {
         margin-bottom: 10px; }
-        #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component h2 {
-          padding: 0;
-          padding-left: 10px;
-          padding-top: 3px; }
-        #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component img {
-          margin-bottom: 12px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component {
+          padding: 2px 0 1px 0; }
+          #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component h2 {
+            padding: 0;
+            padding-left: 10px;
+            padding-top: 3px; }
+          #main-start-project .main-start-component .main-project-component .dropdown-projects .main-projects-component img {
+            margin-bottom: 12px; }
       #main-start-project .main-start-component .main-project-component .main-second-text {
         display: table-cell; }
       #main-start-project .main-start-component .main-project-component .dropdown-categories {
         display: table-cell;
         padding-bottom: 10px; }
-        #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component h2 {
-          padding: 0;
-          padding-left: 10px; }
-        #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component img {
-          margin-bottom: 12px; }
+        #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component {
+          padding: 4px 0 2px 0; }
+          #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component h2 {
+            padding: 0;
+            padding-left: 10px; }
+          #main-start-project .main-start-component .main-project-component .dropdown-categories .main-categories-component img {
+            margin-bottom: 12px; }
     #main-start-project .main-start-component .main-location-component {
       padding: 0;
       margin: 0; }
@@ -717,7 +721,7 @@ overflow: hidden;
           height: auto;
           font-size: 27px; }
       #main-start-project .main-start-component .main-location-component .main-geolocation input {
-        height: auto;
+        height: 42px;
         font-size: 27px; }
     #main-start-project .main-start-component h2 {
       font-size: 27px; }

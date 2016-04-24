@@ -25,7 +25,7 @@
     <link rel="publisher" href="https://plus.google.com/104066516895208794319/about" />
 
     <style>
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-    ng-cloak {
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
             display: none !important;
         }
     </style>
@@ -34,7 +34,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/css/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" /> -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <!-- endbuild -->
@@ -101,7 +101,7 @@
             <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
             <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
             <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
-            <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'"></div>
+            <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
         </section>
         <section id="body-section">
             <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>

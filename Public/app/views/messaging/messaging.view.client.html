@@ -295,8 +295,8 @@
 					header 		= document.getElementById('headerCore');
 
 				messlist.on('click', function() {
-					classie.remove( mbmm, 'left-to-right-message');
-					classie.add( mbmm, 'right-to-left-message');
+					classie.remove( document.getElementById('messages-body-messages-mobile'), 'left-to-right-message');
+					classie.add( document.getElementById('messages-body-messages-mobile'), 'right-to-left-message');
 					$('#messages-body-messages-mobile').show()
 					$('#body-section').hide();
 				});

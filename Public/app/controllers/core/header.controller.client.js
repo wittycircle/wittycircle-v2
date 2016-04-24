@@ -417,8 +417,6 @@ angular.module('wittyApp')
   };
 
   function unslickElem() {
-    $('.main-body2-body-mobile').slick('unslick');
-    $('.main-body3-body-mobile').slick('unslick');
   };
 
   $scope.goToStart = function() {

@@ -953,7 +953,10 @@ a:hover {
 
 				.dropdown-projects {
 					margin-bottom: 10px;
+
 					.main-projects-component {
+						padding: 2px 0 1px 0;
+
 						h2 {
 							padding: 0;
 							padding-left: 10px;
@@ -974,6 +977,7 @@ a:hover {
 					padding-bottom: 10px;
 
 					.main-categories-component {
+						padding: 4px 0 2px 0;
 
 						h2 {
 							padding: 0;
@@ -1001,7 +1005,7 @@ a:hover {
 
 				.main-geolocation {
 					input {
-						height: auto;
+						height: 42px;
 						font-size: 27px;
 					}
 				}

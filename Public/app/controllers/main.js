@@ -298,6 +298,53 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
 
 })
+.directive('slickSliderHome', function () {
+    return {
+        restrict: 'A',         
+        scope: {
+          'data': '='
+        },
+        replace: true,
+        link: function (scope, element, attrs) {
+            var isInitialized = false;
+
+            scope.$watch('data', function(newVal, oldVal) {
+                if (newVal && newVal.length > 0 && !isInitialized) {
+                    $(element).slick({
+                        dots: true, 
+                        speed: 100, 
+                        initialSlide: 0, 
+                        mobileFirst: true, 
+                        centerMode: true, 
+                        centerPadding: "60px", 
+                        variableWidth: true,
+                        swipeToSlide: true,
+                        responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 1
+                            }
+                        }]
+                    });
+
+                    isInitialized = true;
+                }
+            });
+        }
+    }
+})
 .directive('googlePlace', function() {
   return {
     require: 'ngModel',

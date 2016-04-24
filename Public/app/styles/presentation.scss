@@ -883,8 +883,9 @@
 		}
 
 		img {
-			margin: 5px 10px 15px 0px;
+			margin: 5px 10px 13px 0px;
 		}
+
 		h2 {
 			font-family: 'FreigLight';
 			font-size: 27px;
@@ -1164,19 +1165,15 @@
 				display: inline-block;
 				margin-bottom: 10px;
 				margin-right: 20px;
+				padding-bottom: 1px;
 
 				h2 {
 					display: inline-block;
-					padding-left: 10px;
+					padding: 6px 10px 7px 10px;
 				}
 
 				.meet-skillList {
 
-					h2 {
-						font-size: 21px;
-						padding: 0;
-						padding-left: 5px;
-					}
 				}
 
 				.meet-cross-bg {
@@ -1192,13 +1189,13 @@
 			}
 
 			.meet-search1-text2 {
-				display: table-cell;
+				display: table;
 				padding-right: 10px;
-				padding-bottom: 20px;
+				padding-bottom: 10px;
 			}
 
 			.meet-search1-dropdown {
-				display: table-cell;
+				display: table;
 			}
 
 			.meet-search2-text2 {
@@ -1208,6 +1205,8 @@
 			.meet-search2-anylocation {
 				input {
 					font-size: 27px;
+					height: 42px;
+					width: 170px;
 				}
 			}
 		}

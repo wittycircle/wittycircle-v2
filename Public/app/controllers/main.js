@@ -17,9 +17,11 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
   $scope.followed = {};
   $scope.cardLoop = {};
+  $scope.cardProfiles = [];
 
   Users.getCardProfiles(function(result){
-    $scope.cardProfiles = result.data;
+    $scope.cardProfiles = $scope.cardProfiles.concat(result.data[0], result.data[1], result.data[2], result.data[3]);
+    console.log($scope.cardProfiles);
     if ($rootScope.globals.currentUser) {
       Profile.getFollowedUser(result.data, function(res){
         $scope.followed = res;
@@ -310,34 +312,36 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
             scope.$watch('data', function(newVal, oldVal) {
                 if (newVal && newVal.length > 0 && !isInitialized) {
-                    $(element).slick({
-                        dots: true, 
-                        speed: 100, 
-                        initialSlide: 0, 
-                        mobileFirst: true, 
-                        centerMode: true, 
-                        centerPadding: "60px", 
-                        variableWidth: true,
-                        swipeToSlide: true,
-                        responsive: [{
-                            breakpoint: 768,
-                            settings: {
-                                arrows: false,
-                                centerMode: true,
-                                centerPadding: '40px',
-                                slidesToShow: 3
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                arrows: false,
-                                centerMode: true,
-                                centerPadding: '40px',
-                                slidesToShow: 1
-                            }
-                        }]
-                    });
+                    // $(element).slick({
+                    //     dots: true, 
+                    //     speed: 100, 
+                    //     initialSlide: 0, 
+                    //     mobileFirst: true, 
+                    //     centerMode: true, 
+                    //     centerPadding: "60px", 
+                    //     variableWidth: true,
+                    //     swipeToSlide: true,
+                    //     responsive: [{
+                    //         breakpoint: 768,
+                    //         settings: {
+                    //             arrows: false,
+                    //             centerMode: true,
+                    //             centerPadding: '40px',
+                    //             slidesToShow: 3
+                    //         }
+                    //     },
+                    //     {
+                    //         breakpoint: 480,
+                    //         settings: {
+                    //             arrows: false,
+                    //             centerMode: true,
+                    //             centerPadding: '40px',
+                    //             slidesToShow: 1
+                    //         }
+                    //     }]
+                    // });
+
+                    $(element).slick({dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "30px", variableWidth: true,});
 
                     isInitialized = true;
                 }

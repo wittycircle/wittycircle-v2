@@ -119,7 +119,7 @@ $scope.initiateProject = function () {
                     {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
                 ],
                 theme: {
-                    url: "styles/videogular.scss"
+                    url: "styles/css/videogular.css"
                 },
                 plugins: {
                     controls: {
@@ -128,6 +128,9 @@ $scope.initiateProject = function () {
                     }
                 }
             };
+	    if ($scope.project.video_poster) {
+		$scope.config.plugins.poster = $scope.project.video_poster;
+	    }
         }
         Categories.getCategory(response[0].category_id, function (response) {
             $scope.project_category.obj = response[0];
@@ -212,14 +215,20 @@ $scope.uploadFiles = function(file) {
                 $('#viewProject-header').backgroundDraggable();
                 $scope.imageCoverLoading = false;
             }, 1000);
-
         }).error(function(response) {
             console.log(response);
         });
-
     });
-
 };
+
+$scope.uploadPoster = function () {
+        $scope.modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'views/projects/create/modal/upload_poster.client.html',
+        controller: 'UploadPosterCtrl',
+        scope: $scope
+    });
+}
 
 $scope.deleteVideo = function() {
     var data = {};
@@ -253,6 +262,7 @@ $scope.deleteVideo = function() {
 };
 
 $scope.savebasics = function(data, project_category, places_after, statechoose) {
+    console.log($scope.project.video_poster);
     data.picture_position = $scope.imagecoverposition;
     if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
         data.main_video = $scope.project_video;
@@ -419,7 +429,7 @@ $scope.uploadVideo = function() {
         //maxFileSize: 20000000, // 20MB
         dropZone: ".update-project-video",
         start: function (e) {
-            console.log(document.getElementById("file").value);
+            //console.log(document.getElementById("file").value);
             $scope.status = "Starting upload...";
             $scope.file = {};
             $scope.$apply();
@@ -469,7 +479,7 @@ $scope.uploadVideo = function() {
                     {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
                 ],
                 theme: {
-                    url: "styles/videogular.scss"
+                    url: "styles/css/videogular.css"
                 },
                 plugins: {
                     controls: {

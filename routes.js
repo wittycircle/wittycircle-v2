@@ -176,7 +176,8 @@ app.get('/project/involved_users/:public_id', projects.getAllUsersInvolvedByPubl
 app.post('/project/involvment/accepted/:project_id/:user_id', projects.acceptInvolvment);
 app.post('/project/involvment/declined/:project_id/:user_id', projects.declineInvolvment);
 app.delete('/project/:project_id/involved/:user_id', projects.deleteUserInvolved);
-app.get('/project/:public_id/auth', projects. getAllProjectMembers);
+app.get('/project/:public_id/auth', projects.getAllProjectMembers);
+app.post('/project/video/poster/:public_id', projects.updateVideoPoster);
 
 /* Project follow Maxence */
 var project_followers = require('./controllers/project_followers.js');

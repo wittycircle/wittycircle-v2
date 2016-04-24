@@ -148,6 +148,9 @@
                                     }
                                 }
                             };
+		    if (vm.project.video_poster) {
+			vm.config.plugins.poster = vm.project.video_poster;
+		    }
                 }
                 // disable following if the currentUser is the creator
                 if (currentUser && currentUser.id === vm.project.creator_user_id) {

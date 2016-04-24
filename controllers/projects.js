@@ -383,9 +383,12 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       return recursive(index + 1);
                   });
                 }
-                else if (results[index].user_id !== req.user.id) {
+                if (req.user && results[index].user_id !== req.user.id) {
                   recursive(index + 1);
                 }
+		if (!req.isAuthenticated()) {
+		    recursive(index + 1);
+		    }
             } else {
                 return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }
@@ -550,6 +553,7 @@ exports.updateProject = function(req, res){
     req.checkBody('picture_position', 'Error Message').optional().isString().max(128);
     req.checkBody('main_video_id', 'Error message').optional().isString().max(256);
     req.checkBody('picture_card', 'Error message').optional().isString().max(258);
+    
 
     var errors = req.validationErrors(true);
     if (errors) {
@@ -782,4 +786,25 @@ exports.getAllProjectMembers = function(req, res) {
                 }
             });
         }
+}
+
+exports.updateVideoPoster = function(req, res) {
+    req.checkParams('public_id', 'public_id must be an int').isInt().min(1);
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+	console.log(errors);
+	return res.status(400).send(errors);
+    } else {
+	pool.query('UPDATE projects set video_poster = ? WHERE public_id = ?',
+	[req.body.poster, req.params.public_id],
+	function (err, result) {
+	    if (err) {
+		console.log(new Date());
+		throw err;
+	    } else {
+		return res.send(result);
+	    }
+	});
+    }
 }

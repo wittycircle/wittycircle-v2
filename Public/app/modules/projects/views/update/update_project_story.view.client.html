@@ -38,11 +38,14 @@
               </vg-volume>
               <vg-fullscreen-button></vg-fullscreen-button>
           </vg-controls>
-
           <vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
+	  <vg-poster vg-url='config.plugins.poster'></vg-poster>
         </videogular>
-        <div ng-if="videoproject || project.main_video">
-          <p class="text_delete" ng-click="deleteVideo()">
+        <div ng-if="videoproject || project.main_video" style="text-align:center;">
+	  <p style="display: inline; cursor: pointer; outline:none;" data-ng-click="uploadPoster()">
+	    Change video poster
+	  </p>
+          <p class="text_delete" style="display: inline;" ng-click="deleteVideo()">
             delete <i class="fa fa-trash-o"></i>
           </p>
         </div>

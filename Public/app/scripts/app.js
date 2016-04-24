@@ -170,10 +170,10 @@ var wittyCircleApp = angular
 
         redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
         redactorOptions.plugins = ['imagemanager'];
+	redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
         /*
         **End Redactor configuration
         */
-
 
         //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
         $locationProvider.html5Mode(true);

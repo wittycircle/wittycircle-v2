@@ -528,7 +528,7 @@
 			width: 100%;
 			text-align: center;
 			border-top: 1px solid #e5e5e5;
-			padding: 5px 10px;
+			padding: 5px 10px 5px 5px;
 
 			.textarea-box {
 				display: inline-block;
@@ -551,10 +551,7 @@
 
 			.textarea-button {
 				display: inline-block;
-				text-align: right;
 				width: 16%;
-				height: inherit;
-				padding-top: 12px;
 				float: right;
 
 				button {
@@ -563,7 +560,8 @@
 					background-color: #ff4d4d;
 					border: 1px solid #ff4d4d;
 					border-radius: 4px;
-					padding: 4px;
+					padding: 14px 8px;
+					margin-left: 5px;
 					color: white;
 				}
 

@@ -254,8 +254,10 @@
 				data.date = $filter('wittyDateFilter')(data.date);
 				$scope.$parent.offMessages.push(data);
 			}
-			else
+			else {
+				data.date = $filter('wittyDateFilter')(data.date);
 				$scope.offMessages.push(data);
+			}
 			$scope.refreshDialogue();
 		}
 	});

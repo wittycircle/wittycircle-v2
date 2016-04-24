@@ -446,6 +446,7 @@
         #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button {
           display: inline-block;
           width: 16%;
+          margin-top: 1px;
           float: right; }
           #message-modal-mobile #messages-body-messages-mobile .messages-conversation-textarea .textarea-button button {
             font-family: 'FreigSem';

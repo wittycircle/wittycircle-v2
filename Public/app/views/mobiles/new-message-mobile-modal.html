@@ -37,10 +37,10 @@
 
 		<div class="messages-body-conversation-mobile">
 			<div class="messages-body-textos">
-				<div class="messages-cb-texto" ng-repeat="message in messages ">
+				<div class="messages-cb-texto" ng-repeat="message in $parent.messages ">
 					<div class="messages-texto-picture">
-						<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
-						<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">
+						<img ng-if="my_id === message.from_user_id" ng-src="{{profile_my_picture}}">
+						<img ng-if="my_id !== message.from_user_id" ng-src="{{profile_user_picture}}">
 					</div>
 					<div class="messages-texto">
 						<div class="messages-texto-name">
@@ -55,7 +55,7 @@
 
 				<div class="messages-cb-texto" ng-repeat="liveMessage in $parent.liveMessages track by $index">
 					<div class="messages-texto-picture">
-						<img ng-src="{{ resizePic(liveMessage.from_picture, 50, 50, 'fill') }}">
+						<img ng-src="{{liveMessage.from_picture}}">
 					</div>
 					<div class="messages-texto">
 						<div class="messages-texto-name">
@@ -70,7 +70,7 @@
 
 				<div class="messages-cb-texto" ng-repeat="offMessage in $parent.offMessages track by $index">
 					<div class="messages-texto-picture">
-						<img ng-src="{{ resizePic(offMessage.from_picture, 50, 50, 'fill') }}">
+						<img ng-src="{{offMessage.from_picture}}">
 					</div>
 					<div class="messages-texto">
 						<div class="messages-texto-name">

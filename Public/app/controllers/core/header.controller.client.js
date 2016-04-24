@@ -434,7 +434,6 @@ angular.module('wittyApp')
   $scope.moreMobile = function() {
     $scope.limitM += 5;
   };
- 
 
 /*** All watch function ***/
   $scope.$watch('notifBubble', function(value, old) {

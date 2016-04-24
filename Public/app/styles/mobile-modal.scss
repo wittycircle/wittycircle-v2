@@ -267,7 +267,8 @@
 
 	.header-dropdown-lists {
 		overflow-y: scroll;
-		overflow-x: hidden;
+		overflow-x: hidden; 
+		-webkit-overflow-scrolling: touch;
 		margin-top: 42px;
 		padding-bottom: 40px;
 		
@@ -456,6 +457,8 @@
 			width: 100%;
 			padding-bottom: 150px;
 			overflow-y: scroll;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
 
 			.messages-newpost-user {
 				padding: 12px 20px 12px 20px;
@@ -542,7 +545,7 @@
 					resize: none;
 					width: 100%;
 					font-family: 'FreigBook';
-					font-size: 14px;
+					font-size: 16px;
 					border: 1px solid #e5e5e5;
 					border-radius: 5px;
 					padding: 5px 10px;
@@ -629,6 +632,7 @@
 
 		.messages-body-conversation-mobile {
 			position: absolute;
+			bottom: 0;
 			background-color: white;
 			width: 100vw;
 			height: 100%;
@@ -681,7 +685,7 @@
 
 							p {
 								font-family: 'FreigBook';
-								font-size: 15px;
+								font-size: 16px;
 								line-height: 25px;
 								word-wrap: break-word;
 								margin-bottom: 0;

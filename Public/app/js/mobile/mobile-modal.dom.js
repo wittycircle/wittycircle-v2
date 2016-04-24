@@ -41,7 +41,8 @@ $(document).ready(function(){
     $('#hddownlistm').click(function() {
         classie.remove( document.getElementById('messages-body-messages-mobile'), 'left-to-right-message');
         classie.add( document.getElementById('messages-body-messages-mobile'), 'right-to-left-message');
-        $('#messages-body-messages-mobile').show()
+        $('#messages-body-messages-mobile').show();
+        hmmobile.hide();
     });
 
 });

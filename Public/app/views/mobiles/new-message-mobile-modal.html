@@ -1,4 +1,4 @@
-<section id="message-modal-mobile">
+<section id="message-modal-mobile" media="(max-width: 736px)">
 	<section id="nmmmobile" class="new-messages-modal-mobile animated fadeIn">
 		<div class="new-messages-modal-header">
 			<div class="closeMessage"><img src="/images/cross-icon.svg" /></div>
@@ -24,7 +24,7 @@
 		</div>
 	</section>
 
-	<section id="messages-body-messages-mobile">
+	<section id="messages-body-messages-mobile" onload="scrollToBottom()">
 		<div id="mbom" class="messages-body-option-mobile">
 			<div class="messages-backTo-mobile">
 				<h3><i class="fa fa-chevron-left"></i> All conversations</h3>
@@ -101,6 +101,7 @@
 				nmmmobile 		= $('#nmmmobile'),
 				nmmwmobile 		= $('#nmmwmobile'),
 				hmmobile 		= $('#hmmobile'),
+				currentUrl 		= window.location.href,
 				mbmm 			= document.getElementById('messages-body-messages-mobile'),
 				closeMessage 	= $('.closeMessage');
 
@@ -112,7 +113,9 @@
 			$('#mbom').on('click', function() {
 				classie.remove( mbmm, 'right-to-left-message');
 				classie.add( mbmm, 'left-to-right-message');
-				if (hmmobile.css('display') !== "block")
+				if (currentUrl.indexOf('messages'))
+					$('#hmmobile').show();
+				else
 					$('#body-section').show()
 			});
 

@@ -156,7 +156,7 @@
  	};
 
  	$scope.showHomeMobile = function() {
- 		window.location.href = "http://localhost";
+ 		window.location.href = "https://www.wittycircle.com";
  	};
 
  	$rootScope.$watch('dialogueMM', function(value) {

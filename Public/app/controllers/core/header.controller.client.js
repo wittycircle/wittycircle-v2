@@ -120,7 +120,7 @@ angular.module('wittyApp')
     };
 
     $scope.showMessagePageMobile = function() {
-      window.location.href = "http://localhost/messages";
+      window.location.href = "https://www.wittycircle.com/messages";
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {

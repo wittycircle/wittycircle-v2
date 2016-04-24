@@ -344,7 +344,7 @@
 					</div>
 
 					<div class="main-body3-body-mobile" data="cardProfiles" slick-slider-home media="(max-width: 736px)">
-						<div class="main-body3-card profile-card" ng-repeat="cardProfile in cardProfiles">
+						<div class="main-body3-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: 4 track by $index">
 							<div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
 									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->

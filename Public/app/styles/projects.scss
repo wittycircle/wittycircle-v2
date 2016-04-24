@@ -331,7 +331,6 @@ $font-h3: 'Open Sans', sans-serif;
 
 .project-post-container {
   text-align: center;
-  background-color: #fafafa;
   padding: 40px 0px;
 
   .video-container {
@@ -361,12 +360,11 @@ $font-h3: 'Open Sans', sans-serif;
 
 .project-post-box,
 .project-post-video {
-  max-width: 800px;
+  max-width: 740px;
+  padding: 0 2px;
   margin: 0px auto;
-  padding: 30px;
   background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  overflow: hidden;
 
   vg-overlay-play .play {
     font-size: 50px;
@@ -376,7 +374,7 @@ $font-h3: 'Open Sans', sans-serif;
     background-color: transparent;
   }
 
-  videogular vg-controls, 
+  videogular vg-controls,
   [videogular] vg-controls {
     height: 55px !important;
   }
@@ -439,7 +437,7 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   img {
-    width: 738px;
+    width: 100%;
     height: auto;
   }
 
@@ -450,6 +448,7 @@ $font-h3: 'Open Sans', sans-serif;
     color: #222;
     text-align: left;
     word-spacing: 1px;
+    margin-bottom: 0;
   }
 
   h1 {
@@ -484,7 +483,6 @@ $font-h3: 'Open Sans', sans-serif;
 }
 
 #feedback_project {
-  background-color: #fafafa;
 
   .cards_openings {
     margin-bottom: 30px;
@@ -858,7 +856,8 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   .cards-feedbacks-two {
-    padding: 10px 0 0 0;
+    padding: 10px 10px 0 0;
+    padding-bottom: 10px;
     background-color: white !important;
     border: 1px solid #e5e5e5;
     border-radius: 5px;
@@ -994,4 +993,10 @@ $font-h3: 'Open Sans', sans-serif;
 
   }
 
+}
+
+@media only screen and (max-width: 736px) {
+  .project-post-box, .project-post-video {
+    border: none;
+  }
 }

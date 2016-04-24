@@ -1,28 +1,28 @@
 /* Load Globals */
 //require('./globals');
 /* Load Server Modules */
-var express		= require('express');
-var bodyParser		= require('body-parser');
-var cookieParser	= require('cookie-parser');
-var Validator		= require('express-validator');
-var app			= express();
-var morgan		= require('morgan');
-var _			= require('underscore');
-var server		= require('http').createServer(app);
-var https		= require('https');
-var reload		= require('reload');
-var session		= require('express-session');
-var RedisStore          = require('connect-redis')(session);
-var redis               = require("redis");
-var client              = redis.createClient();
-var passport		= require('passport');
-var cloudinary		= require('cloudinary');
-var multer		= require('multer');
-var fs			= require('fs');
-var ensureAuth		= require('./controllers/auth').ensureAuthenticated;
-var mandrill		= require('mandrill-api/mandrill');
-var mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-var algoliaClient	= require('./algo/algolia').algoliaClient;
+var express		= require('express')
+, bodyParser		= require('body-parser')
+, cookieParser	= require('cookie-parser')
+, Validator		= require('express-validator')
+, app			= express()
+, morgan		= require('morgan')
+, _			= require('underscore')
+, server		= require('http').createServer(app)
+, https		= require('https')
+// , reload		= require('reload')
+, session		= require('express-session')
+, RedisStore          = require('connect-redis')(session)
+, redis               = require("redis")
+, client              = redis.createClient()
+, passport		= require('passport')
+, cloudinary		= require('cloudinary')
+, multer		= require('multer')
+, fs			= require('fs')
+, ensureAuth		= require('./controllers/auth').ensureAuthenticated
+, mandrill		= require('mandrill-api/mandrill')
+, mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA')
+, algoliaClient	= require('./algo/algolia').algoliaClient;
 var httpsOption		= {
     key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
     cert: fs.readFileSync('./ssl_key/secure_key/2_www.wittycircle.com.crt'),
@@ -33,7 +33,7 @@ var httpsOption		= {
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());
-app.use(require('express-force-domain')('https://www.wittycircle.com') );
+//app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
@@ -53,12 +53,12 @@ cloudinary.config({
 app.use(passport.initialize());
 app.use(passport.session());
 
-//app.use(express.static(__dirname + '/Public/'));
+app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/dist/styles/'));
 //app.use(express.static(__dirname + '/Public/dist/scripts/'));
-app.use(express.static(__dirname + '/Public/dist/'));
+//app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
-//app.use(express.static(__dirname + '/Public/app/styles/css'));
+app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -141,11 +141,12 @@ require('./algolia')(app, algoliaClient);
 
 /* Socket */
 var ps = https.createServer(httpsOption, app);
-var io = require('socket.io').listen(ps);
+var io = require('socket.io')(server);
+//var io = require('socket.io').listen(ps);
 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-//server.listen(80);
-ps.listen(443);
+ server.listen(80);
+//ps.listen(443);

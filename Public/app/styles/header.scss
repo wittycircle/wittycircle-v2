@@ -1,3 +1,5 @@
+
+
 #header-section {
 	position: absolute;
 	width: 100%;
@@ -12,6 +14,14 @@
 
 	#header-content {
 		padding: 12px 20px 0px 20px;
+
+		hr {
+			display: none;
+		}
+
+		.header-searchBar-mobile {
+			display: none;
+		}
 
 		.header-brand {
 			display: inline-block;
@@ -146,6 +156,17 @@
 			}
 		}
 
+		.header-navigation-mobile {
+			display: none;
+		}
+
+		#cbp-spmenu-s2 {
+			display: none;
+		}
+
+		.header-log-off-mobile {
+			display: none;
+		}
 		.header-log-off {
 			display: inline-block;
 			float: right;
@@ -485,20 +506,21 @@
 
 	#header-findField {
 		display: none;
-		position: relative;
+		position: absolute;
 		z-index: -1;
-		-webkit-animation-duration: 250ms;
-		-moz-animation-duration: 250ms;
-		margin-right: auto;
-		margin-left: auto;
-		max-height: 615px;
 		width: 660px;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		max-height: 615px;
 		background-color: white;
 		border-top: 1px dashed #e5e5e5;
 		border-bottom-left-radius: 3px;
 		border-bottom-right-radius: 3px;
 		box-shadow: 0px 5px 10px #999999;
 		overflow: hidden;
+		-webkit-animation-duration: 250ms;
+		-moz-animation-duration: 250ms;
 
 		.header-notFound {
 			text-align: center;
@@ -650,3 +672,250 @@
 		}
 	}
 }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+
+@media only screen and (min-width: 320px) and (max-width: 736px){
+
+	/* Main start project */
+	#header-section {
+		#header-content {
+			padding: 12px 20px 0px 20px;
+			text-align: center;
+
+			.header-navigation-mobile {
+
+				display: block;
+				text-align: left;
+				.header-nav-list {
+	
+					padding: 0;
+					margin: 0;
+					li {
+						display: inline-block;
+						padding: 0;
+						float: left;
+						width: 25%;
+					}
+					sup	{
+						padding-left: 5px;
+					}
+
+					.normal {
+						text-align: center;
+					}
+					.left {
+						text-align: left;
+					}
+					.right {
+						text-align: right;
+					}
+				}
+			}
+
+			.header-searchBar-mobile {
+
+				display: inline-block;
+				position: relative;
+				float: left;
+				top: 8px;
+				width: 30px;
+				height: 30px;
+			}
+
+			.header-brand {
+				position: relative;
+				float: none;
+				left: 0px;
+			}
+
+			.header-navigation {
+				display: none;
+			}
+
+			.header-log-off {
+				display: none;
+			}
+
+			#hlon {
+				display: none;
+			}
+
+			.header-log-off-mobile {
+				display: inline-block;
+				position: relative;
+				float: right;
+				top: 8px;
+
+				.header-mobile-bubble {
+	
+					position: absolute;
+					width: 10px;
+					height: 10px;
+					background-color: #ff4d4d;
+					border-radius: 50%;
+					margin-left: 12px;
+					margin-top: 4px;
+				}
+
+				img {
+					width: 20px;
+				}
+			}
+
+			.header-log-aside {
+
+				overflow: scroll;
+				.log-on {
+
+					.log-on-list {
+						h2 {
+							margin-top: 25px;
+							font-family: "FreigMed";
+							font-size: 21px;
+							color: black;
+							padding-bottom: 10px;
+						}
+
+						.header-log-avatar {
+							border-radius: 50%;
+							width: 90px;
+							height: 90px;
+							margin-bottom: 20px;
+						}
+
+						.log-on-notifs {
+							margin-bottom: 10px;
+
+							.log-on-mail,
+							.log-on-notif {
+								display: inline-block;	
+							}
+
+							.log-mobile-buble {
+				
+								position: absolute;
+								margin-left: 25px;
+								margin-top: -5px;
+								font-family: 'Arial';
+								font-weight: 600;
+								font-size: 12px;
+								border-radius: 10px;
+								text-align: center;
+								padding: 1px 7px;
+								color: white;
+								background-color: #ff4d4d;
+							}
+
+							img {
+								width: 25px;
+								height: auto;
+								margin: 0 10px;
+							}
+						}
+
+						.header-mobile-menu {
+							li {
+								display: block;
+							}
+						}
+					}
+				}
+			}
+
+			#cbp-spmenu-s2 {
+				display: inline-block;
+				border-left: 1px solid #999999;
+			}
+
+			hr {
+				display: block;
+				width: 85%;
+				margin: 10px auto 8px auto;
+				color: black;
+				border: 0;
+				border-top: 1px solid rgba(0,0,0,0.3);
+			}
+
+		}
+	}
+	
+	/* General styles for all menus */
+
+		.cbp-spmenu {
+
+			background: white;
+			position: fixed;
+		}
+
+		.cbp-spmenu h3 {
+			color: #222222;
+			font-family: 'FreigBook';
+			font-size: 1.9em;
+			padding: 20px;
+			margin: 0;
+			font-weight: 300;
+			background: #FAFAFA;
+			border-bottom: 2px solid #e5e5e5;
+		}
+
+		.cbp-spmenu a {
+			display: block;
+			color: #999999;
+			font-family: 'FreigBook';
+			font-size: 16px;
+		}
+
+		.cbp-spmenu a:active {
+			background: #FAFAFA;
+			color: #999999;
+		}
+
+		/* Orientation-dependent styles for the content of the menu */
+
+		.cbp-spmenu-vertical {
+			width: 240px;
+			height: 100%;
+			top: 0;
+			z-index: 1000;
+		}
+
+		.cbp-spmenu-vertical a {
+			border-bottom: 1px solid #e5e5e5;
+			padding: 1em;
+		}
+
+		/* Vertical menu that slides from the left or right */
+
+		.cbp-spmenu-right {
+			right: -240px;
+		}
+
+		.cbp-spmenu-right.cbp-spmenu-open {
+			right: 0px;
+		}
+
+		/* Push classes applied to the body */
+
+		.cbp-spmenu-push {
+			overflow-x: hidden;
+			position: relative;
+			left: 0;
+		}
+		.cbp-spmenu-push-toleft {
+			left: -240px;
+		}
+
+		/* Transitions */
+
+		.cbp-spmenu,
+		.cbp-spmenu-push {
+			-webkit-transition: all 0.3s ease;
+			-moz-transition: all 0.3s ease;
+			transition: all 0.3s ease;
+
+		}
+}
+
+
+

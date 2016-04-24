@@ -7,13 +7,10 @@
         .module('wittyProjectModule')
         .controller('viewProjectCtrl', viewProjectCtrl);
 
-    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', '$location'];
-    function viewProjectCtrl (project_InvolvmentResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, $location) {
+    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_NeedsResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', 'Project_History', '$location', 'Feedbacks', '$stateParams'];
+    function viewProjectCtrl (project_InvolvmentResolve, project_NeedsResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, Project_History, $location, Feedbacks, $stateParams) {
 
             var vm = this;
-
-            console.time('loading viewProjectCtrl');
-
 
             // var
             // list all var needed to be initialized at the start of controller
@@ -22,17 +19,43 @@
             vm.loggedUser = $rootScope.globals.currentUser;
             vm.isCollapse = false;
             vm.totalNumber = 0;
+            vm.editable = false;
+            vm.currentUrl = 'https://www.wittycircle.com' + $location.path();
+            // asks vars
+            vm.showAskForm = false;
+            vm.newAsk = {};
+
 
             // function
             // link function to vm(this constructor in fact)
+            // about functions
             vm.encodeUrl = encodeUrl;
             vm.showbottomAl = showbottomAl;
             vm.goToMessage = goToMessage;
             vm.goToProfile = goToProfile;
             vm.followProject = followProject;
+            // feedbacks functions
+            vm.deployReplies = deployReplies;
+            vm.isOwnedReply = isOwnedReply;
+            vm.deleteReply = deleteReply;
+            vm.pushReply = pushReply;
+            // asks functions
+            vm.showorhideAskForm = showorhideAskForm;
+            vm.initAsks = initAsks;
+            vm.addAsk = addAsk;
+            vm.deployAskReplies = deployAskReplies;
+            vm.pushAskReply = pushAskReply;
+            vm.deleteAskReply = deleteAskReply;
+
+            // $scope value
+            $scope.showdelete = false;
+            $scope.editable = false;
 
             init();
+            isEditable();
             initFeedbacks();
+            initAsks();
+            initNeeds();
 
             // function
             // used to adjust background position of the image cover
@@ -80,17 +103,17 @@
                 var err;
 
                 vm.project = projectResolve.data[0];
-		/*** Project Card Page ***/
-		$scope.$parent.seo = {
-		    pageTitle: vm.project.title,
-		    pageDescription: vm.project.description
-		};
-		
-		$scope.$parent.card = {
-		    title: vm.project.title,
-		    url: $location.absUrl(),
-		    image: vm.project.picture,
-		};
+				/*** Project Card Page ***/
+				$scope.$parent.seo = {
+		    		pageTitle: vm.project.title,
+		    		pageDescription: vm.project.description
+				};
+
+				$scope.$parent.card = {
+		    		title: vm.project.title,
+		    		url: $location.absUrl(),
+		    		image: vm.project.picture,
+				};
                 // setting default cover picture is there is not
                 if (!vm.project.picture) {
                   vm.project.picture = emptyBg;
@@ -116,7 +139,7 @@
                                     {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
                                 ],
                                 theme: {
-                                    url: 'http://www.videogular.com/styles/themes/default/latest/videogular.css'
+                                    url: '../../../styles/css/videogular.css'
                                 },
                                 plugins: {
                                     controls: {
@@ -125,6 +148,9 @@
                                     }
                                 }
                             };
+		    if (vm.project.video_poster) {
+			vm.config.plugins.poster = vm.project.video_poster;
+		    }
                 }
                 // disable following if the currentUser is the creator
                 if (currentUser && currentUser.id === vm.project.creator_user_id) {
@@ -132,61 +158,44 @@
                 } else {
                   vm.no_follow = true;
                   if (vm.loggedUser) {
-                    Project_Follow.checkFollowProject(vm.project.id, function(response) {
+                    Project_Follow.checkFollowProject(vm.project.id, function (response) {
                       if (!response.follow)
-                        vm.followText = "Following";
+                        vm.followText = 'Following';
                       else
-                        vm.followText = "Follow";
+                        vm.followText = 'Follow';
                     });
-                    var history = {};
-                    history.project_id = vm.project.id;
-                    //need to put this one into a service
-                    $http.post('/history/project/'+ currentUser.id, history).then(function (response) {
-                      //console.log(response);
-                    });
+                    // check if project id and project id is an integrer with parse int
+                    if (vm.project.id && vm.project.id === parseInt(vm.project.id, 10)) {
+                      Project_History.addProjectHistoryToCurrentUser(vm.project.id, function (result) {
+                        // TODO: what we must do when we have anything to do with empty response ?
+                      });
+                    }
                   }
                 }
                 vm.category = project_categoryResolve.data[0];
                 vm.project.user = project_creatorUserResolve.data.profile;
                 if (project_InvolvmentResolve.data.show === true) {
                   if (project_InvolvmentResolve.data.involver) {
-                    $scope.involver = project_InvolvmentResolve.data.involver;
+                    $scope.involver = project_InvolvmentResolve.data.involver[0];
+                    $scope.project = vm.project;
                     $timeout(function () {
                       showbottomAlert.pop_it_involvment($scope);
                     }, 1000);
                   }
                 }
+                if (project_InvolvmentResolve.data.editable === true) {
+                  vm.editable = true;
+                }
+                if (project_InvolvmentResolve.data.userIn) {
+                    vm.involved_users = project_InvolvmentResolve.data.userIn;
+                }
+            }
 
-                /*$http.get('/project/' + vm.project.id + '/involved').success(function (response) {
-                  Object.keys(response).forEach(function (key) {
-                    if (currentUser && currentUser.id == response[key].user_id && response[key].n_accept === 0) {
-                      Users.getProfileByUserId(response[key].invited_by, function(result) {
-                        if (result.success === true) {
-                          Users.getProfilesByProfileId(result.content.profile_id, function(data) {
-                            $scope.involver = data;
-                            showbottomAlert.pop_it_involvment($scope);
-                          })
-                        }
-                      });
-                    }
-                    if (currentUser) {
-                      if (response[key].user_id == currentUser.id && response[key].n_accept === 1) {
-                          $scope.editable = true;
-                      }
-                    }
-                    if (response[key].n_accept === 1) {
-                      Users.getProfileByUserId(response[key].user_id, function(resp) {
-                        if(resp.success == true) {
-                          Users.getProfilesByProfileId(resp.content.profile_id, function(res) {
-                            //$scope.involved_users = setPictureIcon(res);
-                            $scope.involved_users.push(res.content);
-                          });
-                        }
-                      });
-                    }
-                  });
-                });*/
-
+            function isEditable() {
+              if (currentUser && vm.project && vm.project.creator_user_id === currentUser.id) {
+                vm.editable = true;
+                $scope.ediatble = true;
+              }
             }
 
 
@@ -197,8 +206,9 @@
                         return;
                     }
                     if (id !== currentUser.id) {
-                        Users.getProfileByUserId(id, function (res) {
-                            $state.go('messages', {profile_id: res.content.profile_id});
+                        Users.getUserbyId(id, function (res) {
+			    console.log(res);
+                            $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
                         });
                     }
                 } else {
@@ -209,9 +219,11 @@
             };
 
             function goToProfile (id) {
+		console.log(id);
                 if (id && id !== null && id !== undefined && typeof id === 'number') {
-                    Users.getUserIdByProfileId(id).then(function (response) {
-                        $state.go('profile', {username: response.userId.username});
+                    Users.getUserbyId(id, function (response) {
+			console.log(response);
+                        $state.go('profile', {username: response.data.username});
                     });
                 } else {
                     console.log('error in goToProfile in ViewProjectCtrl: no id is provided');
@@ -222,12 +234,9 @@
 
 
             function followProject () {
-                var project_id;
-
-                project_id = projectResolve.id;
-                if (project_id && project_id !== null && project_id !== undefined && typeof project_id === 'number') {
+                if (vm.project.public_id) {
                     if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
-                        Project_Follow.followProject(project_id, function (response) {
+                        Project_Follow.followProject(vm.project.public_id, function (response) {
                             if (response.success) {
                                 if (response.msg === 'Project followed')
                                     vm.followText = 'Following';
@@ -242,26 +251,172 @@
 
             ///////////////////////////////////////
             ////////////// FEEDBACKS //////////////
-            //////////////////////////////////////
+            ///////////////////////////////////////
 
             // function
             // init Feedbacks
-            $scope.initFeedbacks = function () {
-              $scope.questions = Feedbacks.getFeedbacksbyProjectPublicId($stateParams.public_id, function(response) {
-                //$scope.questions = addUsertoFeedbacks(response);
-                $scope.questions = addRepliestoFeedbacks(response);
-                //$scope.repliesNumber = countObjInArray($scope.questions)
-                $scope.feedNumber = countObjInArray(response);
-                $scope.totalNumber = $scope.totalNumber + $scope.feedNumber;
+            function initFeedbacks () {
+                vm.questions = project_FeedbacksResolve.data;
+                vm.totalNumber = vm.totalNumber + vm.questions.length;
+            }
+
+            function deployReplies (question) {
+                if (question.isCollapse == false || !question.isCollapse) {
+                    question.isCollapse = true;
+                    vm.isCollapse = true;
+                } else {
+                    question.isCollapse = false;
+                    vm.isCollapse = false;
+                }
+            }
+
+            function isOwnedReply (reply, creator_user_id) {
+                if (reply.user_id === creator_user_id) {
+                    reply.owned = true;
+                } else {
+                    reply.owned = false;
+                }
+            }
+
+            function deleteReply (reply, question_index) {
+                Feedbacks.deleteFeedbackReply(reply.id, function (response) {
+                    if (response.serverStatus === 2) {
+                        var index = vm.questions[question_index].replies.indexOf(reply);
+                        vm.questions[question_index].replies.splice(index, 1);
+                    } else {
+                        console.log('error');
+                    }
+                });
+            }
+
+            function pushReply (message, feedback_id, question) {
+              var data = {};
+
+              data.feedback_id = feedback_id;
+              data.description = message;
+              data.creator_picture = currentUser.profile_picture_icon;
+              data.creator_first_name = currentUser.first_name;
+              data.creator_last_name = currentUser.last_name;
+              Feedbacks.addFeedbackReply(data, function (response) {
+                  if (response.serverStatus === 2) {
+                      var reply = {};
+                      reply.id = response.insertId;
+                      reply.feedback_id = feedback_id;
+                      reply.description = message;
+                      reply.created_at = new Date();
+                      reply.isOwned = true;
+                      reply.user_profile = {};
+                      reply.user_profile.profile_picture_icon = currentUser.profile_picture_icon;
+                      reply.user_profile.first_name = currentUser.first_name;
+                      reply.user_profile.last_name = currentUser.last_name;
+                      if (question.replies) {
+                          question.replies.push(reply);
+                      } else {
+                          question.replies = [];
+                          question.replies.push(reply);
+                      }
+                  } else {
+                      console.error('cant push reply', data);
+                  }
               });
             };
 
-            function initFeedbacks () {
-                vm.questions = project_FeedbacksResolve.data;
+            ///////////////////////////////////////
+            //////////////// ASKS /////////////////
+            ///////////////////////////////////////
+
+            function showorhideAskForm (event) {
+                if (!currentUser) {
+                  showbottomAlert.pop_it(event);
+                } else {
+                  if (vm.showAskForm == true) {
+                    vm.showAskForm = false;
+                    return;
+                  }
+                  if (vm.showAskForm == false) {
+                    vm.showAskForm = true;
+                  }
+                }
             }
 
+            function initAsks () {
+              $http.get('/ask/public_id/' + $stateParams.public_id).success(function (response) {
+                vm.asks = response;
+                vm.totalNumber += vm.asks.length;
+              });
+            };
 
-            console.timeEnd('loading viewProjectCtrl');
+            function addAsk (newAsk) {
+                newAsk.project_id = vm.project.id;
+                newAsk.creator_img = currentUser.profile_picture_icon;
+                newAsk.first_name = currentUser.first_name;
+                newAsk.last_name = currentUser.last_name;
+                newAsk.project_public_id = vm.project.public_id;
+                $http.post('/asks', newAsk).success(function (response) {
+                    // ok now gonna need to push it etc ...
+                    $timeout(function () {
+                        newAsk.created_at = new Date();
+                        vm.asks.push(newAsk);
+                        vm.newAsk = {};
+                        vm.totalNumber = vm.totalNumber + 1;
+                    }, 500);
+                    if (vm.showAskForm == true) {
+                        vm.showAskForm = false;
+                        return;
+                    }
+                    if (vm.showAskForm == false) {
+                        vm.showAskForm = true;
+                        return;
+                    }
+                })
+            };
+
+            function deployAskReplies (ask) {
+              if (ask.isCollapse == false || !ask.isCollapse) {
+                ask.isCollapse = true;
+                vm.isCollapse = true;
+              } else {
+                ask.isCollapse = false;
+                vm.isCollapse = false;
+              }
+            };
+
+            function pushAskReply (message, ask_id, ask) {
+              var data = {};
+
+              data.ask_id = ask_id;
+              data.description = message;
+              data.creator_picture = currentUser.profile_picture_icon;
+              data.creator_first_name = currentUser.first_name;
+              data.creator_last_name = currentUser.last_name;
+              $http.post('/ask_reply/add', data).success(function (response) {
+                if (currentUser.id == ask.user_id) {
+                  ask.owned = true;
+                }
+                data.created_at = new Date();
+                ask.replies.push(data);
+                vm.reply = [];
+              });
+            };
+
+            function deleteAskReply (ask_reply, question_index) {
+              $http.delete('/ask_reply/delete/' + ask_reply.id).success(function (response) {
+                if (response.serverStatus == 2) {
+                  var index = vm.asks[question_index].replies.indexOf(ask_reply);
+                  vm.asks[question_index].replies.splice(index, 1);
+                }
+              });
+            };
+
+            ///////////////////////////////////////
+            /////////////// NEEDS /////////////////
+            ///////////////////////////////////////
+
+            function initNeeds() {
+                if (project_NeedsResolve.status === 200) {
+                    vm.openings = project_NeedsResolve.data;
+                }
+            }
 
     }
 

@@ -1,5 +1,12 @@
 
+@media only screen and (min-width: 737px) {
+
 /*** MESSAGING MODALS ***/
+
+#messages-body-page-mobile {
+	display: none;
+}
+
 #messages-modals {
 	position: fixed;
 	background-color: white;
@@ -1100,3 +1107,377 @@ textarea:focus {
 }*/
 
 /*/*/
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+
+@media only screen and (max-width: 736px) {
+/*	#header-section {
+		display: none;
+	}
+	#footer-page {
+		display: none;
+	}*/
+
+	#messages-body-page {
+		display: none;
+	}
+
+	.body-fixed {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		background-color: white;
+		z-index: 100000;
+		overflow: hidden;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	#messages-body-page-mobile {
+		display: block;
+
+		#messages-body-list-mobile {
+			width: 100vw;
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				position: fixed;
+				top: 0;
+				width: 100%;
+				padding: 6px 10px 4px 10px;
+				border: 1px solid #e5e5e5;
+				background-color: #fafafa;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-perspective: 1000;
+				-moz-perspective: 1000;
+				-ms-perspective: 1000;
+				-o-perspective: 1000;
+				perspective: 1000;	
+				-webkit-backface-visibility: hidden;
+				-moz-backface-visibility: hidden;
+				-ms-backface-visibility: hidden;
+				-o-backface-visibility: hidden;
+				backface-visibility: hidden;
+				z-index: 100;
+
+				input {
+					display: inline-block;
+					width: 77%;
+					font-family: 'FreigBook';
+					font-size: 16px;
+					background-color: white;
+					color: #999999;
+					background-image: url('/images/search-icon-b.svg');
+					background-repeat: no-repeat;
+					background-position: 4% 50%;
+					padding: 10px 5px 10px 45px;
+					border: 1px solid #e5e5e5;
+					border-radius: 4px;
+				}
+
+				.new-messages-mobile {
+					display: inline-block;
+					text-align: center;
+					float: right;
+					position: fixed;
+					top: 14px;
+					margin-left: 25px;
+
+
+					img {
+						background-color: white;
+						position: relative;
+						bottom: 3px;
+						left: 3px;
+						width: 20px;
+					}
+				}
+
+				.new-messages-home {
+					display: inline-block;
+					margin-top: 5px;
+					margin-right: 10px;
+					float: right;
+
+					.fa-home {
+						color: #999999;
+						font-size: 23px;
+					}
+				}
+			}
+
+			.messages-convers-list-mobile {
+				padding-top: 54px;
+				min-height: 574px;
+
+				.messages-list {
+					width: 100%;
+					border-bottom: 1px solid #e5e5e5;
+
+					.messages-list-picture {
+						display: inline-block;
+						float: left;
+						width: 50px;
+						height: 50px;
+						border-radius: 50%;
+						overflow: hidden;
+						margin: 13px 10px 15px 10px;
+
+						img {
+							max-width: 100%;
+							max-height: 100%;
+						}
+					}
+
+					.messages-list-object {
+						display: inline-block;
+						padding: 10px 10px 9px 4px;
+
+						.messages-list-user {
+							.online-icon {
+								display: inline-block;
+								width: 10px;
+								height: 10px;
+								background: #57C428;
+								-moz-border-radius: 50px;
+								-webkit-border-radius: 50px;
+								border-radius: 50px;
+								margin-right: 5px;
+							}
+
+							.offline-icon {
+								display: inline-block;
+								position: relative;
+								float: left;
+								top: 5px;
+								width: 10px;
+								height: 10px;
+								background: gray;
+								-moz-border-radius: 50px;
+								-webkit-border-radius: 50px;
+								border-radius: 50px;
+								margin-right: 5px;
+							}
+
+							h4 {
+								display: inline-block;
+								font-family: 'FreigMed';
+								font-size: 16px;
+								color: black;
+								max-width: 230px;
+							}
+						}
+
+						.messages-list-text {
+							max-width: 200px;
+
+							p {
+								font-family: 'FreigBook';
+								font-size: 14px;
+								word-wrap: break-word;
+								max-height: 40px;
+								overflow: hidden;
+								line-height: 18px;
+								margin-bottom: 0px;
+								margin-top: 4px;
+							}
+						}
+
+						span {
+							font-family: 'FreigBook';
+							font-size: 14px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: 736px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 76%;
+					padding: 5px 10px 5px 65px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 667px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 75%;
+					padding: 5px 10px 5px 55px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 568px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 10px;
+				}
+
+				input {
+					width: 70%;
+					padding: 5px 10px 5px 55px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 25px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 480px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 71%;
+					padding: 5px 10px 5px 50px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 414px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 68%;
+					padding: 5px 10px 5px 35px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+				
+				.new-messages-home {
+					margin-right: 5px;
+				}
+
+				input {
+					width: 65%;
+					padding: 5px 10px 5px 40px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) { 
+	#messages-body-page-mobile {
+		#messages-body-list-mobile {
+
+			/* messages-body-list-mobile */
+			.messages-search-list-mobile {
+
+				.new-messages-home {
+					margin-right: 0px;
+				}
+
+				input {
+					width: 60%;
+					padding: 5px 10px 5px 35px;
+				}
+
+				.new-messages-mobile {
+					margin-left: 15px;
+				}
+			}
+		}
+	}
+}

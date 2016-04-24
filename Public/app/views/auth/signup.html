@@ -236,7 +236,7 @@
 				<div class="signup-exp-list">
 					<div class="signup-exp">
 						<div class="signup-exp-post">
-							<h3 ng-bind="position.title"></h3>
+							<h3>{{position.title}} <span>| &nbsp;{{position.company}}</span></h3>
 							<h4 ng-bind="position.company"></h4>
 							<div class="signup-exp-param">
 								<img src="/images/picto_edit.svg" ng-click="editPosition($index, position.id)">
@@ -355,6 +355,8 @@
 
 	<script>
 
+		var mobileSize = $(window).width();
+
 		$(document).ready(function() {
 			// $('.signup-info-gender').click(function(e) {
 			// 	var container1 	= $('#srma');
@@ -379,6 +381,24 @@
 			// 	$('#signup-experience-modal').fadeIn();
 			// 	$('#signup-experience-body').fadeOut();
 			// });
+
+			var aClassName 	= $('#signup-basic-body'),
+				bClassName	= $('#signup-about-body'),
+				cClassName  = $('#signup-skill-body'),
+				dClassName  = $('#signup-interest-body'),
+				eClassName 	= $('#signup-experience-body');
+
+			if (mobileSize > 736) {
+				var inRightBig 	= "animated fadeInRightBig",
+					inLeftBig 	= "animated fadeInLeftBig",
+					outRightBig = "animated fadeOutRightBig",
+					outLeftBig 	= "animated fadeOutLeftBig";
+			} else {
+				var inRightBig 	= "animated fadeInRight",
+					inLeftBig 	= "animated fadeInLeft",
+					outRightBig = "animated fadeOutRight",
+					outLeftBig 	= "animated fadeOutLeft";
+			}
 
 			                function myFunction() {
                     return "Write something clever here...";
@@ -438,16 +458,6 @@
 					var b3 			= $('#bin');
 					var b4 			= $('#bex');
 
-					var aClassName 	= $('#signup-basic-body');
-					var bClassName	= $('#signup-about-body');
-					var cClassName  = $('#signup-skill-body');
-					var dClassName  = $('#signup-interest-body');
-					var eClassName 	= $('#signup-experience-body');
-
-					var inRightBig 	= "animated fadeInRightBig";
-					var inLeftBig 	= "animated fadeInLeftBig";
-					var outRightBig = "animated fadeOutRightBig";
-					var outLeftBig 	= "animated fadeOutLeftBig";
 
 					if ($('#signup-basic-body').css('display') === "block") {
 						var count 	 = 0;
@@ -606,13 +616,13 @@
 				var tCon4 = $('#tpty2');
 
 				if (tCon1.is(e.target) || tCon1.has(e.target).length || $('#tmdropdown').css('display') === "block")
-					$('#tmdropdown').slideToggle(300);
+					$('#tmdropdown').slideToggle(200);
 				if (tCon2.is(e.target) || tCon2.has(e.target).length || $('#tydropdown').css('display') === "block")
-					$('#tydropdown').slideToggle(300);
+					$('#tydropdown').slideToggle(200);
 				if (tCon3.is(e.target) || tCon3.has(e.target).length || $('#tmdropdown2').css('display') === "block")
-					$('#tmdropdown2').slideToggle(300);
+					$('#tmdropdown2').slideToggle(200);
 				if (tCon4.is(e.target) || tCon4.has(e.target).length || $('#tydropdown2').css('display') === "block")
-					$('#tydropdown2').slideToggle(300);
+					$('#tydropdown2').slideToggle(200);
 			});
 
 			$('#skill-remove').click(function() {

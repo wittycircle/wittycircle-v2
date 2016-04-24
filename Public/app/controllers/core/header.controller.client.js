@@ -7,30 +7,35 @@
  * # HeaderCtrl
  * Controller of the wittyApp
  **/
-angular.module('wittyApp').controller('HeaderCtrl', function($http, $interval, $timeout, $location, $scope, showbottomAlert, $mdBottomSheet, Authentication, Profile, $cookies, $rootScope, $modal, $state, Users, Header, Notification, Projects, Beauty_encode, algolia) {
+angular.module('wittyApp')
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', 
+  function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia) {
 
   /*** CHECK LOG ***/
-  /*function checkCredential() {
+  function checkCredential() {
     if ($rootScope.globals.currentUser) {
       $http.get('/api').success(function(res) {
         if (!res.success) {
-          Authentication.ClearCredentials();
-          $location.path('/');
+          Authentication.ClearCredentials(function(res) {
+            if (res)
+              $location.path('/');
+          });
         }
       });
     }
-  }; checkCredential();*/
+  }; checkCredential();
 
    /*
    **Update in time sidebar after login
    */
-  var socket = io.connect('https://www.wittycircle.com');
-  
-$rootScope.$watch('globals', function(value) {
+   //TODO: change to the server url
+   var socket = io.connect('http://127.0.0.1');
+
+   $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
-    if ($scope.log) {
-	$("#hlon").css('display', 'block');
-    }
+ //    if ($scope.log) {
+	// $("#hlon").css('display', 'block');
+ //    }
     if (value.currentUser) {
       Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
         $scope.user = {
@@ -46,6 +51,13 @@ $rootScope.$watch('globals', function(value) {
         });
       });
     }
+  });
+
+  $scope.$on('$stateChangeStart', function(scope, next, current) {
+    $('#headerCore').show();
+    $('#bodyCore').show();
+    $('#footerCore').show();
+    $('#hsfmobile').hide();
   });
 
    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
@@ -83,6 +95,34 @@ $rootScope.$watch('globals', function(value) {
       }
     };
 
+    $scope.onSwipeRight = function(ev) {
+
+      var bodyJq          = $( 'body' ),
+          classTog        = classie.toggle,
+          thiss            = document.getElementById('header-section'),
+          menuRight       = document.getElementById( 'cbp-spmenu-s2' ),
+          showRightPush   = document.getElementById( 'showRightPush' ),
+          body            = document.body;
+
+        function disableOther( button ) {
+            if( button !== 'showRightPush' ) {
+                classTog( showRightPush, 'disabled' );
+            }
+        };
+          classTog( thiss, 'active' );
+          classTog( body, 'cbp-spmenu-push-toleft' );
+          classTog( menuRight, 'cbp-spmenu-open' );
+          if (bodyJq.hasClass("cbp-spmenu-push-toleft"))
+              bodyJq.css('overflow-y', 'hidden');
+          else
+              bodyJq.css('overflow-y', 'auto');
+          disableOther( 'showRightPush' );
+    };
+
+    $scope.showMessagePageMobile = function() {
+      window.location.href = "http://localhost/messages";
+    };
+
     // $rootScope.$watch('notifBubble', function(value, old) {
     //   console.log(value);
     //   if (value)
@@ -105,7 +145,8 @@ $rootScope.$watch('globals', function(value) {
       .success(function(response) {
         if (response.success) {
           Authentication.ClearCredentials(function(res) {
-            window.location.replace('https://www.wittycircle.com');
+            if (res)
+              window.location.replace('https://www.wittycircle.com');
           });
         }
       }).error(function (response) {
@@ -137,14 +178,18 @@ $rootScope.$watch('globals', function(value) {
       }
     };
 
+    $scope.showMessageMobile = function(dialogue) {
+      $rootScope.dialogueMM = dialogue;
+    };
+
     // $scope.getMesssageListOnClick = function() {
     //   if (!$scope.listNotifs && !$scope.dialogues[0])
     //     $scope.getMessageList();
     // };
 
     socket.on('notification', function(data){
-            loadHeaderNotification();
-            $scope.getMessageList();
+      loadHeaderNotification();
+      $scope.getMessageList();
     });
 
 /*** All notifications ***/
@@ -292,16 +337,27 @@ $rootScope.$watch('globals', function(value) {
 
 
 /*** Search Bar ***/
-  var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
-  var People = client.initIndex('Users');
+  /* Dev API Key */
+  var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+  /* Public API Key */
+  // var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+  
+  var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
+  var PAndP   = client.initIndex('PAndP');
 
-  $scope.$watch('searchName', function() {
-    if ($scope.searchName) {
+  $scope.$watch('searchName', function(value) {
+    if (value) {
       $scope.searchProjects();
       $scope.searchUsers();
     }
   });
+
+  $scope.$watch('searchNameM', function(value) {
+    if (value) {
+      $scope.searchUsersAndProjects(value)
+    }
+  })
 
   $scope.searchProjects = function() {
     if ($scope.searchName) {
@@ -335,6 +391,24 @@ $rootScope.$watch('globals', function(value) {
     }
   };
 
+  $http.get('/projects/discover').success(function(res) {
+    $scope.resultHits = res;
+  });
+
+  $scope.searchUsersAndProjects = function(value) {
+      PAndP.search(value)
+        .then(function searchSuccess(content) {
+          if (!content.hits[0]) {
+            $scope.notFoundProject = true;
+          } else {
+            $scope.notFoundProject = false;
+            $scope.resultHits = content.hits;
+          }
+        }, function searchFailure(err) {
+            console.log(err);
+        });
+  };
+
   $scope.goToProfile = function(id) {
     Users.getUserIdByProfileId(id).then(function(data) {
       if (data.userId)
@@ -342,15 +416,24 @@ $rootScope.$watch('globals', function(value) {
     });
   };
 
+  function unslickElem() {
+  };
+
   $scope.goToStart = function() {
-    $state.go('main', {tagStart: true});
+    unslickElem();
+    $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
   };
 
   $scope.bfGoToStart = function() {
+    unslickElem();
     $(window).scrollTop(0);
-    $state.go('main', {tagStart: true});
+    $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };
 
+  $scope.limitM = 5;
+  $scope.moreMobile = function() {
+    $scope.limitM += 5;
+  };
 
 /*** All watch function ***/
   $scope.$watch('notifBubble', function(value, old) {
@@ -372,4 +455,4 @@ $rootScope.$watch('globals', function(value) {
           document.getElementById('notifMailbox').style.display = "none";
       }
     });
-});
+}]);

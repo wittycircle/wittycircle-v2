@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, showbottomAlert, $mdBottomSheet, Beauty_encode, algolia, $timeout) {
+ 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout) {
 
  		/*** ALGOLIA ***/
  		var client = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
@@ -23,7 +23,7 @@
 	 	$scope.helps = ['Teammate', 'Freelancer', 'Feedback', 'Mentor', 'Tips', 'Fundings', 'Any help'];
 	 	$scope.cProject = 'All Projects';
 	 	$scope.cHelp = 'Any help';
-	 	$scope.limit = 12;
+	 	$scope.limit = 9;
 
 	 	function getDiscoverCard() {
 		 	$http.get('/projects/discover').success(function(res) {
@@ -31,6 +31,34 @@
 		 	});
 		}; getDiscoverCard();
 
+
+		/*** Discover Mobile ***/
+		var ww = $(window).width();
+		$scope.dmobile = {};
+		$scope.opendmodal = function(value) {
+			
+			if (ww <= 736) {
+				$('body').css('overflow-y', 'hidden');
+				$scope.dmobile.modal	= value;
+				if (value === 1)
+					$scope.dmobile.headerText = "Show me...";
+				if (value === 2)
+					$scope.dmobile.headerText = "Show me projects about...";
+				if (value === 3)
+					$scope.dmobile.headerText = "Show me projects looking for...";
+				if (value === 4)
+					$scope.dmobile.headerText = "Someone with specific skills?";
+				// if (value === 5)
+				// 	$scope.dmobile.headerText = "Show me projects near...";
+				$scope.dmobile.general 	= true;
+			}
+		};
+
+		$scope.closemmodal = function() {
+			$('#dmmodal').css("display", "none");
+			$('body').css('overflow-y', 'scroll');
+			$scope.dmobile.general 	= false;
+		}
 
 		/*** Discover Card Page ***/
 		$scope.$parent.seo = {
@@ -44,9 +72,9 @@
 			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
 		};
 
-    $scope.encodeUrl = function(url) {
-      return Beauty_encode.encodeUrl(url);
-    }
+	    $scope.encodeUrl = function(url) {
+	      return Beauty_encode.encodeUrl(url);
+	    }
 
 		Categories.getCategories(function (response) {
 			$scope.categories = response;
@@ -58,15 +86,15 @@
 				$scope.ctgName = "Art";
 		});
 
-		$scope.$on("$destroy", function(){
-			$scope.skills = 0;
-			var container = $('.custom-popover');
-			if (container.length) {
-				$mdBottomSheet.hide();
-				$('.md-bottom-sheet-backdrop').css('display', 'none')
-				$('#page-wrap').css('display', 'none');
-			}
-		});
+		// $scope.$on("$destroy", function(){
+		// 	$scope.skills = 0;
+		// 	var container = $('.custom-popover');
+		// 	if (container.length) {
+		// 		$mdBottomSheet.hide();
+		// 		$('.md-bottom-sheet-backdrop').css('display', 'none')
+		// 		$('#page-wrap').css('display', 'none');
+		// 	}
+		// });
 
 		/*****-- FUNCTION --*****/
 		// setTimeout(function() {
@@ -104,10 +132,12 @@
 		};
 		/*** get project name ***/
 		$scope.getProject 		= function (pName, number) {
+			if (ww <= 736)
+				$scope.closemmodal();
 			switch (number) {
 				case 1:
-					$scope.cProject = "Idea";
-					$scope.searchStatus = pName;
+					$scope.cProject = "Ideas";
+					$scope.searchStatus = "Idea";
 					break ;
 				case 2:
 					$scope.cProject = "Drafted projects";
@@ -132,6 +162,8 @@
 		$scope.getCategory 		= function (cName) {
 			$scope.ctgName 		= cName;
 			$scope.searchCtg 	= cName;
+			if (ww <= 736)
+				$scope.closemmodal();
 		};
 
 		/*** get tag category name ***/
@@ -142,33 +174,41 @@
 
 		/*** get help name ***/
 		$scope.getHelp = function(hName) {
-			if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
-				document.getElementById('dstext').style.display = "inline-block";
-				document.getElementById('dsdrop1').style.display = "inline-block";
-				// setTimeout(function() {
-				// 	document.getElementById('dsdrop1').style.display = "inline-block";
-				// }, 400);
-			} else {
-				document.getElementById('dstext').style.display = "none";
-				document.getElementById('dsdrop1').style.display = "none";
-			}
-			$scope.cHelp	 		= hName;
-			$scope.searchHelp 		= hName;
-			if ($scope.cHelp === 'Feedback') {
-				$scope.skillList 	= [];
-				if (document.getElementById('labelNoText')) {
-					document.getElementById('labelNoText').id = "labelText";
-					document.getElementById('labelNoText2').id = "labelText2";
-					document.getElementById('labelText').style.display = "block";
-					document.getElementById('labelText2').style.color = "white";
+			if (ww <= 736)
+				$scope.closemmodal();
+
+			if (ww > 736) {
+				if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
+					document.getElementById('dstext').style.display = "inline-block";
+					document.getElementById('dsdrop1').style.display = "inline-block";
+					// setTimeout(function() {
+					// 	document.getElementById('dsdrop1').style.display = "inline-block";
+					// }, 400);
+				} else {
+					document.getElementById('dstext').style.display = "none";
+					document.getElementById('dsdrop1').style.display = "none";
 				}
-				document.getElementById('dsabox1').style.display = "none";
-				document.getElementById('dsabox2').style.display = "none";
-				document.getElementById('input-dsa').style.display = "inline-block";
-				$scope.displaySk = true;
+				$scope.cHelp	 		= hName;
+				$scope.searchHelp 		= hName;
+				if ($scope.cHelp === 'Feedback') {
+					$scope.skillList 	= [];
+					if (document.getElementById('labelNoText')) {
+						document.getElementById('labelNoText').id = "labelText";
+						document.getElementById('labelNoText2').id = "labelText2";
+						document.getElementById('labelText').style.display = "block";
+						document.getElementById('labelText2').style.color = "white";
+					}
+					document.getElementById('dsabox1').style.display = "none";
+					document.getElementById('dsabox2').style.display = "none";
+					document.getElementById('input-dsa').style.display = "inline-block";
+					$scope.displaySk = true;
+				}
+				else
+					$scope.displaySk = false;
+			} else {
+				$scope.cHelp	 		= hName;
+				$scope.searchHelp 		= hName;
 			}
-			else
-				$scope.displaySk = false;
 		};
 
 		/*** expand project list ***/
@@ -180,70 +220,117 @@
 			}
 		};
 
-		$scope.skillList = [];
 		$scope.count = -1;
+		$scope.skillList = [];
+		$scope.skillListM = [];
 		/*** add skill to search ***/
 		$scope.searchSkill = function(name) {
 			$scope.skillName = [];
-			if (document.getElementById('labelNoText')) {
-				document.getElementById('labelNoText').id = "labelText";
-				document.getElementById('labelNoText2').id = "labelText2";
-				document.getElementById('labelText').style.display = "block";
-				document.getElementById('labelText2').style.color = "white";
-			}
-			document.getElementById('dsabox1').style.display = "none";
-			document.getElementById('dsabox2').style.display = "none";
 
-			if ($scope.skillList.length < 5) {
-				if ($scope.skillList.length === 0) {
-					$scope.skillList.push({sName: name});
-					document.getElementById('input-dsa').style.display = "none";
+			if (ww > 736) {
+				if (document.getElementById('labelNoText')) {
+					document.getElementById('labelNoText').id = "labelText";
+					document.getElementById('labelNoText2').id = "labelText2";
+					document.getElementById('labelText').style.display = "block";
+					document.getElementById('labelText2').style.color = "white";
 				}
-				else {
-					for(var i = 0; i < $scope.skillList.length; i++) {
-						if ($scope.skillList[i].sName === name)
-							break;
-					}
-					if (i == $scope.skillList.length) {
+				document.getElementById('dsabox1').style.display = "none";
+				document.getElementById('dsabox2').style.display = "none";
+
+				if ($scope.skillList.length < 5) {
+					if ($scope.skillList.length === 0) {
 						$scope.skillList.push({sName: name});
 						document.getElementById('input-dsa').style.display = "none";
 					}
+					else {
+						for(var i = 0; i < $scope.skillList.length; i++) {
+							if ($scope.skillList[i].sName === name)
+								break;
+						}
+						if (i == $scope.skillList.length) {
+							$scope.skillList.push({sName: name});
+							document.getElementById('input-dsa').style.display = "none";
+						}
+					}
 				}
+
+				if ($scope.skillList.length == 5)
+					$scope.fullList = true;
+
+				$http.post('/search/projects/skills', $scope.skillList).success(function(res) {
+					if (res.success)
+						$scope.skillSearch = res.data;
+				});
+			} else {
+				if ($scope.skillListM.length < 5) {
+					if ($scope.skillListM.length === 0) {
+						$scope.skillListM.push({sName: name});
+					}
+					else {
+						for(var i = 0; i < $scope.skillListM.length; i++) {
+							if ($scope.skillListM[i].sName === name)
+								break;
+						}
+						if (i == $scope.skillListM.length) {
+							$scope.skillListM.push({sName: name});
+						}
+					}
+				}
+				// if ($scope.skillListM.length == 5)
+				// 	$scope.fullList = true;
+
+				$http.post('/search/projects/skills', $scope.skillListM).success(function(res) {
+					if (res.success)
+						$scope.skillSearch = res.data;
+				});
 			}
-			if ($scope.skillList.length == 5)
-				$scope.fullList = true;
-			$http.post('/search/projects/skills', $scope.skillList).success(function(res) {
-				if (res.success)
-					$scope.skillSearch = res.data;
-			});
 
 		}
 
 		/*** remove skill added ***/
 		$scope.removeSkill = function(name) {
 
-			var x = document.getElementsByClassName('discover-skill-list');
 			var index;
 
-			for (var i = 0; i < $scope.skillList.length; i++) {
-				if ($scope.skillList[i].sName === name) {
-					x[i].className = "discover-skill-list animated fadeOut";
-					index = i;
-					break ;
+			if (ww > 736) {
+				var x = document.getElementsByClassName('discover-skill-list');
+				for (var i = 0; i < $scope.skillList.length; i++) {
+					if ($scope.skillList[i].sName === name) {
+						x[i].className = "discover-skill-list animated fadeOut";
+						index = i;
+						break ;
+					}
+				}
+				if (index >= 0) {
+					$scope.skillList.splice(index, 1);
+					if ($scope.skillList[0]) {
+						$http.post('/search/projects/skills', $scope.skillList).success(function(res) {
+							if (res.success)
+								$scope.skillSearch = res.data;
+						});
+					} else
+						$scope.skillSearch = [];
+				}
+				if ($scope.skillList.length < 5)
+					$scope.fullList = false;
+			} else {
+				for (var i = 0; i < $scope.skillListM.length; i++) {
+					if ($scope.skillListM[i].sName === name) {
+						index = i;
+						break ;
+					}
+				}
+				if (index >= 0) {
+					$scope.skillListM.splice(index, 1);
+					if ($scope.skillListM[0]) {
+						$http.post('/search/projects/skills', $scope.skillListM).success(function(res) {
+							if (res.success)
+								$scope.skillSearch = res.data;
+						});
+					} else
+						$scope.skillSearch = [];
 				}
 			}
-			if (index >= 0) {
-				$scope.skillList.splice(index, 1);
-				if ($scope.skillList[0]) {
-					$http.post('/search/projects/skills', $scope.skillList).success(function(res) {
-						if (res.success)
-							$scope.skillSearch = res.data;
-					});
-				} else
-					$scope.skillSearch = [];
-			}
-			if ($scope.skillList.length < 5)
-				$scope.fullList = false;
 		}
 
 		/*** Search Section ***/
@@ -269,6 +356,15 @@
 		$scope.$watch('cards', function(value) {
 			if (value)
 				value.length > 6 ? $scope.allowExpand = true : $scope.allowExpand = false;
+		});
+
+		$scope.$watch('dmobile.general', function(value) {
+			if (value) {
+				$('body').css('overflow', 'hidden');
+			}
+			else {
+				$('body').css('overflow', 'auto');
+			}
 		});
 
 		$scope.$watchGroup(['searchStatus', 'searchCtg', 'searchHelp', 'skillSearch', 'searchDL'], function(value) {
@@ -342,7 +438,8 @@
 						scope.discoverLocation = value.slice(0, checkCountry - 2);
 						var x = scope.discoverLocation.length;
 					} else {
-						var x = value.length;
+						var x = value.length,
+							y = $(window).width();
 						if (x > 11) {
 							$("#dsai").css('width', function() {
 								var el = $('<span />', {
@@ -353,7 +450,10 @@
 								el.remove();
 								if (w < 200)
 									return "200px";
-								return w.toString() + "px";
+								if (y > 736)
+									return w.toString() + "px";
+								else
+									return "260px";
 							});
 						}
 					}

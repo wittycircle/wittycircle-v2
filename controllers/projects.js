@@ -7,7 +7,7 @@ var _             = require('underscore');
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
     if (elem) {
-        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem, 
+        pool.query("SELECT first_name, last_name from profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -21,7 +21,7 @@ function getUsername(elem, callback) {
 
 function getProjectTitle(elem, callback) {
     if (elem) {
-        pool.query("SELECT title FROM projects WHERE id = ?", elem, 
+        pool.query("SELECT title FROM projects WHERE id = ?", elem,
             function(err, data) {
                 if (err) {
                     console.log(new Date());
@@ -76,7 +76,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` ORDER BY view DESC",
+    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 ORDER BY view DESC",
     function (err, results, fields) {
         if (err) {
 	    var date = new Date();
@@ -200,7 +200,7 @@ exports.getProjectsFromCategory = function(req, res){
 exports.getProjectsCreatedByUser = function(req, res){
     req.checkParams('user_id', 'User id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
-    if (errors) { 
+    if (errors) {
         return res.status(400).send(errors);
     }
     else {
@@ -223,13 +223,19 @@ exports.getProjectsCreatedByUser = function(req, res){
                         };
                         tf.sortProjectCard(results, function(data) {
                             if (!data)
-                                return res.status(400).send('Error');
-                            else
-                                return res.send(data);
+                                return res.status(400).send('Error00');
+                            else {
+                                tf.addUserPictureToProject(data, function (rez) {
+                                  if (!rez)
+                                    return res.status(400).send('Error01');
+                                  else
+                                    return res.send(rez);
+                                })
+                            }
                         });
                     });
         	    } else
-        		  return res.send(results);
+        		    return res.send(results);
             });
         } else {
             pool.query('SELECT * FROM `projects` WHERE `creator_user_id` = ? AND project_visibility = 1 ',
@@ -242,28 +248,42 @@ exports.getProjectsCreatedByUser = function(req, res){
                     throw err;
                }
                 if (results[0]) {
-                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?)",
+                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ? AND n_accept = 1) AND project_visibility = 1",
                     [req.params.user_id],
                     function (eror, rez) {
                         for (var i = rez.length - 1; i >= 0; i--) {
                             results.push(rez[i]);
                         };
                         tf.sortProjectCard(results, function(data) {
-                            if (!data)
-                                return res.send(results);
-                            else
-                                return res.send(data);
+                          if (!data)
+                              return res.status(400).send('Error1');
+                          else {
+                              tf.addUserPictureToProject(data, function (rez) {
+                                if (!rez)
+                                  return res.status(400).send('Error2');
+                                else
+                                  return res.send(rez);
+                              })
+                          }
                         });
                     });
                 } else {
-                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?) AND project_visibility = 1",
+                    pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ? AND n_accept = 1) AND project_visibility = 1",
                     [req.params.user_id],
                     function (eror, rez) {
                         tf.sortProjectCard(rez, function(data) {
                             if (!data)
                                 return res.send(results);
-                            else
-                                return res.send(data);
+                            else {
+                                tf.addUserPictureToProject(data, function (rez) {
+                                  if (!rez)
+                                    {
+                                        return res.status(400).send('Error3');
+                                    }
+                                  else
+                                    return res.send(rez);
+                                })
+                            }
                         });
                     });
                 }
@@ -326,40 +346,51 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
         throw er;
       } else {
         var editable = false;
-        var show = false;
-        var involver = false;
-        function recursive(index){
-            if(index !== results.length){
+        var show     = false;
+        var involver = [];
+        var userIn   = [];
+        function recursive (index) {
+            if(results[index]) {
                 if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 0) {
                   show = true;
                   pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
                   [results[index].invited_by],
-                  function (err, result, field) {
+                  function (err, result) {
                       if(err){
                           throw err;
                       }
-                      involver = result[0];
+                      involver.push(result[0]);
+                      recursive(index + 1);
                   });
                 }
+                // TODO: Splice the result in results when accept == 0 and user_id is not equal to the req.user
+                /*if (results[index].user_id != req.user.id && results[index].n_accept === 0) {
+                    console.log('here');
+                    results.splice(index, 1);
+                }*/
                 if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
                   editable = true;
                 }
-                //if (results[index].n_accept === 1) {
+                if (results[index].n_accept === 1) {
                   pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
                   [results[index].user_id],
                   function (err, result, field) {
                       if(err){
                           throw err;
                       }
-                      results[index].user_profile = result[0];
-                      recursive(index + 1);
+                      results.splice(index, 1);
+                      userIn.push(result[0]);
+                      return recursive(index + 1);
                   });
-                //}
-                //} else {
-                  //recursive(index + 1);
-                //}
+                }
+                if (req.user && results[index].user_id !== req.user.id) {
+                  recursive(index + 1);
+                }
+		if (!req.isAuthenticated()) {
+		    recursive(index + 1);
+		    }
             } else {
-                res.send({content: results, editable: editable, show: show, involver: involver});
+                return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }
         }
         recursive(0);
@@ -440,7 +471,7 @@ exports.deleteUserInvolved = function(req, res) {
 			    });
 			});
                     });
-		    
+
 		});
 	});
     }
@@ -522,6 +553,7 @@ exports.updateProject = function(req, res){
     req.checkBody('picture_position', 'Error Message').optional().isString().max(128);
     req.checkBody('main_video_id', 'Error message').optional().isString().max(256);
     req.checkBody('picture_card', 'Error message').optional().isString().max(258);
+    
 
     var errors = req.validationErrors(true);
     if (errors) {
@@ -529,7 +561,7 @@ exports.updateProject = function(req, res){
 	return res.status(400).send(errors);
     } else {
         pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
-            if (err) { 
+            if (err) {
                 var date = new Date();
                 console.log(date);
                 console.log("Error getting projects in projects.js/createProject");
@@ -628,43 +660,31 @@ exports.getProjectFeedbacksPublic = function(req, res){
             }
             function recursive (index) {
               if (results[index]) {
-                  pool.query('SELECT * FROM `feedback_replies` WHERE `feedback_id` = ?',
+                  pool.query('SELECT id, description, created_at, user_id FROM `feedback_replies` WHERE `feedback_id` = ?',
                   results[index].id,
                   function (err, response) {
                     if (err) {
                       console.log(new Date());
                       throw err;
                     }
-                    if (response.length === 1) {
+                    /*if (response.length === 1) {
                       results[index].replies = response[0];
-                    }
-                    if (response.length > 1) {
+                  }*/
+                    //if (response.length > 1) {
                       results[index].replies = response;
-                    }
-
-                    function recursive2 (index2) {
-                      if (response[index2]) {
-                        pool.query('SELECT * FROM profiles WHERE id = (SELECT profile_id FROM users WHERE id = ?)',
-                        response[index2].user_id,
-                        function (err, rez) {
-                          if (err) {
-                            console.log(new Date());
-                            throw err;
-                          }
-                          //console.log(rez);
-                          results[index].replies[index2].profile = rez[0];
-                          //console.log(results[index].replies[index2]);
-                        });
-                      } else {
-                        return;
-                      }
-                      recursive2(index2 + 1);
-                    }
-                    recursive2(0);
+                    //}
                     recursive(index + 1);
                   });
               } else {
-                  return res.send(results);
+                  tf.addprofilestoFeedbacks(req.user, results, function(rez) {
+                      if (!rez) {
+                          return res.send(results);
+                          //console.log('error');
+                      } else {
+                          return res.send(rez);
+                      }
+                  })
+                  //return res.send(results);
               }
             }
             recursive(0);
@@ -766,4 +786,25 @@ exports.getAllProjectMembers = function(req, res) {
                 }
             });
         }
+}
+
+exports.updateVideoPoster = function(req, res) {
+    req.checkParams('public_id', 'public_id must be an int').isInt().min(1);
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+	console.log(errors);
+	return res.status(400).send(errors);
+    } else {
+	pool.query('UPDATE projects set video_poster = ? WHERE public_id = ?',
+	[req.body.poster, req.params.public_id],
+	function (err, result) {
+	    if (err) {
+		console.log(new Date());
+		throw err;
+	    } else {
+		return res.send(result);
+	    }
+	});
+    }
 }

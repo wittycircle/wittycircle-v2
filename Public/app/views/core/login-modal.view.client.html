@@ -3,6 +3,8 @@
         <h2>Log In</h2>
         <img id="closeCrossL" src="/images/cross-icon.svg" style="cursor: pointer">
     </header>
+
+    <div id="closeCrossL2"></div>
     <div class="login-modal-social signup-login-social">
         <h4>Log in with a social network:</h4>
         <div class="fb-login">
@@ -22,70 +24,33 @@
         <div class="old-dash"></div>
     </div>
     <form>
-    <div class="login-modal-email">
-        <p ng-if="!lf">Incorrect password/email</p>
-        <div class="email-input">
-            <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
-            <p ng-if='!lef'>This is a required field</p>
+        <div class="login-modal-email">
+            <p ng-if="!lf">Incorrect password/email</p>
+            <div class="email-input">
+                <input type="text" class="modal-input" ng-model='email' placeholder="E-mail address"/>
+                <p ng-if='!lef'>This is a required field</p>
+            </div>
+            <div class="password-input">
+                <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
+                <p ng-if='!lpf'>This is a required field</p>
+            </div>
+            <div class="forgot-password">
+                <p data-ng-click="showResetPassword()" data-ng-bind="TextReset"></p>
+            </div>
+            <div class="email-input" data-ng-show="showReset">
+                <input type="text" ng-model='ereset' placeholder="E-mail used for your account"/>
+            </div>
+            <div data-ng-show="validateReset === true">
+                <span class="validate-p" data-ng-bind="textValidateReset">
+            </div>
+            <div data-ng-show="validateReset === 2">
+                <p class="validate-p" data-ng-bind="textValidateReset"></p>
+            </div>
         </div>
-        <div class="password-input">
-            <input type='password' class="modal-input" ng-model='password' placeholder="Password"/>
-            <p ng-if='!lpf'>This is a required field</p>
+        <div class="login-modal-footer">
+            <button ng-click='login()' data-ng-bind="textButton"></button>
+            <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
         </div>
-        <div class="forgot-password">
-            <p>Forgot password?</p>
-        </div>
-    </div>
-    <div class="login-modal-footer">
-        <button type="submit" ng-click='login()'>Log In</button>
-        <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
-    </div>
     </form>
-    <script>
-        $(function() {
-
-            var filter = $("#page-wrap");
-            var x = $(window).height();
-            var margL = (x - 551)/2/2;
-
-            $(document).mouseup(function (e) {
-                var container = $("#main-login-modal");
-
-                if (e.target.id === "mologin" || e.target.id === "closeCrossL" || container.is(e.target) || container.has(e.target).length || container.css('display') === "block") {
-                    if ((!container.is(e.target) && !container.has(e.target).length && e.target.id !== "mologin") || e.target.id === "closeCrossL") {
-                        filter.fadeOut(500);
-                        container.animate({top: '-700px'}, 400, function() {
-                            container.hide(100, function() {
-                                container.css({'top': margL.toString() + "px"});
-                            });
-                        });
-                    } else {
-                        filter.fadeIn(300);
-                        container.css({'top': margL.toString() + "px"});
-                        container.fadeIn();
-                    }
-                }
-
-            });
-
-            $(".login-modal-email").keypress(function(e) {
-                if (e.which === 13 || e.keycode === 13) {
-                    $('.login-modal-footer button').click();
-                }
-            });
-
-            $(document).ready(function(){
-                $('#switchToS').on('click', function() {
-                    var x = $('#main-login-modal');
-                    var y = $("#main-signup-modal")
-                    if (x.css('display') === "block") {
-                        y.css({'top': margL.toString() + "px"});
-                        y.fadeIn();
-                        x.fadeOut();
-                    }
-                });
-
-            });
-        });
-    </script>
+    <script src="js/signup-login-modal.dom.js"></script>
 </section>

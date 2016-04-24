@@ -1,6 +1,58 @@
 var bcrypt = require('bcrypt-nodejs');
 var mandrill = require('mandrill-api/mandrill');
 var pf = require('../tools/profile_functions');
+const crypto = require('crypto');
+
+
+exports.getUsersValidateMail = function (req, res) {
+    pool.query('SELECT user_email from account_validation WHERE token = ?',
+    req.params.token,
+    function (err, result) {
+        if (err) {
+            console.log(new Date());
+            throw err;
+        } else {
+            if (result.length !== 0) {
+                return res.send(result[0]);
+            } else {
+                return res.status(404).send({message: 'no'});
+            }
+        }
+    });
+}
+
+exports.ValidateAccount = function(req, res) {
+    pool.query('SELECT token from account_validation WHERE token = ?',
+    req.params.token,
+    function (err, result) {
+        if (err) {
+            console.log(new Date());
+            throw err;
+        } if (result.length !== 0) {
+            pool.query('UPDATE users SET valid = 1 WHERE email = ?',
+            req.body.email,
+            function (err, response) {
+                if (err) {
+                    console.log(new Date());
+                    throw err;
+                } else {
+                    pool.query('DELETE FROM account_validation WHERE token = ?',
+                    req.body.token,
+                    function (err, data) {
+                        if (err) {
+                            console.log(new Date());
+                            throw err;
+                        } else {
+                            return res.send({message: 'ok!'});
+                        }
+                    });
+                }
+            });
+        } else {
+            return res.status(404).send({message: 'nop'});
+        }
+    });
+}
 
 exports.checkFirstLog = function(req, res) {
     pool.query('SELECT value FROM first_log WHERE user_id = ?', req.user.id,
@@ -40,7 +92,7 @@ exports.getProfileIdByUserId = function(req, res) {
 };
 
 exports.getUsers = function(req, res){
-    pool.query('SELECT id, profile_id FROM `users`',
+    pool.query('SELECT id, profile_id, username FROM `users`',
     function (err, results, fields) {
         if(err){
             throw err;
@@ -65,7 +117,7 @@ exports.getUsers = function(req, res){
 exports.getProfiles = function(req,res){
     pool.query('SELECT * FROM `profiles` ORDER BY views DESC', function (err, results) {
 	if (err) throw (err);
-	else 
+	else
 	    res.send(results);
     });
 };
@@ -237,7 +289,7 @@ exports.createUser = function(req, res){
     req.checkBody('first_name', 'First Name must be between 1 and 64 characters.').isString().min(1).max(64);
     req.checkBody('last_name', 'Last Name must be between 1 and 64 characters.').isString().min(1).max(64);
 //    req.checkBody('username', 'Username is already used.').isUnique('username', 'users');
-//    req.checkBody('username', 'Username is not valid.').isString().min(4).max(32); 
+//    req.checkBody('username', 'Username is not valid.').isString().min(4).max(32);
 
     /* Sanitize */
     req.sanitize('email').Clean();
@@ -257,13 +309,13 @@ exports.createUser = function(req, res){
 			   var lastName = req.body.last_name.replace(/\s+/g, '');
 			   for (var i = firstName.length; i > 0; i--) {
 			       username1.push(firstName.slice(0, i) + '.' + lastName);
-			   }; 
+			   };
 			   for (var i = lastName.length - 1; i > 0; i--) {
 			       username1.push(firstName + '.' + lastName.slice(0, i));
 			   }
 			   //shasum = crypto.createHash('sha1');
 			   //shasum.update(req.body.password);
-			   
+
 			   pool.query('INSERT INTO `profiles` SET ?', {
 			       first_name: req.body.first_name,
 			       last_name: req.body.last_name
@@ -272,12 +324,12 @@ exports.createUser = function(req, res){
 				   throw err;
 			       } else {
 				   //		pool.query('SELECT `id`  FROM `users` WHERE `username` = ?', [username1[username1.length - 1]], function(err, result){
-				   
+
 				   function recursive(index) {
 				       if (username1[index]) {
 					   checkUsername(username1[index], function(data) {
 					       if (data.length <= 0) {
-						   pool.query('INSERT INTO `users` SET ?', { 
+						   pool.query('INSERT INTO `users` SET ?', {
 						       profile_id: result.insertId,
 						       email: req.body.email,
 						       username: username1[index],
@@ -306,7 +358,7 @@ exports.createUser = function(req, res){
 				   recursive(0);
 			       }
 			   });
-			   
+
 			   function checkUsername(value, callback) {
 			       pool.query('SELECT `id`  FROM `users` WHERE `username` = ?', [value], function(err, result){
 				   if (err) {
@@ -315,79 +367,166 @@ exports.createUser = function(req, res){
 				   return callback(result);
 			       });
 			   };
-			   
+
 			   var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-			   
-			   var template_name = "welcome";
-			   var template_content = [{
-			       "name": "welcome",
-			       "content": "content",
-			   }];
-			   
-			   var message = {
-			       "html": "<p>HTML content</p>",
-			       "subject": "Welcome to Wittycircle",
-			       "from_email": "noreply@wittycircle.com",
-			       "from_name": "Wittycircle",
-			       "to": [{
-				   "email": req.body.email,
-				   "name": req.body.first_name,
-				   "type": "to"
-			       }],
-			       "headers": {
-				   "Reply-To": "message.reply@example.com"
-			       },
-			       "important": false,
-			       "track_opens": null,
-			       "track_clicks": null,
-			       "auto_text": null,
-			       "auto_html": null,
-			       "inline_css": null,
-			       "url_strip_qs": null,
-			       "preserve_recipients": null,
-			       "view_content_link": null,
-			       "tracking_domain": null,
-			       "signing_domain": null,
-			       "return_path_domain": null,
-			       "merge": true,
-			       "merge_language": "mailchimp",
-			       "global_merge_vars": [{
-				   "name": "merge1",
-				   "content": "merge1 content"
-			       }],
-			       "merge_vars": [
-				   {
-				       "rcpt": req.body.email,
-				       "vars": [
-					   {
-					       "name": "fname",
-					       "content": req.body.first_name
-					   },
-					   {
-					       "name": "lname",
-					       "content": "Smith"
-					   }
-				       ]
-				   }
-			       ]
-			   };
-			   
-			   var async = false;
-			   mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-			       var date = new Date();
-			       console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.body.email);
-			       console.log("response is:");
-			       console.log(result);
-			   }, function(e) {
-			       // Mandrill returns the error as an object with name and message keys
-			       console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-			       // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-			   });
+
+               sendWelcomeMail();
+               sendValidateAccountMail();
+
+               function sendWelcomeMail () {
+    			   var template_name = "welcome";
+    			   var template_content = [{
+    			       "name": "welcome",
+    			       "content": "content",
+    			   }];
+
+    			   var message = {
+    			       "html": "<p>HTML content</p>",
+    			       "subject": "Welcome to Wittycircle",
+    			       "from_email": "noreply@wittycircle.com",
+    			       "from_name": "Wittycircle",
+    			       "to": [{
+    				   "email": req.body.email,
+    				   "name": req.body.first_name,
+    				   "type": "to"
+    			       }],
+    			       "headers": {
+    				   "Reply-To": "message.reply@example.com"
+    			       },
+    			       "important": false,
+    			       "track_opens": null,
+    			       "track_clicks": null,
+    			       "auto_text": null,
+    			       "auto_html": null,
+    			       "inline_css": null,
+    			       "url_strip_qs": null,
+    			       "preserve_recipients": null,
+    			       "view_content_link": null,
+    			       "tracking_domain": null,
+    			       "signing_domain": null,
+    			       "return_path_domain": null,
+    			       "merge": true,
+    			       "merge_language": "mailchimp",
+    			       "global_merge_vars": [{
+    				   "name": "merge1",
+    				   "content": "merge1 content"
+    			       }],
+    			       "merge_vars": [
+    				   {
+    				       "rcpt": req.body.email,
+    				       "vars": [
+    					   {
+    					       "name": "fname",
+    					       "content": req.body.first_name
+    					   },
+    					   {
+    					       "name": "lname",
+    					       "content": "Smith"
+    					   }
+    				       ]
+    				   }
+    			       ]
+    			   };
+
+    			   var async = false;
+    			   mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+    			       var date = new Date();
+    			       console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.body.email);
+    			       console.log("response is:");
+    			       console.log(result);
+    			   }, function(e) {
+    			       // Mandrill returns the error as an object with name and message keys
+    			       console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+    			       // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+    			   });
+           }
+
+           function sendValidateAccountMail () {
+               var buf = crypto.randomBytes(20);
+               var token = buf.toString('hex');
+               var link_validate = 'https://wittycircle.com/validate-account/' + token;
+
+
+               var template_name = "validate-account";
+               var template_content = [{
+                   "name": "validate-account",
+                   "content": "content",
+               }];
+
+               var message = {
+                   "html": "<p>HTML content</p>",
+                   "subject": "Validate your Wittycircle account",
+                   "from_email": "noreply@wittycircle.com",
+                   "from_name": "Wittycircle",
+                   "to": [{
+                       "email": req.body.email,
+                       "type": "to"
+                   }],
+                   "headers": {
+                       "Reply-To": "noreply@wittycircle.com"
+                   },
+                   "important": false,
+                   "track_opens": null,
+                   "track_clicks": null,
+                   "auto_text": null,
+                   "auto_html": null,
+                   "inline_css": null,
+                   "url_strip_qs": null,
+                   "preserve_recipients": null,
+                   "view_content_link": null,
+                   "tracking_domain": null,
+                   "signing_domain": null,
+                   "return_path_domain": null,
+                   "merge": true,
+                   "merge_language": "mailchimp",
+                   "global_merge_vars": [{
+                       "name": "merge1",
+                       "content": "merge1 content"
+                   }],
+                   "merge_vars": [
+                   {
+                       "rcpt": req.body.email,
+                       "vars": [
+                       {
+                           "name": "link",
+                           "content": link_validate
+                       },
+                       {
+                           "name": "lname",
+                           "content": "Smith"
+                       }
+                       ]
+                   }
+                   ]
+               };
+
+               var async = false;
+               mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                   //console.log(result);
+                   pool.query('INSERT into account_validation (token, user_email) VALUES(?, ?)',
+                    [token, req.body.email],
+                    function (err, result) {
+                        if (err) {
+                            console.log(new Date());
+                            throw err;
+                        }
+                    });
+               }, function(e) {
+                   // Mandrill returns the error as an object with name and message keys
+                   console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                   throw e;
+                   // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+               });
+           }
+
+
 		   } else
 		       res.send({sucess: false, msg: 'Email is already taken'});
 	       });
+
+
 };
-	       
+
 exports.updateUser = function(req, res){
     //var session = checkSession(req);
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
@@ -447,7 +586,7 @@ exports.updateUser = function(req, res){
 				      if (check1[0] && check2[0] && check1[0].email === req.user.email && check2[0].username === req.user.username) {
 						  pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newInfo, function(err, done) {
 						      if (err) throw err;
-						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName, 
+						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName,
 								 function(err, result) { // updating profile user from the variable newName
 								     if (err) throw err;
 								     req.user.email = req.body.email;
@@ -458,7 +597,7 @@ exports.updateUser = function(req, res){
 				      } else if (check2[0] && !check1[0] && check2[0].username === req.user.username) {
 				      	pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newInfo, function(err, done) {
 						      if (err) throw err;
-						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName, 
+						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName,
 								 function(err, result) { // updating profile user from the variable newName
 								     if (err) throw err;
 								     req.user.email = req.body.email;
@@ -470,7 +609,7 @@ exports.updateUser = function(req, res){
 				      } else if (check1[0] && !check2[0] && check1[0].email === req.user.email) {
 				      	pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newInfo, function(err, done) {
 						      if (err) throw err;
-						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName, 
+						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName,
 								 function(err, result) { // updating profile user from the variable newName
 								     if (err) throw err;
 								     req.user.email = req.body.email;
@@ -481,7 +620,7 @@ exports.updateUser = function(req, res){
 				      } else if (!check1[0] && !check2[0]) {
 				      	pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newInfo, function(err, done) {
 						      if (err) throw err;
-						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName, 
+						      pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName,
 								 function(err, result) { // updating profile user from the variable newName
 								     if (err) throw err;
 								     req.user.email = req.body.email;
@@ -492,7 +631,7 @@ exports.updateUser = function(req, res){
 				      }else {
 				      	console.log("ERROR");
 							if (check1[0] && req.user.email !== req.body.email) {
-								return res.send({success: false, msg: 'Email already in use'}); 
+								return res.send({success: false, msg: 'Email already in use'});
 							}
 							else {
 								return res.send({success: false, msg: 'Username already in use'});
@@ -502,7 +641,7 @@ exports.updateUser = function(req, res){
 		   });
     }
     else {
-	pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName, 
+	pool.query('UPDATE `profiles` SET ? WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ' + req.params.id + ')', newName,
 		   function(err, result) { // updating profile user from the variable newName
 		       if (err) throw err;
 		       res.send({result: result, success: true, data: req.user});
@@ -513,44 +652,47 @@ exports.updateUser = function(req, res){
 exports.updateUserCredentials = function(req, res){
     //var session = checkSession(req);
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
-    //req.checkParams('id', 'id parameter must be current logged user.').isLoggedUser(req);
     req.checkBody('email', 'E-Mail is already in used.').isUnique('email', 'users');
     req.checkBody('email', 'E-Mail is not valid.').isString().isEmail().min(2).max(64);
     req.checkBody('password', 'Password must be between 8 and 32 characters.').optional().isString().min(8).max(32);
 
-  /*  req.sanitize('email').Clean(); */
+    /*  req.sanitize('email').Clean(); */
     req.sanitize('password').trim();
     var errors = req.validationErrors(true);
     if (errors) {
-	return res.status(400).send(errors);
+        return res.status(400).send(errors);
     } if (!req.isAuthenticated()) {
         return res.status(404).send({message: "not logged in"});
     } else {
-	if (typeof req.body.password !== 'undefined'){
-	    var newSetting = {
-		password: bcrypt.hashSync(req.body.password),
-		email: req.body.email
+        if (typeof req.body.password !== 'undefined'){
+            var newSetting = {
+                password: bcrypt.hashSync(req.body.password),
+                email: req.body.email
             };
-	}
-	if (!req.body.curentPass && !req.user.password && req.isAuthenticated()) {
-	    pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
-                       function(err, result) {
-                           if (err){
-                               throw err;
-                           }
-                           res.send({success: true});
-		       });
-	} else {
-	    if (bcrypt.compareSync(req.body.currentPass, req.user.password)) {
-		pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
-			   function(err, result) {
-			       if (err) throw err;
-			       res.send({success: true});
-			   });
-	    } else {
-		res.send({success: false});
-	    }
-	}
+        }
+        if (!req.body.curentPass) {
+            console.log('hi');
+        }
+        console.log(req.user.password);
+        if (!req.body.currentPass && !req.user.password && req.isAuthenticated()) {
+            pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
+            function(err, result) {
+                if (err){
+                    throw err;
+                }
+                return res.send({success: true});
+            });
+        } else {
+            //if (bcrypt.compareSync(req.body.curentPass, req.user.password)) {
+                pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
+                function(err, result) {
+                    if (err) throw err;
+                    return res.send({success: true});
+                });
+            //} else {
+                //return res.send({success: false});
+            //}
+        }
     }
 };
 

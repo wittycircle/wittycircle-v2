@@ -28,4 +28,3 @@ global.checkLogin = function(req){
         return false;
     }
 };
-

@@ -208,7 +208,7 @@ angular.module('wittyApp')
 
 		return function(input) { // convert default format date to display date's format
 
-			var date, WDay, gdate, gmonth, dateNow, dateNowParse, gPS, gPMin, gPH, gPD, d;
+			var date, WDay, gdate, gmonth, dateNow, dateNowParse, gPS, gPMin, gPH, gPD, gPM, gPY, d;
 
 			date 		= new Date(input);
 			dateNow     = new Date();
@@ -227,8 +227,10 @@ angular.module('wittyApp')
 			gPMin   = gPS / 60;
 			gPH     = gPMin / 60;
 			gPD     = gPH / 24;
+			gPM 	= gPD / 30;
+			gPY		= gPM / 12;
 
-			// get date, month, yea
+			// get date, month, year
 
 			// all case
 			if (gPS >= 0 && gPS <= 10)          {d = "Just now"; return (d);}
@@ -239,14 +241,19 @@ angular.module('wittyApp')
 			else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + "  hours ago"; return (d);}
 			else if (gPD >= 1 && gPD < 2)       {d = "Yesterday"; return (d);}
 			else if (gPD >= 2 && gPD <= 3)      {d = Math.floor(gPD) + " days ago"; return (d);}
-			else if (gPD > 3 && gPD <= 7)       {if (WDay == 0) {d = "Monday"; return (d);}
-			                                 if (WDay == 1) {d = "Tuesday"; return (d);}
-			                                 if (WDay == 2) {d = "Wednesday"; return (d);}
-			                                 if (WDay == 3) {d = "Thursday"; return (d);}
-			                                 if (WDay == 4) {d = "Friday"; return (d);}
-			                                 if (WDay == 5) {d = "Saturday"; return (d);}
-			                                 if (WDay == 6) {d = "Sunday"; return (d);} }
-			else if (gPD > 7 && gPD <= 30)      {d = gdate + "/" + gmonth; return (d);}
+			else if (gPD > 3 && gPD <= 7)   	{	if (WDay == 0) {d = "Monday"; return (d);}
+					                                if (WDay == 1) {d = "Tuesday"; return (d);}
+					                                if (WDay == 2) {d = "Wednesday"; return (d);}
+					                                if (WDay == 3) {d = "Thursday"; return (d);}
+					                                if (WDay == 4) {d = "Friday"; return (d);}
+					                                if (WDay == 5) {d = "Saturday"; return (d);}
+					                                if (WDay == 6) {d = "Sunday"; return (d);} 
+				                             	}
+			else if (gPD > 7 && gPD <= 31)      {d = gdate + "/" + gmonth; return (d);}
+			else if (gPM >= 1 && gPM < 2)      	{d = Math.floor(gPM) + " month ago"; return (d);}
+			else if (gPM >= 2 && gPM <= 12)     {d = Math.floor(gPM) + " months ago"; return (d);}
+			else if (gPY >= 1 && gPY < 2)      	{d = Math.floor(gPY) + " year ago"; return (d);}
+			else if (gPY >= 2)      			{d = Math.floor(gPY) + " years ago"; return (d);}
 			else                                {d = date; return (d);}
 		}
 })
@@ -305,6 +312,53 @@ angular.module('wittyApp')
         }
 
         return value + (tail || ' ...');
+    };
+})
+.filter('sortSkill', function () {
+    return function (input) {
+
+        if (input && input[0]) {
+        	var text = "";
+        	var lengthText = input.length;
+        	var index;
+        	var i 		= 0,
+        		n 		= 0,
+        		count 	= 0;
+
+    		if (!input[1]) {
+    			text = input[0].sName;
+    			if (text.length > 20)
+    				text = text.substring(0, 16) + "...";
+    		} else {
+    			text = input[0].sName;
+    			if (text.length > 14) {
+    				text = text.substring(0, 13) + "..., +" + (lengthText - 1).toString();
+    			} else 
+    				text += ", +" + (lengthText - 1).toString();
+    		}
+
+
+        	// while (i < input.length) {
+        	// 	if (i > 0 )
+        	// 		text += ', ';
+        	// 	text += input[i].sName;
+        	// 	i++;
+        	// }
+
+
+        	// lengthText = text.length;
+        	// for (var n = 0; text.length > 50; n++) {
+	        // 	index = text.lastIndexOf(",");
+	        // 	text = text.substring(0, index);
+
+	        // 	if (text.length <= 50)
+	        // 		break ;
+	        // }
+	        // if (lengthText > 50)
+	        // 	text = text + ", ...";
+
+        	return text;
+        }
     };
 });
 

@@ -1,0 +1,219 @@
+
+#dmmodal, #mmmodal, #mainmmodal {
+	position: fixed;
+	background-color: rgba(255, 255, 255, 0.98);
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	padding: 50px 0px 0px 0;
+	z-index: 200;
+	-webkit-animation-duration: 50ms;
+	-moz-animation-duration: 50ms;
+	-ms-animation-duration: 50ms;
+	-o-animation-duration: 50ms;
+	animation-duration: 50ms;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+
+	sup {
+		position: relative;
+		font-size: 16px;
+		top: -1em;
+	}
+
+	li {
+		font-family: 'FreigLight';
+		font-size: 36px;
+		color: #222222;
+		cursor: pointer;
+		-webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+		-webkit-transition: all 50ms linear;
+		-o-transition: all 50ms linear;
+		-moz-transition: all 50ms linear;
+		-ms-transition: all 50ms linear;
+		-kthtml-transition: all 50ms linear;
+		transition: all 50ms linear;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+
+	li:focus {
+		color: #416299;
+	}
+
+	.presentation-mobile-modal-header {
+		position: fixed;
+		top: 0;
+		width: inherit;
+		padding: 0 20px;
+		z-index: 300;
+
+		h5 {
+			display: inline-block;
+			padding: 20px 0px 15px 0px;
+			font-family: 'FreigMed';
+			font-size: 14px;
+			color: #999999;
+		}
+
+		h4 {
+			display: inline-block;
+			float: right;
+			padding: 17px 0 15px 0;
+			font-family: 'FreigSem';
+			font-size: 18px;
+			color: #222;
+		}
+
+		img {
+			display: inline-block;
+			width: 15px;
+			padding: 20px 0 15px 0;
+			float: right;
+		}
+	}
+
+	.d-mobile-search {
+		position: relative;
+		padding: 0 20px 25px 20px;
+		height: 85vh;
+		overflow-y: scroll;
+		overflow-x: hidden; 
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.discover-mobile-search3 {
+
+		.select-list {
+			margin-bottom: 15px;
+
+			li {
+				display: inline-block;
+				font-family: 'FreigSem';
+				font-size: 14px;
+				text-transform: uppercase;
+				padding: 2px 8px 3px 8px;
+				color: white;
+				background-color: #416299;
+				border-radius: 4px;
+				margin-bottom: 6px;
+				margin-right: 6px;
+				line-height: normal;
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+
+			.fa-times {
+				margin-left: 5px;
+			}
+
+			.fa-times:focus {
+				outline: 0;
+			}
+		}
+
+		.discover-mobile-search-skill {
+			input {
+				width: 100%;
+				padding: 8px 5px 8px 45px;
+				background-image: url('/images/search-icon-b.svg');
+				background-repeat: no-repeat;
+				background-position: 5% 50%;
+				background-size: 19px;
+				font-family: 'FreigBook';
+				font-size: 16px;
+				color: #416299;
+				border: 1px solid #cecece;
+				border-radius: 4px;
+				margin-bottom: 15px;
+				-webkit-transition: all 100ms linear;
+				-o-transition: all 100ms linear;
+				-moz-transition: all 100ms linear;
+				-ms-transition: all 100ms linear;
+				-kthtml-transition: all 100ms linear;
+				transition: all 100ms linear;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+			}
+
+			input:focus {
+				background-image: url('/images/search-icon-blue.svg');
+				border: 1px solid #416299;
+			}
+		}
+
+		.discover-mobile-skillList1 {
+			position: relative;
+			padding-bottom: 10px;
+			height: 320px;
+			overflow-y: scroll;
+			overflow-x: hidden; 
+			-webkit-overflow-scrolling: touch;
+		}
+
+		.discover-mobile-skillList2 {
+			padding-top: 5px;
+			height: 340px;
+		}
+
+		li {
+			font-size: 32px;
+			line-height: 35px;
+			margin-bottom: 10px;
+		}
+
+		h3 {
+			font-family: 'FreigLight';
+			font-size: 24px;
+			color: #999999;
+			margin-top: 5px;
+			margin-bottom: 6px;
+		}
+
+		.fa-plus {
+			font-size: 24px;
+			margin-right: 10px;
+		}
+
+		span {
+			font-family: "FreigBook";
+			font-size: 15px;
+			margin: 0 auto;
+		}
+	}
+}
+
+@media only screen and (max-width: 375px) {
+	#dmmodal, #mmmodal {
+		.d-mobile-search {
+			height: 88vh;
+		}
+	}
+}
+
+@media only screen and (max-width: 414px) {
+	#dmmodal, #mmmodal {
+		.d-mobile-search {
+			height: 92vh;
+		}
+	}
+}

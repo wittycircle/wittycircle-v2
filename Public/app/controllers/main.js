@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the wittyApp
  **/
-angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, $mdBottomSheet, Profile, Users, get_CategoryName, showbottomAlert, Authentication, Beauty_encode, Public_id, $location, $http, Projects, $modal, Data_project, Categories) {
+angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, Categories) {
 
   // if ($rootScope.globals.currentUser) {
     $http.get('/profile').success(function(res){
@@ -45,6 +45,29 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
       $scope.statusprefix= 'a';
     }
   });
+
+  /*** MOBILE ***/
+  var ww = $(window).width();
+  $scope.mamobile = {};
+  $scope.openmamodal = function(value) {
+    
+    if (ww <= 736) {
+      $('body').css('overflow-y', 'hidden');
+      $scope.mamobile.modal  = value;
+      if (value === 1)
+        $scope.mamobile.headerText = "Show me...";
+      if (value === 2)
+        $scope.mamobile.headerText = "Show me projects about...";
+      $scope.mamobile.general  = true;
+      console.log($scope.mamobile.general);
+    }
+  };
+
+  $scope.closemmodal = function() {
+    $('#mainmmodal').css("display", "none");
+    $('body').css('overflow-y', 'scroll');
+    $scope.mamobile.general  = false;
+  }
 
   /************ SECTION SUFFLER *************/
   var cardInfos = {};
@@ -144,16 +167,20 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
   };
 
   $scope.getProject = function(pName) {
+    if (ww <= 736)
+        $scope.closemmodal();
     $scope.statusProject = pName;
   };
 
   $scope.getCategory = function(cName) {
+    if (ww <= 736)
+        $scope.closemmodal();
     $scope.ctgName = cName;
   };
 
   $scope.savedata = function ($event) {
     if (!$rootScope.globals.currentUser) {
-      showbottomAlert.pop_it($event);
+      
     }
     else {
       var data          = {};
@@ -206,7 +233,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
   $scope.followUserFromCard = function(id, index, $event) {
     if (!$rootScope.globals.currentUser) {
-      showbottomAlert.pop_it($event);
+      
     } else {
       Users.getUserIdByProfileId(id).then(function(data) {
         if ($rootScope.globals.currentUser.id !== data.userId.id) {
@@ -271,6 +298,26 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
 
 })
+.directive('slickSliderHome', function () {
+    return {
+        restrict: 'A',         
+        scope: {
+          'data': '='
+        },
+        replace: true,
+        link: function (scope, element, attrs) {
+            var isInitialized = false;
+
+            scope.$watch('data', function(newVal, oldVal) {
+                if (newVal && newVal.length > 0 && !isInitialized) {
+                    $(element).slick(scope.$eval(attrs.slickSliderHome));
+
+                    isInitialized = true;
+                }
+            });
+        }
+    }
+})
 .directive('googlePlace', function() {
   return {
     require: 'ngModel',
@@ -300,7 +347,8 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
           } else
             var x = value.length;
             if (x > 11) {
-              var x = value.length;
+              var x = value.length,
+                  y = $(window).width();
               if (x > 11) {
                 $("#searchTextField").css('width', function() {
                   var el = $('<span />', {
@@ -309,7 +357,10 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
                   }).appendTo('body');
                   var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
                   el.remove();
-                  return w.toString() + "px";
+                  if (y > 736)
+                    return w.toString() + "px";
+                  else
+                    return "260px";
                 });
               } else
                   $("#searchTextField").css('width', '200px');

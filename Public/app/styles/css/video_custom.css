@@ -33,6 +33,10 @@ videogular div.my-button a:visited {
   margin: auto;
   overflow: hidden; }
 
+videogular vg-poster img, [videogular] vg-poster img {
+  height: inherit !important;
+}
+
 @media (min-width: 1200px) {
   .videogular-container {
     width: 1170px;

@@ -256,7 +256,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
                           {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
                       ],
                       theme: {
-                          url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                          url: "styles/css/videogular.css"
                       },
                       plugins: {
                           controls: {
@@ -366,32 +366,36 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
         console.log(error_message);
       });
     } else {
-      data.video_id = $scope.project_video_id;
-      data.project_id = $scope.project.id;
-      $http.post('/upload/delete/videos', data).success(function(response) {
-        console.log($scope.config.sources);
-        if (response.result == "ok") {
-          $scope.project.main_video = "";
-          $scope.config.sources[0].src = "";
-        }
-        console.log($scope.config.sources);
-      }).error(function(error_message) {
-        console.log(error_message);
-      });
+      //data.video_id = $scope.project_video_id;
+      //data.project_id = $scope.project.id;
+      //$http.post('/upload/delete/videos', data).success(function(response) {
+        //console.log($scope.config.sources);
+        //if (response.result == "ok") {
+        $scope.config.sources = [];
+        $scope.videoproject = false;
+        //}
+        //console.log($scope.config.sources);
+      //}).error(function(error_message) {
+        //console.log(error_message);
+      //});
     }
   };
 
   $scope.savebasics = function(data, project_category, places_after, statechoose) {
-    if ($scope.project_video) {
+    if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
       data.main_video = $scope.project_video;
       data.main_video_id = $scope.project_video_id;
+    } if (!$scope.project_video || $scope.project_video === undefined) {
+        delete data.main_video;
     }
     if (statechoose != undefined) {
       data.status = statechoose;
     }
     data.picture_position = $scope.imagecoverposition;
     data.picture = $scope.imagecover;
-    data.picture_card = $scope.picture_card;
+    if ($scope.picture_card) {
+        data.picture_card = $scope.picture_card;
+    }
     data.category_id = project_category.id;
     Locations.setplaces(places_after, data);
     Projects.updateProject(data.id, data, function(response) {
@@ -590,10 +594,10 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
           $scope.config = {
                          preload: "auto",
                          sources: [
-                             {src: $sce.trustAsResourceUrl(url), type: "video/mp4"}
+                             {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
                          ],
                          theme: {
-                             url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                             url: "styles/css/videogular.css"
                          },
                          plugins: {
                              controls: {

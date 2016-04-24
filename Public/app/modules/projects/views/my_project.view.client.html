@@ -1,0 +1,178 @@
+<section id="myProject-page">
+	<header id="myProject-header" data-ng-style="{'background-image': 'url({{ resizePic(vm.backPic, '1200', 220, 'fill') }})'}">
+		<div class='myProject-filter'></div>
+		<div class="myProject-title">
+			<h1>Projects</h1>
+		</div>
+	</header>
+
+	<div id="myProject-mp">
+		<div class="myProject-body-mp">
+			<div class="myProject-body-mpTitle">
+				<h1 data-ng-if="myprojects.length">My projects ({{::vm.myprojects.length}})</h1>
+				<h1 data-ng-if="!myprojects.length">My projects</h1>
+			</div>
+
+			<section id="discover-body-content">
+				<div class="discover-body-container presentation-body-container">
+					<div class="discover-body-list" style="padding-left: 0">
+						<div class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.myprojects" data-ui-sref="viewproject({public_id: card.public_id, title: vm.encodeUrl(card.title)})">
+							<div class="card-tag" ng-click="getTagCag(card.category_name)">
+								<div class="card-tag-content">
+									<div class="card-tag-bg"></div>
+									<img src="/images/tag-icon.png" alt="tag-icon-images">
+									<h5 data-ng-bind="::card.category_name"></h5>
+								</div>
+							</div>
+							<div data-ng-if="card.picture_card" class="card-picture" data-ng-style="{'background-image': 'url({{ resizePic(card.picture_card, 285, 180, 'fill') }})'}">
+								<div class="filter_private" data-ng-if="card.project_visibility == 0">
+									<span class="private_text">PRIVATE</span>
+								</div>
+							</div>
+							<div ng-if="!card.picture_card" class="card-picture" data-ng-style="{'background-image': 'url(http://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}">
+								<div class="filter_private" data-ng-if="card.project_visibility == 0">
+									<span class="private_text">PRIVATE</span>
+								</div>
+							</div>
+							<div class="card-info">
+								<div class="card-title-space">
+									<h4 data-ng-bind="::card.title"></h4>
+								</div>
+								<div class="card-status">
+									<span>
+										<img data-ng-if="card.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
+										<img data-ng-if="card.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
+										<img data-ng-if="card.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
+										<img data-ng-if="card.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
+										{{::card.status}}
+									</span>
+								</div>
+								<div class="card-location">
+									<span><img src="/images/location-picto.svg" alt="location-picture" />{{::card.location_city}}<i data-ng-hide="!card.location_country">,</i> {{::card.location_country}}</span>
+								</div>
+								<div class="card-description-text">
+									<p data-ng-bind="::card.description"></p>
+								</div>
+								<div class="card-info-by" data-ng-click="goToProfile(card.creator_user_id)">
+									<figure class="card-info-by-picture">
+										<img ng-src="{{ resizePic(card.creator_user_picture.profile_picture_icon, 30, 30) }}" alt="card-foot-picture">
+									</figure>
+									<h6>{{::card.creator_user_name}} <h6 data-ng-if="card.usersIn.length">& {{::card.usersIn.length}} more</h6></h6>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div data-ng-if="vm.myprojects.length === 0">
+				<div class="no_feedbacks center-block">
+					<h4 class="text-center title_no_comments">Haven't started a project yet ?</h4>
+					<p class="text-center text_no_comments">
+						The projects you created will appear here.
+					</p>
+					<button class="text-center button_post_comment center-block" data-ng-click="vm.goToStart()">Start a project</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="myProject-followed">
+		<div class="myProject-body-followed">
+			<div class="myProject-body-fTitle">
+				<h1>Followed <span ng-if="vm.projectFollowed.length > 0">({{::vm.projectFollowed.length}})</span></h1>
+			</div>
+			<div class="myProject-body-mpCard" data-ng-if="vm.projectFollowed != false">
+				<section id="discover-body-content">
+					<div class="discover-body-container presentation-body-container">
+						<div class="discover-body-list" style="padding-left: 0">
+							<div class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.projectFollowed"  ui-sref="viewproject({public_id: card.public_id, title: vm.encodeUrl(card.title)})">
+								<div class="card-tag" ng-click="getTagCag(card.category_name)">
+									<div class="card-tag-content">
+										<div class="card-tag-bg"></div>
+										<img src="/images/tag-icon.png" alt="img-tag-icon">
+										<h5 data-ng-bind="card.category_name"></h5>
+									</div>
+								</div>
+								<div data-ng-if="card.picture_card" class="card-picture" data-ng-style="{'background-image': 'url({{ resizePic(card.picture_card, 285, 180) }})'}">
+								</div>
+								<div data-ng-if="!card.picture_card && !card.picture" class="card-picture" data-ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}">
+								</div>
+								<div data-ng-if="!card.picture_card && card.picture" class="card-picture" data-ng-style="{'background-image': 'url({{ ::card.picture }})'}">
+								</div>
+								<div class="card-info">
+									<div class="card-title-space">
+										<h4 data-ng-bind="::card.title"></h4>
+									</div>
+									<div class="card-status">
+										<span>
+											<img data-ng-if="card.status == 'Live project'" src="/images/live-picto.svg" alt="status-picture"/>
+											<img data-ng-if="card.status == 'Idea'" src="/images/idea-picto.svg" alt="status-picture"/>
+											<img data-ng-if="card.status == 'Drafted project'" src="/images/drafted-picto.svg" alt="status-picture"/>
+											<img data-ng-if="card.status == 'Beta project'" src="/images/beta-picto.svg" alt="status-picture"/>
+											{{::card.status}}
+										</span>
+									</div>
+									<div class="card-location">
+										<span><img src="/images/location-picto.svg" alt="location-picture" />{{::card.location_city}}<i data-ng-hide="!card.location_country">,</i> {{::card.location_country}}</span>
+									</div>
+									<div class="card-description-text">
+										<p data-ng-bind="::card.description"></p>
+									</div>
+									<div class="card-info-by" data-ng-click="vm.goToProfile(card.creator_user_id)">
+										<figure class="card-info-by-picture">
+											<img data-ng-src="{{ resizePic(card.creator_user_picture.profile_picture_icon, 30, 30) }}" alt="card-foot-picture">
+										</figure>
+										<h6>{{::card.creator_user_name}} <h6 data-ng-if="card.usersIn.length">& {{::card.usersIn.length}} more</h6></h6>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<div class="" data-ng-if="vm.projectFollowed === false">
+				<div class="no_feedbacks center-block">
+					<h4 class="text-center title_no_comments">Haven't followed a project yet ?</h4>
+					<p class="text-center text_no_comments">
+						The projects you followed will appear here.
+					</p>
+					<button class="text-center button_post_comment center-block" ui-sref="discover">Discover</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="myProject-history">
+		<div class="myProject-body-history">
+			<div class="myProject-body-hTitle">
+				<h1>History.</h1>
+				<h6>All the projects you have viewed over the past 30 days.</h6>
+			</div>
+			<div class="myProject-body-hContainer">
+				<div class="myProject-body-hElement" ui-sref="viewproject({public_id: card.project.public_id, title: vm.encodeUrl(card.project.title)})" ng-repeat="card in vm.project_history track by $index | limitTo:10">
+					<div class="myProject-body-hETitle">
+						<div class="h-picture">
+							<img data-ng-src="{{ resizePic(card.project.picture_card, 60, 60) }}" alt="project-picture">
+						</div>
+						<div class="h-title-tag">
+							<h3 data-ng-bind="::card.project.title"></h3>
+							<div class="card-tag">
+								<div class="card-tag-content">
+									<div class="card-tag-bg">
+									</div>
+									<img src="/images/tag-icon.png" alt="tag-picture">
+									<h5 data-ng-bind="::card.project.category_name"></h5>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="myProject-body-hDate">
+						<span am-time-ago="::card.date"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -419,8 +419,9 @@
   .container-custom-project .redactor-editor p {
     font-family: 'FreigBook';
     font-size: 16px;
-    line-height: 21px;
+    line-height: 26px;
     color: #222;
+    margin-bottom: 0;
     text-align: left; }
   .container-custom-project .redactor-editor h1 {
     font-family: 'FreigBook';

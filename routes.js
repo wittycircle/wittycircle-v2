@@ -2,47 +2,6 @@ var ensureAuth = require('./controllers/auth').ensureAuthenticated;
 
 module.exports = function(app, passport){
 
-/*app.post('/', function(req, res, next) {
-	passport.authenticate('local-login', function (err, user, info) {
-	if (err || !user) {
-	   	res.writeHead(302, {
-		  'Location': 'http://localhost:9000/',
-		});
-		return res.end(); 
-	}
-	req.logIn(user, function(err) {
-	    if (user) {
-			res.render('/superdev');
-	    } else {
-		res.writeHead(302, {
-			'Location': 'http://localhost:9000/',
-			    });
-		return res.end();
-	    }
-	});
-    })(req, res, next);
-});
-
-app.get('/superdev', function(req, res) {
-	if (req.isAuthenticated() && req.user.superdev === 1)
-		res.render('api-page.html');
-	else {
-		res.writeHead(302, {
-		  'Location': 'http://localhost:9000/',
-		});
-		return res.end();
-	}
-});*/
-/*app.get('/api/login', function(req, res) {
-    // render the page and pass in any flash data if it exists
-    res.send('getting login ok');
-});
-
-app.get('/api/logout', function(req, res) {
-    req.logout();
-    res.send('logout done');
-});*/
-
 /* Users */
 var users = require('./controllers/users');
 app.get('/user/checkLog', ensureAuth, users.checkFirstLog);
@@ -62,6 +21,8 @@ app.put('/profiles/view/:username', users.updateProfileView);
 app.put('/user/:id/credentials', ensureAuth, users.updateUserCredentials);
 app.put('/user/checkLog/update', ensureAuth, users.updateFirstLog);
 app.delete('/user/:id', users.deleteUser);
+app.get('/user/valid/:token', users.getUsersValidateMail);
+app.post('/user/valid/:token', users.ValidateAccount)
 
 /* Profile */
 var profile = require('./controllers/profile');
@@ -84,29 +45,37 @@ app.get('/profile', ensureAuth, function(req, res) {
 			      });
 	       });
 });
-    
-/* Facebook Users */
+
+/* AUTHENTICATION API PUBLIC */
+/* Facebook Users && Google Users */
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+// app.get('/auth/facebook/callback', 
+// 	passport.authenticate('facebook', {
+// 	    successRedirect : 'https://www.wittycircle.com',
+// 	    failureRedirect : 'https://www.wittycircle.com'
+// 	}));
+
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+// app.get('/auth/google/callback',
+// 	passport.authenticate('google', {
+// 	    successRedirect : 'https://www.wittycircle.com',
+// 	    failureRedirect : 'https://www.wittycircle.com'
+// 	}));
+
+/* AUTHENTICATION API DEV */
+/* Facebook Users && Google Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
-	    successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : 'http://www.wittycircle.com'
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
 
-/* Twitter Users */	
-/*app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback',
-        passport.authenticate('twitter', {
-            successRedirect : 'http://wittycircle.netlify.com/#/',
-            failureRedirect : '/'
-        }));*/
-
-/* Google Users */
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
 app.get('/auth/google/callback',
 	passport.authenticate('google', {
-	    successRedirect : 'http://www.wittycircle.com',
-	    failureRedirect : 'http://www.wittycircle.com'
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
 	}));
 
 /* View */
@@ -134,7 +103,7 @@ app.put('/notification/update/user-follow-by', ensureAuth, notification.updateUs
 app.put('/notification/update/project-follow', ensureAuth, notification.updateProjectFollowNotif);
 app.put('/notification/update/project-follow-by', ensureAuth, notification.updateProjectFollowBy);
 app.put('/notification/update/project-involve', ensureAuth, notification.updateProjectInvolve);
-	
+
 /* Users Specifications */
 var users_specification = require('./controllers/users_specification');
 app.get('/user/:id/profile', users_specification.getUserProfile);
@@ -205,7 +174,8 @@ app.get('/project/involved_users/:public_id', projects.getAllUsersInvolvedByPubl
 app.post('/project/involvment/accepted/:project_id/:user_id', projects.acceptInvolvment);
 app.post('/project/involvment/declined/:project_id/:user_id', projects.declineInvolvment);
 app.delete('/project/:project_id/involved/:user_id', projects.deleteUserInvolved);
-app.get('/project/:public_id/auth', projects. getAllProjectMembers);
+app.get('/project/:public_id/auth', projects.getAllProjectMembers);
+app.post('/project/video/poster/:public_id', projects.updateVideoPoster);
 
 /* Project follow Maxence */
 var project_followers = require('./controllers/project_followers.js');
@@ -273,6 +243,7 @@ app.get('/follow/user/:username', ensureAuth, follow.getFollowUser);
 //app.get('/follow/list', ensureAuth, follow.getFollowList);
 app.get('/follow/project/check/:id', ensureAuth, follow.checkFollowProject);
 app.get('/follow/projects/:username', follow.getProjectsFollowedByUsername);
+app.get('/follow/projects/number/:username', follow.getNumberProjectFollowed)
 app.get('/follow/users/:username', follow.getFollowing);
 app.get('/follow/followUsers/:username', follow.getFollowers);
 //*** Attention! the function to get follow project is in io.js file.
@@ -288,6 +259,9 @@ var auth = require('./controllers/auth');
 app.get('/api', auth.checkLog);
 app.post('/api/login', auth.login);
 app.get('/api/logout', auth.logout);
+app.post('/api/resetpassword', auth.ResetPassword);
+app.get('/api/resetpassword/:token', auth.getUserForResetPassword);
+app.post('/api/updatepasswordreset', auth.updatePasswordReset);
 
 /* Upload */
 var upload = require('./controllers/upload');
@@ -303,7 +277,7 @@ app.get('/image/transformation/resize/:public_id/:width/:height/:crop', upload.r
 /* Redactor */
 app.post('/upload/redactor', upload.redactorImage);
 
-/* History */ 
+/* History */
 var history = require('./controllers/history');
 app.post('/history/project/:id', history.addProjectToUserHistory);
 app.get('/history/project/:id', history.getUserProjectHistory);
@@ -324,9 +298,8 @@ app.post('/search/users', search.getUsersBySkill);
 app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
 
-
 app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/Public/dist/index.html');
+    res.sendFile(__dirname + '/Public/app/index.html');
 });
 
 };

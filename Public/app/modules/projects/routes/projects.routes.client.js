@@ -44,6 +44,7 @@
         controller: 'viewProjectCtrl',
         controllerAs: 'vm',
         resolve: {
+            // FIXME: lazyload resolve in router don't find file after reload
             /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/view-project.controller.client.js',
@@ -52,7 +53,7 @@
                      ]);
             }],*/
             projectResolve: function (Projects, $stateParams) {
-                    return Projects.getProjectbyPublicId($stateParams.public_id);
+                    return Projects.getProjectbyPublicIdUnresolved($stateParams.public_id);
             },
             project_followersResolve: function(Projects, Project_Follow, $stateParams) {
                     return Project_Follow.getProjectFollowers($stateParams.public_id);
@@ -60,7 +61,7 @@
             project_categoryResolve: function ($q, $stateParams, Categories, Projects) {
                     var defer = $q.defer();
 
-                    Projects.getProjectbyPublicId($stateParams.public_id).then(function (result) {
+                    Projects.getProjectbyPublicIdUnresolved($stateParams.public_id).then(function (result) {
                         defer.resolve(Categories.getCategoryUnresolved(result.data[0].category_id));
                     });
                     return defer.promise;
@@ -68,7 +69,7 @@
             project_creatorUserResolve: function ($q, $stateParams, Users, Projects) {
                     var defer = $q.defer();
 
-                    Projects.getProjectbyPublicId($stateParams.public_id).then(function(result) {
+                    Projects.getProjectbyPublicIdUnresolved($stateParams.public_id).then(function(result) {
                         defer.resolve(Users.getUserbyIdUnresolved(result.data[0].creator_user_id));
                     });
                     return defer.promise;
@@ -78,7 +79,11 @@
             },
             project_FeedbacksResolve: function ($stateParams, Feedbacks) {
               return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
+            },
+            project_NeedsResolve: function ($stateParams, Needs) {
+                return Needs.getNeedsByProjectPublicIdUnresolved($stateParams.public_id);
             }
+
         }
       })
       .state('viewproject.feedback', {
@@ -91,7 +96,7 @@
       })
       .state('updateproject', {
         url: '/project/:public_id/update',
-        templateUrl: 'views/projects/update/update_project.view.client.html',
+        templateUrl: 'modules/projects/views/update/update_project.view.client.html',
         controller: 'UpdateProjectCtrl',
         resolve:{ auth: function($q, $stateParams, Projects, $http) {
                         return $http.get('/project/'+ $stateParams.public_id + '/auth').then(function(response) {
@@ -106,28 +111,52 @@
       })
       .state('updateproject.basics', {
         url: '/basics',
-        templateUrl: 'views/projects/update/update_project_basics.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_basics.view.client.html'
       })
       .state('updateproject.story', {
         url: '/story',
-        templateUrl: 'views/projects/update/update_project_story.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_story.view.client.html'
       })
       .state('updateproject.people', {
         url: '/people',
-        templateUrl: 'views/projects/update/update_project_people.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_people.view.client.html'
       })
       .state('updateproject.needs', {
         url: '/needs',
-        templateUrl: 'views/projects/update/update_project_needs.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_needs.view.client.html'
       })
       .state('updateproject.community', {
         url: '/community',
-        templateUrl: 'views/projects/update/update_project_community.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_community.view.client.html'
       })
       .state('myproject', {
         url: '/my-projects',
-        templateUrl: 'views/projects/myproject/my_project.view.client.html',
+        templateUrl: 'modules/projects/views/my_project.view.client.html',
         controller: 'MyProjectCtrl',
+        controllerAs: 'vm',
+        resolve: {
+            /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                         'modules/projects/controllers/my-project.controller.client.js',
+                     ]);
+            }],*/
+            auth: function ($q, $rootScope, $state) {
+              if ($rootScope.globals.currentUser) {
+                return true;
+              } else {
+                return $state.go(main);
+              }
+            },
+            myProject_Resolve: function ($rootScope, Projects) {
+              return Projects.getUserProjectUnresolved($rootScope.globals.currentUser.id);
+            },
+            myProjectFollowed_Resolve: function($rootScope, Project_Follow) {
+              return Project_Follow.getFollowedProjectUnresolved($rootScope.globals.currentUser.username);
+            },
+            myProjectHistory_Resolve: function(Project_History) {
+              return Project_History.getCurrentUserProjectHistoryUnresolved();
+            }
+          }
       })
 
     })

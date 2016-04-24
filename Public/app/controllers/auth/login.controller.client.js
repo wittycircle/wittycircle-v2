@@ -1,45 +1,68 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name wittyApp.controller:LoginCtrl
- * @description
- * # LoginCtrl
- * Controller of the wittyApp
- */
 angular.module('wittyApp').controller('LoginCtrl', function ($cookieStore, $window, $scope, Authentication, $rootScope) {
 
-   // $scope.dismiss = function () {
-   //   $modalInstance.dismiss();
-   // };
+    $scope.lef = true;
+    $scope.lpf = true;
+    $scope.lf = true;
+    $scope.showReset = false;
+    $scope.textButton = 'Log In';
+    $scope.TextReset = 'Forgot password?';
+    $scope.validateReset = false;
 
-  $scope.lef = true;
-  $scope.lpf = true;
-  $scope.lf  = true;
 
-  $scope.login = function() {
+    $scope.login = function() {
+        if ($scope.showReset === false) {
+            if (!$scope.email)
+            $scope.lef = false;
+            else
+            $scope.lef = true;
+            if (!$scope.password)
+            $scope.lpf = false;
+            else
+            $scope.lpf = true;
 
-    if (!$scope.email)
-      $scope.lef = false;
-    else
-      $scope.lef = true;
-    if (!$scope.password)
-      $scope.lpf = false;
-    else
-      $scope.lpf = true;
+            if (!$scope.lpf || !$scope.lef)
+            return ;
 
-    if (!$scope.lpf || !$scope.lef)
-      return ;
+            Authentication.Login($scope.email, $scope.password, function (response) {
+                if (response.success) {
+                    Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, function(res) {
+                        if (res.success)
+                            window.location.href = "https://www.wittycircle.com";
+                    });
+                } else {
+                    $scope.lf = false;
+                }
+            });
+        } if ($scope.showReset === true) {
+            if ($scope.ereset) {
+                Authentication.ResetPassword($scope.ereset, function (response) {
+                    if (response.message) {
+                        $scope.validateReset = 2;
+                        $scope.textValidateReset = 'Sorry, no account was found with this email!';
+                    } else {
+                        $scope.validateReset = true;
+                        $scope.textValidateReset = 'E-mail successfully sent!';
+                    }
+                });
+            }
+        }
+    };
 
-   	Authentication.Login($scope.email, $scope.password, function (response) {
-   		if (response.success) {
-   			Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, function(res) {
-          if (res.success)
-            window.location.href = "https://www.wittycircle.com";
-        });
-   		} else {
-   			$scope.lf = false;
-   		}
-   	});
-  };
+    $scope.showResetPassword = function () {
+        if ($scope.showReset === false) {
+            $scope.showReset = true;
+            $scope.textButton = 'Reset Password';
+            $scope.TextReset = 'Cancel';
+        } else if ($scope.showReset === true) {
+            $scope.showReset = false;
+            $scope.textButton = 'Log In';
+            $scope.TextReset = 'Forgot Password?';
+            $scope.validateReset = false;
+            $scope.textValidateReset = '';
+        }
+    };
+
+
 });

@@ -6,25 +6,25 @@
 	position: absolute;
 	height: 392px;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .bf2-filter {
 	position: absolute;
 	height: 300px;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .bf3-filter {
 	position: absolute;
 	height: 270px;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 .bf4-filter {
 	position: absolute;
 	height: 302px;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .bf-info {
@@ -129,6 +129,8 @@
 		h4 {
 			font-family: 'FreigLight';
 			font-size: 36px;
+			/*-webkit-font-smoothing: antialiased;
+  			-moz-osx-font-smoothing: grayscale;*/
 		}
 
 		button {
@@ -214,6 +216,189 @@
 			a:hover {
 				text-decoration: none;
 				color: white;
+			}
+		}
+	}
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 800px*\ **************************/
+
+/* Exception media query width */
+
+@media only screen and (max-width: 955px) {
+	#bfooter-1 {
+		.bf-filter {
+			position: absolute;
+			background-image: url('/images/backgrounds/background-footer1.jpg');
+			background-position: center center;
+			background-size: cover;
+			background-color: none;
+			height: 590px;
+			-webkit-filter: blur(2px) brightness(0.5);
+			-moz-filter: blur(2px) brightness(0.5);
+			-o-filter: blur(2px) brightness(0.5);
+			-ms-filter: blur(2px) brightness(0.5);
+			filter: blur(2px) brightness(0.5);
+			overflow: hidden;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+	}
+}
+
+@media only screen and (max-width: 736px) {
+	#bfooter-2 {
+		height: 184px;
+
+		.bf2-filter {
+			position: absolute;
+			background-image: url('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456926920/footer_discover_tzxces.jpg');
+			background-position: center center;
+			background-size: cover;
+			background-color: none;
+			height: 185px;
+			-webkit-filter: blur(2px) brightness(0.6);
+			-moz-filter: blur(2px) brightness(0.6);
+			-o-filter: blur(2px) brightness(0.6);
+			-ms-filter: blur(2px) brightness(0.6);
+			filter: blur(2px) brightness(0.6);
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+
+		.bf2-info {
+			padding: 40px 0;
+		}
+
+		h3 {
+			font-family: 'FreigLight';
+			font-size: 27px;
+			padding: 0 15px;
+		}
+
+		button {
+			width: auto;
+			height: auto;
+			margin-top: 15px;
+			margin-bottom: 10px;
+			border-radius: 4px;
+			padding: 5px 25px 7px 25px;
+		}
+	}
+
+	#bfooter-3 {
+		height: 220px;
+
+		.bf3-filter {
+			position: absolute;
+			background-image: url('/images/backgrounds/background-footer3.jpg');
+			background-position: center center;
+			background-size: cover;
+			background-color: none;
+			height: 221px;
+			-webkit-filter: blur(2px) brightness(0.6);
+			-moz-filter: blur(2px) brightness(0.6);
+			-o-filter: blur(2px) brightness(0.6);
+			-ms-filter: blur(2px) brightness(0.6);
+			filter: blur(2px) brightness(0.6);
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+
+		h4 {
+			font-size: 27px;
+		}
+
+		button {
+			width: 164px;
+			height: auto;
+			margin-top: 15px;
+			margin-bottom: 10px;
+			border-radius: 4px;
+			padding: 5px 25px 7px 25px;
+		}
+
+		.bf3-info .bf3-component .bf3-text {
+			margin: 0;
+		}
+	}
+}
+
+@media only screen and (max-width: 635px) {
+	#bfooter-1 {
+		.bf-filter {
+			position: absolute;
+			background-image: url('/images/backgrounds/background-footer1.jpg');
+			background-position: center center;
+			background-size: cover;
+			background-color: none;
+			height: 839px;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+
+		.bf-info {
+			padding: 50px 0;
+			background-image: none;
+			.bf-component {
+				margin-bottom: 20px;
+
+				h6 {
+					padding-top: 5px;
+					padding-bottom: 10px;
+				}
 			}
 		}
 	}

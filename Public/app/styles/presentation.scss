@@ -1,5 +1,9 @@
 
 /****** Presentation Global ******/
+.discover-image-bg {
+	display: none;
+}
+
 .presentation-component {
 	position: absolute;
 	width: 1000px;
@@ -36,6 +40,21 @@
 		-ms-transition: all 150ms linear;
 		-kthtml-transition: all 150ms linear;
 		transition: all 150ms linear;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
 	}
 
 	.presentation-title {
@@ -65,6 +84,21 @@
 			-ms-transition: all 100ms linear;
 			-kthtml-transition: all 100ms linear;
 			transition: all 100ms linear;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
 		}
 
 		input:focus {
@@ -111,6 +145,21 @@
 		-moz-animation-duration: 0.4s;
 		-o-animation-duration: 0.4s;
 		-ms-animation-duration: 0.4s;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
 	}
 }
 
@@ -161,6 +210,14 @@
 
 /****** Discover ******/
 
+#discover-body-page {
+	.home-video-bg {
+		background-image: url('images/poster/poster_discover.jpg');
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+}
 .discover-component {
 	.discover-search1 {
 
@@ -253,8 +310,31 @@
 			-ms-transition: all 400ms linear;
 			-kthtml-transition: all 400ms linear;
 			transition: all 400ms linear;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+			
 		}
 
+		.discover-search2-text-mobile {
+			display: none;
+		}
+
+		#dsdrop1m {
+			display: none;
+		}
 		.discover-search2-dropdown {
 			display: inline-block;
 			margin-right: 10px;
@@ -301,6 +381,21 @@
 			-moz-animation-duration: 0.4s;
 			-o-animation-duration: 0.4s;
 			-ms-animation-duration: 0.4s;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
 
 			.discover-skill-tag {
 				display: inline-block;
@@ -345,7 +440,22 @@
 					-moz-transition: all 200ms linear;
 					-ms-transition: all 200ms linear;
 					-kthtml-transition: all 200ms linear;
-					transition: all 200ms linear
+					transition: all 200ms linear;
+					-webkit-transform: translateZ(0);
+					-moz-transform: translateZ(0);
+					-ms-transform: translateZ(0);
+					-o-transform: translateZ(0);
+					transform: translateZ(0);
+					-webkit-perspective: 1000;
+					-moz-perspective: 1000;
+					-ms-perspective: 1000;
+					-o-perspective: 1000;
+					perspective: 1000;	
+					-webkit-backface-visibility: hidden;
+					-moz-backface-visibility: hidden;
+					-ms-backface-visibility: hidden;
+					-o-backface-visibility: hidden;
+					backface-visibility: hidden;
 				}
 
 			}
@@ -382,6 +492,22 @@
 			-ms-transition: all 400ms linear;
 			-kthtml-transition: all 400ms linear;
 			transition: all 400ms linear;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+
 			input {
 				width: 200px;
 			}
@@ -392,6 +518,10 @@
 					color: white;
 				}
 			}
+		}
+
+		.discover-search2-anylocation-mobile {
+			display: none;
 		}
 
 		.inputfield {
@@ -429,6 +559,15 @@
 
 /****** Meet ******/
 
+#meet-body-page {
+	.home-video-bg {
+		background-image: url('images/poster/poster_discover.jpg');
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+}
+
 .meet-component {
 	li {
 		padding: 10px 20px 5px 20px;
@@ -448,6 +587,11 @@
 	}
 
 	#meet-search1 {
+
+		.meet-search1-dropdown-mobile {
+			display: none;
+		}
+
 		.meet-search1-dropdown {
 			display: inline-block;
 			margin: 0px 10px 10px 0px;
@@ -465,14 +609,6 @@
 				-moz-animation-duration: 0.4s;
 				-o-animation-duration: 0.4s;
 				-ms-animation-duration: 0.4s;
-			}
-			input::-webkit-input-placeholder {
-				-webkit-transition: all 200ms linear;
-				-o-transition: all 200ms linear;
-				-moz-transition: all 200ms linear;
-				-ms-transition: all 200ms linear;
-				-kthtml-transition: all 200ms linear;
-				transition: all 200ms linear;
 			}
 		}
 
@@ -502,6 +638,21 @@
 			-moz-animation-duration: 0.4s;
 			-o-animation-duration: 0.4s;
 			-ms-animation-duration: 0.4s;
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
 
 			.meet-skill-tag {
 				display: inline-block;
@@ -625,6 +776,21 @@
 		-ms-transition-delay: all 500ms linear;
 		-kthtml-transition-delay: all 500ms linear;
 		transition-delay: all 500ms linear;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
 
 		.meet-body-cards {
 			text-align: left;
@@ -689,6 +855,397 @@
 			h2 {
 				display: inline-block;
 				padding: 10px 15px 10px 10px;
+			}
+		}
+	}
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+	.presentation-image-bg {
+		display: block;
+		width: 100%;
+	}
+
+	/*** Presentation Mobile ***/
+	.presentation-component {
+		width: auto;
+		top: 95px;
+		padding-left: 20px;
+
+		.presentation-title {
+			padding-top: 15px;
+			padding-bottom: 20px;
+			h2 {
+				font-family: 'FreigSem';
+				font-size: 24px;
+			}
+		}
+
+		img {
+			margin: 5px 10px 13px 0px;
+		}
+
+		h2 {
+			font-family: 'FreigLight';
+			font-size: 27px;
+			color: white;
+		}
+
+		.searchbox {
+			background-color: rgba(20, 20, 20, 0.6);
+			h2 {
+				padding-top: 6px;
+				padding-bottom: 6px;
+			}
+		}
+	}
+	.presentation-body-title {
+		padding: 25px 20px 20px 20px;
+
+		h4 {
+			font-family: 'FreigBook';
+			font-size: 16px;
+		}
+	}
+
+	.presentation-body-loadmore {
+		padding: 0px 20px 20px 20px;
+
+		button:hover {
+			background-color: none;
+			color: none;
+		}
+	}
+
+	.presentation-body-loadmore {
+		button {
+			-webkit-transform: translateZ(0);
+			-moz-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			-o-transform: translateZ(0);
+			transform: translateZ(0);
+			-webkit-perspective: 1000;
+			-moz-perspective: 1000;
+			-ms-perspective: 1000;
+			-o-perspective: 1000;
+			perspective: 1000;	
+			-webkit-backface-visibility: hidden;
+			-moz-backface-visibility: hidden;
+			-ms-backface-visibility: hidden;
+			-o-backface-visibility: hidden;
+			backface-visibility: hidden;
+		}
+
+		button:hover {
+			background-color: transparent;
+			color: #222222;
+		}
+
+		button:focus {
+			background-color: #222222;
+			color: white;
+		}
+	}
+
+	/****** Discover mobile ******/
+	.discover-image-bg {
+		height: 480px;
+		background-image: url("/images/bg_mobile/bg_discover_mobile.jpg");
+		background-size: cover;
+		background-position: center center;
+		-webkit-filter: brightness(0.6);
+		-moz-filter: brightness(0.6);
+		-o-filter: brightness(0.6);
+		-ms-filter: brightness(0.6);
+		filter: brightness(0.6);
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	#discover-body-content {
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+
+		.discover-body-container {
+			.discover-body-list {
+				text-align: center;
+				margin: 10px auto;
+				padding-left: 0px;
+
+				.discover-body-card {
+					display: inline-block;
+					width: 287px;
+					height: 418px;
+					margin: 0;
+					margin-bottom: 20px;
+				}
+			}
+		}	
+		.loader {
+			margin: 25px auto;
+		}
+	}
+
+	.discover-component {
+		.discover-search1 {
+
+			.discover-search1-text {
+				display: inline-block;
+				margin: 0px 10px;
+			}
+
+			.discover-search1-dropdown {
+				display: block;
+				margin: 0;
+				margin-bottom: 10px;
+			}
+
+			.discover-search1-dropdown1-mobile {
+				display: table;
+			}
+
+			.discover-search1-dropdown2-mobile {
+				display: inline-block;
+			}
+		}
+
+		.discover-search2 {
+			border-spacing: 0;
+			padding-right: 10px;
+
+			#dsdrop1m {
+				display: inline-block;
+				max-width: auto;
+
+				h2 {
+					display: inline-block;
+					padding: 6px 10px 7px 10px;
+				}
+/*
+				.discover-skillList {
+
+					h2 {
+						font-size: 21px;
+						padding: 0;
+						padding-left: 5px;
+					}
+				}*/
+
+				img {
+					display: inline-block;
+				}
+			}
+
+			.discover-search2-text {
+				margin-bottom: 10px;
+			}
+
+			.discover-search2-text-mobile {
+				display: table-cell;
+				h2 {
+					margin-right: 10px;
+				}
+			}
+
+			.discover-search2-dropdown {
+				margin-bottom: 10px;
+			}
+
+			.discover-search2-dropdown2-mobile {
+				margin-bottom: 10px;
+			}
+
+			.bomobi {
+				display: table-cell;
+				padding-right: 10px;
+			}
+
+			.discover-search2-anylocation {
+				display: table-cell;
+
+				input {
+					font-size: 27px;
+					padding: 2px 10px;
+				}
+			}
+
+			#dsdrop1 {
+				display: none;
+			}
+		}
+	}
+
+	/****** Meet mobile ******/
+	#meet-body-content {
+		min-height: 400px;
+		
+		.meet-body-container {
+
+			.meet-body-cards {
+				padding: 0;
+				text-align: center;
+				margin: 10px 0;
+
+				.meet-body-card {
+					margin: 0px 14px 25px 14px
+				}
+			}
+		}
+	}
+
+	.meet-image-bg {
+		height: 480px;
+		background-image: url("/images/bg_mobile/bg_meet_mobile.jpg");
+		background-size: cover;
+		background-position: center center;
+		-webkit-filter: brightness(0.7);
+		-moz-filter: brightness(0.7);
+		-o-filter: brightness(0.7);
+		-ms-filter: brightness(0.7);
+		filter: brightness(0.7);
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
+		-webkit-perspective: 1000;
+		-moz-perspective: 1000;
+		-ms-perspective: 1000;
+		-o-perspective: 1000;
+		perspective: 1000;	
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		-o-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+
+	.meet-component {
+		.meet-title {
+			padding: 15px 0 10px 0;
+		}
+
+		#meet-search1 { 
+			.meet-search1-text {
+				margin-bottom: 10px;
+			}
+
+			#msdrop1 {
+				display: none;
+			}
+
+			.meet-search1-dropdown-mobile {
+				display: inline-block;
+				margin-bottom: 10px;
+				margin-right: 20px;
+				padding-bottom: 1px;
+
+				h2 {
+					display: inline-block;
+					padding: 6px 10px 7px 10px;
+				}
+
+				.meet-skillList {
+
+				}
+
+				.meet-cross-bg {
+					display: inline-block;
+					vertical-align: middle;
+					background-image: url('/images/arrow-down-icon-w.svg');
+					background-repeat: no-repeat;
+					background-position: 45% 28%;
+					background-size: 14px;
+					height: 30px;
+					width: 26px;
+				}
+			}
+
+			.meet-search1-text2 {
+				display: table;
+				padding-right: 10px;
+				padding-bottom: 10px;
+			}
+
+			.meet-search1-dropdown {
+				display: table;
+			}
+
+			.meet-search2-text2 {
+				margin-bottom: 10px;
+			}
+
+			.meet-search2-anylocation {
+				input {
+					font-size: 27px;
+					height: 42px;
+					width: 170px;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+
+}
+
+@media only screen and (max-width: 320px) {
+
+	/****** Discover mobile ******/
+	#discover-body-content {
+		.discover-body-container {
+			.discover-body-list {
+				.discover-body-card {
+					width: 270px;
+				}
+			}
+		}	
+		.loader {
+		}
+	}
+
+	/****** Meet mobile ******/
+	#meet-body-content {
+		min-height: 400px;
+		
+		.meet-body-container {
+
+			.meet-body-cards {
+				padding: 0;
+				text-align: center;
+				margin: 10px 0;
+
+				.meet-body-card {
+					margin: 0px 16px 25px 16px
+				}
 			}
 		}
 	}

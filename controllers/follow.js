@@ -1,6 +1,36 @@
 /*** REQUIRE TOOL ***/
 var tf = require('../tools/project_functions');
 
+
+exports.getNumberProjectFollowed = function (req, res) {
+    req.checkParams('username', 'username must be a string').isString().max(128);
+
+    var errors= req.validationErrors(true);
+    if (errors) {
+        return res.status(400).send(errors);
+    } else {
+        pool.query('SELECT id FROM project_followers WHERE user_id = (SELECT id FROM users WHERE username = ?)',
+        [req.params.username],
+        function (err, rows) {
+            if (err) {
+                console.log(new Date());
+                throw err;
+            } else {
+                var i = 0;
+                function recursive (index) {
+                    if (rows[index]) {
+                        i = i + 1;
+                        recursive(index + 1);
+                    } else {
+                        return res.send({number: i});
+                    }
+                }
+                recursive(0);
+            }
+        })
+    }
+}
+
 /***** Follow user *****/
 function getNotifUserFollowList(data, callback) {
     var list = [];
@@ -71,7 +101,7 @@ exports.getFollowUser = function(req, res) {
 	pool.query('SELECT * FROM user_followers WHERE user_id = ? && follow_user_id IN (SELECT id FROM users WHERE username = ?)', [req.user.id, req.params.username],
 		   function(err, result) {
 		       if (err) throw err;
-		       if (result.length)
+		       if (result.length) 
 			   res.send({success: true});
 		       else
 			   res.send({success: false});
@@ -103,40 +133,46 @@ exports.getMyProjectFollowedBy = function(req, res, callback) {
 	       });
 };
 
-exports.getProjectsFollowedByUsername = function(req, res) {
+exports.getProjectsFollowedByUsername = function (req, res) {
     req.checkParams('username', 'username must be a string of characters').isString().min(1);
     var errors = req.validationErrors(true);
- 
+
     if (errors) return res.status(400).send(errors);
     else {
-	pool.query("SELECT * FROM project_followers WHERE user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username, 
-		   function(err, results) {
-		       if (err) throw err;
-		       if (results[0]) {
-			   var listProject = [];
-			   function recursive(index) {
-			       if (results[index]) {
-				   pool.query("SELECT * FROM `projects` WHERE `id` = ?", results[index].follow_project_id,
-					      function(err, result) {
-						  if (err) throw err;
-						  listProject.push(result[0]);
-						  recursive(index + 1);
-					      });
-			       } else {
-				   if (listProject[0]) {
-				       tf.sortProjectCard(listProject, function(data) {
-					   if (!data)
-					       res.status(400).send('Error');
-					   else
-					       res.status(200).send({success: true, data: data});
-				       });
-				   }
-			       }
-			   };
-			   recursive(0);
-		       } else
-			   res.send({success: true, data: results});
-		   });
+        pool.query("SELECT * FROM project_followers WHERE user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username,
+        function (err, results) {
+            if (err) throw err;
+            if (results[0]) {
+                var listProject = [];
+                function recursive(index) {
+                    if (results[index]) {
+                        pool.query("SELECT * FROM `projects` WHERE `id` = ?", results[index].follow_project_id,
+                        function(err, result) {
+                            if (err) throw err;
+                            listProject.push(result[0]);
+                            recursive(index + 1);
+                        });
+                    } else {
+                        if (listProject[0]) {
+                            tf.sortProjectCard(listProject, function(data) {
+                                if (!data)
+                                res.status(400).send('Error');
+                                else
+                                tf.addUserPictureToProject(data, function (rez) {
+                                    if (!rez) {
+                                        res.status(400).send('Error');
+                                    } else {
+                                        res.status(200).send(rez);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                };
+                recursive(0);
+            } else
+            res.send({success: true, data: results});
+        });
     }
 };
 
@@ -206,7 +242,7 @@ exports.getAllUserFollowed = function(req, res) {
 	       });
 };
 
-exports.getProjectFollowedBy = function(req, res, callback) {    
+exports.getProjectFollowedBy = function(req, res, callback) {
     pool.query('SELECT * FROM user_followers WHERE user_id = ?', [req.user.id],
 	       function(err, result) {
 		   if (err) throw err;
@@ -270,7 +306,7 @@ exports.getUserFollowBy = function(req, res, callback) {
 				      function(err, results) {
 					  if (err) throw err;
 					  for(var i = 0; i < results.length; i++) {
-					      if (results[i].follow_user_id !== req.user.id) 
+					      if (results[i].follow_user_id !== req.user.id)
 						  user_user_follow.push(results[i]);
 					  }
 					  recursive(index + 1);
@@ -317,52 +353,4 @@ exports.getListFollowedUser = function(req, res) {
         recursive(0);
     } else
 	res.send({success: false, msg: "error data!"});
-};    
-   /* app.get('/follow/project/:id/unfollow', function(req, res){
-	var session = checkSession(req);
-	req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
-	var errors = req.validationErrors(true);
-	if (errors || session) {
-            if(session){
-		return res.status(400).send(session);
-            } else {
-		return res.status(400).send(errors);
-            }
-	} else {
-            pool.query("DELETE FROM `project_followers` WHERE `user_id` = ? AND `follow_project_id` = ?",
-		       [req.session.user_id, req.params.id],
-		       function (err, results, fields) {
-			   if(err){
-                throw err;
-            }
-			   res.send(results);
-		       });
-	}
-    }); */
-
-/*    exports.function(req, res){
-        req.checkParams('user_id', 'user_id must be an integrer').isInt().min(1);
-        var errors = req.validationErrors(true);
-        if (errors) {
-            return res.status(400).send(errors);
-        } else {
-            pool.query("SELECT follow_project_id FROM project_followers WHERE user_id = ?",
-                   [req.params.user_id],
-                   function (err, result) {
-                       if (err) throw err;
-                       var datas = [];
-                       function recursive(index) {
-                           if (result[index]) {
-                               pool.query("SELECT * FROM projects WHERE id = ?", result[index].follow_project_id,
-                                          function(err, data) {
-                                              if (err) throw err;
-                                              datas.push(data[0]);
-                                              recursive(index + 1);
-                                          });
-                           } else
-                               res.send({success: true, datas: datas});
-                       };
-                       recursive(0);
-                   });
-        }
-    }); */
+};

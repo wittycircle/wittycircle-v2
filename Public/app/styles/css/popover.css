@@ -6,10 +6,12 @@
   border-style: none;
   color: white;
   position: fixed;
-  bottom: 0%;
+  bottom: 0;
   z-index: 500; }
   .custom-popover #popover-login {
     padding: 40px 0 55px 0; }
+    .custom-popover #popover-login .crossPopover {
+      display: none; }
     .custom-popover #popover-login .popover-container {
       max-width: 1000px;
       margin-left: auto;
@@ -79,7 +81,7 @@
             font-family: 'FreigSem';
             font-size: 18px;
             background-color: transparent;
-            padding: 8px 40px;
+            padding: 8px 30px;
             border: 1px solid white;
             border-radius: 4px; }
           .custom-popover #popover-login .popover-container .popover-button-involvment .decline button:hover {
@@ -97,8 +99,70 @@
             position: relative;
             bottom: 1px; }
     .custom-popover #popover-login .involvment-popover img {
-      display: inline; }
+      display: inline;
+      margin-right: 5px; }
     .custom-popover #popover-login .involvment-popover p {
       display: inline; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 736px) {
+  .custom-popover {
+    height: inherit;
+    bottom: 80px;
+    background-color: rgba(20, 20, 20, 0.6);
+    padding-bottom: 0; }
+    .custom-popover #popover-login {
+      position: relative;
+      text-align: center;
+      top: 20%;
+      padding: 0;
+      width: 300px;
+      margin: 0 auto; }
+      .custom-popover #popover-login .crossPopover {
+        display: inline-block;
+        float: right;
+        position: relative;
+        top: -80px; }
+        .custom-popover #popover-login .crossPopover img {
+          width: 16px; }
+      .custom-popover #popover-login .popover-container .popover-text {
+        text-align: left;
+        margin-left: 30px;
+        margin-bottom: 10px; }
+      .custom-popover #popover-login .popover-container .popover-button {
+        margin: 0 auto; } }
+@media only screen and (max-width: 375px) {
+  .custom-popover {
+    height: inherit;
+    bottom: 80px;
+    background-color: rgba(20, 20, 20, 0.6);
+    padding-bottom: 0; }
+    .custom-popover #popover-login {
+      position: relative;
+      text-align: center;
+      top: 16%;
+      padding: 0; }
+      .custom-popover #popover-login .popover-container .popover-button {
+        margin: 0 auto; } }
+@media only screen and (max-width: 320px) {
+  .custom-popover {
+    height: inherit;
+    bottom: 80px;
+    background-color: rgba(20, 20, 20, 0.6);
+    padding-bottom: 0; }
+    .custom-popover #popover-login {
+      position: relative;
+      text-align: center;
+      top: 20%;
+      padding: 0;
+      width: auto;
+      margin: 0; }
+      .custom-popover #popover-login .popover-container .popover-text {
+        margin-left: 15px;
+        margin-bottom: 10px; }
+        .custom-popover #popover-login .popover-container .popover-text p {
+          display: none; }
+      .custom-popover #popover-login .popover-container .popover-button {
+        margin: 0 auto; } }
 
 /*# sourceMappingURL=popover.css.map */

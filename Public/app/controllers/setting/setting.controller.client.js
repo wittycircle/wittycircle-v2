@@ -65,7 +65,7 @@ angular.module('wittyApp')
 
 	var id = $rootScope.globals.currentUser.id;
 	var Url = '/user/' + id;
-	var UrlC = Url + '/credentials'
+	var UrlC = Url + '/credentials';
 
 	/*** Update Profile ***/
 	var refresh = function () {
@@ -75,6 +75,7 @@ angular.module('wittyApp')
 			$scope.data.email 		= res.data.email;
 			$scope.data.username	= res.data.username;
 			$scope.password 	= res.data.password;
+			console.log(res);
 		});
 	}
 	refresh();
@@ -134,6 +135,7 @@ angular.module('wittyApp')
 	};
 
 	$scope.passwordUpdate = function() {
+		console.log("OK");
 		if (!$rootScope.globals.currentUser.password && $rootScope.globals.currentUser) {
 			var pass = {
 				email: $rootScope.globals.currentUser.email,
@@ -155,6 +157,7 @@ angular.module('wittyApp')
 
 			if (($scope.newPass.password === $scope.newPass.confirmPass) && $scope.newPass.password.length >= 8) {
 				$http.put(UrlC, pass).success(function(res){
+				    console.log(res);
 					if (res.success) {
 						$rootScope.globals.currentUser.password = $scope.newPass.password;
 						$scope.newPass.password 				= [];
@@ -183,7 +186,6 @@ angular.module('wittyApp')
 				password: $scope.newPass.password,
 				currentPass: $scope.newPass.currentPass
 			};
-
 			if (!$scope.newPass.currentPass)
 				$scope.checkCurrentPass = true;
 			else

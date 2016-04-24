@@ -1,10 +1,12 @@
 <div id="discover-body-page">
+	<div data-ng-include="'views/mobiles/discover-mobile-modal.view.client.html'"></div>
 	<div class="body-page">
 		<div class="home-video-bg">
 			<video poster="images/poster/poster_discover.jpg" loop muted autoplay>
-	    		<source src="https://res.cloudinary.com/dqpkpmrgk/video/upload/v1458582187/Share_banner_cover/videos_background/Discover.mp4" type="video/mp4">
+	    		<source src="videos/Discover.mp4" type="video/mp4">
 	  		</video>
 	  	</div>
+	  	<div class="discover-image-bg presentation-image-bg"></div>
 
 	  	<div class="discover-component presentation-component">
 	  		<div class="discover-title presentation-title">
@@ -12,14 +14,14 @@
 	  		</div>
 
 	  		<div class="discover-search1">
-	  			<div class="discover-search1-dropdown">
-	  				<div id="dsa" class="discover-search1-ap searchbox">
+	  			<div class="discover-search1-dropdown discover-search1-dropdown1-mobile">
+	  				<div id="dsa" class="discover-search1-ap searchbox" ng-click="opendmodal(1)">
 	  					<h2 id="dsa">{{cProject}}</h2>
 						<img id="dsa" src="/images/arrow-down-icon-w.svg">
 					</div>
 					<aside id="dsd" class="discover-search1-downbox1" style="display: none">
 						<ul>
-							<li ng-click="getProject('Idea', 1)">Idea</li>
+							<li ng-click="getProject('Idea', 1)">Ideas</li>
 							<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
 							<li ng-click="getProject('Beta project', 3)">Beta projects</li>
 							<li ng-click="getProject('Live project', 4)">Live projects</li>
@@ -30,7 +32,7 @@
 				<div class="discover-search1-text">
 					<h2>about</h2>
 				</div>
-				<div class="discover-search1-dropdown">
+				<div class="discover-search1-dropdown discover-search1-dropdown2-mobile" ng-click="opendmodal(2)">
 					<div id="dst" class="discover-search1-technology searchbox">
 						<h2 id="dst">{{ctgName}}</h2>
 						<img id="dst" src="/images/arrow-down-icon-w.svg">
@@ -46,8 +48,8 @@
 	  		<div class="discover-search2">
 	  			<div class="discover-search2-text">
 						<h2>looking for</h2>
-					</div>
-				<div class="discover-search2-dropdown">
+				</div>
+				<div class="discover-search2-dropdown" ng-click="opendmodal(3)">
 					<div id="dsa2" class="discover-search2-ah searchbox">
 						<h2 id="dsa2">{{cHelp}}</h2>
 						<img id="dsa2" src="/images/arrow-down-icon-w.svg">
@@ -98,11 +100,20 @@
 						</ul>
 					</aside>
 				</div>
-				<div class="discover-search2-text">
+				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox" ng-click="opendmodal(4)">
+					<h2 ng-if="!skillListM.length">Anything</h2>
+					<img ng-if="!skillListM.length" src="/images/arrow-down-icon-w.svg">
+					<div ng-if="skillListM[0]" class="discover-skillList">
+						<h2>
+							{{skillListM | sortSkill: skillListM}}
+						</h2>
+					</div>
+				</div>
+				<div class="bomobi discover-search2-text">
 					<h2>near</h2>
 				</div>
 				<div class="discover-search2-anylocation inputfield">
-					<input id="dsai" type="text" pre-dis-location="" types="['geocode']" placeholder="any location" ng-model="discoverLocation">
+					<input id="dsai" type="text" pre-dis-location="" types="['geocode']" placeholder="Any location" ng-model="discoverLocation">
 				</div>
 	  		</div>
 	  	</div>
@@ -111,7 +122,7 @@
 		<div id="hoho" class="loader" style="display: block"></div>
 		<div id="haha" class="discover-body-container presentation-body-container animated fadeIn">
 			<div class="discover-body-title presentation-body-title">
-				<h4>Browse <strong>the projects</strong> <span>below</span> or filter them using our magic tool above.</h4>
+				<h4>Browse <span>the projects below</span> or filter them using our magic tool above.</h4>
 			</div>
 			<div class="discover-body-list">
 				
@@ -124,7 +135,7 @@
 						</div>
 					</div>
 					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ encodeUrl(card.title) }}">
-						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url({{ resizePic(card.picture_card, 285, 180, 'fill') }})'}"></div>
+						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url(' + card.picture_card + ')'}"></div>
 						<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}"></div>
 						<div class="card-info">
 							<div class="card-title-space">
@@ -147,7 +158,7 @@
 							</div>
 							<div class="card-info-by">
 								<figure class="card-info-by-picture">
-									<img ng-src="{{ resizePic(card.pic, 30, 30, 'fill') }}" alt="card-foot-picture">
+									<img ng-src="{{ card.pic }}" alt="card-foot-picture">
 								</figure>
 								<h6>{{card.creator_user_name}}<h6 ng-if="card.usersIn.length">& {{card.usersIn.length}} more</h6></h6>
 							</div>
@@ -167,9 +178,20 @@
 			$(window).scrollTop(0);
 		}; setTimeout(function(){ initPage() }, 1000);
 
+		var x = $(window).width();
+		var val = {};
 		var scope = angular.element($("#discover-body-page")).scope();
 
-			var val = {};
+		$("#dsai").focus(function() {
+			if ($(this).val()) {
+				val.text = $(this).val();
+				val.width = Number($(this).width()) + 20;
+				$(this).val("");
+				$(this).css("width", "200px");
+			}
+		});
+
+		if (x > 736) {
 
 			$("#dsai").on('mouseover', function() {
 				if ($(this).val()) {
@@ -217,10 +239,12 @@
 					}
 				}
 			};
+		}
 
-			document.getElementById('discover-body-page').onclick = function(e) {
+		document.getElementById('discover-body-page').onclick = function(e) {
+			if (x > 736) {
 				/*** DownBox DOM ***/
-				if (e.target.id == 'dsa' && document.getElementById('dsd').style.display == "none") {
+				if (e.target.id === 'dsa' && document.getElementById('dsd').style.display === "none") {
 					document.getElementById('dsd').style.display = "block";
 					document.querySelectorAll("#dsa img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -230,7 +254,7 @@
 					}
 				}
 
-				if (e.target.id == 'dst' && document.getElementById('dsd2').style.display == "none") {
+				if (e.target.id === 'dst' && document.getElementById('dsd2').style.display === "none") {
 					document.getElementById('dsd2').style.display = "block";
 					document.querySelectorAll("#dst img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -240,7 +264,7 @@
 					}
 				}
 
-				if (e.target.id == 'dsa2' && document.getElementById('dsd3').style.display == "none") {
+				if (e.target.id === 'dsa2' && document.getElementById('dsd3').style.display === "none") {
 					document.getElementById('dsd3').style.display = "block";
 					document.querySelectorAll("#dsa2 img")[0].style.transform = "rotate(-180deg)";
 				} else {
@@ -266,7 +290,8 @@
 								document.getElementById('dComma').style.display = "none";
 					}
 				}
-			};
+			}
+		};
 
 		function changePlh() {
 			if (document.getElementById('labelText'))
@@ -306,9 +331,9 @@
 		};
 
 		function getSearchBox() {
-			var x = document.getElementById('input-dsa2').value;
+			var val = document.getElementById('input-dsa2').value;
 
-			if (x) {
+			if (val) {
 				if (document.getElementById('labelText')) {
 					document.getElementById('labelText').style.display = "none";
 					document.getElementById('labelText2').style.display = "none";

@@ -11,7 +11,7 @@ exports.createProjectOpening = function(req, res){
 
 	var errors = req.validationErrors(true);
 	if (errors) {
-            return res.status(400).send(errors);        
+            return res.status(400).send(errors);
 	} else {
             pool.query('INSERT INTO `project_openings` SET ?', req.body, function(err, result) {
 		if (err){
@@ -30,13 +30,21 @@ exports.getOpeningsOfProject = function(req, res) {
   if (errors) {
     return res.status(400).send(errors);
   } else {
-    pool.query("SELECT * FROM project_openings WHERE project_id = ?",
+    pool.query("SELECT * FROM project_openings WHERE project_id = (SELECT id FROM projects WHERE public_id = ?)",
     req.params.project_id,
     function (err, result) {
       if (err) {
         throw err;
       }
-      res.send(result);
+      function recursive (index) {
+          if (result[index]) {
+              result[index].taggs = JSON.parse(result[index].taggs);
+              recursive(index + 1);
+          } else {
+              return res.send(result);
+          }
+      }
+      recursive(0);
     });
   }
 };
@@ -51,8 +59,8 @@ exports.updateProjectOpening = function(req, res){
 	if (errors) {
 	    return res.status(400).send(errors);
 	} else {
-	    pool.query('UPDATE `project_openings` SET ? WHERE `id` = ' + req.params.id, 
-	    req.body, 
+	    pool.query('UPDATE `project_openings` SET ? WHERE `id` = ' + req.params.id,
+	    req.body,
 	    function(err, result) {
 		if (err) {
 		    throw err;

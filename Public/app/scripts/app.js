@@ -25,6 +25,7 @@ var wittyCircleApp = angular
       'angular-redactor',
       'oc.lazyLoad',
       '720kb.socialshare',
+      'slick',
       // Custom modules
       'wittyProjectModule',
       'wittyValidateAccountModule'

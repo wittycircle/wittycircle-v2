@@ -241,7 +241,7 @@
 						</div>
 					</div>
 
-					<div class="main-body2-body-mobile" data="projectCards" slick-slider-home media="(max-width: 736px)">
+					<div class="main-body2-body-mobile" data="projectCards" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
 
 						<div class="main-body2-card project-card" ng-repeat="projectCard in projectCards | limitTo: 3">
 							<div class="card-tag" ng-click="goToDiscover(projectCard.category_name)">
@@ -343,7 +343,7 @@
 						</div>
 					</div>
 
-					<div class="main-body3-body-mobile" data="cardProfiles" slick-slider-home media="(max-width: 736px)">
+					<div class="main-body3-body-mobile" data="cardProfiles" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in cardProfiles | limitTo: 4 track by $index">
 							<div class="card-click-zone" ng-click="goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">

@@ -118,14 +118,12 @@ $(document).ready(function() {
             // }]
         // });
 
-        // $('.main-body3-body-mobile').slick({
+        // $('.main-body3-card').slick({
         //     centerMode: true,
         //     centerPadding: '60px',
-        //     slidesToShow: 3,
         //     variableWidth: true,
         //     mobileFirst: true,
         //     dots: true,
-        //     nextArrow: "",
         //     speed: 100,
 
         //     responsive: [{

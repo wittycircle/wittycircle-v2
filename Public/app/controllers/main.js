@@ -310,35 +310,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
             scope.$watch('data', function(newVal, oldVal) {
                 if (newVal && newVal.length > 0 && !isInitialized) {
-                    $(element).slick({
-                        lazyLoad: 'progressive',
-                        dots: true, 
-                        speed: 300, 
-                        initialSlide: 0, 
-                        mobileFirst: true, 
-                        centerMode: true, 
-                        centerPadding: "60px", 
-                        variableWidth: true,
-                        swipeToSlide: true,
-                        responsive: [{
-                            breakpoint: 768,
-                            settings: {
-                                arrows: false,
-                                centerMode: true,
-                                centerPadding: '40px',
-                                slidesToShow: 3
-                            }
-                        },
-                        {
-                            breakpoint: 480,
-                            settings: {
-                                arrows: false,
-                                centerMode: true,
-                                centerPadding: '40px',
-                                slidesToShow: 1
-                            }
-                        }]
-                    });
+                    $(element).slick(scope.$eval(attrs.slickSliderHome));
 
                     isInitialized = true;
                 }

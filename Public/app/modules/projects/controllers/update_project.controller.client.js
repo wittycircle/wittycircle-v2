@@ -262,7 +262,6 @@ $scope.deleteVideo = function() {
 };
 
 $scope.savebasics = function(data, project_category, places_after, statechoose) {
-    console.log($scope.project.video_poster);
     data.picture_position = $scope.imagecoverposition;
     if ($scope.project_video && $scope.project_video !== null && typeof $scope.project_video != 'undefined') {
         data.main_video = $scope.project_video;

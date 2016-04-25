@@ -194,7 +194,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
                         $http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
                             if (res2.success) {
                                 $scope.init();
-                                $scope.reloadCredential();
+                                vm.reloadCredential();
                                 $scope.imageProfileLoading = false;
                             }
                         });

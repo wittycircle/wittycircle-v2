@@ -115,14 +115,17 @@
           #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2 img {
             width: auto;
             height: 200px; }
-        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text h4 {
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text h4,
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text-mobile h4 {
           font-family: 'FreigSem';
           font-size: 17px;
           color: #ff4d4d;
           cursor: pointer; }
-        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text h4:hover {
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text h4:hover,
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text-mobile h4:hover {
           color: #D94242; }
-        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text p {
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text p,
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text-mobile p {
           font-family: 'FreigBook';
           font-size: 16px;
           color: #999999; }
@@ -866,6 +869,13 @@
           margin-bottom: 20px; }
           #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text p {
             display: none; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-picture .spinner-load {
+            width: 149px;
+            height: 149px;
+            border-radius: 50%; }
+            #signup-page #signup-basic-body .signup-body-info .signup-info-picture .spinner-load .spinner-item {
+              width: 10px;
+              height: 10px; }
           #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2 {
             margin: 10px auto;
             height: 150px;

@@ -38,10 +38,10 @@
                     </vg-volume>
                     <vg-fullscreen-button></vg-fullscreen-button>
                 </vg-controls>
-
                 <vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
+                <vg-poster vg-url='config.plugins.poster'></vg-poster>
             </videogular>
-            <div ng-if="videoproject || project.main_video">
+            <div ng-if="videoproject || project.main_video" style="text-align:center; margin-top: 20px;">
                 <p class="text_delete" style="display: inline; margin-right: 20px;" data-ng-click="uploadPoster()">
                     Update video poster <i class="fa fa-picture-o"></i>
                 </p>

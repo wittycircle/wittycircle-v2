@@ -59,7 +59,6 @@ $(document).ready(function() {
                 // }
 
                 /*** ----- section meet ----- ***/
-                console.log(e.target.id);
                 if (e.target.id === 'msat' && document.getElementById('msdbox2').style.display === "none") {
                     document.getElementById('msdbox2').style.display = "block";
                     document.querySelectorAll("#msat img")[0].style.transform = "rotate(-180deg)";

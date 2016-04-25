@@ -337,10 +337,10 @@ angular.module('wittyApp')
 
 
 /*** Search Bar ***/
-  /* Dev API Key */
-  // var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
   /* Public API Key */
-  var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+      var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+  /* Dev API Key */
+  //    var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
   
   var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');
@@ -421,12 +421,10 @@ angular.module('wittyApp')
   };
 
   $scope.goToStart = function() {
-    unslickElem();
     $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
   };
 
   $scope.bfGoToStart = function() {
-    unslickElem();
     $(window).scrollTop(0);
     $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };

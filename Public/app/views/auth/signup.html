@@ -5,8 +5,8 @@
 	<section id="signup-basic-body">
 		<div class="signup-body-nav">
 			<ul>
-				<li class="sbnba"><strong>Basics</strong></li></a>
-				<li class="sbnab" ng-disabled="!canPass">About you</li></a>
+				<li class="sbnba"><strong>Basics</strong></li>
+				<li class="sbnab" ng-disabled="!canPass">About you</li>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin">Interests</li>
 				<li class="sbnex">Experience</li>
@@ -382,27 +382,9 @@
 			// 	$('#signup-experience-body').fadeOut();
 			// });
 
-			var aClassName 	= $('#signup-basic-body'),
-				bClassName	= $('#signup-about-body'),
-				cClassName  = $('#signup-skill-body'),
-				dClassName  = $('#signup-interest-body'),
-				eClassName 	= $('#signup-experience-body');
-
-			if (mobileSize > 736) {
-				var inRightBig 	= "animated fadeInRightBig",
-					inLeftBig 	= "animated fadeInLeftBig",
-					outRightBig = "animated fadeOutRightBig",
-					outLeftBig 	= "animated fadeOutLeftBig";
-			} else {
-				var inRightBig 	= "animated fadeInRight",
-					inLeftBig 	= "animated fadeInLeft",
-					outRightBig = "animated fadeOutRight",
-					outLeftBig 	= "animated fadeOutLeft";
-			}
-
-			                function myFunction() {
-                    return "Write something clever here...";
-                }
+			function myFunction() {
+                return "Write something clever here...";
+            }
 			$('#semcross').click(function() {
 				$('#signup-experience-modal').fadeOut();
 				$('#signup-experience-body').fadeIn();
@@ -431,15 +413,16 @@
 				if (container2.is(e.target) || container2.has(e.target).length || $('#sbdm').css('display') === "block")
 					$('#sbdm').slideToggle(300);
 				if (container3.is(e.target) || container3.has(e.target).length || $('#sbdy').css('display') === "block") {
-					if ($('#sbdy').css('display') === "block") {
-						var scrollIni = $('#sbdyu').offset().top;
-						$('#sbdy').animate({ scrollTop: scrollIni});
-					}
 					$('#sbdy').slideToggle(300);
-					if ($('#sbdy').css('display') === "block") {
-						var scrollTo = $('#sbdyu').offset().top + ($('#sbdyu').height() / 2);
-						$('#sbdy').animate({ scrollTop: scrollTo});
-					}
+					// if ($('#sbdy').css('display') === "block") {
+					// 	var scrollIni = $('#sbdyu').offset().top;
+					// 	$('#sbdy').animate({ scrollTop: scrollIni});
+					// }
+					// $('#sbdy').slideToggle(300);
+					// if ($('#sbdy').css('display') === "block") {
+					// 	var scrollTo = $('#sbdyu').offset().top + ($('#sbdyu').height() / 2);
+					// 	$('#sbdy').animate({ scrollTop: scrollTo});
+					// }
 				}
 
 
@@ -457,6 +440,24 @@
 					var b2 			= $('#bsk');
 					var b3 			= $('#bin');
 					var b4 			= $('#bex');
+
+					var aClassName 	= $('#signup-basic-body'),
+						bClassName	= $('#signup-about-body'),
+						cClassName  = $('#signup-skill-body'),
+						dClassName  = $('#signup-interest-body'),
+						eClassName 	= $('#signup-experience-body');
+
+					if (mobileSize > 736) {
+						var inRightBig 	= "animated fadeInRightBig",
+							inLeftBig 	= "animated fadeInLeftBig",
+							outRightBig = "animated fadeOutRightBig",
+							outLeftBig 	= "animated fadeOutLeftBig";
+					} else {
+						var inRightBig 	= "animated fadeInRight",
+							inLeftBig 	= "animated fadeInLeft",
+							outRightBig = "animated fadeOutRight",
+							outLeftBig 	= "animated fadeOutLeft";
+					}
 
 
 					if ($('#signup-basic-body').css('display') === "block") {
@@ -512,7 +513,6 @@
 							cDisplay.hide();
 						}, 200);
 					}
-
 					if (c0.is(e.target)) {
 						if (count > 0) {
 							aClassName.attr('class', inLeftBig);
@@ -631,13 +631,15 @@
 
 		});
 
-		function preventScroll() {
-			document.body.style.position = "fixed";
-			document.body.style.overflow = "scroll";
-		}
+		if (mobileSize > 736) {
+			function preventScroll() {
+				document.body.style.position = "fixed";
+				document.body.style.overflow = "scroll";
+			}
 
-		function allowScroll() {
-			document.body.style.position = "static";
+			function allowScroll() {
+				document.body.style.position = "static";
+			}
 		}
 	</script>
 

@@ -171,7 +171,8 @@
     border-radius: 4px;
     overflow: hidden; }
   #form-project-1 .project-card .card-picture {
-    height: 100px; }
+    height: 100px;
+    background-size: cover; }
   #form-project-1 .project-card .card-info .card-description-text {
     height: auto; }
   #form-project-1 .need_tags .tag_text {
@@ -427,7 +428,7 @@
     color: #222;
     font-size: 28px; }
   .container-custom-project .text_delete {
-    color: #ddd !important;
+    color: #bbb !important;
     margin-top: 5px;
     cursor: pointer;
     max-width: 80px;

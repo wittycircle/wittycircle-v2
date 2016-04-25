@@ -40,6 +40,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			// if (value === 3)
 			// 	$scope.mmobile.headerText = "Show me projects near...";
 			$scope.mmobile.general 	= true;
+		} else {
+			if (value === 2)
+				$('#msdbox2').toggle();
 		}
 	};
 

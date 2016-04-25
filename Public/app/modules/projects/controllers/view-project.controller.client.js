@@ -207,7 +207,6 @@
                     }
                     if (id !== currentUser.id) {
                         Users.getUserbyId(id, function (res) {
-			    console.log(res);
                             $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
                         });
                     }

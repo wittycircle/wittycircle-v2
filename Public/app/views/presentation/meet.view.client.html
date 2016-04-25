@@ -63,9 +63,9 @@
                     <div id="msat" class="meet-search1-dropdown" ng-click="openmmodal(2)">
 
                         <!-- DIV display title doit etre dans la div general-->
-                        <div class="meet-search-anything searchbox">
-                            <h2>{{mHelp}}</h2>
-                            <img src="/images/arrow-down-icon-w.svg">
+                        <div id="msat" class="meet-search-anything searchbox">
+                            <h2 id="msat" >{{mHelp}}</h2>
+                            <img id="msat" src="/images/arrow-down-icon-w.svg">
                         </div>
 
                         <!-- DIV dropdown  doit etre dans la div general en position absolute-->
@@ -151,6 +151,7 @@
         var val = {};
         var scope = angular.element($("#meet-body-page")).scope();
 
+
         $("#msai").focus(function() {
             if ($(this).val()) {
                 val.text = $(this).val();
@@ -159,8 +160,8 @@
                 $(this).css("width", "200px");
             }
         });
-
         if (x > 736) {
+
             $("#msai").on('mouseover', function() {
                 if ($(this).val()) {
                     val.text = $(this).val();
@@ -197,10 +198,10 @@
                         }
                     }
                 }
-            }
+            };
 
             /*** Skill DOM ***/
-            document.getElementById('main-body').onclick = function(e) {
+            document.getElementById('meet-body-page').onclick = function(e) {
                 if (scope.skillList.length > 0) {
                     if (e.target.id !== 'mslist' || e.target.id !== 'input-msa' || e.target.id !== 'msa' || e.target.id !== 'input-msa2') {
                         if (document.getElementById('input-msa')) {
@@ -212,10 +213,26 @@
 
                     }
                 }
-                if (e.target.id === "msat") {
-                    $('#msdbox2').toggle();   
+
+                /*** ----- section meet ----- ***/
+                if (e.target.id === 'msat' && document.getElementById('msdbox2').style.display === "none") {
+                    document.getElementById('msdbox2').style.display = "block";
+                    document.querySelectorAll("#msat img")[0].style.transform = "rotate(-180deg)";
+                } else {
+                    if (document.getElementById('msdbox2')) {
+                        document.getElementById('msdbox2').style.display = "none";
+                        document.querySelectorAll("#msat img")[0].style.transform = "rotate(0)";
+                    }
                 }
-            }
+
+                //*** add skill ***//
+                if ((e.target.id === 'input-msa2' || e.target.id === 'input-msa') && document.getElementById('msabox1').style.display === "none" && document.getElementById('msabox2').style.display === "none") {
+                    document.getElementById('msabox1').style.display = "block";
+                } else {
+                    if (document.getElementById('msabox1'))
+                        document.getElementById('msabox1').style.display = "none";
+                }
+            };
 
             function changePlh() {
                 if (document.getElementById('labelText'))
@@ -223,14 +240,14 @@
                     document.getElementById('labelText').style.display = "none";
                     document.getElementById('labelText2').style.display = "block";
                 }
-            }
+            };
 
             function normalPlh() {
                 if (document.getElementById('labelText')) {
                     document.getElementById('labelText').style.display = "block";
                     document.getElementById('labelText2').style.display = "none";
                 }
-            }
+            };
 
             function getDropdown() {
                 document.getElementById("input-msa").onmouseout = function() {changePlh()};
@@ -240,7 +257,7 @@
                     document.getElementById('labelText2').style.color = "#999999";
                 }
                 document.getElementById('input-msa').id = "input-msa2";
-            }
+            };
 
             function hideDropdown() {
                 document.getElementById('input-msa2').id = "input-msa";
@@ -252,7 +269,7 @@
                 document.getElementById("input-msa").onmouseout = function() {normalPlh()};
             // document.getElementById("input-msa").onmouseover = "changePlh()";
             // document.getElementById("input-msa").onmouseout = "normalPlh()";
-            }
+            };
 
             function getSearchBox() {
                 var value = document.getElementById('input-msa2').value;
@@ -273,8 +290,9 @@
                     document.getElementById('msabox2').style.display = "none";
                     document.getElementById('msabox1').style.display = "block";
                 }
-            }
+            };
         }
+
 </script>
 </div>
 <div data-ng-include="'views/bfooter/bfooter-3.view.client.html'"></div>

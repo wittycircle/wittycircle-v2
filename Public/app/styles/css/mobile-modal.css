@@ -270,17 +270,7 @@
         -moz-transform: translateZ(0);
         -ms-transform: translateZ(0);
         -o-transform: translateZ(0);
-        transform: translateZ(0);
-        -webkit-perspective: 1000;
-        -moz-perspective: 1000;
-        -ms-perspective: 1000;
-        -o-perspective: 1000;
-        perspective: 1000;
-        -webkit-backface-visibility: hidden;
-        -moz-backface-visibility: hidden;
-        -ms-backface-visibility: hidden;
-        -o-backface-visibility: hidden;
-        backface-visibility: hidden; }
+        transform: translateZ(0); }
         #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,
         #hnmobile .header-dropdown-lists .header-dropdown-list .header-list-picture {
           display: inline-block;
@@ -361,17 +351,7 @@
       -moz-transform: translateZ(0);
       -ms-transform: translateZ(0);
       -o-transform: translateZ(0);
-      transform: translateZ(0);
-      -webkit-perspective: 1000;
-      -moz-perspective: 1000;
-      -ms-perspective: 1000;
-      -o-perspective: 1000;
-      perspective: 1000;
-      -webkit-backface-visibility: hidden;
-      -moz-backface-visibility: hidden;
-      -ms-backface-visibility: hidden;
-      -o-backface-visibility: hidden;
-      backface-visibility: hidden; }
+      transform: translateZ(0); }
       #message-modal-mobile .new-messages-modal-mobile .new-messages-modal-header {
         float: right;
         padding: 10px 25px; }
@@ -569,17 +549,7 @@
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    -ms-perspective: 1000;
-    -o-perspective: 1000;
-    perspective: 1000;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden; }
+    transform: translateZ(0); }
 
   .left-to-right-message {
     right: -800px;
@@ -590,17 +560,7 @@
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-perspective: 1000;
-    -moz-perspective: 1000;
-    -ms-perspective: 1000;
-    -o-perspective: 1000;
-    perspective: 1000;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden; } }
+    transform: translateZ(0); } }
 @media only screen and (max-width: 667px) {
   #hmmobile .header-dropdown-lists .header-noMessage-text .header-list-picture,
   #hmmobile .header-dropdown-lists .header-dropdown-list .header-list-picture,

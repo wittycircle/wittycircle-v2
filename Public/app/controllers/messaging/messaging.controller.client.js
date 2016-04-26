@@ -75,7 +75,7 @@
 			 				$scope.showMessage(redirectParams);
 			 				redirectParams = null;
 			 			}
-			 			scrollDownMessage();
+			 			$scope.scrollDownMessage();
 			 		}
 			 	});
 			} else {
@@ -92,7 +92,7 @@
 			 				$scope.showMessage(redirectParams);
 			 				redirectParams = null;
 			 			}
-			 			scrollDownMessage();
+			 			$scope.scrollDownMessage();
 			 		}
 			 	});
 			}

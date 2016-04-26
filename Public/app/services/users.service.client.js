@@ -28,7 +28,7 @@
           service.count                 = count;
           service.sendNumber            = sendNumber;
           service.getUserIdByProfileId  = getUserIdByProfileId;
-	  service.updateUser            = updateUser;
+          service.updateUser            = updateUser;
           service.getProfileByUserId    = getProfileByUserId;
           service.getProfilesByProfileId= getProfilesByProfileId;
 

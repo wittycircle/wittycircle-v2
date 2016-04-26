@@ -421,12 +421,10 @@ angular.module('wittyApp')
   };
 
   $scope.goToStart = function() {
-    unslickElem();
     $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
   };
 
   $scope.bfGoToStart = function() {
-    unslickElem();
     $(window).scrollTop(0);
     $state.go('main', {tagStart: true}, {reload: true, notify: true});
   };

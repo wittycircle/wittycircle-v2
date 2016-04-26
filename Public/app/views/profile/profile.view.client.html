@@ -8,7 +8,7 @@
 	<div ng-if="canUploadCover && randomCover" class="profile-cover-first">
 		<p>Your profile can look awesome</p>
 		<div class="profile-cover-text">
-			<a ngf-select="uploadProfileCover(coverProfile)" ng-model="coverProfile"><i class="fa fa-camera"></i> Update cover picture</a>
+			<a ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile"><i class="fa fa-camera"></i> Update cover picture</a>
 		</div>
 	</div>
 	<div class="profile-contents">
@@ -19,7 +19,7 @@
 					<div class="spinner__item2 spinner-item"></div>
 					<div class="spinner__item3 spinner-item"></div>
 				</div>
-				<div ng-if="!imageProfileLoading && canUpload" id="pupe" class="profile-update-picture" ngf-drop="uploadProfilePicture(imagecoveruploaded)" ngf-select="uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded"
+				<div ng-if="!imageProfileLoading && canUpload" id="pupe" class="profile-update-picture" ngf-drop="vm.uploadProfilePicture(imagecoveruploaded)" ngf-select="vm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded"
 			            ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 			            accept="image/*"
 			            ngf-pattern="'image/*'">
@@ -90,7 +90,7 @@
 			</div>
 		</div>
 
-		<div id="puc" ng-if="canUploadCover && !randomCover && !imageCoverLoading" class="profile-upload-cover" ngf-select="uploadProfileCover(coverProfile)" ng-model="coverProfile">
+		<div id="puc" ng-if="canUploadCover && !randomCover && !imageCoverLoading" class="profile-upload-cover" ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
 			<i class="fa fa-camera"></i> <p>Update Cover Picture</p>
 		</div>
 
@@ -150,12 +150,12 @@
 </section>
 
 <div id="pmephotos" class="profile-mobile-edit-photos" ng-if="vm.trueUser">
-	<div class="profile-mobile-edit-cover" ngf-select="uploadProfileCover(coverProfile)" ng-model="coverProfile">
+	<div class="profile-mobile-edit-cover" ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
 		Change your cover picture
 	</div>
 
 	<hr />
-	<div class="profile-mobile-edit-profile" ng-if="!imageProfileLoading && canUpload" id="pupe" ngf-select="uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
+	<div class="profile-mobile-edit-profile" ng-if="!imageProfileLoading && canUpload" id="pupe" ngf-select="vm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
             accept="image/*"
             ngf-pattern="'image/*'">
 		Upload a new profile photo

@@ -56,7 +56,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     var arrayYears = [];
     function getSchedule() {
       for (var i = 0; i < 117; i++)
-        arrayYears.push(1900 + i);
+        arrayYears.push(2016 - i);
       for (var n = 1; n < 32; n++)
         arrayDays.push(n);
       $scope.days   = arrayDays;

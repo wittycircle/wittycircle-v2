@@ -150,7 +150,8 @@
 					}
 				}
 
-				.signup-dd-text {
+				.signup-dd-text,
+				.signup-dd-text-mobile {
 					h4 {
 						font-family: 'FreigSem';
 						font-size: 17px;
@@ -1231,6 +1232,17 @@
 					.signup-dd-text {
 						p {
 							display: none;
+						}
+					}
+
+					.spinner-load {
+						width: 149px;
+						height: 149px;
+						border-radius: 50%;
+
+						.spinner-item {
+							width: 10px;
+							height: 10px;
 						}
 					}
 

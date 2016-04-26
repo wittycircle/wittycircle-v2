@@ -20,7 +20,6 @@
           service.getProfiles           = getProfiles;
           service.getUserbyId           = getUserbyId;
           service.getUserbyIdUnresolved = getUserbyIdUnresolved;
-          service.getCardProfiles       = getCardProfiles;
           service.getProfileView        = getProfileView;
           service.getLastMessage        = getLastMessage;
           service.shareIdMessage        = shareIdMessage;
@@ -117,11 +116,6 @@
               return defer.promise;
           };
 
-          function getCardProfiles(callback) {
-            $http.get('/user/card/profiles').success(function(res) {
-              callback(res);
-            });
-          };
           function getProfileView(username) {
             $http.put('/profiles/view/' + username);
           };

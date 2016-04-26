@@ -24,7 +24,6 @@ var wittyCircleApp = angular
       'angular-redactor',
       'oc.lazyLoad',
       '720kb.socialshare',
-      'slick',
       // Custom modules
       'wittyProjectModule',
       'wittyValidateAccountModule'
@@ -43,6 +42,7 @@ var wittyCircleApp = angular
         params      : { tagParams: '',},
         templateUrl : 'views/presentation/discover.view.client.html',
         controller  : 'DiscoverCtrl',
+        controllerAs: 'discover',
         // css: '../styles/presentation.css'
     })
     .state('meet', {

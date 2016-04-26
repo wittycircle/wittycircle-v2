@@ -7,10 +7,9 @@
 * # MainCtrl
 * Controller of the wittyApp
 **/
-angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'Categories', 'showbottomAlert', 
-    function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, Categories, showbottomAlert) {
+angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData',
+    function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData) {
 
-        console.log("OK");
         console.time('Time to load Home Page : ')
         var main    = this,
             n       = 0;
@@ -81,10 +80,9 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         /***** DESKTOP *****/
 
         /*** All Requests On Load ***/
-        Authentication.getCredentialsSocial();
+        // Authentication.getCredentialsSocial();
 
-        Data_project.getProjects('/projects', 'GET').then(function(response) {
-            console.log(response);
+        RetrieveData.getData('/projects', 'GET').then(function(response) {
             main.projectCards     = response;
             main.cardsDisplays    = response.slice(0, 9);
             main.cardInfos        = response;
@@ -98,7 +96,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
             $timeout(hello, 400);
         });
 
-        Users.getCardProfiles(function(result){
+        RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
             main.cardProfiles = result.data;
             if (main.currentUser) {
                 Profile.getFollowedUser(result.data, function(res){
@@ -107,7 +105,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
             }
         });
 
-        Categories.getCategories(function (response) {
+        RetrieveData.getData('/categories', 'GET').then(function(response) {
             main.categories = response;
             main.ctgName    = response[0];
         });

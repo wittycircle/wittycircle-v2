@@ -323,6 +323,7 @@ exports.getUserFollowBy = function(req, res, callback) {
 };
 
 exports.getListFollowedUser = function(req, res) {
+	console.log(req.body.list);
     if (req.body.success && req.body.data[0] && req.body.list[0]) {
         var checkFollow = {};
         var count;

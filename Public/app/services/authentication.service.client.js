@@ -106,12 +106,8 @@
 
         // get credential after log with facebook 
         function getCredentialsSocial() {
-            $http({
-                method: 'GET',
-                url: '/profile'
-            }).then( function(response, status, headers, config) {
-                if (response.data)
-                    SetCredentialsSocial(res.user, res.user_info);
+	    return $http.get('/profile').success(function(res){
+                Authentication.SetCredentialsSocial(res.user, res.user_info);
             });
         };
 

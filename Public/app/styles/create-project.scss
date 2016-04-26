@@ -954,7 +954,11 @@ $blue: #416299;
   z-index: 0;
 
   .text-upload-video {
-  padding-top: 30px;
+    position: absolute;
+    top: 0;
+    width: inherit;
+    padding-top: 60px;
+
   	h5 {
 	   color: $red;
 	   font-family: 'FreigSem';
@@ -1066,7 +1070,6 @@ $blue: #416299;
     width: 300px;
     height: 180px;
     text-align: center;
-    padding-top: 25px;
     margin-left: auto;
     margin-right: auto;
     -webkit-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -2117,7 +2120,7 @@ div + .no-items-founds {
   }
 
   .modal-question-project {
-    padding: 30px 40px 10px 40px;
+    padding: 10px 40px 20px 40px;
   }
 
   input {

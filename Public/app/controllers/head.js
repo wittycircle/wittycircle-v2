@@ -21,8 +21,13 @@ angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png"
 	};
 
-	if ($(window).width() <= 736)
+	if (window.innerWidth <= 736) {
 		$scope.mobile = true;
-	else
+		$scope.viewportVal = "width=device-width,height=device-height,user-scalable=no,initial-scale=1.0";
+	} else {
 		$scope.mobile = false;
+		$scope.viewportVal = "width=device-width";
+	}
+
+	
 });

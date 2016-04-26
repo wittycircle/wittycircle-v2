@@ -15,6 +15,7 @@
         service.ClearCredentials = ClearCredentials;
         service.ResetPassword = ResetPassword;
         service.ResetPasswordTokenValidation = ResetPasswordTokenValidation;
+        service.getCredentialsSocial = getCredentialsSocial;
 
         return service;
 
@@ -102,6 +103,18 @@
                 //$http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
                 $cookieStore.put('globals', $rootScope.globals);
         }
+
+        // get credential after log with facebook 
+        function getCredentialsSocial() {
+            $http({
+                method: 'GET',
+                url: '/profile'
+            }).then( function(response, status, headers, config) {
+                if (response.data)
+                    SetCredentialsSocial(res.user, res.user_info);
+            });
+        };
+
 
         function ClearCredentials(callback) {
             $rootScope.globals = {};

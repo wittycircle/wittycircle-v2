@@ -1,21 +1,21 @@
-<section id="mainmmodal" ng-if="mamobile.general" class="animated fadeIn">
+<section id="mainmmodal" ng-if="main.mamobile.general" class="animated fadeIn">
 	<header class="presentation-mobile-modal-header">
-			<h5>{{mamobile.headerText}}</h5>
-			<img src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()" ng-cloak/>
+			<h5>{{main.mamobile.headerText}}</h5>
+			<img src="/images/cross-icon.svg" alt="close-cross" ng-click="main.closemmodal()" ng-cloak/>
 	</header>
-	<div id="mainmodal" class="discover-mobile-search1 d-mobile-search" ng-if="mamobile.modal === 1">
+	<div id="mainmodal" class="discover-mobile-search1 d-mobile-search" ng-if="main.mamobile.modal === 1">
 		<ul>
-			<li ng-click="getProject('Ideas', 1)">Ideas</li>
-			<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
-			<li ng-click="getProject('Beta project', 3)">Beta projects</li>
-			<li ng-click="getProject('Live project', 4)">Live projects</li>
-			<li ng-click="getProject('all', 5)">All projects</li>
+			<li ng-click="main.getProject('Ideas', 1)">Ideas</li>
+			<li ng-click="main.getProject('Drafted project', 2)">Drafted projects</li>
+			<li ng-click="main.getProject('Beta project', 3)">Beta projects</li>
+			<li ng-click="main.getProject('Live project', 4)">Live projects</li>
+			<li ng-click="main.getProject('all', 5)">All projects</li>
 		</ul>
 	</div>
 
-	<div id="mainmodal" class="discover-mobile-search2 d-mobile-search" ng-if="mamobile.modal === 2">
+	<div id="mainmodal" class="discover-mobile-search2 d-mobile-search" ng-if="main.mamobile.modal === 2">
 		<ul>
-			<li ng-repeat="category in categories" ng-click="getCategory(category)">{{category.name}}</li>
+			<li ng-repeat="category in main.categories" ng-click="main.getCategory(category)">{{category.name}}</li>
 		</ul>
 	</div>
 

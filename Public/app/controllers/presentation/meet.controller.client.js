@@ -9,7 +9,7 @@
  **/
 
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData) {
 
 
 	/*** Meet Card Page ***/
@@ -52,7 +52,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		$scope.mmobile.general 	= false;
 	}
 
-	Users.getCardProfiles(function(result){
+	RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
 		$scope.cardProfiles = result.data;
 		if ($rootScope.globals.currentUser) {
 			Profile.getFollowedUser(result.data, function(res){

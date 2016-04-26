@@ -27,7 +27,7 @@
 		}
 		$scope.onlineUser = $stateParams.userOn;
 
-	 	function scrollDownMessage() {
+	 	$scope.scrollDownMessage = function() {
 	 		setTimeout(function() {
 				var h = document.getElementById('mcb');
 			    if (h !== null)
@@ -41,7 +41,7 @@
 	 	$scope.keyPress = function(keycode, username, nameuser) {
 	 		if (keycode == 13) {
 	 			$scope.socket(username, nameuser);
-	 			scrollDownMessage();
+	 			$scope.scrollDownMessage();
 	 		}
 	 	};
 
@@ -75,7 +75,7 @@
 			 				$scope.showMessage(redirectParams);
 			 				redirectParams = null;
 			 			}
-			 			scrollDownMessage();
+			 			$scope.scrollDownMessage();
 			 		}
 			 	});
 			} else {
@@ -92,7 +92,7 @@
 			 				$scope.showMessage(redirectParams);
 			 				redirectParams = null;
 			 			}
-			 			scrollDownMessage();
+			 			$scope.scrollDownMessage();
 			 		}
 			 	});
 			}

@@ -59,7 +59,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         /*** All Home Functions (Mobile) ***/
         function openmamodal(value) {
 
-            if (main.ww <= 736) {
+            if (main.ww < 736) {
                 $('body').css('overflow-y', 'hidden');
                 main.mamobile.modal  = value;
                 if (value === 1)
@@ -190,13 +190,13 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         };
 
         function getProject(pName) {
-            if (main.ww <= 736)
+            if (main.ww < 736)
                 main.closemmodal();
             main.statusProject = pName;
         };
 
         function getCategory(cName) {
-            if (main.ww <= 736)
+            if (main.ww < 736)
                 main.closemmodal();
             main.ctgName = cName;
         };

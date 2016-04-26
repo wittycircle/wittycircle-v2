@@ -397,7 +397,7 @@
 
 		$(document).ready(function() { 
 
-		    if (x > 736) {
+		    if (x >= 736) {
 		        var y,
 		            mbdown  = $('#mbdown'),
 		            mbbox   = $('#mbbox'),
@@ -543,7 +543,7 @@
 		    }
 		});
 
-		if (x > 736) {
+		if (x >= 736) {
 		    function changeInputWidth() {
 		        $("#mptitle").css('width', function() {
 		            var el = $('<span />', {

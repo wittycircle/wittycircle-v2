@@ -46,3 +46,23 @@ exports.convertDate = function(date, callback) { // convert default format date 
     else if (gPY >= 2)                  {d = Math.floor(gPY) + " years ago"; callback (d);}
     else                                {d = date; callback(d);}
 };
+
+exports.getSchedule = function(req, res) {
+    var arrayDays                 = [],
+        arrayMonths                = [],
+        arrayYears                = [];
+
+    function recursive(index) {
+        if (index < 117) {
+            arrayYears.push(2016 - index);
+            if (index >= 1 && index < 32) {
+                arrayDays.push(index);
+            }
+            recursive(index + 1);
+        } else {
+            arrayMonths = [{Pap: "January", Num: "01"}, {Pap: "February", Num: "02"}, {Pap: "March", Num: "03"}, {Pap: "April", Num: "04"}, {Pap: "May", Num: "05"}, {Pap: "June", Num: "06"}, {Pap: "July", Num: "07"}, {Pap: "August", Num: "08"}, {Pap: "September", Num: "09"}, {Pap: "October", Num: "10"}, {Pap: "November", Num: "11"}, {Pap: "December", Num: "12"}];
+            res.send({years: arrayYears, months: arrayMonths, days: arrayDays});
+        }
+
+    }; recursive(0);
+};

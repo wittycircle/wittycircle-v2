@@ -94,6 +94,7 @@ exports.checkFollowProject = function(req, res) {
 };
 
 exports.getFollowUser = function(req, res) {
+	console.log(req.params);
     req.checkParams('username', 'username must be a string of characters.').isString().min(1).max(128);
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);

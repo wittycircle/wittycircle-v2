@@ -1,15 +1,12 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name wittyApp.controller:InterestsModalCtrl
- * @description
- * # InterestsModalCtrl
- * Controller of the wittyApp
- */
-angular.module('wittyApp').controller('InterestsModalCtrl', function ($modalInstance, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Skills, Interests) {
+angular.module('wittyApp').controller('InterestsModalCtrl', function ($modalInstance, $http, $scope, RetrieveData) {
 
     $scope.saveText     = "Save";
+
+    RetrieveData.getData('/interests', 'GET').then(function(res) {
+        $scope.cInterests = res.interests;
+    });
     
     $scope.getInterest 	= function(interest) {
     	var object 		= {
@@ -18,16 +15,16 @@ angular.module('wittyApp').controller('InterestsModalCtrl', function ($modalInst
     	};
 
     	$http.post('/interests/add', object).success(function(res) {
-        	if (res.success)
-        		$scope.getProfileInterest();
+        	if (res.success) {
+        		$scope.profileVm.getProfileInterest();
+            }
         }); 
     };
 
     $scope.removeInterest = function(index) {
-    	console.log(index);
     	$http.delete('/interest/delete/' + index.interest_id).success(function(res) {
         	if (res.success)
-          		$scope.getProfileInterest();
+          		$scope.profileVm.getProfileInterest();
       	});
     };
 

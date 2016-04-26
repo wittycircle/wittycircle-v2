@@ -78,6 +78,10 @@ app.get('/auth/google/callback',
 // 	    failureRedirect : 'http://localhost'
 // 	}));
 
+/* Schedule */
+var schedule = require('./dateConvert');
+app.get('/schedule', schedule.getSchedule);
+
 /* View */
 var view = require('./controllers/view');
 // app.get('/view', ensureAuth, view.getView);

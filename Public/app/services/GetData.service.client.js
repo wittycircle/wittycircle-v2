@@ -20,6 +20,7 @@
 
             var data = $http({
                 method: method,
+                cache: true,
                 url: url
             }).then( function(response, status, headers, config) {
                 deferred.resolve(response.data);
@@ -31,16 +32,17 @@
 
         function ppdData(url, method, data, param) {
             var deferred = $q.defer();
+            var httpRequest = {};
 
-            var data = $http({
+            httpRequest.method      = method;
+            httpRequest.url         = url;
+            httpRequest.cache       = true;
+            if (data)
+                httpRequest.data    = data;
+            if (param)
+               httpRequest.url += param;
 
-                method  : method,
-                url     : url,
-                data    : data,
-                param   : param,
-
-            }).then( function(response, status, headers, config) {
-
+            var data = $http(httpRequest).then( function(response, status, headers, config) {
                 deferred.resolve(response.data);
                 return deferred.promise;
             });

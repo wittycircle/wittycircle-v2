@@ -80,7 +80,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         /***** DESKTOP *****/
 
         /*** All Requests On Load ***/
-	$http.get('/profile').success(function(res){
+        $http.get('/profile').success(function(res){
             Authentication.SetCredentialsSocial(res.user, res.user_info);
         });
 

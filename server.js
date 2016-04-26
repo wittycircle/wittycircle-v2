@@ -22,7 +22,8 @@ var express		= require('express')
 , ensureAuth		= require('./controllers/auth').ensureAuthenticated
 , mandrill		= require('mandrill-api/mandrill')
 , mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA')
-, algoliaClient	= require('./algo/algolia').algoliaClient;
+, algoliaClient	= require('./algo/algolia').algoliaClient
+, compression = require('compression');
 var httpsOption		= {
     key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
     cert: fs.readFileSync('./ssl_key/secure_key/2_www.wittycircle.com.crt'),
@@ -35,6 +36,7 @@ require('./passport')(passport);
 app.use(cookieParser());
 app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
+app.use(compression())
 
 app.use(session({
     store: new RedisStore({ host: '127.0.0.1', port: 80, client: client, ttl: 86400000}),
@@ -53,12 +55,12 @@ cloudinary.config({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(__dirname + '/Public/'));
+//app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/dist/styles/'));
 //app.use(express.static(__dirname + '/Public/dist/scripts/'));
-//app.use(express.static(__dirname + '/Public/dist/'));
+app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
-app.use(express.static(__dirname + '/Public/app/styles/css'));
+//app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 

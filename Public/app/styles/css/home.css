@@ -646,6 +646,11 @@ overflow: hidden;
     -o-transform: translateZ(0);
     transform: translateZ(0); } }
 @media only screen and (max-width: 736px) {
+  .slick-dots {
+    bottom: -50px; }
+    .slick-dots li button:before {
+      font-size: 10px; }
+
   /* Main video background to Main image background */
   .home-video-bg {
     display: none; }
@@ -762,10 +767,6 @@ overflow: hidden;
     #main-body2-content .main-body2-container .main-body2-contents .main-body2-body-mobile {
       display: block;
       margin-bottom: 80px; }
-      #main-body2-content .main-body2-container .main-body2-contents .main-body2-body-mobile .slick-dots {
-        bottom: -50px; }
-        #main-body2-content .main-body2-container .main-body2-contents .main-body2-body-mobile .slick-dots li button:before {
-          font-size: 10px; }
       #main-body2-content .main-body2-container .main-body2-contents .main-body2-body-mobile .main-body2-card {
         width: 280px;
         margin: 0 10px;

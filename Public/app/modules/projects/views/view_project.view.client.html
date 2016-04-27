@@ -83,6 +83,9 @@
 
 	<div ui-view>
 		<div class="project-post-container">
+			<div ng-if="!vm.project.post && !vm.config.sources" class="project-post-nodetail">
+				<h2>No more details yet.</h2>
+			</div>
 			<div class="project-post-video">
 				<videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">
 					<vg-media vg-src="vm.config.sources" class="animated fadeIn">

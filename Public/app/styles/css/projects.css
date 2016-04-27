@@ -250,6 +250,11 @@
   font-size: 36px;
   font-weight: 200; }
 
+.project-post-nodetail h2 {
+  padding: 30px 0 170px 0;
+  font-family: "FreigBook";
+  color: #999999; }
+
 .project-post-container {
   text-align: center;
   padding: 40px 0px; }

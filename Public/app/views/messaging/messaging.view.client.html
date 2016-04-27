@@ -73,7 +73,7 @@
 					<h1>Messages</h1>
 				</div>
 				<div id="mhn" class="messages-header-new" ng-click="getListUser()">
-					<a id="mhn"><img src="/images/write-icon.svg">New message</a>
+					<a><img id="mhnImg" src="/images/write-icon.svg">New message</a>
 				</div>
 			</div>
 		</header>
@@ -191,18 +191,55 @@
 			</div>
 		</section>
 	</section>
-	<script>
+</div>
 
-		var x = $(window).width();
+<div id="messages-body-page-mobile" ng-if="mobile">
 
-		if (x > 736) {
-			/*** MODAL ***/
-			$('#mhn').on('mouseover', function() {
-				$('#mhn').find('a').children().attr('src', '/images/write-icon-b.svg');
-			});
+	<section id="messages-body-list-mobile">
+		<div id="mslm" class="messages-search-list-mobile">
+			<input type="search" placeholder="Search users or messages" ng-model="searchContact" />
+			<div id="nmmobile" class="new-messages-mobile">
+				<img src="/images/write-icon-g.svg" alt="new message">
+			</div>
+			<div class="new-messages-home" ng-click="showHomeMobile()"><i class="fa fa-home" aria-hidden="true"></i></div>
+		</div>
 
-			$('#mhn').on('mouseleave', function() {
-				$('#mhn').find('a').children().attr('src', '/images/write-icon.svg');
+		<div id="messlist" class="messages-convers-list-mobile">
+			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
+
+				<div class="messages-list-picture">
+					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
+				</div>
+
+				<div class="messages-list-object">
+					<div class="messages-list-user">
+						<i ng-if="onlineUser[dialogue.to_username]" class="online-icon"></i>
+						<i ng-if="!onlineUser[dialogue.to_username]" class="offline-icon"></i>
+						<h4>{{dialogue.to_username}}</h4>
+					</div>
+					<div class="messages-list-text">
+						<p>{{dialogue.last_message}}</p>
+					</div>
+					<span>{{dialogue.date}}</span>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</div>
+<script>
+	var x = $(window).width();
+
+		if (x >= 736) {
+			$(document).ready(function() {
+				/*** MODAL ***/
+				$('#mhn').on('mouseover', function() {
+					document.getElementById('mhnImg').src = "/images/write-icon-b.svg";
+				});
+
+				$('#mhn').on('mouseleave', function() {
+					$('#mhnImg').attr('src', '/images/write-icon.svg');
+				});
 			});
 
 			function showUserList() {
@@ -239,49 +276,8 @@
 				document.getElementById('messages-modal-searchArea').style.display = "none";
 				document.getElementById('messages-modal-newMessageArea').style.display = "block";
 			}
-		}
-	</script>
-</div>
-
-<div id="messages-body-page-mobile" ng-if="mobile">
-
-	<section id="messages-body-list-mobile">
-		<div id="mslm" class="messages-search-list-mobile">
-			<input type="search" placeholder="Search users or messages" ng-model="searchContact" />
-			<div id="nmmobile" class="new-messages-mobile">
-				<img src="/images/write-icon-g.svg" alt="new message">
-			</div>
-			<div class="new-messages-home" ng-click="showHomeMobile()"><i class="fa fa-home" aria-hidden="true"></i></div>
-		</div>
-
-		<div id="messlist" class="messages-convers-list-mobile">
-			<div class="messages-list" ng-class="{ 'actives' : tab === dialogue.id, 'unread-active' : !dialogue.read && dialogue.sender !== currentUsername }" ng-repeat="dialogue in dialogues | filter: searchContact " ng-click="showMessage(dialogue)">
-
-				<div class="messages-list-picture">
-					<img ng-src="{{ dialogue.pic }}" alt="profile-picture">
-				</div>
-
-				<div class="messages-list-object">
-					<div class="messages-list-user">
-						<i ng-if="onlineUser[dialogue.to_username]" class="online-icon"></i>
-						<i ng-if="!onlineUser[dialogue.to_username]" class="offline-icon"></i>
-						<h4>{{dialogue.to_username}}</h4>
-					</div>
-					<div class="messages-list-text">
-						<p>{{dialogue.last_message}}</p>
-					</div>
-					<span>{{dialogue.date}}</span>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<script>
-
-		var x = $(window).width();
-
-		if (x <= 736) {
+		} else {
+			
 			$('#headerCore').hide();
 			$('#footerCore').hide();
 
@@ -317,6 +313,4 @@
 				// });
 			});
 		}
-
-	</script>
-</div>
+</script>

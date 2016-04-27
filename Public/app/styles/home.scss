@@ -893,6 +893,15 @@ a:hover {
 
 @media only screen and (max-width: 736px) {
 
+	.slick-dots {
+		bottom: -50px;
+		li {
+			button:before {
+				font-size: 10px;
+			}
+		}
+	}
+
 	/* Main video background to Main image background */
 	.home-video-bg {
 		display: none;
@@ -1072,14 +1081,7 @@ a:hover {
 				.main-body2-body-mobile {
 					display: block;
 					margin-bottom: 80px;
-					.slick-dots {
-						bottom: -50px;
-						li {
-							button:before {
-								font-size: 10px;
-							}
-						}
-					}
+
 					.main-body2-card {
 						width: 280px;
 						margin: 0 10px;

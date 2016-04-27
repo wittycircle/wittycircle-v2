@@ -245,7 +245,7 @@
 						</div>
 					</div>
 
-					<div class="main-body2-body-mobile" data="main.projectCards" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
+					<slick class="main-body2-body-mobile" init-onload=true data="main.projectCards" media="screen and (max-width: 735px)">
 
 						<div class="main-body2-card project-card" ng-repeat="projectCard in main.projectCards | limitTo: 3">
 							<div class="card-tag" ng-click="main.goToDiscover(projectCard.category_name)">
@@ -288,7 +288,7 @@
 								</div>
 							</a>
 						</div>
-					</div>
+					</slick>
 
 					<div class="main-body2-seemore">
 						<a href="/discover">See more projects</a>
@@ -347,13 +347,11 @@
 						</div>
 					</div>
 
-					<div class="main-body3-body-mobile" data="main.cardProfiles" slick-slider-home='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "60px", variableWidth: true,}' media="(max-width: 736px)">
+					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles | limitTo: 4 track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
-									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
 									<div class="card-profile-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60) }})'}">
-										<!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
 									</div>
 								</div>
 								<div class="card-info">
@@ -383,7 +381,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</slick>
 
 					<div class="main-body3-seemore">
 						<a href="/meet">Find more users around you</a>
@@ -481,17 +479,15 @@
 		            }
 		        });
 
-		        //** Main slide carousel
-		        // $('.main-body2-body-mobile').slick({
-		        //     centerMode: true,
-		        //     centerPadding: '60px',
-		        //     slidesToShow: 3,
-		        //     variableWidth: true,
-		        //     mobileFirst: true,
-		        //     dots: true,
-		        //     nextArrow: "",
-		        //     swipeToSlide: true,
-		        //     speed: 100,
+		        /** Main slide carousel **/
+		        // $('.main-body2-card').slick({
+		            
+		            // variableWidth: true,
+		            // mobileFirst: true,
+		            // dots: true,
+		            // nextArrow: "",
+		            // swipeToSlide: true,
+		            // speed: 100,
 
 		            // responsive: [{
 		            //     breakpoint: 768,

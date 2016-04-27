@@ -203,7 +203,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
 
         function savedata($event) {
             if (!main.currentUser) {
-                showbottomAlert.pop_it();
+                showbottomAlert.pop_it($event);
             }
             else {
                 var data          = {},
@@ -298,26 +298,113 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
 console.timeEnd('Time to load Home Page : ')
 
 }])
-.directive('slickSliderHome', function () {
+.directive('slick', [
+  '$timeout',
+  function ($timeout) {
     return {
-        restrict: 'A',         
-        scope: {
-            'data': '='
-        },
-        replace: true,
-        link: function (scope, element, attrs) {
-            var isInitialized = false;
+      restrict: 'AEC',
+      scope: {
+        initOnload: '@',
+        data: '=',
+      },
+      link: function (scope, element, attrs) {
+        var destroySlick, initializeSlick, isInitialized;
+        destroySlick = function () {
+          return $timeout(function () {
+            var slider;
+            slider = $(element);
+            slider.unslick();
+            slider.find('.slick-list').remove();
+            return slider;
+          });
+        };
 
-            scope.$watch('data', function(newVal, oldVal) {
-                if (newVal && newVal.length > 0 && !isInitialized) {
-                    $(element).slick(scope.$eval(attrs.slickSliderHome));
+        console.log(scope.variableWidth);
+        initializeSlick = function () {
+          return $timeout(function () {
+            var currentIndex, customPaging, slider;
+            slider = $(element);
+            if (scope.currentIndex != null) {
+              currentIndex = scope.currentIndex;
+            }
+            customPaging = function (slick, index) {
+              return scope.customPaging({
+                slick: slick,
+                index: index
+              });
+            };
+            slider.slick({
+                centerMode: true,
+                variableWidth: true,
+                mobileFirst: true,
+                dots: true,
+                nextArrow: "",
+                swipeToSlide: true,
+                speed: 200,
 
-                    isInitialized = true;
-                }
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 1
+                    }
+                }]
             });
+            slider.on('init', function (sl) {
+              if (attrs.onInit) {
+                scope.onInit();
+              }
+              if (currentIndex != null) {
+                return sl.slideHandler(currentIndex);
+              }
+            });
+            slider.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+              if (scope.onAfterChange) {
+                scope.onAfterChange();
+              }
+              if (currentIndex != null) {
+                return scope.$apply(function () {
+                  currentIndex = currentSlide;
+                  return scope.currentIndex = currentSlide;
+                });
+              }
+            });
+            return scope.$watch('currentIndex', function (newVal, oldVal) {
+              if (currentIndex != null && newVal != null && newVal !== currentIndex) {
+                return slider.slick('slickGoTo', newVal);
+              }
+            });
+          });
+        };
+        if (scope.initOnload) {
+          isInitialized = false;
+          return scope.$watch('data', function (newVal, oldVal) {
+            if (newVal != null) {
+              if (isInitialized) {
+                destroySlick();
+              }
+              initializeSlick();
+              return isInitialized = true;
+            }
+          });
+        } else {
+          return initializeSlick();
         }
-    }
-})
+      }
+    };
+  }
+])
 .directive('googlePlace', function() {
     return {
         require: 'ngModel',

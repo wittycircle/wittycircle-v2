@@ -384,7 +384,7 @@
 
 
 		/*** All watch variable ***/
-		$scope.$watch('cards', function(value) {
+		$scope.$watch('discover.cards', function(value) {
 			if (value)
 				value.length > 6 ? discover.allowExpand = true : discover.allowExpand = false;
 		});

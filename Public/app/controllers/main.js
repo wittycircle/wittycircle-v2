@@ -1,250 +1,6 @@
 'use strict';
 
 /**
-<<<<<<< HEAD
- * @ngdoc function
- * @name wittyApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the wittyApp
- **/
-angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, Categories, showbottomAlert) {
-
-  // if ($rootScope.globals.currentUser) {
-    $http.get('/profile').success(function(res){
-      Authentication.SetCredentialsSocial(res.user, res.user_info);
-    });
-  // }
-
-  $scope.followed = {};
-  $scope.cardLoop = {};
-
-  Users.getCardProfiles(function(result){
-    $scope.cardProfiles = result.data;
-    if ($rootScope.globals.currentUser) {
-      Profile.getFollowedUser(result.data, function(res){
-        $scope.followed = res;
-      });
-    }
-  });
-
-  $scope.isstartclicked = false;
-  $scope.tog = 2;
-  $scope.statusprefix = "a";
-  $scope.statusProject = "Idea";
-  $scope.strings = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'All projects'];
-  //$scope.projectcategory = ['Arts', 'Crafts', 'Design', 'Fashion', 'Film & video', 'Food', 'Games'];
-  Categories.getCategories(function (response) {
-    $scope.categories = response;
-    $scope.ctgName    = response[0];
-  })
-
-  $scope.$watch('statusProject', function() {
-    if ($scope.statusProject == 'Idea') {
-      $scope.statusprefix = 'an'
-    } else {
-      $scope.statusprefix= 'a';
-    }
-  });
-
-  /*** MOBILE ***/
-  var ww = $(window).width();
-  $scope.mamobile = {};
-  $scope.openmamodal = function(value) {
-
-    if (ww <= 736) {
-      $('body').css('overflow-y', 'hidden');
-      $scope.mamobile.modal  = value;
-      if (value === 1)
-        $scope.mamobile.headerText = "Show me...";
-      if (value === 2)
-        $scope.mamobile.headerText = "Show me projects about...";
-      $scope.mamobile.general  = true;
-      console.log($scope.mamobile.general);
-    }
-  };
-
-  $scope.closemmodal = function() {
-    $('#mainmmodal').css("display", "none");
-    $('body').css('overflow-y', 'scroll');
-    $scope.mamobile.general  = false;
-  }
-
-  /************ SECTION SUFFLER *************/
-  var cardInfos = {};
-  var n = 0;
-  function getLocation(city, country, state) {
-    if (!state && !country)
-      $scope.shufflerLocation = city;
-    if (state)
-      $scope.shufflerLocation = city + ', ' + state;
-    if (!state)
-      $scope.shufflerLocation = city + ', ' + country;
-  };
-
-  $http.get('/projects').success(function (response) {
-    $scope.projectCards     = response;
-    $scope.cardsDisplays    = response.slice(0, 9);
-    cardInfos               = response;
-    $scope.cardInfo         = response[0];
-    if (response[0])
-      getLocation(response[0].location_city, response[0].location_country, response[0].location_state);
-
-    function hello() {
-      $('#mbcardList_0').fadeIn();
-    };
-    $timeout(hello, 400);
-  });
-
-  function loop() {
-    n++;
-    var idNameP = "#mbcardList_" + (n - 1).toString();
-    if (n === 10)
-      var idName = "#mbcardList_0";
-    else
-      var idName  = "#mbcardList_" + n.toString();
-    $(idNameP).fadeOut(800);
-    $scope.cardInfo = cardInfos[n];
-    if (cardInfos[n])
-      getLocation(cardInfos[n].location_city, cardInfos[n].location_country, cardInfos[n].location_state);
-    $(idName).fadeIn(600);
-    if (n === 10)
-      n = 0;
-  };
-
-  var myInterval = $interval(loop, 4000);
-
-  $scope.stopInterval = function() {
-    $interval.cancel(myInterval);
-  };
-
-  $scope.getShuffleProject = function(pName, cCtg) {
-    $interval.cancel(myInterval);
-    if (!$scope.shuffleCag)
-      $scope.shuffleCag = cCtg;
-    if (pName === "All projects")
-      $scope.shuffleStatus = "project";
-    else
-      $scope.shuffleStatus = pName;
-    $('#mbcardList_0').fadeIn();
-  };
-
-  $scope.getShuffleCag = function(cName, cStatus) {
-    $interval.cancel(myInterval);
-    $scope.shuffleCag = cName;
-    if (!$scope.shuffleStatus)
-      $scope.shuffleStatus = cStatus + " project";
-    $('#mbcardList_0').fadeIn();
-  };
-
-  $scope.$on("$destroy", function(){
-    $interval.cancel(myInterval);
-  });
-
-  $scope.encodeUrl = function(url) {
-    url = Beauty_encode.encodeUrl(url);
-    return url;
-  };
-
-  $scope.stopInterval = function() {
-    $interval.cancel(myInterval);
-  };
-
-  $scope.goforstarter = function() {
-    document.getElementById('main-discover').className = "animated fadeOutLeftBig";
-    document.getElementById('main-start-project').className = "animated fadeInRightBig";
-    $scope.isstartclicked = true;
-  };
-
-  if ($stateParams.tagStart) {
-    $scope.goforstarter();
-  }
-
-  $scope.backtocta = function () {
-    document.getElementById('main-discover').className = "animated fadeInLeftBig";
-    document.getElementById('main-start-project').className = "animated fadeOutRightBig";
-    $timeout(function(){$scope.isstartclicked = false}, 100);
-    //$scope.isstartclicked = false;
-  };
-
-  $scope.getProject = function(pName) {
-    if (ww <= 736)
-        $scope.closemmodal();
-    $scope.statusProject = pName;
-  };
-
-  $scope.getCategory = function(cName) {
-    if (ww <= 736)
-        $scope.closemmodal();
-    $scope.ctgName = cName;
-  };
-
-  $scope.savedata = function ($event) {
-    if (!$rootScope.globals.currentUser) {
-
-    }
-    else {
-      var data          = {};
-      var errorMessage  = "";
-
-
-      if ($scope.selectedlocation) {
-        var location              = $scope.selectedlocation.split(",");
-        var location_city         = location[0];
-        var location_country      = location[1].trim();
-        data.location_city        = location_city;
-        data.location_country     = location_country;
-      }
-
-
-      data.status                 = $scope.statusProject;
-      data.category_id            = $scope.ctgName.id;
-      data.title                  = $scope.selectedname;
-      data.public_id              = Public_id.createPublicId();
-      data.creator_user_name      = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
-      data.project_visibility     = 1;
-      if ($rootScope.globals.currentUser.profile_picture) {
-        data.creator_user_picture = $rootScope.globals.currentUser.profile_picture;
-      }
-      data.category_name = get_CategoryName.get_Name(data.category_id, function(response) {
-        data.category_name = response;
-        Projects.createProject(data, function(response) {
-          if (response.serverStatus == 2) {
-            Data_project.setProjectId(response.insertId);
-            $location.path('/create-project/basics');
-          }
-          else {
-            errorMessage = response;
-            console.log(console.errorMessage);
-          }
-        });
-      });
-    }
-  };
-
-  $scope.goToProfile = function(id) {
-    Users.getUserIdByProfileId(id).then(function(data) {
-      $location.path('/' + data.userId.username);
-    });
-  };
-
-  $scope.goToDiscover = function(category) {
-    $state.go('discover', {tagParams: category});
-  };
-
-  $scope.followUserFromCard = function(id, index, $event) {
-    if (!$rootScope.globals.currentUser) {
-      showbottomAlert.pop_it();
-    } else {
-      Users.getUserIdByProfileId(id).then(function(data) {
-        if ($rootScope.globals.currentUser.id !== data.userId.id) {
-          Profile.followUser(data.userId.username, function(res) {
-            if (res.success) {
-              if (res.msg === "User followed")
-                $scope.followed[index] = true;
-              else
-                $scope.followed[index] = false;
-=======
 * @ngdoc function
 * @name wittyApp.controller:MainCtrl
 * @description
@@ -312,7 +68,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
                     main.mamobile.headerText = "Show me projects about...";
                 main.mamobile.general  = true;
                 console.log(main.mamobile.general);
->>>>>>> aebf9b82f399980e5c60853905fc95c38bf5b178
             }
         };
 
@@ -543,26 +298,113 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
 console.timeEnd('Time to load Home Page : ')
 
 }])
-.directive('slickSliderHome', function () {
+.directive('slick', [
+  '$timeout',
+  function ($timeout) {
     return {
-        restrict: 'A',
-        scope: {
-            'data': '='
-        },
-        replace: true,
-        link: function (scope, element, attrs) {
-            var isInitialized = false;
+      restrict: 'AEC',
+      scope: {
+        initOnload: '@',
+        data: '=',
+      },
+      link: function (scope, element, attrs) {
+        var destroySlick, initializeSlick, isInitialized;
+        destroySlick = function () {
+          return $timeout(function () {
+            var slider;
+            slider = $(element);
+            slider.unslick();
+            slider.find('.slick-list').remove();
+            return slider;
+          });
+        };
 
-            scope.$watch('data', function(newVal, oldVal) {
-                if (newVal && newVal.length > 0 && !isInitialized) {
-                    $(element).slick(scope.$eval(attrs.slickSliderHome));
+        console.log(scope.variableWidth);
+        initializeSlick = function () {
+          return $timeout(function () {
+            var currentIndex, customPaging, slider;
+            slider = $(element);
+            if (scope.currentIndex != null) {
+              currentIndex = scope.currentIndex;
+            }
+            customPaging = function (slick, index) {
+              return scope.customPaging({
+                slick: slick,
+                index: index
+              });
+            };
+            slider.slick({
+                centerMode: true,
+                variableWidth: true,
+                mobileFirst: true,
+                dots: true,
+                nextArrow: "",
+                swipeToSlide: true,
+                speed: 200,
 
-                    isInitialized = true;
-                }
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 1
+                    }
+                }]
             });
+            slider.on('init', function (sl) {
+              if (attrs.onInit) {
+                scope.onInit();
+              }
+              if (currentIndex != null) {
+                return sl.slideHandler(currentIndex);
+              }
+            });
+            slider.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+              if (scope.onAfterChange) {
+                scope.onAfterChange();
+              }
+              if (currentIndex != null) {
+                return scope.$apply(function () {
+                  currentIndex = currentSlide;
+                  return scope.currentIndex = currentSlide;
+                });
+              }
+            });
+            return scope.$watch('currentIndex', function (newVal, oldVal) {
+              if (currentIndex != null && newVal != null && newVal !== currentIndex) {
+                return slider.slick('slickGoTo', newVal);
+              }
+            });
+          });
+        };
+        if (scope.initOnload) {
+          isInitialized = false;
+          return scope.$watch('data', function (newVal, oldVal) {
+            if (newVal != null) {
+              if (isInitialized) {
+                destroySlick();
+              }
+              initializeSlick();
+              return isInitialized = true;
+            }
+          });
+        } else {
+          return initializeSlick();
         }
-    }
-})
+      }
+    };
+  }
+])
 .directive('googlePlace', function() {
     return {
         require: 'ngModel',

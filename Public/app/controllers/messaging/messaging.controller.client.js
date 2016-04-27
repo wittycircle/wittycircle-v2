@@ -114,7 +114,6 @@
 
 		 		$http.get('/messages/' + dialogue.id).success(function(res){
 		 			if (res.success) {
-		 				console.log(res);
 		 				var last 							= res.messages[res.messages.length - 1];
 		 				$scope.$parent.messages				= res.messages;
 		 				$scope.$parent.name 				= res.name.first_name;

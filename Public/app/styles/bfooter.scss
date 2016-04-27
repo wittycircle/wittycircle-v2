@@ -28,7 +28,7 @@
 }
 
 .bf-info {
-	background-image: url('/images/backgrounds/background-footer1.jpg');
+	background-image: url('/images/backgrounds/background-footer1-desktop.jpg');
 	background-position: center center;
 	background-size: cover;
 	padding: 70px 0;
@@ -115,7 +115,7 @@
 /********* Before Footer Meet 3**********/
 
 .bf3-info {
-	background-image: url('/images/backgrounds/background-footer3.jpg');
+	background-image: url('/images/backgrounds/background-footer3-desktop.jpg');
 	background-position: center center;
 	background-size: cover;
 	padding: 39px 0px;
@@ -226,10 +226,13 @@
 /* Exception media query width */
 
 @media only screen and (max-width: 955px) {
+	.bf-info {
+		background-image: none;
+	}
 	#bfooter-1 {
 		.bf-filter {
 			position: absolute;
-			background-image: url('/images/backgrounds/background-footer1.jpg');
+			background-image: url('/images/backgrounds/background-footer1-mobile.jpg');
 			background-position: center center;
 			background-size: cover;
 			background-color: none;
@@ -293,6 +296,7 @@
 		}
 
 		.bf2-info {
+			background-image: none;
 			padding: 40px 0;
 		}
 
@@ -315,9 +319,13 @@
 	#bfooter-3 {
 		height: 220px;
 
+		.bf3-info {
+			background-image: none;
+		}
+
 		.bf3-filter {
 			position: absolute;
-			background-image: url('/images/backgrounds/background-footer3.jpg');
+			background-image: url('/images/backgrounds/background-footer3-mobile.jpg');
 			background-position: center center;
 			background-size: cover;
 			background-color: none;
@@ -364,10 +372,14 @@
 }
 
 @media only screen and (max-width: 635px) {
+	.bf1-info {
+		background-image: none;
+	}
+
 	#bfooter-1 {
 		.bf-filter {
 			position: absolute;
-			background-image: url('/images/backgrounds/background-footer1.jpg');
+			background-image: url('/images/backgrounds/background-footer1-mobile.jpg');
 			background-position: center center;
 			background-size: cover;
 			background-color: none;

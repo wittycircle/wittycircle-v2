@@ -113,6 +113,7 @@
 								<ul>
 									<li ng-click="main.getShuffleProject('Idea', main.cardInfo.category_name)" >Idea</li>
 									<li ng-click="main.getShuffleProject('Drafted projects', main.cardInfo.category_name)" >Drafted projects</li>
+									<li ng-click="main.getShuffleProject('Beta projects', main.cardInfo.category_name)" >Beta projects</li>
 									<li ng-click="main.getShuffleProject('Live projects', main.cardInfo.category_name)" >Live projects</li>
 									<li ng-click="main.getShuffleProject('All projects', main.cardInfo.category_name)" >All projects</li>
 								</ul>
@@ -129,7 +130,7 @@
 							</div>
 							<aside id="mbbox2" class="main-body-downBox2" style="display: none">
 								<ul>
-									<li ng-repeat="category in main.categories" ng-click="main.getmain.shuffleCag(category.name, main.cardInfo.status)">{{category.name}}</li>
+									<li ng-repeat="category in main.categories" ng-click="main.getShuffleCag(category.name, main.cardInfo.status)">{{category.name}}</li>
 								</ul>
 							</aside>
 						</div>

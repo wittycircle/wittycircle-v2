@@ -615,7 +615,7 @@
 
   .discover-image-bg {
     height: 480px;
-    background-image: url("/images/bg_mobile/bg_discover_mobile.jp2");
+    background-image: url("/images/bg_mobile/bg_discover_mobile.jpg");
     background-size: cover;
     background-position: center center;
     -webkit-filter: brightness(0.6);
@@ -641,7 +641,7 @@
 
   .meet-image-bg {
     height: 480px;
-    background-image: url("/images/bg_mobile/bg_meet_mobile.jp2");
+    background-image: url("/images/bg_mobile/bg_meet_mobile.jpg");
     background-size: cover;
     background-position: center center;
     -webkit-filter: brightness(0.7);

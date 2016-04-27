@@ -24,7 +24,6 @@ var wittyCircleApp = angular
       'angular-redactor',
       'oc.lazyLoad',
       '720kb.socialshare',
-      'slick',
       // Custom modules
       'wittyProjectModule',
       'wittyValidateAccountModule'
@@ -52,6 +51,7 @@ var wittyCircleApp = angular
         params      : { tagParams: '',},
         templateUrl : 'views/presentation/discover.view.client.html',
         controller  : 'DiscoverCtrl',
+        controllerAs: 'discover',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
@@ -204,7 +204,7 @@ var wittyCircleApp = angular
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
-        controllerAs: 'vm',
+        controllerAs: 'profileVm',
         // css: '../styles/profiles.css',
         resolve:{
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -260,10 +260,10 @@ var wittyCircleApp = angular
 
         redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
         redactorOptions.plugins = ['imagemanager'];
+		redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
         /*
         **End Redactor configuration
         */
-
 
         //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
         $locationProvider.html5Mode(true);

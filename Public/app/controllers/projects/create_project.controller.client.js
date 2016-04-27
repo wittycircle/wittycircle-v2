@@ -351,6 +351,15 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
 
   };
 
+  $scope.uploadPoster = function () {
+          $scope.modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/projects/create/modal/upload_poster.client.html',
+          controller: 'UploadPosterCtrl',
+          scope: $scope
+      });
+  }
+
   $scope.deleteVideo = function() {
     var data = {};
 

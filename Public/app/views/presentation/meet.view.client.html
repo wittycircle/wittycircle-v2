@@ -41,7 +41,7 @@
                         </aside>
                         <aside id="msabox2" class="meet-search1-downbox1 downbox" style="display: none">
                             <ul>
-                                <li ng-click="meet.searchSkill(skillS.name)" ng-repeat="skillS in meet.skills | filter: meet.skillName | limitTo: 5">{{skillS.name}}</li>
+                                <li ng-click="meet.searchSkill(skillS.name)" ng-repeat="skillS in meet.skills | wordsFilter: meet.skillName | limitTo: 5">{{skillS.name}}</li>
                                 <span ng-show="(meet.skills | filter: meet.skillName).length === 0">No skill found...</span>
                             </ul>
                         </aside>

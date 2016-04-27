@@ -7,11 +7,15 @@
  * # SkillsModalCtrl
  * Controller of the wittyApp
  */
-angular.module('wittyApp').controller('SkillsModalCtrl', function ($modalInstance, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Skills, Interests) {
+angular.module('wittyApp').controller('SkillsModalCtrl', function ($modalInstance, $http, $scope) {
 
     /*** Skills ***/
 
     $scope.saveText     = "Save";
+
+    $http.get('/skills').success(function(res) {
+        $scope.cSkills              = res.skills;
+    });
 
     $scope.getSkill     = function(skill) {
       var object = {
@@ -20,14 +24,14 @@ angular.module('wittyApp').controller('SkillsModalCtrl', function ($modalInstanc
       };
       $http.post('/skills/add', object).success(function(res) {
         if (res.success)
-          $scope.getProfileSkill();
+          $scope.profileVm.getProfileSkill();
       });
     };
 
     $scope.removeSkill  = function(index) {
       $http.delete('/skills/delete/' + index.skill_id).success(function(res) {
         if (res.success)
-          $scope.getProfileSkill();
+          $scope.profileVm.getProfileSkill();
       });
     };
 

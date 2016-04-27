@@ -9,7 +9,7 @@
 			<h4>What are you skilled in?</h4>
 		</div>
 		<div class="profile-skill-select sss">
-			<li ng-repeat="profileSkill in profileSkills track by $index">
+			<li ng-repeat="profileSkill in profileVm.profileSkills track by $index">
 				<h4>{{profileSkill.skill_name}} <i class="fa fa-times" ng-click="removeSkill(profileSkill)"></i></h4>
 			</li>
 		</div>

@@ -3,6 +3,7 @@
 angular.module('wittyApp').controller('UploadPosterCtrl', function ($scope, $rootScope, $state, $http, $modalInstance, Projects, $timeout, Upload) {
 
   $scope.up = false;
+  $scope.poster = false;
 
   $scope.dismiss = function () {
     $modalInstance.dismiss();
@@ -30,6 +31,7 @@ angular.module('wittyApp').controller('UploadPosterCtrl', function ($scope, $roo
 	  var data = {};
 	  data.poster = $scope.poster;
 	  $http.post('/project/video/poster/' + $scope.project.public_id, data).success(function (res) {
+	      $scope.config.plugins.poster = $scope.poster;
 	        $timeout(function() {
 		$scope.dismiss();
             }, 500);

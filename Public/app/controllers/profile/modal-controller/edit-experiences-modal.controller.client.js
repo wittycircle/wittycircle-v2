@@ -8,7 +8,20 @@
 * Controller of the wittyApp
 **/
 
-angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($modalInstance, $filter, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Skills, Interests, Locations, indexId) {
+angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($modalInstance, $filter, $http, $scope, Locations, indexId, RetrieveData) {
+
+	$scope.startMonth           = "Month";
+	$scope.startYear            = "Year";
+	$scope.endMonth             = "Month";
+	$scope.endYear              = "Year";
+	$scope.startPeriod          = {};
+	$scope.endPeriod            = {};
+
+	RetrieveData.getData('/Schedule', 'GET').then(function(res) {
+		$scope.days                 = res.days;
+		$scope.months               = res.months;
+		$scope.years                = res.years;
+	});
 
 	$scope.getStartMonth        = function(month) {
       $scope.startPeriod.month  = month;
@@ -108,7 +121,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 
 		$http.put('/experience/' + $scope.getIndex, position).success(function(res) {
 			if (res.success) {
-				$scope.getProfileExp();
+				$scope.profileVm.getProfileExp();
 				$modalInstance.dismiss();
 			}
 		});

@@ -11,275 +11,277 @@
  angular.module('wittyApp')
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
- 	var socket = io.connect('http://127.0.0.1');
- 	var x = $(window).width();
+ 	if ($rootScope.globals.currentUser) {
+	 	var socket = io.connect('https://www.wittycircle.com');
+	 	var x = $(window).width();
 
- 	/* Function vm */
+	 	/* Function vm */
 
-	if ($rootScope.globals.currentUser) {
- 	    $scope.my_id = $rootScope.globals.currentUser.id;
- 	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
+		if ($rootScope.globals.currentUser) {
+	 	    $scope.my_id = $rootScope.globals.currentUser.id;
+	 	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
 
-	    /***   DATA ***/
-            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
-            $scope.currentUsername = $rootScope.globals.currentUser.username;
-	}
-	$scope.onlineUser = $stateParams.userOn;
-
- 	function scrollDownMessage() {
- 		setTimeout(function() {
-			var h = document.getElementById('mcb');
-		    if (h !== null)
-		    {
-			h.scrollTop = h.scrollHeight;
-		    }
-		}, 500);
- 	};
-
- 	/***	EVENT	***/	
- 	$scope.keyPress = function(keycode, username, nameuser) {
- 		if (keycode == 13) {
- 			$scope.socket(username, nameuser);
- 			scrollDownMessage();
- 		}
- 	};
-
- 	socket.emit('register', $scope.userOnlineName);
-
- 	socket.on('userOnline', function(data){
- 	 	$scope.onlineUser = data;
- 	 	// io.getUserOnline(data);
- 	 	$scope.refreshDialogue();
- 	});
-
- 	// $scope.$on("$destroy", function(){ 
- 	// 	socket.emit('disconnect', $scope.userOnlineName);
- 	// 	socket.close();
- 	// });
-
- 	var i = 0;
- 	var redirectParams = $stateParams.input;
- 	$scope.refreshDialogue = function(check) { // main function to retrieve all $parent.dialogues within last information
- 		if (x <= 736) {
-	 	 	$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
-		 		if (res.success) {
-		 			Users.count();
-		 			$scope.$parent.dialogues = res.topic;
-		 			if ((i === 0 && $scope.$parent.dialogues[0]) || check) {
-
-		 				$scope.showMessage($scope.$parent.dialogues[0]);
-		 				i = 1;
-		 			}
-		 			if (redirectParams) {
-		 				$scope.showMessage(redirectParams);
-		 				redirectParams = null;
-		 			}
-		 			scrollDownMessage();
-		 		}
-		 	});
-		} else {
-			$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
-		 		if (res.success) {
-		 			Users.count();
-		 			$scope.dialogues = res.topic;
-		 			if ((i === 0 && $scope.dialogues[0]) || check) {
-
-		 				$scope.showMessage($scope.dialogues[0]);
-		 				i = 1;
-		 			}
-		 			if (redirectParams) {
-		 				$scope.showMessage(redirectParams);
-		 				redirectParams = null;
-		 			}
-		 			scrollDownMessage();
-		 		}
-		 	});
+		    /***   DATA ***/
+	            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
+	            $scope.currentUsername = $rootScope.globals.currentUser.username;
 		}
-	};
-	$scope.refreshDialogue();
+		$scope.onlineUser = $stateParams.userOn;
 
- 	$scope.showMessage = function(dialogue) { // show all messages between current user and client
- 		if (x <= 736) {
-	 		$scope.tab = dialogue.id;
+	 	$scope.scrollDownMessage = function() {
+	 		setTimeout(function() {
+				var h = document.getElementById('mcb');
+			    if (h !== null)
+			    {
+				h.scrollTop = h.scrollHeight;
+			    }
+			}, 500);
+	 	};
 
-	 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
-	 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
-	 				if (res.success) {
-	 					Users.count();
-	 					$scope.refreshDialogue();
-	 				}
-	 			});
+	 	/***	EVENT	***/	
+	 	$scope.keyPress = function(keycode, username, nameuser) {
+	 		if (keycode == 13) {
+	 			$scope.socket(username, nameuser);
+	 			$scope.scrollDownMessage();
 	 		}
+	 	};
 
-	 		$http.get('/messages/' + dialogue.id).success(function(res){
-	 			if (res.success) {
-	 				console.log(res);
-	 				var last 							= res.messages[res.messages.length - 1];
-	 				$scope.$parent.messages				= res.messages;
-	 				$scope.$parent.name 				= res.name.first_name;
-	 				$scope.$parent.username 			= res.name.first_name + ' ' + res.name.last_name;
-	 				$scope.$parent.nameuser 			= res.name.username,
-	 				$scope.$parent.profile_my_picture 	= res.picture.my_picture;
-	 				$scope.$parent.profile_user_picture = res.picture.user_picture;
-	 				$scope.$parent.c 					= 0;
-	 				$scope.$parent.show 				= true;
-	 			}
-	 			$scope.$parent.offMessages = [];
-	 		});
-	 	} else {
-	 		$scope.tab = dialogue.id;
+	 	socket.emit('register', $scope.userOnlineName);
 
-	 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
-	 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
-	 				if (res.success) {
-	 					Users.count();
-	 					$scope.refreshDialogue();
-	 				}
-	 			});
-	 		}
+	 	socket.on('userOnline', function(data){
+	 	 	$scope.onlineUser = data;
+	 	 	// io.getUserOnline(data);
+	 	 	$scope.refreshDialogue();
+	 	});
 
-	 		$http.get('/messages/' + dialogue.id).success(function(res){
-	 			if (res.success) {
-	 				var last 							= res.messages[res.messages.length - 1];
-	 				$scope.messages				= res.messages;
-	 				$scope.name 				= res.name.first_name;
-	 				$scope.username 			= res.name.first_name + ' ' + res.name.last_name;
-	 				$scope.nameuser 			= res.name.username,
-	 				$scope.profile_my_picture 	= res.picture.my_picture;
-	 				$scope.profile_user_picture = res.picture.user_picture;
-	 				$scope.c 					= 0;
-	 				$scope.show 				= true;
-	 			}
-	 			$scope.offMessages = [];
-	 		});
-	 	}
- 	};
+	 	// $scope.$on("$destroy", function(){ 
+	 	// 	socket.emit('disconnect', $scope.userOnlineName);
+	 	// 	socket.close();
+	 	// });
 
- 	$scope.showHomeMobile = function() {
- 		window.location.href = "http://localhost";
- 	};
+	 	var i = 0;
+	 	var redirectParams = $stateParams.input;
+	 	$scope.refreshDialogue = function(check) { // main function to retrieve all $parent.dialogues within last information
+	 		if (x <= 736) {
+		 	 	$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
+			 		if (res.success) {
+			 			Users.count();
+			 			$scope.$parent.dialogues = res.topic;
+			 			if ((i === 0 && $scope.$parent.dialogues[0]) || check) {
 
- 	$rootScope.$watch('dialogueMM', function(value) {
- 		if(value)
- 			$scope.showMessage(value);
- 	});
+			 				$scope.showMessage($scope.$parent.dialogues[0]);
+			 				i = 1;
+			 			}
+			 			if (redirectParams) {
+			 				$scope.showMessage(redirectParams);
+			 				redirectParams = null;
+			 			}
+			 			$scope.scrollDownMessage();
+			 		}
+			 	});
+			} else {
+				$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
+			 		if (res.success) {
+			 			Users.count();
+			 			$scope.dialogues = res.topic;
+			 			if ((i === 0 && $scope.dialogues[0]) || check) {
 
- 	$scope.deleteMessage = function() {
- 		$http.put('/messages', $scope.messages).success(function(res) {
- 			$scope.refreshDialogue();
- 			$state.reload();
- 		});
- 	};
-
- 	/***   MODAL   ***/
- 	Users.getUsers().then(function (resource) {
-		$scope.profiles = resource;
-	});
-
-	$scope.getListUser = function() {
-		$http.post('/profileId/' + $rootScope.globals.currentUser.id).success(function(res) {
-			$scope.checkId = res.content.profile_id;
-		});
-	}
-
-	$scope.searchArea = function(profile, user_id, username) { // modal new message
-		$scope.newMessageArea = {
-			first_name: profile.first_name,
-			last_name: profile.last_name,
+			 				$scope.showMessage($scope.dialogues[0]);
+			 				i = 1;
+			 			}
+			 			if (redirectParams) {
+			 				$scope.showMessage(redirectParams);
+			 				redirectParams = null;
+			 			}
+			 			$scope.scrollDownMessage();
+			 		}
+			 	});
+			}
 		};
-		$scope.createName = profile.first_name + ' ' + profile.last_name;
-		$scope.Pi = user_id;
-	 	$scope.pUser = username;
+		$scope.refreshDialogue();
 
-	};
+	 	$scope.showMessage = function(dialogue) { // show all messages between current user and client
+	 		if (x <= 736) {
+		 		$scope.tab = dialogue.id;
 
-	$scope.createNewMessage = function() {
-		$scope.infoMessage = {
-			from_user_id: $rootScope.globals.currentUser.id,
-			to_user_id: $scope.Pi,
-			message: $scope.newMessageArea.message
-		}
+		 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
+		 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
+		 				if (res.success) {
+		 					Users.count();
+		 					$scope.refreshDialogue();
+		 				}
+		 			});
+		 		}
 
-		if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {
-			$scope.socket($scope.createName, $scope.pUser);
-		} else {
-			if ($rootScope.globals.currentUser.id !== $scope.Pi) {
-				$http.post('/messages', $scope.infoMessage).success(function(res){
-					if (res.success) {
-						Users.count();
-						$scope.refreshDialogue(true);
-					}
-				});
-			}
-		}
-	};
+		 		$http.get('/messages/' + dialogue.id).success(function(res){
+		 			if (res.success) {
+		 				console.log(res);
+		 				var last 							= res.messages[res.messages.length - 1];
+		 				$scope.$parent.messages				= res.messages;
+		 				$scope.$parent.name 				= res.name.first_name;
+		 				$scope.$parent.username 			= res.name.first_name + ' ' + res.name.last_name;
+		 				$scope.$parent.nameuser 			= res.name.username,
+		 				$scope.$parent.profile_my_picture 	= res.picture.my_picture;
+		 				$scope.$parent.profile_user_picture = res.picture.user_picture;
+		 				$scope.$parent.c 					= 0;
+		 				$scope.$parent.show 				= true;
+		 			}
+		 			$scope.$parent.offMessages = [];
+		 		});
+		 	} else {
+		 		$scope.tab = dialogue.id;
 
-	if ($stateParams.user_id) {
-		$scope.searchArea($stateParams.profile, $stateParams.user_id, $stateParams.username);
-		setTimeout(function() {
-			$('#messages-modal-newMessageArea').fadeIn(function() {
-				$('#messages-modal-searchArea').fadeOut(function(){
-					$('#messages-newpost-modal').fadeIn();
-				});
+		 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
+		 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
+		 				if (res.success) {
+		 					Users.count();
+		 					$scope.refreshDialogue();
+		 				}
+		 			});
+		 		}
+
+		 		$http.get('/messages/' + dialogue.id).success(function(res){
+		 			if (res.success) {
+		 				var last 							= res.messages[res.messages.length - 1];
+		 				$scope.messages				= res.messages;
+		 				$scope.name 				= res.name.first_name;
+		 				$scope.username 			= res.name.first_name + ' ' + res.name.last_name;
+		 				$scope.nameuser 			= res.name.username,
+		 				$scope.profile_my_picture 	= res.picture.my_picture;
+		 				$scope.profile_user_picture = res.picture.user_picture;
+		 				$scope.c 					= 0;
+		 				$scope.show 				= true;
+		 			}
+		 			$scope.offMessages = [];
+		 		});
+		 	}
+	 	};
+
+	 	$scope.showHomeMobile = function() {
+	 		window.location.href = "https://www.wittycircle.com";
+	 	};
+
+	 	$rootScope.$watch('dialogueMM', function(value) {
+	 		if(value)
+	 			$scope.showMessage(value);
+	 	});
+
+	 	$scope.deleteMessage = function() {
+	 		$http.put('/messages', $scope.messages).success(function(res) {
+	 			$scope.refreshDialogue();
+	 			$state.reload();
+	 		});
+	 	};
+
+	 	/***   MODAL   ***/
+	 	Users.getUsers().then(function (resource) {
+			$scope.profiles = resource;
+		});
+
+		$scope.getListUser = function() {
+			$http.post('/profileId/' + $rootScope.globals.currentUser.id).success(function(res) {
+				$scope.checkId = res.content.profile_id;
 			});
-		}, 300);
- 	}
-
-	/***   SOCKET   ***/
-
-	//*** All socket's scopes
-	if (x <= 736) {
-	 	$scope.$parent.liveMessages = [];
-	 	$scope.$parent.offMessages = [];
-	 } else {
-	 	$scope.liveMessages = [];
-	 	$scope.offMessages = [];
-	 }
-
- 	//*** All socket's functions
- 	socket.on('send online', function(data){ // get all message data from sender online
- 		$scope.c = 1;
- 		if (data) {
- 			if ($rootScope.globals.currentUser.id === data.to_user_id)
- 				$scope.showMessage({id: data.from_user_id});
- 			else
- 				$scope.showMessage({id: data.to_user_id});
-			$scope.refreshDialogue();
- 		}
-
-	});
-
-	socket.on('send offline', function(data) { // get all message data from sender offline
-		if (data.success) {
-			if (x <= 736)  {
-				$scope.$parent.offMessages.push(data);
-			}
-			else
-				$scope.offMessages.push(data);
-			$scope.refreshDialogue();
 		}
-	});
-	
 
- 	$scope.socket = function(username, nameuser) { // send message to a particular client 
- 		if ($scope.socket.message  || ($scope.newMessageArea && $scope.newMessageArea.message)) {
- 			if (username && nameuser && $rootScope.globals.currentUser){
- 				var msg;
-	 			if ($scope.socket.message)
-		 			msg = "/private " + $scope.socket.message;
-		 		else
-		 			msg = "/private " + $scope.newMessageArea.message;
-		 	 	socket.emit('private message', {msg: msg, name: username, adresser: nameuser, sender: $rootScope.globals.currentUser.username});
-		 	 	if (x <= 736) {
-		 	 		$timeout(function() {
-						$('.messages-body-conversation-mobile').scrollTop($('.messages-body-conversation-mobile')[0].scrollHeight);
-					}, 200);
-		 	 	}
-		 	 	if ($scope.socket.message)
-		 	 		delete $scope.socket.message;
-		 	 	if ($scope.newMessageArea && $scope.newMessageArea.message)
-		 	 		delete $scope.newMessageArea.message;
-	 		}
+		$scope.searchArea = function(profile, user_id, username) { // modal new message
+			$scope.newMessageArea = {
+				first_name: profile.first_name,
+				last_name: profile.last_name,
+			};
+			$scope.createName = profile.first_name + ' ' + profile.last_name;
+			$scope.Pi = user_id;
+		 	$scope.pUser = username;
+
+		};
+
+		$scope.createNewMessage = function() {
+			$scope.infoMessage = {
+				from_user_id: $rootScope.globals.currentUser.id,
+				to_user_id: $scope.Pi,
+				message: $scope.newMessageArea.message
+			}
+
+			if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {
+				$scope.socket($scope.createName, $scope.pUser);
+			} else {
+				if ($rootScope.globals.currentUser.id !== $scope.Pi) {
+					$http.post('/messages', $scope.infoMessage).success(function(res){
+						if (res.success) {
+							Users.count();
+							$scope.refreshDialogue(true);
+						}
+					});
+				}
+			}
+		};
+
+		if ($stateParams.user_id) {
+			$scope.searchArea($stateParams.profile, $stateParams.user_id, $stateParams.username);
+			setTimeout(function() {
+				$('#messages-modal-newMessageArea').fadeIn(function() {
+					$('#messages-modal-searchArea').fadeOut(function(){
+						$('#messages-newpost-modal').fadeIn();
+					});
+				});
+			}, 300);
 	 	}
- 	};
+
+		/***   SOCKET   ***/
+
+		//*** All socket's scopes
+		if (x <= 736) {
+		 	$scope.$parent.liveMessages = [];
+		 	$scope.$parent.offMessages = [];
+		 } else {
+		 	$scope.liveMessages = [];
+		 	$scope.offMessages = [];
+		 }
+
+	 	//*** All socket's functions
+	 	socket.on('send online', function(data){ // get all message data from sender online
+	 		$scope.c = 1;
+	 		if (data) {
+	 			if ($rootScope.globals.currentUser.id === data.to_user_id)
+	 				$scope.showMessage({id: data.from_user_id});
+	 			else
+	 				$scope.showMessage({id: data.to_user_id});
+				$scope.refreshDialogue();
+	 		}
+
+		});
+
+		socket.on('send offline', function(data) { // get all message data from sender offline
+			if (data.success) {
+				if (x <= 736)  {
+					$scope.$parent.offMessages.push(data);
+				}
+				else
+					$scope.offMessages.push(data);
+				$scope.refreshDialogue();
+			}
+		});
+		
+
+	 	$scope.socket = function(username, nameuser) { // send message to a particular client 
+	 		if ($scope.socket.message  || ($scope.newMessageArea && $scope.newMessageArea.message)) {
+	 			if (username && nameuser && $rootScope.globals.currentUser){
+	 				var msg;
+		 			if ($scope.socket.message)
+			 			msg = "/private " + $scope.socket.message;
+			 		else
+			 			msg = "/private " + $scope.newMessageArea.message;
+			 	 	socket.emit('private message', {msg: msg, name: username, adresser: nameuser, sender: $rootScope.globals.currentUser.username});
+			 	 	if (x <= 736) {
+			 	 		$timeout(function() {
+							$('.messages-body-conversation-mobile').scrollTop($('.messages-body-conversation-mobile')[0].scrollHeight);
+						}, 200);
+			 	 	}
+			 	 	if ($scope.socket.message)
+			 	 		delete $scope.socket.message;
+			 	 	if ($scope.newMessageArea && $scope.newMessageArea.message)
+			 	 		delete $scope.newMessageArea.message;
+		 		}
+		 	}
+	 	};
+	 }
 });

@@ -1,30 +1,40 @@
 <section id="modal_feedbacks">
-    <div class="modal-header">
-        <div class="row">
-            <div class="col-md-10">
-                <h4 class="modal-title">Change your poster video</h4>
-            </div>
-            <div class="col-md-2">
-                <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()"></img>
-            </div>
-        </div>
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-md-10">
+        <h4 class="modal-title">Update video poster</h4>
+      </div>
+      <div class="col-md-2">
+        <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()" alt="close-icon-img">
+      </div>
     </div>
 
     <div class="modal-body">
-        <div class="row drop_container">
-            <div ngf-drop="uploadFiles(poster)" ngf-select="uploadFiles(poster)" ng-model="poster" class="animated" ng-class="{ 'drop-box-cover': !poster}"
-            ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-            accept="image/*"
-            ngf-pattern="'image/*'">
-                <div class="img_up" ng-style="{'background-image': 'url(' + poster + ')', 'background-position': 'center center'}"></div>
-                <div data-ng-if="up"> Uploading ..</div>
+    <div class="row drop_container">
+          <div ngf-drop="uploadFiles(poster)" ngf-select="uploadFiles(poster)" ng-model="poster" class="animated" ng-class="{ 'drop-box-cover': !poster}"
+              ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
+              accept="image/*"
+              ngf-pattern="'image/*'"
+	      style="background-image: none;"
+              >
+              <div class="img_up" ng-style="{'background-image': 'url(' + poster + ')', 'background-position': 'center center'}">
+              </div>
+	      <div class="text-upload-video" data-ng-if="up === false && poster === false">
+		<h5><i class="fa fa-cloud-upload"></i> Upload a video Poster</h5>
+		<p>Choose a high quality picture that best illustrates your video. 10Mb max</p>
+	      </div>
+	    <div ng-if="up" class="spinner-load">
+            <div class="spinner__item1 spinner-item"></div>
+            <div class="spinner__item2 spinner-item"></div>
+            <div class="spinner__item3 spinner-item"></div>
             </div>
-        </div>
+          </div>
+      </div>
     </div>
 
-<div class="row text-center modal-question-project">
-    <button class="back-button" ng-click="dismiss()">Cancel</button>
-    <button class="go-button" ng-click="saveChange()">Change</button>
-</div>
-</div>
+    <div class="row text-center modal-question-project">
+      <button class="back-button" ng-click="dismiss()">Cancel</button>
+      <button class="go-button" ng-click="saveChange()">Save</button>
+    </div>
+  </div>
 </section>

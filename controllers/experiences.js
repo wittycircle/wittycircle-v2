@@ -1,9 +1,9 @@
 exports.getUserExperiences = function(req, res) {
     pool.query('SELECT * FROM user_experiences WHERE user_id = ?', req.user.id,
-	       function(err, result) {
-		   if (err) throw err;
-		   res.send({success: true, data: result});
-	       });
+	              function(err, result) {
+			     if (err) throw err;
+			     res.send({success: true, data: result});
+			         });
 };
 
 exports.getUserExperiencesByUsername = function(req, res) {
@@ -68,16 +68,16 @@ exports.deleteUserExperience = function(req, res){
     if (errors) return res.status(400).send(errors);
     else {
 	pool.query("SELECT user_id FROM user_experiences WHERE id = ?", req.params.id,
-		   function(err, check) {
-		       if (err) throw err;
-		       if (req.user.id === check[0].user_id) {
-			   pool.query("DELETE FROM `user_experiences` WHERE `id` = ?", [req.params.id],
-				      function(err, result) {
-					  if (err) throw err;
-					  res.send({success: true});
-				      });
-		       } else
-			   res.send({success: false, msg: "Cannot delete postion"});
-		   });
+		      function(err, check) {
+			         if (err) throw err;
+			         if (req.user.id === check[0].user_id) {
+				        pool.query("DELETE FROM `user_experiences` WHERE `id` = ?", [req.params.id],
+						         function(err, result) {
+							       if (err) throw err;
+							       res.send({success: true});
+							           });
+				            } else
+						   res.send({success: false, msg: "Cannot delete postion"});
+			     });
     }
 };

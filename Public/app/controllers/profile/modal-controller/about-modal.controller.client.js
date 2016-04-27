@@ -10,11 +10,11 @@
 angular.module('wittyApp').controller('AboutModalCtrl', function (Users, $timeout, $modalInstance, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Skills, Interests) {
 
     $scope.aButton          = "Save";
-    if ($scope.profile.about)
-      $scope.aboutText      = $scope.profile.about;
+    if ($scope.profileVm.profile.about)
+      $scope.aboutText      = $scope.profileVm.profile.about;
     else
       $scope.aboutText      = "discover new things";
-    $scope.aboutDescription = $scope.profile.description;
+    $scope.aboutDescription = $scope.profileVm.profile.description;
 
     $scope.getAboutText     = function(text) {
       $scope.aboutText      = text.toLowerCase();
@@ -29,7 +29,7 @@ angular.module('wittyApp').controller('AboutModalCtrl', function (Users, $timeou
         $http.put('/signup/about', profileData).success(function(res) {
           if (res.success) {
             $scope.aButton  = "Saved";
-            $scope.getProfileInfo();
+            $scope.profileVm.getProfileInfo();
             $timeout(function() {
               $modalInstance.dismiss();
             }, 500);

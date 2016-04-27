@@ -220,7 +220,7 @@ exports.getProjectsCreatedByUser = function(req, res){
                     function (eror, rez) {
                         for (var i = rez.length - 1; i >= 0; i--) {
                             results.push(rez[i]);
-                        };
+                        }
                         tf.sortProjectCard(results, function(data) {
                             if (!data)
                                 return res.status(400).send('Error00');
@@ -234,8 +234,36 @@ exports.getProjectsCreatedByUser = function(req, res){
                             }
                         });
                     });
-        	    } else
+        	    } 
+		if (!results[0]) {
+		  pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?)",
+                    [req.params.user_id],
+                    function (eror, rez) {
+			if (eror) {
+			    console.log(new Date());
+			    throw err;
+			}
+                        for (var i = rez.length - 1; i >= 0; i--) {
+                            results.push(rez[i]);
+                        }
+                        tf.sortProjectCard(results, function(data) {
+                            if (!data)
+                                return res.send([]);
+                            else {
+                                tf.addUserPictureToProject(data, function (rez) {
+                                  if (!rez)
+                                    return res.send('Error01');
+                                  else {
+                                    return res.send(rez);
+				  }
+                                })
+                            }
+                        });
+                    });
+		}
+		/*else {
         		    return res.send(results);
+			}*/
             });
         } else {
             pool.query('SELECT * FROM `projects` WHERE `creator_user_id` = ? AND project_visibility = 1 ',
@@ -363,11 +391,6 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       recursive(index + 1);
                   });
                 }
-                // TODO: Splice the result in results when accept == 0 and user_id is not equal to the req.user
-                /*if (results[index].user_id != req.user.id && results[index].n_accept === 0) {
-                    console.log('here');
-                    results.splice(index, 1);
-                }*/
                 if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
                   editable = true;
                 }
@@ -380,15 +403,15 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                       }
                       results.splice(index, 1);
                       userIn.push(result[0]);
-                      return recursive(index + 1);
+                      recursive(index + 1);
                   });
                 }
-                if (req.user && results[index].user_id !== req.user.id) {
+                if (req.user && results[index].user_id !== req.user.id && results[index].n_accept != 1) {
                   recursive(index + 1);
                 }
-		if (!req.isAuthenticated()) {
-		    recursive(index + 1);
-		    }
+		if (!req.isAuthenticated() && results[index].n_accept !== 1) {
+		  recursive(index + 1);
+		}
             } else {
                 return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});
             }

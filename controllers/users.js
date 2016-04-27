@@ -444,7 +444,7 @@ exports.createUser = function(req, res){
            function sendValidateAccountMail () {
                var buf = crypto.randomBytes(20);
                var token = buf.toString('hex');
-               var link_validate = 'https://wittycircle.com/validate-account/' + token;
+               var link_validate = 'https://www.wittycircle.com/validate-account/' + token;
 
 
                var template_name = "validate-account";

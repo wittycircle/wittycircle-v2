@@ -1,96 +1,96 @@
 <section id="profile-header">
-	<div ng-if="!imageCoverLoading" class="filter"></div>
-	<div ng-if="imageCoverLoading" class="spinner-load">
+	<div ng-if="!profileVm.imageCoverLoading" class="filter"></div>
+	<div ng-if="profileVm.imageCoverLoading" class="spinner-load">
 		<div class="spinner__item1 spinner-item"></div>
 		<div class="spinner__item2 spinner-item"></div>
 		<div class="spinner__item3 spinner-item"></div>
 	</div>
-	<div ng-if="canUploadCover && randomCover" class="profile-cover-first">
+	<div ng-if="profileVm.canUploadCover && profileVm.randomCover" class="profile-cover-first">
 		<p>Your profile can look awesome</p>
 		<div class="profile-cover-text">
-			<a ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile"><i class="fa fa-camera"></i> Update cover picture</a>
+			<a ngf-select="profileVm.uploadProfileCover(coverProfile)" ng-model="coverProfile"><i class="fa fa-camera"></i> Update cover picture</a>
 		</div>
 	</div>
 	<div class="profile-contents">
 		<div class="profile-info">
-			<div id="pip" ng-class="{'profile-info-picture2': !profile.profile_picture}" class="profile-info-picture">
-				<div ng-if="imageProfileLoading" class="spinner-load">
+			<div id="pip" ng-class="{'profile-info-picture2': !profileVm.profile.profile_picture}" class="profile-info-picture">
+				<div ng-if="profileVm.imageProfileLoading" class="spinner-load">
 					<div class="spinner__item1 spinner-item"></div>
 					<div class="spinner__item2 spinner-item"></div>
 					<div class="spinner__item3 spinner-item"></div>
 				</div>
-				<div ng-if="!imageProfileLoading && canUpload" id="pupe" class="profile-update-picture" ngf-drop="vm.uploadProfilePicture(imagecoveruploaded)" ngf-select="vm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded"
+				<div ng-if="!profileVm.imageProfileLoading && profileVm.canUpload" id="pupe" class="profile-update-picture" ngf-drop="profileVm.uploadProfilePicture(imagecoveruploaded)" ngf-select="profileVm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded"
 			            ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
 			            accept="image/*"
 			            ngf-pattern="'image/*'">
 				    	<i id="pipi" class="fa fa-camera animated bounceIn"></i>
 				</div>
-				<img ng-src="{{ resizePic(profile.profile_picture, 154, 154, 'fill') }}" alt="profile-picture">
+				<img ng-src="{{ resizePic(profileVm.profile.profile_picture, 154, 154, 'fill') }}" alt="profile-picture">
 			</div>
 			<div class="profile-info-cv">
 				<div class="name info-line">
-					<h1>{{profile.first_name}} {{profile.last_name}}</h1>
+					<h1>{{profileVm.profile.first_name}} {{profileVm.profile.last_name}}</h1>
 				</div>
 
 				<!-- <div class="info-about">
-					<h3>Looking to {{profile.about | lowercase}}</h3>
+					<h3>Looking to {{profileVm.profile.about | lowercase}}</h3>
 				</div> -->
 
-				<div id="location-input" class="location" ng-mouseover="vm.showEditL()" ng-mouseleave="vm.hideEditL()">
-					<img ng-if="profile.location_city" src="/images/location-picto-w.svg" alt="location-icon" />
+				<div id="location-input" class="location" ng-mouseover="profileVm.showEditL()" ng-mouseleave="profileVm.hideEditL()">
+					<img ng-if="profileVm.profile.location_city" src="/images/location-picto-w.svg" alt="location-icon" />
 					<div class="location-name">
-						<div class="location-name-city" ng-if="!modifyLocation">
-							<h5 >{{profile.location_city}}<i ng-hide="!profile.location_country">,</i></h5> <h5>{{profile.location_state}}</h5>
-							 <h5 ng-if="!profile.location_state">{{profile.location_country}}</h5>
+						<div class="location-name-city" ng-if="!profileVm.modifyLocation">
+							<h5 >{{profileVm.profile.location_city}}<i ng-hide="!profileVm.profile.location_country">,</i></h5> <h5>{{profileVm.profile.location_state}}</h5>
+							 <h5 ng-if="!profileVm.profile.location_state">{{profileVm.profile.location_country}}</h5>
 						</div>
-						<input ng-if="modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
+						<input ng-if="profileVm.modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
 					</div>
-					<img id="location-input2" ng-if="vm.showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
+					<img id="location-input2" ng-if="profileVm.showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="profileVm.editLocation()" />
 				</div>
 
 				<div id="location-input-mobile" class="location">
-					<img ng-if="profile.location_city" src="/images/location-picto-w.svg" alt="location-icon" />
+					<img ng-if="profileVm.profile.location_city" src="/images/location-picto-w.svg" alt="location-icon" />
 					<div class="location-name">
-						<div class="location-name-city" ng-if="!modifyLocation">
-							<h5 >{{profile.location_city}}<i ng-hide="!profile.location_country">,</i></h5> <h5>{{profile.location_state}}</h5>
-							 <h5 ng-if="!profile.location_state">{{profile.location_country}}</h5>
+						<div class="location-name-city" ng-if="!profileVm.modifyLocation">
+							<h5 >{{profileVm.profile.location_city}}<i ng-hide="!profileVm.profile.location_country">,</i></h5> <h5>{{profileVm.profile.location_state}}</h5>
+							 <h5 ng-if="!profileVm.profile.location_state">{{profileVm.profile.location_country}}</h5>
 						</div>
-						<input ng-if="modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
+						<input ng-if="profileVm.modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
 					</div>
-					<img id="location-input2" ng-if="vm.trueUser" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="editLocation()" />
+					<img id="location-input2" ng-if="profileVm.trueUser" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="profileVm.editLocation()" />
 				</div>
 			</div>
 
 			<div class="profile-follow-mobile">
 				<div class="follow-project follower">
-					<h2 data-ng-bind="0 + projectsFollow"></h2>
+					<h2 data-ng-bind="0 + profileVm.projectsFollow"></h2>
 					<h5>Projects<br /> followed</h5>
 				</div>
 				<div class="followed follower">
-					<h2 ng-bind="usersFollow"></h2>
+					<h2 ng-bind="profileVm.usersFollow"></h2>
 					<h5>following</h5>
 				</div>
 				<div class="follow follower">
-					<h2 ng-bind="followers"></h2>
-					<h5>followers</h5>
+					<h2 ng-bind="profileVm.followers"></h2>
+					<h5>Followers</h5>
 				</div>
 			</div>
-			<!-- <div id="pebutton" ng-if="vm.trueUser" class="profile-edit-mobile" ng-click="vm.openMobileEdit()">
+			<!-- <div id="pebutton" ng-if="profileVm.trueUser" class="profile-edit-mobile" ng-click="profileVm.openMobileEdit()">
 				<button type="submit">Edit my profile</button>
 			</div> -->
 
 			<div class="profile-mobile-user-options">
-				<div ng-if="!vm.trueUser" class="profile-mobile-connect">
+				<div ng-if="!profileVm.trueUser" class="profile-mobile-connect">
 					<div class="profile-text-link">
-						<a ng-click="vm.goToMessage(profile.id)">Message</a>
+						<a ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
 					</div>
-					<button class="profile-follow-link" type="button" ng-click="vm.followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
+					<button class="profile-follow-link" type="button" ng-click="profileVm.followUser()"><i ng-if="profileVm.followText === 'Following'" class="fa fa-check"></i><i ng-if="profileVm.followText === 'Follow'" class="fa fa-plus"></i>{{profileVm.followText}}</button>
 				</div>
-				<button id="pmepb" ng-if="vm.trueUser" class="profile-mobile-edit-photo"><i class="fa fa-camera"></i> Update picture</button>
+				<button id="pmepb" ng-if="profileVm.trueUser" class="profile-mobile-edit-photo"><i class="fa fa-camera"></i> Update picture</button>
 			</div>
 		</div>
 
-		<div id="puc" ng-if="canUploadCover && !randomCover && !imageCoverLoading" class="profile-upload-cover" ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
+		<div id="puc" ng-if="profileVm.canUploadCover && !profileVm.randomCover && !profileVm.imageCoverLoading" class="profile-upload-cover" ngf-select="profileVm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
 			<i class="fa fa-camera"></i> <p>Update Cover Picture</p>
 		</div>
 
@@ -100,24 +100,24 @@
 		<div class="profile-bottom-info">
 			<div class="profile-follow">
 				<div class="follow-project follower">
-					<h2 data-ng-bind="0 + projectsFollow"></h2>
+					<h2 data-ng-bind="0 + profileVm.projectsFollow"></h2>
 					<h5>Projects<br /> followed</h5>
 				</div>
 				<div class="followed follower">
-					<h2 ng-bind="usersFollow"></h2>
+					<h2 ng-bind="profileVm.usersFollow"></h2>
 					<h5>Following</h5>
 				</div>
 				<div class="follow follower">
-					<h2 ng-bind="followers"></h2>
+					<h2 ng-bind="profileVm.followers"></h2>
 					<h5>Followers</h5>
 				</div>
 			</div>
-			<div ng-if="inProjects.length" class="profile-user-projects" onclick="getDropdownProfile()">
+			<div ng-if="profileVm.inProjects.length" class="profile-user-projects" onclick="getDropdownProfile()">
 				<div class="profile-projects-text">
-					<h6>Involved in <strong>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length == 1">project<span></strong></h6>
+					<h6>Involved in <strong>{{profileVm.inProjects.length}} <span ng-if="profileVm.inProjects.length > 1">projects</span><span ng-if="profileVm.inProjects.length == 1">project<span></strong></h6>
 				</div>
 				<div class="profile-projects-picture">
-					<figure ng-if="inProject.picture" class="profile-pp" ng-repeat="inProject in inProjects | limitTo: 3 track by $index">
+					<figure ng-if="inProject.picture" class="profile-pp" ng-repeat="inProject in profileVm.inProjects | limitTo: 3 track by $index">
 						<img ng-src="{{ resizePic(inProject.picture, 40, 40, 'fill') }}" alt="project-picture" style="vertical-align: middle; text-align: center">
 					</figure>
 					<figure class="profile-arrow">
@@ -125,37 +125,37 @@
 					</figure>
 				</div>
 			</div>
-			<div ng-if="!cannotFollow" class="profile-user-options">
+			<div ng-if="!profileVm.cannotFollow" class="profile-user-options">
 <!-- 				<div class="profile-text-link">
 					<a>Share</a>
 				</div> -->
 				<div class="profile-text-link">
-					<a ng-click="vm.goToMessage(profile.id)">Message</a>
+					<a ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
 				</div>
-				<button class="profile-follow-link" type="button" ng-click="vm.followUser()"><i ng-if="followText === 'Following'" class="fa fa-check"></i><i ng-if="followText === 'Follow'" class="fa fa-plus"></i>{{followText}}</button>
+				<button class="profile-follow-link" type="button" ng-click="profileVm.followUser()"><i ng-if="profileVm.followText === 'Following'" class="fa fa-check"></i><i ng-if="profileVm.followText === 'Follow'" class="fa fa-plus"></i>{{profileVm.followText}}</button>
 			</div>
 		</div>
 	</div>
 
-	<div id="inprom" ng-if="inProjects.length" class="profile-bottom-mobile">
+	<div id="inprom" ng-if="profileVm.inProjects.length" class="profile-bottom-mobile">
 		<div class="profile-mobile-user-projects">
-			<h5>Involved in <b>{{inProjects.length}} <span ng-if="inProjects.length > 1">projects</span><span ng-if="inProjects.length === 1">project<span></b></h5>
+			<h5>Involved in <b>{{profileVm.inProjects.length}} <span ng-if="profileVm.inProjects.length > 1">projects</span><span ng-if="profileVm.inProjects.length === 1">project<span></b></h5>
 		</div>
-		<div class="profile-mobile-projects-picture" ng-click="getSlideProjects()">
-			<div class="profile-pp" ng-repeat="inProject in inProjects | limitTo: 3 track by $index" ng-style="{'background-image': 'url({{ resizePic(inProject.picture, '', 35, 'fill') }})'}">
+		<div class="profile-mobile-projects-picture" ng-click="profileVm.getSlideProjects()">
+			<div class="profile-pp" ng-repeat="inProject in profileVm.inProjects | limitTo: 3 track by $index" ng-style="{'background-image': 'url({{ resizePic(inProject.picture, '', 35, 'fill') }})'}">
 			</div>
 			<div class="profile-pp-arrow"></div>
 		</div>
 	</div>
 </section>
 
-<div id="pmephotos" class="profile-mobile-edit-photos" ng-if="vm.trueUser">
-	<div class="profile-mobile-edit-cover" ngf-select="vm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
+<div id="pmephotos" class="profile-mobile-edit-photos" ng-if="profileVm.trueUser">
+	<div class="profile-mobile-edit-cover" ngf-select="profileVm.uploadProfileCover(coverProfile)" ng-model="coverProfile">
 		Change your cover picture
 	</div>
 
 	<hr />
-	<div class="profile-mobile-edit-profile" ng-if="!imageProfileLoading && canUpload" id="pupe" ngf-select="vm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
+	<div class="profile-mobile-edit-profile" ng-if="!profileVm.imageProfileLoading && profileVm.canUpload" id="pupe" ngf-select="profileVm.uploadProfilePicture(imagecoveruploaded)" ng-model="imagecoveruploaded" ngf-multiple="false" ngf-allow-dir="false"
             accept="image/*"
             ngf-pattern="'image/*'">
 		Upload a new profile photo
@@ -163,13 +163,13 @@
 </div>
 
 <!-- <section id="psmb" class="profile-save-mobile">
-	<span ng-click="vm.closeMobileEdit()">Cancel</span>
+	<span ng-click="profileVm.closeMobileEdit()">Cancel</span>
 	<button type="submit"><i class="fa fa-check"></i> Save changes</button>
 </section> -->
 
 <section id="profile-mobile-slideDown">
-	<div class="profile-mobile-cardProject" data="inProjects" check="initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "30px", variableWidth: true,}'>
-		<div class="profile-slideDown-card project-card" ng-repeat="cardProject in inProjects track by $index">
+	<div class="profile-mobile-cardProject" data="profileVm.inProjects" check="profileVm.initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "30px", variableWidth: true,}'>
+		<div class="profile-slideDown-card project-card" ng-repeat="cardProject in profileVm.inProjects track by $index">
 			<div class="card-tag" ng-click="goToDiscover(cardProject.category_name)">
 				<div class="card-tag-content">
 					<div class="card-tag-bg">
@@ -211,7 +211,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="pmsc" class="profile-mobile-slideDown-close" ng-click="getSlideProjects()">
+	<div id="pmsc" class="profile-mobile-slideDown-close" ng-click="profileVm.getSlideProjects()">
 		<p>Close this panel</p>
 	</div>
 </section>
@@ -223,7 +223,7 @@
 		<div class="profile-slideDown-project">
 
 			<article class="profile-slideDown-article">
-				<div class="profile-slideDown-card project-card" ng-repeat="cardProject in inProjects track by $index" ng-click="">
+				<div class="profile-slideDown-card project-card" ng-repeat="cardProject in profileVm.inProjects track by $index" ng-click="">
 					<div class="card-tag" ng-click="goToDiscover(cardProject.category_name)">
 						<div class="card-tag-content">
 							<div class="card-tag-bg">
@@ -276,45 +276,45 @@
 <section id="profile-corps">
 	<div class="profile-contents">
 		<aside class="profile-aside">
-			<div ng-mouseover="showEditS()" ng-mouseleave="hideEditS()" class="profile-first-aside">
+			<div ng-mouseover="profileVm.showEditS()" ng-mouseleave="profileVm.hideEditS()" class="profile-first-aside">
 				<h2>Skills</h2>
-				<img ng-if="showEditSkill" ng-click="openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
+				<img ng-if="profileVm.showEditSkill" ng-click="profileVm.openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
 				<div class="profile-aside-skills">
 					<ul>
-						<li ng-repeat="profileSkill in profileSkills">{{profileSkill.skill_name}}</li>
+						<li ng-repeat="profileSkill in profileVm.profileSkills">{{profileSkill.skill_name}}</li>
 					</ul>
 				</div>
 			</div>
-			<div ng-mouseover="showEditI()" ng-mouseleave="hideEditI()" class="profile-second-aside">
+			<div ng-mouseover="profileVm.showEditI()" ng-mouseleave="profileVm.hideEditI()" class="profile-second-aside">
 				<h2>Interests</h2>
-				<img ng-if="showEditInterest" ng-click="openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
+				<img ng-if="profileVm.showEditInterest" ng-click="profileVm.openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
 				<div class="profile-aside-interests">
 					<ul>
-						<li ng-repeat="profileInterest in profileInterests"><a href="">{{profileInterest.interest_name}}</a></li>
+						<li ng-repeat="profileInterest in profileVm.profileInterests"><a href="">{{profileInterest.interest_name}}</a></li>
 					</ul>
 				</div>
 			</div>
 		</aside>
 		<div class="profile-main">
-			<div ng-mouseover="showEditA()" ng-mouseleave="hideEditA()" class="profile-main-about">
+			<div ng-mouseover="profileVm.showEditA()" ng-mouseleave="profileVm.hideEditA()" class="profile-main-about">
 				<h2>About</h2>
-				<img ng-if="showEditAbout" ng-click="openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
-				<p ng-bind-html="profile.description"></p>
+				<img ng-if="profileVm.showEditAbout" ng-click="profileVm.openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
+				<p ng-bind-html="profileVm.profile.description"></p>
 			</div>
 
 			<div class="profile-main-experience">
-				<div ng-mouseover="showAddE()" ng-mouseleave="hideAddE()" class="profile-experience-header">
+				<div ng-mouseover="profileVm.showAddE()" ng-mouseleave="profileVm.hideAddE()" class="profile-experience-header">
 					<h2>Experience</h2>
-					<i ng-if="showAddExp" class="fa fa-plus" ng-click="openAddE()"><span>Add position</span></i>
+					<i ng-if="profileVm.showAddExp" class="fa fa-plus" ng-click="profileVm.openAddE()"><span>Add position</span></i>
 				</div>
 				<div class="profile-exp-list">
-					<div class="profile-exp" ng-mouseover="showEditE($index)" ng-mouseleave="hideEditE()" ng-repeat="profileExp in profileExps track by $index">
+					<div class="profile-exp" ng-mouseover="profileVm.showEditE($index)" ng-mouseleave="profileVm.hideEditE()" ng-repeat="profileExp in profileVm.profileExps track by $index">
 						<div class="profile-exp-post">
 							<h3 ng-bind="profileExp.title"></h3>
 							<h4 ng-bind="profileExp.company"></h4>
-							<div class="profile-exp-option" ng-if="showEditExp == $index">
-								<img ng-click="openEditE($index)" class="profile-edit-exp" src="/images/picto-edit-b.svg">
-								<i class="fa fa-trash" ng-click="removeExp(profileExp.id)"></i>
+							<div class="profile-exp-option" ng-if="profileVm.showEditExp == $index">
+								<img ng-click="profileVm.openEditE($index)" class="profile-edit-exp" src="/images/picto-edit-b.svg">
+								<i class="fa fa-trash" ng-click="profileVm.removeExp(profileExp.id)"></i>
 							</div>
 						</div>
 						<div class="profile-exp-period">
@@ -338,26 +338,26 @@
 	<div class="profile-mobile-contents">
 		<div class="profile-mobile-about">
 			<h2>About</h2>
-			<img ng-if="vm.trueUser" ng-click="openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
-			<p ng-bind-html="profile.description"></p>
+			<img ng-if="profileVm.trueUser" ng-click="profileVm.openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
+			<p ng-bind-html="profileVm.profile.description"></p>
 		</div>
 
 		<div class="profile-mobile-skills">
 			<h2>Skills</h2>
-			<img ng-if="vm.trueUser" ng-click="openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
+			<img ng-if="profileVm.trueUser" ng-click="profileVm.openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
 			<div class="profile-mobile-skills-list">
 				<ul>
-					<li ng-repeat="profileSkill in profileSkills">{{profileSkill.skill_name}}</li>
+					<li ng-repeat="profileSkill in profileVm.profileSkills">{{profileSkill.skill_name}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="profile-mobile-interests">
 			<h2>Interests</h2>
-			<img ng-if="vm.trueUser" ng-click="openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
+			<img ng-if="profileVm.trueUser" ng-click="profileVm.openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
 			<div class="profile-mobile-interests-list">
 				<ul>
-					<li ng-repeat="profileInterest in profileInterests">{{profileInterest.interest_name}}</li>
+					<li ng-repeat="profileInterest in profileVm.profileInterests">{{profileInterest.interest_name}}</li>
 				</ul>
 			</div>
 		</div>
@@ -365,15 +365,15 @@
 		<div class="profile-mobile-experience">
 			<div class="profile-experience-header">
 				<h2>Experience</h2>
-				<i ng-if="vm.trueUser" class="fa fa-plus" ng-click="openAddE()"><span>Add position</span></i>
+				<i ng-if="profileVm.trueUser" class="fa fa-plus" ng-click="profileVm.openAddE()"><span>Add position</span></i>
 			</div>
 			<div class="profile-exp-list">
-				<div class="profile-exp" ng-mouseover="showEditE($index)" ng-mouseleave="hideEditE()" ng-repeat="profileExp in profileExps track by $index">
+				<div class="profile-exp" ng-mouseover="profileVm.showEditE($index)" ng-mouseleave="profileVm.hideEditE()" ng-repeat="profileExp in profileVm.profileExps track by $index">
 					<div class="profile-exp-post">
 					<h3>{{profileExp.title}} <span>| &nbsp;{{profileExp.company}}</span></h3>
-					<div class="profile-exp-option" ng-if="showEditExp == $index">
-						<img ng-click="openEditE($index)" class="profile-edit-exp" src="/images/picto-edit-b.svg">
-						<i class="fa fa-trash" ng-click="removeExp(profileExp.id)"></i>
+					<div class="profile-exp-option" ng-if="profileVm.showEditExp == $index">
+						<img ng-click="profileVm.openEditE($index)" class="profile-edit-exp" src="/images/picto-edit-b.svg">
+						<i class="fa fa-trash" ng-click="profileVm.removeExp(profileExp.id)"></i>
 					</div>
 					</div>
 					<div class="profile-exp-period">
@@ -400,7 +400,7 @@
 	// 		if (container1.is(e.target) || container1.has(e.target).length ||container2.is(e.target))
 	// 			console.log("OK");
 	// 		else
-	// 			scope.editLocation();
+	// 			scope.profileVm.editLocation();
 	// 	});
 	// });
 

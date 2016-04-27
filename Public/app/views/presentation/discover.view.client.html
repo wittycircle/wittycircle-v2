@@ -15,31 +15,31 @@
 
 	  		<div class="discover-search1">
 	  			<div class="discover-search1-dropdown discover-search1-dropdown1-mobile">
-	  				<div id="dsa" class="discover-search1-ap searchbox" ng-click="opendmodal(1)">
-	  					<h2 id="dsa">{{cProject}}</h2>
+	  				<div id="dsa" class="discover-search1-ap searchbox" ng-click="discover.opendmodal(1)">
+	  					<h2 id="dsa">{{discover.cProject}}</h2>
 						<img id="dsa" src="/images/arrow-down-icon-w.svg">
 					</div>
 					<aside id="dsd" class="discover-search1-downbox1" style="display: none">
 						<ul>
-							<li ng-click="getProject('Idea', 1)">Ideas</li>
-							<li ng-click="getProject('Drafted project', 2)">Drafted projects</li>
-							<li ng-click="getProject('Beta project', 3)">Beta projects</li>
-							<li ng-click="getProject('Live project', 4)">Live projects</li>
-							<li ng-click="getProject('all', 5)">All projects</li>
+							<li ng-click="discover.getProject('Idea', 1)">Ideas</li>
+							<li ng-click="discover.getProject('Drafted project', 2)">Drafted projects</li>
+							<li ng-click="discover.getProject('Beta project', 3)">Beta projects</li>
+							<li ng-click="discover.getProject('Live project', 4)">Live projects</li>
+							<li ng-click="discover.getProject('all', 5)">All projects</li>
 						</ul>
 					</aside>
 				</div>
 				<div class="discover-search1-text">
 					<h2>about</h2>
 				</div>
-				<div class="discover-search1-dropdown discover-search1-dropdown2-mobile" ng-click="opendmodal(2)">
+				<div class="discover-search1-dropdown discover-search1-dropdown2-mobile" ng-click="discover.opendmodal(2)">
 					<div id="dst" class="discover-search1-technology searchbox">
-						<h2 id="dst">{{ctgName}}</h2>
+						<h2 id="dst">{{discover.ctgName}}</h2>
 						<img id="dst" src="/images/arrow-down-icon-w.svg">
 					</div>
 					<aside id="dsd2" class="discover-search1-downbox2" style="display: none">
 						<ul>
-							<li ng-repeat="category in categories" ng-click="getCategory(category.name)">{{category.name}}</li>
+							<li ng-repeat="category in discover.categories" ng-click="discover.getCategory(category.name)">{{category.name}}</li>
 						</ul>
 					</aside>
 				</div>
@@ -49,63 +49,63 @@
 	  			<div class="discover-search2-text">
 						<h2>looking for</h2>
 				</div>
-				<div class="discover-search2-dropdown" ng-click="opendmodal(3)">
+				<div class="discover-search2-dropdown" ng-click="discover.opendmodal(3)">
 					<div id="dsa2" class="discover-search2-ah searchbox">
-						<h2 id="dsa2">{{cHelp}}</h2>
+						<h2 id="dsa2">{{discover.cHelp}}</h2>
 						<img id="dsa2" src="/images/arrow-down-icon-w.svg">
 					</div>
 					<aside id="dsd3" class="discover-search2-downbox" style="display: none">
 						<ul>
-							<!-- <li ng-repeat="help in helps" ng-click="getHelp(help)" ng-disabled="help === 'Freelancer' || help === 'Fundings'">{{help}}<sup ng-if="help == 'Freelancer' || help == 'Fundings'">soon</sup></li> -->
-							<li ng-click="getHelp('Teammate')">Teammate</li>
+							<!-- <li ng-repeat="help in helps" ng-click="discover.getHelp(help)" ng-disabled="help === 'Freelancer' || help === 'Fundings'">{{help}}<sup ng-if="help == 'Freelancer' || help == 'Fundings'">soon</sup></li> -->
+							<li ng-click="discover.getHelp('Teammate')">Teammate</li>
 							<li>Freelancer<sup>soon</sup></li>
-							<li ng-click="getHelp('Feedback')">Feedback</li>
-							<li ng-click="getHelp('Mentor')">Mentor</li>
-							<li ng-click="getHelp('Tips')">Tips</li>
+							<li ng-click="discover.getHelp('Feedback')">Feedback</li>
+							<li ng-click="discover.getHelp('Mentor')">Mentor</li>
+							<li ng-click="discover.getHelp('Tips')">Tips</li>
 							<li>Fundings<sup>soon</sup></li>
-							<li ng-click="getHelp('Any help')">Any help</li>
+							<li ng-click="discover.getHelp('Any help')">Any help</li>
 						</ul>
 					</aside>
 				</div>
 				<div id="dstext" class="discover-search2-text animated fadeIn">
-					<h2 ng-if="cHelp !== 'Teammate'">in</h2>
-					<h2 ng-if="cHelp === 'Teammate'">skilled in</h2>
+					<h2 ng-if="discover.cHelp !== 'Teammate'">in</h2>
+					<h2 ng-if="discover.cHelp === 'Teammate'">skilled in</h2>
 				</div>
-				<div id="dslist" class="discover-skill-list animated fadeIn" ng-repeat="skill in skillList">
+				<div id="dslist" class="discover-skill-list animated fadeIn" ng-repeat="skill in discover.skillList">
 					<div id="dslist" class="discover-skill-tag searchbox">
 						<h2 id="dslist">{{skill.sName}}</h2>
-						<div id="dslist" class="discover-skill-cross" ng-click="removeSkill(skill.sName)">
+						<div id="dslist" class="discover-skill-cross" ng-click="discover.removeSkill(skill.sName)">
 							<img id="dslist" src="/images/cross-icon.svg">
 						</div>
 					</div>
 					<span id="dslist" ng-hide="$last">,</span>
-					<span id="dComma" ng-if="$last && !fullList">,</span>
+					<span id="dComma" ng-if="$last && !discover.fullList">,</span>
 				</div>
-				<div id="dsdrop1" class="discover-search2-dropdown2" ng-show="!fullList && !displaySk" >
-					<div class="discover-search2-anyskill inputfield" ng-show="!fullList">
-						<input id="input-dsa" class="animated fadeIn" onfocus="getDropdown()" onfocusout="hideDropdown()" onmouseover="changePlh()" onmouseout="normalPlh()" type="search" oninput="getSearchBox()" ng-model="skillName">
+				<div id="dsdrop1" class="discover-search2-dropdown2" ng-show="!discover.fullList && !displaySk" >
+					<div class="discover-search2-anyskill inputfield" ng-show="!discover.fullList">
+						<input id="input-dsa" class="animated fadeIn" onfocus="getDropdown()" onfocusout="hideDropdown()" onmouseover="changePlh()" onmouseout="normalPlh()" type="search" oninput="getSearchBox()" ng-model="discover.skillName">
 						<label id="labelText" class="animated fadeIn" style="display: block">Anything</label>
 						<label id="labelText2" class="animated fadeIn" style="display: none">add skill</label>
 					</div>
 					<aside id="dsabox1" class="discover-search2-popularskills downbox" style="display: none">
 						<ul>
 							<h3>Popular skills:</h3>
-							<li ng-repeat="skill in skills | limitTo: 5" ng-click="searchSkill(skill.name)">{{skill.name}}</li>
+							<li ng-repeat="skill in discover.skills | limitTo: 5" ng-click="discover.searchSkill(skill.name)">{{skill.name}}</li>
 						</ul>
 					</aside>
 					<aside id="dsabox2" class="discover-search2-downbox1 downbox" style="display: none">
 						<ul>
-							<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 5">{{skillS.name}}</li>
-							<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+							<li ng-click="discover.searchSkill(skillS.name)" ng-repeat="skillS in discover.skills | wordsFilter: discover.skillName | limitTo: 5">{{ skillS.name}}</li>
+							<span ng-show="!(discover.skills | filter: discover.skillName).length">No skill found...</span>
 						</ul>
 					</aside>
 				</div>
-				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox" ng-click="opendmodal(4)">
-					<h2 ng-if="!skillListM.length">Anything</h2>
-					<img ng-if="!skillListM.length" src="/images/arrow-down-icon-w.svg">
-					<div ng-if="skillListM[0]" class="discover-skillList">
+				<div id="dsdrop1m" class="discover-search2-dropdown2-mobile searchbox" ng-click="discover.opendmodal(4)">
+					<h2 ng-if="!discover.skillListM.length">Anything</h2>
+					<img ng-if="!discover.skillListM.length" src="/images/arrow-down-icon-w.svg">
+					<div ng-if="discover.skillListM[0]" class="discover-skillList">
 						<h2>
-							{{skillListM | sortSkill: skillListM}}
+							{{discover.skillListM | sortSkill: discover.skillListM}}
 						</h2>
 					</div>
 				</div>
@@ -126,15 +126,15 @@
 			</div>
 			<div class="discover-body-list">
 				
-				<div class="discover-body-card project-card" ng-repeat="card in cards | limitTo: limit"  ng-if="card.picture_card">
-					<div class="card-tag" ng-click="getTagCag(card.category_name)">
+				<div class="discover-body-card project-card" ng-repeat="card in discover.cards | limitTo: discover.limit"  ng-if="card.picture_card">
+					<div class="card-tag" ng-click="discover.getTagCag(card.category_name)">
 						<div class="card-tag-content">
 							<div class="card-tag-bg"></div>
 							<img src="/images/tag-icon.png">
 							<h5>{{card.category_name}}</h5>
 						</div>
 					</div>
-					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ encodeUrl(card.title) }}">
+					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ discover.encodeUrl(card.title) }}">
 						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url(' + card.picture_card + ')'}"></div>
 						<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}"></div>
 						<div class="card-info">
@@ -166,8 +166,8 @@
 					</a>
 				</div>
 
-				<div ng-if="allowExpand" class="discover-body-loadmore presentation-body-loadmore">
-					<button type="button" ng-click="expand()">Load more</button>
+				<div ng-if="discover.allowExpand" class="discover-body-loadmore presentation-body-loadmore">
+					<button type="button" ng-click="discover.expand()">Load more</button>
 				</div>
 			</div>
 		</div>
@@ -228,7 +228,7 @@
 			});
 
 			window.onmouseover = function(e) {
-				if (scope.skillList.length > 0) {
+				if (scope.discover.skillList.length > 0) {
 					if (e.target.id === 'dslist' || e.target.id === 'input-dsa' || e.target.id === 'dsa') {
 						if (document.getElementById('input-dsa')) {
 							document.getElementById('input-dsa').style.display = "block";
@@ -281,7 +281,7 @@
 				}
 
 				/*** Skill DOM ***/
-				if (scope.skillList.length > 0) {
+				if (scope.discover.skillList.length > 0) {
 					if (e.target.id !== 'dslist' || e.target.id !== 'input-dsa' || e.target.id !== 'dsa' || e.target.id !== 'input-dsa2')
 						if (document.getElementById('input-dsa')) {
 							document.getElementById('input-dsa').style.display = "none";

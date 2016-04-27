@@ -171,7 +171,8 @@
     border-radius: 4px;
     overflow: hidden; }
   #form-project-1 .project-card .card-picture {
-    height: 100px; }
+    height: 100px;
+    background-size: cover; }
   #form-project-1 .project-card .card-info .card-description-text {
     height: auto; }
   #form-project-1 .need_tags .tag_text {
@@ -419,16 +420,15 @@
   .container-custom-project .redactor-editor p {
     font-family: 'FreigBook';
     font-size: 16px;
-    line-height: 26px;
+    line-height: 21px;
     color: #222;
-    margin-bottom: 0;
     text-align: left; }
   .container-custom-project .redactor-editor h1 {
     font-family: 'FreigBook';
     color: #222;
     font-size: 28px; }
   .container-custom-project .text_delete {
-    color: #ddd !important;
+    color: #bbb !important;
     margin-top: 5px;
     cursor: pointer;
     max-width: 80px;
@@ -474,7 +474,8 @@
     #form-project-1 .update-project-story .redactor-editor p {
       font-family: 'FreigBook';
       font-size: 17px;
-      color: black; }
+      color: black;
+      margin-bottom: 0 !important; }
     #form-project-1 .update-project-story .redactor-editor strong {
       color: black; }
 
@@ -673,6 +674,20 @@
   height: 180px;
   position: relative;
   z-index: 0; }
+  .drop_container .text-upload-video {
+    position: absolute;
+    top: 0;
+    width: inherit;
+    padding-top: 60px; }
+    .drop_container .text-upload-video h5 {
+      color: #FF4D4D;
+      font-family: 'FreigSem';
+      font-size: 16px;
+      margin-bottom: 10px; }
+    .drop_container .text-upload-video p {
+      font-family: 'FreigMed';
+      font-size: 16px;
+      color: #999999; }
   .drop_container .img_up {
     background-size: cover;
     background-repeat: no-repeat;
@@ -752,7 +767,6 @@
   width: 300px;
   height: 180px;
   text-align: center;
-  padding-top: 25px;
   margin-left: auto;
   margin-right: auto;
   -webkit-transition: 250ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
@@ -1523,7 +1537,7 @@ div + .no-items-founds {
   font-size: 18px;
   text-align: center; }
 #modal_feedbacks .modal-question-project {
-  padding: 30px 40px 10px 40px; }
+  padding: 10px 40px 20px 40px; }
 #modal_feedbacks input {
   width: 100%;
   padding: 8px 15px;

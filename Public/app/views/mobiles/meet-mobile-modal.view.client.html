@@ -1,37 +1,37 @@
-<section id="mmmodal" ng-if="mmobile.general" class="animated fadeIn">
+<section id="mmmodal" ng-if="meet.mmobile.general" class="animated fadeIn">
 
 	<header class="presentation-mobile-modal-header">
-		<h5>{{mmobile.headerText}}</h5>
-		<img ng-if="!skillListM.length" src="/images/cross-icon.svg" alt="close-cross" ng-click="closemmodal()" ng-cloak/>
-		<h4 ng-if="skillListM[0] && mmobile.modal === 1" class="animated fadeIn" ng-click="closemmodal()" ng-cloak>I'm good <i class="fa fa-check"></i></h4>
+		<h5 data-ng-bind="meet.mmobile.headerText"></h5>
+		<img data-ng-if="!meet.skillListM.length" src="/images/cross-icon.svg" alt="close-cross" data-ng-click="meet.closemmodal()" ng-cloak/>
+		<h4 data-ng-if="meet.skillListM[0] && meet.mmobile.modal === 1" class="animated fadeIn" data-ng-click="meet.closemmodal()" ng-cloak>I'm good <i class="fa fa-check"></i></h4>
 	</header>
 
-	<div id="mskmodal" class="discover-mobile-search3 d-mobile-search" ng-if="mmobile.modal === 1">
+	<div id="mskmodal" class="discover-mobile-search3 d-mobile-search" ng-if="meet.mmobile.modal === 1">
 		<ul class="select-list">
-			<li ng-repeat="skillM in skillListM">{{skillM.sName}} <i class="fa fa-times" ng-click="removeSkill(skillM.sName)"></i></li>
+			<li data-ng-repeat="skillM in meet.skillListM">{{skillM.sName}} <i class="fa fa-times" ng-click="meet.removeSkill(skillM.sName)"></i></li>
 		</ul>
 		<div class="discover-mobile-search-skill">
-			<input type="text" placeholder="Search for a specific skill..." ng-model="skillName">
+			<input type="text" placeholder="Search for a specific skill..." ng-model="meet.skillName">
 		</div>
-		<ul ng-if="!skillName">
+		<ul data-ng-if="!meet.skillName">
 			<h3>Popular skills</h3>
 			<div class="discover-mobile-skillList1">
-				<li ng-repeat="skill in skills | limitTo: 10" class="animated fadeIn" ng-click="searchSkill(skill.name)"><i class="fa fa-plus" aria-hidden="true"></i> {{skill.name}}</li>
+				<li data-ng-repeat="skill in meet.skills | limitTo: 10" class="animated fadeIn" data-ng-click="meet.searchSkill(skill.name)"><i class="fa fa-plus" aria-hidden="true"></i> {{skill.name}}</li>
 			</div>
-		</ul>		
-		<ul ng-if="skillName">
+		</ul>
+		<ul ng-if="meet.skillName">
 			<div class="discover-mobile-skillList1 discover-mobile-skillList2">
-				<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
+				<li data-ng-click="searchSkill(skillS.name)" data-ng-repeat="skillS in meet.skills | filter: meet.skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
 			</div>
-			<span ng-show="!(skills | filter: skillName).length">No skill found...</span>
+			<span data-ng-show="!(meet.skills | filter: meet.skillName).length">No skill found...</span>
 		</ul>
 	</div>
 
-	<div id="msamodal" class="discover-mobile-search1 d-mobile-search" ng-if="mmobile.modal === 2">
+	<div id="msamodal" class="discover-mobile-search1 d-mobile-search" data-ng-if="meet.mmobile.modal === 2">
 		<ul>
-            <li ng-click="getAnything('Discover new things')" >Discover new things</li>
-            <li ng-click="getAnything('Join projects')" >Join projects</li>
-            <li ng-click="getAnything('Find teammates')">Find teammates</li>
+            <li data-ng-click="meet.getAnything('Discover new things')" >Discover new things</li>
+            <li data-ng-click="meet.getAnything('Join projects')" >Join projects</li>
+            <li data-ng-click="meet.getAnything('Find teammates')">Find teammates</li>
             <li>Get freelance misson <sup>soon</sup></li>
         </ul>
 	</div>

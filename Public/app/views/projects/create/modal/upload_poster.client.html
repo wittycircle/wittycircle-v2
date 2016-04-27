@@ -1,32 +1,30 @@
 <section id="modal_feedbacks">
-  <div class="modal-header">
-    <div class="row">
-      <div class="col-md-10">
-        <h4 class="modal-title">Change your poster video</h4>
-      </div>
-      <div class="col-md-2">
-        <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()"></img>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-body">
-    <div class="row drop_container">
-          <div ngf-drop="uploadFiles(poster)" ngf-select="uploadFiles(poster)" ng-model="poster" class="animated" ng-class="{ 'drop-box-cover': !poster}"
-              ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-              accept="image/*"
-              ngf-pattern="'image/*'"
-              >
-              <div class="img_up" ng-style="{'background-image': 'url(' + poster + ')', 'background-position': 'center center'}"
-              </div>
-	  <div data-ng-if="up"> Uploading ..</div>
-          </div>
-      </div>
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h4 class="modal-title">Change your poster video</h4>
+            </div>
+            <div class="col-md-2">
+                <img class="close_modal pull-right" src="images/cross-icon.svg" ng-click="dismiss()"></img>
+            </div>
+        </div>
     </div>
 
-    <div class="row text-center modal-question-project">
-      <button class="back-button" ng-click="dismiss()">Cancel</button>
-      <button class="go-button" ng-click="saveChange()">Change</button>
+    <div class="modal-body">
+        <div class="row drop_container">
+            <div ngf-drop="uploadFiles(poster)" ngf-select="uploadFiles(poster)" ng-model="poster" class="animated" ng-class="{ 'drop-box-cover': !poster}"
+            ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
+            accept="image/*"
+            ngf-pattern="'image/*'">
+                <div class="img_up" ng-style="{'background-image': 'url(' + poster + ')', 'background-position': 'center center'}"></div>
+                <div data-ng-if="up"> Uploading ..</div>
+            </div>
+        </div>
     </div>
-  </div>
+
+<div class="row text-center modal-question-project">
+    <button class="back-button" ng-click="dismiss()">Cancel</button>
+    <button class="go-button" ng-click="saveChange()">Change</button>
+</div>
+</div>
 </section>

@@ -31,7 +31,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     vm.showEditL = showEditL;
     vm.hideEditL = hideEditL;
     vm.openMobileEdit = openMobileEdit;
-    vm.closeMobileEdit =closeMobileEdit;
+    vm.closeMobileEdit = closeMobileEdit;
 
     console.log(vm.trueUser);
 
@@ -246,13 +246,15 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
     /*** Message ***/
     function goToMessage(id) {
+        console.log(id);
         if (!vm.currentUser)
             showbottomAlert.pop_it();
         else {
-            Users.getUserbyId(id, function (res) {
-                if (res.data.username)
+            if (id !== vm.currentUser.id) {
+                Users.getUserbyId(id, function (res) {
                     $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
-            });
+                });
+            }
         }
     };
 
@@ -462,7 +464,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     $scope.getSlideProjects = function() {
         if ($scope.initSlide) {
             $('#profile-mobile-slideDown').slideToggle();
-        } else 
+        } else
             $scope.initSlide = true;
     };
 
@@ -514,7 +516,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 })
 .directive('slickSlider', function () {
     return {
-        restrict: 'A',         
+        restrict: 'A',
         scope: {'data': '=',
             'check': '=',
         },

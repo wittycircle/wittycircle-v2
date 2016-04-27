@@ -50,7 +50,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
   var ww = $(window).width();
   $scope.mamobile = {};
   $scope.openmamodal = function(value) {
-    
+
     if (ww <= 736) {
       $('body').css('overflow-y', 'hidden');
       $scope.mamobile.modal  = value;
@@ -180,7 +180,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 
   $scope.savedata = function ($event) {
     if (!$rootScope.globals.currentUser) {
-      
+
     }
     else {
       var data          = {};
@@ -300,7 +300,7 @@ angular.module('wittyApp').controller('MainCtrl', function ($scope, $state, $sta
 })
 .directive('slickSliderHome', function () {
     return {
-        restrict: 'A',         
+        restrict: 'A',
         scope: {
           'data': '='
         },

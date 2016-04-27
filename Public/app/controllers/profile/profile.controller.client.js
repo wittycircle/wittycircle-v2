@@ -406,9 +406,9 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	// profileVm.endPeriod            = {};
 
 	function getProfileExp() {
-		$http.get('/experiences/' + profileVm.paramUsername).then(function(res) {
-			if (res.success)
-				profileVm.profileExps      = res.data;
+		$http.get('/experiences/' + profileVm.paramUsername).success(function(res) {
+		    if (res.success)
+			    profileVm.profileExps      = res.data;
 		});
 	}; getProfileExp();
 

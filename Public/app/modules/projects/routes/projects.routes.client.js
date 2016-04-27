@@ -9,6 +9,25 @@
         templateUrl: 'views/projects/create/create_project.view.client.html',
         controller: 'CreateProjectCtrl',
         resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'controllers/projects/create_project.controller.client.js',
+                    'controllers/projects/modal/add-user-project.controller.client.js',
+                    'controllers/projects/modal/add-needs.controller.client.js',
+                    'controllers/projects/modal/add-question-project.controller.client.js',
+                    'controllers/projects/modal/upload-poster.controller.client.js',
+                    'scripts/draggable_background.js',
+                    'scripts/redactor/redactor.js',
+                    // css
+                    'styles/css/home.css',
+                    'styles/css/presentation.css',
+                    'styles/css/projects.css',
+                    'styles/css/myProjects.css',
+                    'styles/css/create-project.css',
+                    'styles/css/video_custom.css',
+                    'styles/css/_scss/redactor.css'
+                ]);
+            }],
             auth: function ($q, $rootScope, $stateParams) {
               if ($rootScope.globals.currentUser) {
                 return true;
@@ -44,14 +63,18 @@
         controller: 'viewProjectCtrl',
         controllerAs: 'vm',
         resolve: {
-            // FIXME: lazyload resolve in router don't find file after reload
-            /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/view-project.controller.client.js',
-                         'modules/projects/services/involvment.service.client.js',
-                         'modules/projects/controllers/involvmentSheet.controller.client.js'
+                         // css
+                         'styles/css/home.css',
+                         'styles/css/presentation.css',
+                         'styles/css/projects.css',
+                         'styles/css/myProjects.css',
+                         'styles/css/create-project.css',
+                         'styles/css/video_custom.css'
                      ]);
-            }],*/
+            }],
             projectResolve: function (Projects, $stateParams) {
                     return Projects.getProjectbyPublicIdUnresolved($stateParams.public_id);
             },
@@ -98,7 +121,28 @@
         url: '/project/:public_id/update',
         templateUrl: 'modules/projects/views/update/update_project.view.client.html',
         controller: 'UpdateProjectCtrl',
-        resolve:{ auth: function($q, $stateParams, Projects, $http) {
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                         'modules/projects/controllers/update_project.controller.client.js',
+                         'controllers/projects/modal/add-user-project.controller.client.js',
+                         'controllers/projects/modal/add-needs.controller.client.js',
+                         'controllers/projects/modal/add-question-project.controller.client.js',
+                         'controllers/projects/modal/upload-poster.controller.client.js',
+                         'scripts/draggable_background.js',
+                         'controllers/projects/modal/delete-project.controller.client.js',
+                         'scripts/redactor/redactor.js',
+                         // css
+                         'styles/css/home.css',
+                         'styles/css/presentation.css',
+                         'styles/css/projects.css',
+                         'styles/css/myProjects.css',
+                         'styles/css/create-project.css',
+                         'styles/css/video_custom.css',
+                         'styles/css/_scss/redactor.css'
+                     ]);
+            }],
+            auth: function($q, $stateParams, Projects, $http) {
                         return $http.get('/project/'+ $stateParams.public_id + '/auth').then(function(response) {
                           if (response.data.message === 'success') {
                             return true;
@@ -135,11 +179,14 @@
         controller: 'MyProjectCtrl',
         controllerAs: 'vm',
         resolve: {
-            /*loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/my-project.controller.client.js',
+                         // css
+                         'styles/css/presentation.css',
+                         'styles/css/myProjects.css',
                      ]);
-            }],*/
+            }],
             auth: function ($q, $rootScope, $state) {
               if ($rootScope.globals.currentUser) {
                 return true;

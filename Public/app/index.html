@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" id="main-body" data-ng-app="wittyApp" data-ng-controller="HeadCtrl">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="fragment" content="!">
     <title ng-bind="seo.pageTitle"></title>
@@ -25,9 +25,9 @@
     <link rel="publisher" href="https://plus.google.com/104066516895208794319/about" />
 
     <style>
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-        }
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+    }
     </style>
 
     <base href="/">
@@ -39,33 +39,19 @@
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
 
     <!-- endbuild -->
-    <!-- build:css(.tmp) styles/css/main.css -->
-    <link rel="stylesheet" href="styles/css/main.css" />
-    <link rel="stylesheet" href="styles/css/projects.css" />
-    <link rel="stylesheet" href="styles/css/signup.css" />
-    <link rel="stylesheet" href="styles/css/home.css" />
-    <link rel="stylesheet" href="styles/css/myProjects.css" />
-    <link rel="stylesheet" href="styles/css/custom-select.css" />
-    <link rel="stylesheet" href="styles/css/create-project.css" />
-    <link rel="stylesheet" href="styles/css/messaging.css" />
-    <link rel="stylesheet" href="styles/css/footer.css" />
-    <link rel="stylesheet" href="styles/css/bfooter.css" />
-    <link rel="stylesheet" href="styles/css/profiles.css" />
-    <link rel="stylesheet" href="styles/css/profiles-modal-edit.css" />
-    <link rel="stylesheet" href="styles/css/setting.css" />
-    <link rel="stylesheet" href="styles/css/header.css" />
-    <link rel="stylesheet" href="styles/css/witty-animate.css" />
-    <link rel="stylesheet" href="styles/css/animate.css">
-    <link rel="stylesheet" href="styles/css/_scss/redactor.css" />
-    <link rel="stylesheet" href="styles/css/presentation.css" />
-    <link rel="stylesheet" href="styles/css/modal.css" />
-    <link rel="stylesheet" href="styles/css/card.css" />
-    <link rel="stylesheet" href="styles/css/video_custom.css" />
-    <link rel="stylesheet" href="styles/css/terms.css" />
-    <link rel="stylesheet" href="styles/css/popover.css" />
-    <link rel="stylesheet" href="styles/css/reset.css"  />
-    <link rel="stylesheet" href="styles/css/mobile-modal.css" />
-    <link rel="stylesheet" href="styles/css/presentation-mobile-modal.css" />
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/signup.css" />
+    <link rel="stylesheet" href="styles/custom-select.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/bfooter.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/witty-animate.css" />
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/modal.css" />
+    <link rel="stylesheet" href="styles/mobile-modal.css" />
+    <link rel="stylesheet" href="styles/card.css" />
+    <link rel="stylesheet" href="styles/popover.css" />
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -91,27 +77,24 @@
         window.prerenderReady = false;
 
     </script>
-    <script src="http://localhost:8001/vogue-client.js" 
-        type="text/javascript">
-</script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </head>
   <body class="cbp-spmenu-push">
     <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
     <![endif]-->
-        <div id="page-wrap"></div>
-        <section id="modal-section">
-            <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
-            <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-            <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
-            <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
-        </section>
-        <section id="body-section">
-            <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-            <section id="bodyCore" ui-view autoscroll="true"></section>
-            <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
-        </section>
+    <div id="page-wrap"></div>
+    <section id="modal-section">
+        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
+        <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
+    </section>
+    <section id="body-section">
+        <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+    </section>
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
     <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
@@ -123,16 +106,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.js"></script>
-<!--     <script src=""></script>
-    <script src=""></script>
-    <script src=""></script>
-    <script src=""></script>
-    <script src=""></script>
-    <script src=""></script>
-    <script src=""></script> -->
-
-<!--     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
- -->    <!-- build:js(.) scripts/vendor.js -->
+	<!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -149,7 +123,7 @@
     <script src="bower_components/videogular-poster/vg-poster.js"></script>
     <script src="bower_components/videogular-ima-ads/vg-ima-ads.js"></script>
     <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
-    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.js"></script>
+    <script src="bower_components/cloudinary-jquery-file-upload/cloudinary-jquery-file-upload.min.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
     <script src="bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
     <script src="bower_components/classie/classie.js"></script>
@@ -163,7 +137,7 @@
     <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script> 
+    <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
     <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
     <!-- endbuild -->
 
@@ -178,9 +152,10 @@
     <script text="text/javascript" src="modules/validate-account/config/validate-account.config.client.js"></script>
     <!-- routes -->
     <script text="text/javascript" src="modules/projects/routes/projects.routes.client.js"></script>
+    <script text="text/javascript" src="modules/validate-account/routes/validate-account.routes.client.js"></script>
+
     <!-- services -->
     <script src="scripts/socket.io.js"></script>
-    <script src="scripts/redactor/redactor.js"></script>
     <script src="services/GetData.service.client.js"></script>
     <script src="services/users.service.client.js"></script>
     <script src="services/authentication.service.client.js"></script>
@@ -199,32 +174,14 @@
     <script src="services/locations.service.client.js"></script>
     <script src="services/picture.service.client.js"></script>
     <!-- Controllers -->
-    <script src="controllers/main.js"></script>
     <script src="controllers/head.js"></script>
     <script src="controllers/auth/login.controller.client.js"></script>
     <script src="controllers/auth/signup.controller.client.js"></script>
     <script src="controllers/core/header.controller.client.js"></script>
-    <script src="controllers/users/users.controller.client.js"></script>
     <script src="controllers/auth/signup_modal.controller.client.js"></script>
-    <script src="controllers/profile/profile.controller.client.js"></script>
-    <script src="controllers/profile/modal-controller/about-modal.controller.client.js"></script>
-    <script src="controllers/profile/modal-controller/add-experiences-modal.controller.client.js"></script>
-    <script src="controllers/profile/modal-controller/edit-experiences-modal.controller.client.js"></script>
-    <script src="controllers/profile/modal-controller/skills-modal.controller.client.js"></script>
-    <script src="controllers/profile/modal-controller/interest-modal.controller.client.js"></script>
-    <script src="controllers/projects/create_project.controller.client.js"></script>
-    <script src="controllers/setting/setting.controller.client.js"></script>
     <script src="controllers/messaging/messaging.controller.client.js"></script>
-    <script src="controllers/presentation/meet.controller.client.js"></script>
-    <script src="controllers/presentation/discover.controller.client.js"></script>
-    <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
-    <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
-    <script src="controllers/projects/modal/upload-poster.controller.client.js"></script>
     <!-- MODULE PROJECT -->
-    <script src="modules/projects/controllers/view-project.controller.client.js"></script>
     <script src="modules/projects/controllers/involvmentSheet.controller.client.js"></script>
-    <script src="modules/projects/controllers/my-project.controller.client.js"></script>
-    <script src="modules/projects/controllers/update_project.controller.client.js"></script>
     <script src="modules/projects/services/projects.service.client.js"></script>
     <script src="modules/projects/services/project_follow.service.client.js"></script>
     <script src="modules/projects/services/project_history.service.client.js"></script>
@@ -232,21 +189,10 @@
     <script src="modules/projects/services/feedbacks.service.client.js"></script>
     <script src="modules/projects/services/needs.service.client.js"></script>
     <!-- MODULE VALIDATE ACCOUNT -->
-    <script src="modules/validate-account/routes/validate-account.routes.client.js"></script>
-    <script src="modules/validate-account/controller/validate-account.controller.client.js"></script>
-
     <script src="controllers/notification/notification.controller.client.js"></script>
-    <script src="controllers/projects/modal/add-user-project.controller.client.js"></script>
-    <script src="controllers/projects/modal/add-question-project.controller.client.js"></script>
-    <script src="controllers/presentation/discover.controller.client.js"></script>
-    <script src="controllers/projects/modal/add-needs.controller.client.js"></script>
-    <script src="controllers/projects/modal/delete-project.controller.client.js"></script>
-    <script src="controllers/core/reset-password.controller.client.js"></script>
 
-	  <!-- directives -->
+    <!-- directives -->
     <script src="directives/uisrefif.directive.client.js"></script>
-    <!-- script custom -->
-    <script src="scripts/draggable_background.js"></script>
     <!-- endbuild -->
 
     <!-- DOM -->

@@ -40,10 +40,16 @@
 
         function getFollowedUser(list, callback) {
             $http.get('/user_followed').success(function(res)  {
-                res.list = list;
-                $http.post('/user_followed/get/list', res).success(function(res) {
-                    callback(res);
-                });
+                if (list.data) {
+                    res.list = list.data;
+                } else {
+                    res.list = list;
+                }
+                if (list) {
+                    $http.post('/user_followed/get/list', res).success(function(res) {
+                        callback(res);
+                    });
+                }
             });
         };
 

@@ -1,136 +1,110 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name wittyApp.controller: MeetCtrl
- * @description
- * # MeetCtrl
- * Controller of the wittyApp
- **/
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve) {
 
+	var meet = this;
+	var ww = $(window).width();
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData) {
+	/* global var */
+	meet.limit = 12;
+	meet.mmobile = {};
+	meet.mHelp = "Anything";
+	meet.count = -1;
+	meet.skillList = [];
+	meet.skillListM = [];
 
+	/* functions */
+	meet.openmmodal = openmmodal;
+	meet.closemmodal = closemmodal;
+	meet.getAnything = getAnything;
+	meet.getCardProfiles = getCardProfiles;
+	meet.getSkills = getSkills;
+	meet.searchSkill = searchSkill;
+	meet.removeSkill = removeSkill;
+	meet.goToProfile = goToProfile;
+	meet.followUserFromCard = followUserFromCard;
+	meet.expand = expand;
+
+	getSkills();
+	getCardProfiles();
 
 	/*** Meet Card Page ***/
-		$scope.$parent.seo = {
-			pageTitle: "Wittycircle | Meet",
-			pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
-		};
+	$scope.$parent.seo = {
+		pageTitle: "Wittycircle | Meet",
+		pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+	};
 
-		$scope.$parent.card = {
-			title: "Wittycircle | Meet",
-			url: "https://www.wittycircle.com/meet",
-			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
-		};
+	$scope.$parent.card = {
+		title: "Wittycircle | Meet",
+		url: "https://www.wittycircle.com/meet",
+		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
+	};
 
 	/*** Discover Mobile ***/
-	var ww = $(window).width();
-	$scope.mmobile = {};
-
-	$scope.openmmodal = function(value) {
-		
+	function openmmodal (value) {
 		if (ww <= 736) {
 			$('body').css('overflow-y', 'hidden');
-			$scope.mmobile.modal	= value;
+			meet.mmobile.modal	= value;
 			if (value === 1)
-				$scope.mmobile.headerText = "Someone with specific skills?";
+				meet.mmobile.headerText = "Someone with specific skills?";
 			if (value === 2)
-				$scope.mmobile.headerText = "Show me people looking to...";
-			// if (value === 3)
-			// 	$scope.mmobile.headerText = "Show me projects near...";
-			$scope.mmobile.general 	= true;
+				meet.mmobile.headerText = "Show me people looking to...";
+			meet.mmobile.general 	= true;
 		} else {
 			if (value === 2)
-				$('#msdbox2').toggle();
+			$('#msdbox2').toggle();
 		}
-	};
+	}
 
-	$scope.closemmodal = function() {
+	function closemmodal () {
 		$('#mmmodal').css("display", "none");
 		$('body').css('overflow-y', 'scroll');
-		$scope.mmobile.general 	= false;
+		meet.mmobile.general = false;
 	}
 
-	RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
-		$scope.cardProfiles = result.data;
-		if ($rootScope.globals.currentUser) {
-			Profile.getFollowedUser(result.data, function(res){
-				$scope.followed = res;
-			});
-		}	
-	});
-
-	$scope.limit = 12;
-	
-	$http.get('/skills').success(function(res) {
-		$scope.skills = res.skills;
-		if ($stateParams.skillParams) {
-			$scope.skillList = $stateParams.skillParams;
-		}
-	});
-
-	$scope.resizePicSmall = function(url) {
-		url = Picture.resizePicture(url, 200, 100, "fill");
-		return url;
+	function getCardProfiles () {
+		if (cardProfilesResolve.data) {
+			meet.cardProfiles = cardProfilesResolve.data.data;
+			if ($rootScope.globals.currentUser) {
+				Profile.getFollowedUser(cardProfilesResolve.data, function(res){
+					meet.followed = res;
+				});
+			}
+		};
 	}
 
-	$scope.expand = function(value) {
-		$scope.limit = $scope.limit + value;
-	};
-
-	// $scope.$on("$destroy", function(){
-	// 	var container = $('.custom-popover');
-	// 	if (container.length) {
-	// 		$mdBottomSheet.hide();
-	// 		$('.md-bottom-sheet-backdrop').css('display', 'none')
-	// 		$('#page-wrap').css('display', 'none');
+	// $http.get('/user/card/profiles').then(function(result) {
+	// 	meet.cardProfiles = result.data.data;
+	// 	if ($rootScope.globals.currentUser) {
+	// 		Profile.getFollowedUser(result.data, function(res){
+	// 			console.log(res);
+	// 			meet.followed = res;
+	// 		});
 	// 	}
 	// });
 
-	/*****-- FUNCTION --*****/
-	// setTimeout(function() {
-	//     if (!$rootScope.globals.currentUser) {
-	//   		$(window).scroll(function () {
-	//   			if ($('#meet-body-page')[0]) {
-	//   				var x = $(window).scrollTop();
-	//   				var container = $('.custom-popover');
-	//   				if (x > 350) {
-	//   					if (!container.length) {
-	//   						$mdBottomSheet.hide();
-	//   						showbottomAlert.pop_it_persistance();
-	//   						setTimeout(function() {
-	//   							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
-	//   							$('#page-wrap').css('display', 'block');
-	//   						}, 150);
-	//   					}
-	//   				}
-	//   				if (x < 350) {
-	//   					if (container.length) {
-	//   						$mdBottomSheet.hide();
-	//   						$('.md-bottom-sheet-backdrop').css('display', 'none')
-	//   						$('#page-wrap').css('display', 'none');
-	//   					}
-	//   				}
-	//   			}
-	//   		});
-	//     }
-	// }, 1000);
+	function getSkills () {
+		if (getSkillsResolve.data) {
+			meet.skills = getSkillsResolve.data.skills;
+			if ($stateParams.skillParams) {
+				meet.skillList = $stateParams.skillParams;
+			}
+		}
+	}
 
-	$scope.mHelp = "Anything";
-	$scope.getAnything = function(help) {
-		$scope.mHelp = help;
+	function expand (value) {
+		meet.limit = meet.limit + value;
+	};
+
+	function getAnything (help) {
+		meet.mHelp = help;
 		if (ww <= 736)
-			$scope.closemmodal();
+		closemmodal();
 	};
 
 	/*** SECTION SEARCH MEET ***/
-	$scope.count = -1;
-	$scope.skillList = [];
-	$scope.skillListM = [];
-
-	$scope.searchSkill = function(name) {
-		$scope.skillName = [];
+	function searchSkill (name) {
+		meet.skillName = [];
 
 		if (ww > 736) {
 			if (document.getElementById('labelNoText')) {
@@ -142,104 +116,101 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			document.getElementById('msabox1').style.display = "none";
 			document.getElementById('msabox2').style.display = "none";
 
-			if ($scope.skillList.length < 5) {
-				if ($scope.skillList.length == 0) {
-					$scope.skillList.push({sName: name});
+			if (meet.skillList.length < 5) {
+				if (meet.skillList.length == 0) {
+					meet.skillList.push({sName: name});
 					document.getElementById('input-msa').style.display = "none";
 
 				}
 				else {
-					for(var i = 0; i < $scope.skillList.length; i++) {
-						if ($scope.skillList[i].sName === name)
-							break;
+					for(var i = 0; i < meet.skillList.length; i++) {
+						if (meet.skillList[i].sName === name)
+						break;
 					}
-					if (i == $scope.skillList.length) {
-						$scope.skillList.push({sName: name});
+					if (i == meet.skillList.length) {
+						meet.skillList.push({sName: name});
 						document.getElementById('input-msa').style.display = "none";
 					}
 				}
 			}
-			if ($scope.skillList.length == 5)
-				$scope.fullList = true;
+			if (meet.skillList.length == 5)
+			meet.fullList = true;
 
-			$http.post('/search/users', $scope.skillList).success(function(res) {
-				$scope.skillSearch = res.data;
+			$http.post('/search/users', meet.skillList).success(function(res) {
+				meet.skillSearch = res.data;
 			});
-
 		} else {
 
-			if ($scope.skillListM.length < 5) {
-				if ($scope.skillListM.length === 0) {
-					$scope.skillListM.push({sName: name});
+			if (meet.skillListM.length < 5) {
+				if (meet.skillListM.length === 0) {
+					meet.skillListM.push({sName: name});
 				}
 				else {
-					for(var i = 0; i < $scope.skillListM.length; i++) {
-						if ($scope.skillListM[i].sName === name)
-							break;
+					for(var i = 0; i < meet.skillListM.length; i++) {
+						if (meet.skillListM[i].sName === name)
+						break;
 					}
-					if (i == $scope.skillListM.length) {
-						$scope.skillListM.push({sName: name});
+					if (i == meet.skillListM.length) {
+						meet.skillListM.push({sName: name});
 					}
 				}
 			}
 
-			$http.post('/search/users', $scope.skillListM).success(function(res) {
-				$scope.skillSearch = res.data;
+			$http.post('/search/users', meet.skillListM).success(function(res) {
+				meet.skillSearch = res.data;
 			});
 		}
-
 	}
 
-	$scope.removeSkill = function(name) {
-
+	function removeSkill (name) {
 		var index;
 
 		if (ww > 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
-			
-			for (var i = 0; i < $scope.skillList.length; i++) {
-				if ($scope.skillList[i].sName === name) {
+
+			for (var i = 0; i < meet.skillList.length; i++) {
+				if (meet.skillList[i].sName === name) {
 					x[i].className = "meet-skill-list animated fadeOut";
 					index = i;
 					break ;
 				}
 			}
 			if (index >= 0)
-				$scope.skillList.splice(index, 1);
-			if ($scope.skillList.length < 5)
-				$scope.fullList = false;
-			if($scope.skillList[0]) {
-				$http.post('/search/users', $scope.skillList).success(function(res) {
-					$scope.skillSearch = res.data;
+			meet.skillList.splice(index, 1);
+			if (meet.skillList.length < 5)
+			meet.fullList = false;
+			if(meet.skillList[0]) {
+				$http.post('/search/users', meet.skillList).success(function(res) {
+					meet.skillSearch = res.data;
 				});
 			} else
-				$scope.skillSearch = [];
+			meet.skillSearch = [];
 		} else {
-			for (var i = 0; i < $scope.skillListM.length; i++) {
-				if ($scope.skillListM[i].sName === name) {
+			for (var i = 0; i < meet.skillListM.length; i++) {
+				if (meet.skillListM[i].sName === name) {
 					index = i;
 					break ;
 				}
 			}
 			if (index >= 0)
-				$scope.skillListM.splice(index, 1);
-			if($scope.skillListM[0]) {
-				$http.post('/search/users', $scope.skillListM).success(function(res) {
-					$scope.skillSearch = res.data;
+			meet.skillListM.splice(index, 1);
+			if(meet.skillListM[0]) {
+				$http.post('/search/users', meet.skillListM).success(function(res) {
+					meet.skillSearch = res.data;
 				});
 			} else
-				$scope.skillSearch = [];
+			meet.skillSearch = [];
 		}
 	}
 
 	/*** SECTION PROFILE CARD ***/
-	$scope.goToProfile = function(id) {
-	    Users.getUserIdByProfileId(id).then(function(data) {
-		$location.path('/' + data.userId.username);
-	    });
+	function goToProfile (id) {
+		Users.getUserIdByProfileId(id).then(function(data) {
+			$location.path('/' + data.userId.username);
+		});
 	};
-    
-	$scope.followUserFromCard = function(id, index, $event) {
+
+	function followUserFromCard (id, index, $event) {
 		if (!$rootScope.globals.currentUser) {
 			showbottomAlert.pop_it();
 		} else {
@@ -248,9 +219,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					Profile.followUser(data.userId.username, function(res) {
 						if (res.success) {
 							if (res.msg === "User followed")
-							$scope.followed[index] = true;
+							meet.followed[index] = true;
 							else
-							$scope.followed[index] = false;
+							meet.followed[index] = false;
 						}
 					});
 				}
@@ -259,7 +230,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	};
 
 	/*** Search Section ***/
-	$scope.$watchGroup(['mHelp', 'skillSearch', 'searchML'], function(value) {
+	$scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function(value) {
 		if (value) {
 
 			$('#ldm').css('display', 'block');
@@ -278,22 +249,22 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			if (value[1] && value[1][0]) {
 				$http.put('/search/users', object).success(function(res) {
 					if (res.success) {
-						$scope.cardProfiles = res.data;
+						meet.cardProfiles = res.data;
 						if ($rootScope.globals.currentUser) {
-							Profile.getFollowedUser(res.data, function(res){
-								$scope.followed = res;
+							Profile.getFollowedUser(res, function(res){
+								meet.followed = res;
 							});
-						}	
+						}
 					}
 				});
 			} else {
 				if (value[0] !== "Anything" || value[2]) {
 					$http.post('/search/users/al', object).success(function(res) {
 						if (res.success)
-							$scope.cardProfiles = res.data;
+						meet.cardProfiles = res.data;
 						if ($rootScope.globals.currentUser) {
-							Profile.getFollowedUser(res.data, function(res){
-								$scope.followed = res;
+							Profile.getFollowedUser(res, function(res){
+								meet.followed = res;
 							});
 						}
 					});
@@ -326,8 +297,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 })
 .directive('preGoLocation', function() {
 	return {
-    	require: 'ngModel',
-	    link: function(scope, element, attrs, model) {
+		require: 'ngModel',
+		link: function(scope, element, attrs, model) {
 			var options = {
 				types: ['(cities)'],
 			};
@@ -350,26 +321,26 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 						var x = scope.meetLocation.length;
 					} else {
 						var x = value.length,
-							y = $(window).width();
+						y = $(window).width();
 						if (x > 11) {
 							$("#msai").css('width', function() {
 								var el = $('<span />', {
-								text : value,
-								css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
+									text : value,
+									css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
 								}).appendTo('body');
 								var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 20;
 								el.remove();
 								if (w < 200)
-									return "200px";
+								return "200px";
 								if (y > 736)
-									return w.toString() + "px";
+								return w.toString() + "px";
 								else
-									return "260px";
+								return "260px";
 							});
 						}
 					}
 				}
 			});
-    	}	
+		}
 	}
 });

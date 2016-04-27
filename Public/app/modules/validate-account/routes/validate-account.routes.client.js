@@ -10,6 +10,13 @@
         controller: 'ValidateAccountCtrl',
         controllerAs: 'vm',
         resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                         'modules/validate-account/controller/validate-account.controller.client.js',
+                         // css
+                         'styles/css/messaging.css'
+                     ]);
+            }],
             valid: function ($http, $stateParams) {
                 return $http.get('/user/valid/' + $stateParams.token);
             }

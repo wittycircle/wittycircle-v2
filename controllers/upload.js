@@ -3,7 +3,7 @@ var multer = require('multer');
 var fs = require('fs');
 
 exports.uploadPhoto = function(req, res) {
-    cloudinary.uploader.upload(req.body.url, function(result) {  
+    cloudinary.uploader.upload(req.body.url, function(result) {
 	res.send(result);
     });
 };
@@ -40,7 +40,7 @@ exports.uploadProfileCard = function(req, res) {
 
 exports.uploadVideoProject = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
-	   res.send(result); 
+	   res.send(result);
     }, {
 	resource_type: "video" });
 };
@@ -63,7 +63,7 @@ exports.deleteVideoProject = function(req, res) {
                   res.status(200).send(result) }, {
                       resource_type: "video" });
         }
-      });  
+      });
     }
 };
 
@@ -78,7 +78,7 @@ exports.resizePhoto = function(req, res) {
     if (errors) {
 	return res.status(400).send(errors);
     } else {
-	return res.send(cloudinary.url(req.param.public_id, {width: req.param.width, height: req.param.height, crop: req.param.crop}));	
+	return res.send(cloudinary.url(req.param.public_id, {width: req.param.width, height: req.param.height, crop: req.param.crop}));
     }
 };
 
@@ -89,7 +89,7 @@ exports.redactorImage = function(req, res) {
         body += chunk;
     }).on('end', function() {
          cloudinary.uploader.upload(body, function(result) {
-            res.send({url: result.secure_url});
-        }, {width: 800, crop: 'fill', format: 'jpg'});     
+            return res.send({url: result.secure_url});
+        }, {width: 800, crop: 'fill', format: 'jpg'});
     });
 };

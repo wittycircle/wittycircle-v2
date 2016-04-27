@@ -376,7 +376,7 @@
 			});
 		};
 		function searchHelpF(val, object) {
-			RetrieveData.ppdData('/search/projects/help/', 'POST', object, val).success(function(res) {
+			RetrieveData.ppdData('/search/projects/help/', 'POST', object, val).then(function(res) {
 				if (!res.success) return getDiscoverCard();
 				discover.cards = res.data;
 			});

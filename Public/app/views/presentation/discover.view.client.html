@@ -95,7 +95,7 @@
 					</aside>
 					<aside id="dsabox2" class="discover-search2-downbox1 downbox" style="display: none">
 						<ul>
-							<li ng-click="discover.searchSkill(skillS.name)" ng-repeat="skillS in discover.skills | filter: discover.skillName | limitTo: 5">{{skillS.name}}</li>
+							<li ng-click="discover.searchSkill(skillS.name)" ng-repeat="skillS in discover.skills | wordsFilter: discover.skillName | limitTo: 5">{{ skillS.name}}</li>
 							<span ng-show="!(discover.skills | filter: discover.skillName).length">No skill found...</span>
 						</ul>
 					</aside>

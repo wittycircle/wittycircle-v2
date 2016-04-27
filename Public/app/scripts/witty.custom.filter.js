@@ -360,5 +360,27 @@ angular.module('wittyApp')
         	return text;
         }
     };
+})
+.filter('wordsFilter', function() {
+   return function(items, word) {
+    var filtered = [], 
+    	lowerword;
+    var	wordLower = !word || !word[0] ? null : word.toLowerCase();
+
+    angular.forEach(items, function(item) {
+    	lowerword = item.name.toLowerCase();
+        if(lowerword.indexOf(wordLower) !== -1){
+            filtered.push(item);
+        }
+    });
+
+    filtered.sort(function(a,b){
+        if(a.name.indexOf(wordLower) < b.name.indexOf(wordLower)) return -1;
+        else if(a.name.indexOf(wordLower) > b.name.indexOf(wordLower)) return 1;
+        else return 0;
+    });
+
+    return filtered;
+  };
 });
 

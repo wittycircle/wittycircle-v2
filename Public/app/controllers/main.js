@@ -203,7 +203,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
 
         function savedata($event) {
             if (!main.currentUser) {
-                showbottomAlert.pop_it();
+                showbottomAlert.pop_it($event);
             }
             else {
                 var data          = {},

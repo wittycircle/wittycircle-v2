@@ -36,15 +36,6 @@ var wittyCircleApp = angular
         templateUrl : 'views/main.html',
         controller  : 'MainCtrl',
         controllerAs: 'main',
-        resolve: {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/main.js',
-                         // css
-                         'styles/css/home.css'
-                     ]);
-            }]
-        }
     })
     .state('discover', {
         url         : '/discover',
@@ -58,8 +49,7 @@ var wittyCircleApp = angular
                          'controllers/presentation/discover.controller.client.js',
                          // css
                          'styles/css/presentation.css',
-                         'styles/css/presentation-mobile-modal.css',
-                         'styles/css/home.css'
+                         'styles/css/presentation-mobile-modal.css'
                      ]);
             }]
         }
@@ -76,8 +66,7 @@ var wittyCircleApp = angular
                          'controllers/presentation/meet.controller.client.js',
                          // css
                          'styles/css/presentation.css',
-                         'styles/css/presentation-mobile-modal.css',
-                         'styles/css/home.css'
+                         'styles/css/presentation-mobile-modal.css'
                      ]);
             }],
             cardProfilesResolve: function (Users) {
@@ -111,7 +100,6 @@ var wittyCircleApp = angular
                          // css
                          'styles/css/presentation.css',
                          'styles/css/presentation-mobile-modal.css',
-                         'styles/css/home.css',
                          'styles/css/reset.css'
                      ]);
             }],
@@ -169,7 +157,6 @@ var wittyCircleApp = angular
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          // css
-                         'styles/css/home.css',
                          'styles/css/terms.css'
                      ]);
             }]
@@ -182,7 +169,6 @@ var wittyCircleApp = angular
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          // css
-                         'styles/css/home.css',
                          'styles/css/terms.css',
                      ]);
             }]
@@ -217,12 +203,11 @@ var wittyCircleApp = angular
                          'controllers/profile/modal-controller/interest-modal.controller.client.js',
                          // css
                          'styles/css/profiles.css',
-                         'styles/css/profiles-modal-edit.css',
-                         'styles/css/home.css'
+                         'styles/css/profiles-modal-edit.css'
                      ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
-                Profile.getUserbyUsername($stateParams.username).then(function(res) {
+                return Profile.getUserbyUsername($stateParams.username).then(function(res) {
                     if (res) {
                         return true;
                     } else {
@@ -234,12 +219,15 @@ var wittyCircleApp = angular
                             $state.go('meet');
                         }// if (!res && $stateParams.username === "work") {
                             //   $state.go('work');}
-                            if (!res && $stateParams.username === "messages") {
-                                $state.go('messages');
-                            } if (!res && $stateParams.username === "my-projects") {
-                                $state.go('my-projects');
-                            }
-                        }
+                        if (!res && $stateParams.username === "messages") {
+                            $state.go('messages');
+                        } 
+			if (!res && $stateParams.username === "my-projects") {
+                            $state.go('my-projects');
+			} else {
+			    $state.go('/');
+			}
+                    }
                     });
                 }
             }

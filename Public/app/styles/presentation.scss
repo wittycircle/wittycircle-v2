@@ -211,12 +211,14 @@
 /****** Discover ******/
 
 #discover-body-page {
-	.home-video-bg {
-		background-image: url('images/poster/poster_discover.jpg');
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: cover;
-	}
+	.body-page {
+		   height: auto;
+		   width: 100%;
+		background-image: url('/images/poster/poster_discover.jpg');
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: cover;
+	}	
 }
 .discover-component {
 	.discover-search1 {
@@ -560,8 +562,10 @@
 /****** Meet ******/
 
 #meet-body-page {
-	.home-video-bg {
-		background-image: url('images/poster/poster_discover.jpg');
+	.body-page {
+		   height: auto;
+		   width: 100%;
+		background-image: url('images/poster/poster_meet.jpg');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;

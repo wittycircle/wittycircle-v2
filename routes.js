@@ -10,6 +10,7 @@ app.get('/users', users.getUsers);
 app.get('/profiles', users.getProfiles);
 app.get('/user/:id', users.getUser);
 app.get('/user/card/profiles', users.getCardProfile);
+app.get('/user/card/profiles/home', users.getCardProfileHome);
 app.get('/user_email/:email', users.getUserbyEmail);
 app.get('/username/:username', users.getUserbyUsername);
 app.get('/users/search/:search', users.searchUser);

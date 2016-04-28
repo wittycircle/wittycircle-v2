@@ -98,7 +98,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
             $timeout(hello, 400);
         });
 
-        RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
+        RetrieveData.getData('/user/card/profiles/home', 'GET').then(function(result) {
             main.cardProfiles = result.data;
             if (main.currentUser) {
                 Profile.getFollowedUser(result.data, function(res){

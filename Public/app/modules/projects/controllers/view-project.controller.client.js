@@ -206,9 +206,10 @@
                     return;
                 }
                 if (id !== currentUser.id) {
-                    Users.getUserbyId(id, function (res) {
-                        $state.go('messages', {profile: res.profile, user_id: res.data.id, username: res.data.username});
-                    });
+                   Users.getUserIdByProfileId(id).then(function(res) {
+		       if (res.success)
+			   $state.go('messages', {profile: vm.project.user, user_id: res.userId.id, username: res.userId.username});
+		   });
                 }
             } else {
                 console.error('error in goToMessage in ViewProjectCtrl: no id is provided');

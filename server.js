@@ -143,12 +143,12 @@ require('./algolia')(app, algoliaClient);
 
 /* Socket */
 var ps = https.createServer(httpsOption, app);
-//var io = require('socket.io')(server);
- var io = require('socket.io').listen(ps);
+var io = require('socket.io')(server);
+// var io = require('socket.io').listen(ps);
 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-//server.listen(80);
- ps.listen(443);
+server.listen(80);
+ // ps.listen(443);

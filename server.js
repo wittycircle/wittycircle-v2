@@ -31,12 +31,12 @@ var httpsOption		= {
     honorCipherOrder: true,
 };
 
+app.use(compression());
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());
 // app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
-app.use(compression())
 
 app.use(session({
     store: new RedisStore({ host: '127.0.0.1', port: 80, client: client, ttl: 86400000}),
@@ -58,7 +58,7 @@ app.use(passport.session());
 app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/dist/styles/'));
 //app.use(express.static(__dirname + '/Public/dist/scripts/'));
-//app.use(express.static(__dirname + '/Public/dist/'));
+// app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
 app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);

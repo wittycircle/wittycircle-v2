@@ -258,7 +258,9 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		if (!profileVm.currentUser)
 			showbottomAlert.pop_it();
 		else {
+			console.log(id);
 			Users.getUserbyId(id, function (res) {
+				console.log(res);
 				if (res.data.username)
 					$state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
 			});

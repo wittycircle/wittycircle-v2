@@ -168,8 +168,10 @@
     color: white; }
 
 /****** Discover ******/
-#discover-body-page .home-video-bg {
-  background-image: url("images/poster/poster_discover.jpg");
+#discover-body-page .body-page {
+  height: auto;
+  width: 100%;
+  background-image: url("/images/poster/poster_discover.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
@@ -415,8 +417,10 @@
     margin: 45px auto; }
 
 /****** Meet ******/
-#meet-body-page .home-video-bg {
-  background-image: url("images/poster/poster_discover.jpg");
+#meet-body-page .body-page {
+  height: auto;
+  width: 100%;
+  background-image: url("images/poster/poster_meet.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }

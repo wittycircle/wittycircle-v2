@@ -65,6 +65,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	function getCardProfiles () {
 		if (cardProfilesResolve.data) {
 			meet.cardProfiles = cardProfilesResolve.data.data;
+			console.log(meet.cardProfiles);
 			if ($rootScope.globals.currentUser) {
 				Profile.getFollowedUser(cardProfilesResolve.data, function(res){
 					meet.followed = res;

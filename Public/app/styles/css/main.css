@@ -52,6 +52,7 @@ button:focus {
   outline: 0; }
 
 a:hover {
+  color: white;
   text-decoration: none; }
 
 a:focus {

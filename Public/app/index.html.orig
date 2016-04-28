@@ -32,17 +32,20 @@
     </style>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+<<<<<<< HEAD
+    <!-- build:css(.) styles/css/css/vendor.css -->
+=======
 
-    <!-- build:css(.) styles/css/vendor.css -->
+    <!-- build:css(.) styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+>>>>>>> master
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <!-- endbuild -->
-
+<<<<<<< HEAD
     <!-- build:css(.tmp) styles/css/main.css -->
     <link rel="stylesheet" href="styles/css/main.css" />
-    <link rel="stylesheet" href="styles/css/home.css" />
     <link rel="stylesheet" href="styles/css/signup.css" />
     <link rel="stylesheet" href="styles/css/custom-select.css" />
     <link rel="stylesheet" href="styles/css/footer.css" />
@@ -54,6 +57,23 @@
     <link rel="stylesheet" href="styles/css/mobile-modal.css" />
     <link rel="stylesheet" href="styles/css/card.css" />
     <link rel="stylesheet" href="styles/css/popover.css" />
+=======
+
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/home.css" />
+    <link rel="stylesheet" href="styles/signup.css" />
+    <link rel="stylesheet" href="styles/custom-select.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/bfooter.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/witty-animate.css" />
+    <link rel="stylesheet" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/modal.css" />
+    <link rel="stylesheet" href="styles/mobile-modal.css" />
+    <link rel="stylesheet" href="styles/card.css" />
+    <link rel="stylesheet" href="styles/popover.css" />
+>>>>>>> master
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -78,6 +98,27 @@
             window.location.hash = "/";
         window.prerenderReady = false;
     </script>
+<<<<<<< HEAD
+    <noscript>Your browser does not support JavaScript!</noscript>
+  </head>
+  <body class="cbp-spmenu-push">
+    <!--[if lte IE 8]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
+    <![endif]-->
+    <div id="page-wrap"></div>
+    <section id="modal-section">
+        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
+        <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
+    </section>
+    <section id="body-section" ng-cloak>
+        <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+    </section>
+=======
+>>>>>>> master
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -123,8 +164,7 @@
     <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
     <!-- endbuild -->
 
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </head>
   <body class="cbp-spmenu-push">
@@ -138,12 +178,10 @@
         <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
         <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
     </section>
-    <section id="body-section" ng-cloak>
+    <section id="body-section">
         <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-        <div id="body-and-footer">
-            <section id="bodyCore" ui-view autoscroll="true"></section>
-            <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
-        </div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
     </section>
 
     <!-- algolia angular -->

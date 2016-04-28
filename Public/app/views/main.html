@@ -113,6 +113,7 @@
 								<ul>
 									<li ng-click="main.getShuffleProject('Idea', main.cardInfo.category_name)" >Idea</li>
 									<li ng-click="main.getShuffleProject('Drafted projects', main.cardInfo.category_name)" >Drafted projects</li>
+									<li ng-click="main.getShuffleProject('Beta projects', main.cardInfo.category_name)" >Beta projects</li>
 									<li ng-click="main.getShuffleProject('Live projects', main.cardInfo.category_name)" >Live projects</li>
 									<li ng-click="main.getShuffleProject('All projects', main.cardInfo.category_name)" >All projects</li>
 								</ul>
@@ -129,7 +130,7 @@
 							</div>
 							<aside id="mbbox2" class="main-body-downBox2" style="display: none">
 								<ul>
-									<li ng-repeat="category in main.categories" ng-click="main.getmain.shuffleCag(category.name, main.cardInfo.status)">{{category.name}}</li>
+									<li ng-repeat="category in main.categories" ng-click="main.getShuffleCag(category.name, main.cardInfo.status)">{{category.name}}</li>
 								</ul>
 							</aside>
 						</div>
@@ -245,7 +246,7 @@
 						</div>
 					</div>
 
-					<slick class="main-body2-body-mobile" init-onload=true data="main.projectCards" media="screen and (max-width: 735px)">
+					<slick class="main-body2-body-mobile" init-onload=true data="main.projectCards" media="screen and (max-width: 735px)" ng-if="mobile">
 
 						<div class="main-body2-card project-card" ng-repeat="projectCard in main.projectCards | limitTo: 3">
 							<div class="card-tag" ng-click="main.goToDiscover(projectCard.category_name)">
@@ -347,7 +348,7 @@
 						</div>
 					</div>
 
-					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)">
+					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)" ng-if="mobile">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles | limitTo: 4 track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
@@ -479,63 +480,6 @@
 		            }
 		        });
 
-		        /** Main slide carousel **/
-		        // $('.main-body2-card').slick({
-		            
-		            // variableWidth: true,
-		            // mobileFirst: true,
-		            // dots: true,
-		            // nextArrow: "",
-		            // swipeToSlide: true,
-		            // speed: 100,
-
-		            // responsive: [{
-		            //     breakpoint: 768,
-		            //     settings: {
-		            //         arrows: false,
-		            //         centerMode: true,
-		            //         centerPadding: '40px',
-		            //         slidesToShow: 3
-		            //     }
-		            // },
-		            // {
-		            //     breakpoint: 480,
-		            //     settings: {
-		            //         arrows: false,
-		            //         centerMode: true,
-		            //         centerPadding: '40px',
-		            //         slidesToShow: 1
-		            //     }
-		            // }]
-		        // });
-
-		        // $('.main-body3-card').slick({
-		        //     centerMode: true,
-		        //     centerPadding: '60px',
-		        //     variableWidth: true,
-		        //     mobileFirst: true,
-		        //     dots: true,
-		        //     speed: 100,
-
-		        //     responsive: [{
-		        //         breakpoint: 768,
-		        //         settings: {
-		        //             arrows: false,
-		        //             centerMode: true,
-		        //             centerPadding: '40px',
-		        //             slidesToShow: 3
-		        //         }
-		        //     },
-		        //     {
-		        //         breakpoint: 480,
-		        //         settings: {
-		        //             arrows: false,
-		        //             centerMode: true,
-		        //             centerPadding: '40px',
-		        //             slidesToShow: 1
-		        //         }
-		        //     }]
-		        // });
 		    }
 		});
 

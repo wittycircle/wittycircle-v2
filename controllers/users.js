@@ -129,7 +129,7 @@ exports.getUser = function(req, res){
     if (errors) {
         return res.status(400).send(errors);
     } else {
-        pool.query('SELECT `id`, `profile_id` FROM `users` WHERE `id` = ?',
+        pool.query('SELECT `id`, `profile_id` FROM `users` WHERE `profile_id` = ?',
         [req.params.id],
         function (err, results, fields) {
             if(err){
@@ -148,7 +148,7 @@ exports.getUser = function(req, res){
 	                        recursive(index + 1);
 	                    });
 	                } else {
-			    pool.query('SELECT id, email, username FROM `users` WHERE `id` = ?', [req.params.id],
+			    pool.query('SELECT id, email, username FROM `users` WHERE `profile_id` = ?', [req.params.id],
 				       	function(err, data) {
 				       		if (data[0])
 					   			res.send({success: true, profile: results[0].profile[0], data: data[0]});
@@ -162,7 +162,7 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
-    pool.query('SELECT * FROM `profiles` ORDER BY views DESC', function (err, results) {
+    pool.query('SELECT * FROM `profiles` ORDER BY creation_date DESC', function (err, results) {
         if (err) throw (err);
 	pf.sortCardProfile(results, function(array) {
 	    res.send({success: true, data: array});

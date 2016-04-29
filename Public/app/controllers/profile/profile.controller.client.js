@@ -158,7 +158,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			profileVm.followers            = res.data.length;
 		});
 
-		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername).then(function(res) {
+		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername, 0).then(function(res) {
 			if (res && res[0]) {
 				Experiences.getExperiences(res[0].id).then(function(res1) {
 					profileVm.experiences      = res1;
@@ -173,6 +173,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 				profileVm.profile            = res[0].profile[0];
 				if (profileVm.profile.cover_picture) {
 					$http.post('/picture/get/cover', {url: profileVm.profile.cover_picture}).success(function(res) {
+						console.log(res)
 						if (res.success && res.data[0])
 							profileVm.randomCover  = true;
 						else

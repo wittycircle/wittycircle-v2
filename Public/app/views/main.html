@@ -311,7 +311,7 @@
 						</div>
 					</div>
 					<div class="main-body3-body">
-						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles | limitTo: 4 track by $index">
+						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
 									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
@@ -349,7 +349,7 @@
 					</div>
 
 					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)" ng-if="mobile">
-						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles | limitTo: 4 track by $index">
+						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
 									<div class="card-profile-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60) }})'}">

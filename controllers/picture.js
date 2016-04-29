@@ -14,6 +14,24 @@ function transformUrlForCard(url) {
       }
 }
 
+exports.checkExistProfilePicture = function(req, res) {
+	req.checkParams('profileId', 'must be an integer').isInt();
+
+	var errors = req.validationErrors(true);
+	if (errors)	return res.status(400).send(errors);
+	else {
+		pool.query('SELECT profile_picture FROM profiles WHERE id = ?', req.params.profileId,
+			function(err, result) {
+				if (err) throw err;
+				console.log(result);
+				if (result[0].profile_picture)
+					return res.send({success: false});
+				else
+					return res.send({success: true});
+			});
+	}
+};
+
 exports.getRandomProfilePicture = function(req, res) {
     function recursive() {
 	var x = Math.floor((Math.random() * 16) + 1);

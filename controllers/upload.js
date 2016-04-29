@@ -2,11 +2,11 @@ var cloudinary = require('cloudinary');
 var multer = require('multer');
 var fs = require('fs');
 
-exports.uploadPhoto = function(req, res) {
-    cloudinary.uploader.upload(req.body.url, function(result) {
-	res.send(result);
-    });
-};
+// exports.uploadPhoto = function(req, res) {
+//     cloudinary.uploader.upload(req.body.url, function(result) {
+// 	res.send(result);
+//     });
+// };
 
 exports.uploadProjectCover = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {

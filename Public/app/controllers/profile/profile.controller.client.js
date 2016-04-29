@@ -199,18 +199,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			profileVm.imageProfileLoading           = true;
 			Upload.dataUrl(file, true).then(function(url){
 				data.url = url;
-				$http.post('/upload', data).success(function(res) {
-					$http.post('/upload/profile_pic_icon', data).success(function(res1) {
-						$http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
-							if (res2.success) {
-								init();
-								profileVm.reloadCredential();
-								profileVm.imageProfileLoading = false;
-							}
-						});
+				$http.post('/upload/profile_pic_icon', data).success(function(res1) {
+					$http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
+						if (res2.success) {
+							init();
+							profileVm.reloadCredential();
+							profileVm.imageProfileLoading = false;
+						}
 					});
-				}).error(function(res) {
-					console.log(res);
 				});
 			});
 		}
@@ -258,12 +254,10 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		if (!profileVm.currentUser)
 			showbottomAlert.pop_it();
 		else {
-			console.log(id);
-			Users.getUserbyId(id, function (res) {
-				console.log(res);
-				if (res.data.username)
-					$state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
-			});
+		    Users.getUserIdByProfileId(id).then(function(res) {
+			if (res.success)
+			    $state.go('messages', {profile: profileVm.profile, user_id: res.userId.id, username: res.userId.username});
+		    });
 		}
 	};
 

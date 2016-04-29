@@ -170,6 +170,15 @@ exports.getCardProfile = function(req, res) {
     });
 };
 
+exports.getCardProfileHome = function(req, res) {
+    pool.query('SELECT * FROM `profiles` ORDER BY views DESC LIMIT 4', function (err, results) {
+        if (err) throw (err);
+        pf.sortCardProfile(results, function(array) {
+            res.send({success: true, data: array});
+        });
+    });
+}
+
 exports.getUserbyEmail = function(req, res){
     req.checkParams('email', 'email parameter must be an integer.').isString().max(128).min(1);
 

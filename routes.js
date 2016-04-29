@@ -10,6 +10,7 @@ app.get('/users', users.getUsers);
 app.get('/profiles', users.getProfiles);
 app.get('/user/:id', users.getUser);
 app.get('/user/card/profiles', users.getCardProfile);
+app.get('/user/card/profiles/home', users.getCardProfileHome);
 app.get('/user_email/:email', users.getUserbyEmail);
 app.get('/username/:username', users.getUserbyUsername);
 app.get('/users/search/:search', users.searchUser);
@@ -269,7 +270,7 @@ app.post('/api/updatepasswordreset', auth.updatePasswordReset);
 
 /* Upload */
 var upload = require('./controllers/upload');
-app.post('/upload', ensureAuth, upload.uploadPhoto);
+// app.post('/upload', ensureAuth, upload.uploadPhoto);
 app.post('/upload/project/cover', ensureAuth, upload.uploadProjectCover);
 app.post('/upload/project/cover_card', ensureAuth, upload.uploadProjectCard);
 app.post('/upload/videos', upload.uploadVideoProject);
@@ -290,6 +291,7 @@ app.get('/history/project/:id', history.getUserProjectHistory);
 var picture = require('./controllers/picture');
 app.get('/picture/profile', ensureAuth, picture.getRandomProfilePicture);
 app.get('/picture/cover', ensureAuth, picture.getRandomCoverPicture);
+app.get('/picture/check/profile/:profileId', ensureAuth, picture.checkExistProfilePicture);
 app.post('/picture/get/cover', picture.getCoverPicture);
 
 /* Search */

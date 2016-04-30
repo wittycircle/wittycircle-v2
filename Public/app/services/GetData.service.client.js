@@ -36,7 +36,7 @@
 
             httpRequest.method      = method;
             httpRequest.url         = url;
-            httpRequest.cache       = cache === 0 ? false : true;
+            httpRequest.cache       = cache === 0 ? false: true;
             if (data)
                 httpRequest.data    = data;
             if (param)

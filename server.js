@@ -57,7 +57,7 @@ app.use(passport.session());
 
 app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/dist/styles/'));
-//app.use(express.static(__dirname + '/Public/dist/scripts/'));
+// app.use(express.static(__dirname + '/Public/dist/scripts/'));
 // app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/app/'));
 app.use(express.static(__dirname + '/Public/app/styles/css'));
@@ -151,4 +151,4 @@ require('./io')(app, io, ensureAuth);
 /* Start Server */
 //reload(server, app);
 server.listen(80);
- // ps.listen(443);
+// ps.listen(443);

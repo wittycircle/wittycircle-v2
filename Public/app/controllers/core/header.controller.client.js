@@ -335,6 +335,9 @@ angular.module('wittyApp')
 
   });
 
+  $scope.encodeUrl = function(url) {
+    return Beauty_encode.encodeUrl(url);
+  }
 
 /*** Search Bar ***/
   /* Public API Key */

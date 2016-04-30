@@ -30,13 +30,13 @@
             return data;
         }
 
-        function ppdData(url, method, data, param) {
+        function ppdData(url, method, data, param, cache) {
             var deferred = $q.defer();
             var httpRequest = {};
 
             httpRequest.method      = method;
             httpRequest.url         = url;
-            httpRequest.cache       = true;
+            httpRequest.cache       = cache === 0 ? false: true;
             if (data)
                 httpRequest.data    = data;
             if (param)

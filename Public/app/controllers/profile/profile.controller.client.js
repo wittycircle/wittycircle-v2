@@ -19,6 +19,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
+        profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
 
 	/* Vm Function */
 	profileVm.encodeUrl             = encodeUrl;
@@ -158,7 +159,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			profileVm.followers            = res.data.length;
 		});
 
-		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername).then(function(res) {
+		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername, 0).then(function(res) {
 			if (res && res[0]) {
 				Experiences.getExperiences(res[0].id).then(function(res1) {
 					profileVm.experiences      = res1;
@@ -180,6 +181,17 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 						$('#profile-header').css('background-image', "url('" + $rootScope.resizePic(profileVm.profile.cover_picture, 1200, 410, 'fill') + "')");
 					});
 				}
+			    /* SEO */
+			    $scope.$parent.seo = {
+				pageTitle: profileVm.profile.first_name + " " + profileVm.profile.last_name,
+				pageDescription: profileVm.profile.about,
+			    };
+			    
+			    $scope.$parent.card = {
+				title: profileVm.profile.first_name + " " + profileVm.profile.last_name,
+				url: profileVm.currentUrl,
+				image: $rootScope.resizePic(profileVm.profile.cover_picture, 500, 400, 'fill')
+			    };
 			} else {
 				console.log("error");
 				$location.path('/');
@@ -459,7 +471,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 				getProfileExp();
 		});
 	};
-
+    
 	console.timeEnd('loading profile');
 })
 .directive('profileLocationSearch', function($http, Locations) {

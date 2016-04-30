@@ -162,7 +162,8 @@
             <div class="header-find-title">
                 <h1>Projects</h1>
             </div>
-            <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility" ui-sref="viewproject({public_id: projectHit.public_id, title: encodeUrl(projectHit.title)})">
+            <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
+                <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
                 <div class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findProject-content">
                     <div class="header-findProject-title">
@@ -173,6 +174,7 @@
                         <h3>{{projectHit.category_name}}</h3>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="header-find-seemore">
                 <a href="/discover">See more projects</a>

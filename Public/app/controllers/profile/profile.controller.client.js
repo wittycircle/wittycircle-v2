@@ -19,6 +19,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
+	profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
 
 	/* Vm Function */
 	profileVm.encodeUrl             = encodeUrl;
@@ -173,7 +174,6 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 				profileVm.profile            = res[0].profile[0];
 				if (profileVm.profile.cover_picture) {
 					$http.post('/picture/get/cover', {url: profileVm.profile.cover_picture}).success(function(res) {
-						console.log(res)
 						if (res.success && res.data[0])
 							profileVm.randomCover  = true;
 						else

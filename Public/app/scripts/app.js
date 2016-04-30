@@ -43,7 +43,14 @@ var wittyCircleApp = angular
                          // css
                          'styles/css/home.css'
                      ]);
-            }]
+            }],
+
+            projectHomeResolve: function(RetrieveData) {
+                return RetrieveData.getData('/projects', 'GET');
+            },
+            cardProfileHomeResolve: function(RetrieveData) {
+                return RetrieveData.getData('/user/card/profiles/home', 'GET');
+            }
         }
     })
     .state('discover', {
@@ -61,7 +68,7 @@ var wittyCircleApp = angular
                          'styles/css/presentation-mobile-modal.css',
                          'styles/css/home.css'
                      ]);
-            }]
+            }],
         }
     })
     .state('meet', {

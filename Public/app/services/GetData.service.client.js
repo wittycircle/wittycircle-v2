@@ -37,7 +37,6 @@
             httpRequest.method      = method;
             httpRequest.url         = url;
             httpRequest.cache       = cache === 0 ? false : true;
-            console.log(httpRequest.cache);
             if (data)
                 httpRequest.data    = data;
             if (param)

@@ -167,7 +167,7 @@
 	<button type="submit"><i class="fa fa-check"></i> Save changes</button>
 </section> -->
 
-<section id="profile-mobile-slideDown">
+<section id="profile-mobile-slideDown" ng-if="mobile">
 	<div class="profile-mobile-cardProject" data="profileVm.inProjects" check="profileVm.initSlide" slick-slider='{dots: true, speed: 200, initialSlide: 0, mobileFirst: true, centerMode: true, centerPadding: "30px", variableWidth: true,}'>
 		<div class="profile-slideDown-card project-card" ng-repeat="cardProject in profileVm.inProjects track by $index">
 			<div class="card-tag" ng-click="goToDiscover(cardProject.category_name)">
@@ -178,7 +178,7 @@
 					<h5>{{cardProject.category_name}}</h5>
 				</div>
 			</div>
-			<div class="card-project-page" ui-sref="viewproject({public_id: cardProject.public_id, title: encodeUrl(cardProject.title)})">
+			<div class="card-project-page" ng-href="/project/{{cardProject.public_id}}/{{main.encodeUrl(cardProject.title)}}">
 				<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProject.picture, 285, 180, 'fill') }})'}">
 				<!-- <img ng-src="{{cardProject.picture}}" alt="card-picture"> -->
 				</div>
@@ -232,7 +232,7 @@
 							<h5>{{cardProject.category_name}}</h5>
 						</div>
 					</div>
-					<div class="card-project-page" ui-sref="viewproject({public_id: cardProject.public_id, title: encodeUrl(cardProject.title)})">
+					<div class="card-project-page" ng-href="/project/{{cardProject.public_id}}/{{main.encodeUrl(cardProject.title)}}">
 						<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProject.picture, 285, 180, 'fill') }})'}">
 						<!-- <img ng-src="{{cardProject.picture}}" alt="card-picture"> -->
 						</div>

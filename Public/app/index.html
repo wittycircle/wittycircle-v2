@@ -43,6 +43,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/home.css" />
+    <link rel="stylesheet" href="styles/profiles.css" />
     <link rel="stylesheet" href="styles/signup.css" />
     <link rel="stylesheet" href="styles/custom-select.css" />
     <link rel="stylesheet" href="styles/footer.css" />
@@ -56,8 +57,8 @@
     <link rel="stylesheet" href="styles/mobile-modal.css" />
     <link rel="stylesheet" href="styles/presentation-mobile-modal.css" />
     <link rel="stylesheet" href="styles/presentation.css" />
-    <link rel="stylesheet" href="styles/terms.css">
-    <link rel="stylesheet" href="'styles/reset.css'">
+    <link rel="stylesheet" href="styles/terms.css" />
+    <link rel="stylesheet" href="styles/reset.css" />
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -116,6 +117,7 @@
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-redactor/angular-redactor.js"></script>
     <!-- endbower -->
     <script src="bower_components/blueimp-load-image/js/load-image.all.min.js"></script>
     <script src="bower_components/angular-redactor/angular-redactor-2.js"></script>
@@ -144,10 +146,8 @@
     </section>
     <section id="body-section" ng-cloak>
         <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-        <div id="body-and-footer">
-            <section id="bodyCore" ui-view autoscroll="true"></section>
-            <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
-        </div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>    
     </section>
 
     <!-- algolia angular -->

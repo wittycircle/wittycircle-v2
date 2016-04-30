@@ -175,7 +175,6 @@ var wittyCircleApp = angular
                          'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
                          'controllers/profile/modal-controller/skills-modal.controller.client.js',
                          'controllers/profile/modal-controller/interest-modal.controller.client.js',
-
                      ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet) {
 
 	var meet = this;
 	var ww = $(window).width();
@@ -65,7 +65,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	function getCardProfiles () {
 		if (cardProfilesResolve.data) {
 			meet.cardProfiles = cardProfilesResolve.data.data;
-			console.log(meet.cardProfiles);
 			if ($rootScope.globals.currentUser) {
 				Profile.getFollowedUser(cardProfilesResolve.data, function(res){
 					meet.followed = res;
@@ -229,6 +228,30 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			});
 		}
 	};
+    
+    
+    /*** Scroll to display Popover ***/
+    var unique = 0;
+    setTimeout(function() {
+	    if (!$rootScope.globals.currentUser) {
+
+		$(document).scroll(function () {
+		    if ($('#meet-body-page')[0]) {
+			var y = $(this).scrollTop();
+
+			if (!unique && y > 350) {
+			    unique = 1;
+			    showbottomAlert.pop_it_persistance();
+			    } 
+			if (y <= 350) {
+			    unique = 0;
+			    $mdBottomSheet.cancel();
+			    }
+			}
+		    });
+		    }
+	}, 1000);
+
 
 	/*** Search Section ***/
 	$scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function(value) {

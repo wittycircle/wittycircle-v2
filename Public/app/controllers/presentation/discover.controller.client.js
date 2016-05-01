@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, showbottomAlert, $mdBottomSheet) {
+ 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
 
  		console.time('Time to load Discover Page : ');
 

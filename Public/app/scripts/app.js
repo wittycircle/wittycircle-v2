@@ -175,7 +175,10 @@ var wittyCircleApp = angular
                          'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
                          'controllers/profile/modal-controller/skills-modal.controller.client.js',
                          'controllers/profile/modal-controller/interest-modal.controller.client.js',
-
+			 //css
+			 'styles/css/profiles.css',
+			 'styles/css/profiles-modal-edit.css',
+			 'styles/css/home.css'
                      ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
@@ -227,12 +230,12 @@ var wittyCircleApp = angular
         $locationProvider.hashPrefix('!');
 
     })
-    .run(function ($rootScope, $cookieStore, $location) {
+    .run(function ($rootScope, $cookieStore, $location, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
-        /*if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-    }*/
+
+	$http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
+
 
     $rootScope.resizePic = function(url, width, height, crop) {
         if (url && url.indexOf('cloudinary') >= 0) {

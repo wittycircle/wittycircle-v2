@@ -46,6 +46,17 @@ exports.ensureAuthenticated = function(req, res, next) { // make sure that the u
     };
 };
 
+exports.hasAccess = function(req, res, next) {
+    if (req.headers && req.headers.access_token) {
+	if (req.headers.access_token == 'oTJaUTHa6FFTSSLrzQOb') {
+            next();
+	}
+    } else {
+        return res.status(404);
+        //res.sendFile('/Public/app/index.html');
+    }
+}
+
 exports.login = function (req, res, next) {
     passport.authenticate('local-login', function (err, user, info) {
 	if (err || !user) {

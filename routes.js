@@ -1,4 +1,6 @@
 var ensureAuth = require('./controllers/auth').ensureAuthenticated;
+var hasAccess = require('./controllers/auth').hasAccess;
+
 
 module.exports = function(app, passport){
 
@@ -158,7 +160,7 @@ app.delete('/category/:id', categories.deleteCategory);
 
 /* Projects*/
 var projects = require('./controllers/projects');
-app.get('/projects', projects.getProjects);
+app.get('/projects', hasAccess, projects.getProjects);
 app.get('/projects/discover', projects.getProjectsDiscover);
 app.get('/project/:id', projects.getProject);
 app.get('/project/public_id/:public_id', projects.getProjectByPublicId);

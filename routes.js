@@ -8,9 +8,9 @@ module.exports = function(app, passport){
 var users = require('./controllers/users');
 app.get('/user/checkLog', ensureAuth, users.checkFirstLog);
 app.get('/userId/:profile_id', users.getUserIdByProfileId);
-app.get('/users', users.getUsers);
-app.get('/profiles', users.getProfiles);
-app.get('/user/:id', users.getUser);
+app.get('/users', hasAccess, users.getUsers);
+app.get('/profiles', hasAccess, users.getProfiles);
+app.get('/user/:id', hasAccess, users.getUser);
 app.get('/user/card/profiles', users.getCardProfile);
 app.get('/user/card/profiles/home', users.getCardProfileHome);
 app.get('/user_email/:email', users.getUserbyEmail);
@@ -127,7 +127,7 @@ app.get('/user/:id/extended', users_specification.getUserExtendedInformations);
 
 /* Skills */
 var skills = require('./controllers/skills');
-app.get('/skills', skills.getSkills);
+app.get('/skills', hasAccess, skills.getSkills);
 app.get('/skill/:id', ensureAuth, skills.getSkill);
 app.get('/skills/:username', skills.getSkillsByUsername);
 app.get('/skills/search/:search', skills.searchSkills);
@@ -139,7 +139,7 @@ app.delete('/skills/delete/:id', ensureAuth, skills.deleteUserSkill);
 
 /* Interests */
 var interests = require('./controllers/interests');
-app.get('/interests', interests.getInterests);
+app.get('/interests', hasAccess, interests.getInterests);
 app.get('/interests/:id', interests.getInterest);
 app.get('/interest/:username', interests.getInterestsByUsername);
 app.get('/interests/search/:search', interests.searchInterests);
@@ -151,7 +151,7 @@ app.delete('/interest/delete/:id', ensureAuth, interests.deleteUserInterest);
 
 /* Categories */
 var categories = require('./controllers/categories');
-app.get('/categories', categories.getCategories);
+app.get('/categories', hasAccess, categories.getCategories);
 app.get('/category/:id', categories.getCategory);
 app.get('/categories/search/:search', categories.searchCategories);
 app.post('/categories', categories.createCategory);
@@ -161,7 +161,7 @@ app.delete('/category/:id', categories.deleteCategory);
 /* Projects*/
 var projects = require('./controllers/projects');
 app.get('/projects', hasAccess, projects.getProjects);
-app.get('/projects/discover', projects.getProjectsDiscover);
+app.get('/projects/discover', hasAccess, projects.getProjectsDiscover);
 app.get('/project/:id', projects.getProject);
 app.get('/project/public_id/:public_id', projects.getProjectByPublicId);
 app.get('/projects/search/:search', projects.searchProjects);

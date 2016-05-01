@@ -55,7 +55,7 @@ cloudinary.config({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(express.static(__dirname + '/Public/'));
+//app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/dist/styles/'));
 // app.use(express.static(__dirname + '/Public/dist/scripts/'));
 app.use(express.static(__dirname + '/Public/dist/'));
@@ -143,12 +143,12 @@ require('./algolia')(app, algoliaClient);
 
 /* Socket */
 var ps = https.createServer(httpsOption, app);
-// var io = require('socket.io')(server);
+//var io = require('socket.io')(server);
 var io = require('socket.io').listen(ps);
 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-// server.listen(80);
+//server.listen(80);
 ps.listen(443);

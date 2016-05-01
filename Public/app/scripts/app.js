@@ -48,7 +48,7 @@ var wittyCircleApp = angular
                      return $ocLazyLoad.load([
                          'controllers/presentation/discover.controller.client.js',
                      ]);
-            }]
+            }],
         }
     })
     .state('meet', {
@@ -178,7 +178,6 @@ var wittyCircleApp = angular
 			 //css
 			 'styles/css/profiles.css',
 			 'styles/css/profiles-modal-edit.css',
-			 'styles/css/home.css'
                      ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {

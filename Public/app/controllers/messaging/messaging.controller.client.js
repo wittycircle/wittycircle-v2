@@ -12,7 +12,8 @@
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('https://www.wittycircle.com');
+	 	// var socket = io.connect('https://www.wittycircle.com');
+	 	var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
 
 	 	/* Function vm */

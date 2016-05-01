@@ -353,27 +353,26 @@
 			});
 		};
 
-
-	    /*** Scroll to display Popover ***/
-	    var unique = 0;
-	    setTimeout(function() {
+		/*** Scroll to display Popover ***/
+		var unique = 0;
+		setTimeout(function() {
 		    if (!$rootScope.globals.currentUser) {
 
-			$(document).scroll(function () {
-			    if ($('#discover-body-page')[0]) {
-				var y = $(this).scrollTop();
+		  		$(document).scroll(function () {
+		  			if ($('#discover-body-page')[0]) {
+		  				var y = $(this).scrollTop();
 
-				if (!unique && y > 350) {
-				    unique = 1;
-				    showbottomAlert.pop_it_persistance();
-				    } 
-				if (y <= 350) {
-				    unique = 0;
-				    $mdBottomSheet.cancel();
-				    }
-				}
-			    });
-			    }
+		  				if (!unique && y > 350) {
+		  					unique = 1;
+		  					showbottomAlert.pop_it_persistance();
+		  				} 
+		  				if (y <= 350) {
+		  					unique = 0;
+		  					$mdBottomSheet.cancel();
+		  				}
+		  			}
+		  		});
+		    }
 		}, 1000);
 
 

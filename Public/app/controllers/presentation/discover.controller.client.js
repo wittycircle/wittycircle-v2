@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData) {
+ 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, showbottomAlert, $mdBottomSheet) {
 
  		console.time('Time to load Discover Page : ');
 
@@ -124,35 +124,6 @@
 		// 		$('#page-wrap').css('display', 'none');
 		// 	}
 		// });
-
-		/*****-- FUNCTION --*****/
-		// setTimeout(function() {
-		//     if (!$rootScope.globals.currentUser) {
-		//   		$(window).scroll(function () {
-		//   			if ($('#discover-body-page')[0]) {
-		//   				var x = $(window).scrollTop();
-		//   				var container = $('.custom-popover');
-		//   				if (x > 350) {
-		//   					if (!container.length) {
-		//   						$mdBottomSheet.hide();
-		//   						showbottomAlert.pop_it_persistance();
-		//   						setTimeout(function() {
-		//   							$('#main-body .md-bottom-sheet-backdrop').css('display', 'none');
-		//   							$('#page-wrap').css('display', 'block');
-		//   						}, 150);
-		//   					}
-		//   				}
-		//   				if (x < 350) {
-		//   					if (container.length) {
-		//   						$mdBottomSheet.hide();
-		//   						$('.md-bottom-sheet-backdrop').css('display', 'none')
-		//   						$('#page-wrap').css('display', 'none');
-		//   					}
-		//   				}
-		//   			}
-		//   		});
-		//     }
-		// }, 1000);
 
 		// function goToProfile(id) {
 		// 	Users.getUserIdByProfileId(id).then(function(data) {
@@ -381,6 +352,28 @@
 				discover.cards = res.data;
 			});
 		};
+
+		/*** Scroll to display Popover ***/
+		var unique = 0;
+		setTimeout(function() {
+		    if (!$rootScope.globals.currentUser) {
+
+		  		$(document).scroll(function () {
+		  			if ($('#discover-body-page')[0]) {
+		  				var y = $(this).scrollTop();
+
+		  				if (!unique && y > 350) {
+		  					unique = 1;
+		  					showbottomAlert.pop_it_persistance();
+		  				} 
+		  				if (y <= 350) {
+		  					unique = 0;
+		  					$mdBottomSheet.cancel();
+		  				}
+		  			}
+		  		});
+		    }
+		}, 1000);
 
 
 		/*** All watch variable ***/

@@ -48,7 +48,7 @@ var wittyCircleApp = angular
                      return $ocLazyLoad.load([
                          'controllers/presentation/discover.controller.client.js',
                      ]);
-            }]
+            }],
         }
     })
     .state('meet', {

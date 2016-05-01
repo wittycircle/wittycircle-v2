@@ -123,7 +123,7 @@
                 vm.project.picture_position = adjustSize(vm.project.picture_position);
             }
             // need to tell angular it's a safe html
-            $sce.trustAsHtml(vm.project.post);
+            vm.project.post = $sce.trustAsHtml(vm.project.post);
             Projects.incrementViewProject(vm.project.id, function (response) {
                 if (response.serverStatus ==! 2) {
                     err = response;

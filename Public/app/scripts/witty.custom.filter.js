@@ -346,7 +346,7 @@ angular.module('wittyApp')
        if (word && !word[0])
 	   return items;
        else {
-	   var filtered = []; 
+	   var filtered = [],
     	   lowerword,
 	   wordLower = !word || !word[0] ? null : word.toLowerCase();
 	   

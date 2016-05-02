@@ -71,6 +71,12 @@ button:focus {
   outline: 0;
 }
 
+
+.ng-animate { 
+ -webkit-animation: none 0s !important;
+ transition: none 0s !important;
+}
+
 a:hover {
 color: white;
   text-decoration: none;

@@ -42,7 +42,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** Discover Mobile ***/
 	function openmmodal (value) {
-		if (ww <= 736) {
+		if (ww < 736) {
 			$('body').css('overflow-y', 'hidden');
 			meet.mmobile.modal	= value;
 			if (value === 1)
@@ -65,7 +65,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	function getCardProfiles () {
 		if (cardProfilesResolve.data) {
 			meet.cardProfiles = cardProfilesResolve.data.data;
-			console.log(meet.cardProfiles);
 			if ($rootScope.globals.currentUser) {
 				Profile.getFollowedUser(cardProfilesResolve.data, function(res){
 					meet.followed = res;
@@ -99,15 +98,16 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	function getAnything (help) {
 		meet.mHelp = help;
-		if (ww <= 736)
+		if (ww < 736)
 		closemmodal();
 	};
 
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
+		console.log(name);
 		meet.skillName = [];
 
-		if (ww > 736) {
+		if (ww >= 736) {
 			if (document.getElementById('labelNoText')) {
 				document.getElementById('labelNoText').id = "labelText";
 				document.getElementById('labelNoText2').id = "labelText2";
@@ -160,13 +160,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			$http.post('/search/users', meet.skillListM).success(function(res) {
 				meet.skillSearch = res.data;
 			});
+			console.log(meet.skillName);
 		}
 	}
 
 	function removeSkill (name) {
 		var index;
 
-		if (ww > 736) {
+		if (ww >= 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
 
 			for (var i = 0; i < meet.skillList.length; i++) {

@@ -1,4 +1,4 @@
-@media only screen and (min-width: 737px) {
+@media only screen and (min-width: 736px) {
   /*** MESSAGING MODALS ***/
   #messages-body-page-mobile {
     display: none; }
@@ -333,10 +333,10 @@
               color: #416299; }
               #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list:hover .messages-list-object h4 {
                 color: #416299; } }
-        @media only screen and (min-width: 737px) and (min-height: 720px) {
+        @media only screen and (min-width: 736px) and (min-height: 720px) {
           #messages-page #messages-body .messages-component .messages-contact-list .messages-contact {
             height: 663px; } }
-@media only screen and (min-width: 737px) {
+@media only screen and (min-width: 736px) {
         #messages-page #messages-body .messages-component .messages-conversation {
           display: inline-block;
           width: 65%;
@@ -471,10 +471,10 @@
                     line-height: 25px;
                     word-wrap: break-word;
                     margin-bottom: 0; } }
-        @media only screen and (min-width: 737px) and (min-height: 720px) {
+        @media only screen and (min-width: 736px) and (min-height: 720px) {
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body {
             height: 500px; } }
-@media only screen and (min-width: 737px) {
+@media only screen and (min-width: 736px) {
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea {
             text-align: center;
             border-top: 1px solid #e5e5e5; }

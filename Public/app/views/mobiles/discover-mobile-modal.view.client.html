@@ -48,9 +48,9 @@
 			</ul>		
 			<ul ng-if="discover.skillName">
 				<div class="discover-mobile-skillList1 discover-mobile-skillList2">
-					<li ng-click="discover.searchSkill(skillS.name)" ng-repeat="skillS in discover.skills | filter: discover.skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
+					<li ng-click="discover.searchSkill(skillS.name)" ng-repeat="skillS in discover.skills | wordsFilter: discover.skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
 				</div>
-				<span ng-show="!(discover.skills | filter: discover.skillName).length">No skill found...</span>
+				<span ng-show="!(discover.skills | wordsFilter: discover.skillName).length">No skill found...</span>
 			</ul>
 	</div>
 </section>

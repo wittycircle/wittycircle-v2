@@ -125,12 +125,6 @@ var wittyCircleApp = angular
         templateUrl: 'views/messaging/messaging.view.client.html',
         controller: 'MessageCtrl',
         resolve : {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         // css
-                         'styles/css/messaging.css'
-                     ]);
-            }],
             auth: function($q, $rootScope, $stateParams) {
                 if ($rootScope.globals.currentUser) {
                     return true;

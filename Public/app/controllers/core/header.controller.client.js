@@ -61,7 +61,7 @@ angular.module('wittyApp')
   });
 
    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
-    $scope.searchName = [];
+    $scope.searchNameHeader = [];
    });
 
     // var check = false;
@@ -353,22 +353,22 @@ angular.module('wittyApp')
   var Project = client.initIndex('Projects');
   var PAndP   = client.initIndex('PAndP');
 
-  $scope.$watch('searchName', function(value) {
+  $scope.$watch('searchNameHeader', function(value) {
     if (value) {
       $scope.searchProjects();
       $scope.searchUsers();
     }
   });
 
-  $scope.$watch('searchNameM', function(value) {
+  $scope.$watch('searchNameHeaderM', function(value) {
     if (value) {
       $scope.searchUsersAndProjects(value)
     }
   })
 
   $scope.searchProjects = function() {
-    if ($scope.searchName) {
-      Project.search($scope.searchName)
+    if ($scope.searchNameHeader) {
+      Project.search($scope.searchNameHeader)
         .then(function searchSuccess(content) {
           if (!content.hits[0]) {
             $scope.notFoundProject = true;
@@ -383,8 +383,8 @@ angular.module('wittyApp')
   };
 
   $scope.searchUsers = function() {
-    if ($scope.searchName) {
-      People.search($scope.searchName)
+    if ($scope.searchNameHeader) {
+      People.search($scope.searchNameHeader)
         .then(function searchSuccess(content) {
           if (!content.hits[0]) {
             $scope.notFoundUser = true;
@@ -461,4 +461,33 @@ angular.module('wittyApp')
           document.getElementById('notifMailbox').style.display = "none";
       }
     });
-}]);
+}])
+.directive('homeMessageModal', function() {
+  var x = $(window).width();
+
+  if (x >= 736) {
+    return {
+      templateUrl: 'views/messaging/messaging.modals.view.client.html',
+      restrict: "AE",
+      scope: false,
+      controller: 'MessageCtrl',
+      link: function(scope, element, attr) {
+        var myelem = (angular.element(element.children()[0]));
+
+        myelem.on('click', function(e) {
+          var target = e.target.id;
+
+          if (target === "mmo") {
+            document.getElementById('messages-modal-searchArea').style.display = "none";
+            document.getElementById('messages-modal-newMessageArea').style.display = "block";
+          }
+        });
+
+      }
+    }
+  }
+
+  return {
+
+  }
+});

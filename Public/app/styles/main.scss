@@ -54,6 +54,11 @@ h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button, a {
 
 /************************************************************************************************/
 
+.ng-animate { 
+ -webkit-animation: none 0s !important;
+ transition: none 0s !important;
+}
+
 li {
   list-style-type: none;
 }

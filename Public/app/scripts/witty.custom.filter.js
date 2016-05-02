@@ -337,50 +337,34 @@ angular.module('wittyApp')
     				text += ", +" + (lengthText - 1).toString();
     		}
 
-
-        	// while (i < input.length) {
-        	// 	if (i > 0 )
-        	// 		text += ', ';
-        	// 	text += input[i].sName;
-        	// 	i++;
-        	// }
-
-
-        	// lengthText = text.length;
-        	// for (var n = 0; text.length > 50; n++) {
-	        // 	index = text.lastIndexOf(",");
-	        // 	text = text.substring(0, index);
-
-	        // 	if (text.length <= 50)
-	        // 		break ;
-	        // }
-	        // if (lengthText > 50)
-	        // 	text = text + ", ...";
-
         	return text;
         }
     };
 })
 .filter('wordsFilter', function() {
    return function(items, word) {
-    var filtered = [], 
-    	lowerword;
-    var	wordLower = !word || !word[0] ? null : word.toLowerCase();
-
-    angular.forEach(items, function(item) {
-    	lowerword = item.name.toLowerCase();
-        if(lowerword.indexOf(wordLower) !== -1){
-            filtered.push(item);
-        }
-    });
-
-    filtered.sort(function(a,b){
-        if(a.name.indexOf(wordLower) < b.name.indexOf(wordLower)) return -1;
-        else if(a.name.indexOf(wordLower) > b.name.indexOf(wordLower)) return 1;
-        else return 0;
-    });
-
-    return filtered;
-  };
+       if (word && !word[0])
+	   return items;
+       else {
+	   var filtered = []; 
+    	   lowerword,
+	   wordLower = !word || !word[0] ? null : word.toLowerCase();
+	   
+	   angular.forEach(items, function(item) {
+    	       lowerword = item.name.toLowerCase();
+               if(lowerword.indexOf(wordLower) !== -1){
+		   filtered.push(item);
+               }
+	   });
+	   
+	   filtered.sort(function(a,b){
+               if(a.name.indexOf(wordLower) < b.name.indexOf(wordLower)) return -1;
+               else if(a.name.indexOf(wordLower) > b.name.indexOf(wordLower)) return 1;
+               else return 0;
+	   });
+	   
+	   return filtered;
+       }
+   };
 });
 

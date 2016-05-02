@@ -30,6 +30,7 @@ exports.googleAuth = {
   'clientSecret'  : 'EUQK_lzSb9Ba-z288oagNThx',
   'callbackURL'   : 'https://www.wittycircle.com/auth/google/callback'
 
+};
 
 exports.checkLog = function(req, res) {
     if (req.isAuthenticated())

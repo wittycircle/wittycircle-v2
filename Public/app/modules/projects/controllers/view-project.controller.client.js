@@ -104,7 +104,6 @@
 
             vm.project = projectResolve.data[0];
             /*** Project Card Page ***/
-            console.log($scope.$parent.seo);
             $scope.$parent.seo = {
                 pageTitle: vm.project.title,
                 pageDescription: vm.project.description

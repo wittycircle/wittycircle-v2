@@ -1,4 +1,4 @@
-<section id="footer-page">
+<section id="footer-page" style="visibility: hidden">
     <div class="footer-global">
         <div class="footer-info-section">
             <div id="fta" class="footer-about footer-size">
@@ -71,6 +71,10 @@
         </div>
     </div>
     <script>
+        setTimeout(function(){
+            document.getElementById('footer-page').style.visibility = "visible";
+        }, 2000);
+
         $(document).ready(function() {
             var container1  = $("#fta"),
                 container2  = $("#fte"),

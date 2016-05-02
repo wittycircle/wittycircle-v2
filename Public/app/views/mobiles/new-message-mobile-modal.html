@@ -5,16 +5,16 @@
 		</div>
 
 		<div class="new-messages-search-mobile">
-			<input type="search" placeholder="Search a username" ng-model="searchName">
+			<input type="search" placeholder="Search a username" ng-model="searchNameM">
 		</div>
 
 		<div id="mprofilef" class="messages-users-mobile-found">
-			<div ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 20" ng-click="showMessage(profile)">
+			<div ng-if="checkId != profile.id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchNameM | limitTo : 20" ng-click="showMessage(profile)">
 				<div class="messages-newpost-puser">
 					<img ng-src="{{ profile.profile[0].profile_picture}}" alt="witty-userpicture">
 					<div class="messages-newpost-iuser">
 						<h3>{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
-						<h5 >{{profile.profile[0].location_city}}, {{profile.profile[0].location_country}}</h5>
+						<h5 >{{profile.profile[0].location_city}}<span ng-if="profile.profile[0].location_country">,</span> {{profile.profile[0].location_country}}</h5>
 					</div>
 				</div>
 			</div>

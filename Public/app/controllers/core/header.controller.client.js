@@ -29,7 +29,8 @@ angular.module('wittyApp')
    **Update in time sidebar after login
    */
    //TODO: change to the server url
-   var socket = io.connect('https://www.wittycircle.com');
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
    $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
@@ -360,7 +361,7 @@ angular.module('wittyApp')
     }
   });
 
-  $scope.$watch('searchNameHeaderM', function(value) {
+  $scope.$watch('searchNameM', function(value) {
     if (value) {
       $scope.searchUsersAndProjects(value)
     }

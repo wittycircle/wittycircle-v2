@@ -21,7 +21,7 @@
 		</ul>
 		<ul ng-if="meet.skillName">
 			<div class="discover-mobile-skillList1 discover-mobile-skillList2">
-				<li data-ng-click="meet.searchSkill(skillS.name)" data-ng-repeat="skillS in meet.skills | wordsFilter: meet.skillName | limitTo: 15"><i class="fa fa-plus"></i> {{skillS.name}}</li>
+				<li data-ng-click="meet.searchSkill(skillS.name)" data-ng-repeat="skillS in meet.skills | wordsFilter: meet.skillName | limitTo: 15"><i class="fa fa-plus" aria-hidden="true"></i> {{skillS.name}}</li>
 			</div>
 			<span data-ng-show="!(meet.skills | wordsFilter: meet.skillName).length">No skill found...</span>
 		</ul>

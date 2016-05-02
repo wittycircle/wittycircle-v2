@@ -40,6 +40,10 @@ input[type="text"], input[type="search"], input[type="password"], input[type="em
   appearance: none; }
 
 /************************************************************************************************/
+.ng-animate {
+  -webkit-animation: none 0s !important;
+  transition: none 0s !important; }
+
 li {
   list-style-type: none; }
 

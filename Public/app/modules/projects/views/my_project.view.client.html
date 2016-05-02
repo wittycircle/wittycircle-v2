@@ -16,7 +16,7 @@
 			<section id="discover-body-content">
 				<div class="discover-body-container presentation-body-container">
 					<div class="discover-body-list" style="padding-left: 0">
-						<div class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.myprojects" data-ui-sref="viewproject({public_id: card.public_id, title: vm.encodeUrl(card.title)})">
+						<a class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.myprojects" data-ng-href="/project/{{card.public_id}}/{{vm.encodeUrl(card.title)}}" >
 							<div class="card-tag" ng-click="getTagCag(card.category_name)">
 								<div class="card-tag-content">
 									<div class="card-tag-bg"></div>
@@ -60,7 +60,7 @@
 									<h6>{{::card.creator_user_name}} <h6 data-ng-if="card.usersIn.length">& {{::card.usersIn.length}} more</h6></h6>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 			</section>
@@ -86,7 +86,7 @@
 				<section id="discover-body-content">
 					<div class="discover-body-container presentation-body-container">
 						<div class="discover-body-list" style="padding-left: 0">
-							<div class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.projectFollowed"  ui-sref="viewproject({public_id: card.public_id, title: vm.encodeUrl(card.title)})">
+							<a class="discover-body-card project-card animated fadeIn" data-ng-repeat="card in vm.projectFollowed"  data-ng-href="/project/{{card.public_id}}/{{vm.encodeUrl(card.title)}}">
 								<div class="card-tag" ng-click="getTagCag(card.category_name)">
 									<div class="card-tag-content">
 										<div class="card-tag-bg"></div>
@@ -126,7 +126,7 @@
 										<h6>{{::card.creator_user_name}} <h6 data-ng-if="card.usersIn.length">& {{::card.usersIn.length}} more</h6></h6>
 									</div>
 								</div>
-							</div>
+							</a>
 						</div>
 					</div>
 				</section>

@@ -452,6 +452,7 @@ html {
 	/* Media query signup modal */
 	#main-signup-modal {
 		position: absolute;
+		border-radius: 0;
 
 		header {
 			display: none;
@@ -469,7 +470,7 @@ html {
 			.fb-login {
 				width: 231px;
 				margin-right: 10px;
-				margin-left: 10px;
+				margin-left: 14px;
 				margin-bottom: 10px;
 
 				i {
@@ -492,6 +493,7 @@ html {
 			position: relative;
 			width: 60px;
 			height: 40px;
+			right: 5px;
 			float: right;
 			background-image: url('/images/cross-icon.svg');
 			background-size: 15px;
@@ -564,7 +566,8 @@ html {
 			display: inline-block;
 			position: relative;
 			width: 60px;
-			height: 60px;
+			height: 40px;
+			right: 5px;
 			float: right;
 			background-image: url('/images/cross-icon.svg');
 			background-size: 15px;

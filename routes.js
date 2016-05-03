@@ -307,7 +307,7 @@ app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
 
 app.get('*', function(req, res) {
-    res.sendFile(__dirname + '/Public/dist/index.html');
+    res.sendFile(__dirname + '/Public/app/index.html');
 });
 
 };

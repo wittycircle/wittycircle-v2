@@ -57,10 +57,10 @@ app.use(passport.session());
 
 app.use(express.static(__dirname + '/Public/app/'));
 
-app.use(express.static(__dirname + '/Public/dist/'));
+//app.use(express.static(__dirname + '/Public/dist/'));
 
-//app.use(express.static(__dirname + '/Public/'));
-//app.use(express.static(__dirname + '/Public/app/styles/css'));
+app.use(express.static(__dirname + '/Public/'));
+app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 

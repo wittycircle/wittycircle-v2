@@ -94,11 +94,6 @@
 			transform: translateZ(0);
 
 	.home-searchHeader-mobile {
-	-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 		position: fixed;
 		width: 100%;
 		z-index: 10;
@@ -136,11 +131,6 @@
 			margin-bottom: 10px;
 			border-bottom: 1px solid #e8e8e8;
 			padding-bottom: 7px;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 
 			.home-findProject-picture {
 				display: inline-block;
@@ -244,11 +234,6 @@
 	display: none;
 
 	.header-dropdown-head {
-	-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 		position: fixed;
 		width: 100%;
 		height: 42px;
@@ -309,12 +294,7 @@
 		-webkit-overflow-scrolling: touch;
 		margin-top: 42px;
 		padding-bottom: 40px;
-		-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-
+		
 		h4, h5, p, span {
 			color: #999999;
 		}
@@ -448,11 +428,6 @@
 	}
 
 	.new-messages-modal-mobile {
-	-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 		position: fixed;
 		width: 100vw;
 		height: 100vh;
@@ -462,6 +437,11 @@
 		-o-animation-duration: 0.2s;
 		-moz-animation-duration: 0.2s;
 		-ms-animation-duration: 0.2s;
+		-webkit-transform: translateZ(0);
+		-moz-transform: translateZ(0);
+		-ms-transform: translateZ(0);
+		-o-transform: translateZ(0);
+		transform: translateZ(0);
 
 		.new-messages-modal-header {
 			float: right;
@@ -475,11 +455,6 @@
 		.new-messages-search-mobile {
 			padding: 0 20px;
 			padding-bottom: 10px;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 
 			input {
 				margin-top: 5px;
@@ -505,11 +480,6 @@
 			overflow-y: scroll;
 			overflow-x: hidden; 
 			-webkit-overflow-scrolling: touch;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
 
 			.messages-newpost-user {
 				padding: 12px 20px 12px 20px;

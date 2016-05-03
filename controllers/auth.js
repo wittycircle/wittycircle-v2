@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt-nodejs');
 
 
-//TODO: CGAMHE Server url
+//TODO: CHANGE Server url
 /** DEV **/
 /*exports.facebookAuth = {
     'clientID'      : '793713660760465',

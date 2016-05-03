@@ -418,6 +418,13 @@ a:hover {
       float: left;
       padding: 40px 40px;
       width: 370px; }
+      #profile-corps .profile-contents .profile-aside .profile-no-data {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        line-height: 28px;
+        color: #999999 !important;
+        margin: 10px 0 !important;
+        margin-bottom: 0; }
       #profile-corps .profile-contents .profile-aside li {
         display: inline-block;
         font-family: 'FreigSem';
@@ -475,6 +482,14 @@ a:hover {
       padding-right: 20px;
       padding-bottom: 200px;
       min-height: 800px; }
+      #profile-corps .profile-contents .profile-main .profile-no-data {
+        font-family: 'FreigBook';
+        font-size: 18px;
+        line-height: 28px;
+        text-align: center;
+        color: #999999 !important;
+        margin: 100px 0 !important;
+        margin-bottom: 0; }
       #profile-corps .profile-contents .profile-main .profile-main-about {
         margin-top: 20px;
         margin-bottom: 20px; }
@@ -877,7 +892,7 @@ a:hover {
   		-moz-perspective: 1000;
   		-ms-perspective: 1000;
   		-o-perspective: 1000;
-  		perspective: 1000;	
+  		perspective: 1000;
   		-webkit-backface-visibility: hidden;
   		-moz-backface-visibility: hidden;
   		-ms-backface-visibility: hidden;

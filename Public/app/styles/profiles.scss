@@ -162,7 +162,7 @@ a:hover {
 				width: 154px;
 				height: 154px;
 				overflow: hidden;
-				
+
 				img {
 					width: auto;
 					height: 154px;
@@ -468,7 +468,7 @@ a:hover {
 
 					.fa-plus {
 						font-size: 14px;
-						margin-right: 10px; 
+						margin-right: 10px;
 					}
 
 					.fa-check {
@@ -517,7 +517,7 @@ a:hover {
 					height: 418px;
 					border: 1px solid #E5E5E5;
 					border-radius: 5px;
-					overflow: hidden;				
+					overflow: hidden;
 				}
 
 				.profile-slideDown-text {
@@ -557,7 +557,7 @@ a:hover {
 #profile-corps {
 	position: relative;
 	z-index: 1;
-	
+
 	h2 {
 		display: inline-block;
 		font-family: 'FreigLight';
@@ -581,6 +581,17 @@ a:hover {
 			float: left;
 			padding: 40px 40px;
 			width: 370px;
+
+			.profile-no-data {
+				font-family: 'FreigBook';
+				font-size: 18px;
+				line-height: 28px;
+				//text-align: center;
+				color: #999999 !important;
+				margin: 10px 0 !important;
+				margin-bottom: 0;
+			}
+
 			li {
 				display: inline-block;
 				font-family: 'FreigSem';
@@ -591,7 +602,7 @@ a:hover {
 				margin-bottom: 5px;
 				margin-right: 4px;
 				-webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;	
+                -moz-osx-font-smoothing: grayscale;
 				-webkit-transition: all 100ms linear;
 				-o-transition: all 100ms linear;
 				-moz-transition: all 100ms linear;
@@ -663,6 +674,16 @@ a:hover {
 			padding-right: 20px;
 			padding-bottom: 200px;
 			min-height: 800px;
+
+			.profile-no-data {
+				font-family: 'FreigBook';
+				font-size: 18px;
+				line-height: 28px;
+				text-align: center;
+				color: #999999 !important;
+				margin: 100px 0 !important;
+				margin-bottom: 0;
+			}
 
 			.profile-main-about {
 				margin-top: 20px;
@@ -820,7 +841,7 @@ a:hover {
 					width: 110px;
 					height: 110px;
 					border: 2px solid white;
-					
+
 					img {
 						width: auto;
 						height: 110px;
@@ -961,7 +982,7 @@ a:hover {
 		}
 
 		.profile-bottom {
-			display: none;	
+			display: none;
 		}
 
 		.profile-bottom-mobile {
@@ -1017,7 +1038,7 @@ a:hover {
 		}
 	}
 
-	#profile-slideDown { 
+	#profile-slideDown {
 		display: none
 	}
 
@@ -1035,7 +1056,7 @@ a:hover {
 				height: 418px;
 				border: 1px solid #E5E5E5;
 				border-radius: 5px;
-				overflow: hidden;	
+				overflow: hidden;
 			}
 		}
 
@@ -1083,7 +1104,7 @@ a:hover {
 				margin-bottom: 5px;
 				margin-right: 4px;
 				-webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;	
+                -moz-osx-font-smoothing: grayscale;
 				-webkit-transition: all 100ms linear;
 				-o-transition: all 100ms linear;
 				-moz-transition: all 100ms linear;
@@ -1244,7 +1265,7 @@ a:hover {
 		-moz-perspective: 1000;
 		-ms-perspective: 1000;
 		-o-perspective: 1000;
-		perspective: 1000;	
+		perspective: 1000;
 		-webkit-backface-visibility: hidden;
 		-moz-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
@@ -1295,7 +1316,7 @@ a:hover {
 		-moz-perspective: 1000;
 		-ms-perspective: 1000;
 		-o-perspective: 1000;
-		perspective: 1000;	
+		perspective: 1000;
 		-webkit-backface-visibility: hidden;
 		-moz-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
@@ -1367,4 +1388,3 @@ a:hover {
 		}
 	}
 }
-

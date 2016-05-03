@@ -2,35 +2,35 @@
 console.log("You're looking under the ground, find a bug ? Help us to improve our platform at hello@wittycircle.com");
 
 var wittyCircleApp = angular
-  .module('wittyApp', [
-      // Assets Modules
-      'ngAria',
-      'ngCookies',
-      'ngResource',
-      'ngRoute',
-      'ngSanitize',
-      'ui.router',
-      'ui.bootstrap',
-      'ngMaterial',
-      'ngFileUpload',
-      'angular-toArrayFilter',
-      'algoliasearch',
-      'angularMoment',
-      'com.2fdevs.videogular',
-      'com.2fdevs.videogular.plugins.controls',
-      'com.2fdevs.videogular.plugins.overlayplay',
-      'com.2fdevs.videogular.plugins.poster',
-      'cloudinary',
-      'angular-redactor',
-      'oc.lazyLoad',
-      '720kb.socialshare',
-      // Custom modules
-      'wittyProjectModule',
-      'wittyValidateAccountModule'
-   ])
-    .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
-	$stateProvider
-	    .state('main', {
+.module('wittyApp', [
+    // Assets Modules
+    'ngAria',
+    'ngCookies',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize',
+    'ui.router',
+    'ui.bootstrap',
+    'ngMaterial',
+    'ngFileUpload',
+    'angular-toArrayFilter',
+    'algoliasearch',
+    'angularMoment',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls',
+    'com.2fdevs.videogular.plugins.overlayplay',
+    'com.2fdevs.videogular.plugins.poster',
+    'cloudinary',
+    'angular-redactor',
+    'oc.lazyLoad',
+    '720kb.socialshare',
+    // Custom modules
+    'wittyProjectModule',
+    'wittyValidateAccountModule'
+])
+.config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
+    $stateProvider
+    .state('main', {
         url: '/',
         params      : { tagStart: '',},
         templateUrl : 'views/main.html',
@@ -104,11 +104,11 @@ var wittyCircleApp = angular
         controller: 'SettingCtrl',
         resolve : {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/setting/setting.controller.client.js',
-                         // css
-                         'styles/css/setting.css',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/setting/setting.controller.client.js',
+                    // css
+                    'styles/css/setting.css',
+                ]);
             }],
             auth: function($q, $rootScope, $stateParams) {
                 if ($rootScope.globals.currentUser.username) {
@@ -200,8 +200,6 @@ var wittyCircleApp = angular
 
         $httpProvider.defaults.withCredentials = true;
 
-        $urlRouterProvider.otherwise('/');
-
         // **Redactor configuration
 
         redactorOptions.imageUpload = '/upload/redactor';
@@ -213,7 +211,7 @@ var wittyCircleApp = angular
 
         redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
         redactorOptions.plugins = ['imagemanager'];
-		redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+        redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
         /*
         **End Redactor configuration
         */

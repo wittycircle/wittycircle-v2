@@ -234,7 +234,7 @@ exports.getProjectsCreatedByUser = function(req, res){
                             }
                         });
                     });
-        	    } 
+        	    }
 		if (!results[0]) {
 		  pool.query("SELECT * FROM `projects` WHERE `id` IN (SELECT `project_id` FROM `project_users` WHERE `user_id` = ?)",
                     [req.params.user_id],
@@ -576,7 +576,7 @@ exports.updateProject = function(req, res){
     req.checkBody('picture_position', 'Error Message').optional().isString().max(128);
     req.checkBody('main_video_id', 'Error message').optional().isString().max(256);
     req.checkBody('picture_card', 'Error message').optional().isString().max(258);
-    
+
 
     var errors = req.validationErrors(true);
     if (errors) {

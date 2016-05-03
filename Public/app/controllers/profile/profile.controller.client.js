@@ -84,7 +84,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	function getSlideProjects() {
 		if (profileVm.initSlide) {
 			$('#profile-mobile-slideDown').slideToggle();
-		} else 
+		} else
 			profileVm.initSlide = true;
 	};
 
@@ -155,7 +155,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			profileVm.usersFollow          = res.data.length;
 		});
 
-		RetrieveData.ppdData('/follow/followUsers/', 'GET', null, profileVm.paramUsername).then(function(res) {		
+		RetrieveData.ppdData('/follow/followUsers/', 'GET', null, profileVm.paramUsername).then(function(res) {
 			profileVm.followers            = res.data.length;
 		});
 
@@ -522,7 +522,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 })
 .directive('slickSlider', function () {
 	return {
-		restrict: 'A',         
+		restrict: 'A',
 		scope: {'data': '=',
 			'check': '=',
 		},

@@ -8,7 +8,7 @@
  * Controller of the wittyApp
  **/
 angular.module('wittyApp')
-.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', '$mdBottomSheet', 
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', '$mdBottomSheet',
   function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia, $mdBottomSheet) {
 
   /*** CHECK LOG ***/
@@ -340,9 +340,6 @@ angular.module('wittyApp')
 
   });
 
-  $scope.encodeUrl = function(url) {
-    return Beauty_encode.encodeUrl(url);
-  }
 
 /*** Search Bar ***/
   /* Public API Key */

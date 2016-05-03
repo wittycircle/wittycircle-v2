@@ -281,18 +281,24 @@
 				<h2>Skills</h2>
 				<img ng-if="profileVm.showEditSkill" ng-click="profileVm.openEditS()" class="profile-edit-skills" src="/images/picto-edit-b.svg">
 				<div class="profile-aside-skills">
-					<ul>
+					<ul data-ng-if="profileVm.profileSkills.length > 0">
 						<li ng-repeat="profileSkill in profileVm.profileSkills">{{profileSkill.skill_name}}</li>
 					</ul>
+					<p class="profile-no-data" data-ng-if="profileVm.profileSkills.length == 0">
+						No skills added, yet.
+					</p>
 				</div>
 			</div>
 			<div ng-mouseover="profileVm.showEditI()" ng-mouseleave="profileVm.hideEditI()" class="profile-second-aside">
 				<h2>Interests</h2>
 				<img ng-if="profileVm.showEditInterest" ng-click="profileVm.openEditI()" class="profile-edit-interest" src="/images/picto-edit-b.svg">
 				<div class="profile-aside-interests">
-					<ul>
+					<ul data-ng-if="profileVm.profileInterests.length > 0">
 						<li ng-repeat="profileInterest in profileVm.profileInterests"><a href="">{{profileInterest.interest_name}}</a></li>
 					</ul>
+					<p class="profile-no-data" data-ng-if="profileVm.profileInterests.length == 0">
+						No interests added, yet.
+					</p>
 				</div>
 			</div>
 		</aside>
@@ -300,7 +306,10 @@
 			<div ng-mouseover="profileVm.showEditA()" ng-mouseleave="profileVm.hideEditA()" class="profile-main-about">
 				<h2>About</h2>
 				<img ng-if="profileVm.showEditAbout" ng-click="profileVm.openEditA()" class="profile-edit-about" src="/images/picto-edit-b.svg">
-				<p ng-bind-html="profileVm.profile.description"></p>
+				<p data-ng-if="profileVm.profile.description" ng-bind-html="profileVm.profile.description"></p>
+				<p class="profile-no-data" data-ng-if="!profileVm.profile.description">
+					No story to show, yet.
+				</p>
 			</div>
 
 			<div class="profile-main-experience">
@@ -327,6 +336,9 @@
 							<h6>{{profileExp.description}}</h6>
 						</div>
 					</div>
+					<p class="profile-no-data" data-ng-if="profileVm.profileExps.length == 0">
+						No experience to show, yet.
+					</p>
 				</div>
 			</div>
 

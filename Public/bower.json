@@ -24,7 +24,6 @@
     "classie": "^1.0.1",
     "slick-carousel": "^1.5.9",
     "angular-material": "^1.0.7",
-    "angular-slick": "^0.2.1",
     "angular-redactor": "^1.1.6"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
-var ensureAuth = require('./controllers/auth').ensureAuthenticated;
+var ensureAuth      = require('./controllers/auth').ensureAuthenticated;
+var hasAccess       = require('./controllers/auth').hasAccess;
 
 module.exports = function(app, passport){
 
@@ -49,7 +50,7 @@ app.get('/profile', ensureAuth, function(req, res) {
 /* AUTHENTICATION API PUBLIC */
 /* Facebook Users && Google Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {
 	    successRedirect : 'https://www.wittycircle.com',
 	    failureRedirect : 'https://www.wittycircle.com'
@@ -70,7 +71,7 @@ app.get('/auth/google/callback',
 // 	    successRedirect : 'http://localhost',
 // 	    failureRedirect : 'http://localhost'
 // 	}));
-
+//
 // app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
 // app.get('/auth/google/callback',
 // 	passport.authenticate('google', {
@@ -157,7 +158,7 @@ app.delete('/category/:id', categories.deleteCategory);
 
 /* Projects*/
 var projects = require('./controllers/projects');
-app.get('/projects', projects.getProjects);
+app.get('/projects', hasAccess, projects.getProjects);
 app.get('/projects/discover', projects.getProjectsDiscover);
 app.get('/project/:id', projects.getProject);
 app.get('/project/public_id/:public_id', projects.getProjectByPublicId);
@@ -304,6 +305,7 @@ app.put('/search/users', search.getUsersBySkillAl);
 
 app.get('*', function(req, res) {
     res.sendFile(__dirname + '/Public/app/index.html');
+    //res.cookie('name', 'tobi');
 });
 
 };

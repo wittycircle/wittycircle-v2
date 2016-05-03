@@ -32,6 +32,13 @@ angular.module('wittyApp')
     var socket = io.connect('https://www.wittycircle.com');
     // var socket = io.connect('http://127.0.0.1');
 
+      function islogged() {
+	  if ($rootScope.globals.currentUser) {
+              return true;
+	  } else
+              return false;
+      };
+
    $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
  //    if ($scope.log) {
@@ -134,13 +141,6 @@ angular.module('wittyApp')
    /*
    **Private function for checking login
    */
-    function islogged() {
-      if ($rootScope.globals.currentUser) {
-         return true;
-      } else
-         return false;
-    };
-
     $scope.logout = function() {
       $http.get('/api/logout')
       .success(function(response) {

@@ -328,7 +328,8 @@ html {
 @media only screen and (max-width: 736px) {
   /* Media query signup modal */
   #main-signup-modal {
-    position: absolute; }
+    position: absolute;
+    border-radius: 0; }
     #main-signup-modal header {
       display: none; }
     #main-signup-modal .signup-modal-social {
@@ -340,7 +341,7 @@ html {
       #main-signup-modal .signup-modal-social .fb-login {
         width: 231px;
         margin-right: 10px;
-        margin-left: 10px;
+        margin-left: 14px;
         margin-bottom: 10px; }
         #main-signup-modal .signup-modal-social .fb-login i {
           position: relative;
@@ -356,6 +357,7 @@ html {
       position: relative;
       width: 60px;
       height: 40px;
+      right: 5px;
       float: right;
       background-image: url("/images/cross-icon.svg");
       background-size: 15px;
@@ -402,7 +404,8 @@ html {
       display: inline-block;
       position: relative;
       width: 60px;
-      height: 60px;
+      height: 40px;
+      right: 5px;
       float: right;
       background-image: url("/images/cross-icon.svg");
       background-size: 15px;

@@ -12,7 +12,8 @@
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('https://www.wittycircle.com');
+	 	// var socket = io.connect('http://127.0.0.1');
+	 	var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
 
 	 	/* Function vm */
@@ -172,6 +173,10 @@
 	 	};
 
 	 	/***   MODAL   ***/
+	 	$scope.$on("message-params", function(event, params) {
+	 		$scope.searchArea(params.profile, params.user_id, params.username);
+	 	});
+
 	 	Users.getUsers().then(function (resource) {
 			$scope.profiles = resource;
 		});
@@ -183,6 +188,7 @@
 		}
 
 		$scope.searchArea = function(profile, user_id, username) { // modal new message
+			console.log(user_id, username);
 			$scope.newMessageArea = {
 				first_name: profile.first_name,
 				last_name: profile.last_name,
@@ -283,4 +289,30 @@
 		 	}
 	 	};
 	 }
+}).directive('messageModal', function() {
+	var x = $(window).width();
+
+	if (x >= 736) {
+		return {
+			templateUrl: 'views/messaging/messaging.modals.view.client.html',
+			restrict: "AE",
+			link: function(scope, element, attr) {
+				var myelem = (angular.element(element.children()[0]));
+
+				myelem.on('click', function(e) {
+					var target = e.target.id;
+
+					if (target === "mmo") {
+						document.getElementById('messages-modal-searchArea').style.display = "none";
+						document.getElementById('messages-modal-newMessageArea').style.display = "block";
+					}
+				});
+
+			}
+		}
+	}
+
+	return {
+
+	}
 });

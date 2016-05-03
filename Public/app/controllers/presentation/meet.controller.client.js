@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet) {
 
 	var meet = this;
 	var ww = $(window).width();
@@ -42,7 +42,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** Discover Mobile ***/
 	function openmmodal (value) {
-		if (ww <= 736) {
+		if (ww < 736) {
 			$('body').css('overflow-y', 'hidden');
 			meet.mmobile.modal	= value;
 			if (value === 1)
@@ -98,15 +98,16 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	function getAnything (help) {
 		meet.mHelp = help;
-		if (ww <= 736)
+		if (ww < 736)
 		closemmodal();
 	};
 
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
+		console.log(name);
 		meet.skillName = [];
 
-		if (ww > 736) {
+		if (ww >= 736) {
 			if (document.getElementById('labelNoText')) {
 				document.getElementById('labelNoText').id = "labelText";
 				document.getElementById('labelNoText2').id = "labelText2";
@@ -159,13 +160,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			$http.post('/search/users', meet.skillListM).success(function(res) {
 				meet.skillSearch = res.data;
 			});
+			console.log(meet.skillName);
 		}
 	}
 
 	function removeSkill (name) {
 		var index;
 
-		if (ww > 736) {
+		if (ww >= 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
 
 			for (var i = 0; i < meet.skillList.length; i++) {
@@ -228,6 +230,33 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			});
 		}
 	};
+
+	/*** Scroll to display Popover ***/
+	var unique = 0;
+	setTimeout(function() {
+	    if (!$rootScope.globals.currentUser) {
+
+	  		$(document).scroll(function () {
+	  			if ($('#meet-body-page')[0]) {
+	  				var y = $(this).scrollTop();
+
+	  				if (!unique && y > 350) {
+	  					unique = 1;
+	  					showbottomAlert.pop_it_persistance();
+	  				} 
+	  				if (y <= 350) {
+	  					unique = 0;
+	  					$mdBottomSheet.cancel();
+	  				}
+	  			}
+	  		});
+	    }
+	}, 1000);
+
+	// $scope.$on('$destroy', function() {
+	// 	console.log("OK");
+	// 	$mdBottomSheet.destroy();
+	// });
 
 	/*** Search Section ***/
 	$scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function(value) {

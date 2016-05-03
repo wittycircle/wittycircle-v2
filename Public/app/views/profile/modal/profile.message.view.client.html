@@ -1,0 +1,13 @@
+<section id="profile-modal-newMessageArea" data-ng-controller="MessageCtrl" class="animated fadeIn" ng-if="sendMess">
+	<div class="messages-newMessageArea-to">
+		<label>To : </label>
+		<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
+	</div>
+	<div class="messages-newMessageArea-text">
+		<textarea class="profile-newMessageArea-text" ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
+	</div>
+	<div class="messages-newMessageArea-send">
+		<button type="submit" ng-click="createNewMessage()">Send</button>
+	</div>
+
+</section>

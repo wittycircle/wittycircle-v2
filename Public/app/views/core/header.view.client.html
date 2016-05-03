@@ -1,4 +1,5 @@
 <header id="header-section" data-ng-controller="HeaderCtrl">
+    <home-message-modal></home-message-modal>
     <section id="header-content" class="cbp-spmenu-push">
         <div id="hsmobile" class="header-searchBar-mobile">
             <figure>
@@ -26,7 +27,7 @@
 
             <div id='hsb' class="header-searchBar">
                 <label for="iff"></label>
-                <input id="iff" type="search" placeholder="Search for projects and people..." name="search" ng-model="searchName" oninput="showFindField()" autocomplete="off">
+                <input id="iff" type="search" placeholder="Search for projects and people..." name="search" ng-model="searchNameHeader" oninput="showFindField()" autocomplete="off">
             </div>
         </div>
 
@@ -100,8 +101,8 @@
             </div>
             <div id="hdropm" class="header-dropdown-mailbox header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()" style="display: none;">
                 <div class="header-dropdown-head">
-                    <h4>Inbox</h4>
-                    <a href="/messages">Write A New Message</a>
+                    <a class="header-see-all" href="/messages">See All</a>
+                    <a id="hnmmopen" class="header-new-message">Write A New Message</a>
                 </div>
                 <div class="header-dropdown-lists">
                     <div ng-if="!dialogues.length" class="header-noMessage-text">
@@ -162,7 +163,8 @@
             <div class="header-find-title">
                 <h1>Projects</h1>
             </div>
-            <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility" ui-sref="viewproject({public_id: projectHit.public_id, title: encodeUrl(projectHit.title)})">
+            <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
+	      <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
                 <div class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findProject-content">
                     <div class="header-findProject-title">
@@ -173,6 +175,7 @@
                         <h3>{{projectHit.category_name}}</h3>
                     </div>
                 </div>
+		</a>
             </div>
             <div class="header-find-seemore">
                 <a href="/discover">See more projects</a>
@@ -359,6 +362,11 @@
                             hnlog.className = "header-nav-log";
                         }
                     }
+
+                $('#hnmmopen').on('click', function() {
+
+                });
+
                 });
             } else {
                 var bodyJq          = $( 'body' ),

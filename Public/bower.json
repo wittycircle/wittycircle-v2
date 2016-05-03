@@ -2,6 +2,15 @@
   "name": "witty",
   "version": "0.0.0",
   "dependencies": {
+    "jquery": "^2.2.3",
+    "angular": "^1.5.5",
+    "bootstrap": "^3.3.6",
+    "angular-aria": "^1.5.5",
+    "angular-cookies": "^1.5.5",
+    "angular-resource": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-sanitize": "^1.5.5",
+    "angular-animate": "^1.5.5",
     "angular-bootstrap": "0.13.3",
     "angular-ui-router": "0.2.15",
     "angular-custom-select": "~0.1.0",
@@ -32,8 +41,17 @@
   },
   "appPath": "app",
   "moduleName": "wittyApp",
-  "overrides": {},
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  },
   "resolutions": {
+    "angular": "1.5.0",
     "angular-socialshare": "^1.4.5"
   }
 }

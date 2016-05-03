@@ -123,7 +123,7 @@
                 vm.project.picture_position = adjustSize(vm.project.picture_position);
             }
             // need to tell angular it's a safe html
-            $sce.trustAsHtml(vm.project.post);
+            vm.project.post = $sce.trustAsHtml(vm.project.post);
             Projects.incrementViewProject(vm.project.id, function (response) {
                 if (response.serverStatus ==! 2) {
                     err = response;
@@ -206,9 +206,10 @@
                     return;
                 }
                 if (id !== currentUser.id) {
-                    Users.getUserbyId(id, function (res) {
-                        $state.go('messages', {profile: res.profile, user_id: id, username: res.data.username});
-                    });
+                   Users.getUserIdByProfileId(id).then(function(res) {
+		       if (res.success)
+			   $state.go('messages', {profile: vm.project.user, user_id: res.userId.id, username: res.userId.username});
+		   });
                 }
             } else {
                 console.error('error in goToMessage in ViewProjectCtrl: no id is provided');

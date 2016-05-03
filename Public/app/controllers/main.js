@@ -8,7 +8,7 @@
 * Controller of the wittyApp
 **/
 angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData',
-    function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData) {
+    function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, projectHomeResolve, cardProfileHomeResolve) {
 
         console.time('Time to load Home Page : ')
         var main    = this,
@@ -98,7 +98,7 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
             $timeout(hello, 400);
         });
 
-        RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
+        RetrieveData.getData('/user/card/profiles/home', 'GET').then(function(result) {
             main.cardProfiles = result.data;
             if (main.currentUser) {
                 Profile.getFollowedUser(result.data, function(res){

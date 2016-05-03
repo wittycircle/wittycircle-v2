@@ -5,9 +5,9 @@
     	   <input class="home-searchField-mobile" type="search" placeholder="Search for projects and people..." ng-model="searchNameM" />
         </div>
     	<div class="home-findField-mobile">
-    		<div class="home-find-list" ng-repeat="resultHit in resultHits | limitTo : limitM">
+    		<div class="home-find-list animated fadeIn" ng-repeat="resultHit in resultHits | limitTo : limitM" >
 
-    			<div ng-if="resultHit.title && resultHit.project_visibility" class="result-project" ui-sref="viewproject({public_id: resultHit.public_id, title: encodeUrl(resultHit.title)})">
+    			<a ng-if="resultHit.title && resultHit.project_visibility" class="result-project" ng-href="/project/{{ resultHit.public_id }}/{{ encodeUrl(resultHit.title) }}" onclick="getBack('hsf')">
     				<div class="home-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.picture_card, 60, 60, 'fill') }})'}"></div>
     				<div class="home-findProject-content">
     		            <div class="home-findProject-title">
@@ -18,7 +18,7 @@
     		                <h4>{{resultHit.category_name}}</h4>
     		            </div>
     		        </div>
-    		    </div>
+    		    </a>
 
     		    <div ng-if="!resultHit.title" class="result-people" onclick="getBack('hsf')" ng-click="goToProfile(resultHit.id)">
     		        <div class="home-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(resultHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>

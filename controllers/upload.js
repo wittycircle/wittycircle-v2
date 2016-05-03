@@ -2,40 +2,40 @@ var cloudinary = require('cloudinary');
 var multer = require('multer');
 var fs = require('fs');
 
-exports.uploadPhoto = function(req, res) {
-    cloudinary.uploader.upload(req.body.url, function(result) {
-	res.send(result);
-    });
-};
+// exports.uploadPhoto = function(req, res) {
+//     cloudinary.uploader.upload(req.body.url, function(result) {
+// 	res.send(result);
+//     });
+// };
 
 exports.uploadProjectCover = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
         res.send(result);
-    }, { width: 1920, height: 1080 , crop: "fill", format: "jpg"});
+    }, {width: 1920, height: 1080 , crop: "fill", format: "jpg"});
 };
 
 exports.uploadProjectCard = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
 	res.send(result);
-    }, { width: 300, height: 300, crop: "fill", format: "jpg"});
+    }, {width: 300, height: 300, crop: "fill", format: "jpg"});
 };
 
 exports.uploadPhotoIcon = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
         res.send(result);
-    }, { width: 200, height: 200, crop: "fill", format: "jpg", gravity: "face" });
+    }, {width: 200, height: 200, crop: "fill", format: "jpg", gravity: "face" });
 };
 
 exports.uploadProfileCover = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
         res.send(result);
-    }, { width: 1920, height: 1080, crop: "fill", format: "jpg"});
+    }, {width: 1920, height: 1080, crop: "fill", format: "jpg"});
 };
 
 exports.uploadProfileCard = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
         res.send(result);
-    }, { width: 200, height: 100, crop: "fill", format: "jpg"});
+    }, {width: 200, height: 100, crop: "fill", format: "jpg"});
 };
 
 exports.uploadVideoProject = function(req, res) {

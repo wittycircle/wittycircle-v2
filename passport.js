@@ -127,19 +127,19 @@ module.exports = function(passport) {
 					   });
 				       });
 				   } else {
-				       var url_photo = "https://graph.facebook.com/me/picture?width=200&height=200&access_token=" + token;
-				       var profile_object = {
-					   first_name           : info.first_name,
-                                           last_name            : info.last_name,
-					   genre		: info.gender,
-                                           profile_picture	: url_photo,
-					   profile_picture_icon : url_photo,
-                                           facebook_id          : profile.id,
-                                           facebook_token       : token,
-				       };
-				       pool.query('INSERT INTO `profiles` SET ?', profile_object, // set all of the facebook information in our profile model
-						  function(err, result) {
-						      if (err) throw err;
+						var url_photo = "https://graph.facebook.com/me/picture?width=200&height=200&access_token=" + token;
+						var profile_object = {
+							first_name   			: info.first_name,
+	                    	last_name            	: info.last_name,
+							genre					: info.gender,
+	                    	profile_picture 		: url_photo,
+							profile_picture_icon 	: url_photo,
+	                        facebook_id          	: profile.id,
+	                        facebook_token       	: token,
+						};
+				        pool.query('INSERT INTO `profiles` SET ?', profile_object, // set all of the facebook information in our profile model
+						  	function(err, result) {
+						      	if (err) throw err;
 						      function recursive(index) { // recursive function to find out available username
 							  if (username1[index]) {
 							      checkUsername(username1[index], function(found) {

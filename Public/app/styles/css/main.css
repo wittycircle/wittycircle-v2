@@ -40,6 +40,10 @@ input[type="text"], input[type="search"], input[type="password"], input[type="em
   appearance: none; }
 
 /************************************************************************************************/
+.ng-animate {
+  -webkit-animation: none 0s !important;
+  transition: none 0s !important; }
+
 li {
   list-style-type: none; }
 
@@ -51,7 +55,12 @@ ul {
 button:focus {
   outline: 0; }
 
+.ng-animate {
+  -webkit-animation: none 0s !important;
+  transition: none 0s !important; }
+
 a:hover {
+  color: white;
   text-decoration: none; }
 
 a:focus {

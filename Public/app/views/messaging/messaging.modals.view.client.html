@@ -1,0 +1,122 @@
+<section id="messages-modals">
+	<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
+		<div id="mmo" class="messages-modal-header">
+			<div id="mmo" class="messages-modal-title">
+				<h3 id="mmo">New message</h3>
+			</div>
+			<div id="mmo" class="messages-modal-cross" alt="witty-crosspicture">
+				<img src="/images/cross-icon.svg">
+			</div>
+		</div>
+		<article id="messages-modal-newMessageArea" class="animated fadeIn" style="display: none;">
+			<div id="mmo" class="messages-newMessageArea-to">
+				<label id="mmo">To : </label>
+				<h5 id="mmo">{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
+			</div>
+			<div id="mmo" class="messages-newMessageArea-text">
+				<textarea id="mmo" ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
+			</div>
+			<div id="mmo" class="messages-newMessageArea-send">
+				<button type="submit" ng-click="createNewMessage()">Send</button>
+			</div>
+		</article>
+		<article id="messages-modal-searchArea" style="display: block;">
+			<div class="messages-newpost-search">
+				<input id="mmoinput" type="search" placeholder="Search a username" ng-model="searchName">
+			</div>
+			<div id="mmolist" class="messages-newpost-users">
+				<div id="mmo" ng-if="checkId != profile.profile[0].id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 5" ng-click="searchArea(profile.profile[0], profile.id, profile.username)">
+					<div id="mmo" class="messages-newpost-puser">
+						<img id="mmo" ng-src="{{ resizePic(profile.profile[0].profile_picture, 60, 60, 'fill') }}" alt="witty-userpicture">
+						<div id="mmo" class="messages-newpost-iuser">
+							<h3 id="mmo">{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
+							<h5 id="mmo" >{{profile.profile[0].location_city}} <span ng-if="profile.profile[0].location_country">,</span> {{profile.profile[0].location_country}}</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="messages-newpost-footer">
+					<img src="/images/witty-logo-icon-b.svg">
+				</div>
+			</div>
+		</article>
+	</div>
+	<div id="messages-confirmDelete-modal" class="messages-confirmDelete" style="display: none;">
+		<div id="mcdm" class="messages-modal-header">
+			<div id="mcdm" class="messages-modal-title">
+				<h3 id="mcdm" >Delete conversation</h3>
+			</div>
+			<div class="messages-modal-cross" alt="witty-crosspicture">
+				<img src="/images/cross-icon.svg">
+			</div>
+		</div>
+		<div id="mcdm" class="messages-cd-body">
+			<div id="mcdm" class="messages-cd-text">
+				<h5 id="mcdm">Are you sure you want to delete this conversation ? <br />
+					This action cannot be undone.
+				</h5>
+			</div>
+			<div id="mcdm" class="messages-cd-button">
+				<p>Cancel</p>
+				<button type="submit" ng-click="deleteMessage()">Yes, delete it</button>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+		$(document).ready(function() {
+			$(this).on('click', function(e) {
+				var eTarget = e.target.id;
+
+				if (eTarget === "mhop" && document.getElementById('mobox')) {
+					document.getElementById('mobox').style.display = "block";
+					document.getElementById('mhop-i').style.transform = "rotate(180deg)";
+				} else {
+					if (document.getElementById('mobox')) {
+						document.getElementById('mobox').style.display = "none";
+						document.getElementById('mhop-i').style.transform = "rotate(0)";
+					}
+				}
+
+				/*** section messaging modal ***/
+
+                  // message modal
+                  if (document.getElementById('messages-newpost-modal') && eTarget === 'mhn' || eTarget === 'mmo' || eTarget === 'mmoinput' || eTarget === 'mhnImg' || eTarget === 'hnmmopen') {
+                  	document.getElementById('messages-newpost-modal').style.display = "block";
+                  } else {
+                  	if (document.getElementById('messages-newpost-modal')) {
+                  		document.getElementById('messages-newpost-modal').style.display = "none";
+                  		document.getElementById('messages-modal-searchArea').style.display = "block";
+                  		document.getElementById('messages-modal-newMessageArea').style.display = "none";
+                  	}
+                  }
+
+                  // confirm delete modal
+                  if (eTarget === 'mcdm' || eTarget === 'mcdc' && document.getElementById('messages-confirmDelete-modal')) {
+                  	document.getElementById('messages-confirmDelete-modal').style.display = "block";
+                  } else {
+                  	if (document.getElementById('messages-confirmDelete-modal'))
+                  		document.getElementById('messages-confirmDelete-modal').style.display = "none";
+                  }
+              });
+		});
+
+		// function showUserList() {
+		// 	var x = document.getElementById('mmoinput').value;
+
+		// 	if (x) {
+		// 		document.getElementById('mmolist').style.display = "block";
+		// 		document.getElementById('messages-modals').style.top = "15%";
+		// 		document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 5px 20px";
+		// 	} else {
+		// 		document.getElementById('mmolist').style.display = "none";
+		// 		document.getElementById('messages-modals').style.top = "30%";
+		// 		document.getElementsByClassName('messages-newpost-search')[0].style.padding = "30px 20px 30px 20px";
+		// 	}
+		// }
+
+		// function showNewMessageArea() {
+		// 	document.getElementById('messages-modal-searchArea').style.display = "none";
+		// 	document.getElementById('messages-modal-newMessageArea').style.display = "block";
+		// }
+	</script>

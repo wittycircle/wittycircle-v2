@@ -36,15 +36,6 @@ var wittyCircleApp = angular
         templateUrl : 'views/main.html',
         controller  : 'MainCtrl',
         controllerAs: 'main',
-        resolve: {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'controllers/main.js',
-                    // css
-                    'styles/css/home.css'
-                ]);
-            }]
-        }
     })
     .state('discover', {
         url         : '/discover',
@@ -54,14 +45,10 @@ var wittyCircleApp = angular
         controllerAs: 'discover',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'controllers/presentation/discover.controller.client.js',
-                    // css
-                    'styles/css/presentation.css',
-                    'styles/css/presentation-mobile-modal.css',
-                    'styles/css/home.css'
-                ]);
-            }]
+                     return $ocLazyLoad.load([
+                         'controllers/presentation/discover.controller.client.js',
+                     ]);
+            }],
         }
     })
     .state('meet', {
@@ -72,13 +59,9 @@ var wittyCircleApp = angular
         controllerAs: 'meet',
         resolve : {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'controllers/presentation/meet.controller.client.js',
-                    // css
-                    'styles/css/presentation.css',
-                    'styles/css/presentation-mobile-modal.css',
-                    'styles/css/home.css'
-                ]);
+                     return $ocLazyLoad.load([
+                         'controllers/presentation/meet.controller.client.js',
+                     ]);
             }],
             cardProfilesResolve: function (Users) {
                 return Users.getCardProfilesUnresolved();
@@ -106,14 +89,9 @@ var wittyCircleApp = angular
         controller: 'ResetPasswordCtrl',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'controllers/core/reset-password.controller.client.js',
-                    // css
-                    'styles/css/presentation.css',
-                    'styles/css/presentation-mobile-modal.css',
-                    'styles/css/home.css',
-                    'styles/css/reset.css'
-                ]);
+                     return $ocLazyLoad.load([
+                         'controllers/core/reset-password.controller.client.js',
+                     ]);
             }],
             access: function($q, $rootScope, Authentication, $stateParams) {
                 return Authentication.ResetPasswordTokenValidation($stateParams.token);
@@ -147,12 +125,6 @@ var wittyCircleApp = angular
         templateUrl: 'views/messaging/messaging.view.client.html',
         controller: 'MessageCtrl',
         resolve : {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    // css
-                    'styles/css/messaging.css'
-                ]);
-            }],
             auth: function($q, $rootScope, $stateParams) {
                 if ($rootScope.globals.currentUser) {
                     return true;
@@ -165,42 +137,24 @@ var wittyCircleApp = angular
     .state('terms', {
         url: '/terms',
         templateUrl: 'views/core/terms.view.client.html',
-        resolve : {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    // css
-                    'styles/css/home.css',
-                    'styles/css/terms.css'
-                ]);
-            }]
-        }
-    })
-    .state('privacy', {
+      })
+      .state('privacy', {
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
-        resolve : {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    // css
-                    'styles/css/home.css',
-                    'styles/css/terms.css',
-                ]);
-            }]
-        }
-    })
-    .state('noaccess1', {
-        url: '/projects',
-        resolve: {
-            security: function ($q, $state) {
-                var deferred = $q.defer();
-                //return $q.reject("Not Authorized");
-                $state.go('main');
-                deferred.reject();
-                return deferred.promise;
-            }
-        }
-    })
-    .state('profile', {
+      })
+	.state('noaccess1', {
+	    url: '/projects',
+	    resolve: {
+		security: function ($q, $state) {
+		    var deferred = $q.defer();
+		    //return $q.reject("Not Authorized");
+		    $state.go('main');
+		    deferred.reject();
+		    return deferred.promise;
+		}
+	    }
+	})
+      .state('profile', {
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
@@ -208,18 +162,17 @@ var wittyCircleApp = angular
         // css: '../styles/profiles.css',
         resolve:{
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'controllers/profile/profile.controller.client.js',
-                    'controllers/profile/modal-controller/about-modal.controller.client.js',
-                    'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
-                    'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
-                    'controllers/profile/modal-controller/skills-modal.controller.client.js',
-                    'controllers/profile/modal-controller/interest-modal.controller.client.js',
-                    // css
-                    'styles/css/profiles.css',
-                    'styles/css/profiles-modal-edit.css',
-                    'styles/css/home.css'
-                ]);
+                     return $ocLazyLoad.load([
+                         'controllers/profile/profile.controller.client.js',
+                         'controllers/profile/modal-controller/about-modal.controller.client.js',
+                         'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
+                         'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
+                         'controllers/profile/modal-controller/skills-modal.controller.client.js',
+                         'controllers/profile/modal-controller/interest-modal.controller.client.js',
+			 //css
+			 'styles/css/profiles.css',
+			 'styles/css/profiles-modal-edit.css',
+                     ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
                 Profile.getUserbyUsername($stateParams.username).then(function(res) {
@@ -271,10 +224,8 @@ var wittyCircleApp = angular
     .run(function ($rootScope, $cookieStore, $location, $http) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
-        /*if ($rootScope.globals.currentUser) {
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-    }*/
-    $http.defaults.headers.common['access_token'] = 'C3PO R2D2';
+
+	$http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
 
 
     $rootScope.resizePic = function(url, width, height, crop) {

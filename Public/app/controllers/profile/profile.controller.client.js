@@ -266,9 +266,11 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		if (!profileVm.currentUser)
 			showbottomAlert.pop_it();
 		else {
+			$scope.sendMess = true;
 		    Users.getUserIdByProfileId(id).then(function(res) {
 			if (res.success)
-			    $state.go('messages', {profile: profileVm.profile, user_id: res.userId.id, username: res.userId.username});
+				$rootScope.$broadcast("message-params", {profile: profileVm.profile, user_id: res.userId.id, username: res.userId.username});
+			    // $state.go('messages', {profile: profileVm.profile, user_id: res.userId.id, username: res.userId.username});
 		    });
 		}
 	};

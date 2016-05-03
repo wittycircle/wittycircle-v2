@@ -1,4 +1,5 @@
 <section id="profile-header">
+	<div data-ng-include="'views/profile/modal/profile.message.view.client.html'"></div>
 	<div ng-if="!profileVm.imageCoverLoading" class="filter"></div>
 	<div ng-if="profileVm.imageCoverLoading" class="spinner-load">
 		<div class="spinner__item1 spinner-item"></div>
@@ -129,8 +130,8 @@
 <!-- 				<div class="profile-text-link">
 					<a>Share</a>
 				</div> -->
-				<div class="profile-text-link">
-					<a ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
+				<div id="pmpm" class="profile-text-link">
+					<a id="pmpma" ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
 				</div>
 				<button class="profile-follow-link" type="button" ng-click="profileVm.followUser()"><i ng-if="profileVm.followText === 'Following'" class="fa fa-check"></i><i ng-if="profileVm.followText === 'Follow'" class="fa fa-plus"></i>{{profileVm.followText}}</button>
 			</div>
@@ -410,7 +411,7 @@
       $(window).scrollTop(0);
     }; initPage();
 
-    if (x > 736) {
+    if (x >= 736) {
 
     	$(document).ready(function() {
 			$('#profile-header').mouseover(function() {
@@ -436,6 +437,20 @@
 			// function hideText() {
 			// 	$('.profile-update-text').fadeOut();
 			// };
+
+			$(this).click(function(e) {
+				var target = e.target.id,
+					container = "#messages-modal-newMessageArea";
+
+				if (target === "pmpm" || target === "pmpma")
+					$('#profile-modal-newMessageArea').show();
+				if(target !== "messages-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
+
+					if ($('#profile-modal-newMessageArea').css('display') === "block") {
+						$('#profile-modal-newMessageArea').fadeOut(200);
+					}
+				}
+			});
 		});
 
 		function getDropdownProfile() {

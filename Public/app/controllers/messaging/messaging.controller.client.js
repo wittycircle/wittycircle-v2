@@ -173,6 +173,10 @@
 	 	};
 
 	 	/***   MODAL   ***/
+	 	$scope.$on("message-params", function(event, params) {
+	 		$scope.searchArea(params.profile, params.user_id, params.username);
+	 	});
+
 	 	Users.getUsers().then(function (resource) {
 			$scope.profiles = resource;
 		});
@@ -184,6 +188,7 @@
 		}
 
 		$scope.searchArea = function(profile, user_id, username) { // modal new message
+			console.log(user_id, username);
 			$scope.newMessageArea = {
 				first_name: profile.first_name,
 				last_name: profile.last_name,

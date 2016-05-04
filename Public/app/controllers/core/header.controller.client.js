@@ -29,8 +29,8 @@ angular.module('wittyApp')
    **Update in time sidebar after login
    */
    //TODO: change to the server url
-    // var socket = io.connect('https://www.wittycircle.com');
-    var socket = io.connect('http://127.0.0.1');
+    var socket = io.connect('https://www.wittycircle.com');
+    // var socket = io.connect('http://127.0.0.1');
 
       function islogged() {
 	  if ($rootScope.globals.currentUser) {

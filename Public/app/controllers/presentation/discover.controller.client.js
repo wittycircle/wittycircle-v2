@@ -375,6 +375,16 @@
 		    }
 		}, 1000);
 
+		setTimeout(function() {
+			if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
+				$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+					if (!res.success) {
+						$rootScope.socialCheck = true;
+						showbottomAlert.pop_share();
+					}
+				});
+			}
+		}, 7000);
 
 		/*** All watch variable ***/
 		$scope.$watch('discover.cards', function(value) {

@@ -11,7 +11,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
     function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, projectHomeResolve, cardProfileHomeResolve) {
 
 	$http.get('/profile').success(function(res){
-            console.log(res);
             Authentication.SetCredentialsSocial(res.user, res.user_info);
         });
 

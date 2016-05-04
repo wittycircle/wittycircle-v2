@@ -54,10 +54,6 @@ h1, h2, h3, h5, h6, p, li, textarea, h4, input, label, button, a {
 
 /************************************************************************************************/
 
-.ng-animate { 
- -webkit-animation: none 0s !important;
- transition: none 0s !important;
-}
 
 li {
   list-style-type: none;
@@ -76,11 +72,6 @@ button:focus {
   outline: 0;
 }
 
-
-.ng-animate { 
- -webkit-animation: none 0s !important;
- transition: none 0s !important;
-}
 
 a:hover {
 color: white;
@@ -857,6 +848,12 @@ li:focus {
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 @media only screen and (max-width: 736px) {
+
+  .ng-animate { 
+   -webkit-animation: none 0s !important;
+   transition: none 0s !important;
+  }
+
   .pdt-tp-bt-75 {
     padding-top: 30px;
     padding-bottom: 30px;

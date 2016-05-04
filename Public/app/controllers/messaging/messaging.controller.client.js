@@ -12,8 +12,8 @@
  	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
 
  	if ($rootScope.globals.currentUser) {
-	 	// var socket = io.connect('http://127.0.0.1');
-	 	var socket = io.connect('https://www.wittycircle.com/');
+	 	var socket = io.connect('http://127.0.0.1');
+	 	// var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
 
 	 	/* Function vm */
@@ -188,7 +188,6 @@
 		}
 
 		$scope.searchArea = function(profile, user_id, username) { // modal new message
-			console.log(user_id, username);
 			$scope.newMessageArea = {
 				first_name: profile.first_name,
 				last_name: profile.last_name,

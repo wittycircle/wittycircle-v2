@@ -10,7 +10,10 @@
 angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData',
     function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, projectHomeResolve, cardProfileHomeResolve) {
 
-        console.time('Time to load Home Page : ')
+	$http.get('/profile').success(function(res){
+            Authentication.SetCredentialsSocial(res.user, res.user_info);
+        });
+
         var main    = this,
             n       = 0;
 
@@ -78,11 +81,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         }
 
         /***** DESKTOP *****/
-
-        /*** All Requests On Load ***/
-        $http.get('/profile').success(function(res){
-            Authentication.SetCredentialsSocial(res.user, res.user_info);
-        });
 
         RetrieveData.getData('/projects', 'GET').then(function(response) {
             main.projectCards     = response;
@@ -295,7 +293,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
                 }
             }
         });
-console.timeEnd('Time to load Home Page : ')
 
 }])
 .directive('slick', [
@@ -319,7 +316,6 @@ console.timeEnd('Time to load Home Page : ')
           });
         };
 
-        console.log(scope.variableWidth);
         initializeSlick = function () {
           return $timeout(function () {
             var currentIndex, customPaging, slider;

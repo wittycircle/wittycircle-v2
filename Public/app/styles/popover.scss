@@ -20,9 +20,10 @@ $blue: #416299;
 	color: white;
 	position: fixed;
 	bottom: 0;
+	height: 324px;
 	z-index: 500;
 
-	#popover-login {
+	#popover-login, #popover-share {
 		padding: 40px 0 55px 0;
 
 		.crossPopover {
@@ -37,6 +38,7 @@ $blue: #416299;
 			.popover-text {
 				display: inline-block;
 				float: left;
+				max-width: 700px;
 
 				h1 {
 					font-family: 'FreigBook';

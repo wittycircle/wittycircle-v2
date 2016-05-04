@@ -476,6 +476,18 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     
 	console.timeEnd('loading profile');
 })
+.directive('profileMessageModal', function() {
+	var x = $(window).width();
+
+	if (x >= 736) {
+		return {
+			templateUrl: 'views/profile/modal/profile.message.view.client.html',
+			restrict: "AE",
+			scope: false,
+			controller: 'MessageCtrl'
+		}
+	}
+})
 .directive('profileLocationSearch', function($http, Locations) {
 	return {
 		require: 'ngModel',

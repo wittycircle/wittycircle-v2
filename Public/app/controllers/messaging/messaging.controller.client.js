@@ -85,7 +85,6 @@
 			 			Users.count();
 			 			$scope.dialogues = res.topic;
 			 			if ((i === 0 && $scope.dialogues[0]) || check) {
-
 			 				$scope.showMessage($scope.dialogues[0]);
 			 				i = 1;
 			 			}
@@ -188,7 +187,6 @@
 		}
 
 		$scope.searchArea = function(profile, user_id, username) { // modal new message
-			console.log(user_id, username);
 			$scope.newMessageArea = {
 				first_name: profile.first_name,
 				last_name: profile.last_name,
@@ -209,11 +207,14 @@
 			if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {
 				$scope.socket($scope.createName, $scope.pUser);
 			} else {
-				if ($rootScope.globals.currentUser.id !== $scope.Pi) {
-					$http.post('/messages', $scope.infoMessage).success(function(res){
+				if ($rootScope.globals.currentUser.id !== $scope.Pi) {	
+				    $http.post('/messages', $scope.infoMessage).success(function(res){
 						if (res.success) {
 							Users.count();
-							$scope.refreshDialogue(true);
+						    $scope.refreshDialogue(true);
+							setTimeout(function() {
+							    $state.reload()
+							}, 1500);
 						}
 					});
 				}

@@ -32,6 +32,13 @@ angular.module('wittyApp')
     var socket = io.connect('https://www.wittycircle.com');
     // var socket = io.connect('http://127.0.0.1');
 
+      function islogged() {
+	  if ($rootScope.globals.currentUser) {
+              return true;
+	  } else
+              return false;
+      };
+
    $rootScope.$watch('globals', function(value) {
     $scope.log = islogged();
  //    if ($scope.log) {
@@ -134,13 +141,6 @@ angular.module('wittyApp')
    /*
    **Private function for checking login
    */
-    function islogged() {
-      if ($rootScope.globals.currentUser) {
-         return true;
-      } else
-         return false;
-    };
-
     $scope.logout = function() {
       $http.get('/api/logout')
       .success(function(response) {
@@ -345,7 +345,7 @@ angular.module('wittyApp')
   /* Public API Key */
      var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
   /* Dev API Key */
-     // var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+    //  var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
   
   var People  = client.initIndex('Users');
   var Project = client.initIndex('Projects');

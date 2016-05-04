@@ -19,7 +19,7 @@
 	margin: 0 auto;
 	left: 0;
 	right: 0;
-	top: 30%;
+	top: 20%;
 	z-index: 1000000;
 	border-radius: 5px;
 	box-shadow: 0px 0px 15px #999999;
@@ -102,11 +102,6 @@ button {
 	border-radius: 4px;
 	padding: 6px 15px 8px 15px;
 	color: white;
-}
-
-button:hover {
-	border: 1px solid #d94242;
-	background-color: #d94242;
 }
 
 #messages-modals {

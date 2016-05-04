@@ -252,6 +252,17 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	  		});
 	    }
 	}, 1000);
+	
+	setTimeout(function() {
+		if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
+			$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+				if (!res.success) {
+					$rootScope.socialCheck = true;
+					showbottomAlert.pop_share();
+				}
+			});
+		}
+	}, 7000);
 
 	// $scope.$on('$destroy', function() {
 	// 	console.log("OK");

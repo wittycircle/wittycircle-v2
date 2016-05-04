@@ -1,5 +1,5 @@
 <section id="profile-header">
-	<div data-ng-include="'views/profile/modal/profile.message.view.client.html'"></div>
+	<profile-message-modal></profile-message-modal>
 	<div ng-if="!profileVm.imageCoverLoading" class="filter"></div>
 	<div ng-if="profileVm.imageCoverLoading" class="spinner-load">
 		<div class="spinner__item1 spinner-item"></div>
@@ -452,14 +452,14 @@
 
 			$(this).click(function(e) {
 				var target = e.target.id,
-					container = "#messages-modal-newMessageArea";
+					container = "#profile-modal-newMessageArea";
 
 				if (target === "pmpm" || target === "pmpma")
 					$('#profile-modal-newMessageArea').show();
-				if(target !== "messages-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
+				if(target !== "profile-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
 
 					if ($('#profile-modal-newMessageArea').css('display') === "block") {
-						$('#profile-modal-newMessageArea').fadeOut(200);
+						$('#profile-modal-newMessageArea').fadeOut(100);
 					}
 				}
 			});

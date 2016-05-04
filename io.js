@@ -132,10 +132,10 @@ module.exports = function(app, io, ensureAuth) {
                                                             var subj = result[0].first_name + " " + result[0].last_name + " followed you on Wittycirlce";
                                                             var newd = getNewD(result[0].description, true, 76, ' ...');
                                                             if (result[0].location_country) {
-                                                                var loc = result[0].location_city + " " + result[0].location_country;
+                                                                var loc = result[0].location_city + ', ' + result[0].location_country;
                                                             }
                                                             if (result[0].location_state) {
-                                                                var loc = result[0].location_city + " " + result[0].location_state;
+                                                                var loc = result[0].location_city + ', ' + result[0].location_state;
                                                             }
                                                             var url = "https://www.wittycircle.com/" + rslt[0].username;
 

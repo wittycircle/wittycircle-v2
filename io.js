@@ -158,7 +158,7 @@ module.exports = function(app, io, ensureAuth) {
                                                                     "type": "to"
                                                                 }],
                                                                 "headers": {
-                                                                    "Reply-To": "message.reply@example.com"
+                                                                    "Reply-To": "noreply@wittycircle.com"
                                                                 },
                                                                 "important": false,
                                                                 "inline_css": null,

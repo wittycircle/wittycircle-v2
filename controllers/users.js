@@ -3,6 +3,41 @@ var mandrill = require('mandrill-api/mandrill');
 var pf = require('../tools/profile_functions');
 const crypto = require('crypto');
 
+exports.getUserShare = function(req, res) {
+    req.checkParams('user_id', 'username must be an integer.').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors)
+        return res.status(400).send(errors);
+    else {
+        pool.query('SELECT social_share FROM users WHERE id = ?', req.params.user_id,
+            function(err, result) {
+                console.log(result[0]);
+                if (err) throw err;
+                if (!result[0].social_share)
+                    return res.send({success: false})
+                else
+                    return res.send({success: true});
+            });
+    }
+};
+
+exports.updateUserShare = function(req, res) {
+
+    req.checkParams('user_id', 'username must be an integer.').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors)
+        return res.status(400).send(errors);
+    else {
+        pool.query('UPDATE users SET social_share = 1 WHERE id = ?', req.params.user_id,
+            function(err, result) {
+                if (err) throw err;
+                else
+                    return res.send({success: true});
+            });
+    }
+};
 
 exports.getUsersValidateMail = function (req, res) {
     pool.query('SELECT user_email from account_validation WHERE token = ?',

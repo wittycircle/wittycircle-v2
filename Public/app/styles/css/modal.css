@@ -11,9 +11,9 @@ html {
   display: none; }
 
 /*********************** Main SignUp LogIn Css *************************/
-.fb-login {
+.fb-login, .fb-share {
   margin-bottom: 15px; }
-  .fb-login button {
+  .fb-login button, .fb-share button {
     background-color: #46629E;
     font-family: 'FreigSem';
     font-size: 18px;
@@ -21,10 +21,11 @@ html {
     padding: 10px 20px 10px 15px;
     border: 1px solid #46629E;
     border-radius: 4px; }
-    .fb-login button i {
+    .fb-login button i, .fb-share button i {
       padding: 0 15px 0 10px; }
-  .fb-login button:hover {
-    background-color: #344e7a; }
+  .fb-login button:hover, .fb-share button:hover {
+    background-color: #344e7a;
+    border: 1px solid #344e7a; }
 
 .go-login {
   margin-bottom: 15px;
@@ -40,10 +41,29 @@ html {
     border-radius: 4px;
     margin: 0; }
   .go-login button:hover {
-    background-color: #f5f5f5; }
+    background-color: #e9e9e9; }
   .go-login img {
     padding: 0 15px 0 10px;
     width: 40px; }
+
+.tw-share {
+  margin-bottom: 15px; }
+  .tw-share button {
+    text-align: left;
+    background-color: #4099FF;
+    font-family: 'FreigSem';
+    font-size: 18px;
+    color: white;
+    padding: 10px 30px 10px 13px;
+    border: 1px solid #4099FF;
+    border-radius: 4px;
+    margin: 0; }
+  .tw-share i {
+    margin-right: 12px;
+    margin-left: 13px; }
+  .tw-share button:hover {
+    background-color: #0077FF;
+    border: 1px solid #0077FF; }
 
 .signup-login-header {
   background-color: #FAFAFA;
@@ -125,10 +145,10 @@ html {
     display: none; }
   #main-signup-modal .signup-modal-social {
     padding: 0 55px 25px 60px; }
-    #main-signup-modal .signup-modal-social .fb-login {
+    #main-signup-modal .signup-modal-social .fb-login, #main-signup-modal .signup-modal-social .fb-share {
       display: inline-block;
       margin-right: 20px; }
-      #main-signup-modal .signup-modal-social .fb-login button {
+      #main-signup-modal .signup-modal-social .fb-login button, #main-signup-modal .signup-modal-social .fb-share button {
         padding: 10px 20px 10px 10px; }
     #main-signup-modal .signup-modal-social .go-login {
       display: inline-block; }
@@ -338,17 +358,17 @@ html {
       #main-signup-modal .signup-modal-social h4 {
         padding: 0;
         margin: 15px 0 15px 0; }
-      #main-signup-modal .signup-modal-social .fb-login {
+      #main-signup-modal .signup-modal-social .fb-login, #main-signup-modal .signup-modal-social .fb-share {
         width: 231px;
         margin-right: 10px;
         margin-left: 14px;
         margin-bottom: 10px; }
-        #main-signup-modal .signup-modal-social .fb-login i {
+        #main-signup-modal .signup-modal-social .fb-login i, #main-signup-modal .signup-modal-social .fb-share i {
           position: relative;
           margin-right: 23px;
           padding: 0;
           left: 5px; }
-        #main-signup-modal .signup-modal-social .fb-login button {
+        #main-signup-modal .signup-modal-social .fb-login button, #main-signup-modal .signup-modal-social .fb-share button {
           width: 231px;
           padding-right: 5px; }
     #main-signup-modal #closeCrossS2 {
@@ -419,7 +439,7 @@ html {
       #main-login-modal .login-modal-social h4 {
         padding: 0;
         margin: 30px 0 20px 0; }
-      #main-login-modal .login-modal-social .fb-login {
+      #main-login-modal .login-modal-social .fb-login, #main-login-modal .login-modal-social .fb-share {
         margin-bottom: 15px; }
     #main-login-modal .signup-login-old {
       padding: 10px 0 15px 0; }
@@ -450,7 +470,7 @@ html {
       padding: 0;
       margin-top: 5px;
       margin-bottom: 15px; }
-    #main-login-modal .login-modal-social .fb-login {
+    #main-login-modal .login-modal-social .fb-login, #main-login-modal .login-modal-social .fb-share {
       margin-bottom: 10px; }
   #main-login-modal .login-modal-email {
     padding: 0 20px; }

@@ -5,7 +5,19 @@
 
     angular
     .module('wittyProjectModule')
-    .controller('viewProjectCtrl', viewProjectCtrl);
+    .controller('viewProjectCtrl', viewProjectCtrl)
+    .directive('projectMessageModal', function() {
+        var x = $(window).width();
+
+        if (x >= 736) {
+            return {
+                templateUrl: 'views/profile/modal/profile.message.view.client.html',
+                restrict: "AE",
+                scope: false,
+                controller: 'MessageCtrl'
+            }
+        }
+    });
 
     viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_NeedsResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', 'Project_History', '$location', 'Feedbacks', '$stateParams'];
     function viewProjectCtrl (project_InvolvmentResolve, project_NeedsResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, Project_History, $location, Feedbacks, $stateParams) {
@@ -206,10 +218,12 @@
                     return;
                 }
                 if (id !== currentUser.id) {
-                   Users.getUserIdByProfileId(id).then(function(res) {
-		       if (res.success)
-			   $state.go('messages', {profile: vm.project.user, user_id: res.userId.id, username: res.userId.username});
-		   });
+                    $scope.sendMess = true;
+                    Users.getUserbyId(id, function(res) {
+                        if (res.success) {
+                            $rootScope.$broadcast("message-params", {profile: vm.project.user, user_id: id, username: res.data.username});
+                        }
+                    });
                 }
             } else {
                 console.error('error in goToMessage in ViewProjectCtrl: no id is provided');

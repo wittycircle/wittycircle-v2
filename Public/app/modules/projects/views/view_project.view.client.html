@@ -1,4 +1,5 @@
 <section id="viewProject-page">
+	<project-message-modal></project-message-modal>
 	<header id="viewProject-header" data-ng-style="{'background-image': 'url(' + resizePic(vm.project.picture, 1200, 410) + ')', 'background-position': vm.project.picture_position}">
 		<div class="viewProject-filter"></div>
 		<div class="viewProject-title">
@@ -39,7 +40,7 @@
 				</ul>
 
 				<ul class="viewProject-option">
-					<li data-ng-if="!vm.editable || vm.editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
+					<li id="pnm" data-ng-if="!vm.editable || vm.editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
 					<li id="sharer">
 						Share
 						<div class="icon-share animated bounceIn">
@@ -122,5 +123,25 @@
 	   function changeEditPictoW() {
 	   		$("#editButton").find('img').attr("src", '/images/picto-edit-w.svg');
 	   };
+
+		$(document).ready(function() {
+			$(this).click(function(e) {
+				var target = e.target.id,
+					container = "#profile-modal-newMessageArea";
+
+				if (target === "pnm") {
+					console.log("cest rentre");
+					$('#profile-modal-newMessageArea').show();
+				}
+				else {
+					if(target !== "profile-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
+
+						if ($('#profile-modal-newMessageArea').css('display') === "block") {
+							$('#profile-modal-newMessageArea').fadeOut(100);
+						}
+					}
+				}
+			});
+		});
 </script>
 </section>

@@ -85,7 +85,6 @@
 			 			Users.count();
 			 			$scope.dialogues = res.topic;
 			 			if ((i === 0 && $scope.dialogues[0]) || check) {
-
 			 				$scope.showMessage($scope.dialogues[0]);
 			 				i = 1;
 			 			}
@@ -208,13 +207,14 @@
 			if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {
 				$scope.socket($scope.createName, $scope.pUser);
 			} else {
-				if ($rootScope.globals.currentUser.id !== $scope.Pi) {
-					$http.post('/messages', $scope.infoMessage).success(function(res){
+				if ($rootScope.globals.currentUser.id !== $scope.Pi) {	
+				    $http.post('/messages', $scope.infoMessage).success(function(res){
 						if (res.success) {
 							Users.count();
+						    $scope.refreshDialogue(true);
 							setTimeout(function() {
-							    $scope.refreshDialogue(true);
-							}, 1000);
+							    $state.reload()
+							}, 1500);
 						}
 					});
 				}

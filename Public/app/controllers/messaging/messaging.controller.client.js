@@ -212,7 +212,9 @@
 					$http.post('/messages', $scope.infoMessage).success(function(res){
 						if (res.success) {
 							Users.count();
-							$scope.refreshDialogue(true);
+							setTimeout(function() {
+							    $scope.refreshDialogue(true);
+							}, 1000);
 						}
 					});
 				}

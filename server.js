@@ -2,6 +2,7 @@
 //require('./globals');
 /* Load Server Modules */
 var express		= require('express')
+, constants		= require('constants')
 , bodyParser		= require('body-parser')
 , cookieParser	= require('cookie-parser')
 , Validator		= require('express-validator')
@@ -23,13 +24,26 @@ var express		= require('express')
 , mandrill		= require('mandrill-api/mandrill')
 , mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA')
 , algoliaClient	= require('./algo/algolia').algoliaClient
-, compression = require('compression');
+, compression = require('compression')
+, helmet = require('helmet');
+
 var httpsOption		= {
-    key: fs.readFileSync('./ssl_key/wittycircle-key.pem'),
-    cert: fs.readFileSync('./ssl_key/secure_key/2_www.wittycircle.com.crt'),
-    ciphers: 'ECDHE-RSA-AES256-SHA:AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM',
+    secureProtocol: 'SSLv23_method',
+    secureOptions: constants.SSL_OP_NO_SSLv3,
+    key: fs.readFileSync('./ssl_key/www_wittycircle_com.key'),
+    cert: fs.readFileSync('./ssl_key/www_wittycircle_com.crt'),
+    ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA",
     honorCipherOrder: true,
+    requestCert: true,
+    rejectUnauthorized: false
 };
+
+var ONE_YEAR = 31536000000;
+app.use(helmet.hsts({
+    maxAge: ONE_YEAR,
+    includeSubdomains: true,
+    force: true
+}));
 
 app.use(compression());
 require('./passport')(passport);

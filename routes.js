@@ -26,6 +26,9 @@ app.put('/user/checkLog/update', ensureAuth, users.updateFirstLog);
 app.delete('/user/:id', users.deleteUser);
 app.get('/user/valid/:token', users.getUsersValidateMail);
 app.post('/user/valid/:token', users.ValidateAccount)
+/* Social share */
+app.get('/share/:user_id', ensureAuth, users.getUserShare);
+app.put('/share/:user_id', ensureAuth, users.updateUserShare);
 
 /* Profile */
 var profile = require('./controllers/profile');

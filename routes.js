@@ -312,9 +312,9 @@ app.put('/search/users', search.getUsersBySkillAl);
 
 app.get('*', function(req, res) {
     if (req.isAuthenticated()) {
-	updateUserActivity(req.user.id, function (response) {
-            console.log(response);
-	});
+    	updateUserActivity(req.user.id, function (response) {
+                console.log(response);
+    	});
     }
     res.sendFile(__dirname + '/Public/app/index.html');
     //res.cookie('name', 'tobi');

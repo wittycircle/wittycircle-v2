@@ -505,6 +505,7 @@ module.exports = function(app, io, ensureAuth) {
             } else {
                 if (data[0]) {
                     // relation exist already, now i must check the last connect of user
+                    return;
                 } else {
                     pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
                     [info.to_user_id, info.from_user_id],
@@ -514,8 +515,9 @@ module.exports = function(app, io, ensureAuth) {
                         } else {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
+                                return;
                             } else {
-                                // send mail because no relations exist 
+                                // send mail because no relations exist
                             }
                         }
                     });

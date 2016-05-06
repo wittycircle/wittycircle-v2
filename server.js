@@ -45,9 +45,12 @@ app.use(helmet.hsts({
     force: true
 }));
 
+var updateUserActivity = require('./tools/mail_message_functions').sendMailUnread;
+
 setInterval(function () {
-    console.log('op');
-}, 172800000); // 48 hours in ms
+    console.log('start mail process');
+    updateUserActivity();
+}, 21600000); // 6 hours in ms
 
 app.use(compression());
 require('./passport')(passport);

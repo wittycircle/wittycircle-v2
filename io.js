@@ -294,19 +294,19 @@ module.exports = function(app, io, ensureAuth) {
                                                         }
                                                         return value + (tail || ' ...');
                                                     }
-                                                    var subj = name[0].first_name + " " + name[0].last_name + " followed" + id[0].title + " on Wittycirlce";
+                                                    var subj = name[0].first_name + " " + name[0].last_name + " followed " + id[0].title + " on Wittycirlce";
                                                     var newd = getNewD(name[0].description, true, 76, ' ...');
                                                     if (name[0].location_country) {
-                                                        var loc = name[0].location_city + ', ' + result[0].location_country;
+                                                        var loc = name[0].location_city + ', ' + name[0].location_country;
                                                     }
                                                     if (name[0].location_state) {
-                                                        var loc = name[0].location_city + ', ' + result[0].location_state;
+                                                        var loc = name[0].location_city + ', ' + name[0].location_state;
                                                     }
                                                     var url = "https://www.wittycircle.com/" + rslt[0].username;
 
                                                     var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                    var template_name = "user-follow";
+                                                    var template_name = "follow-project";
                                                     var template_content = [{
                                                         "name": "follow-project",
                                                         "content": "content",
@@ -340,7 +340,7 @@ module.exports = function(app, io, ensureAuth) {
                                                         }],
                                                         "merge_vars": [
                                                             {
-                                                                "rcpt": data[0].email,
+                                                                "rcpt": rslt[0].email,
                                                                 "vars": [
                                                                     {
                                                                         "name": "fname",

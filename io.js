@@ -466,7 +466,7 @@ module.exports = function(app, io, ensureAuth) {
         });
     });
 
-    function saveMessage(names, message, callback) { // save message into the database
+    function saveMessage (names, message, callback) { // save message into the database
         pool.query('SELECT id, profile_id, CASE username WHEN ? then 1 WHEN ? then 2 END AS myorder FROM users WHERE username IN (?, ?) ORDER BY myorder',
         [names.senderName, names.addresserName, names.senderName, names.addresserName],
         function(err, data) {
@@ -494,5 +494,34 @@ module.exports = function(app, io, ensureAuth) {
                 });
             }
         });
-    };
+    }
+
+    function checkFirstMessage (info, callback) {
+        pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
+        [info.from_user_id, info.to_user_id],
+        function (err, data) {
+            if (err) {
+                throw err;
+            } else {
+                if (data[0]) {
+                    // relation exist already, now i must check the last connect of user
+                } else {
+                    pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
+                    [info.to_user_id, info.from_user_id],
+                    function (err, result) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            if (data[0]) {
+                                // relation exist already, now i must check the last connect of user
+                            } else {
+                                // send mail because no relations exist 
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 };

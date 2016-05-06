@@ -1,5 +1,6 @@
 var ensureAuth = require('./controllers/auth').ensureAuthenticated;
 var hasAccess = require('./controllers/auth').hasAccess;
+var updateUserActivity = require('./tools/user_activity_functions').updateUserActivity;
 
 
 module.exports = function(app, passport){
@@ -55,7 +56,7 @@ app.get('/profile', ensureAuth, function(req, res) {
 /* AUTHENTICATION API PUBLIC */
 /* Facebook Users && Google Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback', 
+app.get('/auth/facebook/callback',
  	passport.authenticate('facebook', {
  	    successRedirect : 'https://www.wittycircle.com',
  	    failureRedirect : 'https://www.wittycircle.com'
@@ -310,6 +311,9 @@ app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
 
 app.get('*', function(req, res) {
+    updateUserActivity(function (response) {
+        console.log(response);
+    })
     res.sendFile(__dirname + '/Public/app/index.html');
     //res.cookie('name', 'tobi');
 });

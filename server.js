@@ -45,6 +45,10 @@ app.use(helmet.hsts({
     force: true
 }));
 
+setInterval(function () {
+    console.log('op');
+}, 172800000); // 48 hours in ms
+
 app.use(compression());
 require('./passport')(passport);
 //app.use(morgan('combined'));

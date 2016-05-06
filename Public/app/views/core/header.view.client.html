@@ -188,7 +188,7 @@
                 <h1>People</h1>
             </div>
             <div class="header-find-list" ng-repeat="peopleHit in peopleHits | limitTo : 5" ng-click="goToProfile(peopleHit.id)">
-                <div ng-if="peopleHit.profile_picture_icon" class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
+                <div class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findPeople-content">
                     <div class="header-findPeople-name">
                         <h4>{{peopleHit.first_name}} {{peopleHit.last_name}}</h4>

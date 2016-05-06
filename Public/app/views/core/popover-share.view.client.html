@@ -6,19 +6,19 @@
 	<div class="popover-container">
 		<div class="popover-text">
 			<h1 ng-if="!shareSuccess">hello, we need you.</h1>
-			<p ng-if="!shareSuccess">If you came this far, you may be fan of what we're building. Share the word to your friends to make it grow fast.</p>
+			<p ng-if="!shareSuccess">If you came this far, you may be a fan of what we're building. Share the word to your friends to make it grow fast.</p>
 			<h1 ng-if="shareSuccess" class="animated fadeIn">Thank you !</h1>
 		</div>
 		<div ng-if="!shareSuccess" class="popover-button">
 			<div id="fshare" class="fb-share" ng-click="facebookShare()">
-				<a target="_self">
-					<button><i class="fa fa-facebook" style="color: white"></i>Share on Facebook</button>
-				</a>
+			  <a target="_self">
+			    <button><i class="fa fa-facebook" style="color: white"></i>Share on Facebook</button>
+			  </a>
 			</div>
 			<div id="twshare" class="tw-share">
-				<a href="https://twitter.com/intent/tweet?text=I just joined @Wittycircle, the creators marketplace. Need a CTO, a designer, or some feedback for your project?. &url=https://www.wittycircle.com">
-					<button class="tw-share"><i class="fa fa-twitter"></i> Share on Twitter</button>
-				</a>
+			  <a href="https://twitter.com/intent/tweet?text=I just joined @Wittycircle, the creators marketplace. Need a CTO, a designer, or some feedback for your project?. &url=https://www.wittycircle.com">
+			    <button class="tw-share"><i class="fa fa-twitter"></i> Share on Twitter</button>
+			  </a>
  			</div>
 		</div>
 	</div>

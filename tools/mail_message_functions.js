@@ -1,6 +1,7 @@
 const mandrill = require('mandrill-api/mandrill');
 
 exports.sendMailUnread = function() {
+    console.log('enter the send mail function');
     pool.query("SELECT * FROM messages where m_send = 0 AND m_read = 0",
     function (err, results) {
         if (err) {
@@ -15,13 +16,13 @@ exports.sendMailUnread = function() {
                         if (err) {
                             throw err;
                         } else {
-                            pool.query("SELECT * FROM profiles where id IN (SELECT profile_id IN users WHERE id = ?)", // then select the profiles info of who gonna get it
+                            pool.query("SELECT * FROM profiles where id IN (SELECT profile_id FROM users WHERE id = ?)", // then select the profiles info of who gonna get it
                             results[index].to_user_id,
                             function (err, response) {
                                 if (err) {
                                     throw err;
                                 } else {
-                                    pool.query("SELECT * FROM profiles where id IN (SELECT profile_id IN users WHERE id = ?)", // and select the profile info of who write the new message
+                                    pool.query("SELECT * FROM profiles where id IN (SELECT profile_id FROM users WHERE id = ?)", // and select the profile info of who write the new message
                                     results[index].from_user_id,
                                     function (err, resp) {
                                         if (err) {
@@ -43,10 +44,10 @@ exports.sendMailUnread = function() {
 
                                             var subj = resp[0].first_name + " " + resp[0].last_name + " sent you a message" ;
                                             var newd = getNewD(results[index].message, true, 76, ' ...');
-                                            if (name[0].location_country) {
+                                            if (resp[0].location_country) {
                                                 var loc = resp[0].location_city + ', ' + resp[0].location_country;
                                             }
-                                            if (name[0].location_state) {
+                                            if (resp[0].location_state) {
                                                 var loc = resp[0].location_city + ', ' + resp[0].location_state;
                                             }
 

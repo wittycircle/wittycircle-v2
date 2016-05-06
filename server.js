@@ -50,7 +50,7 @@ var updateUserActivity = require('./tools/mail_message_functions').sendMailUnrea
 setInterval(function () {
     console.log('start mail process');
     updateUserActivity();
-}, 21600000); // 6 hours in ms
+}, 21600000); // 6 hours in ms = 21600000
 
 app.use(compression());
 require('./passport')(passport);

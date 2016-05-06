@@ -1,9 +1,6 @@
 
-exports.updateUserActivity = function(callback) {
-    if (!req.isAuthenticated()) {
-        return res.status(404).send({message: "cant update user activity, not legged in"});
-    } else {
-        if (req.user.id) {
+exports.updateUserActivity = function(user_id, callback) {
+        if (user_id) {
             var time = new Date().getTime();
             pool.query("UPDATE users SET last_activity = ? WHERE id = ?",
             [time, user_id],
@@ -12,8 +9,8 @@ exports.updateUserActivity = function(callback) {
                     throw err;
                 } else {
                     callback(true);
+		    //next();
                 }
             });
-        }
     }
 };

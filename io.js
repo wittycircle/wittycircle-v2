@@ -467,6 +467,7 @@ module.exports = function(app, io, ensureAuth) {
     });
 
     function saveMessage (names, message, callback) { // save message into the database
+	console.log('la save');
         pool.query('SELECT id, profile_id, CASE username WHEN ? then 1 WHEN ? then 2 END AS myorder FROM users WHERE username IN (?, ?) ORDER BY myorder',
         [names.senderName, names.addresserName, names.senderName, names.addresserName],
         function(err, data) {
@@ -487,6 +488,7 @@ module.exports = function(app, io, ensureAuth) {
                     checkFirstMessage(infoMessage);
                     pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
                         if (err) throw err;
+			//checkFirstMessage(infoMessage, done.insertId);
                         infoMessage.from_picture= result[0].profile_picture_icon;
                         infoMessage.date		= new Date();
                         infoMessage.success		= true;
@@ -498,6 +500,7 @@ module.exports = function(app, io, ensureAuth) {
     }
 
     function checkFirstMessage (info) {
+	console.log(info);
         pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
         [info.from_user_id, info.to_user_id],
         function (err, data) {
@@ -506,6 +509,7 @@ module.exports = function(app, io, ensureAuth) {
             } else {
                 if (data[0]) {
                     // relation exist already, now i must check the last connect of user
+		    console.log('data0 exits1');
                     return;
                 } else {
                     pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
@@ -516,22 +520,24 @@ module.exports = function(app, io, ensureAuth) {
                         } else {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
+				console.log('data0 exits2');
                                 return;
                             } else {
                                 // send mail because no relations exist
-                                pool.query("SELECT * FROM pofiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
+                                pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                 [info.from_user_id],
                                 function (err, rslt) {
                                     if (err) {
                                         throw err;
                                     } else {
+					console.log(rslt);
                                         pool.query("SELECT * FROM users WHERE id = ?",
                                         [info.to_user_id],
                                         function (err, mail) {
                                             if (err) {
                                                 throw err;
                                             } else {
-                                                pool.query("SELECT * FROM pofiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
+                                                pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                                 [info.to_user_id],
                                                 function (err, response) {
                                                     if (err) {
@@ -551,18 +557,18 @@ module.exports = function(app, io, ensureAuth) {
                                                             return value + (tail || ' ...');
                                                         }
 
-                                                        var subj = rslt.first_name + " " + rslt.last_name + " sent you a message" ;
+                                                        var subj = rslt[0].first_name + " " + rslt[0].last_name + " sent you a message" ;
                                                         var newd = getNewD(info.message, true, 76, ' ...');
-                                                        if (rslt.location_country) {
-                                                            var loc = rslt.location_city + ', ' + rslt.location_country;
+                                                        if (rslt[0].location_country) {
+                                                            var loc = rslt[0].location_city + ', ' + rslt[0].location_country;
                                                         }
-                                                        if (rslt.location_state) {
-                                                            var loc = rslt.location_city + ', ' + rslt.location_state;
+                                                        if (rslt[0].location_state) {
+                                                            var loc = rslt[0].location_city + ', ' + rslt[0].location_state;
                                                         }
 
                                                         var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                        var template_name = "follow-project";
+                                                        var template_name = "new-message";
                                                         var template_content = [{
                                                             "name": "new-message",
                                                             "content": "content",
@@ -629,15 +635,16 @@ module.exports = function(app, io, ensureAuth) {
 
                                                         var async = false;
                                                         mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                            pool.query("UPDATE messages set m_send = 1 WHERE id = ?",
-                                                            results[index].id,
+                                                            /*pool.query("UPDATE messages set m_send = 1 WHERE id = ?",
+                                                            m_id,
                                                             function (err, rez) {
                                                                 if (err) {
                                                                     throw err;
                                                                 } else {
                                                                     return (0);
                                                                 }
-                                                            })
+                                                            })*/
+							    return (0);
                                                         }, function(e) {
                                                             // Mandrill returns the error as an object with name and message keys
                                                             console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);

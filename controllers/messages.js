@@ -1,3 +1,4 @@
+const mandrill = require('mandrill-api/mandrill');
 
 
 /* Data messages */
@@ -383,5 +384,3 @@ function checkFirstMessage (info) {
 		}
 	});
 }
-
-};

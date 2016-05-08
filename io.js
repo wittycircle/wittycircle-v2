@@ -484,6 +484,7 @@ module.exports = function(app, io, ensureAuth) {
                         parent_id        : parent,
                         message          : message
                     };
+                    checkFirstMessage(infoMessage);
                     pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
                         if (err) throw err;
                         infoMessage.from_picture= result[0].profile_picture_icon;
@@ -496,7 +497,7 @@ module.exports = function(app, io, ensureAuth) {
         });
     }
 
-    function checkFirstMessage (info, callback) {
+    function checkFirstMessage (info) {
         pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
         [info.from_user_id, info.to_user_id],
         function (err, data) {
@@ -518,6 +519,137 @@ module.exports = function(app, io, ensureAuth) {
                                 return;
                             } else {
                                 // send mail because no relations exist
+                                pool.query("SELECT * FROM pofiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
+                                [info.from_user_id],
+                                function (err, rslt) {
+                                    if (err) {
+                                        throw err;
+                                    } else {
+                                        pool.query("SELECT * FROM users WHERE id = ?",
+                                        [info.to_user_id],
+                                        function (err, mail) {
+                                            if (err) {
+                                                throw err;
+                                            } else {
+                                                pool.query("SELECT * FROM pofiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
+                                                [info.to_user_id],
+                                                function (err, response) {
+                                                    if (err) {
+                                                        throw err;
+                                                    } else {
+                                                        function getNewD(value, wordwise, max, tail) {
+                                                            if (!value) return '';
+                                                            if (!max) return value;
+                                                            if (value.length <= max) return value;
+                                                            value = value.substr(0, max);
+                                                            if (wordwise) {
+                                                                var lastspace = value.lastIndexOf(' ');
+                                                                if (lastspace != -1) {
+                                                                    value = value.substr(0, lastspace);
+                                                                }
+                                                            }
+                                                            return value + (tail || ' ...');
+                                                        }
+
+                                                        var subj = rslt.first_name + " " + rslt.last_name + " sent you a message" ;
+                                                        var newd = getNewD(info.message, true, 76, ' ...');
+                                                        if (rslt.location_country) {
+                                                            var loc = rslt.location_city + ', ' + rslt.location_country;
+                                                        }
+                                                        if (rslt.location_state) {
+                                                            var loc = rslt.location_city + ', ' + rslt.location_state;
+                                                        }
+
+                                                        var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+
+                                                        var template_name = "follow-project";
+                                                        var template_content = [{
+                                                            "name": "new-message",
+                                                            "content": "content",
+                                                        }];
+
+                                                        var message = {
+                                                            "html": "<p>HTML content</p>",
+                                                            "subject": subj,
+                                                            "from_email": "noreply@wittycircle.com",
+                                                            "from_name": "Wittycircle",
+                                                            "to": [{
+                                                                "email": mail[0].email,
+                                                                "name": 'kkkkk',
+                                                                "type": "to"
+                                                            }],
+                                                            "headers": {
+                                                                "Reply-To": "noreply@wittycircle.com"
+                                                            },
+                                                            "important": false,
+                                                            "inline_css": null,
+                                                            "preserve_recipients": null,
+                                                            "view_content_link": null,
+                                                            "tracking_domain": null,
+                                                            "signing_domain": null,
+                                                            "return_path_domain": null,
+                                                            "merge": true,
+                                                            "merge_language": "mailchimp",
+                                                            "global_merge_vars": [{
+                                                                "name": "merge1",
+                                                                "content": "merge1 content"
+                                                            }],
+                                                            "merge_vars": [
+                                                                {
+                                                                    "rcpt": mail[0].email,
+                                                                    "vars": [
+                                                                        {
+                                                                            "name": "fname",
+                                                                            "content": response[0].first_name
+                                                                        },
+                                                                        {
+                                                                            "name": "ffname",
+                                                                            "content": rslt[0].first_name
+                                                                        },
+                                                                        {
+                                                                            "name": "flname",
+                                                                            "content": rslt[0].last_name
+                                                                        },
+                                                                        {
+                                                                            "name": "fimg",
+                                                                            "content": rslt[0].profile_picture_icon
+                                                                        },
+                                                                        {
+                                                                            "name": "fdesc",
+                                                                            "content": newd
+                                                                        },
+                                                                        {
+                                                                            "name": "floc",
+                                                                            "content": loc
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        };
+
+                                                        var async = false;
+                                                        mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                                                            pool.query("UPDATE messages set m_send = 1 WHERE id = ?",
+                                                            results[index].id,
+                                                            function (err, rez) {
+                                                                if (err) {
+                                                                    throw err;
+                                                                } else {
+                                                                    return (0);
+                                                                }
+                                                            })
+                                                        }, function(e) {
+                                                            // Mandrill returns the error as an object with name and message keys
+                                                            console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                                                            throw e;
+                                                            // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         }
                     });

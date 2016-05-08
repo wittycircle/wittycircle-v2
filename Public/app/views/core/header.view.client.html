@@ -165,8 +165,7 @@
             </div>
             <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
 	      <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
-                <div ng-if="projectHit.picture_card" class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
-                <div ng-if="!projectHit.picture_card" class="header-findProject-picture" style="background-image: url('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg'); background-size: auto 48px; background-repeat: no-repeat;"></div>
+                <div class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findProject-content">
                     <div class="header-findProject-title">
                         <h2>{{projectHit.title}}</h2>

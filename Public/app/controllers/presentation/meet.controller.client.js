@@ -253,7 +253,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	    }
 	}, 1000);
 	
-	setTimeout(function() {
+	var shareInterval = $timeout(function() {
 		if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
 			$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
 				if (!res.success) {
@@ -264,6 +264,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		}
 	}, 7000);
 
+        $scope.$on('$destroy', function() {
+            $timeout.cancel(shareInterval);
+        });
 	// $scope.$on('$destroy', function() {
 	// 	console.log("OK");
 	// 	$mdBottomSheet.destroy();

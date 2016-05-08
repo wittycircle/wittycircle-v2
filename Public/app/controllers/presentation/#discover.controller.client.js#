@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
+ 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert, $timeout) {
 
  		console.time('Time to load Discover Page : ');
 
@@ -41,7 +41,7 @@
 	 	discover.categories;
 	 	discover.searchCtg;
 	 	discover.ctgName;
-	    discover.allowExpand;
+	        discover.allowExpand;
 	    
 	 	/*** Scope ***/
 	 	/*** Discover Card Page SEO ***/
@@ -385,6 +385,7 @@
 				});
 			}
 		}, 7000);
+	        shareInterval();
 
 	        $scope.$on('$destroy', function() {
 		    $timeout.cancel(shareInterval);

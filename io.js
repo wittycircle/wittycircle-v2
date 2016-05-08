@@ -467,7 +467,6 @@ module.exports = function(app, io, ensureAuth) {
     });
 
     function saveMessage (names, message, callback) { // save message into the database
-	console.log('la save');
         pool.query('SELECT id, profile_id, CASE username WHEN ? then 1 WHEN ? then 2 END AS myorder FROM users WHERE username IN (?, ?) ORDER BY myorder',
         [names.senderName, names.addresserName, names.senderName, names.addresserName],
         function(err, data) {
@@ -488,7 +487,7 @@ module.exports = function(app, io, ensureAuth) {
                     checkFirstMessage(infoMessage);
                     pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
                         if (err) throw err;
-			//checkFirstMessage(infoMessage, done.insertId);
+                        //checkFirstMessage(infoMessage, done.insertId);
                         infoMessage.from_picture= result[0].profile_picture_icon;
                         infoMessage.date		= new Date();
                         infoMessage.success		= true;
@@ -500,7 +499,6 @@ module.exports = function(app, io, ensureAuth) {
     }
 
     function checkFirstMessage (info) {
-	console.log(info);
         pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
         [info.from_user_id, info.to_user_id],
         function (err, data) {
@@ -509,8 +507,8 @@ module.exports = function(app, io, ensureAuth) {
             } else {
                 if (data[0]) {
                     // relation exist already, now i must check the last connect of user
-		    console.log('data0 exits1');
-                    return;
+                    console.log('data0 exits1');
+                    return 1;
                 } else {
                     pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
                     [info.to_user_id, info.from_user_id],
@@ -520,8 +518,8 @@ module.exports = function(app, io, ensureAuth) {
                         } else {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
-				console.log('data0 exits2');
-                                return;
+                                console.log('data0 exits2');
+                                return 1;
                             } else {
                                 // send mail because no relations exist
                                 pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
@@ -530,7 +528,7 @@ module.exports = function(app, io, ensureAuth) {
                                     if (err) {
                                         throw err;
                                     } else {
-					console.log(rslt);
+                                        console.log(rslt);
                                         pool.query("SELECT * FROM users WHERE id = ?",
                                         [info.to_user_id],
                                         function (err, mail) {
@@ -635,16 +633,7 @@ module.exports = function(app, io, ensureAuth) {
 
                                                         var async = false;
                                                         mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                            /*pool.query("UPDATE messages set m_send = 1 WHERE id = ?",
-                                                            m_id,
-                                                            function (err, rez) {
-                                                                if (err) {
-                                                                    throw err;
-                                                                } else {
-                                                                    return (0);
-                                                                }
-                                                            })*/
-							    return (0);
+                                                            return (0);
                                                         }, function(e) {
                                                             // Mandrill returns the error as an object with name and message keys
                                                             console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);

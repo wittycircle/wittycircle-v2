@@ -1,523 +1,521 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name wittyApp.controller:DiscoverCtrl
- * @description
- * # DiscoverCtrl
- * Controller of the wittyApp
- **/
+* @ngdoc function
+* @name wittyApp.controller:DiscoverCtrl
+* @description
+* # DiscoverCtrl
+* Controller of the wittyApp
+**/
 
- angular.module('wittyApp')
- 	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
+angular.module('wittyApp')
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
 
- 		var discover = this;
+    var discover = this;
 
-		/*** Controller As Discover Function ***/
-		discover.opendmodal 	= opendmodal;
-		discover.closemmodal 	= closemmodal;
-		discover.getProject 	= getProject;
-		discover.getCategory 	= getCategory;
-		discover.encodeUrl 		= encodeUrl;
-		discover.getTagCag 		= getTagCag;
-		discover.getHelp		= getHelp;
-		discover.expand  		= expand;
-		discover.searchSkill 	= searchSkill;
-		discover.removeSkill 	= removeSkill;
+    /*** Controller As Discover Function ***/
+    discover.opendmodal 	= opendmodal;
+    discover.closemmodal 	= closemmodal;
+    discover.getProject 	= getProject;
+    discover.getCategory 	= getCategory;
+    discover.encodeUrl 		= encodeUrl;
+    discover.getTagCag 		= getTagCag;
+    discover.getHelp		= getHelp;
+    discover.expand  		= expand;
+    discover.searchSkill 	= searchSkill;
+    discover.removeSkill 	= removeSkill;
 
-		// discover.goToProfile 	= goToProfile;
+    // discover.goToProfile 	= goToProfile;
 
-		/*** Controller As Discover Variable ***/
-		discover.ww = $(window).width();
-		discover.cProject = 'All Projects';
-	 	discover.cHelp = 'Any help';
-	 	discover.limit = 9;
+    /*** Controller As Discover Variable ***/
+    discover.ww = $(window).width();
+    discover.cProject = 'All Projects';
+    discover.cHelp = 'Any help';
+    discover.limit = 9;
 
-		discover.dmobile;
-		discover.skills;
-		discover.cards;
-	 	discover.categories;
-	 	discover.searchCtg;
-	 	discover.ctgName;
-	    discover.allowExpand;
+    discover.dmobile;
+    discover.skills;
+    discover.cards;
+    discover.categories;
+    discover.searchCtg;
+    discover.ctgName;
+    discover.allowExpand;
 
-        getDiscoverCard();
+    getDiscoverCard();
 
-	 	/*** Scope ***/
-	 	/*** Discover Card Page SEO ***/
-		$scope.$parent.seo = {
-			pageTitle: "Wittycircle | Discover",
-			pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
-		};
+    /*** Scope ***/
+    /*** Discover Card Page SEO ***/
+    $scope.$parent.seo = {
+        pageTitle: "Wittycircle | Discover",
+        pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+    };
 
-		$scope.$parent.card = {
-			title: "Wittycircle | Discover",
-			url: "https://www.wittycircle.com/discover",
-			image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
-		};
+    $scope.$parent.card = {
+        title: "Wittycircle | Discover",
+        url: "https://www.wittycircle.com/discover",
+        image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
+    };
 
-	 	/***** MOBILE *****/
-	 	/*** Discover Mobile ***/
-		discover.dmobile = {};
+    /***** MOBILE *****/
+    /*** Discover Mobile ***/
+    discover.dmobile = {};
 
-		/*** All Discover Functions (Mobile) ***/
-		function opendmodal(value) {
+    /*** All Discover Functions (Mobile) ***/
+    function opendmodal(value) {
 
-			if (discover.ww <= 736) {
-				$('body').css('overflow-y', 'hidden');
-				discover.dmobile.modal	= value;
-				if (value === 1)
-					discover.dmobile.headerText = "Show me...";
-				if (value === 2)
-					discover.dmobile.headerText = "Show me projects about...";
-				if (value === 3)
-					discover.dmobile.headerText = "Show me projects looking for...";
-				if (value === 4)
-					discover.dmobile.headerText = "Someone with specific skills?";
-				// if (value === 5)
-				// 	discover.dmobile.headerText = "Show me projects near...";
-				discover.dmobile.general 	= true;
-			}
-		};
+        if (discover.ww <= 736) {
+            $('body').css('overflow-y', 'hidden');
+            discover.dmobile.modal	= value;
+            if (value === 1)
+            discover.dmobile.headerText = "Show me...";
+            if (value === 2)
+            discover.dmobile.headerText = "Show me projects about...";
+            if (value === 3)
+            discover.dmobile.headerText = "Show me projects looking for...";
+            if (value === 4)
+            discover.dmobile.headerText = "Someone with specific skills?";
+            // if (value === 5)
+            // 	discover.dmobile.headerText = "Show me projects near...";
+            discover.dmobile.general 	= true;
+        }
+    };
 
-		function closemmodal() {
-			$('#dmmodal').css("display", "none");
-			$('body').css('overflow-y', 'scroll');
-			discover.dmobile.general 	= false;
-		}
+    function closemmodal() {
+        $('#dmmodal').css("display", "none");
+        $('body').css('overflow-y', 'scroll');
+        discover.dmobile.general 	= false;
+    }
 
-		/***** DESKTOP *****/
+    /***** DESKTOP *****/
 
-		/*** All Requests On Load ***/
-	 	RetrieveData.getData('/skills', 'GET').then(function(res) {
-			discover.skills = res.skills;
-		});
+    /*** All Requests On Load ***/
+    RetrieveData.getData('/skills', 'GET').then(function(res) {
+        discover.skills = res.skills;
+    });
 
-		function getDiscoverCard() {
-			RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
-		 		discover.cards = res;
-		 	});
-		};
+    function getDiscoverCard() {
+        RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
+            discover.cards = res;
+        });
+    };
 
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    RetrieveData.getData('/categories', 'GET').then(function(response) {
+        discover.categories = response;
+        if ($stateParams.category) {
+            var str = $stateParams.category.toLowerCase();
+            str = capitalizeFirstLetter(str);
+            var obj = discover.categories.filter(function ( obj ) {
+                return obj.name === str;
+            })[0];
+            if (obj != undefined) {
+                discover.searchCtg = str;
+                discover.ctgName = str;
+            } else {
+                discover.searchCtg = 'Art';
+                discover.ctgName = 'Art';
+            }
+            if ($stateParams.tagParams) {
+                discover.searchCtg = $stateParams.tagParams;
+                discover.ctgName = $stateParams.tagParams;
+            }
+            if (!$stateParams.tagParams && !$stateParams.category)
+                discover.ctgName = "Art";
+        }
+    });
+
+        /*** All Discover Functions (Desktop) ***/
+
+        function encodeUrl(url) {
+            return Beauty_encode.encodeUrl(url);
         }
 
-	 	RetrieveData.getData('/categories', 'GET').then(function(response) {
-			discover.categories = response;
-		    console.log(response);
-            if ($stateParams.category) {
-                var str = $stateParams.category.toLowerCase();
-                str = capitalizeFirstLetter(str);
-                //var exist = (discover.categories.indexOf(str) > -1)
-                //console.log(exist);
-		var obj = discover.categories.filter(function ( obj ) {
-		    return obj.name === str;
-		})[0];
-		if (obj != undefined) {
-                    discover.searchCtg = str;
-                    discover.ctgName = str;
-		} else {
-		    discover.searchCtg = 'Art';
-		    discover.ctgName = 'Art';
+        // $scope.$on("$destroy", function(){
+        // 	$scope.skills = 0;
+        // 	var container = $('.custom-popover');
+        // 	if (container.length) {
+        // 		$mdBottomSheet.hide();
+        // 		$('.md-bottom-sheet-backdrop').css('display', 'none')
+        // 		$('#page-wrap').css('display', 'none');
+        // 	}
+        // });
+
+        // function goToProfile(id) {
+        // 	Users.getUserIdByProfileId(id).then(function(data) {
+        // 		$location.path('/' + data.userId.username);
+        // 	});
+        // };
+
+        /*** get project name ***/
+        function getProject(pName, number) {
+            if (discover.ww <= 736)
+            discover.closemmodal();
+            switch (number) {
+                case 1:
+                discover.cProject = "Ideas";
+                discover.searchStatus = "Idea";
+                break ;
+                case 2:
+                discover.cProject = "Drafted projects";
+                discover.searchStatus = pName;
+                break ;
+                case 3:
+                discover.cProject = "Beta projects";
+                discover.searchStatus = pName;
+                break ;
+                case 4:
+                discover.cProject = "Live projects";
+                discover.searchStatus = pName;
+                break ;
+                case 5:
+                discover.cProject = "All projects";
+                discover.searchStatus = pName;
+                break ;
+            };
+        };
+
+        /*** get category name ***/
+        function getCategory(cName) {
+            discover.ctgName 		= cName;
+            discover.searchCtg 	= cName;
+            if (discover.ww <= 736)
+            discover.closemmodal();
+        };
+
+        /*** get tag category name ***/
+        function getTagCag(tagName) {
+            discover.ctgName 		= tagName;
+            discover.searchCtg 	= tagName;
+        };
+
+        /*** get help name ***/
+        function getHelp(hName) {
+            if (discover.ww <= 736)
+            discover.closemmodal();
+
+            if (discover.ww > 736) {
+                if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
+                    document.getElementById('dstext').style.display = "inline-block";
+                    document.getElementById('dsdrop1').style.display = "inline-block";
+                    // setTimeout(function() {
+                    // 	document.getElementById('dsdrop1').style.display = "inline-block";
+                    // }, 400);
+                } else {
+                    document.getElementById('dstext').style.display = "none";
+                    document.getElementById('dsdrop1').style.display = "none";
+                }
+                discover.cHelp	 		= hName;
+                discover.searchHelp 		= hName;
+                if (discover.cHelp === 'Feedback') {
+                    discover.skillList 	= [];
+                    if (document.getElementById('labelNoText')) {
+                        document.getElementById('labelNoText').id = "labelText";
+                        document.getElementById('labelNoText2').id = "labelText2";
+                        document.getElementById('labelText').style.display = "block";
+                        document.getElementById('labelText2').style.color = "white";
+                    }
+                    document.getElementById('dsabox1').style.display = "none";
+                    document.getElementById('dsabox2').style.display = "none";
+                    document.getElementById('input-dsa').style.display = "inline-block";
+                    $scope.displaySk = true;
+                }
+                else
+                $scope.displaySk = false;
+            } else {
+                discover.cHelp	 		= hName;
+                discover.searchHelp 		= hName;
             }
-			if ($stateParams.tagParams) {
-				discover.searchCtg = $stateParams.tagParams;
-				discover.ctgName = $stateParams.tagParams;
-			}
-			if (!$stateParams.tagParams && !$stateParams.category)
-				discover.ctgName = "Art";
-		});
+        };
 
-		/*** All Discover Functions (Desktop) ***/
+        /*** expand project list ***/
+        function expand() {
+            if (discover.allowExpand) {
+                discover.limit += 6;
+                if (discover.limit >= discover.cards.length)
+                discover.allowExpand = false;
+            }
+        };
 
-	    function encodeUrl(url) {
-	      return Beauty_encode.encodeUrl(url);
-	    }
+        discover.skillList = [];
+        discover.skillListM = [];
+        /*** add skill to search ***/
+        function searchSkill(name) {
+            discover.skillName = [];
 
-		// $scope.$on("$destroy", function(){
-		// 	$scope.skills = 0;
-		// 	var container = $('.custom-popover');
-		// 	if (container.length) {
-		// 		$mdBottomSheet.hide();
-		// 		$('.md-bottom-sheet-backdrop').css('display', 'none')
-		// 		$('#page-wrap').css('display', 'none');
-		// 	}
-		// });
+            if (discover.ww > 736) {
+                if (document.getElementById('labelNoText')) {
+                    document.getElementById('labelNoText').id = "labelText";
+                    document.getElementById('labelNoText2').id = "labelText2";
+                    document.getElementById('labelText').style.display = "block";
+                    document.getElementById('labelText2').style.color = "white";
+                }
+                document.getElementById('dsabox1').style.display = "none";
+                document.getElementById('dsabox2').style.display = "none";
 
-		// function goToProfile(id) {
-		// 	Users.getUserIdByProfileId(id).then(function(data) {
-		// 		$location.path('/' + data.userId.username);
-		// 	});
-		// };
+                if (discover.skillList.length < 5) {
+                    if (discover.skillList.length === 0) {
+                        discover.skillList.push({sName: name});
+                        document.getElementById('input-dsa').style.display = "none";
+                    }
+                    else {
+                        for(var i = 0; i < discover.skillList.length; i++) {
+                            if (discover.skillList[i].sName === name)
+                            break;
+                        }
+                        if (i == discover.skillList.length) {
+                            discover.skillList.push({sName: name});
+                            document.getElementById('input-dsa').style.display = "none";
+                        }
+                    }
+                }
 
-		/*** get project name ***/
-		function getProject(pName, number) {
-			if (discover.ww <= 736)
-				discover.closemmodal();
-			switch (number) {
-				case 1:
-					discover.cProject = "Ideas";
-					discover.searchStatus = "Idea";
-					break ;
-				case 2:
-					discover.cProject = "Drafted projects";
-					discover.searchStatus = pName;
-					break ;
-				case 3:
-					discover.cProject = "Beta projects";
-					discover.searchStatus = pName;
-					break ;
-				case 4:
-					discover.cProject = "Live projects";
-					discover.searchStatus = pName;
-					break ;
-				case 5:
-					discover.cProject = "All projects";
-					discover.searchStatus = pName;
-					break ;
-			};
-		};
+                if (discover.skillList.length == 5)
+                discover.fullList = true;
 
-		/*** get category name ***/
-		function getCategory(cName) {
-			discover.ctgName 		= cName;
-			discover.searchCtg 	= cName;
-			if (discover.ww <= 736)
-				discover.closemmodal();
-		};
+                RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
+                    if (res.success)
+                    discover.skillSearch = res.data;
+                });
+            } else {
+                if (discover.skillListM.length < 5) {
+                    if (discover.skillListM.length === 0) {
+                        discover.skillListM.push({sName: name});
+                    }
+                    else {
+                        for(var i = 0; i < discover.skillListM.length; i++) {
+                            if (discover.skillListM[i].sName === name)
+                            break;
+                        }
+                        if (i == discover.skillListM.length) {
+                            discover.skillListM.push({sName: name});
+                        }
+                    }
+                }
+                // if (discover.skillListM.length == 5)
+                // 	discover.fullList = true;
 
-		/*** get tag category name ***/
-		function getTagCag(tagName) {
-			discover.ctgName 		= tagName;
-			discover.searchCtg 	= tagName;
-		};
+                RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
+                    if (res.success)
+                    discover.skillSearch = res.data;
+                });
+            }
 
-		/*** get help name ***/
-		function getHelp(hName) {
-			if (discover.ww <= 736)
-				discover.closemmodal();
+        }
 
-			if (discover.ww > 736) {
-				if (hName === "Any help" || hName === "Teammate" || hName === "Mentor" || hName === "Tips") {
-					document.getElementById('dstext').style.display = "inline-block";
-					document.getElementById('dsdrop1').style.display = "inline-block";
-					// setTimeout(function() {
-					// 	document.getElementById('dsdrop1').style.display = "inline-block";
-					// }, 400);
-				} else {
-					document.getElementById('dstext').style.display = "none";
-					document.getElementById('dsdrop1').style.display = "none";
-				}
-				discover.cHelp	 		= hName;
-				discover.searchHelp 		= hName;
-				if (discover.cHelp === 'Feedback') {
-					discover.skillList 	= [];
-					if (document.getElementById('labelNoText')) {
-						document.getElementById('labelNoText').id = "labelText";
-						document.getElementById('labelNoText2').id = "labelText2";
-						document.getElementById('labelText').style.display = "block";
-						document.getElementById('labelText2').style.color = "white";
-					}
-					document.getElementById('dsabox1').style.display = "none";
-					document.getElementById('dsabox2').style.display = "none";
-					document.getElementById('input-dsa').style.display = "inline-block";
-					$scope.displaySk = true;
-				}
-				else
-					$scope.displaySk = false;
-			} else {
-				discover.cHelp	 		= hName;
-				discover.searchHelp 		= hName;
-			}
-		};
+        /*** remove skill added ***/
+        function removeSkill(name) {
 
-		/*** expand project list ***/
-		function expand() {
-			if (discover.allowExpand) {
-				discover.limit += 6;
-				if (discover.limit >= discover.cards.length)
-					discover.allowExpand = false;
-			}
-		};
+            var index;
 
-		discover.skillList = [];
-		discover.skillListM = [];
-		/*** add skill to search ***/
-		function searchSkill(name) {
-			discover.skillName = [];
+            if (discover.ww > 736) {
+                var x = document.getElementsByClassName('discover-skill-list');
+                for (var i = 0; i < discover.skillList.length; i++) {
+                    if (discover.skillList[i].sName === name) {
+                        x[i].className = "discover-skill-list animated fadeOut";
+                        index = i;
+                        break ;
+                    }
+                }
+                if (index >= 0) {
+                    discover.skillList.splice(index, 1);
+                    if (discover.skillList[0]) {
+                        RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
+                            if (res.success)
+                            discover.skillSearch = res.data;
+                        });
+                    } else
+                    discover.skillSearch = [];
+                }
+                if (discover.skillList.length < 5)
+                discover.fullList = false;
+            } else {
+                for (var i = 0; i < discover.skillListM.length; i++) {
+                    if (discover.skillListM[i].sName === name) {
+                        index = i;
+                        break ;
+                    }
+                }
+                if (index >= 0) {
+                    discover.skillListM.splice(index, 1);
+                    if (discover.skillListM[0]) {
+                        RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
+                            if (res.success)
+                            discover.skillSearch = res.data;
+                        });
+                    } else
+                    discover.skillSearch = [];
+                }
+            }
+        }
 
-			if (discover.ww > 736) {
-				if (document.getElementById('labelNoText')) {
-					document.getElementById('labelNoText').id = "labelText";
-					document.getElementById('labelNoText2').id = "labelText2";
-					document.getElementById('labelText').style.display = "block";
-					document.getElementById('labelText2').style.color = "white";
-				}
-				document.getElementById('dsabox1').style.display = "none";
-				document.getElementById('dsabox2').style.display = "none";
+        /*** Search Section ***/
+        function searchScl(object) {
+            RetrieveData.ppdData('/search/projects/scl', 'POST', object).then(function(res) {
+                if (!res.success) return getDiscoverCard();
+                discover.cards = res.data;
+            });
+        };
+        function searchSkill2(object) {
+            RetrieveData.ppdData('/search/projects/skills', 'PUT', object).then(function(res) {
+                if (res.success)
+                discover.cards = res.data;
+            });
+        };
+        function searchHelpF(val, object) {
+            RetrieveData.ppdData('/search/projects/help/', 'POST', object, val).then(function(res) {
+                if (!res.success) return getDiscoverCard();
+                discover.cards = res.data;
+            });
+        };
 
-				if (discover.skillList.length < 5) {
-					if (discover.skillList.length === 0) {
-						discover.skillList.push({sName: name});
-						document.getElementById('input-dsa').style.display = "none";
-					}
-					else {
-						for(var i = 0; i < discover.skillList.length; i++) {
-							if (discover.skillList[i].sName === name)
-								break;
-						}
-						if (i == discover.skillList.length) {
-							discover.skillList.push({sName: name});
-							document.getElementById('input-dsa').style.display = "none";
-						}
-					}
-				}
+        /*** Scroll to display Popover ***/
+        var unique = 0;
+        setTimeout(function() {
+            if (!$rootScope.globals.currentUser) {
 
-				if (discover.skillList.length == 5)
-					discover.fullList = true;
+                $(document).scroll(function () {
+                    if ($('#discover-body-page')[0]) {
+                        var y = $(this).scrollTop();
 
-				RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
-					if (res.success)
-						discover.skillSearch = res.data;
-				});
-			} else {
-				if (discover.skillListM.length < 5) {
-					if (discover.skillListM.length === 0) {
-						discover.skillListM.push({sName: name});
-					}
-					else {
-						for(var i = 0; i < discover.skillListM.length; i++) {
-							if (discover.skillListM[i].sName === name)
-								break;
-						}
-						if (i == discover.skillListM.length) {
-							discover.skillListM.push({sName: name});
-						}
-					}
-				}
-				// if (discover.skillListM.length == 5)
-				// 	discover.fullList = true;
+                        if (!unique && y > 350) {
+                            unique = 1;
+                            showbottomAlert.pop_it_persistance();
+                        }
+                        if (y <= 350) {
+                            unique = 0;
+                            $mdBottomSheet.cancel();
+                        }
+                    }
+                });
+            }
+        }, 1000);
 
-				RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
-					if (res.success)
-						discover.skillSearch = res.data;
-				});
-			}
+        var shareInterval = $timeout(function() {
+            if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
+                $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+                    if (!res.success) {
+                        $rootScope.socialCheck = true;
+                        showbottomAlert.pop_share();
+                    }
+                });
+            }
+        }, 7000);
 
-		}
+        $scope.$on('$destroy', function() {
+            $timeout.cancel(shareInterval);
+        });
 
-		/*** remove skill added ***/
-		function removeSkill(name) {
+        /*** All watch variable ***/
+        $scope.$watch('discover.cards', function(value) {
+            if (value)
+            value.length > 6 ? discover.allowExpand = true : discover.allowExpand = false;
+        });
 
-			var index;
+        $scope.$watch('discover.dmobile.general', function(value) {
+            if (value) {
+                $('body').css('overflow', 'hidden');
+            }
+            else {
+                $('body').css('overflow', 'auto');
+            }
+        });
 
-			if (discover.ww > 736) {
-				var x = document.getElementsByClassName('discover-skill-list');
-				for (var i = 0; i < discover.skillList.length; i++) {
-					if (discover.skillList[i].sName === name) {
-						x[i].className = "discover-skill-list animated fadeOut";
-						index = i;
-						break ;
-					}
-				}
-				if (index >= 0) {
-					discover.skillList.splice(index, 1);
-					if (discover.skillList[0]) {
-						RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
-							if (res.success)
-								discover.skillSearch = res.data;
-						});
-					} else
-						discover.skillSearch = [];
-				}
-				if (discover.skillList.length < 5)
-					discover.fullList = false;
-			} else {
-				for (var i = 0; i < discover.skillListM.length; i++) {
-					if (discover.skillListM[i].sName === name) {
-						index = i;
-						break ;
-					}
-				}
-				if (index >= 0) {
-					discover.skillListM.splice(index, 1);
-					if (discover.skillListM[0]) {
-						RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
-							if (res.success)
-								discover.skillSearch = res.data;
-						});
-					} else
-						discover.skillSearch = [];
-				}
-			}
-		}
+        $scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function(value) {
 
-		/*** Search Section ***/
-		function searchScl(object) {
-			RetrieveData.ppdData('/search/projects/scl', 'POST', object).then(function(res) {
-				if (!res.success) return getDiscoverCard();
-				discover.cards = res.data;
-			});
-		};
-		function searchSkill2(object) {
-			RetrieveData.ppdData('/search/projects/skills', 'PUT', object).then(function(res) {
-				if (res.success)
-					discover.cards = res.data;
-			});
-		};
-		function searchHelpF(val, object) {
-			RetrieveData.ppdData('/search/projects/help/', 'POST', object, val).then(function(res) {
-				if (!res.success) return getDiscoverCard();
-				discover.cards = res.data;
-			});
-		};
+            if (value) {
 
-		/*** Scroll to display Popover ***/
-		var unique = 0;
-		setTimeout(function() {
-		    if (!$rootScope.globals.currentUser) {
+                $('#hoho').css('display', 'block');
+                $('#haha').css('display', 'none');
 
-		  		$(document).scroll(function () {
-		  			if ($('#discover-body-page')[0]) {
-		  				var y = $(this).scrollTop();
+                $timeout(function() {
+                    $('#hoho').css('display', 'none');
+                    $('#haha').css('display', 'block');
+                }, 500);
 
-		  				if (!unique && y > 350) {
-		  					unique = 1;
-		  					showbottomAlert.pop_it_persistance();
-		  				}
-		  				if (y <= 350) {
-		  					unique = 0;
-		  					$mdBottomSheet.cancel();
-		  				}
-		  			}
-		  		});
-		    }
-		}, 1000);
+                if (value[2] || value[3]) {
 
-		var shareInterval = $timeout(function() {
-			if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
-				$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
-					if (!res.success) {
-						$rootScope.socialCheck = true;
-						showbottomAlert.pop_share();
-					}
-				});
-			}
-		}, 7000);
+                    var object = {
+                        status 	: value[0],
+                        ctg 	: value[1],
+                        list 	: value[3],
+                        geo 	: value[4]
+                    };
 
-	        $scope.$on('$destroy', function() {
-		    $timeout.cancel(shareInterval);
-		});
+                    if (value[2])
+                    return searchHelpF(value[2], object);
+                    else {
+                        if (value[0] || value[1] || value[4]) {
+                            if (!value[3][0])
+                            return searchScl(object);
+                            return searchSkill2(object);
+                        } else
+                        if (value[3][0])
+                        discover.cards = value[3];
+                    }
+                }
+                else {
+                    var object = {
+                        status 	: value[0],
+                        ctg 	: value[1],
+                        geo 	: value[4]
+                    };
 
-		/*** All watch variable ***/
-		$scope.$watch('discover.cards', function(value) {
-			if (value)
-				value.length > 6 ? discover.allowExpand = true : discover.allowExpand = false;
-		});
+                    if (value[0] || value[1] || value[4])
+                    return searchScl(object);
+                }
+            }
+        });
 
-		$scope.$watch('discover.dmobile.general', function(value) {
-			if (value) {
-				$('body').css('overflow', 'hidden');
-			}
-			else {
-				$('body').css('overflow', 'auto');
-			}
-		});
+    })
+    .directive('preDisLocation', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, model) {
+                var options = {
+                    types: ['(cities)'],
+                };
 
-		$scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function(value) {
+                scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
 
-			if (value) {
+                google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
+                    scope.$apply(function() {
+                        model.$setViewValue(element.val());
+                        var x = model.$viewValue.indexOf(',');
+                        scope.searchDL = model.$viewValue.slice(0, x).toLowerCase();
+                    });
+                });
 
-				$('#hoho').css('display', 'block');
-				$('#haha').css('display', 'none');
-
-				$timeout(function() {
-					$('#hoho').css('display', 'none');
-					$('#haha').css('display', 'block');
-				}, 500);
-
-				if (value[2] || value[3]) {
-
-					var object = {
-						status 	: value[0],
-						ctg 	: value[1],
-						list 	: value[3],
-						geo 	: value[4]
-					};
-
-					if (value[2])
-						return searchHelpF(value[2], object);
-					else {
-						if (value[0] || value[1] || value[4]) {
-							if (!value[3][0])
-								return searchScl(object);
-							return searchSkill2(object);
-						} else
-							if (value[3][0])
-								discover.cards = value[3];
-					}
-				}
-				else {
-					var object = {
-						status 	: value[0],
-						ctg 	: value[1],
-						geo 	: value[4]
-					};
-
-					if (value[0] || value[1] || value[4])
-						return searchScl(object);
-				}
-			}
-		});
-
-})
-.directive('preDisLocation', function() {
-	return {
-    	require: 'ngModel',
-	    link: function(scope, element, attrs, model) {
-			var options = {
-				types: ['(cities)'],
-			};
-
-			scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
-
-			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
-				scope.$apply(function() {
-					model.$setViewValue(element.val());
-					var x = model.$viewValue.indexOf(',');
-					scope.searchDL = model.$viewValue.slice(0, x).toLowerCase();
-				});
-			});
-
-			scope.$watch('discoverLocation', function(value) {
-				if (value) {
-					var checkCountry = value.indexOf('United States');
-					if (checkCountry >= 0) {
-						scope.discoverLocation = value.slice(0, checkCountry - 2);
-						var x = scope.discoverLocation.length;
-					} else {
-						var x = value.length,
-							y = $(window).width();
-						if (x > 11) {
-							$("#dsai").css('width', function() {
-								var el = $('<span />', {
-								text : value,
-								css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
-								}).appendTo('body');
-								var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
-								el.remove();
-								if (w < 200)
-									return "200px";
-								if (y > 736)
-									return w.toString() + "px";
-								else
-									return "260px";
-							});
-						}
-					}
-				}
-			});
-    	}
-	}
-});
+                scope.$watch('discoverLocation', function(value) {
+                    if (value) {
+                        var checkCountry = value.indexOf('United States');
+                        if (checkCountry >= 0) {
+                            scope.discoverLocation = value.slice(0, checkCountry - 2);
+                            var x = scope.discoverLocation.length;
+                        } else {
+                            var x = value.length,
+                            y = $(window).width();
+                            if (x > 11) {
+                                $("#dsai").css('width', function() {
+                                    var el = $('<span />', {
+                                        text : value,
+                                        css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
+                                    }).appendTo('body');
+                                    var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
+                                    el.remove();
+                                    if (w < 200)
+                                    return "200px";
+                                    if (y > 736)
+                                    return w.toString() + "px";
+                                    else
+                                    return "260px";
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    });

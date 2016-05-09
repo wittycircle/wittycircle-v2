@@ -99,9 +99,18 @@
 		 	});
 		};
 
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
 	 	RetrieveData.getData('/categories', 'GET').then(function(response) {
 			discover.categories = response;
             console.log($stateParams)
+            if ($stateParams.category) {
+                str = $stateParams.category.toLowerCase();
+                str = capitalizeFirstLetter(str);
+                discover.ctgName = str;
+            }
 			if ($stateParams.tagParams) {
 				discover.searchCtg = $stateParams.tagParams;
 				discover.ctgName = $stateParams.tagParams;

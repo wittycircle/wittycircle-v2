@@ -129,7 +129,7 @@ module.exports = function(app, io, ensureAuth) {
                                                                 return value + (tail || ' ...');
                                                             }
 
-                                                            var subj = result[0].first_name + " " + result[0].last_name + " followed you on Wittycirlce";
+                                                            var subj = result[0].first_name + " " + result[0].last_name + " followed you on Wittycircle";
                                                             var newd = getNewD(result[0].description, true, 76, ' ...');
                                                             if (result[0].location_country) {
                                                                 var loc = result[0].location_city + ', ' + result[0].location_country;
@@ -484,21 +484,27 @@ module.exports = function(app, io, ensureAuth) {
                         parent_id        : parent,
                         message          : message
                     };
-                    checkFirstMessage(infoMessage);
-                    pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
-                        if (err) throw err;
-                        //checkFirstMessage(infoMessage, done.insertId);
-                        infoMessage.from_picture= result[0].profile_picture_icon;
-                        infoMessage.date		= new Date();
-                        infoMessage.success		= true;
-                        callback(infoMessage);
+                    checkFirstMessage(infoMessage, function (response) {
+                        if (response & response === true) {
+                            infoMessage.m_send = 1;
+                        } else {
+                            infoMessage.m_send = 0;
+                        }
+                        pool.query('INSERT INTO messages SET ?', infoMessage, function(err, done) {
+                            if (err) throw err;
+                            //checkFirstMessage(infoMessage, done.insertId);
+                            infoMessage.from_picture= result[0].profile_picture_icon;
+                            infoMessage.date		= new Date();
+                            infoMessage.success		= true;
+                            callback(infoMessage);
+                        });
                     });
                 });
             }
         });
     }
 
-    function checkFirstMessage (info) {
+    function checkFirstMessage (info, callback) {
         pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
         [info.from_user_id, info.to_user_id],
         function (err, data) {
@@ -508,7 +514,7 @@ module.exports = function(app, io, ensureAuth) {
                 if (data[0]) {
                     // relation exist already, now i must check the last connect of user
                     console.log('data0 exits1');
-                    return 1;
+                    callback(false);
                 } else {
                     pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
                     [info.to_user_id, info.from_user_id],
@@ -519,7 +525,7 @@ module.exports = function(app, io, ensureAuth) {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
                                 console.log('data0 exits2');
-                                return 1;
+                                callback(false);
                             } else {
                                 // send mail because no relations exist
                                 pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
@@ -633,7 +639,7 @@ module.exports = function(app, io, ensureAuth) {
 
                                                         var async = false;
                                                         mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                            return (0);
+                                                            callback(true);
                                                         }, function(e) {
                                                             // Mandrill returns the error as an object with name and message keys
                                                             console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);

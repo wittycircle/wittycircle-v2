@@ -165,7 +165,11 @@
             </div>
             <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
 	      <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
-                <div class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
+                <div ng-if="projectHit.picture_card" class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Idea'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Idea.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Drafted project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Drafted.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Beta project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Beta.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Live project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Live.svg');"></div>
                 <div class="header-findProject-content">
                     <div class="header-findProject-title">
                         <h2>{{projectHit.title}}</h2>

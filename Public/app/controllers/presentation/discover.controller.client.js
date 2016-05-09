@@ -105,13 +105,21 @@
 
 	 	RetrieveData.getData('/categories', 'GET').then(function(response) {
 			discover.categories = response;
+		    console.log(response);
             if ($stateParams.category) {
                 var str = $stateParams.category.toLowerCase();
                 str = capitalizeFirstLetter(str);
-                var exist = (discover.categories.indexOf(str) > -1)
-                console.log(exist);
-                discover.searchCtg = str;
-                discover.ctgName = str;
+                //var exist = (discover.categories.indexOf(str) > -1)
+                //console.log(exist);
+		var obj = discover.categories.filter(function ( obj ) {
+		    return obj.name === str;
+		})[0];
+		if (obj != undefined) {
+                    discover.searchCtg = str;
+                    discover.ctgName = str;
+		} else {
+		    discover.searchCtg = 'Art';
+		    discover.ctgName = 'Art';
             }
 			if ($stateParams.tagParams) {
 				discover.searchCtg = $stateParams.tagParams;

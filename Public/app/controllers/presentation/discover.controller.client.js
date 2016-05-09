@@ -105,10 +105,10 @@
 
 	 	RetrieveData.getData('/categories', 'GET').then(function(response) {
 			discover.categories = response;
-            console.log($stateParams)
             if ($stateParams.category) {
                 var str = $stateParams.category.toLowerCase();
                 var str = capitalizeFirstLetter(str);
+                discover.searchCtg = str;
                 discover.ctgName = str;
             }
 			if ($stateParams.tagParams) {

@@ -151,9 +151,10 @@ exports.createMessage = function(req, res){
 					to_user_id       : req.body.to_user_id,
 					message          : req.body.message
 				};
-				var isS = checkFirstMessage(infoMessage);
+				checkFirstMessage(infoMessage, function (response) {
+				    console.log("res is " + response);
+				});
 				pool.query('INSERT INTO `messages` SET ?', req.body, function(err, result) {
-					console.log(isS);
 					if (err) throw err;
 					res.send({success: true});
 				});
@@ -229,7 +230,7 @@ exports.deleteConversation = function(req, res) {
 	}
 };
 
-function checkFirstMessage (info) {
+function checkFirstMessage (info, callback) {
 	pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', //checking if messages has already been sent between the 2 users
 	[info.from_user_id, info.to_user_id],
 	function (err, data) {
@@ -239,7 +240,7 @@ function checkFirstMessage (info) {
 			if (data[0]) {
 				// relation exist already, now i must check the last connect of user
 				console.log('data0 exits1');
-				return 1;
+				callback(false);
 			} else {
 				pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
 				[info.to_user_id, info.from_user_id],
@@ -250,7 +251,7 @@ function checkFirstMessage (info) {
 						if (data[0]) {
 							// relation exist already, now i must check the last connect of user
 							console.log('data0 exits2');
-							return 1;
+							callback(false);
 						} else {
 							// send mail because no relations exist
 							pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
@@ -364,7 +365,7 @@ function checkFirstMessage (info) {
 
 													var async = false;
 													mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-														return (0);
+														callback(true);
 													}, function(e) {
 														// Mandrill returns the error as an object with name and message keys
 														console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);

@@ -108,14 +108,14 @@
             console.log($stateParams)
             if ($stateParams.category) {
                 var str = $stateParams.category.toLowerCase();
-                str = capitalizeFirstLetter(str);
+                var str = capitalizeFirstLetter(str);
                 discover.ctgName = str;
             }
 			if ($stateParams.tagParams) {
 				discover.searchCtg = $stateParams.tagParams;
 				discover.ctgName = $stateParams.tagParams;
 			}
-			else
+			if (!$stateParams.tagParams && !$stateParams.category)
 				discover.ctgName = "Art";
 		});
 

@@ -152,11 +152,15 @@ exports.createMessage = function(req, res){
 					message          : req.body.message
 				};
 				checkFirstMessage(infoMessage, function (response) {
-				    console.log("res is " + response);
-				});
-				pool.query('INSERT INTO `messages` SET ?', req.body, function(err, result) {
-					if (err) throw err;
-					res.send({success: true});
+					if (response && response === true) {
+						req.body.m_send = 1;
+					} else {
+						req.body.m_send = 0;
+					}
+					pool.query('INSERT INTO `messages` SET ?', req.body, function(err, result) {
+						if (err) throw err;
+						return res.send({success: true});
+					});
 				});
 			});
 		});

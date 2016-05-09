@@ -107,7 +107,9 @@
 			discover.categories = response;
             if ($stateParams.category) {
                 var str = $stateParams.category.toLowerCase();
-                var str = capitalizeFirstLetter(str);
+                str = capitalizeFirstLetter(str);
+                var exist = (discover.categories.indexOf(str) > -1)
+                console.log(exist);
                 discover.searchCtg = str;
                 discover.ctgName = str;
             }

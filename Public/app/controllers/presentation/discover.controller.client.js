@@ -11,8 +11,6 @@
  angular.module('wittyApp')
  	.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
 
- 		console.time('Time to load Discover Page : ');
-
  		var discover = this;
 
 		/*** Controller As Discover Function ***/
@@ -42,7 +40,9 @@
 	 	discover.searchCtg;
 	 	discover.ctgName;
 	    discover.allowExpand;
-	    
+
+        getDiscoverCard();
+
 	 	/*** Scope ***/
 	 	/*** Discover Card Page SEO ***/
 		$scope.$parent.seo = {
@@ -62,7 +62,7 @@
 
 		/*** All Discover Functions (Mobile) ***/
 		function opendmodal(value) {
-			
+
 			if (discover.ww <= 736) {
 				$('body').css('overflow-y', 'hidden');
 				discover.dmobile.modal	= value;
@@ -97,10 +97,11 @@
 			RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
 		 		discover.cards = res;
 		 	});
-		}; getDiscoverCard();
+		};
 
 	 	RetrieveData.getData('/categories', 'GET').then(function(response) {
 			discover.categories = response;
+            console.log($stateParams)
 			if ($stateParams.tagParams) {
 				discover.searchCtg = $stateParams.tagParams;
 				discover.ctgName = $stateParams.tagParams;
@@ -217,7 +218,7 @@
 			if (discover.allowExpand) {
 				discover.limit += 6;
 				if (discover.limit >= discover.cards.length)
-					discover.allowExpand = false; 
+					discover.allowExpand = false;
 			}
 		};
 
@@ -337,7 +338,7 @@
 		function searchScl(object) {
 			RetrieveData.ppdData('/search/projects/scl', 'POST', object).then(function(res) {
 				if (!res.success) return getDiscoverCard();
-				discover.cards = res.data; 
+				discover.cards = res.data;
 			});
 		};
 		function searchSkill2(object) {
@@ -365,7 +366,7 @@
 		  				if (!unique && y > 350) {
 		  					unique = 1;
 		  					showbottomAlert.pop_it_persistance();
-		  				} 
+		  				}
 		  				if (y <= 350) {
 		  					unique = 0;
 		  					$mdBottomSheet.cancel();
@@ -448,10 +449,9 @@
 					if (value[0] || value[1] || value[4])
 						return searchScl(object);
 				}
-			}	
+			}
 		});
 
-		console.timeEnd('Time to load Discover Page : ')
 })
 .directive('preDisLocation', function() {
 	return {
@@ -499,6 +499,6 @@
 					}
 				}
 			});
-    	}	
+    	}
 	}
 });

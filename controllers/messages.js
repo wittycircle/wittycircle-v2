@@ -123,7 +123,6 @@ function getDialogue(req, data, callback) {
 	recursive(0);
 };
 
-
 exports.createMessage = function(req, res){
 	/* Form Validation */
 	req.checkBody('from_user_id', 'Error Message').isInt();
@@ -152,8 +151,9 @@ exports.createMessage = function(req, res){
 					to_user_id       : req.body.to_user_id,
 					message          : req.body.message
 				};
-				checkFirstMessage(infoMessage);
+				var isS = checkFirstMessage(infoMessage);
 				pool.query('INSERT INTO `messages` SET ?', req.body, function(err, result) {
+					console.log(isS);
 					if (err) throw err;
 					res.send({success: true});
 				});

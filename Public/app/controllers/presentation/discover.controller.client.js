@@ -34,7 +34,7 @@ angular.module('wittyApp')
     discover.limit = 9;
 
     var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
-    var allStatu = ['Ideas', 'Drafted projects', 'Beta projects', 'Live projects', 'all'];
+    var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
 
 
     discover.dmobile;

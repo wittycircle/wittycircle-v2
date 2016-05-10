@@ -34,6 +34,8 @@ angular.module('wittyApp')
     discover.limit = 9;
 
     var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+    var allStatu = ['Ideas', 'Drafted projects', 'Beta projects', 'Live projects', 'all'];
+
 
     discover.dmobile;
     discover.skills;
@@ -130,6 +132,17 @@ angular.module('wittyApp')
             } else {
                 discover.cHelp = 'Any help';
                 discover.searchHelp = 'Any help';
+            }
+        }
+        if ($stateParams.statu) {
+            var str = capitalizeFirstLetter($stateParams.statu.toLowerCase());
+            var arraycontains = (allStatu.indexOf(str) > -1);
+            if (arraycontains === true) {
+                discover.cProject = str;
+                discover.searchStatus = str;
+            } else {
+                discover.cProject = 'all';
+                discover.searchStatus = 'all';
             }
         }
         if ($stateParams.tagParams) {
@@ -437,8 +450,7 @@ angular.module('wittyApp')
         }
     });
 
-    $scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function(value) {
-        console.log(value);
+    $scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function (value) {
         if (value) {
 
             $('#hoho').css('display', 'block');

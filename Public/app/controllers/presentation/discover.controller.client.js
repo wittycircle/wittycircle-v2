@@ -364,13 +364,18 @@ angular.module('wittyApp')
             }
             if (index >= 0) {
                 discover.skillList.splice(index, 1);
+                skillListUrl.replace(',' + name, '');
+                $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                 if (discover.skillList[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
                         if (res.success)
                         discover.skillSearch = res.data;
                     });
-                } else
-                discover.skillSearch = [];
+                } else {
+                    skillListUrl.replace(name, '');
+                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
+                    discover.skillSearch = [];
+                }
             }
             if (discover.skillList.length < 5)
             discover.fullList = false;
@@ -383,16 +388,12 @@ angular.module('wittyApp')
             }
             if (index >= 0) {
                 discover.skillListM.splice(index, 1);
-                skillListUrl.replace(',' + name, '');
-                $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                 if (discover.skillListM[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
                         if (res.success)
                         discover.skillSearch = res.data;
                     });
                 } else {
-                    skillListUrl.replace(name, '');
-                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     discover.skillSearch = [];
                 }
             }

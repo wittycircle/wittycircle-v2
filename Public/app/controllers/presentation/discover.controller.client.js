@@ -461,7 +461,7 @@ angular.module('wittyApp')
                     return searchHelpF(value[2], object);
                 } else {
                     if (value[0] || value[1] || value[4]) {
-                        $state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
+                        //$state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
                         if (!value[3][0]) {
                             return searchScl(object);
                         }
@@ -479,9 +479,10 @@ angular.module('wittyApp')
                     ctg 	: value[1],
                     geo 	: value[4]
                 };
-
-                if (value[0] || value[1] || value[4])
-                return searchScl(object);
+                if (value[0] || value[1] || value[4]) {
+		    $state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
+                    return searchScl(object);
+		}
             }
         }
     });

@@ -262,7 +262,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				}
 			});
 		}
-	}, 7000);
+	}, 0);
 
         $scope.$on('$destroy', function() {
             $timeout.cancel(shareInterval);

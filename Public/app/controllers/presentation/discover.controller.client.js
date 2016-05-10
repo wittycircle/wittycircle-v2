@@ -451,7 +451,7 @@ angular.module('wittyApp')
                 }
             });
         }
-    }, 7000);
+    }, 0);
 
     $scope.$on('$destroy', function() {
         $timeout.cancel(shareInterval);

@@ -38,7 +38,7 @@ var wittyCircleApp = angular
         controllerAs: 'main',
     })
     .state('discover', {
-        url         : '/discover?category&help',
+        url         : '/discover?status&category&help&location',
         params      : { tagParams: '',},
         templateUrl : 'views/presentation/discover.view.client.html',
         controller  : 'DiscoverCtrl',

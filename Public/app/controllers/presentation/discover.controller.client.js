@@ -313,6 +313,7 @@ angular.module('wittyApp')
             if (discover.skillListM.length < 5) {
                 if (discover.skillListM.length === 0) {
                     discover.skillListM.push({sName: name});
+                    $state.transitionTo('discover', {skills: skillListM}, { notify: false, inherit: true });
                 }
                 else {
                     for(var i = 0; i < discover.skillListM.length; i++) {

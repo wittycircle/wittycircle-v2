@@ -372,7 +372,7 @@ angular.module('wittyApp')
                         discover.skillSearch = res.data;
                     });
                 } else {
-                    skillListUrl.replace(name, '');
+                    skillListUrl = skillListUrl.replace(name, '');
                     $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     discover.skillSearch = [];
                 }

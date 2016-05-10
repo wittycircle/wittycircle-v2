@@ -33,6 +33,8 @@ angular.module('wittyApp')
     discover.cHelp = 'Any help';
     discover.limit = 9;
 
+    var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+
     discover.dmobile;
     discover.skills;
     discover.cards;
@@ -118,12 +120,27 @@ angular.module('wittyApp')
                 discover.searchCtg = 'Art';
                 discover.ctgName = 'Art';
             }
-            if ($stateParams.tagParams) {
-                discover.searchCtg = $stateParams.tagParams;
-                discover.ctgName = $stateParams.tagParams;
+        }
+        if ($stateParams.help) {
+            //var str = $stateParams.help.toLowerCase();
+            var str = capitalizeFirstLetter($stateParams.help.toLowerCase());
+            var obj = allHelp.filter(function ( obj ) {
+                return obj.name === str;
+            })[0];
+            if (obj != undefined) {
+                discover.cHelp = str;
+                discover.searchHelp = str;
+            } else {
+                discover.cHelp = 'Any help';
+                discover.searchHelp = 'Any help';
             }
-            if (!$stateParams.tagParams && !$stateParams.category)
-                discover.ctgName = "Art";
+        }
+        if ($stateParams.tagParams) {
+            discover.searchCtg = $stateParams.tagParams;
+            discover.ctgName = $stateParams.tagParams;
+        }
+        if (!$stateParams.tagParams && !$stateParams.category) {
+            discover.ctgName = "Art";
         }
     });
 

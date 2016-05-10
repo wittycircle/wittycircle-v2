@@ -9,7 +9,7 @@
 **/
 
 angular.module('wittyApp')
-.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert) {
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert, $state) {
 
     var discover = this;
 
@@ -438,7 +438,7 @@ angular.module('wittyApp')
         });
 
         $scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function(value) {
-
+	    console.log(value);
             if (value) {
 
                 $('#hoho').css('display', 'block');
@@ -458,9 +458,10 @@ angular.module('wittyApp')
                         geo 	: value[4]
                     };
 
-                    if (value[2])
-                    return searchHelpF(value[2], object);
-                    else {
+                    if (value[2]) {
+			$state.transitionTo('discover', {help: value[2]}, { notify: false, inherit: true });
+			return searchHelpF(value[2], object);
+                    } else {
                         if (value[0] || value[1] || value[4]) {
                             if (!value[3][0])
                             return searchScl(object);

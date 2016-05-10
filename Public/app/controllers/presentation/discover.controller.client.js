@@ -122,12 +122,9 @@ angular.module('wittyApp')
             }
         }
         if ($stateParams.help) {
-            //var str = $stateParams.help.toLowerCase();
             var str = capitalizeFirstLetter($stateParams.help.toLowerCase());
-            var obj = allHelp.filter(function ( obj ) {
-                return obj.name === str;
-            })[0];
-            if (obj != undefined) {
+	    var arraycontains = (allHelp.indexOf(str) > -1);
+            if (arraycontains === true) {
                 discover.cHelp = str;
                 discover.searchHelp = str;
             } else {

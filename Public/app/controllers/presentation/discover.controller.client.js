@@ -364,7 +364,7 @@ angular.module('wittyApp')
             }
             if (index >= 0) {
                 discover.skillList.splice(index, 1);
-                skillListUrl.replace(',' + name, '');
+                skillListUrl = skillListUrl.replace(',' + name, '');
                 $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                 if (discover.skillList[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {

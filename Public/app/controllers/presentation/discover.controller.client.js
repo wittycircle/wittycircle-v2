@@ -546,7 +546,7 @@ angular.module('wittyApp')
     });
 
 })
-.directive('preDisLocation', function() {
+.directive('preDisLocation', function($state) {
     return {
         require: 'ngModel',
         link: function(scope, element, attrs, model) {

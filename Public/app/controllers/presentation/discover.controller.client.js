@@ -350,7 +350,6 @@ angular.module('wittyApp')
 
     /*** remove skill added ***/
     function removeSkill(name) {
-
         var index;
 
         if (discover.ww > 736) {
@@ -383,13 +382,16 @@ angular.module('wittyApp')
             }
             if (index >= 0) {
                 discover.skillListM.splice(index, 1);
+                $stateParams.skills.replace(',' + name, '');
                 if (discover.skillListM[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
                         if (res.success)
                         discover.skillSearch = res.data;
                     });
-                } else
-                discover.skillSearch = [];
+                } else {
+                    $stateParams.skills.replace(name, '');
+                    discover.skillSearch = [];
+                }
             }
         }
     }

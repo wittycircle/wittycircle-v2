@@ -113,7 +113,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
-		console.log(name);
 		meet.skillName = [];
 
 		if (ww >= 736) {
@@ -221,7 +220,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** SECTION PROFILE CARD ***/
 	function goToProfile (id) {
 		Users.getUserIdByProfileId(id).then(function(data) {
-			$location.path('/' + data.userId.username);
+			//$location.path('/' + data.userId.username);
+			$state.go('profile', {username: data.userId.username});
 		});
 	};
 

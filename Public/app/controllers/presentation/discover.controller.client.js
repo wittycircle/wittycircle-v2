@@ -145,6 +145,9 @@ angular.module('wittyApp')
                 discover.searchStatus = 'all';
             }
         }
+        if ($stateParams.loc) {
+            $scope.searchDL = $stateParams.loc;
+        }
         if ($stateParams.tagParams) {
             discover.searchCtg = $stateParams.tagParams;
             discover.ctgName = $stateParams.tagParams;
@@ -492,7 +495,7 @@ angular.module('wittyApp')
                     geo 	: value[4]
                 };
                 if (value[0] || value[1] || value[4]) {
-                    $state.transitionTo('discover', {statu: value[0], category: value[1], location: value[4]}, { notify: false, inherit: true });
+                    $state.transitionTo('discover', {statu: value[0], category: value[1], loc: value[4]}, { notify: false, inherit: true });
                     return searchScl(object);
                 }
             }

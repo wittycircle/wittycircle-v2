@@ -151,6 +151,7 @@ angular.module('wittyApp')
             }
         }
         if ($stateParams.skills) {
+            skillListUrl = $stateParams.skills;
             var tab = $stateParams.skills.split(',');
             for (var i = 0; i < tab.length; i++) {
                 discover.skillList.push({sName: tab[i]});
@@ -382,14 +383,16 @@ angular.module('wittyApp')
             }
             if (index >= 0) {
                 discover.skillListM.splice(index, 1);
-                $stateParams.skills.replace(',' + name, '');
+                skillListUrl.replace(',' + name, '');
+                $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                 if (discover.skillListM[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
                         if (res.success)
                         discover.skillSearch = res.data;
                     });
                 } else {
-                    $stateParams.skills.replace(name, '');
+                    skillListUrl.replace(name, '');
+                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     discover.skillSearch = [];
                 }
             }

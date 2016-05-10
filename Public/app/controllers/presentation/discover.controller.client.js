@@ -46,6 +46,10 @@ angular.module('wittyApp')
     discover.ctgName;
     discover.allowExpand;
 
+
+    discover.skillList = [];
+    discover.skillListM = [];
+
     getDiscoverCard();
 
     /*** Scope ***/
@@ -144,6 +148,12 @@ angular.module('wittyApp')
             } else {
                 discover.cProject = 'All projects';
                 discover.searchStatus = 'all';
+            }
+        }
+        if ($stateParams.skills) {
+            var tab = $stateParams.skills.split(',');
+            for (var i = 0; i < tab.length; i++) {
+                discover.skillList.push({sName: tab[i]});
             }
         }
         if ($stateParams.loc) {
@@ -270,8 +280,6 @@ angular.module('wittyApp')
         }
     };
 
-    discover.skillList = [];
-    discover.skillListM = [];
     /*** add skill to search ***/
     function searchSkill(name) {
         discover.skillName = [];
@@ -289,7 +297,7 @@ angular.module('wittyApp')
             if (discover.skillList.length < 5) {
                 if (discover.skillList.length === 0) {
                     discover.skillList.push({sName: name});
-                    skillListUrl = skillListUrl + "," + name;
+                    skillListUrl = name;
                     $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     document.getElementById('input-dsa').style.display = "none";
                 }

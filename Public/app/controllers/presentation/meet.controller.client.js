@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet, $state) {
 
 	var meet = this;
 	var ww = $(window).width();
@@ -268,7 +268,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		$(document).scroll(function() {
                     if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
 			var y = $(this).scrollTop();
-			
+
 			if (!unique && y > 350) {
                             unique = 1;
                             $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
@@ -285,7 +285,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		});
             }
 	}, 1000);
-    
+
         /*var shareInterval = $timeout(function() {
 		if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
 			$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {

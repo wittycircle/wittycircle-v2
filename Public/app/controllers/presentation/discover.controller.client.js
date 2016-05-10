@@ -139,8 +139,8 @@ angular.module('wittyApp')
                 discover.searchHelp = 'Any help';
             }
         }
-        if ($stateParams.statu) {
-            var str = capitalizeFirstLetter($stateParams.statu.toLowerCase());
+        if ($stateParams.pstatus) {
+            var str = capitalizeFirstLetter($stateParams.pstatus.toLowerCase());
             var arraycontains = (allStatu.indexOf(str) > -1);
             if (arraycontains === true) {
                 discover.cProject = str;
@@ -495,8 +495,13 @@ angular.module('wittyApp')
                     return searchHelpF(value[2], object);
                 } else {
                     if (value[0] || value[1] || value[4]) {
-                        //$state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
                         if (!value[3][0]) {
+                            if (value[0]) {
+                                $state.transitionTo('discover', {pstatus: value[0]}, { notify: false, inherit: true });
+                            }
+                            if (value[1]) {
+                                $state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
+                            }
                             return searchScl(object);
                         }
                         return searchSkill2(object);
@@ -506,15 +511,14 @@ angular.module('wittyApp')
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 var object = {
                     status 	: value[0],
                     ctg 	: value[1],
                     geo 	: value[4]
                 };
                 if (value[0] || value[1] || value[4]) {
-                    $state.transitionTo('discover', {statu: value[0], category: value[1], loc: value[4]}, { notify: false, inherit: true });
+                    $state.transitionTo('discover', {pstatus: value[0], category: value[1]}, { notify: false, inherit: true });
                     return searchScl(object);
                 }
             }
@@ -535,6 +539,7 @@ angular.module('wittyApp')
             google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
                 scope.$apply(function() {
                     model.$setViewValue(element.val());
+                    $state.transitionTo('discover', {loc: model.$viewValue}, { notify: false, inherit: true });
                     var x = model.$viewValue.indexOf(',');
                     scope.searchDL = model.$viewValue.slice(0, x).toLowerCase();
                 });

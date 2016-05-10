@@ -35,6 +35,7 @@ angular.module('wittyApp')
 
     var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
     var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
+    var skillListUrl = "";
 
 
     discover.dmobile;
@@ -288,6 +289,8 @@ angular.module('wittyApp')
             if (discover.skillList.length < 5) {
                 if (discover.skillList.length === 0) {
                     discover.skillList.push({sName: name});
+                    skillListUrl = skillListUrl + "," + name;
+                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     document.getElementById('input-dsa').style.display = "none";
                 }
                 else {
@@ -297,6 +300,8 @@ angular.module('wittyApp')
                     }
                     if (i == discover.skillList.length) {
                         discover.skillList.push({sName: name});
+                        skillListUrl = skillListUrl + "," + name;
+                        $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                         document.getElementById('input-dsa').style.display = "none";
                     }
                 }
@@ -313,7 +318,6 @@ angular.module('wittyApp')
             if (discover.skillListM.length < 5) {
                 if (discover.skillListM.length === 0) {
                     discover.skillListM.push({sName: name});
-                    $state.transitionTo('discover', {skills: skillListM}, { notify: false, inherit: true });
                 }
                 else {
                     for(var i = 0; i < discover.skillListM.length; i++) {
@@ -484,7 +488,6 @@ angular.module('wittyApp')
                         return searchSkill2(object);
                     } else {
                         if (value[3][0]) {
-                            $state.transitionTo('discover', {skills: value[3]}, { notify: false, inherit: true });
                             discover.cards = value[3];
                         }
                     }

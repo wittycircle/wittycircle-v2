@@ -483,6 +483,7 @@ angular.module('wittyApp')
                         return searchSkill2(object);
                     } else {
                         if (value[3][0]) {
+                            $state.transitionTo('discover', {skills: value[3]}, { notify: false, inherit: true });
                             discover.cards = value[3];
                         }
                     }

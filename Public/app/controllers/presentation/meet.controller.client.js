@@ -250,10 +250,30 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	  				}
 	  			}
 	  		});
-	    }
+	    } else {
+		unique = 0;
+		$(document).scroll(function() {
+                    if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
+			var y = $(this).scrollTop();
+			
+			if (!unique && y > 350) {
+                            unique = 1;
+                            $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+			        if (!res.success) {
+                                    $rootScope.socialCheck = true;
+				    showbottomAlert.pop_share();
+				}
+                            });
+			}
+			if (y <= 350) {
+                            $mdBottomSheet.cancel();
+			}
+                    }
+		});
+            }
 	}, 1000);
-	
-	var shareInterval = $timeout(function() {
+    
+        /*var shareInterval = $timeout(function() {
 		if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
 			$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
 				if (!res.success) {
@@ -266,7 +286,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
         $scope.$on('$destroy', function() {
             $timeout.cancel(shareInterval);
-        });
+        });*/
+
 	// $scope.$on('$destroy', function() {
 	// 	console.log("OK");
 	// 	$mdBottomSheet.destroy();

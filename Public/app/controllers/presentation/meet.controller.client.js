@@ -399,8 +399,9 @@ $(document).ready(function() {
 			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
-					var x = model.$viewValue.indexOf(',');
 					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
+					console.log(model.$viewValue);
+					var x = model.$viewValue.indexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
 				});
 			});

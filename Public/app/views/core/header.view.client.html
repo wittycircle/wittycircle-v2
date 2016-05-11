@@ -46,10 +46,10 @@
                     <h2>{{user.first_name}} {{user.last_name}}</h2>
                         <img ng-if="user.profile_picture" id="hlogavatar" class="header-log-avatar" ng-src="{{ resizePic(user.profile_picture, 90, 90, 'fill') }}" alt="profile-avatar" data-ui-sref="profile({username: user.username})">
                     <div class="log-on-notifs">
-                        <div id="loma" class="log-on-mail">
+                        <a id="loma" class="log-on-mail" href="/messages">
                             <div ng-if="numberNotif" class="log-mobile-buble">{{numberNotif}}</div>
                             <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg" alt="notif-mail" />
-                        </div>
+                        </a>
                         <div id="lono" class="log-on-notif">
                             <div ng-if="notifBubble" class="log-mobile-buble">{{notifBubble}}</div>
                             <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png" alt="notif-notif" />
@@ -446,8 +446,6 @@
                     classTog( menuRight, 'cbp-spmenu-open' );
                     bodyJq.css('overflow-y', 'auto');
                     disableOther( 'showRightPush' );
-                    $('#body-section').hide();
-                    hmmobile.show();
                 });
 
                 lono.on('click', function() {

@@ -112,6 +112,22 @@
           padding: 0 10px; }
           #header-section #header-content .header-log-off .header-nav-log li a {
             color: white; }
+          #header-section #header-content .header-log-off .header-nav-log li #mosignup {
+            padding: 3px 15px 5px 15px;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 4px;
+            font-family: 'FreigSem';
+            color: white;
+            -webkit-transition: all 100ms linear;
+            -o-transition: all 150ms linear;
+            -moz-transition: all 150ms linear;
+            -ms-transition: all 150ms linear;
+            -kthtml-transition: all 150ms linear;
+            transition: all 150ms linear; }
+          #header-section #header-content .header-log-off .header-nav-log li #mosignup:hover {
+            background-color: white;
+            color: #222; }
       #header-section #header-content .header-log-off .header-nav-log2 {
         display: inline-block; }
         #header-section #header-content .header-log-off .header-nav-log2 li {

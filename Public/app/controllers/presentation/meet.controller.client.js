@@ -347,7 +347,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			});
 		} else {
 			if (value[0] !== "Anything" || value[2]) {
-				if (value[0] && !value[2]) {
+				if (value[0] && value[0] !== "Anything") {
 					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				$http.post('/search/users/al', object).success(function(res) {
@@ -400,7 +400,6 @@ $(document).ready(function() {
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
 					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
-					console.log(model.$viewValue);
 					var x = model.$viewValue.indexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
 				});

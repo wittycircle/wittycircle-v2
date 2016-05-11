@@ -347,7 +347,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			});
 		} else {
 			if (value[0] !== "Anything" || value[2]) {
-				if (value[0]) {
+				if (value[0] && !value[2]) {
 					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				$http.post('/search/users/al', object).success(function(res) {

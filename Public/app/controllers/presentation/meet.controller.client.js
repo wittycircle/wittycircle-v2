@@ -86,6 +86,10 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		}
 	}
 
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
 	function checkParams () {
 		if ($stateParams.skills) {
 			skillListUrl = $stateParams.skills;

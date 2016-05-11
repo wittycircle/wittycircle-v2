@@ -53,7 +53,7 @@ exports.sendMailUnread = function() {
 
                                             var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                            var template_name = "follow-project";
+                                            var template_name = "new-message";
                                             var template_content = [{
                                                 "name": "new-message",
                                                 "content": "content",

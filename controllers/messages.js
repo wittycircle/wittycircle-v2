@@ -264,7 +264,6 @@ function checkFirstMessage (info, callback) {
 								if (err) {
 									throw err;
 								} else {
-									console.log(rslt);
 									pool.query("SELECT * FROM users WHERE id = ?",
 									[info.to_user_id],
 									function (err, mail) {

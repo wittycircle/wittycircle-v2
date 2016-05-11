@@ -386,7 +386,7 @@ $(document).ready(function() {
 	});
 });
 })
-.directive('preGoLocation', function() {
+.directive('preGoLocation', function($state) {
 	return {
 		require: 'ngModel',
 		link: function(scope, element, attrs, model) {

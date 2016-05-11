@@ -64,7 +64,7 @@
 
 			<div class="profile-follow-mobile">
 				<div class="follow-project follower">
-					<h2 data-ng-bind="0 + profileVm.projectsFollow"></h2>
+					<h2 data-ng-bind="profileVm.projectsFollow.length"></h2>
 					<h5>Projects<br /> followed</h5>
 				</div>
 				<div class="followed follower">
@@ -101,16 +101,45 @@
 		<div class="profile-bottom-info">
 			<div class="profile-follow">
 				<div class="follow-project follower">
-					<h2 data-ng-bind="0 + profileVm.projectsFollow"></h2>
+					<h2 data-ng-bind="profileVm.projectsFollow.length"></h2>
 					<h5>Projects<br /> followed</h5>
+					<div id="pfdd1" class="profile-follow-dropdown" style="display: none">
+						<a class="profile-pfollow-list" ng-repeat="pFollow in profileVm.projectsFollow" ng-href="/project/{{ pFollow.public_id }}/{{ profileVm.encodeUrl(pFollow.title) }}">
+							<div class="profile-pfollow-picture" ng-style="{'background-image': 'url(' + pFollow.picture_card + ')'}"></div>
+
+							<div class="profile-pfollow-info">
+								<h4 ng-bind="pFollow.title"></h4>
+							</div>
+						</a>
+					</div>
 				</div>
 				<div class="followed follower">
-					<h2 ng-bind="profileVm.usersFollow"></h2>
+					<h2 ng-bind="profileVm.usersFollow.length"></h2>
 					<h5>Following</h5>
+					<div id="pfdd2" class="profile-follow-dropdown profile-follow-dropdown2" style="display: none">
+						<a class="profile-followed-list follow-list-dd" ng-repeat="followed in profileVm.usersFollow" ng-click="goToProfile(followed.id)">
+							<div class="profile-followed-picture" ng-style="{'background-image': 'url(' + followed.profile_picture_icon + ')'}"></div>
+
+							<div class="profile-follow-info">
+								<h4>{{followed.first_name}} {{followed.last_name}}</h4>
+								<span>{{followed.location_city}}</span><span ng-if="followed.location_state">, {{followed.location_state}}</span><span ng-if="!followed.location_state && followed.location_country">, {{followed.location_country}}</span>
+							</div>
+						</a>
+					</div>
 				</div>
 				<div class="follow follower">
-					<h2 ng-bind="profileVm.followers"></h2>
+					<h2 ng-bind="profileVm.followers.length"></h2>
 					<h5>Followers</h5>
+					<div id="pfdd3" class="profile-follow-dropdown profile-follow-dropdown2" style="display: none">
+						<a class="profile-follower-list follow-list-dd" ng-repeat="follower in profileVm.followers" ng-click="goToProfile(follower.id)">
+							<div class="profile-followed-picture" ng-style="{'background-image': 'url(' + follower.profile_picture_icon + ')'}"></div>
+
+							<div class="profile-follow-info">
+								<h4>{{follower.first_name}} {{follower.last_name}}</h4>
+								<span>{{follower.location_city}}</span><span ng-if="follower.location_state">, {{follower.location_state}}</span><span ng-if="!follower.location_state && follower.location_country">, {{follower.location_country}}</span>
+							</div>
+						</a>
+					</div>
 				</div>
 			</div>
 			<div ng-if="profileVm.inProjects.length" class="profile-user-projects" onclick="getDropdownProfile()">
@@ -462,6 +491,30 @@
 						$('#profile-modal-newMessageArea').fadeOut(100);
 					}
 				}
+			});
+
+			$('.follow-project').mouseover(function() {
+				$('#pfdd1').fadeIn(300);
+			});
+
+			$('.follow-project').mouseleave(function() {
+				$('#pfdd1').fadeOut(200);
+			});
+
+			$('.followed').mouseover(function() {
+				$('#pfdd2').fadeIn(300);
+			});
+
+			$('.followed').mouseleave(function() {
+				$('#pfdd2').fadeOut(200);
+			});
+
+			$('.follow').mouseover(function() {
+				$('#pfdd3').fadeIn(300);
+			});
+
+			$('.follow').mouseleave(function() {
+				$('#pfdd3').fadeOut(200);
 			});
 		});
 

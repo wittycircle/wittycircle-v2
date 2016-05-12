@@ -394,6 +394,19 @@ a:hover {
 					overflow: scroll;
 					z-index: 1000;
 
+					h4 {
+						font-family: 'FreigBook';
+						font-size: 16px;
+						color: black;
+						word-break: break-all;
+					}
+
+					span {
+						font-family: 'FreigBook';
+						font-size: 14px;
+						color: #999999;
+					}
+
 					.profile-pfollow-list {
 						width: 100%;
 
@@ -425,12 +438,6 @@ a:hover {
 							-kthtml-transition: all 250ms linear;
 							transition: all 250ms linear;
 
-							h4 {
-								font-family: 'FreigBook';
-								font-size: 16px;
-								color: black;
-								word-break: break-all;
-							}
 						}
 
 						.profile-pfollow-info:hover {
@@ -467,19 +474,6 @@ a:hover {
 							-ms-transition: all 250ms linear;
 							-kthtml-transition: all 250ms linear;
 							transition: all 250ms linear;
-
-							h4 {
-								font-family: 'FreigBook';
-								font-size: 16px;
-								color: black;
-								word-break: break-all;
-							}
-
-							span {
-								font-family: 'FreigBook';
-								font-size: 14px;
-								color: #999999;
-							}
 						}
 
 						.profile-follow-info:hover {

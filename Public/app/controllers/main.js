@@ -275,24 +275,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         $scope.$on("$destroy", function(){
             $interval.cancel(main.interval);
         });
-        /*** DOM ***/
-        $('.main-body3-body').mouseup(function(e) {
-            if (main.currentUser) {
-                var id      = e.target.id;
-                var index   = e.target.id.slice(3);
-                main.idName  = "fop" + index;
-                main.idName2 = "foc" + index;
-                if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
-                    if (document.getElementById(main.idName).className === "fa fa-plus" || document.getElementById(main.idName).className === "fa fa-plus animated fadeIn") {
-                        document.getElementById(main.idName).className = "fa fa-plus animated fadeOut";
-                        document.getElementById(main.idName2).className = "fa fa-check animated fadeIn";
-                    } else {
-                        document.getElementById(main.idName).className = "fa fa-plus animated fadeIn";
-                        document.getElementById(main.idName2).className = "fa fa-check animated fadeOut";
-                    }
-                }
-            }
-        });
 
 }])
 .directive('slick', [

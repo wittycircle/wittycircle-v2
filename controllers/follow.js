@@ -19,7 +19,7 @@ exports.getNumberProjectFollowed = function (req, res) {
                 var array = [];
                 function recursive (index) {
                     if (rows[index]) {
-                        pool.query('SELECT public_id, title, picture_card, category_name FROM projects WHERE id = ?', rows[index].follow_project_id,
+                        pool.query('SELECT public_id, title, picture_card, location_city, location_state, location_country FROM projects WHERE id = ?', rows[index].follow_project_id,
                             function(err, result) {
                                 if (err) throw err;
                                 else {

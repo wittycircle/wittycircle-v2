@@ -29,7 +29,6 @@ exports.googleAuth = {
 //   'clientID'      : '1000804181890-epc9jh416f4hvqp7gklkk0f3ot1u7gg6.apps.googleusercontent.com',
 //   'clientSecret'  : 'EUQK_lzSb9Ba-z288oagNThx',
 //   'callbackURL'   : 'https://www.wittycircle.com/auth/google/callback'
-
 // };
 
 exports.checkLog = function(req, res) {

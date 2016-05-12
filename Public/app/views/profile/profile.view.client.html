@@ -109,6 +109,7 @@
 
 							<div class="profile-pfollow-info">
 								<h4 ng-bind="pFollow.title"></h4>
+								<span>{{pFollow.location_city}}</span><span ng-if="pFollow.location_state">, {{pFollow.location_state}}</span><span ng-if="!pFollow.location_state && pFollow.location_country">, {{pFollow.location_country}}</span>
 							</div>
 						</a>
 					</div>
@@ -455,6 +456,8 @@
     if (x >= 736) {
 
     	$(document).ready(function() {
+			document.getElementById('footer-page').style.visibility = "visible";
+
 			$('#profile-header').mouseover(function() {
 				$('#puc').fadeIn(300);
 			});
@@ -546,7 +549,8 @@
 	} else {
 
 		$(document).ready(function() {
-
+			document.getElementById('footer-page').style.visibility = "visible";
+			
 			$('body').click(function(e) {
 
 				if (!$('#pmephotos').hasClass('animate-pmep-close') && $('#pmephotos').css('display') === "block") {

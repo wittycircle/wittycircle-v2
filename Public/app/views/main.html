@@ -395,7 +395,8 @@
 		var x = $(window).width();
 
 		$(document).ready(function() { 
-
+			document.getElementById('footer-page').style.visibility = "visible";
+			
 		    if (x >= 736) {
 		        var y,
 		            mbdown  = $('#mbdown'),
@@ -411,6 +412,25 @@
 
 		        if (screen.height > 1280)
 		            document.getElementById('hvbg').style.height = "650px";
+
+		        /*** Hover Follow ***/
+		        $('.main-body3-body').mouseup(function(e) {
+		            if (main.currentUser) {
+		                var id      = e.target.id;
+		                var index   = e.target.id.slice(3);
+		                main.idName  = "fop" + index;
+		                main.idName2 = "foc" + index;
+		                if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
+		                    if (document.getElementById(main.idName).className === "fa fa-plus" || document.getElementById(main.idName).className === "fa fa-plus animated fadeIn") {
+		                        document.getElementById(main.idName).className = "fa fa-plus animated fadeOut";
+		                        document.getElementById(main.idName2).className = "fa fa-check animated fadeIn";
+		                    } else {
+		                        document.getElementById(main.idName).className = "fa fa-plus animated fadeIn";
+		                        document.getElementById(main.idName2).className = "fa fa-check animated fadeOut";
+		                    }
+		                }
+		            }
+		        });
 
 		        $('#main-body-page').on('click', function(e) {
 
@@ -479,7 +499,6 @@
 		                $(this).css("width", "200px");
 		            }
 		        });
-
 		    }
 		});
 

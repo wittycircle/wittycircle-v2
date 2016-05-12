@@ -157,7 +157,6 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
 		RetrieveData.ppdData('/follow/followUsers/', 'GET', null, profileVm.paramUsername).then(function(res) {
 			profileVm.followers            = res.data;
-			console.log(profileVm.followers);
 		});
 
 		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername, 0).then(function(res) {

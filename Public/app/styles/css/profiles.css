@@ -272,9 +272,6 @@ a:hover {
           text-align: center;
           height: 50px;
           cursor: pointer; }
-        #profile-header .profile-bottom .profile-bottom-info .profile-follow .follower:hover {
-          background-color: rgba(0, 0, 0, 0.3);
-          border-radius: 4px; }
         #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown2 {
           margin-top: 14px; }
         #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown {
@@ -287,6 +284,15 @@ a:hover {
           padding: 5px;
           overflow: scroll;
           z-index: 1000; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown h4 {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            color: black;
+            word-break: break-all; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown span {
+            font-family: 'FreigBook';
+            font-size: 14px;
+            color: #999999; }
           #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .profile-pfollow-list {
             width: 100%; }
             #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .profile-pfollow-list .profile-pfollow-picture {
@@ -347,15 +353,6 @@ a:hover {
             -ms-transition: all 250ms linear;
             -kthtml-transition: all 250ms linear;
             transition: all 250ms linear; }
-            #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .follow-list-dd .profile-follow-info h4 {
-              font-family: 'FreigBook';
-              font-size: 16px;
-              color: black;
-              word-break: break-all; }
-            #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .follow-list-dd .profile-follow-info span {
-              font-family: 'FreigBook';
-              font-size: 14px;
-              color: #999999; }
           #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .follow-list-dd .profile-follow-info:hover {
             background-color: #fafafa;
             border-radius: 4px; }

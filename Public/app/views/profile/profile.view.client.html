@@ -109,6 +109,7 @@
 
 							<div class="profile-pfollow-info">
 								<h4 ng-bind="pFollow.title"></h4>
+								<span>{{pFollow.location_city}}</span><span ng-if="pFollow.location_state">, {{pFollow.location_state}}</span><span ng-if="!pFollow.location_state && pFollow.location_country">, {{pFollow.location_country}}</span>
 							</div>
 						</a>
 					</div>

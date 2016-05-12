@@ -45,9 +45,9 @@ var wittyCircleApp = angular
         controllerAs: 'discover',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/presentation/discover.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/presentation/discover.controller.client.js',
+                ]);
             }],
         }
     })
@@ -59,9 +59,9 @@ var wittyCircleApp = angular
         controllerAs: 'meet',
         resolve : {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/presentation/meet.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/presentation/meet.controller.client.js',
+                ]);
             }],
             cardProfilesResolve: function (Users) {
                 return Users.getCardProfilesUnresolved();
@@ -89,9 +89,9 @@ var wittyCircleApp = angular
         controller: 'ResetPasswordCtrl',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/core/reset-password.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/core/reset-password.controller.client.js',
+                ]);
             }],
             access: function($q, $rootScope, Authentication, $stateParams) {
                 return Authentication.ResetPasswordTokenValidation($stateParams.token);
@@ -137,24 +137,36 @@ var wittyCircleApp = angular
     .state('terms', {
         url: '/terms',
         templateUrl: 'views/core/terms.view.client.html',
-      })
-      .state('privacy', {
+    })
+    .state('privacy', {
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
-      })
-	.state('noaccess1', {
-	    url: '/projects',
-	    resolve: {
-		security: function ($q, $state) {
-		    var deferred = $q.defer();
-		    //return $q.reject("Not Authorized");
-		    $state.go('main');
-		    deferred.reject();
-		    return deferred.promise;
-		}
-	    }
-	})
-      .state('profile', {
+    })
+    .state('noaccess1', {
+        url: '/projects',
+        resolve: {
+            security: function ($q, $state) {
+                var deferred = $q.defer();
+                //return $q.reject("Not Authorized");
+                $state.go('main');
+                deferred.reject();
+                return deferred.promise;
+            }
+        }
+    })
+    .state('notfound', {
+        url: '/404',
+        templateUrl: 'modules/404/views/404.html',
+        controller: '404Ctrl',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'modules/404/controllers/404controller.js',
+                ]);
+            }]
+        }
+    })
+    .state('profile', {
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
@@ -162,17 +174,17 @@ var wittyCircleApp = angular
         // css: '../styles/profiles.css',
         resolve:{
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/profile/profile.controller.client.js',
-                         'controllers/profile/modal-controller/about-modal.controller.client.js',
-                         'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
-                         'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
-                         'controllers/profile/modal-controller/skills-modal.controller.client.js',
-                         'controllers/profile/modal-controller/interest-modal.controller.client.js',
-			 //css
-			 'styles/css/profiles.css',
-			 'styles/css/profiles-modal-edit.css',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/profile/profile.controller.client.js',
+                    'controllers/profile/modal-controller/about-modal.controller.client.js',
+                    'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
+                    'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
+                    'controllers/profile/modal-controller/skills-modal.controller.client.js',
+                    'controllers/profile/modal-controller/interest-modal.controller.client.js',
+                    //css
+                    'styles/css/profiles.css',
+                    'styles/css/profiles-modal-edit.css',
+                ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
                 Profile.getUserbyUsername($stateParams.username).then(function(res) {
@@ -225,34 +237,34 @@ var wittyCircleApp = angular
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
 
-	$http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
+        $http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
 
 
-    $rootScope.resizePic = function(url, width, height, crop) {
-        if (url && url.indexOf('cloudinary') >= 0) {
-            var tab, i, parameter, url_ret;
-            crop = crop || 'fill';
-            width ? width = "w_" + width + "," : "";
-            height ? height = "h_" + height + "," : "";
+        $rootScope.resizePic = function(url, width, height, crop) {
+            if (url && url.indexOf('cloudinary') >= 0) {
+                var tab, i, parameter, url_ret;
+                crop = crop || 'fill';
+                width ? width = "w_" + width + "," : "";
+                height ? height = "h_" + height + "," : "";
 
-            tab = url.split('/');
-            i = $.inArray('upload', tab);
-            parameter = width + height + "c_" + crop;
-            tab.splice(i + 1, 0, parameter);
-            url_ret = tab.join('/');
+                tab = url.split('/');
+                i = $.inArray('upload', tab);
+                parameter = width + height + "c_" + crop;
+                tab.splice(i + 1, 0, parameter);
+                url_ret = tab.join('/');
 
-            return url_ret;
-        } else
-        return url;
-    };
+                return url_ret;
+            } else
+            return url;
+        };
 
-    $cookieStore.put('resizePic', $rootScope.resizePic);
-    // Check state authorization then redirect to the main page if rejection is called.
-    $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
+        $cookieStore.put('resizePic', $rootScope.resizePic);
+        // Check state authorization then redirect to the main page if rejection is called.
+        $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
 
-        if(error === "Not Authorized"){
-            $state.go(main);
-        }
+            if(error === "Not Authorized"){
+                $state.go(main);
+            }
+        });
+
     });
-
-});

@@ -62,7 +62,7 @@
 	 	var i = 0;
 	 	var redirectParams = $stateParams.input;
 	 	$scope.refreshDialogue = function(check) { // main function to retrieve all $parent.dialogues within last information
-	 		if (x <= 736) {
+	 		if (x < 736) {
 		 	 	$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
 			 		if (res.success) {
 			 			Users.count();

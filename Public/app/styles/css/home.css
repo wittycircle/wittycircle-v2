@@ -75,11 +75,11 @@ overflow: hidden;
   width: 100%;
   height: 550px;
   overflow: hidden;
-  -webkit-filter: brightness(0.4);
-  -moz-filter: brightness(0.4);
-  -o-filter: brightness(0.4);
-  -ms-filter: brightness(0.4);
-  filter: brightness(0.4); }
+  -webkit-filter: brightness(0.5);
+  -moz-filter: brightness(0.5);
+  -o-filter: brightness(0.5);
+  -ms-filter: brightness(0.5);
+  filter: brightness(0.5); }
   .home-video-bg video {
     width: 100%;
     min-height: 100%;
@@ -113,7 +113,7 @@ overflow: hidden;
     margin-top: 10px;
     margin-bottom: 10px; }
     #main-discover .main-title-text h4 {
-      font-family: 'FreigBook';
+      font-family: 'FreigMed';
       font-size: 21px;
       line-height: 28px;
       opacity: 0.8; }

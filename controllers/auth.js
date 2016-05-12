@@ -34,9 +34,9 @@ exports.googleAuth = {
 
 exports.checkLog = function(req, res) {
     if (req.isAuthenticated())
-	res.send({success: true});
+    res.send({success: true});
     else
-	res.send({success: false});
+    res.send({success: false});
 };
 
 exports.ensureAuthenticated = function(req, res, next) { // make sure that the user is authenticated
@@ -49,9 +49,9 @@ exports.ensureAuthenticated = function(req, res, next) { // make sure that the u
 
 exports.hasAccess = function(req, res, next) {
     if (req.headers && req.headers.access_token) {
-	if (req.headers.access_token == 'oTJaUTHa6FFTSSLrzQOb') {
+        if (req.headers.access_token == 'oTJaUTHa6FFTSSLrzQOb') {
             next();
-	}
+        }
     } else {
         return res.status(404);
         //res.sendFile('/Public/app/index.html');
@@ -60,31 +60,31 @@ exports.hasAccess = function(req, res, next) {
 
 exports.login = function (req, res, next) {
     passport.authenticate('local-login', function (err, user, info) {
-	if (err || !user) {
-	   return res.send({success: false});
-	}
-	req.logIn(user, function(err) {
-	    if (err) {
-		res.send({success: false});
-		console.log('error in login');
-		return next(err);
-	    } else {
-		var get_user = {
-		    id		: user.id,
-		    email	: user.email,
-		    profile_id	: user.profile_id,
-		    username	: user.username
-		};
-		res.send({success: true, user: get_user});
-	    }
-	});
+        if (err || !user) {
+            return res.send({success: false});
+        }
+        req.logIn(user, function(err) {
+            if (err) {
+                res.send({success: false});
+                console.log('error in login');
+                return next(err);
+            } else {
+                var get_user = {
+                    id		: user.id,
+                    email	: user.email,
+                    profile_id	: user.profile_id,
+                    username	: user.username
+                };
+                return res.send({success: true, user: get_user});
+            }
+        });
     })(req, res, next);
 };
 
 
 exports.logout = function (req, res) {
     if (!req.isAuthenticated()) {
-       res.send({message: 'User is not logged in'});
+        res.send({message: 'User is not logged in'});
     } else {
         req.session.destroy(function (err) {
             if (err) throw err;
@@ -102,7 +102,6 @@ exports.ResetPassword = function (req, res) {
     } else {
         var buf = crypto.randomBytes(20);
         var token = buf.toString('hex');
-        // TODO: IMPORTANT: change the dev url to the real one
         var link = 'https://www.wittycircle.com/password/reset/' + token;
 
         pool.query('SELECT id FROM users WHERE email = ?',

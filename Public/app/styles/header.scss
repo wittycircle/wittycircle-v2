@@ -8,7 +8,7 @@
 	li {
 		display: inline-block;
 		padding: 0 15px;
-		font-family: 'FreigBook';
+		font-family: 'FreigMed';
 		font-size: 16px;
 	}
 
@@ -180,8 +180,27 @@
 
 					a {
 						color: white;
-					}
-				}
+					}				
+					#mosignup {
+				                 padding: 3px 15px 5px 15px;
+                                               	  background-color: transparent;
+                                               	  border: 2px solid white;
+						  border-radius: 4px;
+                                               	  font-family: 'FreigSem';
+                                                  color: white;
+						  -webkit-transition: all 100ms linear;
+                                -o-transition: all 150ms linear;
+                                -moz-transition: all 150ms linear;
+                                -ms-transition: all 150ms linear;
+                                -kthtml-transition: all 150ms linear;
+                                transition: all 150ms linear;
+						  }					  
+
+					#mosignup:hover {
+					   background-color: white;
+					   color: #222;
+					   }
+				}				
 			}
 
 			.header-nav-log2 {
@@ -316,7 +335,7 @@
 
 				a {
 					padding: 10px 0;
-					font-family: 'FreigBook';
+					font-family: 'FreigMed';
 					font-size: 16px;
 				}
 

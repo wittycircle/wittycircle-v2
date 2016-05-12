@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet, $state) {
 
 	var meet = this;
 	var ww = $(window).width();
@@ -25,8 +25,12 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.followUserFromCard = followUserFromCard;
 	meet.expand = expand;
 
+	var skillListUrl = "";
+	var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+
 	getSkills();
 	getCardProfiles();
+	checkParams();
 
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
@@ -46,9 +50,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			$('body').css('overflow-y', 'hidden');
 			meet.mmobile.modal	= value;
 			if (value === 1)
-				meet.mmobile.headerText = "Someone with specific skills?";
+			meet.mmobile.headerText = "Someone with specific skills?";
 			if (value === 2)
-				meet.mmobile.headerText = "Show me people looking to...";
+			meet.mmobile.headerText = "Show me people looking to...";
 			meet.mmobile.general 	= true;
 		} else {
 			if (value === 2)
@@ -73,22 +77,38 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		};
 	}
 
-	// $http.get('/user/card/profiles').then(function(result) {
-	// 	meet.cardProfiles = result.data.data;
-	// 	if ($rootScope.globals.currentUser) {
-	// 		Profile.getFollowedUser(result.data, function(res){
-	// 			console.log(res);
-	// 			meet.followed = res;
-	// 		});
-	// 	}
-	// });
-
 	function getSkills () {
 		if (getSkillsResolve.data) {
 			meet.skills = getSkillsResolve.data.skills;
 			if ($stateParams.skillParams) {
 				meet.skillList = $stateParams.skillParams;
 			}
+		}
+	}
+
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	function checkParams () {
+		if ($stateParams.skills) {
+			skillListUrl = $stateParams.skills;
+			var tab = $stateParams.skills.split(',');
+			for (var i = 0; i < tab.length; i++) {
+				meet.skillList.push({sName: tab[i]});
+			}
+		}
+		if ($stateParams.help) {
+			var str = capitalizeFirstLetter($stateParams.help.toLowerCase());
+			var arraycontains = (allHelp.indexOf(str) > -1);
+			if (arraycontains === true) {
+				meet.mHelp = str;
+			} else {
+				meet.mHelp = 'Any help';
+			}
+		}
+		if ($stateParams.loc) {
+			$scope.meetLocation = $stateParams.loc;
 		}
 	}
 
@@ -104,7 +124,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
-		console.log(name);
 		meet.skillName = [];
 
 		if (ww >= 736) {
@@ -120,6 +139,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			if (meet.skillList.length < 5) {
 				if (meet.skillList.length == 0) {
 					meet.skillList.push({sName: name});
+					skillListUrl = name;
+					$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 					document.getElementById('input-msa').style.display = "none";
 
 				}
@@ -130,6 +151,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					}
 					if (i == meet.skillList.length) {
 						meet.skillList.push({sName: name});
+						skillListUrl = skillListUrl + "," + name;
+						$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 						document.getElementById('input-msa').style.display = "none";
 					}
 				}
@@ -208,7 +231,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** SECTION PROFILE CARD ***/
 	function goToProfile (id) {
 		Users.getUserIdByProfileId(id).then(function(data) {
-			$location.path('/' + data.userId.username);
+			//$location.path('/' + data.userId.username);
+			$state.go('profile', {username: data.userId.username});
 		});
 	};
 
@@ -234,108 +258,135 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** Scroll to display Popover ***/
 	var unique = 0;
 	setTimeout(function() {
-	    if (!$rootScope.globals.currentUser) {
+		if (!$rootScope.globals.currentUser) {
 
-	  		$(document).scroll(function () {
-	  			if ($('#meet-body-page')[0]) {
-	  				var y = $(this).scrollTop();
+			$(document).scroll(function () {
+				if ($('#meet-body-page')[0]) {
+					var y = $(this).scrollTop();
 
-	  				if (!unique && y > 350) {
-	  					unique = 1;
-	  					showbottomAlert.pop_it_persistance();
-	  				} 
-	  				if (y <= 350) {
-	  					unique = 0;
-	  					$mdBottomSheet.cancel();
-	  				}
-	  			}
-	  		});
-	    }
-	}, 1000);
-	
-	setTimeout(function() {
-		if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
-			$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
-				if (!res.success) {
-					$rootScope.socialCheck = true;
-					showbottomAlert.pop_share();
+					if (!unique && y > 350) {
+						unique = 1;
+						showbottomAlert.pop_it_persistance();
+					}
+					if (y <= 350) {
+						unique = 0;
+						$mdBottomSheet.cancel();
+					}
+				}
+			});
+		} else {
+			unique = 0;
+			$(document).scroll(function() {
+				if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
+					var y = $(this).scrollTop();
+
+					if (!unique && y > 350) {
+						unique = 1;
+						$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+							if (!res.success) {
+								$rootScope.socialCheck = true;
+								showbottomAlert.pop_share();
+							}
+						});
+					}
+					if (y <= 350) {
+						$mdBottomSheet.cancel();
+					}
 				}
 			});
 		}
-	}, 7000);
+	}, 1000);
 
-	// $scope.$on('$destroy', function() {
-	// 	console.log("OK");
-	// 	$mdBottomSheet.destroy();
-	// });
+	/*var shareInterval = $timeout(function() {
+	if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
+	$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+	if (!res.success) {
+	$rootScope.socialCheck = true;
+	showbottomAlert.pop_share();
+}
+});
+}
+}, 0);
 
-	/*** Search Section ***/
-	$scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function(value) {
-		if (value) {
+$scope.$on('$destroy', function() {
+$timeout.cancel(shareInterval);
+});*/
 
-			$('#ldm').css('display', 'block');
-			$('#mbd').css('display', 'none');
+// $scope.$on('$destroy', function() {
+// 	console.log("OK");
+// 	$mdBottomSheet.destroy();
+// });
 
-			$timeout(function() {
-				$('#ldm').css('display', 'none');
-				$('#mbd').css('display', 'block');
-			}, 500);
+/*** Search Section ***/
+$scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
+	if (value) {
 
-			var object = {
-				about: value[0],
-				list: value[1],
-				geo: value[2],
-			};
-			if (value[1] && value[1][0]) {
-				$http.put('/search/users', object).success(function(res) {
-					if (res.success) {
-						meet.cardProfiles = res.data;
-						if ($rootScope.globals.currentUser) {
-							Profile.getFollowedUser(res, function(res){
-								meet.followed = res;
-							});
-						}
+		$('#ldm').css('display', 'block');
+		$('#mbd').css('display', 'none');
+
+		$timeout(function() {
+			$('#ldm').css('display', 'none');
+			$('#mbd').css('display', 'block');
+		}, 500);
+
+		var object = {
+			about: value[0],
+			list: value[1],
+			geo: value[2],
+		};
+		if (value[1] && value[1][0]) {
+			$http.put('/search/users', object).success(function(res) {
+				if (res.success) {
+					meet.cardProfiles = res.data;
+					if ($rootScope.globals.currentUser) {
+						Profile.getFollowedUser(res, function(res){
+							meet.followed = res;
+						});
+					}
+				}
+			});
+		} else {
+			if (value[0] !== "Anything" || value[2]) {
+				if (value[0] && value[0] !== "Anything") {
+					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
+				}
+				$http.post('/search/users/al', object).success(function(res) {
+					if (res.success)
+					meet.cardProfiles = res.data;
+					if ($rootScope.globals.currentUser) {
+						Profile.getFollowedUser(res, function(res){
+							meet.followed = res;
+						});
 					}
 				});
-			} else {
-				if (value[0] !== "Anything" || value[2]) {
-					$http.post('/search/users/al', object).success(function(res) {
-						if (res.success)
-						meet.cardProfiles = res.data;
-						if ($rootScope.globals.currentUser) {
-							Profile.getFollowedUser(res, function(res){
-								meet.followed = res;
-							});
-						}
-					});
+			}
+		}
+	}
+});
+
+$(document).ready(function() {
+	$('.meet-body-cards').mouseup(function(e) {
+		if ($rootScope.globals.currentUser) {
+			var id      = e.target.id;
+			var index   = e.target.id.slice(3);
+			var idName  = "fop" + index;
+			var idName2 = "foc" + index;
+
+			if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
+
+				if (document.getElementById(idName).className === "fa fa-plus" || document.getElementById(idName).className === "fa fa-plus animated fadeIn") {
+					document.getElementById(idName).className = "fa fa-plus animated fadeOut";
+					document.getElementById(idName2).className = "fa fa-check animated fadeIn";
+				} else {
+					document.getElementById(idName).className = "fa fa-plus animated fadeIn";
+					document.getElementById(idName2).className = "fa fa-check animated fadeOut";
 				}
 			}
 		}
 	});
-
-	$(document).ready(function() {
-		$('.meet-body-cards').mouseup(function(e) {
-			if ($rootScope.globals.currentUser) {
-				var id      = e.target.id;
-				var index   = e.target.id.slice(3);
-				var idName  = "fop" + index;
-				var idName2 = "foc" + index;
-
-				if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
-
-					if (document.getElementById(idName).className === "fa fa-plus" || document.getElementById(idName).className === "fa fa-plus animated fadeIn") {
-						document.getElementById(idName).className = "fa fa-plus animated fadeOut";
-						document.getElementById(idName2).className = "fa fa-check animated fadeIn";
-					} else {
-						document.getElementById(idName).className = "fa fa-plus animated fadeIn";
-						document.getElementById(idName2).className = "fa fa-check animated fadeOut";
-					}
-				}
-			}
-		});
-	});
+});
 })
-.directive('preGoLocation', function() {
+.directive('preGoLocation', function($state) {
 	return {
 		require: 'ngModel',
 		link: function(scope, element, attrs, model) {
@@ -348,6 +399,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
+					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
 					var x = model.$viewValue.indexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
 				});

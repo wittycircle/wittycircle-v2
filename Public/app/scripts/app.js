@@ -38,7 +38,7 @@ var wittyCircleApp = angular
         controllerAs: 'main',
     })
     .state('discover', {
-        url         : '/discover',
+        url         : '/discover?pstatus&category&help&skills&loc',
         params      : { tagParams: '',},
         templateUrl : 'views/presentation/discover.view.client.html',
         controller  : 'DiscoverCtrl',
@@ -52,7 +52,7 @@ var wittyCircleApp = angular
         }
     })
     .state('meet', {
-        url         : '/meet',
+        url         : '/meet?skills&help&loc',
         params      : { skillParams: '' },
         templateUrl : 'views/presentation/meet.view.client.html',
         controller  : 'MeetCtrl',

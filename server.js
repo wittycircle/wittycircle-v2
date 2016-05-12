@@ -34,8 +34,6 @@ var httpsOption		= {
     cert: fs.readFileSync('./ssl_key/www_wittycircle_com.crt'),
     ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA",
     honorCipherOrder: true,
-    requestCert: true,
-    rejectUnauthorized: false
 };
 
 var ONE_YEAR = 31536000000;
@@ -44,6 +42,13 @@ app.use(helmet.hsts({
     includeSubdomains: true,
     force: true
 }));
+
+var updateUserActivity = require('./tools/mail_message_functions').sendMailUnread;
+
+setInterval(function () {
+    console.log('start mail process');
+    updateUserActivity();
+}, 21600000); // 6 hours in ms = 21600000
 
 app.use(compression());
 require('./passport')(passport);

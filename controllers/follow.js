@@ -9,20 +9,28 @@ exports.getNumberProjectFollowed = function (req, res) {
     if (errors) {
         return res.status(400).send(errors);
     } else {
-        pool.query('SELECT id FROM project_followers WHERE user_id = (SELECT id FROM users WHERE username = ?)',
+        pool.query('SELECT id, follow_project_id FROM project_followers WHERE user_id = (SELECT id FROM users WHERE username = ?)',
         [req.params.username],
         function (err, rows) {
             if (err) {
                 console.log(new Date());
                 throw err;
             } else {
-                var i = 0;
+                var array = [];
                 function recursive (index) {
                     if (rows[index]) {
-                        i = i + 1;
-                        recursive(index + 1);
+                        pool.query('SELECT public_id, title, picture_card, category_name FROM projects WHERE id = ?', rows[index].follow_project_id,
+                            function(err, result) {
+                                if (err) throw err;
+                                else {
+                                    if (result[0]) {
+                                        array.push(result[0]);
+                                    }
+                                    recursive(index + 1);
+                                }
+                            });
                     } else {
-                        return res.send({number: i});
+                        return res.send({success: true, list: array});
                     }
                 }
                 recursive(0);
@@ -186,7 +194,24 @@ exports.getFollowing = function(req, res) {
         pool.query("SELECT * FROM user_followers WHERE user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username,
         function(err, result) {
             if (err) throw err;
-            res.send({success: true, data: result});
+            else {
+                var array = [];
+                function recursive(index) {
+                    if (result[index]) {
+                        pool.query("SELECT id, profile_picture_icon, first_name, last_name, location_city, location_state, location_country FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)",
+                            result[index].follow_user_id, function(err, list) {
+                                if (err) throw err;
+                                else {
+                                    if (list[0])
+                                        array.push(list[0]);
+                                    recursive(index + 1);
+                                }
+                            });
+                    } else
+                        res.send({success: true, data: array});
+
+                }; recursive(0);
+            }
         });
     }
 };
@@ -200,7 +225,24 @@ exports.getFollowers = function(req, res) {
         pool.query("SELECT * FROM user_followers WHERE follow_user_id IN (SELECT id FROM users WHERE username = ?)", req.params.username,
         function(err, result) {
             if (err) throw err;
-            res.send({success: true, data: result});
+            else {
+                var array = [];
+                function recursive(index) {
+                    if (result[index]) {
+                        pool.query("SELECT id, profile_picture_icon, first_name, last_name, location_city, location_state, location_country FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)",
+                            result[index].user_id, function(err, list) {
+                                if (err) throw err;
+                                else {
+                                    if (list[0])
+                                        array.push(list[0]);
+                                    recursive(index + 1);
+                                }
+                            });
+                    } else
+                        res.send({success: true, data: array});
+
+                }; recursive(0);
+            }
         });
     }
 };

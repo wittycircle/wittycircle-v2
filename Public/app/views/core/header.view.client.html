@@ -46,10 +46,10 @@
                     <h2>{{user.first_name}} {{user.last_name}}</h2>
                         <img ng-if="user.profile_picture" id="hlogavatar" class="header-log-avatar" ng-src="{{ resizePic(user.profile_picture, 90, 90, 'fill') }}" alt="profile-avatar" data-ui-sref="profile({username: user.username})">
                     <div class="log-on-notifs">
-                        <div id="loma" class="log-on-mail">
+                        <a id="loma" class="log-on-mail" href="/messages">
                             <div ng-if="numberNotif" class="log-mobile-buble">{{numberNotif}}</div>
                             <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg" alt="notif-mail" />
-                        </div>
+                        </a>
                         <div id="lono" class="log-on-notif">
                             <div ng-if="notifBubble" class="log-mobile-buble">{{notifBubble}}</div>
                             <img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png" alt="notif-notif" />
@@ -166,7 +166,10 @@
             <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
 	      <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
                 <div ng-if="projectHit.picture_card" class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
-                <div ng-if="!projectHit.picture_card" class="header-findProject-picture" style="background-image: url('https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg'); background-size: auto 48px; background-repeat: no-repeat;"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Idea'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Idea.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Drafted project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Drafted.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Beta project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Beta.svg');"></div>
+                <div ng-if="!projectHit.picture_card && projectHit.status === 'Live project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Live.svg');"></div>
                 <div class="header-findProject-content">
                     <div class="header-findProject-title">
                         <h2>{{projectHit.title}}</h2>
@@ -188,7 +191,7 @@
                 <h1>People</h1>
             </div>
             <div class="header-find-list" ng-repeat="peopleHit in peopleHits | limitTo : 5" ng-click="goToProfile(peopleHit.id)">
-                <div ng-if="peopleHit.profile_picture_icon" class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
+                <div class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findPeople-content">
                     <div class="header-findPeople-name">
                         <h4>{{peopleHit.first_name}} {{peopleHit.last_name}}</h4>
@@ -443,8 +446,6 @@
                     classTog( menuRight, 'cbp-spmenu-open' );
                     bodyJq.css('overflow-y', 'auto');
                     disableOther( 'showRightPush' );
-                    $('#body-section').hide();
-                    hmmobile.show();
                 });
 
                 lono.on('click', function() {

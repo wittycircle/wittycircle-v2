@@ -49,7 +49,7 @@ app.use(compression());
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());
-app.use(require('express-force-domain')('https://www.wittycircle.com') );
+// app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
@@ -159,12 +159,12 @@ require('./algolia')(app, algoliaClient);
 
 /* Socket */
 var ps = https.createServer(httpsOption, app);
-//var io = require('socket.io')(server);
-var io = require('socket.io').listen(ps);
+var io = require('socket.io')(server);
+// var io = require('socket.io').listen(ps);
 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-// server.listen(80);
-ps.listen(443);
+server.listen(80);
+// ps.listen(443);

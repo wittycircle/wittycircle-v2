@@ -227,12 +227,13 @@ var wittyCircleApp = angular
     $locationProvider.hashPrefix('!');
 
 
-    $http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
-
     })
 	.run(function ($rootScope, $cookieStore, $location, $http, $state) {
     	// keep user logged in after page refresh
     	$rootScope.globals = $cookieStore.get('globals') || {};
+
+        $http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
+
 
         $rootScope.resizePic = function(url, width, height, crop) {
             if (url && url.indexOf('cloudinary') >= 0) {

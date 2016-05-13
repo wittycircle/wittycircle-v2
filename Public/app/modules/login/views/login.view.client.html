@@ -31,7 +31,7 @@
             </div>
             <md-divider></md-divider>
         </nav>
-        <nav class="header-log-off" ng-hide="log">
+        <nav class="header-log-off">
             <ul id='hnlog' class="header-nav-log2">
                 <li class="lsu"><a id="mosignup" style="padding: 3px 15px 5px 15px; background-color: transparent; border: 2px solid #999999; border-radius: 4px; font-family: freigSem;" href="/join">Sign Up</a></li>
             </ul>
@@ -56,7 +56,7 @@
 
 <section id="login-page">
     <section id="main-login">
-        <header class="login-modal-header signup-login-header">
+        <header class="login-modal-header signup-login-header" style="background-color: white; border-bottom: none;">
             <h2>Log In</h2>
         </header>
 
@@ -105,7 +105,7 @@
                 </div>
                 <div class="login-modal-footer">
                     <button ng-click='login()' data-ng-bind="textButton"></button>
-                    <h4>Don't have an account yet? <strong><u id="switchToS">Sign up</u></strong></h4>
+                    <h4>Don't have an account yet? <strong><a href="/join" style="color: #999999; cursor: pointer;">Sign up</a></strong></h4>
                 </div>
             </form>
 

@@ -72,7 +72,7 @@ exports.ValidateAccount = function(req, res) {
                     throw err;
                 } else {
                     pool.query('DELETE FROM account_validation WHERE token = ?',
-                    req.body.token,
+                    req.params.token,
                     function (err, data) {
                         if (err) {
                             console.log(new Date());

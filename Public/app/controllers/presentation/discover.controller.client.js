@@ -158,8 +158,8 @@ angular.module('wittyApp')
             }
         }
         if ($stateParams.loc) {
-            $scope.searchDL = $stateParams.loc;
-        }
+			$scope.meetLocation = $stateParams.loc;
+		}
         if ($stateParams.tagParams) {
             discover.searchCtg = $stateParams.tagParams;
             discover.ctgName = $stateParams.tagParams;

@@ -108,7 +108,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			}
 		}
 		if ($stateParams.loc) {
-			$scope.meetLocation = $stateParams.loc;
+			$scope.discoverLocation = $stateParams.loc;
 		}
 	}
 

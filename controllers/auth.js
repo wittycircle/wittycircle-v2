@@ -53,7 +53,10 @@ exports.hasAccess = function(req, res, next) {
             next();
         }
     } else {
-        return res.status(404);
+        //return res.status(404);
+        path = __dirname;
+        path = path.replace('/controllers', '');
+        return res.sendFile(path + '/Public/app/index.html');
         //res.sendFile('/Public/app/index.html');
     }
 }

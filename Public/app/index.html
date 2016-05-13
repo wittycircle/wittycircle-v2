@@ -60,6 +60,8 @@
     <link rel="stylesheet" href="styles/css/terms.css" />
     <link rel="stylesheet" href="styles/css/reset.css" />
     <link rel="stylesheet" href="styles/css/messaging.css">
+    <link rel="stylesheet" href="styles/css/login.css">
+
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -182,9 +184,9 @@
         <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
     </section>
     <section id="body-section" ng-cloak>
-        <div id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <div data-ng-if="navbar.nshow != false" id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
         <section id="bodyCore" ui-view autoscroll="true"></section>
-        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>    
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
     </section>
 
     <!-- algolia angular -->

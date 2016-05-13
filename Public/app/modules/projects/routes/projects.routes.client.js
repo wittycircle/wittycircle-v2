@@ -63,6 +63,19 @@
         controller: 'viewProjectCtrl',
         controllerAs: 'vm',
         resolve: {
+            // project_doExist: function ($q, $stateParams, Projects, $state) {
+            //         var defer = $q.defer();
+            //
+            //         Projects.getProjectbyPublicId($stateParams.public_id, function (result) {
+            //             if (result.data && result.data[0]) {
+            //                 defer.resolve();
+            //             } if (!result.data) {
+            //                 return $state.go('notfound');
+            //                 defer.reject();
+            //             }
+            //             return defer.promise;
+            //         });
+            // },
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/view-project.controller.client.js',

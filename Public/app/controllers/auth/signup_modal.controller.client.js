@@ -58,6 +58,7 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
     });
 
     $scope.signupto = function () {
+        console.log('ici');
       // var username = createUsername($scope.formData.first_name, $scope.formData.last_name);
       // $scope.formData.username = username;
       $scope.eat = false;

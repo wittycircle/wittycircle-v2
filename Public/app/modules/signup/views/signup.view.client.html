@@ -1,0 +1,133 @@
+<header id="header-section" data-ng-controller="HeaderCtrl">
+    <home-message-modal></home-message-modal>
+    <section id="header-content" class="cbp-spmenu-push" style="background-color: white; border-bottom: 1px solid #e5e5e5;">
+
+        <div class="header-brand" role="navigation">
+            <figure class="header-brand-picture">
+                <a href="/"><img id="hbp" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg" alt="wittycircle-logo"></a>
+            </figure>
+        </div>
+
+        <div class="header-navigation">
+            <ul id='hnl' class="header-nav-list2" style="padding-top: 14px; padding-bottom: 14px;">
+                <li class="normal" ><a href="/discover">Discover</a></li>
+                <li class="normal"><a href="/meet" >Meet</a></li>
+                <div class="list-soon">
+                    <li class="normal"><a>Work<sup>soon</sup></a></li>
+                </div>
+                <div class="strong-start">
+                    <li ng-click="goToStart()"><a><strong>Start</strong></a></li>
+                </div>
+            </ul>
+        </div>
+
+        <div id="showRightPush" class="header-log-off-mobile">
+            <div ng-if="notifBubble || numberNotif" class="header-mobile-bubble"></div>
+            <img src="/images/littleman-w.svg">
+        </div>
+        <nav md-swipe-right="onSwipeRight()" class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+            <div class="log-of" ng-hide="log">
+                <a id="mosignup" href="">Sign Up</a>
+            </div>
+            <md-divider></md-divider>
+        </nav>
+        <nav class="header-log-off" ng-hide="log">
+            <ul id='hnlog' class="header-nav-log2">
+                <li class="lsu"><a id="" href="/login">Log In</a></li>
+            </ul>
+        </nav>
+        <hr />
+
+        <div class="header-navigation-mobile">
+            <ul class="header-nav-list">
+                <li class="left" ><a style="color: #999999" href="/discover">Discover</a></li>
+                <li class="normal"><a style="color: #999999" href="/meet" >Meet</a></li>
+                <li class="normal"><a style="color: #999999">Work<sup>soon</sup></a></li>
+                <li class="right" ng-click="goToStart()"><a style="color: #999999"><strong>Start</strong></a></li>
+            </ul>
+        </div>
+    </section>
+</header>
+
+<section id="signup-page-cta">
+    <section id="main-signup">
+    	<header class="signup-modal-header signup-login-header">
+    		<h2>Sign Up</h2>
+    		<img id="closeCrossS" src="/images/cross-icon.svg" style="cursor: pointer">
+    	</header>
+        <div id="closeCrossS2"></div>
+    	<div class="signup-modal-social signup-login-social">
+            <h4>Log in with a social network:</h4>
+            <div class="fb-login">
+                <a href="/auth/facebook" target="_self">
+                    <button><i class="fa fa-facebook" style="color: white"></i>Log in with Facebook</button>
+                </a>
+            </div>
+            <div class="go-login">
+                <a href="/auth/google" target="_self">
+                    <button class="go-login"><img src="/images/social_media/newgoogle-logo.svg">Log in with Google</button>
+                </a>
+            </div>
+        </div>
+        <div class="signup-modal-old signup-login-old">
+            <div class="old-dash"></div>
+            <h4>Let's get you started</h4>
+            <div class="old-dash"></div>
+        </div>
+        <div class="signup-modal-field">
+            <p ng-if="eat">Email is already taken</p>
+        	<div class="signup-firstname-field firstname-input">
+        		<input type="text" ng-model="formData.first_name" placeholder="Enter your first name" />
+                <p ng-if="!fnf">This is a required field</p>
+        	</div>
+        	<div class="signup-lastname-field lastname-input">
+        		<input type="text" ng-model="formData.last_name" placeholder="Enter your last name"/>
+                <p ng-if="!lnf">This is a required field</p>
+        	</div>
+        	<div class="signup-email-field email-input">
+        		<input type="email" ng-model="formData.email" placeholder="Enter your email address"/>
+                <p ng-if="!emf">Address must be valid</p>
+        	</div>
+        	<div class="signup-password-field password-input">
+        		<input type="password" ng-model="formData.password" placeholder="Enter your password (minimum 6 characters)"/>
+                <p ng-if="!pwf">This is a required field</p>
+                <span ng-if='week' class='pw-week'>Weak</span>
+                <span ng-if='okey' class='pw-okey'>Medium</span>
+                <span ng-if='strong' class='pw-strong'>Strong</span>
+        	</div>
+        </div>
+        <div class="sign-modal-policy">
+        	<p>By creating an account, I accept Wittycircle's <br /> <a href="/terms" target="_blank"><strong><u>Terms of Services</u></strong></a>,
+        	and <a href="/privacy" target="_blank"><strong><u>Privacy Policy</u></strong></a>.
+        	</p>
+        </div>
+        <div class="signup-modal-button">
+            <button type="submit" ng-click="signupto()">Sign Up</button>
+        </div>
+
+        <div class="signup-modal-footer">
+        	<h4>Already have an account? <strong><u id="switchToL" >Sign in</u></strong></h4>
+        </div>
+    </section>
+</section>
+
+
+
+    <script>
+
+        //$("#header-section").css("display", "none");
+        //$("#header-section").hide();
+
+
+        // $("#hsb").css("display", "none");
+        //
+        //
+        // $("#header-content").css("background-color", "white");
+        // $("#hbp").attr("src","https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
+        // $("#hnl").toggleClass('header-nav-list header-nav-list2');
+        //
+        // $("#hnlog").toggleClass('header-nav-log header-nav-log2');
+
+
+
+    </script>

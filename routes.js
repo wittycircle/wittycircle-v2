@@ -166,7 +166,7 @@ app.delete('/category/:id', categories.deleteCategory);
 var projects = require('./controllers/projects');
 app.get('/projects', hasAccess, projects.getProjects);
 app.get('/projects/discover', hasAccess, projects.getProjectsDiscover);
-app.get('/project/:id', projects.getProject);
+app.get('/project/:id', hasAccess, projects.getProject);
 app.get('/project/public_id/:public_id', projects.getProjectByPublicId);
 app.get('/projects/search/:search', projects.searchProjects);
 app.post('/projects', projects.createProject);

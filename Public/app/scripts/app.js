@@ -37,6 +37,16 @@ var wittyCircleApp = angular
         controller  : 'MainCtrl',
         controllerAs: 'main',
     })
+    .state('login', {
+        url: '/login',
+        templateUrl : 'modules/login/views/login.view.client.html',
+        controller : 'LoginCtrl'
+    })
+    .state('join', {
+        url: '/join',
+        templateUrl : 'modules/signup/views/signup.view.client.html',
+        controller : 'Signup_modalCtrl'
+    })
     .state('discover', {
         url         : '/discover?pstatus&category&help&skills&loc',
         params      : { tagParams: '',},
@@ -45,9 +55,9 @@ var wittyCircleApp = angular
         controllerAs: 'discover',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/presentation/discover.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/presentation/discover.controller.client.js',
+                ]);
             }],
         }
     })
@@ -59,9 +69,9 @@ var wittyCircleApp = angular
         controllerAs: 'meet',
         resolve : {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/presentation/meet.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/presentation/meet.controller.client.js',
+                ]);
             }],
             cardProfilesResolve: function (Users) {
                 return Users.getCardProfilesUnresolved();
@@ -70,12 +80,6 @@ var wittyCircleApp = angular
                 return $http.get('/skills');
             }
         }
-    })
-    .state('login', {
-        url         : '/login',
-        templateUrl : 'views/auth/login.html',
-        controller  : 'LoginCtrl',
-        controllerAs: 'login'
     })
     .state('signup', {
         url         : '/signup',
@@ -89,9 +93,9 @@ var wittyCircleApp = angular
         controller: 'ResetPasswordCtrl',
         resolve: {
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/core/reset-password.controller.client.js',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/core/reset-password.controller.client.js',
+                ]);
             }],
             access: function($q, $rootScope, Authentication, $stateParams) {
                 return Authentication.ResetPasswordTokenValidation($stateParams.token);
@@ -137,24 +141,24 @@ var wittyCircleApp = angular
     .state('terms', {
         url: '/terms',
         templateUrl: 'views/core/terms.view.client.html',
-      })
-      .state('privacy', {
+    })
+    .state('privacy', {
         url: '/privacy',
         templateUrl: 'views/core/privacy.view.client.html',
-      })
-	.state('noaccess1', {
-	    url: '/projects',
-	    resolve: {
-		security: function ($q, $state) {
-		    var deferred = $q.defer();
-		    //return $q.reject("Not Authorized");
-		    $state.go('main');
-		    deferred.reject();
-		    return deferred.promise;
-		}
-	    }
-	})
-      .state('profile', {
+    })
+    .state('notfound', {
+        url: '/404',
+        templateUrl: 'modules/404/views/404.html',
+        controller: '404Ctrl',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'modules/404/controllers/404controller.js',
+                ]);
+            }]
+        }
+    })
+    .state('profile', {
         url: '/:username',
         templateUrl: 'views/profile/profile.view.client.html',
         controller: 'ProfileCtrl',
@@ -162,17 +166,17 @@ var wittyCircleApp = angular
         // css: '../styles/profiles.css',
         resolve:{
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                     return $ocLazyLoad.load([
-                         'controllers/profile/profile.controller.client.js',
-                         'controllers/profile/modal-controller/about-modal.controller.client.js',
-                         'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
-                         'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
-                         'controllers/profile/modal-controller/skills-modal.controller.client.js',
-                         'controllers/profile/modal-controller/interest-modal.controller.client.js',
-			 //css
-			 'styles/css/profiles.css',
-			 'styles/css/profiles-modal-edit.css',
-                     ]);
+                return $ocLazyLoad.load([
+                    'controllers/profile/profile.controller.client.js',
+                    'controllers/profile/modal-controller/about-modal.controller.client.js',
+                    'controllers/profile/modal-controller/add-experiences-modal.controller.client.js',
+                    'controllers/profile/modal-controller/edit-experiences-modal.controller.client.js',
+                    'controllers/profile/modal-controller/skills-modal.controller.client.js',
+                    'controllers/profile/modal-controller/interest-modal.controller.client.js',
+                    //css
+                    'styles/css/profiles.css',
+                    'styles/css/profiles-modal-edit.css',
+                ]);
             }],
             auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
                 Profile.getUserbyUsername($stateParams.username).then(function(res) {
@@ -185,47 +189,49 @@ var wittyCircleApp = angular
                             $state.go('discover');
                         } if (!res && $stateParams.username === "meet") {
                             $state.go('meet');
-                        }// if (!res && $stateParams.username === "work") {
-                            //   $state.go('work');}
-                            if (!res && $stateParams.username === "messages") {
-                                $state.go('messages');
-                            } if (!res && $stateParams.username === "my-projects") {
-                                $state.go('my-projects');
-                            }
+                        } if (!res && $stateParams.username === "messages") {
+                            $state.go('messages');
+                        } if (!res && $stateParams.username === "my-projects") {
+                            $state.go('my-projects');
+                        } else {
+                            $state.go('notfound');
                         }
-                    });
-                }
+                    }
+                });
             }
-        })
-
-        $httpProvider.defaults.withCredentials = true;
-
-        // **Redactor configuration
-
-        redactorOptions.imageUpload = '/upload/redactor';
-        redactorOptions.buttonSource = true;
-        redactorOptions.imageResizable = true;
-        redactorOptions.imageEditable = true;
-        redactorOptions.imageLink = true;
-        redactorOptions.visual = true;// false for html mode
-
-        redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
-        redactorOptions.plugins = ['imagemanager'];
-        redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
-        /*
-        **End Redactor configuration
-        */
-
-        //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
-        $locationProvider.html5Mode(true);
-        $locationProvider.hashPrefix('!');
-
+        }
     })
-    .run(function ($rootScope, $cookieStore, $location, $http) {
-        // keep user logged in after page refresh
-        $rootScope.globals = $cookieStore.get('globals') || {};
 
-	$http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
+    $urlRouterProvider.otherwise('/404');
+
+    $httpProvider.defaults.withCredentials = true;
+
+    // **Redactor configuration
+
+    redactorOptions.imageUpload = '/upload/redactor';
+    redactorOptions.buttonSource = true;
+    redactorOptions.imageResizable = true;
+    redactorOptions.imageEditable = true;
+    redactorOptions.imageLink = true;
+    redactorOptions.visual = true;// false for html mode
+
+    redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
+    redactorOptions.plugins = ['imagemanager'];
+    redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+    /*
+    **End Redactor configuration
+    */
+
+    //** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
+
+})
+.run(function ($rootScope, $cookieStore, $location, $http, $state) {
+    // keep user logged in after page refresh
+    $rootScope.globals = $cookieStore.get('globals') || {};
+
+    $http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
 
 
     $rootScope.resizePic = function(url, width, height, crop) {
@@ -251,7 +257,7 @@ var wittyCircleApp = angular
     $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
 
         if(error === "Not Authorized"){
-            $state.go(main);
+            $state.go('notfound');
         }
     });
 

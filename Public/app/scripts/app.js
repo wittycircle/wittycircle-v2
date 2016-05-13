@@ -226,39 +226,39 @@ var wittyCircleApp = angular
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
 
-})
-.run(function ($rootScope, $cookieStore, $location, $http, $state) {
-    // keep user logged in after page refresh
-    $rootScope.globals = $cookieStore.get('globals') || {};
 
     $http.defaults.headers.common['access_token'] = 'oTJaUTHa6FFTSSLrzQOb';
 
+    })
+	.run(function ($rootScope, $cookieStore, $location, $http, $state) {
+    	// keep user logged in after page refresh
+    	$rootScope.globals = $cookieStore.get('globals') || {};
 
-    $rootScope.resizePic = function(url, width, height, crop) {
-        if (url && url.indexOf('cloudinary') >= 0) {
-            var tab, i, parameter, url_ret;
-            crop = crop || 'fill';
-            width ? width = "w_" + width + "," : "";
-            height ? height = "h_" + height + "," : "";
+        $rootScope.resizePic = function(url, width, height, crop) {
+            if (url && url.indexOf('cloudinary') >= 0) {
+                var tab, i, parameter, url_ret;
+                crop = crop || 'fill';
+                width ? width = "w_" + width + "," : "";
+                height ? height = "h_" + height + "," : "";
 
-            tab = url.split('/');
-            i = $.inArray('upload', tab);
-            parameter = width + height + "c_" + crop;
-            tab.splice(i + 1, 0, parameter);
-            url_ret = tab.join('/');
+                tab = url.split('/');
+                i = $.inArray('upload', tab);
+                parameter = width + height + "c_" + crop;
+                tab.splice(i + 1, 0, parameter);
+                url_ret = tab.join('/');
 
-            return url_ret;
-        } else
-        return url;
-    };
+                return url_ret;
+            } else
+            return url;
+        };
 
-    $cookieStore.put('resizePic', $rootScope.resizePic);
-    // Check state authorization then redirect to the main page if rejection is called.
-    $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
+        $cookieStore.put('resizePic', $rootScope.resizePic);
+        // Check state authorization then redirect to the main page if rejection is called.
+        $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
 
-        if(error === "Not Authorized"){
-            $state.go('notfound');
-        }
+            if(error === "Not Authorized"){
+                $state.go(main);
+            }
+        });
+
     });
-
-});

@@ -351,8 +351,9 @@ a:hover {
 				.follower {
 					display: inline-block;
 					position: relative;
-					margin: 0 8px;
+					padding: 0 8px;
 					text-align: center;
+					cursor: pointer;
 
 					h2 {
 						font-family: 'FreigSem';
@@ -368,6 +369,118 @@ a:hover {
 					position: relative;
 					bottom: 14px;
 					text-align: center;
+					height: 50px;
+					cursor: pointer
+				}
+
+				.profile-follow-dropdown2 {
+					margin-top: 14px;
+				}
+
+				.profile-follow-dropdown {
+					position: absolute;
+					max-height: 290px;
+					width: 250px;
+					background-color: white;
+					border: 1px solid #e5e5e5;
+					border-radius: 4px;
+					padding: 5px;
+					overflow: scroll;
+					z-index: 1000;
+					
+					h4 {
+		                               font-family: 'FreigBook';
+					       font-size: 16px;
+                                               color: black;
+					       word-break: break-all;
+					}
+
+					span {
+                    			       font-family: 'FreigBook';
+                                               font-size: 14px;
+                                               color: #999999;
+                                         }
+
+					.profile-pfollow-list {
+						width: 100%;
+
+						.profile-pfollow-picture {
+							display: inline-block;
+							background-repeat: no-repeat;
+							background-size: cover;
+							background-position: center center;
+							width: 36px;
+							height: 36px;
+							border-radius: 4px;
+							margin: 5px 0;
+						}
+
+						.profile-pfollow-info {
+							display: inline-block;
+							width: 180px;
+							min-height: 36px;
+							margin-top: 5px;
+							margin-left: 5px;
+							padding-left: 5px;
+							vertical-align: top;
+							text-align: left;
+							overflow: hidden;
+							-webkit-transition: all 250ms linear;
+							-o-transition: all 250ms linear;
+							-moz-transition: all 250ms linear;
+							-ms-transition: all 250ms linear;
+							-kthtml-transition: all 250ms linear;
+							transition: all 250ms linear;
+
+							h4 {
+								font-family: 'FreigBook';
+								font-size: 16px;
+								color: black;
+								word-break: break-all;
+							}
+						}
+
+						.profile-pfollow-info:hover {
+							background-color: #fafafa;
+							border-radius: 4px;
+						}
+					}
+
+					.follow-list-dd {
+						.profile-followed-picture {
+							display: inline-block;
+							background-repeat: no-repeat;
+							background-size: cover;
+							background-position: center center;
+							width: 36px;
+							height: 36px;
+							border-radius: 50%;
+							margin: 5px 0;
+						}
+
+						.profile-follow-info {
+							display: inline-block;
+							width: 180px;
+							min-height: 36px;
+							margin-top: 5px;
+							margin-left: 5px;
+							padding-left: 5px;
+							vertical-align: top;
+							text-align: left;
+							overflow: hidden;
+							-webkit-transition: all 250ms linear;
+							-o-transition: all 250ms linear;
+							-moz-transition: all 250ms linear;
+							-ms-transition: all 250ms linear;
+							-kthtml-transition: all 250ms linear;
+							transition: all 250ms linear;
+						}
+
+						.profile-follow-info:hover {
+							background-color: #fafafa;
+							border-radius: 4px;
+						}
+					}
 				}
 			}
 

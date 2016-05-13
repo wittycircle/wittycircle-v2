@@ -146,17 +146,17 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		profileVm.followText             = "Follow";
 
 		RetrieveData.ppdData('/follow/projects/number/', 'GET', null, profileVm.paramUsername).then(function(res) {
-			if (res.number) {
-				profileVm.projectsFollow = res.number;
+			if (res.success) {
+				profileVm.projectsFollow = res.list;
 			}
 		});
 
 		RetrieveData.ppdData('/follow/users/', 'GET', null, profileVm.paramUsername).then(function(res) {
-			profileVm.usersFollow          = res.data.length;
+			profileVm.usersFollow          = res.data;
 		});
 
 		RetrieveData.ppdData('/follow/followUsers/', 'GET', null, profileVm.paramUsername).then(function(res) {
-			profileVm.followers            = res.data.length;
+			profileVm.followers            = res.data;
 		});
 
 		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername, 0).then(function(res) {
@@ -202,6 +202,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	/*** Go to Discover ***/
 	function goToDiscover(category) {
 		$state.go('discover', {tagParams: category});
+	};
+
+	/*** Go To Profile ***/
+	$scope.goToProfile = function(id) {
+	    Users.getUserIdByProfileId(id).then(function(data) {
+			if (data.userId)
+				$location.path('/' + data.userId.username);
+		});
 	};
 
 	/*** Upload picture ***/

@@ -70,7 +70,6 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
                 if (value === 2)
                     main.mamobile.headerText = "Show me projects about...";
                 main.mamobile.general  = true;
-                console.log(main.mamobile.general);
             }
         };
 
@@ -277,6 +276,35 @@ angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$statePa
         });
 
 }])
+.directive('mainBody3', function() {
+    return {
+        restrict: 'AE',
+        scope: {
+            data: '='
+        },
+        link: function(scope, element, attrs) {
+            var scopeD = scope.data;
+            /*** Hover Follow ***/
+            $('.main-body3-body').mouseup(function(e) {
+                if (scopeD.currentUser) {
+                    var id      = e.target.id;
+                    var index   = e.target.id.slice(3);
+                    scopeD.idName  = "fop" + index;
+                    scopeD.idName2 = "foc" + index;
+                    if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
+                        if (document.getElementById(scopeD.idName).className === "fa fa-plus" || document.getElementById(scopeD.idName).className === "fa fa-plus animated fadeIn") {
+                            document.getElementById(scopeD.idName).className = "fa fa-plus animated fadeOut";
+                            document.getElementById(scopeD.idName2).className = "fa fa-check animated fadeIn";
+                        } else {
+                            document.getElementById(scopeD.idName).className = "fa fa-plus animated fadeIn";
+                            document.getElementById(scopeD.idName2).className = "fa fa-check animated fadeOut";
+                        }
+                    }
+                }
+            });
+        }
+    }
+})
 .directive('slick', [
   '$timeout',
   function ($timeout) {

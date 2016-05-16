@@ -310,7 +310,7 @@
 							<a href="/meet">See more</a>
 						</div>
 					</div>
-					<div class="main-body3-body">
+					<main-body3 class="main-body3-body" data="main">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
@@ -346,7 +346,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</main-body3>
 
 					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)" ng-if="mobile">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
@@ -411,26 +411,7 @@
 		            acocIT  = document.querySelectorAll("#acoc img");
 
 		        if (screen.height > 1280)
-		            document.getElementById('hvbg').style.height = "650px";
-
-		        /*** Hover Follow ***/
-		        $('.main-body3-body').mouseup(function(e) {
-		            if (main.currentUser) {
-		                var id      = e.target.id;
-		                var index   = e.target.id.slice(3);
-		                main.idName  = "fop" + index;
-		                main.idName2 = "foc" + index;
-		                if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
-		                    if (document.getElementById(main.idName).className === "fa fa-plus" || document.getElementById(main.idName).className === "fa fa-plus animated fadeIn") {
-		                        document.getElementById(main.idName).className = "fa fa-plus animated fadeOut";
-		                        document.getElementById(main.idName2).className = "fa fa-check animated fadeIn";
-		                    } else {
-		                        document.getElementById(main.idName).className = "fa fa-plus animated fadeIn";
-		                        document.getElementById(main.idName2).className = "fa fa-check animated fadeOut";
-		                    }
-		                }
-		            }
-		        });
+		            document.getElementById('hvbg').style.height = "650px"; 
 
 		        $('#main-body-page').on('click', function(e) {
 

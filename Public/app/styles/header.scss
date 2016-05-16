@@ -609,7 +609,9 @@
 
 			.header-findPeople-content {
 				display: inline-block;
-				float: right;
+				width: 180px;
+				vertical-align: top;
+				margin-left: 15px;
 
 				.header-findPeople-name {
 					width: 180px;
@@ -625,7 +627,7 @@
 				}
 
 				.header-findPeople-location {
-					margin-top: 10px;
+					margin-top: 5px;
 					h6 {
 						font-family: 'FreigBook';
 						font-size: 14px;

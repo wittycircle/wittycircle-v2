@@ -399,7 +399,9 @@
         background-position: center center; }
       #header-section #header-findField .header-find-list .header-findPeople-content {
         display: inline-block;
-        float: right; }
+        width: 180px;
+        vertical-align: top;
+        margin-left: 15px; }
         #header-section #header-findField .header-find-list .header-findPeople-content .header-findPeople-name {
           width: 180px;
           height: 24px;
@@ -410,7 +412,7 @@
             font-size: 18px;
             color: #222222; }
         #header-section #header-findField .header-find-list .header-findPeople-content .header-findPeople-location {
-          margin-top: 10px; }
+          margin-top: 5px; }
           #header-section #header-findField .header-find-list .header-findPeople-content .header-findPeople-location h6 {
             font-family: 'FreigBook';
             font-size: 14px;

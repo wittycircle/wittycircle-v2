@@ -301,6 +301,19 @@ angular.module('wittyApp')
         $location.path("project/" + res[0].public_id + "/" + titleUrl);
       });
     }
+    if (type === "p_ask") {
+      Projects.getProjectbyId(project_id, function(res) {
+        var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+        if (!check_read) {
+          console.log(id);
+          $http.put('/notification/update/project-ask', id).success(function(res) {
+             if (res.success)
+               $scope.getNotifList();
+          });
+        }
+        $location.path("project/" + res[0].public_id + "/" + titleUrl + "/feedback");
+      });
+    }
   };
 
   $scope.encodeUrl = function(url) {
@@ -324,6 +337,11 @@ angular.module('wittyApp')
 
   /* project involve notification */
   socket.on('involve-notification', function(data) {
+    $scope.getNotifList();
+  });
+
+  /* ask project notification */
+  socket.on('ask-project-notification', function(data) {
     $scope.getNotifList();
   });
 

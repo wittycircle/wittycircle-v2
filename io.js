@@ -441,6 +441,40 @@ module.exports = function(app, io, ensureAuth) {
             }
         });
 
+        /*** Ask Project Notification ***/
+        app.post('/asks', function(req, res) {
+            if (!req.isAuthenticated()) {
+                return res.status(404).send({message: 'user need to be authenticated'});
+            } else {
+                req.checkBody('title', 'title need to be a string').isString().max(128);
+                req.checkBody('message', 'message need to be a string').optional().isString().max(4096);
+                req.checkBody('project_id', 'project_id need to be an int').isInt().min(1);
+                req.checkBody('creator_img', 'creator img need to be a string').isString().max(512);
+                req.checkBody('first_name', 'first_name need to be a string').isString().max(128);
+                req.checkBody('last_name', 'last_name need to be a string').isString().max(128);
+                req.checkBody('project_public_id', 'project_public_id need to be an int').isInt().min(1);
+
+                var errors = req.validationErrors(true);
+                if (errors) {
+                    var date = new Date();
+                    console.log(date + "\n");
+                    console.log("error in creating a ask" + "\n");
+                    console.log(errors);
+                    console.log("\n");
+                    res.status(400).send(errors);
+                } else {
+                    req.body.user_id = req.user.id;
+                    pool.query("INSERT INTO project_asks SET ?", req.body,
+                        function (err, result) {
+                            if (err) {
+                                throw err;
+                            }
+                            socket.broadcast.emit('ask-project-notification', 'hello world!');
+                        });
+                }
+            }
+        });
+
         /*** Send Private Message ***/
         socket.on('private message',  function (data) { // private message between users
             var msg = data.msg.trim(); // clear all whitespace of the end and the begining

@@ -114,6 +114,7 @@ app.put('/notification/update/user-follow-by', ensureAuth, notification.updateUs
 app.put('/notification/update/project-follow', ensureAuth, notification.updateProjectFollowNotif);
 app.put('/notification/update/project-follow-by', ensureAuth, notification.updateProjectFollowBy);
 app.put('/notification/update/project-involve', ensureAuth, notification.updateProjectInvolve);
+app.put('/notification/update/project-ask', ensureAuth, notification.updateProjectAsk);
 
 /* Users Specifications */
 var users_specification = require('./controllers/users_specification');
@@ -215,7 +216,7 @@ app.delete('/feedback_replies/:id', feedback_replies.deleteFeedbackReplies);
 /* Asks */
 var asks = require('./controllers/asks');
 app.get('/asks/:project_id', asks.getAsksofProject);
-app.post('/asks', asks.createAsk);
+// app.post('/asks', asks.createAsk);
 app.delete('/ask/:ask_id', asks.deleteAsk);
 app.get('/ask/public_id/:project_public_id', asks.getAsksofProjectByPublicId);
 app.post('/ask_reply/add', asks.addAskReply);

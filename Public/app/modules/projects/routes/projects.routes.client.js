@@ -18,14 +18,6 @@
                     'controllers/projects/modal/upload-poster.controller.client.js',
                     'scripts/draggable_background.js',
                     'scripts/redactor/redactor.js',
-                    // css
-                    'styles/css/home.css',
-                    'styles/css/presentation.css',
-                    'styles/css/projects.css',
-                    'styles/css/myProjects.css',
-                    'styles/css/create-project.css',
-                    'styles/css/video_custom.css',
-                    'styles/css/_scss/redactor.css'
                 ]);
             }],
             auth: function ($q, $rootScope, $stateParams) {
@@ -66,13 +58,6 @@
             loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/view-project.controller.client.js',
-                         // css
-                         'styles/css/home.css',
-                         'styles/css/presentation.css',
-                         'styles/css/projects.css',
-                         'styles/css/myProjects.css',
-                         'styles/css/create-project.css',
-                         'styles/css/video_custom.css'
                      ]);
             }],
             projectResolve: function (Projects, $stateParams) {
@@ -132,14 +117,6 @@
                          'scripts/draggable_background.js',
                          'controllers/projects/modal/delete-project.controller.client.js',
                          'scripts/redactor/redactor.js',
-                         // css
-                         'styles/css/home.css',
-                         'styles/css/presentation.css',
-                         'styles/css/projects.css',
-                         'styles/css/myProjects.css',
-                         'styles/css/create-project.css',
-                         'styles/css/video_custom.css',
-                         'styles/css/_scss/redactor.css'
                      ]);
             }],
             auth: function($q, $stateParams, Projects, $http) {
@@ -183,8 +160,6 @@
                      return $ocLazyLoad.load([
                          'modules/projects/controllers/my-project.controller.client.js',
                          // css
-                         'styles/css/presentation.css',
-                         'styles/css/myProjects.css',
                      ]);
             }],
             auth: function ($q, $rootScope, $state) {

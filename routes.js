@@ -56,7 +56,7 @@ app.get('/profile', ensureAuth, function(req, res) {
 /* AUTHENTICATION API PUBLIC */
 /* Facebook Users && Google Users */
 app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback',
+app.get('/auth/facebook/callback', 
  	passport.authenticate('facebook', {
  	    successRedirect : 'https://www.wittycircle.com',
  	    failureRedirect : 'https://www.wittycircle.com'
@@ -71,19 +71,19 @@ app.get('/auth/facebook/callback',
 
 /* AUTHENTICATION API DEV */
 /* Facebook Users && Google Users */
-/*app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback',
-	passport.authenticate('facebook', {
-	    successRedirect : 'http://localhost',
-	    failureRedirect : 'http://localhost'
-	}));
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+// app.get('/auth/facebook/callback',
+// 	passport.authenticate('facebook', {
+// 	    successRedirect : 'http://localhost',
+// 	    failureRedirect : 'http://localhost'
+// 	}));
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
-app.get('/auth/google/callback',
-	passport.authenticate('google', {
-	    successRedirect : 'http://localhost',
-	    failureRedirect : 'http://localhost'
-	}));*/
+// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+// app.get('/auth/google/callback',
+// 	passport.authenticate('google', {
+// 	    successRedirect : 'http://localhost',
+// 	    failureRedirect : 'http://localhost'
+// 	}));
 
 /* Schedule */
 var schedule = require('./dateConvert');
@@ -114,6 +114,7 @@ app.put('/notification/update/user-follow-by', ensureAuth, notification.updateUs
 app.put('/notification/update/project-follow', ensureAuth, notification.updateProjectFollowNotif);
 app.put('/notification/update/project-follow-by', ensureAuth, notification.updateProjectFollowBy);
 app.put('/notification/update/project-involve', ensureAuth, notification.updateProjectInvolve);
+app.put('/notification/update/project-ask', ensureAuth, notification.updateProjectAsk);
 
 /* Users Specifications */
 var users_specification = require('./controllers/users_specification');
@@ -215,7 +216,7 @@ app.delete('/feedback_replies/:id', feedback_replies.deleteFeedbackReplies);
 /* Asks */
 var asks = require('./controllers/asks');
 app.get('/asks/:project_id', asks.getAsksofProject);
-app.post('/asks', asks.createAsk);
+// app.post('/asks', asks.createAsk);
 app.delete('/ask/:ask_id', asks.deleteAsk);
 app.get('/ask/public_id/:project_public_id', asks.getAsksofProjectByPublicId);
 app.post('/ask_reply/add', asks.addAskReply);
@@ -316,7 +317,7 @@ app.get('*', function(req, res) {
                 //console.log(response);
     	});
     }
-    res.sendFile(__dirname + '/Public/app/index.html');
+    res.sendFile(__dirname + '/Public/dist/index.html');
     //res.cookie('name', 'tobi');
 });
 

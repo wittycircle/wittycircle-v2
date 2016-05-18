@@ -628,7 +628,6 @@ exports.createProject = function(req, res){
                             }
                         });
                 }
-                
             });
         } else {
             res.status(404).send({message: 'You need to login.'});

@@ -30,7 +30,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     */
     //TODO: change to the server url
     var socket = io.connect('https://www.wittycircle.com');
-    //var socket = io.connect('http://127.0.0.1');
+    // var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -309,19 +309,31 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $location.path("project/" + res[0].public_id + "/" + titleUrl);
             });
         }
+        if (type === "p_ask") {
+            Projects.getProjectbyId(project_id, function(res) {
+                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+                if (!check_read) {
+                    $http.put('/notification/update/project-ask', id).success(function(res) {
+                        if (res.success)
+                            $scope.getNotifList();
+                    });
+                }
+                $location.path("project/" + res[0].public_id + "/" + titleUrl + "/feedback");
+            });
+        }
     };
 
     $scope.encodeUrl = function(url) {
         return Beauty_encode.encodeUrl(url);
-    }
-
-    /* view notification */
-    socket.on('view-notification', function(data) {
-        $scope.getNotifList();
-    });
+    };
 
     /* follow notification */
     socket.on('follow-notification', function(data) {
+        $scope.getNotifList();
+    });
+
+    /* view notification */
+    socket.on('view-notification', function(data) {
         $scope.getNotifList();
     });
 
@@ -332,6 +344,11 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /* project involve notification */
     socket.on('involve-notification', function(data) {
+        $scope.getNotifList();
+    }); 
+
+    /* ask project notification */
+    socket.on('ask-project-notification', function(data) {
         $scope.getNotifList();
     });
 
@@ -345,7 +362,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 });
             }
         }
-
     });
 
 

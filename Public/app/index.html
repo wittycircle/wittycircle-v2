@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" id="main-body" data-ng-app="wittyApp" data-ng-controller="HeadCtrl">
 <head>
-    <base href="/">
     <meta charset="UTF-8">
     <meta name="fragment" content="!">
     <title ng-bind="seo.pageTitle"></title>
@@ -24,7 +23,8 @@
     <link rel="icon" type="image/png" href="images/favicons/default-favicon.png" />
     <link rel="canonical" href="https://www.wittycircle.com" />
     <link rel="publisher" href="https://plus.google.com/104066516895208794319/about" />
-
+    <base href="/">
+    
     <style>
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
         display: none !important;
@@ -41,6 +41,7 @@
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/css/main.css -->
+    <link rel="stylesheet" href="styles/css/_scss/redactor.css" />
     <link rel="stylesheet" href="styles/css/main.css" />
     <link rel="stylesheet" href="styles/css/home.css" />
     <link rel="stylesheet" href="styles/css/profiles.css" />
@@ -60,8 +61,12 @@
     <link rel="stylesheet" href="styles/css/terms.css" />
     <link rel="stylesheet" href="styles/css/reset.css" />
     <link rel="stylesheet" href="styles/css/messaging.css">
-    <link rel="stylesheet" href="styles/css/login.css">
-
+    <link rel="stylesheet" href="styles/css/projects.css" />
+    <link rel="stylesheet" href="styles/css/myProjects.css" />
+    <link rel="stylesheet" href="styles/css/create-project.css" />
+    <link rel="stylesheet" href="styles/css/video_custom.css" />
+    <link rel="stylesheet" href="styles/css/setting.css">
+    <link rel="stylesheet" href="styles/css/profiles-modal-edit.css" />
     <!-- endbuild -->
 
     <!-- Font Awesome.css -->
@@ -231,6 +236,17 @@
     <script src="controllers/core/header.controller.client.js"></script>
     <script src="controllers/auth/signup_modal.controller.client.js"></script>
     <script src="controllers/messaging/messaging.controller.client.js"></script>
+    <script src="controllers/presentation/discover.controller.client.js"></script>
+    <script src="controllers/presentation/meet.controller.client.js"></script>
+    <script src="controllers/core/reset-password.controller.client.js"></script>
+    <script src="controllers/setting/setting.controller.client.js"></script>
+    <script src="controllers/profile/profile.controller.client.js"></script>
+    <script src="controllers/profile/modal-controller/about-modal.controller.client.js"></script>
+    <script src="controllers/profile/modal-controller/add-experiences-modal.controller.client.js"></script>
+    <script src="controllers/profile/modal-controller/edit-experiences-modal.controller.client.js"></script>
+    <script src="controllers/profile/modal-controller/skills-modal.controller.client.js"></script>
+    <script src="controllers/profile/modal-controller/interest-modal.controller.client.js"></script>
+
     <!-- MODULE PROJECT -->
     <script src="modules/projects/controllers/involvmentSheet.controller.client.js"></script>
     <script src="modules/projects/services/projects.service.client.js"></script>

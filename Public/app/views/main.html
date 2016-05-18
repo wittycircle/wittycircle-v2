@@ -310,7 +310,7 @@
 							<a href="/meet">See more</a>
 						</div>
 					</div>
-					<div class="main-body3-body">
+					<main-body3 class="main-body3-body" data="main">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
@@ -346,7 +346,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</main-body3>
 
 					<slick class="main-body3-body-mobile" init-onload=true data="main.cardProfiles" media="screen and (max-width: 735px)" ng-if="mobile">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
@@ -395,7 +395,8 @@
 		var x = $(window).width();
 
 		$(document).ready(function() { 
-
+			document.getElementById('footer-page').style.visibility = "visible";
+			
 		    if (x >= 736) {
 		        var y,
 		            mbdown  = $('#mbdown'),
@@ -410,7 +411,7 @@
 		            acocIT  = document.querySelectorAll("#acoc img");
 
 		        if (screen.height > 1280)
-		            document.getElementById('hvbg').style.height = "650px";
+		            document.getElementById('hvbg').style.height = "650px"; 
 
 		        $('#main-body-page').on('click', function(e) {
 
@@ -479,7 +480,6 @@
 		                $(this).css("width", "200px");
 		            }
 		        });
-
 		    }
 		});
 

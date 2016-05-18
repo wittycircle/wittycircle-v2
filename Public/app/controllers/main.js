@@ -264,30 +264,64 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         }
     };
 
-    /*** Destroy Controller ***/
-    $scope.$on("$destroy", function(){
-        $interval.cancel(main.interval);
-    });
-    /*** DOM ***/
-    $('.main-body3-body').mouseup(function(e) {
-        if (main.currentUser) {
-            var id      = e.target.id;
-            var index   = e.target.id.slice(3);
-            main.idName  = "fop" + index;
-            main.idName2 = "foc" + index;
-            if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
-                if (document.getElementById(main.idName).className === "fa fa-plus" || document.getElementById(main.idName).className === "fa fa-plus animated fadeIn") {
-                    document.getElementById(main.idName).className = "fa fa-plus animated fadeOut";
-                    document.getElementById(main.idName2).className = "fa fa-check animated fadeIn";
-                } else {
-                    document.getElementById(main.idName).className = "fa fa-plus animated fadeIn";
-                    document.getElementById(main.idName2).className = "fa fa-check animated fadeOut";
-                }
+        function goToDiscover(category) {
+            $state.go('discover', {tagParams: category});
+        };
+
+        function followUserFromCard(id, index, $event) {
+            if (!main.currentUser) {
+                showbottomAlert.pop_it();
+            } else {
+                Users.getUserIdByProfileId(id).then(function(data) {
+                    if (main.currentUser.id !== data.userId.id) {
+                        Profile.followUser(data.userId.username, function(res) {
+                            if (res.success) {
+                                if (res.msg === "User followed")
+                                    main.followed[index] = true;
+                                else
+                                    main.followed[index] = false;
+                            }
+                        });
+                    }
+                });
             }
-        }
-    });
+        };
+
+        /*** Destroy Controller ***/
+        $scope.$on("$destroy", function(){
+            $interval.cancel(main.interval);
+        });
 
 }])
+.directive('mainBody3', function() {
+    return {
+        restrict: 'AE',
+        scope: {
+            data: '='
+        },
+        link: function(scope, element, attrs) {
+            var scopeD = scope.data;
+            /*** Hover Follow ***/
+            $('.main-body3-body').mouseup(function(e) {
+                if (scopeD.currentUser) {
+                    var id      = e.target.id;
+                    var index   = e.target.id.slice(3);
+                    scopeD.idName  = "fop" + index;
+                    scopeD.idName2 = "foc" + index;
+                    if (id.indexOf("cfs") !== -1 || id.indexOf("fop") !== -1 || id.indexOf("foc") !== -1) {
+                        if (document.getElementById(scopeD.idName).className === "fa fa-plus" || document.getElementById(scopeD.idName).className === "fa fa-plus animated fadeIn") {
+                            document.getElementById(scopeD.idName).className = "fa fa-plus animated fadeOut";
+                            document.getElementById(scopeD.idName2).className = "fa fa-check animated fadeIn";
+                        } else {
+                            document.getElementById(scopeD.idName).className = "fa fa-plus animated fadeIn";
+                            document.getElementById(scopeD.idName2).className = "fa fa-check animated fadeOut";
+                        }
+                    }
+                }
+            });
+        }
+    }
+})
 .directive('slick', [
     '$timeout',
     function ($timeout) {

@@ -57,13 +57,17 @@ function getNotifUserFollowList(data, callback) {
 };
 
 exports.getFollowList = function(req, res, callback) {
-    pool.query('SELECT * FROM user_followers WHERE follow_user_id = ?', [req.user.id],
-    function (err, data) {
-        if (err) throw err;
-        getNotifUserFollowList(data, function(newData) {
-            callback(newData);
+    if (!req.isAuthenticated()) {
+        return res.status(404).send({message: 'user need to be authenticated'});
+    } else {
+        pool.query('SELECT * FROM user_followers WHERE follow_user_id = ?', [req.user.id],
+        function (err, data) {
+            if (err) throw err;
+            getNotifUserFollowList(data, function(newData) {
+                callback(newData);
+            });
         });
-    });
+    }
 };
 
 /***** Follow project *****/
@@ -301,7 +305,7 @@ exports.getProjectFollowedBy = function(req, res, callback) {
                 });
             } else {
                 getNotifUserFollowProject(project_user_follow, function(newData) {
-                    callback(newData);
+                    return callback(newData);
                 });
             }
         };

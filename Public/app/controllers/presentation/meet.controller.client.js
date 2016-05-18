@@ -327,7 +327,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 		$timeout(function() {
 			$('#ldm').css('display', 'none');
 			$('#mbd').css('display', 'block');
-		}, 500);
+		}, 1500);
 
 		var object = {
 			about: value[0],

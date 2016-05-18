@@ -229,7 +229,7 @@
 
             //*** add skill ***//
             if ((e.target.id === 'input-msa2' || e.target.id === 'input-msa') && document.getElementById('msabox1').style.display === "none" && document.getElementById('msabox2').style.display === "none") {
-                document.getElementById('msabox1').style.display = "block";
+		$("msabox1").show();
             } else {
                 if (document.getElementById('msabox1'))
                 document.getElementById('msabox1').style.display = "none";

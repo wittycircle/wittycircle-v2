@@ -76,7 +76,8 @@ exports.login = function (req, res, next) {
                     id		: user.id,
                     email	: user.email,
                     profile_id	: user.profile_id,
-                    username	: user.username
+                    username	: user.username,
+		    moderator	: user.moderator
                 };
                 return res.send({success: true, user: get_user});
             }

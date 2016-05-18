@@ -648,12 +648,12 @@ exports.updateProject = function(req, res){
     req.checkBody('location_state', 'Error Message').optional().isString().max(64);
     req.checkBody('location_country', 'Error Message').isString().max(64);
     req.checkBody('picture', 'Error Message').optional().isString().max(128);
-    req.checkBody('post', 'Error Message').optional().isString().max(10000);
+    req.checkBody('post', 'Error Message').optional().isString();
     req.checkBody('main_video', 'Error Message').optional().isString().max(256);
     req.checkBody('picture_position', 'Error Message').optional().isString().max(128);
     req.checkBody('main_video_id', 'Error message').optional().isString().max(256);
     req.checkBody('picture_card', 'Error message').optional().isString().max(258);
-
+    
 
     var errors = req.validationErrors(true);
     if (errors) {
@@ -862,7 +862,7 @@ exports.getAllProjectMembers = function(req, res) {
                 console.log(new Date());
                 throw err;
             }
-            if (req.user.id  === response[0].creator_user_id) {
+            if (req.user.id  === response[0].creator_user_id || req.user.moderator === 1) {
                 return res.send({message: "success"});
             }
             else {

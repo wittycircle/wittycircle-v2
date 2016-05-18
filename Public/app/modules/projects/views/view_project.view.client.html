@@ -27,6 +27,7 @@
 			</div>
 			<div class="viewProject-mobile-options">
 				<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+				<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="moderator === 1"><img src="images/picto-edit-w.svg" alt="edit-picto" /> Edit</button>
 					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button>
 					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
 			</div>
@@ -74,7 +75,7 @@
 								</span>
 						</div>
 					</li>
-					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable || moderator"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
 					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button>
 					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
 				</ul>

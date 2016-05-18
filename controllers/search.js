@@ -34,6 +34,8 @@ function checkElement(elem, list, callback) {
             if (elem === list[i])
                 return callback(false);
         }
+	if (i === list.length)
+	    return callback(true);
     } 
 };
 
@@ -294,7 +296,7 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
 exports.getUsersBySkill = function(req, res) {
     var arrayId, sortList;
     arrayId = [];
-
+    console.time('Time to find: ');
     function recursive(index) {
         if (req.body[index]) {
             pool.query('SELECT user_id FROM user_skills WHERE skill_name = ?', req.body[index].sName,
@@ -310,6 +312,7 @@ exports.getUsersBySkill = function(req, res) {
                         recursive(index + 1);
                 });
         } else {
+	    console.timeEnd('Time to find: ')
             return sortList ? res.send({success: true, data: sortList}) : res.send({success: false});
         }
     };

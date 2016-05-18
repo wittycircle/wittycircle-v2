@@ -27,6 +27,8 @@
         // var
         // list all var needed to be initialized at the start of controller
         var currentUser = $rootScope.globals.currentUser;
+	if (currentUser && currentUser.moderator)
+	    $scope.moderator = currentUser.moderator;
         vm.no_follow = true;
         vm.loggedUser = $rootScope.globals.currentUser;
         vm.isCollapse = false;

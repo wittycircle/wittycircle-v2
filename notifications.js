@@ -208,6 +208,7 @@ function saveNotificationList(req, res, list, callback) {
 							});
 					}
 					else if (list[index].type_notif === "p_ask") {
+						console.log("OK");
 						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && project_id = ? && date_of_view = ? && type_notif = ?',
 							[list[index].user_id, list[index].project_id, list[index].date_of_view, list[index].type_notif],
 							function(err, row) {
@@ -221,8 +222,9 @@ function saveNotificationList(req, res, list, callback) {
 								} else
 									recursive2(index + 1);
 							});
-					} else
+					} else {
 						recursive2(index + 1);
+					}
 				} else
 					callback({done: true});
 			};
@@ -240,9 +242,13 @@ function getAllNotificationList(req, res, callback) {
 						follow.getUserFollowBy(req, res, function(data5) {
 							project.getMyInvolvedProject(req, res, function(data6) {
 								ask.getProjectAsk(req, res, function(data7) {
-									var allList = data.concat(data2, data3, data4, data5, data6, data7);
-									saveNotificationList(req, res, allList, function(res) {
-										callback(res);
+									ask.getProjectAskForInvolvedUsers(req, res, function(data8) {
+										ask.getProjectAskForCreator(req, res, function(data9) {
+											var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9);
+											saveNotificationList(req, res, allList, function(res) {
+												callback(res);
+											});
+										});
 									});
 								});
 							});

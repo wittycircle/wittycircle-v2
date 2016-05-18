@@ -68,6 +68,79 @@ function getNotifProjectAsk(data, req, callback) {
 
 };
 
+exports.getProjectAskForCreator = function(req, res, callback) {
+    if (!req.isAuthenticated()) {
+        return res.status(404);
+    } else {
+        pool.query('SELECT id FROM projects WHERE creator_user_id = ?', req.user.id,
+            function(err, result) {
+                if (err) throw err;
+                if (result[0]) {
+                    var array = [];
+                    function recursive(index) {
+                        if (result[index]) {
+                            pool.query('SELECT * FROM project_asks WHERE project_id = ? && user_id != ?',
+                                [result[index].id, req.user.id],
+                                function(err, result2) {
+                                    if (err) throw err;
+                                    if (result2[0]) {
+                                        for(var i = 0; i < result2.length; i++)
+                                            array.push(result2[i])
+                                        return recursive(index + 1);
+                                    } else
+                                        return recursive(index + 1);
+                                });
+                        } else {
+                            getNotifProjectAsk(array, req, function(newData) {
+                                return callback(newData);
+                            });
+                        }
+                    };
+                    recursive(0);
+                } else
+                    callback([]);
+            });
+    }
+};
+
+exports.getProjectAskForInvolvedUsers = function(req, res, callback) {
+    if (!req.isAuthenticated()) {
+        return res.status(404);
+    } else {
+        pool.query('SELECT * FROM project_users WHERE user_id = ? && n_accept = 1', req.user.id, 
+            function(err, result) {
+                if (err) throw {error: err, title: "getProjectAskForCreator", date: new Date()};
+                else {
+                    if (result[0]) {
+                        var array = [];
+                        function recursive(index) {
+                            if (result[index]) {
+                                pool.query('SELECT * FROM project_asks WHERE project_id = ? && created_at >= ? && user_id != ?',
+                                    [result[index].project_id, result[index].creation_date, req.user.id],
+                                    function(err, result2) {
+                                        if (err) throw err;
+                                        if (result2[0]) {
+                                            for(var i = 0; i < result2.length; i++) {
+                                                array.push(result2[i])
+                                            }
+                                            return recursive(index + 1);
+                                        } else
+                                            return recursive(index + 1);
+                                    });
+                            } else {
+                                getNotifProjectAsk(array, req, function(newData) {
+                                    return callback(newData);
+                                });
+                            }
+                        };
+                        recursive(0);
+                    } else
+                        callback([]);
+                }
+            });
+    }
+};
+
 exports.getProjectAsk = function(req, res, callback) {
     if (!req.isAuthenticated()) {
         return res.status(404).send({message: 'user need to be authenticated'});
@@ -99,7 +172,7 @@ exports.getProjectAsk = function(req, res, callback) {
                     };
                     recursive(0);
                 } else
-                    return callback(null);
+                    return callback([]);
             });
     }
 };

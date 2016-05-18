@@ -27,6 +27,8 @@ var express		= require('express')
 , compression = require('compression')
 , helmet = require('helmet');
 
+app.use(compression());
+
 var httpsOption		= {
     secureProtocol: 'SSLv23_method',
     secureOptions: constants.SSL_OP_NO_SSLv3,
@@ -50,7 +52,6 @@ setInterval(function () {
     updateUserActivity();
 }, 21600000); // 6 hours in ms = 21600000
 
-app.use(compression());
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());

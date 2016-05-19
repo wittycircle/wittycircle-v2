@@ -203,7 +203,7 @@ app.delete('/opening/:id', openings.deleteProjectOpening);
 
 /* Feedbacks */
 var feedbacks = require('./controllers/feedbacks');
-app.post('/feedbacks', feedbacks.createProjectFeedback);
+// app.post('/feedbacks', feedbacks.createProjectFeedback);
 app.put('/feedback/:id', feedbacks.updateProjectFeedback);
 app.delete('/feedback/:id', feedbacks.deleteProjectFeedback);
 

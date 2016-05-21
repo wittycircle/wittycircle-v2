@@ -203,7 +203,7 @@ app.delete('/opening/:id', openings.deleteProjectOpening);
 
 /* Feedbacks */
 var feedbacks = require('./controllers/feedbacks');
-app.post('/feedbacks', feedbacks.createProjectFeedback);
+// app.post('/feedbacks', feedbacks.createProjectFeedback);
 app.put('/feedback/:id', feedbacks.updateProjectFeedback);
 app.delete('/feedback/:id', feedbacks.deleteProjectFeedback);
 
@@ -317,7 +317,7 @@ app.get('*', function(req, res) {
                 //console.log(response);
     	});
     }
-    res.sendFile(__dirname + '/Public/dist/index.html');
+    res.sendFile(__dirname + '/Public/app/index.html');
     //res.cookie('name', 'tobi');
 });
 

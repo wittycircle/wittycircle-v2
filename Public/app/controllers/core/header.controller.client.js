@@ -309,17 +309,17 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $location.path("project/" + res[0].public_id + "/" + titleUrl);
             });
         }
-        if (type === "p_ask") {
-            Projects.getProjectbyId(project_id, function(res) {
-                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read) {
-                    $http.put('/notification/update/project-ask', id).success(function(res) {
-                        if (res.success)
-                            $scope.getNotifList();
-                    });
-                }
-                $location.path("project/" + res[0].public_id + "/" + titleUrl + "/feedback");
-            });
+        $location.path("project/" + res[0].public_id + "/" + titleUrl);
+      });
+    }
+    if (type === "p_ask" || type === "p_help") {
+      Projects.getProjectbyId(project_id, function(res) {
+        var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+        if (!check_read) {
+          $http.put('/notification/update/project-ask', id).success(function(res) {
+             if (res.success)
+               $scope.getNotifList();
+          });
         }
     };
 

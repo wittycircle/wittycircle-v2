@@ -423,6 +423,7 @@ angular.module('wittyApp')
     /*** Scroll to display Popover ***/
     var unique = 0;
     setTimeout(function() {
+	if (discover.ww >= 736) {
         if (!$rootScope.globals.currentUser) {
 
             $(document).scroll(function () {
@@ -459,6 +460,7 @@ angular.module('wittyApp')
 		    }
 		}
 	    });
+	}
 	}
     }, 1000);
 

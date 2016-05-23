@@ -98,7 +98,7 @@ function saveNotificationList(req, res, list, callback) {
 								recursive(index + 1);
 							});
 					}
-					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help") {
+					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help" || list[index].type_notif === "p_reply_ask") {
 						pool.query('INSERT INTO notification_list SET ?', list[index],
 							function(err, result) {
 								if (err) throw err;
@@ -208,12 +208,12 @@ function saveNotificationList(req, res, list, callback) {
 									recursive2(index + 1);
 							});
 					}
-					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help") {
+					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help" || list[index].type_notif === "p_reply_ask" || list[index].type_notif === "p_reply_help") {
 						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && project_id = ? && date_of_view = ? && type_notif = ?',
 							[list[index].user_id, list[index].project_id, list[index].date_of_view, list[index].type_notif],
 							function(err, row) {
 								if (err) throw err;
-								if (!row[0]) {
+								if (!row[0] || typeof row[0] === "undefined") {
 									pool.query('INSERT INTO notification_list SET ?', list[index],
 										function(err, result) {
 											if (err) throw err;
@@ -244,11 +244,20 @@ function getAllNotificationList(req, res, callback) {
 								ask.getProjectAsk(req, res, function(data7) {
 									ask.getProjectAskForInvolvedUsers(req, res, function(data8) {
 										ask.getProjectAskForCreator(req, res, function(data9) {
-											help.getProjectHelp(req, res, function(data10) {
-												console.log(data10);
-												var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10);
-												saveNotificationList(req, res, allList, function(res) {
-													callback(res);
+											ask.getProjectReplyAskForCreator(req, res, function(data10) {
+												ask.getProjectReplyAskForCommentUsers(req, res, function(data11) {
+													help.getProjectHelp(req, res, function(data12) {
+														help.getProjectReplyHelpForCreator(req, res, function(data13) {
+															help.getProjectReplyHelpForInvolvedUser(req, res, function(data14) {
+																help.getProjectReplyHelp(req, res, function(data15) {
+																	var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15);
+																	saveNotificationList(req, res, allList, function(res) {
+																		callback(res);
+																	});
+																});
+															});
+														});
+													});
 												});
 											});
 										});

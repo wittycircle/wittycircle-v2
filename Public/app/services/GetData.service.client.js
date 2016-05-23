@@ -20,7 +20,7 @@
 
             var data = $http({
                 method: method,
-                cache: true,
+                cache: false,
                 url: url
             }).then( function(response, status, headers, config) {
                 deferred.resolve(response.data);

@@ -19,6 +19,39 @@ function getUsername(elem, callback) {
     callback(null);
 };
 
+function getVotedProject(list, req, callback) {
+    pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+        function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            if (result[0]) {
+                function recursive(index) {
+                    if (result[index]) {
+                        function recursive2(index2) {
+                            if (list[index2]) {
+                                if (list[index2].public_id == result[index].follow_project_public_id) {
+                                    list[index2].check = true;
+                                    recursive(index + 1);
+                                } 
+                                else {
+                                    recursive2(index2 + 2);
+                                }
+                            } else
+                                recursive(index + 1);
+
+                        };
+                        recursive2(0);
+                    } else {
+                        callback(list);
+                    }
+
+                };
+                recursive(0);
+            } else
+                callback(list);
+        });
+};
+
 function getProjectTitle(elem, callback) {
     if (elem) {
         pool.query("SELECT title FROM projects WHERE id = ?", elem,
@@ -60,7 +93,7 @@ function sortListProject(list, callback) {
         };
         recursive(0);
     } else
-    callback(false);
+        callback([]);
 };
 
 exports.getMyInvolvedProject = function(req, res, callback) {
@@ -76,7 +109,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 ORDER BY view DESC",
+    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY view DESC",
     function (err, results, fields) {
         if (err) {
             var date = new Date();
@@ -87,8 +120,14 @@ exports.getProjects = function(req, res){
         tf.sortProjectCard(results, function(data) {
             if (!data)
             res.send({message: 'No projects has been found'});
-            else
-            res.send(data);
+            else {
+                // if (req.isAuthenticated()) {
+                //     getVotedProject(data, req, function(newData) {
+                //         res.send(newData);
+                //     }); 
+                // } else
+                    res.send(data);
+            }
         });
     });
 };
@@ -105,8 +144,14 @@ exports.getProjectsDiscover = function(req, res){
         tf.sortProjectCard(results, function(data) {
             if (!data)
             res.send({message: 'No projects has been found'});
-            else
-            res.send(data);
+            else {
+                if (req.isAuthenticated()) {
+                    getVotedProject(data, req, function(newData) {
+                        res.send(newData);
+                    }); 
+                } else
+                    res.send(data);
+            }
         });
     });
 };

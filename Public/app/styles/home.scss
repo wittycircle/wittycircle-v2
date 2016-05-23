@@ -1,7 +1,7 @@
 
 $red: #FF4D4D;
 $red-hover: #D94242;
-$bg-color-strokes: #F5F5F5;
+$bg-color-strokes: #fafafa;
 $bgColor: #222222;
 $secondary-text: #999999;
 
@@ -165,7 +165,6 @@ overflow: hidden;
 			display: inline-block;
 			margin: 3px 12px 3px 10px;
 			button {
-				width: 150px;
 				height: 45px;
 				border: 2px solid white;
 				border-radius: 3px;
@@ -183,21 +182,21 @@ overflow: hidden;
 
 		.button-start-project {
 			display: inline-block;
-			margin: 3px 12px 3px 10px;	 
+			margin: 3px 12px 3px 10px;
+
 			button {
-				width: 150px;
 				height: 45px;
-				border: 2px solid $red;
+				border: 2px solid rgba(255, 52, 52, 1);
 				border-radius: 3px;
-				background-color: $red;
+				background-color: rgba(255, 52, 52, 1);
 				color: white;
 				font-family: 'FreigSem';
 				font-size: 18px;
 			}
 
 			button:hover {
-				border: 2px solid $red-hover;
-				background-color: $red-hover;
+				border: 2px solid rgba(255, 0, 0, 1);
+				background-color: rgba(255, 0, 0, 1);
 			}
 		}
 	}
@@ -743,7 +742,7 @@ margin-right: 10px;*/
 
 			.main-body2-seemore {
 /*        display: inline-block;
-*/        padding: 0px 20px 30px 20px;
+*/        padding: 50px 20px 90px 20px;
 text-align: center;
 
 a {

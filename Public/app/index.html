@@ -128,6 +128,30 @@
 
     </script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
+    <script src="http://localhost:8001/vogue-client.js" 
+        type="text/javascript">
+</script>
+    <noscript>Your browser does not support JavaScript!</noscript>
+  </head>
+  <body class="cbp-spmenu-push">
+
+    <!--[if lte IE 8]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
+    <![endif]-->
+    <div id="page-wrap"></div>
+    <section id="modal-section">
+        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ng-if="mobile"></div>
+        <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
+    </section>
+    <section id="body-section" ng-cloak>
+        <div data-ng-if="navbar.nshow !== false" id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+    </section>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -172,30 +196,6 @@
     <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
     <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
     <!-- endbuild -->
-
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8"></script>
-    <noscript>Your browser does not support JavaScript!</noscript>
-  </head>
-  <body class="cbp-spmenu-push">
-
-    <!--[if lte IE 8]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
-    <![endif]-->
-    <div id="page-wrap"></div>
-    <section id="modal-section">
-        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
-        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ></div>
-        <div data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
-    </section>
-    <section id="body-section" ng-cloak>
-        <div data-ng-if="navbar.nshow != false" id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-        <section id="bodyCore" ui-view autoscroll="true"></section>
-        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
-    </section>
-
-    <!-- algolia angular -->
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
 
     <!-- build:js({.tmp,app})  scripts/scripts.js-->
     <script src="scripts/app.js"></script>
@@ -261,6 +261,9 @@
     <!-- directives -->
     <script src="directives/uisrefif.directive.client.js"></script>
     <!-- endbuild -->
+
+    <!-- algolia angular -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.angular.min.js"></script>
 
     <!-- DOM -->
     <script>

@@ -11,23 +11,24 @@
 		<section id="main-discover" ng-show="!main.isstartclicked">
 			<div class="row">
 				<div class="main-title-market">
-					<h1>The creators marketplace</h1>
+					<h1>The creators place</h1>
 				</div>
 				<div class="main-title-market-mobile">
-					<h1>The creators marketplace</h1>
+					<h1>The creators place</h1>
 				</div>
 				<div class="main-title-text">
-					<h4>Have an idea worth spreading? You found the right place. Start with finding skilled people around you, ask for feedback, support and meet your early fans, the ones who count.</h4>
+					<h4>Have an idea in mind? Find here skilled people,support and feedback to help you developing it.</h4>
 				</div>
 				<div class="main-title-text-mobile">
 					<h4>Have an idea worth spreading? You found the right place. Start with finding skilled people around you, ask for feedback, support and meet your early fans, the ones who count.</h4>
 				</div>
 				<div class="main-button-discover">
-					<div class="button-discover">
-						<button data-ui-sref="discover">Discover</button>
+					<div class="button-start-project">
+						<button>Explore our projects</button>
 					</div>
-					<div class="button-start-project" ng-click="main.goforstarter(); tog=1">
-						<button>Start a project</button>
+					<div class="button-discover">
+
+						<button data-ui-sref="meet">Meet our community</button>
 					</div>
 				</div>
 				<div onclick="scrollToBf()" class="main-info">
@@ -150,6 +151,12 @@
 								<img src="/images/tag-icon.png">
 								<h5>{{cardsDisplay.category_name}}</h5>
 							</div>
+							<div class="card-vote">
+								<div class="card-vote-bg" ng-click="main.voteProjectCard(cardsDisplay.public_id, $index)"></div>
+								<img ng-if="!card.check" src="/images/Upvote_Icon_w.svg">
+								<img ng-if="card.check" src="/images/Upvote_Icon.svg">
+								<span ng-bind="cardsDisplay.vote"></span>
+							</div>
 						</div>
 						<a class="card-project-page" ng-href="/project/{{cardsDisplay.public_id}}/{{main.encodeUrl(cardsDisplay.title)}}">
 							<div class="card-picture">
@@ -195,7 +202,7 @@
 				<div class="main-body2-contents">
 					<div class="main-body2-head">
 						<div class="main-body2-title">
-							<h1>Witty Picks.</h1>
+							<h1>Trending projects.</h1>
 							<h6>Best projects of the week, carefully selected by our team.</h6>
 						</div>
 						<div class="main-body2-option">
@@ -203,7 +210,7 @@
 						</div>
 					</div>
 					<div class="main-body2-body">
-						<div class="main-body2-card project-card" ng-repeat="projectCard in main.projectCards | limitTo: 3">
+						<div class="main-body2-card project-card" ng-repeat="projectCard in main.projectCards | limitTo: 3 track by $index">
 							<div class="card-tag" ng-click="main.goToDiscover(projectCard.category_name)">
 								<div class="card-tag-content">
 									<div class="card-tag-bg">
@@ -211,6 +218,13 @@
 									<img src="/images/tag-icon.png">
 									<h5>{{projectCard.category_name}}</h5>
 								</div>
+							</div>
+
+							<div class="card-vote" ng-click="main.voteProjectCard(projectCard.public_id, $index)">
+								<div class="card-vote-bg"></div>
+								<img ng-if="!projectCard.check" src="/images/Upvote_Icon_w.svg">
+								<img ng-if="projectCard.check" src="/images/Upvote_Icon.svg">
+								<span ng-bind="projectCard.vote"></span>
 							</div>
 							<a class="card-project-page" ng-href="/project/{{projectCard.public_id}}/{{main.encodeUrl(projectCard.title)}}">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ projectCard.picture_card }})'}">

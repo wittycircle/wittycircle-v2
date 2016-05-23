@@ -126,7 +126,6 @@ overflow: hidden;
       display: inline-block;
       margin: 3px 12px 3px 10px; }
       #main-discover .main-button-discover .button-discover button {
-        width: 150px;
         height: 45px;
         border: 2px solid white;
         border-radius: 3px;
@@ -141,17 +140,16 @@ overflow: hidden;
       display: inline-block;
       margin: 3px 12px 3px 10px; }
       #main-discover .main-button-discover .button-start-project button {
-        width: 150px;
         height: 45px;
-        border: 2px solid #FF4D4D;
+        border: 2px solid #ff3434;
         border-radius: 3px;
-        background-color: #FF4D4D;
+        background-color: #ff3434;
         color: white;
         font-family: 'FreigSem';
         font-size: 18px; }
       #main-discover .main-button-discover .button-start-project button:hover {
-        border: 2px solid #D94242;
-        background-color: #D94242; }
+        border: 2px solid red;
+        background-color: red; }
   #main-discover .main-info {
     width: 300px;
     margin: 0 auto;
@@ -239,7 +237,7 @@ overflow: hidden;
           color: #222222;
           font-size: 18px; }
         #main-start-project .main-start-component .dropdown-projects .main-downBoxProject li:hover {
-          background-color: #F5F5F5; }
+          background-color: #fafafa; }
     #main-start-project .main-start-component .dropdown-categories {
       display: inline-block; }
       #main-start-project .main-start-component .dropdown-categories .main-categories-component {
@@ -283,7 +281,7 @@ overflow: hidden;
           color: #222222;
           font-size: 18px; }
         #main-start-project .main-start-component .dropdown-categories .main-downBoxCategories li:hover {
-          background-color: #F5F5F5; }
+          background-color: #fafafa; }
     #main-start-project .main-start-component .main-location-component {
       margin-top: 10px;
       margin-bottom: 15px; }
@@ -481,7 +479,7 @@ overflow: hidden;
 /*******************************************************/
 /*********************** Main Body2 Contents ***************************/
 #main-body2-content {
-  background-color: #F5F5F5; }
+  background-color: #fafafa; }
   #main-body2-content .main-body2-container {
     max-width: 1000px;
     margin: 0 auto; }
@@ -543,7 +541,7 @@ overflow: hidden;
     #main-body2-content .main-body2-container .main-body2-contents .main-body2-seemore {
       /*        display: inline-block;
       */
-      padding: 0px 20px 30px 20px;
+      padding: 50px 20px 90px 20px;
       text-align: center; }
       #main-body2-content .main-body2-container .main-body2-contents .main-body2-seemore a {
         font-family: 'FreigSem';
@@ -778,7 +776,7 @@ overflow: hidden;
         overflow: hidden; }
 
   #main-body3-content .main-body3-container {
-    background-color: #F5F5F5; }
+    background-color: #fafafa; }
     #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
       text-align: center;
       padding: 30px 20px 20px 20px; }

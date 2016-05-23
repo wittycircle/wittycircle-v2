@@ -2,6 +2,7 @@
 function getNotifProjectHelp(data, req, callback) {
     var list = [];
     var elem;
+    
     if (data[0]) {
         function recursive(index) {
             elem = data[index];
@@ -40,9 +41,7 @@ exports.getProjectHelp = function(req, res, callback) {
             function(err, result) {
                 if (err) throw err;
                 else {
-                    console.log("OOK");
                     if (result[0]) {
-                        console.log(result);
                         var array = [];
                         function recursive(index) {
                             if (result[index]) {
@@ -68,6 +67,218 @@ exports.getProjectHelp = function(req, res, callback) {
                     } else
                         callback([])
                 }
+            });
+    }
+};
+
+function getNotifProjectReplyHelp(array, req, callback) {
+    var list = [];
+    var elem;
+    if (array[0]) {
+        function recursive(index) {
+            elem = array[index];
+            if (elem) {
+                pool.query('SELECT title FROM projects WHERE id = ?', elem.project_id, 
+                    function(err, result) {
+                        if (err) throw err;
+                        else {
+                            list.push({
+                                date_of_view        : elem.created_at,
+                                user_id             : req.user.id,
+                                user_notif_id       : elem.user_id,
+                                user_notif_username : elem.creator_first_name + ' ' + elem.creator_last_name,
+                                project_title       : result[0].title,
+                                project_id          : elem.project_id,
+                                type_notif          : "p_reply_help"
+                            });
+                            return recursive(index + 1);
+                        }
+                    });
+            } else {
+                return callback(list);
+            }
+        };
+        return recursive(0);
+    } else
+        return callback(list);
+};
+
+function removeSameElementInArray(array, callback) {
+    if (array[0]) {
+        var newArray = [];
+        function recursive(index) {
+            if (array[index]) {
+                if (!newArray[0]) {
+                    newArray.push(array[index]);
+                    recursive(index + 1);
+                }
+                else {
+                    function recursive2(index2) {
+                        if (newArray[index2]) {
+                            if (newArray[index2].feedback_id === array[index].feedback_id)
+                                recursive(index + 1);
+                            else
+                                recursive2(index2 + 1)
+                        } else {
+                            newArray.push(array[index]);
+                            recursive(index + 1);
+                        }
+                    };
+                    recursive2(0);
+                }
+            } else {
+                function recursive3(index3) {
+                    if (newArray[index3]) {
+                        pool.query('SELECT project_id FROM project_feedbacks WHERE id = ?', newArray[index3].feedback_id,
+                            function(err, result) {
+                                if (err) throw err;
+                                if (!result[0])
+                                    return recursive3(index3 + 1);
+                                else {
+                                    newArray[index3].project_id = result[0].project_id;
+                                    return recursive3(index3 + 1);
+                                }
+                            });
+                    } else {
+                        callback(newArray);
+                    }
+                };
+                recursive3(0);
+            }
+        };
+        recursive(0);
+    } else
+        callback(newArray);
+};
+
+exports.getProjectReplyHelp = function(req, res, callback) {
+    if (!req.isAuthenticated()) {
+        return res.status(404).send({message: 'user need to be authenticated'});
+    } else {
+        pool.query('SELECT * FROM feedback_replies WHERE user_id = ? order by feedback_id, created_at desc', req.user.id,
+            function(err, result) {
+                if (err) throw err;
+                if (result[0]) {
+                    removeSameElementInArray(result, function(result2) {
+                        if (result2[0]) {
+                            var array = [];
+                            function recursive(index) {
+                                if (result2[index]) {
+                                    pool.query('SELECT * FROM feedback_replies WHERE feedback_id = ? && created_at > ? && user_id != ?',
+                                        [result2[index].feedback_id, result2[index].created_at, req.user.id],
+                                        function(err, result3) {
+                                            if (err) throw result3;
+                                            if (result3[0]) {
+                                                for(var i = 0; i < result3.length; i++) {
+                                                    result3[i].project_id = result2[index].project_id;
+                                                    array.push(result3[i]);
+                                                }
+                                                return recursive(index + 1);
+                                            } else
+                                                return recursive(index + 1);
+                                        });
+                                } else {
+                                    getNotifProjectReplyHelp(array, req, function(newData) {
+                                        return callback(newData);
+                                    });
+                                }
+                            };
+                            recursive(0);
+                        } else
+                            callback([]);
+                    });
+                } else
+                    return callback([]);
+            });
+    }
+};
+
+exports.getProjectReplyHelpForInvolvedUser = function(req, res, callback) {
+    if (!req.isAuthenticated()) {
+        return res.status(404);
+    } else {
+        pool.query('SELECT * FROM project_users WHERE user_id = ? && n_accept = 1', req.user.id, 
+            function(err, result) {
+                if (err) throw err;
+                else {
+                    if (result[0]) {
+                        var array = [];
+                        function recursive(index) {
+                            if (result[index]) {
+                                pool.query('SELECT * FROM project_feedbacks WHERE project_id = ? && user_id != ?',
+                                    [result[index].project_id, req.user.id],
+                                    function(err, result2) {
+                                        if (err) throw err;
+                                        if (result2[0]) {
+                                            function recursive2(index2) {
+                                                if (result2[index2]) {
+                                                    pool.query('SELECT * FROM feedback_replies WHERE feedback_id = ? && user_id != ?',
+                                                        [result2[index2].id, req.user.id],
+                                                        function(err, result3) {
+                                                            if (err) throw err;
+                                                            if (result3[0]) {
+                                                                for(var i = 0; i < result3.length; i++) {
+                                                                        result3[i].project_id = result2[index2].project_id;
+                                                                        array.push(result3[i]);
+                                                                }
+                                                                return recursive2(index2 + 1);
+                                                            } else
+                                                                return recursive2(index2 + 1);
+                                                        });
+                                                } else
+                                                    return recursive(index + 1);
+                                            };
+                                            recursive2(0);
+                                        } else
+                                            return recursive(index + 1);
+                                    });
+                            } else {
+                                getNotifProjectReplyHelp(array, req, function(newData) {
+                                    return callback(newData);
+                                });
+                            }
+                        };
+                        recursive(0);
+                    } else
+                        return callback([]);
+                }
+            });
+    }
+};
+
+exports.getProjectReplyHelpForCreator = function(req, res, callback) {
+    if (!req.isAuthenticated()) {
+        return res.status(404).send({message: 'user need to be authenticated'});
+    } else {
+        pool.query('SELECT * FROM project_feedbacks WHERE user_id = ?', req.user.id,
+            function(err, result) {
+                if (err) throw err;
+                if (result[0]) {
+                    var array = [];
+                    function recursive(index) {
+                        if (result[index]) {
+                            pool.query('SELECT * FROM feedback_replies WHERE feedback_id = ? && user_id != ?', 
+                                [result[index].id, req.user.id],
+                                function(err, result2) {
+                                    if (err) throw err;
+                                    if (result2[0]) {
+                                        for(var i = 0; i < result2.length; i++) {
+                                            result2[i].project_id = result[index].project_id;
+                                            array.push(result2[i]);
+                                        }
+                                        return recursive(index + 1);
+                                    } else
+                                        return recursive(index + 1);
+                                });
+                        } else {
+                            getNotifProjectReplyHelp(array, req, function(newData) {
+                                return callback(newData);
+                            });
+                        }
+                    };
+                    recursive(0);
+                } else
+                    return callback([]);
             });
     }
 };

@@ -56,4 +56,29 @@ module.exports = function(app, algoliaClient) {
 	}
     });
 
+    // pool.query('SELECT public_id FROM projects',
+    // 	function (err, result) {
+    // 		if (err) throw err;
+    // 		else {
+    // 			if (result[0]) {
+    // 				function recursive(index) {
+    // 					if (result[index]) {
+    // 						pool.query('SELECT count(*) FROM project_followers WHERE follow_project_public_id = ?', result[index].public_id,
+    // 							function(err, result2) {
+    // 								if (err) throw err;
+    // 								pool.query('UPDATE projects SET vote = ? WHERE public_id = ?', [result2[0]['count(*)'], result[index].public_id],
+    // 									function(err, result3) {
+    // 										if (err) throw err;
+    // 										recursive(index + 1);
+    // 									})
+    // 							});
+    // 					} else
+    // 						console.log("OK");
+    // 				};
+    // 				recursive(0);
+    // 			} else
+    // 				console.log("OK");
+    // 		} 
+    // 	});
+
 };

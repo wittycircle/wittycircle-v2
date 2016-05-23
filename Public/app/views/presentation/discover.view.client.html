@@ -126,13 +126,19 @@
 			</div>
 			<div class="discover-body-list">
 				
-				<div class="discover-body-card project-card" ng-repeat="card in discover.cards | limitTo: discover.limit"  ng-if="card.picture_card">
+				<div class="discover-body-card project-card" ng-repeat="card in discover.cards | limitTo: discover.limit track by $index"  ng-if="card.picture_card">
 					<div class="card-tag" ng-click="discover.getTagCag(card.category_name)">
 						<div class="card-tag-content">
 							<div class="card-tag-bg"></div>
 							<img src="/images/tag-icon.png">
 							<h5>{{card.category_name}}</h5>
 						</div>
+					</div>
+					<div class="card-vote" ng-click="discover.voteProjectCard(card.public_id, $index)">
+						<div class="card-vote-bg"></div>
+						<img ng-if="!card.check" src="/images/Upvote_Icon_w.svg">
+						<img ng-if="card.check" src="/images/Upvote_Icon.svg">
+						<span ng-bind="card.vote"></span>
 					</div>
 					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ discover.encodeUrl(card.title) }}">
 						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url(' + card.picture_card + ')'}"></div>

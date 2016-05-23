@@ -1,9 +1,3 @@
-server.js
-routes.js
-/algo/algolia.js
-/controllers/auth.js
-/Public/app/controllers/core/header.controller.client.js
-/Public/app/controllers/messaging/messaging.controller.client.js
 /Public/node_modules
 /Public/dist
 /Public/.sass-cache

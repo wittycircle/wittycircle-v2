@@ -26,8 +26,8 @@
           });
          }
 
-         function followProject(project_id, callback) {
-           $http.put('/follow/project/' + project_id).success(function (response) {
+         function followProject(project_id, index, callback) {
+           $http.put('/follow/project/' + project_id, {index: index}).success(function (response) {
              callback(response);
            }).error(function (response) {
              callback(response);

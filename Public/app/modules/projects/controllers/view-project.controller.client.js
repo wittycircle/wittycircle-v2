@@ -237,7 +237,6 @@
         function goToProfile (id) {
             if (id && id !== null && id !== undefined && typeof id === 'number') {
                 Users.getUserbyId(id, function (response) {
-                    console.log(response);
                     $state.go('profile', {username: response.data.username});
                 });
             } else {
@@ -251,7 +250,7 @@
         function followProject () {
             if (vm.project.public_id) {
                 if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
-                    Project_Follow.followProject(vm.project.public_id, function (response) {
+                    Project_Follow.followProject(vm.project.public_id, -1, function (response) {
                         if (response.success) {
                             if (response.msg === 'Project followed')
                             vm.followText = 'Following';

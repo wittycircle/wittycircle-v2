@@ -1,11 +1,14 @@
 'use strict';
 
-angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData',
-function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, projectHomeResolve, cardProfileHomeResolve) {
+angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData', 'Project_Follow',
+function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, Project_Follow) {
 
     $http.get('/profile').success(function(res){
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
+
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var main    = this,
     n       = 0;
@@ -25,6 +28,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     main.goToProfile            = goToProfile;
     main.goToDiscover           = goToDiscover;
     main.followUserFromCard     = followUserFromCard;
+    main.voteProjectCard        = voteProjectCard;
 
     /*** Controller As Main Variable ***/
     main.ww                     = $(window).width();
@@ -76,6 +80,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     /***** DESKTOP *****/
 
     RetrieveData.getData('/projects', 'GET').then(function(response) {
+        console.log(response);
         main.projectCards     = response;
         main.cardsDisplays    = response.slice(0, 9);
         main.cardInfos        = response;
@@ -234,6 +239,31 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
             });
         }
     };
+
+    function voteProjectCard(public_id, index) {
+        Project_Follow.followProject(public_id, index, function (response) {
+            // if (response.success) {
+            //     if (response.msg === 'Project followed')
+            //     vm.followText = 'Following';
+            //     else
+            //     vm.followText = 'Follow';
+            // }
+        });
+    };
+
+    socket.on('project-vote', function(index) {
+        RetrieveData.getData('/projects', 'GET').then(function(res) {
+            main.projectCards[index].vote = res[index].vote;
+            main.projectCards[index].check = true;
+        });
+    });
+
+    socket.on('project-vote-del', function(index) {
+        RetrieveData.getData('/projects', 'GET').then(function(res) {
+            main.projectCards[index].vote = res[index].vote;
+            main.projectCards[index].check = false;
+        });
+    });
 
     function goToProfile(id) {
         Users.getUserIdByProfileId(id).then(function(data) {

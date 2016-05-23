@@ -9,7 +9,10 @@
 **/
 
 angular.module('wittyApp')
-.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert, $state) {
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert, $state, Project_Follow) {
+
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 
@@ -24,6 +27,7 @@ angular.module('wittyApp')
     discover.expand  		= expand;
     discover.searchSkill 	= searchSkill;
     discover.removeSkill 	= removeSkill;
+    discover.voteProjectCard= voteProjectCard;
 
     // discover.goToProfile 	= goToProfile;
 
@@ -108,6 +112,31 @@ angular.module('wittyApp')
         });
     };
 
+    function voteProjectCard(public_id, index) {
+        Project_Follow.followProject(public_id, index, function (response) {
+            // if (response.success) {
+            //     if (response.msg === 'Project followed')
+            //     vm.followText = 'Following';
+            //     else
+            //     vm.followText = 'Follow';
+            // }
+        });
+    };
+
+    socket.on('project-vote', function(index) {
+        RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
+            discover.cards[index].vote = res[index].vote;
+            discover.cards[index].check = true;
+        });
+    });
+
+    socket.on('project-vote-del', function(index) {
+        RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
+            discover.cards[index].vote = res[index].vote;
+            discover.cards[index].check = false;
+        });
+    });
+    
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }

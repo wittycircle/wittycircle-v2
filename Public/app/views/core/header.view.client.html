@@ -21,7 +21,7 @@
                     <li class="normal"><a>Work<sup>soon</sup></a></li>
                 </div>
                 <div class="strong-start">
-                    <li ng-click="goToStart()"><a><strong>Start</strong></a></li>
+                    <li ng-click="goToStart()"><a><strong>Start a project</strong></a></li>
                 </div>
             </ul>
 
@@ -143,7 +143,9 @@
                             <h5 ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></h5>
                             <h5 ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></h5>
                             <h5 ng-if="listNotif.type_notif === 'p_ask'">asked a question on <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_help'">asked a for feedback on <strong>{{listNotif.project_title}}</strong></h5>
+                            <h5 ng-if="listNotif.type_notif === 'p_reply_ask'">replied to a comment on <strong>{{listNotif.project_title}}</strong></h5>
+                            <h5 ng-if="listNotif.type_notif === 'p_help'">asked for feedback on <strong>{{listNotif.project_title}}</strong></h5>
+                            <h5 ng-if="listNotif.type_notif === 'p_reply_help'">reply to a question on <strong>{{listNotif.project_title}}</strong></h5>
                             <p>{{listNotif.date_of_view}}<p>
                         </div>
                     </div>

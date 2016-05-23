@@ -16,10 +16,10 @@
 					<img src="/images/location-picto-w.svg" alt="icon-location">
 					<h5 data-ng-bind="(vm.project.location_city) + ', ' + (vm.project.location_country)"></h5>
 				</li>
-				<li class="user-icon">
+<!-- 				<li class="user-icon">
 					<img src="/images/littleman-w.svg" alt="icon-followers">
 					<h5><span data-ng-bind="vm.project_followers.length"></span> followers</h5>
-				</li>
+				</li> -->
 				<li class="ng-cloak">
 					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="vm.goToProfile(vm.project.creator_user_id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img data-ng-click="vm.goToProfile(user.id)" class="img-circle" height="30px" width="30px" data-ng-repeat="user in vm.involved_users" data-ng-src="{{user.profile_picture}}" />
 					</h5>
@@ -41,10 +41,42 @@
 				</ul>
 
 				<ul class="viewProject-option">
+					<div class="icon-share">
+						<span class="fa-stack fa-lg"
+						socialshare
+						socialshare-provider="facebook"
+						socialshare-text="{{vm.project.title}}"
+						socialshare-hashtags="wittycircle, projects"
+						socialshare-url="{{::vm.currentUrl}}"
+						socialshare-description="{{vm.project.description}}"
+						socialshare-media="{{ resizePic(vm.project.picture, 450, 300)}}"
+						socialshare-via="487284094736758"
+						socialshare-ref="wittycircle, project, creator, marketplace"
+						socialshare-display="popup"
+						socialshare-source="https://www.wittycircle.com"
+						socialshare-type="feed">
+						  <i class="fa fa-circle fa-stack-1x"></i>
+						  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
+					<div class="icon-share">
+						<span class="fa-stack fa-lg"
+						socialshare
+						socialshare-provider="twitter"
+						socialshare-url="{{::vm.currentUrl}}"
+						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, the creators marketplace."
+						socialshare-hashtags="{{vm.project.title}}, projects, creators"
+						socialshare-trigger="click"
+						socialshare-popup-height="400"
+						socialshare-popup-width="800">
+							<i class="fa fa-circle fa-circle-twitter fa-stack-1x"></i>
+							<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+						</span>
+					</div>
 					<li id="pnm" data-ng-if="!vm.editable || vm.editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
-					<li id="sharer">
+					<!-- <li id="sharer">
 						Share
-						<div class="icon-share animated bounceIn">
+						<div class="icon-share animated ">
 								<span class="fa-stack fa-lg"
 								socialshare
 								socialshare-provider="facebook"
@@ -74,10 +106,15 @@
 									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
 								</span>
 						</div>
-					</li>
+					</li> -->
 					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable || moderator"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button>
-					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
+					<!-- <button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button> -->
+					<div class="project-vote">
+						<div class="tooltipw">Upvotes allow us to rank projects on our main pages</div>
+						<img src="/images/Upvote_Icon_w.svg">
+						<span>34</span>
+					</div>
+					<!-- <button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button> -->
 				</ul>
 			</div>
 		</div>

@@ -96,11 +96,11 @@ overflow: hidden;
 	width: 100%;
 	height: 550px;
 	overflow: hidden;
-	-webkit-filter: brightness(0.5);
-	-moz-filter: brightness(0.5);
-	-o-filter: brightness(0.5);
-	-ms-filter: brightness(0.5);
-	filter: brightness(0.5);
+	-webkit-filter: brightness(0.4);
+	-moz-filter: brightness(0.4);
+	-o-filter: brightness(0.4);
+	-ms-filter: brightness(0.4);
+	filter: brightness(0.4);
 
 
 	video {
@@ -120,14 +120,18 @@ overflow: hidden;
 
 #main-discover {
 	position: absolute;
-	margin-left: 15%;
-	margin-right: 15%;
-	width: 70%;
+	max-width: 650px;
+	margin-left: auto;
+	margin-right: auto;
 	z-index: 90;
-	text-align: center;
+	left: 0;
+	right: 0;
+	text-align: left;
 	top: 170px;
 
 	.main-title-market {
+		padding-left: 130px;
+
 		h1 {
 			font-family: 'FreigSem';
 			font-size: 48px;
@@ -139,17 +143,15 @@ overflow: hidden;
 	}
 
 	.main-title-text {
-		max-width: 580px;
-		margin-left: auto;
-		margin-right: auto;
 		margin-top: 10px;
 		margin-bottom: 10px;
+		padding-left: 130px;
 
 		h4 {
+			color: #ededed;
 			font-family: 'FreigMed';
 			font-size: 21px;
-			line-height: 28px;
-			opacity: 0.8;
+			line-height: 24px;
 		}
 	}
 
@@ -158,7 +160,8 @@ overflow: hidden;
 	}
 
 	.main-button-discover {
-		margin-top: 30px;
+		padding-left: 130px;
+		margin-top: 25px;
 		margin-bottom: 30px;
 
 		.button-discover {
@@ -182,21 +185,21 @@ overflow: hidden;
 
 		.button-start-project {
 			display: inline-block;
-			margin: 3px 12px 3px 10px;
+			margin: 3px 12px 3px 0px;
 
 			button {
 				height: 45px;
-				border: 2px solid rgba(255, 52, 52, 1);
+				border: none;
 				border-radius: 3px;
-				background-color: rgba(255, 52, 52, 1);
+				background-color: rgba(255, 52, 52, 0.8);
 				color: white;
 				font-family: 'FreigSem';
 				font-size: 18px;
+				padding: 6px 18px 8px 18px;
 			}
 
 			button:hover {
-				border: 2px solid rgba(255, 0, 0, 1);
-				background-color: rgba(255, 0, 0, 1);
+				background-color: rgba(255, 52, 52, 0.7);
 			}
 		}
 	}
@@ -205,6 +208,7 @@ overflow: hidden;
 		width: 300px;
 		margin: 0 auto;
 		cursor: pointer;
+		text-align: center;
 
 		p {
 			font-family: 'FreigSem';
@@ -476,20 +480,20 @@ margin-right: 10px;*/
 		display: inline-block;
 		margin-left: 27px;
 		margin-right: 10px;
+
 		button {
 			width: 90px;
 			height: 45px;
-			border: 2px solid $red;
 			border-radius: 3px;
-			background-color: $red;
+			border: none;
+			background-color: rgba(255, 52, 52, 0.8);
 			color: white;
 			font-family: 'FreigSem';
 			font-size: 18px;
 		}
 
 		button:hover {
-			border: 2px solid $red-hover;
-			background-color: $red-hover;
+			background-color: rgba(255, 52, 52, 0.7);
 		}
 	}
 }

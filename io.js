@@ -321,11 +321,10 @@ module.exports = function(app, io, ensureAuth) {
                                                                             socket.broadcast.emit('follow-project-notification', "user follow project");
                                                                             socket.broadcast.emit('my-follow-users', req.user.id);
                                                                             if (req.body.index >= 0)
-                                                                                socket.broadcast.emit('project-vote', req.body.index);
+                                                                                socket.broadcast.emit('project-vote', {index: req.body.index, user_id: req.user.id});
                                                                             else {
                                                                                 getIndexPosition(req.params.id, function(newIndex) {
-                                                                                    console.log(newIndex);
-                                                                                    socket.broadcast.emit('project-vote', newIndex)
+                                                                                    socket.broadcast.emit('project-vote', {index: newIndex, user_id: req.user.id})
                                                                                 })
                                                                             }
                                                                             return res.send({success: true, msg: "Project followed"});
@@ -459,10 +458,10 @@ module.exports = function(app, io, ensureAuth) {
                                                 if (err) throw err;
                                                 socket.broadcast.emit('follow-project-notification', "user unfollow project");
                                                 if (req.body.index >= 0) 
-                                                    socket.broadcast.emit('project-vote-del', req.body.index);
+                                                    socket.broadcast.emit('project-vote-del', {index: req.body.index, user_id: req.user.id});
                                                 else {
                                                     getIndexPosition(req.params.id, function(newIndex) {
-                                                        socket.broadcast.emit('project-vote-del', newIndex)
+                                                        socket.broadcast.emit('project-vote-del', {index: newIndex, user_id: req.user.id})
                                                     })
                                                 }
                                                 return res.send({success: true, msg: "Project unfollowed"});
@@ -709,7 +708,6 @@ module.exports = function(app, io, ensureAuth) {
                         } else {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
-                                console.log('data0 exits2');
                                 callback(false);
                             } else {
                                 // send mail because no relations exist
@@ -719,7 +717,6 @@ module.exports = function(app, io, ensureAuth) {
                                     if (err) {
                                         throw err;
                                     } else {
-                                        console.log(rslt);
                                         pool.query("SELECT * FROM users WHERE id = ?",
                                         [info.to_user_id],
                                         function (err, mail) {

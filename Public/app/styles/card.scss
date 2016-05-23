@@ -76,7 +76,7 @@
 		img {
 			position: relative;
 			z-index: 100;
-			height: 10px;
+			height: 9px;
 			width: auto;
 			margin-left: 10px;
 		}
@@ -94,7 +94,7 @@
 	}
 
 	.card-vote:hover > .card-vote-bg {
-		transform: scale(1.02,1.1);
+		transform: scale(1.05,1.1);
 	}
 
 	.card-vote:active > .card-vote-bg {

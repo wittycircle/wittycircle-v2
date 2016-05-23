@@ -113,6 +113,14 @@ angular.module('wittyApp')
     };
 
     function voteProjectCard(public_id, index) {
+        if (discover.cards[index].check_vote === 0) {
+            discover.cards[index].vote = discover.cards[index].vote + 1;
+            discover.cards[index].check_vote = 1;
+        }
+        else {
+            discover.cards[index].vote = discover.cards[index].vote - 1;
+            discover.cards[index].check_vote = 0;
+        }
         Project_Follow.followProject(public_id, index, function (response) {
             // if (response.success) {
             //     if (response.msg === 'Project followed')
@@ -123,18 +131,22 @@ angular.module('wittyApp')
         });
     };
 
-    socket.on('project-vote', function(index) {
-        RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
-            discover.cards[index].vote = res[index].vote;
-            discover.cards[index].check = true;
-        });
+    socket.on('project-vote', function(data) {
+        console.log(data);
+        if (data.user_id !== $rootScope.globals.currentUser.id) {
+            RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
+                console.log(res);
+                discover.cards[data.index].vote = res[data.index].vote;
+            });
+        }
     });
 
-    socket.on('project-vote-del', function(index) {
-        RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
-            discover.cards[index].vote = res[index].vote;
-            discover.cards[index].check = false;
-        });
+    socket.on('project-vote-del', function(data) {
+        if (data.user_id !== $rootScope.globals.currentUser.id) {
+            RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
+                discover.cards[data.index].vote = res[data.index].vote;
+            });
+        }
     });
     
     function capitalizeFirstLetter(string) {

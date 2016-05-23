@@ -11,16 +11,16 @@
 		<section id="main-discover" ng-show="!main.isstartclicked">
 			<div class="row">
 				<div class="main-title-market">
-					<h1>The creators place</h1>
+					<h1>The creators place.</h1>
 				</div>
 				<div class="main-title-market-mobile">
 					<h1>The creators place</h1>
 				</div>
 				<div class="main-title-text">
-					<h4>Have an idea in mind? Find here skilled people,support and feedback to help you developing it.</h4>
+					<h4>Have an idea in mind? Find here skilled people, support <br />and feedback to help you develop it.</h4>
 				</div>
 				<div class="main-title-text-mobile">
-					<h4>Have an idea worth spreading? You found the right place. Start with finding skilled people around you, ask for feedback, support and meet your early fans, the ones who count.</h4>
+					<h4>Have an idea in mind? Find here skilled people,support and feedback to help you developing it.</h4>
 				</div>
 				<div class="main-button-discover">
 					<div class="button-start-project">
@@ -151,12 +151,12 @@
 								<img src="/images/tag-icon.png">
 								<h5>{{cardsDisplay.category_name}}</h5>
 							</div>
-							<div class="card-vote">
-								<div class="card-vote-bg" ng-click="main.voteProjectCard(cardsDisplay.public_id, $index)"></div>
-								<img ng-if="!card.check" src="/images/Upvote_Icon_w.svg">
-								<img ng-if="card.check" src="/images/Upvote_Icon.svg">
-								<span ng-bind="cardsDisplay.vote"></span>
-							</div>
+						</div>
+						<div class="card-vote" ng-click="main.voteProjectCardShuffle(cardsDisplay.public_id, $index)">
+							<div class="card-vote-bg"></div>
+							<img ng-if="!cardsDisplay.check_vote" src="/images/Upvote_Icon_w.svg">
+							<img ng-if="cardsDisplay.check_vote" src="/images/Upvote_Icon.svg">
+							<span ng-bind="cardsDisplay.vote"></span>
 						</div>
 						<a class="card-project-page" ng-href="/project/{{cardsDisplay.public_id}}/{{main.encodeUrl(cardsDisplay.title)}}">
 							<div class="card-picture">
@@ -203,7 +203,7 @@
 					<div class="main-body2-head">
 						<div class="main-body2-title">
 							<h1>Trending projects.</h1>
-							<h6>Best projects of the week, carefully selected by our team.</h6>
+							<h6>Most upvoted projects of the last 72 hours.</h6>
 						</div>
 						<div class="main-body2-option">
 							<a href="/discover">See all</a>
@@ -222,8 +222,8 @@
 
 							<div class="card-vote" ng-click="main.voteProjectCard(projectCard.public_id, $index)">
 								<div class="card-vote-bg"></div>
-								<img ng-if="!projectCard.check" src="/images/Upvote_Icon_w.svg">
-								<img ng-if="projectCard.check" src="/images/Upvote_Icon.svg">
+								<img ng-if="!projectCard.check_vote" src="/images/Upvote_Icon_w.svg">
+								<img ng-if="projectCard.check_vote" src="/images/Upvote_Icon.svg">
 								<span ng-bind="projectCard.vote"></span>
 							</div>
 							<a class="card-project-page" ng-href="/project/{{projectCard.public_id}}/{{main.encodeUrl(projectCard.title)}}">

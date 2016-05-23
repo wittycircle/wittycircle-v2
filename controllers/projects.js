@@ -23,18 +23,18 @@ function getVotedProject(list, req, callback) {
     pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
         function(err, result) {
             if (err) throw err;
-            console.log(result);
             if (result[0]) {
                 function recursive(index) {
                     if (result[index]) {
                         function recursive2(index2) {
                             if (list[index2]) {
                                 if (list[index2].public_id == result[index].follow_project_public_id) {
-                                    list[index2].check = true;
+                                    console.log(result[index].follow_project_public_id);
+                                    list[index2].check_vote = 1;
                                     recursive(index + 1);
                                 } 
                                 else {
-                                    recursive2(index2 + 2);
+                                    recursive2(index2 + 1);
                                 }
                             } else
                                 recursive(index + 1);
@@ -109,7 +109,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY view DESC",
+    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC",
     function (err, results, fields) {
         if (err) {
             var date = new Date();
@@ -121,11 +121,11 @@ exports.getProjects = function(req, res){
             if (!data)
             res.send({message: 'No projects has been found'});
             else {
-                // if (req.isAuthenticated()) {
-                //     getVotedProject(data, req, function(newData) {
-                //         res.send(newData);
-                //     }); 
-                // } else
+                if (req.isAuthenticated()) {
+                    getVotedProject(data, req, function(newData) {
+                        res.send(newData);
+                    }); 
+                } else
                     res.send(data);
             }
         });

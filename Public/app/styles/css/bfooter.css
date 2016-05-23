@@ -1,9 +1,9 @@
 /********* Before Footer Home 1**********/
 .bf-filter {
   position: absolute;
-  height: 392px;
+  height: 386px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5); }
+  background-color: rgba(0, 0, 0, 0.6); }
 
 .bf2-filter {
   position: absolute;
@@ -33,23 +33,25 @@
     position: relative;
     z-index: 20;
     display: inline-block;
-    width: 316px;
+    margin: 0 10px;
+    width: 326px;
     color: #fff; }
     .bf-info .bf-component h4 {
-      font-family: 'FreigLight';
-      font-size: 36px;
+      font-family: 'FreigSem';
+      font-size: 32px;
       margin: 10px 0px; }
     .bf-info .bf-component h6 {
+      text-align: left;
+      margin-left: 10px;
       font-family: 'FreigBook';
       font-size: 17px;
-      padding: 20px 16px;
+      padding: 10px 16px;
       line-height: 20px; }
     .bf-info .bf-component button {
       clear: both;
       margin-top: 15px;
       margin-bottom: 10px;
       background-color: transparent;
-      width: 180px;
       height: 46px;
       border: 2px solid white;
       border-radius: 4px;
@@ -58,6 +60,8 @@
     .bf-info .bf-component button:hover {
       background-color: white;
       color: #222222; }
+  .bf-info .bf-projects {
+    margin-left: 20px; }
 
 /********* Before Footer Discover 2**********/
 .bf2-info {

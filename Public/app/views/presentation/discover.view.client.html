@@ -136,8 +136,8 @@
 					</div>
 					<div class="card-vote" ng-click="discover.voteProjectCard(card.public_id, $index)">
 						<div class="card-vote-bg"></div>
-						<img ng-if="!card.check" src="/images/Upvote_Icon_w.svg">
-						<img ng-if="card.check" src="/images/Upvote_Icon.svg">
+						<img ng-if="!card.check_vote" src="/images/Upvote_Icon_w.svg">
+						<img ng-if="card.check_vote" src="/images/Upvote_Icon.svg">
 						<span ng-bind="card.vote"></span>
 					</div>
 					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ discover.encodeUrl(card.title) }}">

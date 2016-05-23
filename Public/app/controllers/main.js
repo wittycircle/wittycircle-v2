@@ -29,6 +29,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     main.goToDiscover           = goToDiscover;
     main.followUserFromCard     = followUserFromCard;
     main.voteProjectCard        = voteProjectCard;
+    main.voteProjectCardShuffle = voteProjectCardShuffle;
 
     /*** Controller As Main Variable ***/
     main.ww                     = $(window).width();
@@ -80,7 +81,6 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     /***** DESKTOP *****/
 
     RetrieveData.getData('/projects', 'GET').then(function(response) {
-        console.log(response);
         main.projectCards     = response;
         main.cardsDisplays    = response.slice(0, 9);
         main.cardInfos        = response;
@@ -138,6 +138,25 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
 
     function stopInterval() {
         $interval.cancel(main.interval);
+    };
+
+    function voteProjectCardShuffle(public_id, index) {
+        if (main.cardsDisplays[index].check_vote === 0) {
+            main.cardsDisplays[index].vote = main.cardsDisplays[index].vote + 1;
+            main.cardsDisplays[index].check_vote = 1;
+        }
+        else {
+            main.cardsDisplays[index].vote = main.cardsDisplays[index].vote - 1;
+            main.cardsDisplays[index].check_vote = 0;
+        }
+        Project_Follow.followProject(public_id, index, function (response) {
+            // if (response.success) {
+            //     if (response.msg === 'Project followed')
+            //     vm.followText = 'Following';
+            //     else
+            //     vm.followText = 'Follow';
+            // }
+        });
     };
 
     function getShuffleProject(pName, cCtg) {
@@ -241,6 +260,14 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     };
 
     function voteProjectCard(public_id, index) {
+        if (main.projectCards[index].check_vote === 0) {
+            main.projectCards[index].vote = main.projectCards[index].vote + 1;
+            main.projectCards[index].check_vote = 1;
+        }
+        else {
+            main.projectCards[index].vote = main.projectCards[index].vote - 1;
+            main.projectCards[index].check_vote = 0;
+        }
         Project_Follow.followProject(public_id, index, function (response) {
             // if (response.success) {
             //     if (response.msg === 'Project followed')
@@ -251,19 +278,21 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         });
     };
 
-    socket.on('project-vote', function(index) {
-        RetrieveData.getData('/projects', 'GET').then(function(res) {
-            main.projectCards[index].vote = res[index].vote;
-            main.projectCards[index].check = true;
-        });
-    });
+    // socket.on('project-vote', function(data) {
+    //     if (data.user_id !== main.currentUser.id) {
+    //         RetrieveData.getData('/projects', 'GET').then(function(res) {
+    //             main.projectCards[data.index].vote = res[data.index].vote;
+    //         });
+    //     }
+    // });
 
-    socket.on('project-vote-del', function(index) {
-        RetrieveData.getData('/projects', 'GET').then(function(res) {
-            main.projectCards[index].vote = res[index].vote;
-            main.projectCards[index].check = false;
-        });
-    });
+    // socket.on('project-vote-del', function(data) {
+    //     if (data.user_id !== main.currentUser.id) {
+    //         RetrieveData.getData('/projects', 'GET').then(function(res) {
+    //             main.projectCards[data.index].vote = res[data.index].vote;
+    //         });
+    //     }
+    // });
 
     function goToProfile(id) {
         Users.getUserIdByProfileId(id).then(function(data) {

@@ -20,12 +20,10 @@
       font-size: 42px;
       color: white; }
     #viewProject-page #viewProject-header .viewProject-title h4 {
-      font-family: 'FreigBook';
+      font-family: 'FreigMed';
       font-size: 21px;
-      color: white;
-      margin: 7px 0;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale; }
+      color: #fafafa;
+      margin: 7px 0; }
   #viewProject-page #viewProject-header .viewProject-info {
     padding: 20px 0;
     margin-bottom: 20px; }
@@ -34,7 +32,7 @@
       margin-right: 20px; }
       #viewProject-page #viewProject-header .viewProject-info li h5 {
         display: inline-block;
-        font-family: 'FreigBook';
+        font-family: 'FreigMed';
         font-size: 16px;
         color: white; }
         #viewProject-page #viewProject-header .viewProject-info li h5 img {
@@ -92,16 +90,98 @@
           -ms-transition: all 200ms linear;
           -kthtml-transition: all 200ms linear;
           transition: all 200ms linear; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote {
+          display: inline-block;
+          padding: 6px 16px 8px 16px;
+          border: 1px solid white;
+          border-radius: 4px;
+          cursor: pointer;
+          webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .tooltipw {
+            display: block;
+            background: rgba(0, 0, 0, 0.4);
+            bottom: 38px;
+            font-family: 'FreigSem';
+            font-size: 13px;
+            color: #fff;
+            opacity: 0;
+            width: auto;
+            padding: 3px 5px;
+            border-radius: 4px;
+            pointer-events: none;
+            position: absolute;
+            right: 5.3em;
+            bottom: 71px;
+            -webkit-transform: translateY(10px);
+            -moz-transform: translateY(10px);
+            -ms-transform: translateY(10px);
+            -o-transform: translateY(10px);
+            transform: translateY(10px);
+            -webkit-transition: all .25s ease-out;
+            -moz-transition: all .25s ease-out;
+            -ms-transition: all .25s ease-out;
+            -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+            /*-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+            -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+            -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+            -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);*/ }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .tooltipw:before {
+            bottom: -20px;
+            content: " ";
+            display: block;
+            height: 20px;
+            left: 0;
+            position: absolute; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .tooltipw:after {
+            border-left: solid transparent 6px;
+            border-right: solid transparent 6px;
+            border-top: solid rgba(0, 0, 0, 0.4) 6px;
+            bottom: -6px;
+            content: " ";
+            height: 0;
+            left: 50%;
+            margin-left: -7px;
+            position: absolute; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote img {
+            height: 9px;
+            width: auto;
+            margin-right: 5px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote span {
+            position: relative;
+            top: 1px;
+            font-family: 'Arial';
+            font-weight: 600;
+            color: white; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover {
+          background-color: white; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover .tooltipw {
+            opacity: 1;
+            pointer-events: auto;
+            -webkit-transform: translateY(0px);
+            -moz-transform: translateY(0px);
+            -ms-transform: translateY(0px);
+            -o-transform: translateY(0px);
+            transform: translateY(0px); }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover img {
+            content: url("/images/Upvote_Icon_b.svg"); }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover span {
+            color: black; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer {
           cursor: pointer; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer:hover .icon-share {
           display: block;
           position: absolute; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share {
-          bottom: -67px;
-          display: none;
-          position: absolute;
-          padding: 50px 0px 30px 0px; }
+          display: inline-block;
+          margin: 0 5px;
+          cursor: pointer; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-lg {
             font-size: inherit; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle {

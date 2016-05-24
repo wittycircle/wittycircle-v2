@@ -10,7 +10,7 @@
     position: absolute;
     width: 100%;
     height: 390px;
-    background-color: rgba(0, 0, 0, 0.5); }
+    background-color: rgba(0, 0, 0, 0.6); }
   #viewProject-page #viewProject-header .viewProject-title {
     position: relative;
     top: 140px;
@@ -54,9 +54,9 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4); }
     #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav {
-      max-width: 1000px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 0 35px;
+      padding-right: 10px;
       text-align: left; }
       #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-category {
         display: inline-block; }
@@ -92,6 +92,7 @@
           transition: all 200ms linear; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote {
           display: inline-block;
+          position: relative;
           padding: 6px 16px 8px 16px;
           border: 1px solid white;
           border-radius: 4px;
@@ -104,19 +105,19 @@
           transition: all 200ms linear; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .tooltipw {
             display: block;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             bottom: 38px;
             font-family: 'FreigSem';
             font-size: 13px;
             color: #fff;
             opacity: 0;
-            width: auto;
-            padding: 3px 5px;
+            width: 310px;
+            padding: 5px 10px;
             border-radius: 4px;
             pointer-events: none;
             position: absolute;
-            right: 5.3em;
-            bottom: 71px;
+            left: -119px;
+            bottom: 58px;
             -webkit-transform: translateY(10px);
             -moz-transform: translateY(10px);
             -ms-transform: translateY(10px);
@@ -142,14 +143,14 @@
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .tooltipw:after {
             border-left: solid transparent 6px;
             border-right: solid transparent 6px;
-            border-top: solid rgba(0, 0, 0, 0.4) 6px;
+            border-top: solid rgba(0, 0, 0, 0.6) 6px;
             bottom: -6px;
             content: " ";
             height: 0;
             left: 50%;
             margin-left: -7px;
             position: absolute; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote img {
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote .project-vote-image {
             height: 9px;
             width: auto;
             margin-right: 5px; }
@@ -161,6 +162,8 @@
             color: white; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover {
           background-color: white; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover .project-vote-image {
+            content: url("/images/Upvote_Icon_b.svg"); }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover .tooltipw {
             opacity: 1;
             pointer-events: auto;
@@ -169,8 +172,6 @@
             -ms-transform: translateY(0px);
             -o-transform: translateY(0px);
             transform: translateY(0px); }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover img {
-            content: url("/images/Upvote_Icon_b.svg"); }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .project-vote:hover span {
             color: black; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer {
@@ -255,6 +256,8 @@
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button:hover {
           background-color: white;
           color: black; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option button:hover img {
+            content: url("/images/picto-edit-vb.svg"); }
 
 /*** MY PROJECT PAGE ***/
 #myProject-page {

@@ -9,7 +9,7 @@
           <a class="link_top pull-right" data-ng-if="vm.editable" data-ui-sref="updateproject.community({public_id: vm.project.public_id})"><i class="fa fa-plus"></i> Add/Delete a question</a>
         </div>
       </div>
-      <div class="cards-feedbacks-two animated fadeIn" data-ng-repeat="question in vm.questions">
+      <div class="cards-feedbacks-two" data-ng-repeat="question in vm.questions">
         <div id="cards" class="row feedback_description" data-ng-click="vm.deployReplies(question)">
           <div class="img-feedback">
             <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{::question.creator_img}}" alt="creator-img">
@@ -101,7 +101,7 @@
           <a class="link_top pull-right" data-ng-if="vm.editable === false || !vm.editable" data-ng-click="vm.showorhideAskForm($event)"><i class="fa fa-plus"></i>Add a question</a>
         </div>
       </div>
-      <div class="row feedback_description cards-feedbacks-two animated fadeIn" data-ng-if="vm.loggedUser && vm.showAskForm">
+      <div class="row feedback_description cards-feedbacks-two" data-ng-if="vm.loggedUser && vm.showAskForm">
         <div class="row feedback_description mgr-bt-20">
           <div class="col-md-1">
             <img class="img-responsive img-circle" height="36px" width="36px" ng-src="{{vm.loggedUser.profile_picture_icon}}" alt="profile-picture">
@@ -121,12 +121,12 @@
           </div>
         </div>
       </div>
-      <div class="cards-feedbacks-two animated fadeIn" data-ng-repeat="ask in vm.asks">
+      <div class="cards-feedbacks-two" data-ng-repeat="ask in vm.asks">
         <div id="cards" class="row feedback_description" data-ng-click="vm.deployAskReplies(ask)">
           <div class="img-feedback">
             <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{ask.creator_img}}" alt="creator-img">
           </div>
-          <div class="col-md-11">
+          <div class="view-project-feedback-ask">
             <h5 data-ng-bind="ask.title"></h5>
             <p class="from_text">
               <span am-time-ago="ask.created_at"></span> <span>from</span>

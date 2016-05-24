@@ -113,26 +113,29 @@ angular.module('wittyApp')
     };
 
     function voteProjectCard(public_id, index) {
-        if (discover.cards[index].check_vote === 0) {
-            discover.cards[index].vote = discover.cards[index].vote + 1;
-            discover.cards[index].check_vote = 1;
+        if ($rootScope.globals.currentUser) {
+            if (discover.cards[index].check_vote === 0) {
+                discover.cards[index].vote = discover.cards[index].vote + 1;
+                discover.cards[index].check_vote = 1;
+            }
+            else {
+                discover.cards[index].vote = discover.cards[index].vote - 1;
+                discover.cards[index].check_vote = 0;
+            }
+            Project_Follow.followProject(public_id, index, function (response) {
+                // if (response.success) {
+                //     if (response.msg === 'Project followed')
+                //     vm.followText = 'Following';
+                //     else
+                //     vm.followText = 'Follow';
+                // }
+            });
+        } else {
+            showbottomAlert.pop_it();
         }
-        else {
-            discover.cards[index].vote = discover.cards[index].vote - 1;
-            discover.cards[index].check_vote = 0;
-        }
-        Project_Follow.followProject(public_id, index, function (response) {
-            // if (response.success) {
-            //     if (response.msg === 'Project followed')
-            //     vm.followText = 'Following';
-            //     else
-            //     vm.followText = 'Follow';
-            // }
-        });
     };
 
     socket.on('project-vote', function(data) {
-        console.log(data);
         if (data.user_id !== $rootScope.globals.currentUser.id) {
             RetrieveData.getData('/projects/discover', 'GET').then(function(res) {
                 console.log(res);

@@ -141,22 +141,26 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     };
 
     function voteProjectCardShuffle(public_id, index) {
-        if (main.cardsDisplays[index].check_vote === 0) {
-            main.cardsDisplays[index].vote = main.cardsDisplays[index].vote + 1;
-            main.cardsDisplays[index].check_vote = 1;
+        if (main.currentUser) {
+            if (main.cardsDisplays[index].check_vote === 0) {
+                main.cardsDisplays[index].vote = main.cardsDisplays[index].vote + 1;
+                main.cardsDisplays[index].check_vote = 1;
+            }
+            else {
+                main.cardsDisplays[index].vote = main.cardsDisplays[index].vote - 1;
+                main.cardsDisplays[index].check_vote = 0;
+            }
+            Project_Follow.followProject(public_id, index, function (response) {
+                // if (response.success) {
+                //     if (response.msg === 'Project followed')
+                //     vm.followText = 'Following';
+                //     else
+                //     vm.followText = 'Follow';
+                // }
+            }); 
+        } else {
+            showbottomAlert.pop_it();
         }
-        else {
-            main.cardsDisplays[index].vote = main.cardsDisplays[index].vote - 1;
-            main.cardsDisplays[index].check_vote = 0;
-        }
-        Project_Follow.followProject(public_id, index, function (response) {
-            // if (response.success) {
-            //     if (response.msg === 'Project followed')
-            //     vm.followText = 'Following';
-            //     else
-            //     vm.followText = 'Follow';
-            // }
-        });
     };
 
     function getShuffleProject(pName, cCtg) {
@@ -260,22 +264,26 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     };
 
     function voteProjectCard(public_id, index) {
-        if (main.projectCards[index].check_vote === 0) {
-            main.projectCards[index].vote = main.projectCards[index].vote + 1;
-            main.projectCards[index].check_vote = 1;
+        if (main.currentUser) {
+            if (main.projectCards[index].check_vote === 0) {
+                main.projectCards[index].vote = main.projectCards[index].vote + 1;
+                main.projectCards[index].check_vote = 1;
+            }
+            else {
+                main.projectCards[index].vote = main.projectCards[index].vote - 1;
+                main.projectCards[index].check_vote = 0;
+            }
+            Project_Follow.followProject(public_id, index, function (response) {
+                // if (response.success) {
+                //     if (response.msg === 'Project followed')
+                //     vm.followText = 'Following';
+                //     else
+                //     vm.followText = 'Follow';
+                // }
+            });
+        } else {
+            showbottomAlert.pop_it();
         }
-        else {
-            main.projectCards[index].vote = main.projectCards[index].vote - 1;
-            main.projectCards[index].check_vote = 0;
-        }
-        Project_Follow.followProject(public_id, index, function (response) {
-            // if (response.success) {
-            //     if (response.msg === 'Project followed')
-            //     vm.followText = 'Following';
-            //     else
-            //     vm.followText = 'Follow';
-            // }
-        });
     };
 
     // socket.on('project-vote', function(data) {

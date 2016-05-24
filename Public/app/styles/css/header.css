@@ -342,9 +342,10 @@
               display: inline-block;
               font-family: 'FreigSem';
               font-size: 16px; }
-            #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message h5 {
-              display: inline-block;
-              font-family: 'FreigBook'; }
+            #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message .hlmspan {
+              font-family: 'FreigBook';
+              font-size: 15px;
+              word-spacing: 1px; }
             #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message p {
               font-family: 'FreigBook';
               font-size: 15px;

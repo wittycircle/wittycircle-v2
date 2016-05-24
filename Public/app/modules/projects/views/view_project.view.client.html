@@ -108,11 +108,12 @@
 						</div>
 					</li> -->
 					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable || moderator"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-					<!-- <button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button> -->
-					<div class="project-vote">
-						<div class="tooltipw">Upvotes allow us to rank projects on our main pages</div>
-						<img src="/images/Upvote_Icon_w.svg">
-						<span>34</span>
+					<!-- <button type="submit" data-ng-if="vm.loggedUser && !vm.editable && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button> -->
+					<div class="project-vote" data-ng-if="!vm.editable && editable === false" ng-click="vm.voteProjectCard(vm.project.public_id)">
+						<div ng-if="!vm.followCheck" class="tooltipw">Upvotes allow us to rank projects on our main pages</div>
+						<img ng-if="!vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon_w.svg" />
+						<img ng-if="vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon.svg" />
+						<span ng-bind="vm.followNumber"></span>
 					</div>
 					<!-- <button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button> -->
 				</ul>
@@ -155,14 +156,15 @@
 	</div>
 
 <script>
-	   function changeEditPictoB() {
-	   		$("#editButton").find('img').attr("src", '/images/picto-edit-vb.svg');
-	   };
-	   function changeEditPictoW() {
-	   		$("#editButton").find('img').attr("src", '/images/picto-edit-w.svg');
-	   };
+	   // function changeEditPictoB() {
+	   // 		$("#editButton").find('img').attr("src", '/images/picto-edit-vb.svg');
+	   // };
+	   // function changeEditPictoW() {
+	   // 		$("#editButton").find('img').attr("src", '/images/picto-edit-w.svg');
+	   // };
 
 		$(document).ready(function() {
+			document.getElementById('footer-page').style.visibility = "visible";
 			$(this).click(function(e) {
 				var target = e.target.id,
 					container = "#profile-modal-newMessageArea";

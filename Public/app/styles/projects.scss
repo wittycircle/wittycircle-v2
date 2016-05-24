@@ -494,6 +494,7 @@ $font-h3: 'Open Sans', sans-serif;
 #feedback_project {
 
   .cards_openings {
+    width: 33%;
     margin-bottom: 30px;
     border-radius: 4px;
     overflow: hidden;
@@ -669,6 +670,10 @@ $font-h3: 'Open Sans', sans-serif;
     }
   }
 
+  .view-project-feedback-ask {
+    display: inline-block;
+  }
+
   .feedback_description {
     margin: 0px;
 
@@ -832,14 +837,15 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   .container-custom-project {
-    max-width: 1000px;
+    max-width: 780px;
+    padding: 0 20px;
     float: none;
     margin: 0 auto;
   }
 
   .feedback_container {
-    max-width: 1000px;
-    padding: 0 50px;
+    max-width: 780px;
+    padding: 0 20px;
   }
 
   h3 {

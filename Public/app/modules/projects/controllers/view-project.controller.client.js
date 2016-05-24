@@ -26,9 +26,9 @@
 
         // var
         // list all var needed to be initialized at the start of controller
-        var currentUser = $rootScope.globals.currentUser;
-	if (currentUser && currentUser.moderator)
-	    $scope.moderator = currentUser.moderator;
+        var currentUser = $rootScope.globals.currentUser || false;
+	    if (currentUser && currentUser.moderator)
+	       $scope.moderator = currentUser.moderator;
         vm.no_follow = true;
         vm.loggedUser = $rootScope.globals.currentUser;
         vm.isCollapse = false;
@@ -38,6 +38,7 @@
         // asks vars
         vm.showAskForm = false;
         vm.newAsk = {};
+        vm.followNumber;
 
 
         // function
@@ -47,7 +48,8 @@
         vm.showbottomAl = showbottomAl;
         vm.goToMessage = goToMessage;
         vm.goToProfile = goToProfile;
-        vm.followProject = followProject;
+        vm.voteProjectCard = voteProjectCard;
+        // vm.followProject = followProject;
         // feedbacks functions
         vm.deployReplies = deployReplies;
         vm.isOwnedReply = isOwnedReply;
@@ -146,6 +148,7 @@
             });
             // resolve the project_followers
             vm.project_followers = project_followersResolve.data;
+            vm.followNumber = vm.project_followers.length;
             if (vm.project.main_video) {
                 vm.config = {
                     preload: 'auto',
@@ -173,10 +176,10 @@
                 vm.no_follow = true;
                 if (vm.loggedUser) {
                     Project_Follow.checkFollowProject(vm.project.id, function (response) {
-                        if (!response.follow)
-                        vm.followText = 'Following';
+                        if (response.follow)
+                            vm.followCheck = true;
                         else
-                        vm.followText = 'Follow';
+                            vm.followCheck = false;
                     });
                     // check if project id and project id is an integrer with parse int
                     if (vm.project.id && vm.project.id === parseInt(vm.project.id, 10)) {
@@ -212,6 +215,45 @@
             }
         }
 
+        function voteProjectCard(public_id) {
+            console.log(public_id);
+            if (currentUser) {
+                if (!vm.followCheck) {
+                    vm.followNumber += 1;
+                    vm.followCheck = true;
+                }
+                else {
+                    vm.followNumber -= 1;
+                    vm.followCheck = false;
+                }
+                Project_Follow.followProject(public_id, -1, function (response) {
+                    // if (response.success) {
+                    //     if (response.msg === 'Project followed')
+                    //     vm.followText = 'Following';
+                    //     else
+                    //     vm.followText = 'Follow';
+                    // }
+                });
+            } else {
+                showbottomAlert.pop_it();
+            }
+        };
+
+        // function followProject () {
+        //     if (vm.project.public_id) {
+        //         if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
+        //             Project_Follow.followProject(vm.project.public_id, -1, function (response) {
+        //                 if (response.success) {
+        //                     if (response.msg === 'Project followed')
+        //                     vm.followText = 'Following';
+        //                     else
+        //                     vm.followText = 'Follow';
+        //                 }
+        //             });
+        //         }
+        //     }
+        // };
+
 
         function goToMessage (id) {
             if (id && id !== null && id !== undefined && typeof id === 'number') {
@@ -243,22 +285,6 @@
                 console.log('error in goToProfile in ViewProjectCtrl: no id is provided');
                 console.log(id);
                 return;
-            }
-        };
-
-
-        function followProject () {
-            if (vm.project.public_id) {
-                if (currentUser && (currentUser.id !== vm.project.creator_user_id)) {
-                    Project_Follow.followProject(vm.project.public_id, -1, function (response) {
-                        if (response.success) {
-                            if (response.msg === 'Project followed')
-                            vm.followText = 'Following';
-                            else
-                            vm.followText = 'Follow';
-                        }
-                    });
-                }
             }
         };
 
@@ -312,7 +338,7 @@
             data.creator_first_name = currentUser.first_name;
             data.creator_last_name = currentUser.last_name;
             Feedbacks.addFeedbackReply(data, function (response) {
-                if (response.serverStatus === 2) {
+                if (response.success) {
                     var reply = {};
                     reply.id = response.insertId;
                     reply.feedback_id = feedback_id;

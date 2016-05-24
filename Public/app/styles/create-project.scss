@@ -611,6 +611,10 @@ $blue: #416299;
   margin: 0px auto;
   max-width: 1000px;
 
+  .video-poster-update {
+    overflow: hidden;
+  }
+
   .redactor-editor {
 
     p {

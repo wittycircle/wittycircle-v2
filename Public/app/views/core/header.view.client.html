@@ -135,17 +135,18 @@
                             <img ng-src="{{ resizePic(listNotif.pic, 48, 48, 'fill') }}" alt="header-notif-avatar">
                         </div>
                         <div class="header-list-message">
-                            <h4>{{listNotif.user_notif_username}}</h4>
-                            <h5 ng-if="listNotif.type_notif === 'u_follow'">is now following you.</h5>
-                            <h5 ng-if="listNotif.type_notif === 'view'">viewed your profile.</h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_follow'">followed <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_user_follow'">followed <strong>{{listNotif.project_title}}</strong> </h5>
-                            <h5 ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_ask'">asked a question on <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_reply_ask'">replied to a comment on <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_help'">asked for feedback on <strong>{{listNotif.project_title}}</strong></h5>
-                            <h5 ng-if="listNotif.type_notif === 'p_reply_help'">reply to a question on <strong>{{listNotif.project_title}}</strong></h5>
+                            <h4>{{listNotif.user_notif_username}} 
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'u_follow'">is now following you.</span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'view'">viewed your profile.</span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_follow'">followed <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_user_follow'">followed <strong>{{listNotif.project_title}}</strong> </span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_ask'">asked a question about <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_reply_ask'">replied to a question about <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_help'">asked a question about <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_reply_help'">replied to a question about <strong>{{listNotif.project_title}}</strong></span>
+                            </h4>
                             <p>{{listNotif.date_of_view}}<p>
                         </div>
                     </div>

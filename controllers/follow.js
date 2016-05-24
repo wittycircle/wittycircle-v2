@@ -99,8 +99,8 @@ exports.checkFollowProject = function(req, res) {
     } else {
         pool.query("SELECT * FROM project_followers WHERE user_id = ? && follow_project_id = ?", [req.user.id, req.params.id],
         function (err, row) {
-            if (!row[0]) res.send({follow: true});
-            else res.send({follow: false});
+            if (!row[0]) res.send({follow: false});
+            else res.send({follow: true});
         });
     }
 };

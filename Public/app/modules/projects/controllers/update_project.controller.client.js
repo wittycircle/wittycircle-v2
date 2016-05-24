@@ -390,18 +390,15 @@ $scope.addquestion = function() {
 $scope.deleteFeedbacks = function(feedbacks_id) {
     var error_message = "";
     Feedbacks.deleteFeedbacks(feedbacks_id, function(response) {
-        if (response.serverStatus == 2) {
+        if (response.success) {
             for (var i = 0; i < $scope.questions.length; i++) {
-                if ($scope.questions[i].id == feedbacks_id)
-                $scope.questions.splice(i, 1);
-                return;
+                if ($scope.questions[i].id == feedbacks_id) {
+                    $scope.questions.splice(i, 1);
+                    break ;
+                }
             }
         }
-        else {
-            error_message = response;
-        }
     });
-    return error_message;
 };
 
 $scope.finish = function(public_id, title, data, project_category, places_after, statechoose) {

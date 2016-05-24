@@ -374,6 +374,7 @@
   padding: 0px; }
 
 #feedback_project .cards_openings {
+  width: 33%;
   margin-bottom: 30px;
   border-radius: 4px;
   overflow: hidden; }
@@ -489,6 +490,8 @@
     padding: 15px; }
   #feedback_project .feedback_textarea_question .col-md-11 {
     padding: 0; }
+#feedback_project .view-project-feedback-ask {
+  display: inline-block; }
 #feedback_project .feedback_description {
   margin: 0px; }
   #feedback_project .feedback_description .mgr-bt-20 {
@@ -593,12 +596,13 @@
   color: #1a1a1a;
   text-decoration: underline; }
 #feedback_project .container-custom-project {
-  max-width: 1000px;
+  max-width: 780px;
+  padding: 0 20px;
   float: none;
   margin: 0 auto; }
 #feedback_project .feedback_container {
-  max-width: 1000px;
-  padding: 0 50px; }
+  max-width: 780px;
+  padding: 0 20px; }
 #feedback_project h3 {
   margin-bottom: 20px; }
 #feedback_project .link_top {

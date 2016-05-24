@@ -318,15 +318,20 @@ module.exports = function(app, io, ensureAuth) {
                                                                     pool.query('UPDATE projects SET vote = ? WHERE public_id = ?', [done[0]['count(*)'], req.params.id],
                                                                         function(err, done2) {
                                                                             if (err) throw err;
-                                                                            socket.broadcast.emit('follow-project-notification', "user follow project");
-                                                                            socket.broadcast.emit('my-follow-users', req.user.id);
-                                                                            if (req.body.index >= 0)
-                                                                                socket.broadcast.emit('project-vote', {index: req.body.index, user_id: req.user.id});
-                                                                            else {
-                                                                                getIndexPosition(req.params.id, function(newIndex) {
-                                                                                    socket.broadcast.emit('project-vote', {index: newIndex, user_id: req.user.id})
-                                                                                })
+                                                                            setTimeout(function() {
+                                                                                socket.broadcast.emit('follow-project-notification', "user follow project");
+                                                                                socket.broadcast.emit('my-follow-users', req.user.id);
+                                                                            }, 1000);
+                                                                            if (req.body.index >= 0) {
+                                                                                setTimeout(function() {
+                                                                                    socket.broadcast.emit('project-vote', {index: req.body.index, user_id: req.user.id});
+                                                                                }, 2000);
                                                                             }
+                                                                            // else {
+                                                                            //     getIndexPosition(req.params.id, function(newIndex) {
+                                                                            //         socket.broadcast.emit('project-vote', {index: newIndex, user_id: req.user.id})
+                                                                            //     })
+                                                                            // }
                                                                             return res.send({success: true, msg: "Project followed"});
                                                                         });
                                                                 });
@@ -455,15 +460,20 @@ module.exports = function(app, io, ensureAuth) {
                                         if (err) throw err;
                                         pool.query('UPDATE projects SET vote = ? WHERE public_id = ?', [finish[0]['count(*)'], req.params.id],
                                             function(err, finish2) {
-                                                if (err) throw err;
-                                                socket.broadcast.emit('follow-project-notification', "user unfollow project");
-                                                if (req.body.index >= 0) 
-                                                    socket.broadcast.emit('project-vote-del', {index: req.body.index, user_id: req.user.id});
-                                                else {
-                                                    getIndexPosition(req.params.id, function(newIndex) {
-                                                        socket.broadcast.emit('project-vote-del', {index: newIndex, user_id: req.user.id})
-                                                    })
+                                                if (err) throw err; 
+                                                    setTimeout(function() {
+                                                        socket.broadcast.emit('follow-project-notification', "user unfollow project");
+                                                    }, 1000);
+                                                if (req.body.index >= 0) {
+                                                    setTimeout(function() {
+                                                        socket.broadcast.emit('project-vote-del', {index: req.body.index, user_id: req.user.id});
+                                                    }, 2000);
                                                 }
+                                                // else {
+                                                //     getIndexPosition(req.params.id, function(newIndex) {
+                                                //         socket.broadcast.emit('project-vote-del', {index: newIndex, user_id: req.user.id})
+                                                //     })
+                                                // }
                                                 return res.send({success: true, msg: "Project unfollowed"});
                                             });
                                     });
@@ -493,7 +503,7 @@ module.exports = function(app, io, ensureAuth) {
                         throw err;
                     }
                     socket.broadcast.emit('involve-notification', 'involve project');
-                    res.send(result);
+                    return res.send({success: true});
                 });
             }
         });
@@ -527,6 +537,7 @@ module.exports = function(app, io, ensureAuth) {
                                 throw err;
                             }
                             socket.broadcast.emit('ask-project-notification', 'hello world!');
+                            return res.send({success: true});
                             
                         });
                 }
@@ -555,6 +566,7 @@ module.exports = function(app, io, ensureAuth) {
                             throw err;
                         }
                         socket.broadcast.emit('ask-project-notification', 'hello world!');
+                        return res.send({success: true});
                     });
                 }
             }
@@ -584,6 +596,7 @@ module.exports = function(app, io, ensureAuth) {
                             throw err;
                         }
                         socket.broadcast.emit('ask-project-notification', 'hello world!');
+                        return res.send({success: true});
                     });
                 }
         });
@@ -611,6 +624,7 @@ module.exports = function(app, io, ensureAuth) {
                     throw err;
                 }
                 socket.broadcast.emit('ask-project-notification', 'hello world!');
+                return res.send({success: true});
                 });
             }
             }

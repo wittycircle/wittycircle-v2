@@ -352,14 +352,7 @@ exports.deleteProjectFeedback = function(req, res){
             if (err){
                 throw err;
             }
-            res.send(result);
+            res.send({success: true});
         });
-	pool.query("DELETE FROM feedback_replies WHERE feedback_id = ?",
-	[req.params.id],
-	function(err, result) {
-	    if (err) {
-		throw err;
-	    }
-	});
     }
 };

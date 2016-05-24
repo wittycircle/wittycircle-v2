@@ -42,6 +42,10 @@
 </header>
   <div id="form-views" ui-view onbeforeunload="confirmExit()"></div>
   <script>
+
+    $(document).ready(function() {
+      document.getElementById('footer-page').style.visibility = "visible";
+    });
     function confirmExit() {
             console.log("OK");
             confirm("do you want to check our other products");

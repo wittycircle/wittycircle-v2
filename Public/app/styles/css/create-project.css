@@ -417,6 +417,8 @@
 .container-custom-project {
   margin: 0px auto;
   max-width: 1000px; }
+  .container-custom-project .video-poster-update {
+    overflow: hidden; }
   .container-custom-project .redactor-editor p {
     font-family: 'FreigBook';
     font-size: 16px;

@@ -22,7 +22,7 @@ $blue: #416299;
 			position: absolute;
 			width: 100%;
 			height: 390px;
-			background-color: rgba(0, 0, 0, 0.5);
+			background-color: rgba(0, 0, 0, 0.6);
 		}
 
 		.viewProject-title {
@@ -94,9 +94,9 @@ $blue: #416299;
 			background-color: rgba(0, 0, 0, 0.4);
 
 			.viewProject-nav {
-				max-width: 1000px;
+				max-width: 760px;
 				margin: 0 auto;
-				padding: 0 35px;
+				padding-right: 10px;
 				text-align: left;
 
 				.viewProject-category {
@@ -142,6 +142,7 @@ $blue: #416299;
 
 					.project-vote {
 						display: inline-block;
+						position: relative;
 						padding: 6px 16px 8px 16px;
 						border: 1px solid white;
 						border-radius: 4px;
@@ -155,19 +156,19 @@ $blue: #416299;
 
 						.tooltipw {
 							display: block;
-							background: rgba(0, 0, 0, 0.4);
+							background: rgba(0, 0, 0, 0.6);
 							bottom: 38px;
 							font-family: 'FreigSem';
 							font-size: 13px;
 							color: #fff;
 							opacity: 0;
-							width: auto;
-							padding: 3px 5px;
+							width: 310px;
+							padding: 5px 10px;
 							border-radius: 4px;
 							pointer-events: none;
 							position: absolute;
-							right: 5.3em;
-							bottom: 71px;
+							left: -119px;
+							bottom: 58px;
 							-webkit-transform: translateY(10px);
 							-moz-transform: translateY(10px);
 							-ms-transform: translateY(10px);
@@ -197,7 +198,7 @@ $blue: #416299;
 						.tooltipw:after {
 							border-left: solid transparent 6px;
 							border-right: solid transparent 6px;
-							border-top: solid rgba(0, 0, 0, 0.4) 6px;
+							border-top: solid rgba(0, 0, 0, 0.6) 6px;
 							bottom: -6px;
 							content: " ";
 							height: 0;
@@ -206,7 +207,7 @@ $blue: #416299;
 							position: absolute;
 						}
 
-						img {
+						.project-vote-image {
 							height: 9px;
 							width: auto;
 							margin-right: 5px;
@@ -223,6 +224,9 @@ $blue: #416299;
 
 					.project-vote:hover {
 						background-color: white;
+						.project-vote-image {
+							content:url("/images/Upvote_Icon_b.svg")
+						}
 
 						.tooltipw {
 							opacity: 1;
@@ -234,9 +238,6 @@ $blue: #416299;
 							transform: translateY(0px);
 						}
 
-						img {
-							content:url("/images/Upvote_Icon_b.svg")
-						}
 						span {
 							color: black;
 						}
@@ -354,6 +355,9 @@ $blue: #416299;
 					button:hover {
 						background-color: white;
 						color: black;
+						img {
+							content: url('/images/picto-edit-vb.svg');
+						}
 					}
 				}
 			}

@@ -7,8 +7,8 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
 
-    // var socket = io.connect('https://www.wittycircle.com');
-    var socket = io.connect('http://127.0.0.1');
+    var socket = io.connect('https://www.wittycircle.com');
+    // var socket = io.connect('http://127.0.0.1');
 
     var main    = this,
     n       = 0;

@@ -173,6 +173,8 @@ overflow: hidden;
       border-bottom: 1px solid white; }
   #main-discover .main-info:hover p {
     border-bottom: none; }
+  #main-discover .main-info:active p {
+    border-bottom: none; }
 
 /*******************************************************/
 /*********************** Main start project ***************************/
@@ -571,61 +573,64 @@ overflow: hidden;
   #main-body3-content .main-body3-container {
     max-width: 1000px;
     margin: 0 auto; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
-      padding: 55px 30px 35px 30px; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title {
-        display: inline-block;
-        margin: 20px 0; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h1 {
+    #main-body3-content .main-body3-container .main-body3-contents {
+      text-align: center; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
+        text-align: center;
+        padding: 55px 30px 35px 30px; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title {
           display: inline-block;
-          font-family: 'FreigBook';
-          font-size: 38px;
-          color: #222222; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h6 {
+          margin: 20px 0; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h1 {
+            display: inline-block;
+            font-family: 'FreigBook';
+            font-size: 38px;
+            color: #222222; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h6 {
+            display: inline-block;
+            font-family: 'FreigBook';
+            font-size: 16px;
+            color: #999999;
+            padding-left: 10px; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option {
           display: inline-block;
-          font-family: 'FreigBook';
-          font-size: 16px;
-          color: #999999;
-          padding-left: 10px; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option {
-        display: inline-block;
-        border: 1px solid #222222;
-        border-radius: 4px;
-        padding: 5px 20px 6px 20px;
-        position: relative;
-        float: right;
-        margin-right: 3px;
-        top: 20px;
-        cursor: pointer;
-        -webkit-transition: all 200ms linear;
-        -o-transition: all 200ms linear;
-        -moz-transition: all 200ms linear;
-        -ms-transition: all 200ms linear;
-        -kthtml-transition: all 200ms linear;
-        transition: all 200ms linear; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option a {
+          border: 1px solid #222222;
+          border-radius: 4px;
+          padding: 5px 20px 6px 20px;
+          position: relative;
+          float: right;
+          margin-right: 3px;
+          top: 20px;
+          cursor: pointer;
+          -webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option a {
+            font-family: 'FreigSem';
+            font-size: 16px;
+            color: #222222; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option:hover {
+          background-color: #222222; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option:hover a {
+            color: white; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
+        text-align: center;
+        opacity: 0.3; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
+        display: none; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
+        text-align: center;
+        padding: 50px 20px 90px 20px; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore a {
           font-family: 'FreigSem';
           font-size: 16px;
-          color: #222222; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option:hover {
-        background-color: #222222; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option:hover a {
-          color: white; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
-      text-align: center;
-      opacity: 0.3; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
-      display: none; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
-      text-align: center;
-      padding: 50px 20px 90px 20px; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore a {
-        font-family: 'FreigSem';
-        font-size: 16px;
-        color: #222222;
-        text-decoration: underline; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore a:hover {
-        text-decoration: none; }
+          color: #222222;
+          text-decoration: underline; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore a:hover {
+          text-decoration: none; }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: transparent; }
@@ -679,10 +684,29 @@ overflow: hidden;
     transform: translateZ(0); }
     #main-discover .main-title-market {
       display: none; }
+    #main-discover .main-button-discover {
+      padding: 0;
+      text-align: center; }
+      #main-discover .main-button-discover .button-start-project {
+        margin: 0 10px 15px 10px; }
+        #main-discover .main-button-discover .button-start-project button {
+          width: 200px; }
+      #main-discover .main-button-discover .button-start-project:active {
+        background-color: rgba(255, 52, 52, 0.7); }
+      #main-discover .main-button-discover .button-discover {
+        margin: 0;
+        margin: 0 10px; }
+        #main-discover .main-button-discover .button-discover button {
+          padding: 6px 18px 8px 18px; }
+      #main-discover .main-button-discover .button-discover:active {
+        background-color: white; }
+        #main-discover .main-button-discover .button-discover:active button {
+          color: black; }
     #main-discover .main-title-market-mobile {
-      display: block; }
+      display: block;
+      text-align: center; }
       #main-discover .main-title-market-mobile h1 {
-        font-family: 'FreigLight';
+        font-family: 'FreigMed';
         font-size: 38px; }
     #main-discover .main-title-text {
       display: none; }
@@ -697,6 +721,10 @@ overflow: hidden;
         font-size: 21px;
         line-height: 28px;
         opacity: 0.9; }
+    #main-discover .main-info {
+      margin-top: 60px; }
+      #main-discover .main-info p {
+        margin: 0; }
 
   #main-start-project {
     top: 110px;
@@ -787,72 +815,80 @@ overflow: hidden;
         border-radius: 5px;
         cursor: pointer;
         overflow: hidden; }
+    #main-body2-content .main-body2-container .main-body2-contents .main-body2-seemore {
+      padding: 0px 20px 40px 20px; }
 
   #main-body3-content .main-body3-container {
     background-color: #fafafa; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
-      text-align: center;
-      padding: 30px 20px 20px 20px; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title {
-        margin-top: 0; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h1 {
-          margin-bottom: 15px; }
-        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h6 {
-          display: block;
-          padding: 0; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option {
+    #main-body3-content .main-body3-container .main-body3-contents {
+      text-align: center; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-head {
+        padding: 30px 20px 20px 20px; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title {
+          margin-top: 0; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h1 {
+            margin-bottom: 15px; }
+          #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-title h6 {
+            display: block;
+            padding: 0; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-head .main-body3-option {
+          display: none; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
         display: none; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body {
-      display: none; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
-      display: block;
-      text-align: center;
-      margin-bottom: 50px; }
-      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile .profile-card {
-        position: relative;
-        top: 10px;
-        margin: 0 10px 20px 10px; }
-    #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
-      padding: 20px 20px 40px 20px; } }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile {
+        display: block;
+        text-align: center;
+        margin-bottom: 50px; }
+        #main-body3-content .main-body3-container .main-body3-contents .main-body3-body-mobile .profile-card {
+          position: relative;
+          top: 10px;
+          margin: 0 10px 20px 10px; }
+      #main-body3-content .main-body3-container .main-body3-contents .main-body3-seemore {
+        padding: 20px 20px 40px 20px; } }
 /* Width 414px iPhone6Plus */
 @media only screen and (max-width: 414px) {
   #main-discover {
     top: 120px; }
     #main-discover .main-title-market-mobile h1 {
       font-size: 42px; }
-    #main-discover .main-title-text-mobile h4 {
-      font-size: 18px;
-      line-height: 24px;
-      opacity: 0.9; } }
+    #main-discover .main-title-text-mobile {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding: 0 25px; }
+      #main-discover .main-title-text-mobile h4 {
+        font-family: 'FreigMed';
+        font-size: 21px;
+        line-height: 24px;
+        opacity: 0.9;
+        color: #fafafa; }
+    #main-discover .main-info {
+      margin-top: 35px; } }
 @media only screen and (max-width: 375px) {
   #main-discover {
-    top: 150px; }
+    top: 130px; }
     #main-discover .main-title-text-mobile {
       display: none; }
     #main-discover .main-button-discover {
-      margin-top: 30px;
-      margin-bottom: 30px; }
-      #main-discover .main-button-discover .button-discover {
-        margin: 5px 10px 5px 8px; }
-      #main-discover .main-button-discover .button-start-project {
-        margin: 6px 12px 3px 10px; } }
+      margin: 20px 20px; }
+    #main-discover .main-title-text-mobile {
+      display: block;
+      padding-left: 10px;
+      margin-bottom: 0; }
+    #main-discover .main-info {
+      margin-top: 30px; } }
 /* Width 320px iPhone4 */
 @media only screen and (max-width: 320px) {
   #main-discover {
-    top: 140px; }
+    top: 130px; }
     #main-discover .main-title-market-mobile h1 {
       font-size: 36px; }
     #main-discover .main-title-text-mobile {
       display: none; }
-    #main-discover .main-button-discover {
-      margin-top: 30px;
-      margin-bottom: 30px; }
-      #main-discover .main-button-discover .button-discover {
-        margin: 3px 10px 3px 8px; }
-      #main-discover .main-button-discover .button-start-project {
-        margin: 6px 12px 3px 10px; }
     #main-discover .main-info {
-      width: inherit; }
+      margin-top: 60px; }
 
   #main-body2-content .main-body2-container .main-body2-contents .main-body2-head .main-body2-title h1 {
     margin-bottom: 15px; }

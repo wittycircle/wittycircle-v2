@@ -232,6 +232,12 @@ overflow: hidden;
 		}
 	}
 
+	.main-info:active {
+		p {
+			border-bottom: none;
+		}
+	}
+
 	-webkit-animation-duration: 0.3s;
 	-moz-animation-duration: 0.3s;
 }
@@ -790,7 +796,9 @@ a:hover {
 		margin: 0 auto;
 
 		.main-body3-contents {
+			text-align: center;
 			.main-body3-head {
+				text-align: center;
 				padding: 55px 30px 35px 30px;
 				.main-body3-title {
 					display: inline-block;
@@ -940,10 +948,45 @@ a:hover {
 			display: none;
 		}
 
+		.main-button-discover {
+			padding: 0;
+			text-align: center;
+
+			.button-start-project {
+				margin: 0 10px 15px 10px;
+
+				button {
+					width: 200px;
+				}
+			}
+
+			.button-start-project:active {
+				background-color: rgba(255, 52, 52, 0.7);
+			}
+
+			.button-discover {
+				margin: 0;
+				margin: 0 10px;
+				button {
+					padding: 6px 18px 8px 18px;
+				}
+			}
+
+			.button-discover:active {
+				background-color: white;
+				button {
+					color: black;
+				}
+			}
+
+		}	
+
 		.main-title-market-mobile {
 			display: block;
+			text-align: center;
+
 			h1 {
-				font-family: 'FreigLight';
+				font-family: 'FreigMed';
 				font-size: 38px;
 			}
 		}
@@ -964,6 +1007,13 @@ a:hover {
 				font-size: 21px;
 				line-height: 28px;
 				opacity: 0.9;
+			}
+		}
+
+		.main-info {
+			margin-top: 60px;
+			p {
+				margin: 0;
 			}
 		}
 	}
@@ -1110,6 +1160,10 @@ a:hover {
 						overflow: hidden
 					}
 				}
+
+				.main-body2-seemore {
+					padding: 0px 20px 40px 20px;
+				} 
 			}
 		}
 	}
@@ -1118,8 +1172,8 @@ a:hover {
 		.main-body3-container {
 			background-color: $bg-color-strokes;
 			.main-body3-contents {
+				text-align: center;
 				.main-body3-head {
-					text-align: center;
 					padding: 30px 20px 20px 20px;
 					.main-body3-title {
 						margin-top: 0;
@@ -1170,11 +1224,24 @@ a:hover {
 			}
 		}
 		.main-title-text-mobile {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			padding: 0 25px;
+
 			h4 {
-				font-size: 18px;
+				font-family: 'FreigMed';
+				font-size: 21px;
 				line-height: 24px;
 				opacity: 0.9;
+				color: #fafafa;
 			}
+		}
+
+		.main-info {
+			margin-top: 35px;
 		}
 	}
 }
@@ -1182,20 +1249,22 @@ a:hover {
 @media only screen and (max-width: 375px) {
 
 	#main-discover {
-		top: 150px;
+		top: 130px;
 		.main-title-text-mobile {
 			display: none
 		}
-		.main-button-discover {
-			margin-top: 30px;
-			margin-bottom: 30px;
 
-			.button-discover {
-				margin: 5px 10px 5px 8px;
-			}
-			.button-start-project {
-				margin: 6px 12px 3px 10px;
-			}
+		.main-button-discover {
+			margin: 20px 20px;
+		}
+		.main-title-text-mobile {
+			display: block;
+			padding-left: 10px;
+			margin-bottom: 0;
+		}
+
+		.main-info {
+			margin-top: 30px;
 		}
 	}
 }
@@ -1204,28 +1273,18 @@ a:hover {
 @media only screen and (max-width: 320px) {
 
 	#main-discover {
-		top: 140px;
+		top: 130px;
 		.main-title-market-mobile {
 			h1 {
 				font-size: 36px;
 			}
 		}
-		.main-title-text-mobile {
-			display: none
-		}
-		.main-button-discover {
-			margin-top: 30px;
-			margin-bottom: 30px;
 
-			.button-discover {
-				margin: 3px 10px 3px 8px;
-			}
-			.button-start-project {
-				margin: 6px 12px 3px 10px;
-			}
+		.main-title-text-mobile {
+			display: none;
 		}
 		.main-info {
-			width: inherit;
+			margin-top: 60px;
 		}
 	}
 

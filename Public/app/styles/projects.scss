@@ -1020,10 +1020,71 @@ $font-h3: 'Open Sans', sans-serif;
     padding: 40px 20px;
   }
 
+  #feedback_project .cards-feedbacks-two .img-responsive {
+    margin: 0;
+  }
+
+  #feedback_project .cards-feedbacks-two {
+    padding: 0;
+    border: none;
+  }
+
+  #feedback_project .feedback_description {
+    border-radius: 4px;
+  }
+
+  #feedback_project .cards-feedbacks-two {
+    border-radius: 4px;
+  }
+
+  #feedback_project .feedback_reply_text {
+    font-family: 'FreigMed';
+  }
+
+  #feedback_project .text_description_feed p {
+    font-family: 'FreigMed';
+  }
+
+  #feedback_project .feedback_description .feedback-reply-field {
+    border: none;
+    padding-right: 0;
+  }
+
+  #feedback_project .feedback_description .feedback-reply-field .col-md-1 {
+    padding: 0 15px 0 10px;
+    display: inline-block;
+  }
+
+  #feedback_project .feedback_description .col-md-11 {
+    padding-right: 0;
+    display: inline-block;
+    padding-top: 0;
+  }
+
+  #feedback_project .feedback_description .mgr-bt-20 {
+    margin-bottom: 0;
+  }
+
+  #feedback_project .text_description_feed {
+    margin-left: 10px;
+  }
+
+  #feedback_project #asks .mgr-bt-20 {
+    margin: 0;
+  }
+
+  #feedback_project #asks .mgr-bt-20 {
+    padding-left: 15px;
+  }
+
+  #feedback_project .cards_openings {
+    width: 100%;
+  }
+
   #feedback_project {
 
     .pdt-tp-bt-75 {
-      padding: 30px 30px 70px 30px;
+      padding: 30px 10px 50px 10px;
     }
 
     h3 {
@@ -1096,7 +1157,7 @@ $font-h3: 'Open Sans', sans-serif;
   
   #feedback_project {
     .pdt-tp-bt-75 {
-      padding: 30px 10px 70px 10px;
+      padding: 30px 10px 30px 15px;
     }
 
     .cards_openings_body {

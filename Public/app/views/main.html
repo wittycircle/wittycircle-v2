@@ -24,7 +24,7 @@
 				</div>
 				<div class="main-button-discover">
 					<div class="button-start-project">
-						<button>Explore our projects</button>
+						<button data-ui-sref="discover">Explore our projects</button>
 					</div>
 					<div class="button-discover">
 
@@ -518,12 +518,6 @@
 		    //  $(window).scrollTop(0);
 		    // }; setTimeout(function() {initPage()}, 800);
 
-		    function scrollToBf() {
-		        $('html, body').animate({
-		            scrollTop: $(".bf-info").offset().top
-		        }, 500);
-		    };
-
 			function changePlaceholder() {
 				if (document.getElementById('searchTextField')) {
 					$('#searchTextField').attr("placeholder", "Add location");
@@ -536,6 +530,11 @@
 				}
 			};
 		}
+		function scrollToBf() {
+		        $('html, body').animate({
+		            scrollTop: $(".bf-info").offset().top
+		        }, 500);
+		    };
 	</script>
 </div>
 <div data-ng-include="'views/bfooter/bfooter-1.view.client.html'"></div>

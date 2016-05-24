@@ -29,7 +29,6 @@ function getVotedProject(list, req, callback) {
                         function recursive2(index2) {
                             if (list[index2]) {
                                 if (list[index2].public_id == result[index].follow_project_public_id) {
-                                    console.log(result[index].follow_project_public_id);
                                     list[index2].check_vote = 1;
                                     recursive(index + 1);
                                 } 

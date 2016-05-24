@@ -26,10 +26,12 @@
 				</li>
 			</div>
 			<div class="viewProject-mobile-options">
-				<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
-				<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="moderator === 1"><img src="images/picto-edit-w.svg" alt="edit-picto" /> Edit</button>
-					<button type="submit" data-ng-if="vm.loggedUser && (!vm.editable || vm.editable === false) && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button>
-					<button type="submit" data-ng-if="!vm.loggedUser" ng-click="vm.showbottomAl($event)"><span><i class="fa fa-plus"></i></span>Follow</button>
+				<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable || moderator"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
+					<div class="project-vote" data-ng-if="!vm.editable && editable === false" ng-click="vm.voteProjectCard(vm.project.public_id)">
+						<img ng-if="!vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon_w.svg" />
+						<img ng-if="vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon.svg" />
+						<span ng-bind="vm.followNumber"></span>
+					</div>
 			</div>
 		</div>
 		<div class="viewProject-bottom">
@@ -64,7 +66,7 @@
 						socialshare
 						socialshare-provider="twitter"
 						socialshare-url="{{::vm.currentUrl}}"
-						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, the creators marketplace."
+						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, the creators place."
 						socialshare-hashtags="{{vm.project.title}}, projects, creators"
 						socialshare-trigger="click"
 						socialshare-popup-height="400"
@@ -110,7 +112,7 @@
 					<button id="editButton" type="submit" ui-sref="updateproject.basics({public_id: vm.project.public_id})" data-ng-if="vm.editable || editable || moderator"><img src="images/picto-edit-w.svg"  alt="edit-picto" /> Edit</button>
 					<!-- <button type="submit" data-ng-if="vm.loggedUser && !vm.editable && editable === false" data-ng-click="vm.followProject()"><span><i data-ng-if="vm.followText === 'Follow'" class="fa fa-plus"></i><i data-ng-if="vm.followText !== 'Follow'" class="fa fa-check"></i></span>{{vm.followText}}</button> -->
 					<div class="project-vote" data-ng-if="!vm.editable && editable === false" ng-click="vm.voteProjectCard(vm.project.public_id)">
-						<div ng-if="!vm.followCheck" class="tooltipw">Upvotes allow us to rank projects on our main pages</div>
+						<div ng-if="!vm.followCheck" class="tooltipw">Upvotes help us to rank projects.</div>
 						<img ng-if="!vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon_w.svg" />
 						<img ng-if="vm.followCheck" class="project-vote-image" src="/images/Upvote_Icon.svg" />
 						<span ng-bind="vm.followNumber"></span>

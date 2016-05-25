@@ -102,7 +102,7 @@
 			<div class="profile-follow">
 				<div class="follow-project follower">
 					<h2 data-ng-bind="profileVm.projectsFollow.length"></h2>
-					<h5>Projects<br /> followed</h5>
+					<h5>Projects<br /> upvoted</h5>
 					<div id="pfdd1" class="profile-follow-dropdown" style="display: none" ng-if="profileVm.projectsFollow.length !== 0">
 						<a class="profile-pfollow-list" ng-repeat="pFollow in profileVm.projectsFollow" ng-href="/project/{{ pFollow.public_id }}/{{ profileVm.encodeUrl(pFollow.title) }}">
 							<div class="profile-pfollow-picture" ng-style="{'background-image': 'url(' + pFollow.picture_card + ')'}"></div>

@@ -291,7 +291,7 @@ function getPrettyDateForAllNotif(array, callback) {
 exports.getNotifications = function(req, res) {
 	getAllNotificationList(req, res, function(result) {
 		if (result.done) {
-			pool.query("SELECT * FROM notification_list WHERE user_id = ? AND date_of_view BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() ORDER BY date_of_view DESC LIMIT 50", [req.user.id], function(err, data) {
+			pool.query("SELECT * FROM notification_list WHERE user_id = ? ORDER BY date_of_view DESC LIMIT 50", [req.user.id], function(err, data) {
 				if (err) throw err;
 				var notifArray = [];
 				function recursive(index) {

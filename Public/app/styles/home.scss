@@ -798,7 +798,7 @@ a:hover {
 		.main-body3-contents {
 			text-align: center;
 			.main-body3-head {
-				text-align: center;
+				text-align: left;
 				padding: 55px 30px 35px 30px;
 				.main-body3-title {
 					display: inline-block;
@@ -1220,7 +1220,8 @@ a:hover {
 		top: 120px;
 		.main-title-market-mobile {
 			h1 {
-				font-size: 42px;
+				font-family: 'FreigSem';
+				font-size: 40px;
 			}
 		}
 		.main-title-text-mobile {
@@ -1255,7 +1256,7 @@ a:hover {
 		}
 
 		.main-button-discover {
-			margin: 20px 20px;
+			margin: 15px 20px;
 		}
 		.main-title-text-mobile {
 			display: block;
@@ -1276,6 +1277,7 @@ a:hover {
 		top: 130px;
 		.main-title-market-mobile {
 			h1 {
+				font-family: 'FreigMed';
 				font-size: 36px;
 			}
 		}

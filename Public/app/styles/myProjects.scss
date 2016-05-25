@@ -47,12 +47,12 @@ $blue: #416299;
 				font-size: 13px;
 				color: #fff;
 				opacity: 0;
-				width: 310px;
+				width: 205px;
 				padding: 5px 10px;
 				border-radius: 4px;
 				pointer-events: none;
 				position: absolute;
-				left: -119px;
+				left: -76px;
 				bottom: 58px;
 				-webkit-transform: translateY(10px);
 				-moz-transform: translateY(10px);
@@ -890,8 +890,7 @@ $blue: #416299;
 
 				.viewProject-title-info {
 /*					min-height: 120px;
-*/					
-					text-align: left;
+*/			
 					h1 {
 						font-size: 34px;
 						padding-left: 15px;
@@ -900,6 +899,7 @@ $blue: #416299;
 					h4 {
 						font-size: 18px;
 						padding: 0 15px;
+						text-align: left;
 					}
 				}
 			}

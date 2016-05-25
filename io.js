@@ -332,116 +332,115 @@ module.exports = function(app, io, ensureAuth) {
                                                                             //         socket.broadcast.emit('project-vote', {index: newIndex, user_id: req.user.id})
                                                                             //     })
                                                                             // }
-                                                                            return res.send({success: true, msg: "Project followed"});
+									    function getNewD(value, wordwise, max, tail) {
+										if (!value) return '';
+										if (!max) return value;
+										if (value.length <= max) return value;
+										value = value.substr(0, max);
+										if (wordwise) {
+										    var lastspace = value.lastIndexOf(' ');
+										    if (lastspace != -1) {
+											value = value.substr(0, lastspace);
+										    }
+										}
+										return value + (tail || ' ...');
+									    }
+									    var subj = name[0].first_name + " " + name[0].last_name + " upvoted " + id[0].title + " on Wittycircle";
+									    var newd = getNewD(name[0].description, true, 76, ' ...');
+									    if (name[0].location_country) {
+										var loc = name[0].location_city + ', ' + name[0].location_country;
+									    }
+									    if (name[0].location_state) {
+										var loc = name[0].location_city + ', ' + name[0].location_state;
+									    }
+									    var url = "https://www.wittycircle.com/" + rez[0].username;
+									    
+									    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+									    
+									    var template_name = "follow-project";
+									    var template_content = [{
+										"name": "follow-project",
+										"content": "content",
+									    }];
+									    
+									    var message = {
+										"html": "<p>HTML content</p>",
+										"subject": subj,
+										"from_email": "noreply@wittycircle.com",
+										"from_name": "Wittycircle",
+										"to": [{
+										    "email": rslt[0].email,
+										    "name": 'kkkkk',
+										    "type": "to"
+										}],
+										"headers": {
+										    "Reply-To": "noreply@wittycircle.com"
+										},
+										"important": false,
+										"inline_css": null,
+										"preserve_recipients": null,
+										"view_content_link": null,
+										"tracking_domain": null,
+										"signing_domain": null,
+										"return_path_domain": null,
+										"merge": true,
+										"merge_language": "mailchimp",
+										"global_merge_vars": [{
+										    "name": "merge1",
+										    "content": "merge1 content"
+										}],
+										"merge_vars": [
+										    {
+											"rcpt": rslt[0].email,
+											"vars": [
+											    {
+												"name": "fname",
+												"content": rst[0].first_name
+											    },
+											    {
+												"name": "ffname",
+												"content": name[0].first_name
+											    },
+											    {
+												"name": "flname",
+												"content": name[0].last_name
+											    },
+											    {
+												"name": "fimg",
+												"content": name[0].profile_picture_icon
+											    },
+											    {
+												"name": "fdesc",
+												"content": newd
+											    },
+											    {
+												"name": "floc",
+												"content": loc
+											    },
+											    {
+												"name": "furl",
+												"content": url
+											    },
+											    {
+												"name": "ftitle",
+												"content": id[0].title
+											    }
+											]
+										    }
+										]
+									    };
+									    
+									    var async = false;
+									    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+										return res.send({success: true, msg: "Project followed"});
+									    }, function(e) {
+										// Mandrill returns the error as an object with name and message keys
+										console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+										throw e;
+										// A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+									    });
                                                                         });
-                                                                });
-                                                            // function getNewD(value, wordwise, max, tail) {
-                                                            //     if (!value) return '';
-                                                            //     if (!max) return value;
-                                                            //     if (value.length <= max) return value;
-                                                            //     value = value.substr(0, max);
-                                                            //     if (wordwise) {
-                                                            //         var lastspace = value.lastIndexOf(' ');
-                                                            //         if (lastspace != -1) {
-                                                            //             value = value.substr(0, lastspace);
-                                                            //         }
-                                                            //     }
-                                                            //     return value + (tail || ' ...');
-                                                            // }
-                                                            // var subj = name[0].first_name + " " + name[0].last_name + " followed " + id[0].title + " on Wittycirlce";
-                                                            // var newd = getNewD(name[0].description, true, 76, ' ...');
-                                                            // if (name[0].location_country) {
-                                                            //     var loc = name[0].location_city + ', ' + name[0].location_country;
-                                                            // }
-                                                            // if (name[0].location_state) {
-                                                            //     var loc = name[0].location_city + ', ' + name[0].location_state;
-                                                            // }
-                                                            // var url = "https://www.wittycircle.com/" + rez[0].username;
-
-                                                            // var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-
-                                                            // var template_name = "follow-project";
-                                                            // var template_content = [{
-                                                            //     "name": "follow-project",
-                                                            //     "content": "content",
-                                                            // }];
-
-                                                            // var message = {
-                                                            //     "html": "<p>HTML content</p>",
-                                                            //     "subject": subj,
-                                                            //     "from_email": "noreply@wittycircle.com",
-                                                            //     "from_name": "Wittycircle",
-                                                            //     "to": [{
-                                                            //         "email": rslt[0].email,
-                                                            //         "name": 'kkkkk',
-                                                            //         "type": "to"
-                                                            //     }],
-                                                            //     "headers": {
-                                                            //         "Reply-To": "noreply@wittycircle.com"
-                                                            //     },
-                                                            //     "important": false,
-                                                            //     "inline_css": null,
-                                                            //     "preserve_recipients": null,
-                                                            //     "view_content_link": null,
-                                                            //     "tracking_domain": null,
-                                                            //     "signing_domain": null,
-                                                            //     "return_path_domain": null,
-                                                            //     "merge": true,
-                                                            //     "merge_language": "mailchimp",
-                                                            //     "global_merge_vars": [{
-                                                            //         "name": "merge1",
-                                                            //         "content": "merge1 content"
-                                                            //     }],
-                                                            //     "merge_vars": [
-                                                            //         {
-                                                            //             "rcpt": rslt[0].email,
-                                                            //             "vars": [
-                                                            //                 {
-                                                            //                     "name": "fname",
-                                                            //                     "content": rst[0].first_name
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "ffname",
-                                                            //                     "content": name[0].first_name
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "flname",
-                                                            //                     "content": name[0].last_name
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "fimg",
-                                                            //                     "content": name[0].profile_picture_icon
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "fdesc",
-                                                            //                     "content": newd
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "floc",
-                                                            //                     "content": loc
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "furl",
-                                                            //                     "content": url
-                                                            //                 },
-                                                            //                 {
-                                                            //                     "name": "ftitle",
-                                                            //                     "content": id[0].title
-                                                            //                 }
-                                                            //             ]
-                                                            //         }
-                                                            //     ]
-                                                            // };
-
-                                                            // var async = false;
-                                                            // mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                            //     return res.send({success: true, msg: "Project followed"});
-                                                            // }, function(e) {
-                                                            //     // Mandrill returns the error as an object with name and message keys
-                                                            //     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                            //     throw e;
-                                                            //     // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                            // });
+								});
                                                         }
                                                     });
                                                 }

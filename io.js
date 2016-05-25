@@ -4,6 +4,20 @@ var tf            = require('./tools/project_functions');
 const mandrill = require('mandrill-api/mandrill');
 
 
+function getNewD(value, wordwise, max, tail, callback) {
+    if (!value) return '';
+    if (!max) return value;
+    if (value.length <= max) return value;
+    value = value.substr(0, max);
+    if (wordwise) {
+        var lastspace = value.lastIndexOf(' ');
+        if (lastspace != -1) {
+            value = value.substr(0, lastspace);
+        }
+    }
+    callback(value + (tail || ' ...'));
+}
+
 module.exports = function(app, io, ensureAuth) {
     var users = {};
 
@@ -509,6 +523,22 @@ module.exports = function(app, io, ensureAuth) {
         });
 
         /*** Ask Project Notification ***/
+        function getFollowersEmail(array, callback){
+            var mailList = []; 
+            function recursive(index) {
+                if (array[index]) {
+                    pool.query('SELECT email FROM users WHERE id = ?', array[index].user_id,
+                        function(err, result) {
+                            if (err) throw err;
+                            mailList.push(result[0].email);
+                            recursive(index + 1);
+                        });
+                } else
+                    callback(mailList);
+            };
+            recursive(0);
+        };
+
         app.post('/asks', function(req, res) {
             if (!req.isAuthenticated()) {
                 return res.status(404).send({message: 'user need to be authenticated'});
@@ -522,23 +552,118 @@ module.exports = function(app, io, ensureAuth) {
                 req.checkBody('project_public_id', 'project_public_id need to be an int').isInt().min(1);
 
                 var errors = req.validationErrors(true);
-                if (errors) {
-                    var date = new Date();
-                    console.log(date + "\n");
-                    console.log("error in creating a ask" + "\n");
-                    console.log(errors);
-                    console.log("\n");
-                    res.status(400).send(errors);
-                } else {
+                if (errors) res.status(400).send(errors);
+                else {
                     req.body.user_id = req.user.id;
                     pool.query("INSERT INTO project_asks SET ?", req.body,
-                        function (err, result) {
-                            if (err) {
-                                throw err;
-                            }
-                            socket.broadcast.emit('ask-project-notification', 'hello world!');
-                            return res.send({success: true});
-                            
+                        function(err, result) {
+                            if (err) throw err;
+                            pool.query('SELECT title FROM projects WHERE project_id = ?', req.body.project_id,
+                                function(err, result2) {
+                                    if (err) throw err;
+                                    else {
+                                        pool.query('SELECT user_id FROM project_followers WHERE project_id = ?', req.body.project_id,
+                                            function(err, result3) {
+                                                if (err) throw err;
+                                                else {
+                                                    if (!result3[0]) return res.send({success: true});
+                                                    getFollowersEmail(result3, function(mailList) {
+                                                        getNewD(req.body.message, true, 76, ' ...', function(newMessage) {
+                                                            var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
+                                                            var url = req.body.url;
+                                                            console.log(subj);
+                                                            console.log(mailList);
+                                                            // var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+
+                                                            // var template_name = "ask-project";
+                                                            // var template_content = [{
+                                                            //     "name": "ask-project",
+                                                            //     "content": "content",
+                                                            // }];
+
+                                                            // var message = {
+                                                            //     "html": "<p>HTML content</p>",
+                                                            //     "subject": subj,
+                                                            //     "from_email": "noreply@wittycircle.com",
+                                                            //     "from_name": "Wittycircle",
+                                                            //     "to": [{
+                                                            //         "email": rslt[0].email,
+                                                            //         "name": 'kkkkk',
+                                                            //         "type": "to"
+                                                            //     }],
+                                                            //     "headers": {
+                                                            //         "Reply-To": "noreply@wittycircle.com"
+                                                            //     },
+                                                            //     "important": false,
+                                                            //     "inline_css": null,
+                                                            //     "preserve_recipients": null,
+                                                            //     "view_content_link": null,
+                                                            //     "tracking_domain": null,
+                                                            //     "signing_domain": null,
+                                                            //     "return_path_domain": null,
+                                                            //     "merge": true,
+                                                            //     "merge_language": "mailchimp",
+                                                            //     "global_merge_vars": [{
+                                                            //         "name": "merge1",
+                                                            //         "content": "merge1 content"
+                                                            //     }],
+                                                            //     "merge_vars": [
+                                                            //         {
+                                                            //             "rcpt": rslt[0].email,
+                                                            //             "vars": [
+                                                            //                 {
+                                                            //                     "name": "fname",
+                                                            //                     "content": rst[0].first_name
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "ffname",
+                                                            //                     "content": name[0].first_name
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "flname",
+                                                            //                     "content": name[0].last_name
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "fimg",
+                                                            //                     "content": name[0].profile_picture_icon
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "fdesc",
+                                                            //                     "content": newd
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "floc",
+                                                            //                     "content": loc
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "furl",
+                                                            //                     "content": url
+                                                            //                 },
+                                                            //                 {
+                                                            //                     "name": "ftitle",
+                                                            //                     "content": id[0].title
+                                                            //                 }
+                                                            //             ]
+                                                            //         }
+                                                            //     ]
+                                                            // };
+
+                                                            // var async = false;
+                                                            // mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                                                            //     socket.broadcast.emit('ask-project-notification', 'hello world!');
+                                                            //     return res.send({success: true, msg: "Project followed"});
+                                                            // }, function(e) {
+                                                            //     // Mandrill returns the error as an object with name and message keys
+                                                            //     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                                                            //     throw e;
+                                                            //     // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                                                            // });
+                                                        });
+                                                    });
+                                                }
+                                            });
+                                    }
+                                });                            
                         });
                 }
             }

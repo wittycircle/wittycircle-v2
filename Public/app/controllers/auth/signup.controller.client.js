@@ -60,11 +60,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		$http.put('/user/checkLog/update');
 		$http.post('/profileId/' + currentUser.id).success(function(res) {
 		    /*** Set Default Profile Picture ***/
-		    console.log(res.content.profile_id);
 		    $http.get('/picture/check/profile/' + res.content.profile_id).success(function(check) {
-			console.log(check);
 			if (check.success) {
-			    console.log("OK");
 			    $http.get('/picture/profile');
 			}
 		    });

@@ -170,7 +170,7 @@ module.exports = function(app, io, ensureAuth) {
                                                                 "from_name": "Wittycircle",
                                                                 "to": [{
                                                                     "email": data[0].email,
-                                                                    "name": 'kkkkk',
+                                                                    "name": 'Recipient',
                                                                     "type": "to"
                                                                 }],
                                                                 "headers": {
@@ -385,7 +385,7 @@ module.exports = function(app, io, ensureAuth) {
 										"from_name": "Wittycircle",
 										"to": [{
 										    "email": rslt[0].email,
-										    "name": 'kkkkk',
+										    "name": 'Recipient',
 										    "type": "to"
 										}],
 										"headers": {
@@ -1225,7 +1225,7 @@ module.exports = function(app, io, ensureAuth) {
                                                             "from_name": "Wittycircle",
                                                             "to": [{
                                                                 "email": mail[0].email,
-                                                                "name": 'kkkkk',
+                                                                "name": 'Recipient',
                                                                 "type": "to"
                                                             }],
                                                             "headers": {

@@ -7,7 +7,7 @@
  * # AddQuestionProjectCtrl
  * Controller of the wittyApp
  */
-angular.module('wittyApp').controller('AddQuestionProjectCtrl', function (Public_id, Feedbacks, $q, $scope, $rootScope, $state, $http, Upload, Data_project, Users, $modalInstance) {
+angular.module('wittyApp').controller('AddQuestionProjectCtrl', function (Public_id, Feedbacks, $q, $scope, $location, $rootScope, $state, $http, Upload, Data_project, Users, $modalInstance) {
 
   $scope.type_project = ['Question', 'Help'];
 
@@ -37,6 +37,7 @@ angular.module('wittyApp').controller('AddQuestionProjectCtrl', function (Public
     $scope.feedbacks.badge = addingBadge();
     $scope.feedbacks.first_name = $rootScope.globals.currentUser.first_name;
     $scope.feedbacks.last_name = $rootScope.globals.currentUser.last_name;
+    $scope.feedbacks.url = 'https://www.wittycircle.com' + $location.path();
     Feedbacks.createFeedbacks($scope.feedbacks, function(response) {
       $scope.feedbacks.id = response.insertId;
       $scope.feedbacks.user = $rootScope.globals.currentUser;

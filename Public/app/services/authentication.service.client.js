@@ -69,7 +69,7 @@
                         first_name: result.first_name,
                         last_name: result.last_name,
                         username: username,
-			moderator: moderator
+                        moderator: moderator
                     }
                 };
                 if (result.cover_picture)

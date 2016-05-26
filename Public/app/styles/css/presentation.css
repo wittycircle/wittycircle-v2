@@ -16,6 +16,8 @@
     font-family: 'FreigLight';
     font-size: 32px;
     color: white; }
+  .presentation-component .discover-search2-textarticle {
+    display: inline-block; }
   .presentation-component .searchbox {
     border-radius: 4px;
     cursor: pointer;

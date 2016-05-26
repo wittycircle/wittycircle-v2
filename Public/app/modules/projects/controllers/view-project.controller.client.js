@@ -337,6 +337,8 @@
             data.creator_picture = currentUser.profile_picture_icon;
             data.creator_first_name = currentUser.first_name;
             data.creator_last_name = currentUser.last_name;
+            data.url = vm.currentUrl;
+            
             Feedbacks.addFeedbackReply(data, function (response) {
                 if (response.success) {
                     var reply = {};
@@ -392,6 +394,7 @@
             newAsk.first_name = currentUser.first_name;
             newAsk.last_name = currentUser.last_name;
             newAsk.project_public_id = vm.project.public_id;
+            newAsk.url  = vm.currentUrl;
             $http.post('/asks', newAsk).success(function (response) {
                 // ok now gonna need to push it etc ...
                 $timeout(function () {
@@ -429,6 +432,7 @@
             data.creator_picture = currentUser.profile_picture_icon;
             data.creator_first_name = currentUser.first_name;
             data.creator_last_name = currentUser.last_name;
+            data.url = vm.currentUrl;
             $http.post('/ask_reply/add', data).success(function (response) {
                 if (currentUser.id == ask.user_id) {
                     ask.owned = true;

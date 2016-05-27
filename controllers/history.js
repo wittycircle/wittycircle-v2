@@ -1,10 +1,12 @@
 exports.addProjectToUserHistory = function(req,res) {
+
     req.checkParams('id', 'id must be an integrer corresponding to an existing project').isInt().min(1);
     req.checkBody('project_id', 'project_id must be an integrer').isInt().min(1);
+
     var errors = req.validationErrors(true);
-    if (errors) {
-	     return res.status(400).send(errors);
-    } else {
+    if (errors) return res.status(400).send(errors);
+    if (!req.isAuthenticated()) return res.status(404);
+    else {
 	     pool.query('SELECT * FROM project_history WHERE user_id = ? AND project_id = ?',
 		   [req.user.id, req.body.project_id],
 		   function (err, rows) {
@@ -36,7 +38,7 @@ exports.getUserProjectHistory = function(req, res) {
 	if (errors) {
 	    return res.status(400).send(errors);
 	} else {
-	    pool.query('SELECT * from project_history WHERE user_id = ? ORDER BY date DESC',
+	    pool.query('SELECT * from project_history WHERE user_id = ? ORDER BY date DESC LIMIT 10',
 		  [req.params.id],
 		  function (err, result) {
 			  if (err) {

@@ -900,6 +900,7 @@ exports.getAllProjectMembers = function(req, res) {
     if (errors) {
         return res.status(400).send(errors);
     } else {
+	if (!req.isAuthenticated()) return status(404);
         pool.query("SELECT creator_user_id FROM projects where public_id = ?", req.params.public_id, function(err, response) {
             if (err) {
                 console.log(new Date());

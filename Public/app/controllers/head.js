@@ -11,12 +11,12 @@
 angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 
 	$scope.seo = {
-		pageTitle: "Wittycircle | The creators place",
+		pageTitle: "Wittycircle | Where creators meet",
 		pageDescription: "Have an idea worth spreading? You found the right place. Start with finding skilled peope around you, ask for feedback, support and meet your early fans.",
 	};
 
 	$scope.card = {
-		title: "Wittycircle | The creators place",
+		title: "Wittycircle | Where creators meet",
 		url: "https://www.wittycircle.com",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png"
 	};

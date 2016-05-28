@@ -5,7 +5,7 @@ angular.module('wittyApp')
 
 	var options = {
 		method: 'feed',
-		name: 'Wittycircle | The creators place',
+		name: 'Wittycircle | Where creators meet',
 		link: 'https://www.wittycircle.com',
 		picture: 'https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png',
 		caption: 'Wittycircle.com',

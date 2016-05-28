@@ -9,12 +9,13 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter) {
+ 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location) {
 
  	if ($rootScope.globals.currentUser) {
 	 	// var socket = io.connect('http://127.0.0.1');
 	 	var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
+	 	var currentUrl = $location.path();
 
 	 	/* Function vm */
 
@@ -38,6 +39,14 @@
 			}, 500);
 	 	};
 
+	 	/*** MOBILE ***/
+	 	if (x < 736) {
+	 		$rootScope.$watch('dialogueMM', function(value) {
+		 		if(value)
+		 			$scope.showMessage(value);
+		 	});
+	 	}
+
 	 	/***	EVENT	***/	
 	 	$scope.keyPress = function(keycode, username, nameuser) {
 	 		if (keycode == 13) {
@@ -51,6 +60,7 @@
 	 	socket.on('userOnline', function(data){
 	 	 	$scope.onlineUser = data;
 	 	 	// io.getUserOnline(data);
+	 	 	$scope.checkOnlinUser = true;
 	 	 	$scope.refreshDialogue();
 	 	});
 
@@ -59,8 +69,11 @@
 	 	// 	socket.close();
 	 	// });
 
-	 	var i = 0;
-	 	var redirectParams = $stateParams.input;
+	 	var i;
+	 	var redirectParams = $stateParams.input || false;
+
+	 	i = !redirectParams ? 0 : 1;
+
 	 	$scope.refreshDialogue = function(check) { // main function to retrieve all $parent.dialogues within last information
 	 		if (x < 736) {
 		 	 	$http.get('/messages/get/all').success(function(res){ // get all dialogues of user
@@ -97,72 +110,73 @@
 			 	});
 			}
 		};
-		$scope.refreshDialogue();
+		if (currentUrl === '/messages') {
+			console.log("OK");
+			$scope.refreshDialogue();
+		}
 
 	 	$scope.showMessage = function(dialogue) { // show all messages between current user and client
-	 		if (x <= 736) {
-		 		$scope.tab = dialogue.id;
+	 		if (!$scope.checkOnlinUser) {
+		 		if (x <= 736) {
+			 		$scope.tab = dialogue.id;
+			 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
+			 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
+			 				if (res.success) {
+			 					Users.count();
+			 					$scope.refreshDialogue();
+			 				}
+			 			});
+			 		}
 
-		 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
-		 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
-		 				if (res.success) {
-		 					Users.count();
-		 					$scope.refreshDialogue();
-		 				}
-		 			});
-		 		}
+			 		$http.get('/messages/' + dialogue.id).success(function(res){
+			 			if (res.success) {
+			 				var last 							= res.messages[res.messages.length - 1];
+			 				$scope.$parent.messages				= res.messages;
+			 				$scope.$parent.name 				= res.name.first_name;
+			 				$scope.$parent.username 			= res.name.first_name + ' ' + res.name.last_name;
+			 				$scope.$parent.nameuser 			= res.name.username,
+			 				$scope.$parent.profile_my_picture 	= res.picture.my_picture;
+			 				$scope.$parent.profile_user_picture = res.picture.user_picture;
+			 				$scope.$parent.c 					= 0;
+			 				$scope.$parent.show 				= true;
+			 			}
+			 			$scope.$parent.offMessages = [];
+			 		});
+			 	} else {
+			 		$scope.tab = dialogue.id;
 
-		 		$http.get('/messages/' + dialogue.id).success(function(res){
-		 			if (res.success) {
-		 				var last 							= res.messages[res.messages.length - 1];
-		 				$scope.$parent.messages				= res.messages;
-		 				$scope.$parent.name 				= res.name.first_name;
-		 				$scope.$parent.username 			= res.name.first_name + ' ' + res.name.last_name;
-		 				$scope.$parent.nameuser 			= res.name.username,
-		 				$scope.$parent.profile_my_picture 	= res.picture.my_picture;
-		 				$scope.$parent.profile_user_picture = res.picture.user_picture;
-		 				$scope.$parent.c 					= 0;
-		 				$scope.$parent.show 				= true;
-		 			}
-		 			$scope.$parent.offMessages = [];
-		 		});
-		 	} else {
-		 		$scope.tab = dialogue.id;
+			 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
+			 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
+			 				if (res.success) {
+			 					Users.count();
+			 					$scope.refreshDialogue();
+			 				}
+			 			});
+			 		}
 
-		 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
-		 			$http.put('/messages/', {id : dialogue.id}).success(function(res){
-		 				if (res.success) {
-		 					Users.count();
-		 					$scope.refreshDialogue();
-		 				}
-		 			});
-		 		}
-
-		 		$http.get('/messages/' + dialogue.id).success(function(res){
-		 			if (res.success) {
-		 				var last 							= res.messages[res.messages.length - 1];
-		 				$scope.messages				= res.messages;
-		 				$scope.name 				= res.name.first_name;
-		 				$scope.username 			= res.name.first_name + ' ' + res.name.last_name;
-		 				$scope.nameuser 			= res.name.username,
-		 				$scope.profile_my_picture 	= res.picture.my_picture;
-		 				$scope.profile_user_picture = res.picture.user_picture;
-		 				$scope.c 					= 0;
-		 				$scope.show 				= true;
-		 			}
-		 			$scope.offMessages = [];
-		 		});
-		 	}
+			 		$http.get('/messages/' + dialogue.id).success(function(res){
+			 			if (res.success) {
+			 				var last 							= res.messages[res.messages.length - 1];
+			 				$scope.messages				= res.messages;
+			 				$scope.name 				= res.name.first_name;
+			 				$scope.username 			= res.name.first_name + ' ' + res.name.last_name;
+			 				$scope.nameuser 			= res.name.username,
+			 				$scope.profile_my_picture 	= res.picture.my_picture;
+			 				$scope.profile_user_picture = res.picture.user_picture;
+			 				$scope.c 					= 0;
+			 				$scope.show 				= true;
+			 			}
+			 			$scope.offMessages = [];
+			 		});
+			 	}
+			} else {
+				$scope.checkOnlinUser;
+			}
 	 	};
 
 	 	$scope.showHomeMobile = function() {
 	 		window.location.href = "https://www.wittycircle.com";
 	 	};
-
-	 	$rootScope.$watch('dialogueMM', function(value) {
-	 		if(value)
-	 			$scope.showMessage(value);
-	 	});
 
 	 	$scope.deleteMessage = function() {
 	 		$http.put('/messages', $scope.messages).success(function(res) {

@@ -43,4 +43,21 @@ angular.module('wittyApp')
 	      	}
 	    });
 	});
+
+	$scope.closePopover = function() {
+        $mdBottomSheet.hide();
+    };
+
+    $scope.popSwL = function() {
+        var x       = $('#main-signup-modal');
+        var filter  = $("#page-wrap");
+        var marge = (x - 600)/2/2;
+
+        if (x.css('display') === "none") {
+            filter.fadeIn(500);
+            x.css({'top': marge.toString() + "px"});
+            $mdBottomSheet.cancel();
+            x.fadeIn();
+        }
+    };
 });

@@ -105,16 +105,17 @@ overflow: hidden;
   -moz-animation-duration: 0.3s; }
   #main-discover .main-title-market h1 {
     font-family: 'FreigSem';
-    font-size: 48px; }
+    font-size: 55px;
+    text-shadow: 1px 1px 10px black; }
   #main-discover .main-title-market-mobile {
     display: none; }
   #main-discover .main-title-text {
     max-width: 800px;
-    margin: 10px auto 40px auto; }
+    margin: 10px auto 50px auto; }
     #main-discover .main-title-text h4 {
       color: #ededed;
       font-family: 'FreigBook';
-      font-size: 24px;
+      font-size: 25px;
       line-height: 24px;
       text-shadow: 1px 1px 10px black; }
   #main-discover .main-title-text-mobile {
@@ -123,8 +124,7 @@ overflow: hidden;
     margin-top: 25px;
     margin-bottom: 30px; }
     #main-discover .main-button-discover .button-discover {
-      display: inline-block;
-      margin: 3px 12px 3px 10px; }
+      display: inline-block; }
       #main-discover .main-button-discover .button-discover button {
         height: 45px;
         border: 2px solid white;
@@ -138,7 +138,7 @@ overflow: hidden;
         color: #222222; }
     #main-discover .main-button-discover .button-start-project {
       display: inline-block;
-      margin: 3px 12px 3px 0px; }
+      margin: 3px 20px 3px 0px; }
       #main-discover .main-button-discover .button-start-project button {
         height: 45px;
         border: none;
@@ -642,7 +642,7 @@ overflow: hidden;
   border-right: 11px solid transparent; }
 
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
-@media only screen and (max-width: 1270px) {
+@media only screen and (max-width: 1024px) {
   .home-video-bg {
     display: none; }
 
@@ -653,16 +653,27 @@ overflow: hidden;
     background-image: url("/images/bg_mobile/bg_home_mobile.jpg");
     background-size: cover;
     background-position: center center;
-    -webkit-filter: brightness(0.6);
-    -moz-filter: brightness(0.6);
-    -o-filter: brightness(0.6);
-    -ms-filter: brightness(0.6);
-    filter: brightness(0.6);
+    -webkit-filter: brightness(0.4);
+    -moz-filter: brightness(0.4);
+    -o-filter: brightness(0.4);
+    -ms-filter: brightness(0.4);
+    filter: brightness(0.4);
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
-    transform: translateZ(0); } }
+    transform: translateZ(0); }
+
+  /* Main text content */
+  #main-discover {
+    width: 80%;
+    margin: 0 10%;
+    top: 120px; }
+    #main-discover .main-info {
+      margin-top: 50px; }
+
+  #main-body-content .main-body-container .main-body-contents .main-body-cardList .main-body-card {
+    top: -70px; } }
 @media only screen and (max-width: 736px) {
   .slick-dots {
     bottom: -50px; }
@@ -689,7 +700,7 @@ overflow: hidden;
       padding: 0;
       text-align: center; }
       #main-discover .main-button-discover .button-start-project {
-        margin: 0 10px 15px 10px;
+        margin: 0px 0px 15px 0px;
         -webkit-transition: all 200ms linear;
         -o-transition: all 200ms linear;
         -moz-transition: all 200ms linear;
@@ -729,8 +740,9 @@ overflow: hidden;
       display: block;
       text-align: center; }
       #main-discover .main-title-market-mobile h1 {
-        font-family: 'FreigMed';
-        font-size: 38px; }
+        font-family: 'FreigSem';
+        font-size: 42px;
+        text-shadow: 1px 1px  10px black; }
     #main-discover .main-title-text {
       display: none; }
     #main-discover .main-title-text-mobile {
@@ -738,14 +750,17 @@ overflow: hidden;
       margin-left: auto;
       margin-right: auto;
       margin-top: 10px;
-      margin-bottom: 10px; }
+      margin-bottom: 40px;
+      text-align: center; }
       #main-discover .main-title-text-mobile h4 {
         font-family: 'FreigBook';
-        font-size: 21px;
-        line-height: 28px;
-        opacity: 0.9; }
+        font-size: 24px;
+        line-height: 24px;
+        opacity: 0.9;
+        margin: 0 auto;
+        text-shadow: 1px 1px  10px black; }
     #main-discover .main-info {
-      margin-top: 60px; }
+      margin-top: 40px; }
       #main-discover .main-info p {
         margin: 0; }
 
@@ -874,46 +889,41 @@ overflow: hidden;
     top: 120px; }
     #main-discover .main-title-market-mobile h1 {
       font-family: 'FreigSem';
-      font-size: 40px; }
+      font-size: 35px; }
     #main-discover .main-title-text-mobile {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      padding: 0 25px; }
+      width: 310px; }
       #main-discover .main-title-text-mobile h4 {
         font-family: 'FreigMed';
         font-size: 21px;
         line-height: 24px;
         opacity: 0.9;
-        color: #fafafa; }
-    #main-discover .main-info {
-      margin-top: 35px; } }
+        color: #fafafa; } }
 @media only screen and (max-width: 375px) {
   #main-discover {
     top: 130px; }
-    #main-discover .main-title-text-mobile {
-      display: none; }
+    #main-discover .main-title-market-mobile h1 {
+      font-size: 35px; }
     #main-discover .main-button-discover {
       margin: 15px 20px; }
     #main-discover .main-title-text-mobile {
       display: block;
-      padding-left: 10px;
-      margin-bottom: 0; }
-    #main-discover .main-info {
-      margin-top: 30px; } }
+      width: 305px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left; } }
 /* Width 320px iPhone4 */
 @media only screen and (max-width: 320px) {
   #main-discover {
     top: 130px; }
-    #main-discover .main-title-market-mobile h1 {
-      font-family: 'FreigMed';
-      font-size: 36px; }
+    #main-discover .main-title-market-mobile {
+      margin-bottom: 40px; }
+      #main-discover .main-title-market-mobile h1 {
+        font-family: 'FreigMed';
+        font-size: 36px; }
     #main-discover .main-title-text-mobile {
       display: none; }
     #main-discover .main-info {
-      margin-top: 60px; }
+      margin-top: 50px; }
 
   #main-body2-content .main-body2-container .main-body2-contents .main-body2-head .main-body2-title h1 {
     margin-bottom: 15px; }

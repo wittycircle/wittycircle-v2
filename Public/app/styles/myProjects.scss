@@ -891,14 +891,14 @@ $blue: #416299;
 				.viewProject-title-info {
 /*					min-height: 120px;
 */			
+					padding: 0 10px;
+					
 					h1 {
 						font-size: 34px;
-						padding-left: 15px;
 					}
 
 					h4 {
 						font-size: 18px;
-						padding: 0 15px;
 						text-align: left;
 					}
 				}
@@ -917,10 +917,11 @@ $blue: #416299;
 				}
 
 				.location-icon {
-					
+
 					img {
 						position: relative;
 						bottom: 2px;
+						margin-right: 5px;
 					}
 				}
 			}

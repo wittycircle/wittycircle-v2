@@ -602,13 +602,12 @@
       padding: 0 15px; }
       #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info {
         /*					min-height: 120px;
-        */ }
+        */
+        padding: 0 10px; }
         #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info h1 {
-          font-size: 34px;
-          padding-left: 15px; }
+          font-size: 34px; }
         #viewProject-page #viewProject-header .viewProject-title .viewProject-title-info h4 {
           font-size: 18px;
-          padding: 0 15px;
           text-align: left; }
     #viewProject-page #viewProject-header .viewProject-info {
       padding: 0 10px;
@@ -621,7 +620,8 @@
         margin-bottom: 10px; }
       #viewProject-page #viewProject-header .viewProject-info .location-icon img {
         position: relative;
-        bottom: 2px; }
+        bottom: 2px;
+        margin-right: 5px; }
     #viewProject-page #viewProject-header .viewProject-mobile-options {
       display: block;
       margin-top: 20px; }

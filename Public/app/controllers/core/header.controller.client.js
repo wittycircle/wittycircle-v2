@@ -98,19 +98,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     //     }
     // });
 
-    $scope.popSwL = function() {
-        var x       = $('#main-signup-modal');
-        var filter  = $("#page-wrap");
-        var marge = (x - 600)/2/2;
-
-        if (x.css('display') === "none") {
-            filter.fadeIn(500);
-            x.css({'top': marge.toString() + "px"});
-            $mdBottomSheet.cancel();
-            x.fadeIn();
-        }
-    };
-
     $scope.onSwipeRight = function(ev) {
 
         var bodyJq          = $( 'body' ),
@@ -443,10 +430,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (data.userId)
             $location.path('/' + data.userId.username);
         });
-    };
-
-    $scope.closePopover = function() {
-        $mdBottomSheet.hide();
     };
 
     $scope.goToStart = function() {

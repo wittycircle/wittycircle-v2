@@ -38,7 +38,7 @@ $blue: #416299;
 			.popover-text {
 				display: inline-block;
 				float: left;
-				max-width: 700px;
+				max-width: 600px;
 
 				h1 {
 					font-family: 'FreigBook';
@@ -55,10 +55,10 @@ $blue: #416299;
 
 			.popover-button {
 				display: inline-block;
+				float: right;
 				text-align: center;
 				position: relative;
 				top: 15px;
-				margin-left: 70px;
 
 				.fb-login {
 					margin-bottom: 12px;

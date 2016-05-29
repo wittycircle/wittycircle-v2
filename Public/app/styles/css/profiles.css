@@ -293,6 +293,15 @@ a:hover {
             font-family: 'FreigBook';
             font-size: 14px;
             color: #999999; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown h4 {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            color: black;
+            word-break: break-all; }
+          #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown span {
+            font-family: 'FreigBook';
+            font-size: 14px;
+            color: #999999; }
           #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .profile-pfollow-list {
             width: 100%; }
             #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .profile-pfollow-list .profile-pfollow-picture {
@@ -306,7 +315,7 @@ a:hover {
               margin: 5px 0; }
             #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .profile-pfollow-list .profile-pfollow-info {
               display: inline-block;
-              width: 180px;
+              width: 170px;
               min-height: 36px;
               margin-top: 5px;
               margin-left: 5px;
@@ -334,7 +343,7 @@ a:hover {
             margin: 5px 0; }
           #profile-header .profile-bottom .profile-bottom-info .profile-follow .profile-follow-dropdown .follow-list-dd .profile-follow-info {
             display: inline-block;
-            width: 180px;
+            width: 170px;
             min-height: 36px;
             margin-top: 5px;
             margin-left: 5px;

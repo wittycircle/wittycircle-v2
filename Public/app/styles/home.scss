@@ -894,7 +894,7 @@ a:hover {
 /*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
 
 
-@media only screen and (max-width: 1270px) {
+@media only screen and (max-width: 1024px) {
 	.home-video-bg {
 		display: none;
 	}
@@ -906,16 +906,30 @@ a:hover {
 		background-image: url("/images/bg_mobile/bg_home_mobile.jpg");
 		background-size: cover;
 		background-position: center center;
-		-webkit-filter: brightness(0.6);
-		-moz-filter: brightness(0.6);
-		-o-filter: brightness(0.6);
-		-ms-filter: brightness(0.6);
-		filter: brightness(0.6);
+		-webkit-filter: brightness(0.4);
+		-moz-filter: brightness(0.4);
+		-o-filter: brightness(0.4);
+		-ms-filter: brightness(0.4);
+		filter: brightness(0.4);
 		-webkit-transform: translateZ(0);
 		-moz-transform: translateZ(0);
 		-ms-transform: translateZ(0);
 		-o-transform: translateZ(0);
 		transform: translateZ(0);
+	}
+
+	/* Main text content */
+	#main-discover {
+		width: 80%;
+		margin: 0 10%;
+		top: 120px;
+
+		.main-info {
+			margin-top: 50px;
+		}
+	}
+	#main-body-content .main-body-container .main-body-contents .main-body-cardList .main-body-card {
+		top: -70px;
 	}
 }
 
@@ -955,7 +969,7 @@ a:hover {
 			text-align: center;
 
 			.button-start-project {
-				margin: 0 10px 15px 10px;
+				margin: 0px 0px 15px 0px;
 				-webkit-transition: all 200ms linear;
 				-o-transition: all 200ms linear;
 				-moz-transition: all 200ms linear;
@@ -1011,8 +1025,9 @@ a:hover {
 			text-align: center;
 
 			h1 {
-				font-family: 'FreigMed';
-				font-size: 38px;
+				font-family: 'FreigSem';
+				font-size: 42px;
+				text-shadow: 1px 1px  10px black;
 			}
 		}
 
@@ -1025,18 +1040,23 @@ a:hover {
 			margin-left: auto;
 			margin-right: auto;
 			margin-top: 10px;
-			margin-bottom: 10px;
+			margin-bottom: 40px;
+			text-align: center;
 
 			h4 {
 				font-family: 'FreigBook';
-				font-size: 21px;
-				line-height: 28px;
+				font-size: 24px;
+				line-height: 24px;
 				opacity: 0.9;
+				margin: 0 auto;
+				text-shadow: 1px 1px  10px black;
+
 			}
 		}
 
 		.main-info {
-			margin-top: 60px;
+			margin-top: 40px;
+
 			p {
 				margin: 0;
 			}
@@ -1246,16 +1266,12 @@ a:hover {
 		.main-title-market-mobile {
 			h1 {
 				font-family: 'FreigSem';
-				font-size: 40px;
+				font-size: 35px;
 			}
 		}
+
 		.main-title-text-mobile {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			padding: 0 25px;
+			width: 310px;
 
 			h4 {
 				font-family: 'FreigMed';
@@ -1265,10 +1281,6 @@ a:hover {
 				color: #fafafa;
 			}
 		}
-
-		.main-info {
-			margin-top: 35px;
-		}
 	}
 }
 
@@ -1276,21 +1288,21 @@ a:hover {
 
 	#main-discover {
 		top: 130px;
-		.main-title-text-mobile {
-			display: none
-		}
 
+		.main-title-market-mobile {
+			h1 {
+				font-size: 35px;
+			}
+		}
 		.main-button-discover {
 			margin: 15px 20px;
 		}
 		.main-title-text-mobile {
 			display: block;
-			padding-left: 10px;
-			margin-bottom: 0;
-		}
-
-		.main-info {
-			margin-top: 30px;
+			width: 305px;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: left;
 		}
 	}
 }
@@ -1301,6 +1313,8 @@ a:hover {
 	#main-discover {
 		top: 130px;
 		.main-title-market-mobile {
+			margin-bottom: 40px;
+
 			h1 {
 				font-family: 'FreigMed';
 				font-size: 36px;
@@ -1311,7 +1325,7 @@ a:hover {
 			display: none;
 		}
 		.main-info {
-			margin-top: 60px;
+			margin-top: 50px;
 		}
 	}
 

@@ -15,7 +15,7 @@ body {
 }
 
 /*********************** MEDIA QUERIES MOBILE WIDTH superior than 736px **************************/
-@media only screen and (min-width: 737px) {
+@media only screen and (min-width: 768px) {
   body {
      min-width:1200px !important; /* suppose you want minimun width of 1200px */
      width: 100% !important;

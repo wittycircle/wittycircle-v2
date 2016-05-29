@@ -9,7 +9,7 @@
 **/
 
 angular.module('wittyApp')
-.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, showbottomAlert, $state, Project_Follow) {
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow) {
 
     var socket = io.connect('https://www.wittycircle.com');
     // var socket = io.connect('http://127.0.0.1');
@@ -475,50 +475,6 @@ angular.module('wittyApp')
         });
     };
 
-    /*** Scroll to display Popover ***/
-    var unique = 0;
-    setTimeout(function() {
-	if (discover.ww >= 736) {
-        if (!$rootScope.globals.currentUser) {
-
-            $(document).scroll(function () {
-                if ($('#discover-body-page')[0]) {
-                    var y = $(this).scrollTop();
-
-                    if (!unique && y > 350) {
-                        unique = 1;
-                        showbottomAlert.pop_it_persistance();
-                    }
-                    if (y <= 350) {
-                        unique = 0;
-                        $mdBottomSheet.cancel();
-                    }
-                }
-            });
-        } else {
-	    unique = 0;
-	    $(document).scroll(function() {
-		if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
-		    var y = $(this).scrollTop();
-
-		    if (!unique && y > 350) {
-			unique = 1;
-			 $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
-			     if (!res.success) {
-				 $rootScope.socialCheck = true;
-				 showbottomAlert.pop_share();
-			     }
-			 });
-		    }
-		    if (y <= 350) {
-			$mdBottomSheet.cancel();
-		    }
-		}
-	    });
-	}
-	}
-    }, 1000);
-
     /*var shareInterval = $timeout(function() {
         if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {
             $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
@@ -530,9 +486,9 @@ angular.module('wittyApp')
         }
     }, 0);*/
 
-    /*$scope.$on('$destroy', function() {
-        $timeout.cancel(shareInterval);
-    });*/
+    $scope.$on('$destroy', function() {
+        $mdMenu.hide();
+    });
 
     /*** All watch variable ***/
     $scope.$watch('discover.cards', function(value) {
@@ -602,6 +558,67 @@ angular.module('wittyApp')
         }
     });
 
+})
+.directive('sharePop', function($http, $rootScope, $mdBottomSheet, $timeout) {
+    return {
+        link: function(scope, element, attrs, model) {
+            /*** Scroll to display Popover ***/
+            var unique = 0;
+            var ww = $(window).width();
+
+            setTimeout(function() {
+            if (ww >= 736) {
+                if (!$rootScope.globals.currentUser) {
+
+                    $(document).scroll(function () {
+                        if ($('#discover-body-page')[0]) {
+                            var y = $(this).scrollTop();
+
+                            if (!unique && y > 350) {
+                                unique = 1;
+                                $mdBottomSheet.show({
+                                    templateUrl: 'views/core/popover-login.view.client.html',
+                                    controller: 'PopUpCtrl',
+                                    clickOutsideToClose: false,
+                                    disableParentScroll: false,
+                                });
+                            }
+                            if (y <= 350) {
+                                unique = 0;
+                                $mdBottomSheet.hide();
+                            }
+                        }
+                    });
+                } else {
+                unique = 0;
+                $(document).scroll(function() {
+                if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
+                    var y = $(this).scrollTop();
+
+                    if (!unique && y > 350) {
+                    unique = 1;
+                     $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+                         if (!res.success) {
+                         $rootScope.socialCheck = true;
+                            $mdBottomSheet.show({
+                                templateUrl: 'views/core/popover-share.view.client.html',
+                                controller: 'PopUpCtrl',
+                                clickOutsideToClose: true,
+                                disableParentScroll: false,
+                            });
+                         }
+                     });
+                    }
+                    if (y <= 350) {
+                    $mdBottomSheet.hide();
+                    }
+                }
+                });
+            }
+            }
+            }, 1000);
+        }
+    }
 })
 .directive('preDisLocation', function($state) {
     return {

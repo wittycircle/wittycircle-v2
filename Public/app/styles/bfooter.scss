@@ -232,7 +232,7 @@
 
 /* Exception media query width */
 
-@media only screen and (max-width: 955px) {
+@media only screen and (max-width: 1024px) {
 	.bf-info {
 		background-image: none;
 	}
@@ -243,28 +243,13 @@
 			background-position: center center;
 			background-size: cover;
 			background-color: none;
-			height: 590px;
+			height: 394px;
 			-webkit-filter: blur(2px) brightness(0.5);
 			-moz-filter: blur(2px) brightness(0.5);
 			-o-filter: blur(2px) brightness(0.5);
 			-ms-filter: blur(2px) brightness(0.5);
 			filter: blur(2px) brightness(0.5);
 			overflow: hidden;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 		}
 	}
 }
@@ -289,21 +274,6 @@
 			-o-filter: blur(2px) brightness(0.6);
 			-ms-filter: blur(2px) brightness(0.6);
 			filter: blur(2px) brightness(0.6);
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 		}
 
 		.bf2-info {
@@ -346,21 +316,6 @@
 			-o-filter: blur(2px) brightness(0.6);
 			-ms-filter: blur(2px) brightness(0.6);
 			filter: blur(2px) brightness(0.6);
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 		}
 
 		h4 {
@@ -395,21 +350,6 @@
 			background-size: cover;
 			background-color: none;
 			height: 882px;
-			-webkit-transform: translateZ(0);
-			-moz-transform: translateZ(0);
-			-ms-transform: translateZ(0);
-			-o-transform: translateZ(0);
-			transform: translateZ(0);
-			-webkit-perspective: 1000;
-			-moz-perspective: 1000;
-			-ms-perspective: 1000;
-			-o-perspective: 1000;
-			perspective: 1000;	
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			-ms-backface-visibility: hidden;
-			-o-backface-visibility: hidden;
-			backface-visibility: hidden;
 		}
 
 		.bf-info {

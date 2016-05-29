@@ -487,29 +487,29 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 .directive('homeMessageModal', function() {
     var x = $(window).width();
 
-    if (x >= 736) {
-        return {
-            templateUrl: 'views/messaging/messaging.modals.view.client.html',
-            restrict: "AE",
-            scope: false,
-            controller: 'MessageCtrl',
-            link: function(scope, element, attr) {
-                var myelem = (angular.element(element.children()[0]));
+        if (x >= 736) {
+            return {
+                templateUrl: 'views/messaging/messaging.modals.view.client.html',
+                restrict: "AE",
+                scope: false,
+                controller: 'MessageCtrl',
+                link: function(scope, element, attr) {
+                    var myelem = (angular.element(element.children()[0]));
 
-                myelem.on('click', function(e) {
-                    var target = e.target.id;
+                    myelem.on('click', function(e) {
+                        var target = e.target.id;
 
-                    if (target === "mmo") {
-                        document.getElementById('messages-modal-searchArea').style.display = "none";
-                        document.getElementById('messages-modal-newMessageArea').style.display = "block";
-                    }
-                });
+                        if (target === "mmo") {
+                            document.getElementById('messages-modal-searchArea').style.display = "none";
+                            document.getElementById('messages-modal-newMessageArea').style.display = "block";
+                        }
+                    });
 
+                }
             }
         }
-    }
 
-    return {
+        return {
 
     }
 });

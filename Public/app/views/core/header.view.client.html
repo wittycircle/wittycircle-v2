@@ -102,7 +102,7 @@
             <div id="hdropm" class="header-dropdown-mailbox header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()" style="display: none;">
                 <div class="header-dropdown-head">
                     <a class="header-see-all" href="/messages">See All</a>
-                    <a id="hnmmopen" class="header-new-message">Write A New Message</a>
+                    <a id="hnmmopen" class="header-new-message" ng-click="getTemplate()">Write A New Message</a>
                 </div>
                 <div class="header-dropdown-lists">
                     <div ng-if="!dialogues.length" class="header-noMessage-text">

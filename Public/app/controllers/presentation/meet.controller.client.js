@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, cardProfilesResolve, getSkillsResolve, $mdBottomSheet, $state) {
+angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData, $mdBottomSheet, $state) {
+
 
 	var meet = this;
 	var ww = $(window).width();
@@ -17,8 +18,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.openmmodal = openmmodal;
 	meet.closemmodal = closemmodal;
 	meet.getAnything = getAnything;
-	meet.getCardProfiles = getCardProfiles;
-	meet.getSkills = getSkills;
+	// meet.getCardProfiles = getCardProfiles;
 	meet.searchSkill = searchSkill;
 	meet.removeSkill = removeSkill;
 	meet.goToProfile = goToProfile;
@@ -28,8 +28,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	var skillListUrl = "";
 	var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
 
-	getSkills();
-	getCardProfiles();
 	checkParams();
 
 	/*** Meet Card Page ***/
@@ -43,6 +41,17 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		url: "https://www.wittycircle.com/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
 	};
+
+	$scope.$on('$stateChangeStart', function(next, current) {
+		if(window.stop !== undefined)
+        {
+             window.stop();
+        }
+        else if(document.execCommand !== undefined)
+        {
+             document.execCommand("Stop", false);
+        }
+	});
 
 	/*** Discover Mobile ***/
 	function openmmodal (value) {
@@ -66,25 +75,25 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		meet.mmobile.general = false;
 	}
 
-	function getCardProfiles () {
-		if (cardProfilesResolve.data) {
-			meet.cardProfiles = cardProfilesResolve.data.data;
-			if ($rootScope.globals.currentUser) {
-				Profile.getFollowedUser(cardProfilesResolve.data, function(res){
-					meet.followed = res;
-				});
-			}
-		};
-	}
-
-	function getSkills () {
-		if (getSkillsResolve.data) {
-			meet.skills = getSkillsResolve.data.skills;
-			if ($stateParams.skillParams) {
-				meet.skillList = $stateParams.skillParams;
-			}
+	Users.getCardProfiles(function(result) {
+		meet.cardProfiles = result.data
+		if ($rootScope.globals.currentUser) {
+			Profile.getFollowedUser(result.data, function(res){
+				meet.followed = res;
+			});
 		}
-	}
+	});
+
+	RetrieveData.getData('/skills', 'GET').then(function(res) {
+		meet.skills = res.skills;
+		if ($stateParams.skillParams) {
+			meet.skillList = $stateParams.skillParams;
+		}
+	});
+
+	$scope.$on('$destroy', function() {
+		$stateParams.skillParams = [];
+	});
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);

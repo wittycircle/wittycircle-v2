@@ -34,7 +34,6 @@
 
         function getProjects(url, method) {
             var deferred = $q.defer();
-            console.log("OK");
             return $http({
                 method: method,
                 url: url

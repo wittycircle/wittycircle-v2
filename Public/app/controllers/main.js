@@ -54,6 +54,17 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     main.selectedname;
 
 
+    $scope.$on('$stateChangeStart', function(next, current) {
+        if(window.stop !== undefined)
+        {
+             window.stop();
+        }
+        else if(document.execCommand !== undefined)
+        {
+             document.execCommand("Stop", false);
+        }
+    });
+    
     /***** MOBILE *****/
     main.mamobile = {};
 

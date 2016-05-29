@@ -2,7 +2,7 @@
 	<div data-ng-include="'views/mobiles/main-mobile-modal.view.client.html'"></div>
 	<div class="body-page">
 		<div id="hvbg" class="home-video-bg">
-			<video poster="images/poster/poster_home_signup.jpg" loop muted autoplay>
+			<video poster="images/poster/poster_home_signup.jpg" loop muted>
 				<source src="videos/Home.mp4" type="video/mp4">
 			</video>
 		</div>
@@ -409,9 +409,9 @@
 		var x = $(window).width();
 
 		$(document).ready(function() { 
-			document.getElementById('footer-page').style.visibility = "visible";
-			
+
 		    if (x >= 736) {
+
 		        var y,
 		            mbdown  = $('#mbdown'),
 		            mbbox   = $('#mbbox'),
@@ -424,7 +424,7 @@
 		            apocIT  = document.querySelectorAll("#apoc img"),
 		            acocIT  = document.querySelectorAll("#acoc img");
 
-		        if (screen.height > 1280)
+		        if (screen.height > 1280 && document.getElementById('hvbg'))
 		            document.getElementById('hvbg').style.height = "650px"; 
 
 		        $('#main-body-page').on('click', function(e) {
@@ -498,6 +498,7 @@
 		});
 
 		if (x >= 736) {
+
 		    function changeInputWidth() {
 		        $("#mptitle").css('width', function() {
 		            var el = $('<span />', {

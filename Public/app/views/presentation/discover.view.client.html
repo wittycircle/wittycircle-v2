@@ -2,7 +2,7 @@
 	<div data-ng-include="'views/mobiles/discover-mobile-modal.view.client.html'"></div>
 	<div class="body-page">
 		<div class="home-video-bg">
-			<video poster="images/poster/poster_discover.jpg" loop muted autoplay>
+			<video poster="images/poster/poster_discover.jpg" loop muted>
 	    		<source src="videos/Discover.mp4" type="video/mp4">
 	  		</video>
 	  	</div>
@@ -181,9 +181,6 @@
 	</section>
 
 	<script>
-		$(document).ready(function() {
-			document.getElementById('footer-page').style.visibility = "visible";
-		});
 		
 		function initPage() {
 			$(window).scrollTop(0);

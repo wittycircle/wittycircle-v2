@@ -74,6 +74,10 @@
         var x = $(window).width();
         if (x < 736) {
             $(document).ready(function() {
+		setTimeout(function() {
+                $("#footer-page").css('visibility', 'visible');
+                }, 1000);
+
                 var container1  = $("#fta"),
                     container2  = $("#fte"),
                     container3  = $("#ftm"),
@@ -101,7 +105,9 @@
             });
         } else {
             $(document).ready(function() {
+		setTimeout(function() {
                 $("#footer-page").css('visibility', 'visible');
+		}, 1000);
             });
         }
     </script>

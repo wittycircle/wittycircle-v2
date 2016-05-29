@@ -506,77 +506,79 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         };
     }
 ])
-.directive('googlePlace', function() {
+.directive('googlePlace', function($timeout) {
     return {
         require: 'ngModel',
         link: function(scope, element, attrs, model) {
-            var options = {
-                types: ['(cities)'],
-            };
-
-            scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
-
-            google.maps.event.addListener(scope.gPlace, 'place_changed',
-            function() {
-                scope.$apply(function() {
-                    model.$setViewValue(element.val());
-                    var x = model.$viewValue.indexOf(',');
-                    scope.searchHL = model.$viewValue.slice(0, x);
-                });
-            });
-
-            scope.$watch('selectedlocation', function(value) {
-                if (value) {
-                    var checkCountry = value.indexOf('United States');
-                    if (checkCountry >= 0) {
-                        scope.selectedlocation = value.slice(0, checkCountry - 2);
-                        var x = scope.selectedlocation.length;
-                    } else
-                    var x = value.length;
-                    if (x > 11) {
-                        var x = value.length,
-                        y = $(window).width();
-                        if (x > 11) {
-                            $("#searchTextField").css('width', function() {
-                                var el = $('<span />', {
-                                    text : value,
-                                    css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
-                                }).appendTo('body');
-                                var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
-                                el.remove();
-                                if (y > 736)
-                                return w.toString() + "px";
-                                else
-                                return "260px";
-                            });
-                        } else
-                        $("#searchTextField").css('width', '200px');
+	    $timeout(function() {
+		var options = {
+                    types: ['(cities)'],
+		};
+		
+		scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
+		
+		google.maps.event.addListener(scope.gPlace, 'place_changed',
+					      function() {
+						  scope.$apply(function() {
+						      model.$setViewValue(element.val());
+						      var x = model.$viewValue.indexOf(',');
+						      scope.searchHL = model.$viewValue.slice(0, x);
+						  });
+					      });
+		
+		scope.$watch('selectedlocation', function(value) {
+                    if (value) {
+			var checkCountry = value.indexOf('United States');
+			if (checkCountry >= 0) {
+                            scope.selectedlocation = value.slice(0, checkCountry - 2);
+                            var x = scope.selectedlocation.length;
+			} else
+			    var x = value.length;
+			if (x > 11) {
+                            var x = value.length,
+                            y = $(window).width();
+                            if (x > 11) {
+				$("#searchTextField").css('width', function() {
+                                    var el = $('<span />', {
+					text : value,
+					css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
+                                    }).appendTo('body');
+                                    var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 30;
+                                    el.remove();
+                                    if (y > 736)
+					return w.toString() + "px";
+                                    else
+					return "260px";
+				});
+                            } else
+				$("#searchTextField").css('width', '200px');
+			}
                     }
-                }
-            });
-
-            scope.$watch('shufflerLocation', function(value, oldvalue) {
-                if (value !== oldvalue) {
-                    var checkCountry = value.indexOf('United States');
-                    if (checkCountry >= 0) {
-                        scope.shufflerLocation = value.slice(0, checkCountry - 2);
-                        var x = scope.shufflerLocation.length;
-                    } else {
-                        var x = value.length;
-                        if (x > 7) {
-                            $("#mbsLocation").css('width', function() {
-                                var el = $('<span />', {
-                                    text : value,
-                                    css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
-                                }).appendTo('body');
-                                var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 50;
-                                el.remove();
-                                return w.toString() + "px";
-                            });
-                        }
+		});
+		
+		scope.$watch('shufflerLocation', function(value, oldvalue) {
+                    if (value !== oldvalue) {
+			var checkCountry = value.indexOf('United States');
+			if (checkCountry >= 0) {
+                            scope.shufflerLocation = value.slice(0, checkCountry - 2);
+                            var x = scope.shufflerLocation.length;
+			} else {
+                            var x = value.length;
+                            if (x > 7) {
+				$("#mbsLocation").css('width', function() {
+                                    var el = $('<span />', {
+					text : value,
+					css  : {left: -9999, position: 'relative', 'font-family': 'FreigLight', 'font-size': '32px'}
+                                    }).appendTo('body');
+                                    var w = parseInt(el.css('width').replace(/[^-\d\.]/g, '')) + 50;
+                                    el.remove();
+                                    return w.toString() + "px";
+				});
+                            }
+			}
                     }
-                }
-            });
+		});
+	    }, 1000);
         }
     }
 });

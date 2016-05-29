@@ -32,6 +32,8 @@
 
     <!-- build:css({.,.tmp}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <link rel="stylesheet" href="styles/animate.css">
     <link rel="stylesheet" href="styles/witty-animate.css" />
     <link rel="stylesheet" href="styles/header.css" />
@@ -59,8 +61,6 @@
     <link rel="stylesheet" href="styles/profiles-modal-edit.css" />
     <link rel="stylesheet" href="styles/_scss/redactor.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
-    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
     <!-- endbuild -->
 
     <script>
@@ -122,24 +122,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8" async></script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </head>
-  <body class="cbp-spmenu-push">
-    <!--[if lte IE 8]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
-    <![endif]-->
-    <div id="page-wrap"></div>
-    <section id="modal-section">
-        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
-        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
-        <div data-ng-include="'views/mobiles/mobile-modal.view.client.html'" ng-if="mobile"></div>
-        <div ng-if="mobile" data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
-    </section>
-    <section id="body-section">
-        <div data-ng-if="navbar.nshow !== false" id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
-        <section id="bodyCore" ui-view autoscroll="true"></section>
-        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
-    </section>
-
-    <!-- build:js({.,.tmp,app}) scripts/vendor.js -->
+<!-- build:js({.,.tmp,app}) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -188,6 +171,7 @@
     <script src="modules/projects/routes/projects.routes.client.js" ></script>
     <script src="modules/validate-account/routes/validate-account.routes.client.js" ></script>
     <script src="scripts/algolia.min.js" ></script>
+    <script src="scripts/socket.io.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/witty.custom.filter.js" ></script>
     <script src="scripts/cloudinary_config.js" ></script>
@@ -246,6 +230,22 @@
     <script src="directives/uisrefif.directive.client.js"></script>
     <!-- endbuild -->
 
+  <body class="cbp-spmenu-push">
+    <!--[if lte IE 8]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.d</p>
+    <![endif]-->
+    <div id="page-wrap"></div>
+    <section id="modal-section">
+        <div data-ng-include="'views/core/signup-modal.view.client.html'"></div>
+        <div data-ng-include="'views/core/login-modal.view.client.html'"></div>
+        <div ng-if="mobile" data-ng-include="'views/mobiles/mobile-modal.view.client.html'"></div>
+        <div ng-if="mobile" data-ng-include="'views/mobiles/new-message-mobile-modal.html'" data-ng-controller="MessageCtrl"></div>
+    </section>
+    <section id="body-section">
+        <div data-ng-if="navbar.nshow !== false" id="headerCore" data-ng-include="'views/core/header.view.client.html'"></div>
+        <section id="bodyCore" ui-view autoscroll="true"></section>
+        <div id="footerCore" data-ng-include="'views/core/footer.view.client.html'"></div>
+    </section>
 
     <!-- DOM -->
     <script>

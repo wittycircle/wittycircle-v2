@@ -22,9 +22,9 @@ var wittyCircleApp = angular
 	'com.2fdevs.videogular.plugins.poster',
 	'cloudinary',
 	'angular-redactor',
-	'oc.lazyLoad',
 	'720kb.socialshare',
 	// Custom modules
+        'oc.lazyLoad',
 	'wittyProjectModule',
 	'wittyValidateAccountModule'
 ])

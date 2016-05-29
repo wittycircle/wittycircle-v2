@@ -25,9 +25,8 @@ var express		= require('express')
 , mandrill_client	= new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA')
 , algoliaClient	= require('./algo/algolia').algoliaClient
 , compression = require('compression')
-, helmet = require('helmet');
-
-app.use(compression());
+, helmet = require('helmet')
+, nstatic = require('node-static');
 
 var httpsOption		= {
     secureProtocol: 'SSLv23_method',
@@ -46,6 +45,8 @@ app.use(helmet.hsts({
 }));
 
 var updateUserActivity = require('./tools/mail_message_functions').sendMailUnread;
+
+var fileServer = new nstatic.Server('./Public/dist/images/', {cache: 3600});
 
 setInterval(function () {
     console.log('start mail process');
@@ -72,16 +73,18 @@ cloudinary.config({
   api_secret: 'FC29M50mu-5ekjXXGaHtay7yNFk'
 });
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(__dirname + '/Public/dist/'));
+app.use(compression());
+
+app.use(express.static(__dirname + '/Public/'));
+app.use(express.static(__dirname + '/Public/dist/'))
 app.use(express.static(__dirname + '/Public/dist/styles/'));
 app.use(express.static(__dirname + '/Public/dist/scripts/'));
-app.use(express.static(__dirname + '/Public/app/'));
-
-// app.use(express.static(__dirname + '/Public/'));
-// app.use(express.static(__dirname + '/Public/app/styles/css'));
+app.use(express.static(__dirname + '/Public/app/'));;
+//app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -163,7 +166,11 @@ require('./routes')(app, passport);
 require('./algolia')(app, algoliaClient);
 
 /* Socket */
-var ps = https.createServer(httpsOption, app);
+var ps = https.createServer(httpsOption, app, function(req, res) {
+    request.addListener('end', function () {
+        fileServer.serve(request, response);
+    }).resume();
+});
 // var io = require('socket.io')(server);
 var io = require('socket.io').listen(ps);
 

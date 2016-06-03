@@ -57,6 +57,7 @@
                     </div>
                     <ul id="hmmenu" class="header-mobile-menu">
                         <li><a href="" data-ui-sref="profile({username: user.username})">My Profile</a></li>
+                        <li ng-if="moderator" ><a href="/admin/mailpanel">Admin Panel</a></li>
                         <li><a href="/my-projects">Projects</a></li>
                         <li><a href="/setting">Settings</a></li>
                         <li><a ng-click="logout()">Log out</a></li>
@@ -94,6 +95,7 @@
                 </a>
                 <ul id="hdmenu" class="header-dropdown-menu" style="display: none;">
                     <li><a href="" data-ui-sref="profile({username: user.username})">My Profile</a></li>
+                    <li ng-if="moderator" ><a href="/admin/mailpanel">Admin Panel</a></li>
                     <li><a href="/my-projects">Projects</a></li>
                     <li><a href="/setting">Settings</a></li>
                     <li><a ng-click="logout()">Log out</a></li>

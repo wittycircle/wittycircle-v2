@@ -15,6 +15,7 @@
         service.ClearCredentials = ClearCredentials;
         service.ResetPassword = ResetPassword;
         service.ResetPasswordTokenValidation = ResetPasswordTokenValidation;
+        service.checkAdmin = checkAdmin;
 
         return service;
 
@@ -54,6 +55,10 @@
             $http.post('/api/login', data).success(function (response) {
                 callback(response);
             });
+        }
+
+        function checkAdmin() {
+            return $http.get('/admin/check');
         }
 
         // Setting Credentials and user object to $cookieStore

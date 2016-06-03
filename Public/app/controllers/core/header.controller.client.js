@@ -39,6 +39,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         return false;
     }
 
+    $scope.moderator = $rootScope.globals.currentUser.moderator;
     $scope.updateUrlLogin = function () {
         $state.transitionTo('main', {login: 'true'}, { notify: false, inherit: true });
     }

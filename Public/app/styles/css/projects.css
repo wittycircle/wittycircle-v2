@@ -286,7 +286,8 @@
   overflow: hidden; }
   .project-post-box vg-overlay-play .play,
   .project-post-video vg-overlay-play .play {
-    font-size: 50px; }
+    font-size: 50px;
+    color: #999999; }
   .project-post-box videogular,
   .project-post-video videogular {
     background-color: transparent; }

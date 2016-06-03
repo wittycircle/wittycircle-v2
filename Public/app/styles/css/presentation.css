@@ -517,7 +517,9 @@
     font-size: 16px;
     color: #999999; }
 .meet-component #meet-search1 .meet-search2-anylocation {
-  display: inline-block; }
+  display: inline-block;
+  position: relative;
+  right: 10px; }
   .meet-component #meet-search1 .meet-search2-anylocation input {
     width: 200px; }
   .meet-component #meet-search1 .meet-search2-anylocation input:focus {

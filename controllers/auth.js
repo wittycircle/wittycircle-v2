@@ -46,6 +46,14 @@ exports.ensureAuthenticated = function(req, res, next) { // make sure that the u
     };
 };
 
+exports.ensureAdminAuthenticated = function(req, res, next) {
+    if (req.isAuthenticated() && req.user.moderator) {
+        return next();
+    } else {
+        return res.redirect('/');
+    };
+}
+
 exports.hasAccess = function(req, res, next) {
     if (req.headers && req.headers.access_token) {
         if (req.headers.access_token == 'oTJaUTHa6FFTSSLrzQOb') {

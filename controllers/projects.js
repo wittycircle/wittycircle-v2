@@ -617,15 +617,15 @@ exports.createProject = function(req, res){
                                 var message = {
                                     "html": "<p>HTML content</p>",
                                     "subject": "Your project on Wittycircle",
-                                    "from_email": "noreply@wittycircle.com",
-                                    "from_name": "Wittycircle",
+                                    "from_email": "quentin@wittycircle.com",
+                                    "from_name": "Quentin Verriere",
                                     "to": [{
                                         "email": req.user.email,
                                         "name": data[0].first_name,
                                         "type": "to"
                                     }],
                                     "headers": {
-                                        "Reply-To": "message.reply@example.com"
+                                        "Reply-To": "quentin@wittycircle.com"
                                     },
                                     "important": false,
                                     "track_opens": null,
@@ -647,7 +647,6 @@ exports.createProject = function(req, res){
                                     }],
                                     "merge_vars": [
                                     {
-                                        "rcpt": "maxencemasson.mm@gmail.com",
                                         "vars": [
                                         {
                                             "name": "fname",
@@ -684,21 +683,20 @@ exports.updateProject = function(req, res){
         return res.status(400).send({message: 'You need to login'});
     }
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
-    req.checkBody('category_id', 'Error Message').isInt();
-    req.checkBody('title', 'Error Message').isString().max(256);
-    req.checkBody('description', 'Error Message').optional().isString().max(512);
-    req.checkBody('location_city', 'Error Message').isString().max(64);
-    req.checkBody('location_state', 'Error Message').optional().isString().max(64);
-    req.checkBody('location_country', 'Error Message').isString().max(64);
-    req.checkBody('picture', 'Error Message').optional().isString().max(128);
-    req.checkBody('post', 'Error Message').optional().isString();
-    req.checkBody('main_video', 'Error Message').optional().isString().max(256);
-    req.checkBody('picture_position', 'Error Message').optional().isString().max(128);
-    req.checkBody('main_video_id', 'Error message').optional().isString().max(256);
-    req.checkBody('picture_card', 'Error message').optional().isString().max(258);
+    req.checkBody('category_id', 'Error Message1').isInt();
+    req.checkBody('title', 'Error Message2').isString().max(256);
+    req.checkBody('description', 'Error Message3').optional().isString().max(512);
+/*    req.checkBody('location_city', 'Error Message4').isString().max(64);
+    req.checkBody('location_country', 'Error Message6').isString().max(64); */
+    req.checkBody('picture', 'Error Message7').optional().isString().max(128);
+    req.checkBody('main_video', 'Error Message9').optional().isString().max(256);
+    req.checkBody('picture_position', 'Error Message10').optional().isString().max(128);
+    req.checkBody('main_video_id', 'Error message11').optional().isString().max(256);
+    req.checkBody('picture_card', 'Error message12').optional().isString().max(258);
     
 
     var errors = req.validationErrors(true);
+    console.log(errors);
     if (errors) {
         console.log(errors);
         return res.status(400).send(errors);
@@ -900,7 +898,7 @@ exports.getAllProjectMembers = function(req, res) {
     if (errors) {
         return res.status(400).send(errors);
     } else {
-	if (!req.isAuthenticated()) return status(404);
+	if (!req.isAuthenticated()) return res.status(404);
         pool.query("SELECT creator_user_id FROM projects where public_id = ?", req.params.public_id, function(err, response) {
             if (err) {
                 console.log(new Date());

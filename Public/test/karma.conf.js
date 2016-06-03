@@ -49,10 +49,10 @@ module.exports = function(config) {
       'bower_components/oclazyload/dist/ocLazyLoad.js',
       'bower_components/angular-socialshare/dist/angular-socialshare.min.js',
       'bower_components/classie/classie.js',
-      'bower_components/slick-carousel/slick/slick.min.js',
+      'bower_components/slick-carousel/slick/slick.js',
       'bower_components/angular-messages/angular-messages.js',
       'bower_components/angular-material/angular-material.js',
-      'bower_components/angular-redactor/angular-redactor.js',
+      'bower_components/angular-css/angular-css.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       // script other

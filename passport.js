@@ -21,6 +21,9 @@ var mandrill = require('mandrill-api/mandrill');
 // Cloudinary
 var cloudinary = require('cloudinary');
 
+// Mailchimp
+var mailchimp = require('./mailchimpRequest');
+
 pool.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -143,7 +146,15 @@ module.exports = function(passport) {
 						   facebook_id          : profile.id,
 						   facebook_token       : token,
 					       };
-
+					       var mailObject = {
+                                                   'email_address': info.email,
+                                                   'status': 'subscribed',
+                                                   'merge_fields': {
+                                                       'FNAME': info.first_name,
+                                                       'LNAME': info.last_name
+                                                   }
+                                               };
+                                               mailchimp.addMember(mailObject, function(){});
 					       pool.query('INSERT INTO `profiles` SET ?', profile_object, // set all of the facebook information in our profile model
 						  	function(err, result) {
 						      	if (err) throw err;
@@ -180,8 +191,8 @@ module.exports = function(passport) {
 														       var message = {
 															      "html": "<p>HTML content</p>",
 															      "subject": "Welcome to Wittycircle",
-															      "from_email": "noreply@wittycircle.com",
-															      "from_name": "Wittycircle",
+															      "from_email": "quentin@wittycircle.com",
+															      "from_name": "Quentin Verriere",
 															      "to": [{
 																	 "email": info.email,
 																	 "name": info.first_name,
@@ -379,6 +390,15 @@ module.exports = function(passport) {
 					       }
 					   });
 				       }
+				       var mailObject = {
+                                           'email_address': user.emails[0].value,
+                                           'status': 'subscribed',
+                                           'merge_fields': {
+                                               'FNAME': user.name.givenName,
+                                               'LNAME': user.name.familyName,
+                                           }
+                                       };
+                                       mailchimp.addMember(mailObject, function(){});
 				       pool.query('INSERT INTO profiles SET ?', object_profile, // set all of the google information in our user model
 						  function(err, result){
 						      if (err) throw err;

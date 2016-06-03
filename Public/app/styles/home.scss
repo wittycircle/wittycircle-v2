@@ -13,10 +13,6 @@ margin-top: -80px;
 height: 700px;
 }*/
 
-button {
-       padding: 0;
-}
-
 @keyframes appear {
 	from {
 		opacity: 0;
@@ -33,6 +29,18 @@ button {
 	to {
 		opacity: 0;
 	}
+}
+
+#bodyCore{
+	      button {
+		padding: 6px 18px 8px 18px;
+}
+}
+
+#header-section {
+	opacity: 0;
+	-webkit-animation: startAnim 0.4s forwards 1s;
+              animation: startAnim 0.4s forwards 1s;
 }
 
 button {
@@ -939,7 +947,7 @@ a:hover {
 		bottom: -50px;
 		li {
 			button:before {
-				font-size: 10px;
+				font-size: 20px;
 			}
 		}
 	}
@@ -1041,7 +1049,7 @@ a:hover {
 			margin-right: auto;
 			margin-top: 10px;
 			margin-bottom: 40px;
-			text-align: center;
+			text-align: left;
 
 			h4 {
 				font-family: 'FreigBook';

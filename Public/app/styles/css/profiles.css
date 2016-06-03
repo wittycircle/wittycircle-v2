@@ -1,6 +1,11 @@
 a:hover {
   color: white; }
 
+#profile-header, #profile-corps {
+  opacity: 0;
+  -webkit-animation: startAnim 0.4s forwards 0.6s;
+  animation: startAnim 0.4s forwards 0.6s; }
+
 #profile-header {
   position: relative;
   height: 410px;

@@ -9,6 +9,16 @@ body {
   -o-backface-visibility: hidden;
   backface-visibility: hidden; }
 
+@-webkit-keyframes startAnim {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes startAnim {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 /*********************** MEDIA QUERIES MOBILE WIDTH superior than 736px **************************/
 @media only screen and (min-width: 768px) {
   body {

@@ -7,55 +7,49 @@ module.exports = function(app, algoliaClient) {
     var Project = algoliaClient.initIndex('Projects');
     var PAndP 	= algoliaClient.initIndex('PAndP');
 
-    People.search('', function searchDone(err, content) {
-	if (err) { // if index People does not exist then add data to index
-	    pool.query('SELECT * FROM profiles', function(err, data) {
-		if (err) throw err;
-		People.addObjects(data, function(err, content) {
-		    if (err)
-			console.log(err);
+    algoliaClient.deleteIndex('Users', function(error) {
+	pool.query('SELECT * FROM profiles', function(err1, data) {
+	    if (err1) throw err;
+	    People.addObjects(data, function(err2, content) {
+		if (err2)
+		    console.log(err2);
+	    });
+	});
+    });
+    algoliaClient.deleteIndex('Projects', function(error) {
+	pool.query('SELECT * FROM projects', function(err, data) {
+	    if (err) throw err;
+	    Project.addObjects(data, function(err, content) {
+		if (err)
+		    console.log(err);
+	    });
+	});
+    });
+    algoliaClient.deleteIndex('PAndP', function(error) {
+	pool.query('SELECT * FROM projects', function(err, data) {
+	    if (err) throw err;
+	    if (data[0]) {
+		pool.query('SELECT * FROM profiles', function(err, data1) {
+		    if (err) throw err;
+		    if (data1[0]) {
+			function recursive(index) {
+			    if (data[index]) {
+				data1.push(data[index]);
+				recursive(index + 1);
+			    } else {
+				PAndP.addObjects(data1, function(err, content) {
+				    if (err) console.log(err);
+				    return ;
+				});
+			    }
+			};
+			recursive(0);
+		    }
 		});
-	    });
-	}
+	    }
+	});
     });
-    Project.search('', function searchDone(err, content) {
-	if (err) { // if index Project does not exist then add data to index
-	    pool.query('SELECT * FROM projects', function(err, data) {
-		if (err) throw err;
-		Project.addObjects(data, function(err, content) {
-		    if (err)
-			console.log(err);
-		});
-	    });
-	}	    
-    });
-    PAndP.search('', function searchDone(err, content) {
-	if (err) { // if index People does not exist then add data to index
-	    pool.query('SELECT * FROM projects', function(err, data) {
-		if (err) throw err;
-		if (data[0]) {
-			pool.query('SELECT * FROM profiles', function(err, data1) {
-				if (err) throw err;
-				if (data1[0]) {
-					function recursive(index) {
-						if (data[index]) {
-							data1.push(data[index]);
-							recursive(index + 1);
-						} else {
-							PAndP.addObjects(data1, function(err, content) {
-							    if (err) console.log(err);
-							    return ;
-							});
-						}
-					};
-					recursive(0);
-				}
-			});
-		}
-	    });
-	}
-    });
-
+    
     // pool.query('SELECT public_id FROM projects',
     // 	function (err, result) {
     // 		if (err) throw err;

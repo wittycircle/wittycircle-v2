@@ -1,5 +1,5 @@
-
 /****** Presentation Global ******/
+
 .discover-image-bg {
 	display: none;
 }
@@ -718,6 +718,8 @@
 
 		.meet-search2-anylocation {
 			display: inline-block;
+			position: relative;
+			right: 10px;
 
 			input {
 				width: 200px;

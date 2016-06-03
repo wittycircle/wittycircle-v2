@@ -1,6 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var mandrill = require('mandrill-api/mandrill');
 var pf = require('../tools/profile_functions');
+var mailchimp = require('../mailchimpRequest');
 const crypto = require('crypto');
 
 exports.getUserShare = function(req, res) {
@@ -381,6 +382,15 @@ exports.createUser = function(req, res){
 						       //password: shasum.digest('hex')
 						   }, function(err, result) {
 						       if (err) throw err;
+						       var mailObject = {
+							   'email_address': req.body.email,
+							   'status': 'subscribed',
+							   'merge_fields': {
+							       'FNAME': req.body.first_name,
+							       'LNAME': req.body.last_name
+							   }
+						       };
+						       mailchimp.addMember(mailObject, function(){});
 						       pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
 								  function(err, success) {
 								        if (err) throw err;
@@ -427,15 +437,15 @@ exports.createUser = function(req, res){
     			   var message = {
     			       "html": "<p>HTML content</p>",
     			       "subject": "Welcome to Wittycircle",
-    			       "from_email": "noreply@wittycircle.com",
-    			       "from_name": "Wittycircle",
+    			       "from_email": "quentin@wittycircle.com",
+    			       "from_name": "Quentin Verriere",
     			       "to": [{
     				   "email": req.body.email,
     				   "name": req.body.first_name,
     				   "type": "to"
     			       }],
     			       "headers": {
-    				   "Reply-To": "message.reply@example.com"
+    				   "Reply-To": "quentin@wittycircle.com"
     			       },
     			       "important": false,
     			       "track_opens": null,

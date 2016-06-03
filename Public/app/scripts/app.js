@@ -26,7 +26,8 @@ var wittyCircleApp = angular
 	// Custom modules
         'oc.lazyLoad',
 	'wittyProjectModule',
-	'wittyValidateAccountModule'
+	'wittyValidateAccountModule',
+        'angularCSS'
 ])
 .config(function ($urlRouterProvider, $stateProvider, $httpProvider, $locationProvider, redactorOptions) {
 	$stateProvider
@@ -62,10 +63,10 @@ var wittyCircleApp = angular
 		controllerAs: 'meet',
 	})
 	.state('signup', {
-		url         : '/signup',
-		params      : { tagCheckFirst: false},
-		templateUrl : 'views/auth/signup.html',
-		controller  : 'SignupCtrl'
+	    url         : '/signup',
+	    params      : { tagCheckFirst: false},
+	    templateUrl : 'views/auth/signup.html',
+	    controller  : 'SignupCtrl',
 	})
 	.state('password_reset', {
 		url: '/password/reset/:token',
@@ -97,22 +98,23 @@ var wittyCircleApp = angular
 		templateUrl: 'views/messaging/messaging.view.client.html',
 		controller: 'MessageCtrl',
 		resolve : {
-			auth: function($q, $rootScope, $stateParams) {
-				if ($rootScope.globals.currentUser) {
-					return true;
-				} else {
-					return $q.reject('not authorized');
-				}
+		    auth: function($q, $rootScope, $stateParams) {
+			if ($rootScope.globals.currentUser) {
+			    return true;
+			} else {
+			    return $q.reject('not authorized');
 			}
+		    }
 		}
 	})
 	.state('terms', {
-		url: '/terms',
-		templateUrl: 'views/core/terms.view.client.html',
+	    url: '/terms',
+	    templateUrl: 'views/core/terms.view.client.html',
+
 	})
 	.state('privacy', {
-		url: '/privacy',
-		templateUrl: 'views/core/privacy.view.client.html',
+	    url: '/privacy',
+	    templateUrl: 'views/core/privacy.view.client.html',
 	})
 	.state('notfound', {
 		url: '/404',
@@ -131,8 +133,7 @@ var wittyCircleApp = angular
 		templateUrl: 'views/profile/profile.view.client.html',
 		controller: 'ProfileCtrl',
 		controllerAs: 'profileVm',
-		// css: '../styles/profiles.css',
-		resolve:{
+		resolve : {
 			auth: function($q, $rootScope, $stateParams, $location, $state, Profile) {
 				Profile.getUserbyUsername($stateParams.username).then(function(res) {
 					if (res) {
@@ -157,7 +158,7 @@ var wittyCircleApp = angular
 		}
 	})
 
-	$urlRouterProvider.otherwise('/404');
+	$urlRouterProvider.otherwise('modules/404/views/404.html');
 
 	$httpProvider.defaults.withCredentials = true;
 	$httpProvider.interceptors.push(function ($q) { return { request: function (config) { if (!config.timeout) { config.cancel = $q.defer(); config.timeout = config.cancel.promise; } return config; } } });

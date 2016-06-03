@@ -26,7 +26,13 @@ var express		= require('express')
 , algoliaClient	= require('./algo/algolia').algoliaClient
 , compression = require('compression')
 , helmet = require('helmet')
-, nstatic = require('node-static');
+, nstatic = require('node-static')
+, request = require('request')
+, log4js = require('log4js');
+
+
+var logger = log4js.getLogger();
+logger.debug("ERROR OCCURS!");
 
 var httpsOption		= {
     secureProtocol: 'SSLv23_method',
@@ -79,11 +85,11 @@ app.use(passport.session());
 
 app.use(compression());
 
-app.use(express.static(__dirname + '/Public/'));
 app.use(express.static(__dirname + '/Public/dist/'))
 app.use(express.static(__dirname + '/Public/dist/styles/'));
 app.use(express.static(__dirname + '/Public/dist/scripts/'));
 app.use(express.static(__dirname + '/Public/app/'));;
+//app.use(express.static(__dirname + '/Public/'));
 //app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
@@ -158,6 +164,13 @@ String.prototype.Nice = function() {
 String.prototype.capitalize = function() {
     return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 };
+
+/* pool.query('SELECT * FROM TOUT', function(err, result) {
+    if (err) throw err;
+}); */
+
+/* MailChimp API */
+require('./mailchimpAPI')(app, request);
 
 /* REST API */
 require('./routes')(app, passport);

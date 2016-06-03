@@ -14,7 +14,7 @@
         </div>
 
         <div class="header-navigation">
-            <ul id='hnl' class="header-nav-list">
+            <ul id="hnl" class="header-nav-list">
                 <li class="normal" ><a href="/discover">Discover</a></li>
                 <li class="normal"><a href="/meet" >Meet</a></li>
                 <div class="list-soon">
@@ -67,8 +67,8 @@
         </nav>
         <nav class="header-log-off" ng-hide="log">
             <ul id='hnlog' class="header-nav-log">
-                <li class="lsu"><a id="mologin">Log In</a></li>
-                <li class="lsu"><a id="mosignup" ng-click="opensignup('lg'); updateUrlSignup()">Join us</a></li>
+                <li class="lsu"><a href="" id="mologin">Log In</a></li>
+                <li class="lsu"><a href="" id="mosignup" ng-click="opensignup('lg'); updateUrlSignup()">Join us</a></li>
             </ul>
         </nav>
         <hr />
@@ -195,7 +195,7 @@
             <div class="header-find-title">
                 <h1>People</h1>
             </div>
-            <div class="header-find-list" ng-repeat="peopleHit in peopleHits | limitTo : 5" ng-click="goToProfile(peopleHit.id)">
+            <div class="header-find-list" ng-repeat="peopleHit in peopleHits | limitTo : 5" ng-click="goToProfile(peopleHit.id)" ng-if="peopleHit.profile_picture_icon" >
                 <div class="header-findPeople-picture" ng-style="{'background-image': 'url({{ resizePic(peopleHit.profile_picture_icon, 60, 60, 'fill') }})'}"></div>
                 <div class="header-findPeople-content">
                     <div class="header-findPeople-name">
@@ -233,6 +233,9 @@
             bodypos     = document.body.style.position,
             bodyover    = document.body.style.overflow;
 
+ /*	mixpanel.track_links("#hnl a", "click nav link", {
+		"referrer": document.referrer
+	}); */
         $(document).ready(function() {
 
             if (y > 736) {

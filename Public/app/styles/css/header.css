@@ -559,6 +559,9 @@
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-mail,
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-notif {
           display: inline-block; }
+        #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-on-mail {
+          padding: 0;
+          border: none; }
         #header-section #header-content .header-log-aside .log-on .log-on-list .log-on-notifs .log-mobile-buble {
           position: absolute;
           margin-left: 25px;

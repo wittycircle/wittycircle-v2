@@ -173,7 +173,7 @@ String.prototype.capitalize = function() {
 require('./mailchimpAPI')(app, request);
 
 /* BackOffice */
-// require('./backoffice')(app);
+require('./backoffice')(app);
 
 /* REST API */
 require('./routes')(app, passport);

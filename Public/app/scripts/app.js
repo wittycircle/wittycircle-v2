@@ -112,8 +112,8 @@ var wittyCircleApp = angular
 		templateUrl: 'views/backoffice/mailpanel.view.client.html',
 		controller: 'BackOfficeCtrl',
 		resolve : {
-			access: function($location, Authentication) {
-				return Authentication.checkAdmin();
+			access: function(Authentication) {
+			    return Authentication.checkAdmin();
 			}
 		}
 	})

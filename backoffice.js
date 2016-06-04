@@ -79,7 +79,7 @@ module.exports = function(app) {
 										   }
 										}
 
-										mailchimp.addMember(data, function() {
+										mailchimp.addMemberIncomplete("profile", data, function() {
 											return recursive(index + 1);
 										});
 									} else {
@@ -97,7 +97,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/project/incomplete/post', ensureAdmin, function(req, res) {
-		pool.query("SELECT creator_user_id, title  FROM projects WHERE post IS NULL || post = ''", function(err, result) {
+		pool.query("SELECT creator_user_id, title  FROM projects WHERE project_visibility = 1 AND post = '' AND picture != ''", function(err, result) {
 			if (err) throw err;
 			else {
 				var arr = result.map( function(el) { return el.creator_user_id; });
@@ -119,7 +119,7 @@ module.exports = function(app) {
 										   }
 										}
 
-										mailchimp.addMember(data, function() {
+										mailchimp.addMemberIncomplete("post", data, function() {
 											return recursive(index + 1);
 										});
 									} else {
@@ -137,7 +137,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/project/incomplete/picture', ensureAdmin, function(req, res) {
-		pool.query("SELECT creator_user_id, title FROM projects WHERE picture IS NULL || picture = ''", function(err, result) {
+		pool.query("SELECT creator_user_id, title FROM projects WHERE project_visibility = 1 AND picture = '' AND post != ''", function(err, result) {
 			if (err) throw err;
 			else {
 				var arr = result.map( function(el) { return el.creator_user_id; });
@@ -159,7 +159,47 @@ module.exports = function(app) {
 										   }
 										}
 
-										mailchimp.addMember(data, function() {
+										mailchimp.addMemberIncomplete("picture", data, function() {
+											return recursive(index + 1);
+										});
+									} else {
+										return res.send({success: true});
+									}
+								});
+							} else
+								return res.send({success: true});
+						};
+						recursive(0);
+					}
+				});
+			}
+		});
+	});
+
+	app.get('/admin/mailpanel/project/incomplete/pp', ensureAdmin, function(req, res) {
+		pool.query("SELECT creator_user_id, title FROM projects WHERE project_visibility = 1 AND picture = '' AND post = ''", function(err, result) {
+			if (err) throw err;
+			else {
+				var arr = result.map( function(el) { return el.creator_user_id; });
+				pool.query('SELECT id, email FROM users WHERE id IN (' + arr + ')', function(err, result2) {
+					if (err) throw err;
+					if (result2[0]) {
+						function recursive(index) {
+							if (result2[index]) {
+							pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result2[index].id,
+								function(err, result3) {
+									if (err) throw err;
+									if (result3[0]) {
+										var data = {
+										   'email_address': result2[index].email,
+										   'status': 'subscribed',
+										   'merge_fields': {
+										       'FNAME': result3[0].first_name,
+										       'LNAME': result3[0].last_name
+										   }
+										}
+
+										mailchimp.addMemberIncomplete("pp", data, function() {
 											return recursive(index + 1);
 										});
 									} else {
@@ -199,7 +239,7 @@ module.exports = function(app) {
 										   }
 										}
 
-										mailchimp.addMember(data, function() {
+										mailchimp.addMemberIncomplete("upvote", data, function() {
 											return recursive(index + 1);
 										});
 									} else {

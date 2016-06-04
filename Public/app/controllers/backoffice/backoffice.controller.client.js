@@ -14,6 +14,8 @@ angular.module('wittyApp')
 					url = '/admin/mailpanel/project/incomplete/picture';
 				if (value && value === "tProject")
 					url = '/admin/mailpanel/project/incomplete/post';
+				if (value && value === "tpProject")
+					url = '/admin/mailpanel/project/incomplete/pp';
 				if (value && value === "upvote")
 					url = '/admin/mailpanel/upvote';
 

@@ -51,7 +51,6 @@
         vm.voteProjectCard = voteProjectCard;
         // vm.followProject = followProject;
         // feedbacks functions
-        vm.deployReplies = deployReplies;
         vm.isOwnedReply = isOwnedReply;
         vm.deleteReply = deleteReply;
         vm.pushReply = pushReply;
@@ -300,15 +299,15 @@
             vm.totalNumber = vm.totalNumber + vm.questions.length;
         }
 
-        function deployReplies (question) {
-            if (question.isCollapse == false || !question.isCollapse) {
-                question.isCollapse = true;
-                vm.isCollapse = true;
-            } else {
-                question.isCollapse = false;
-                vm.isCollapse = false;
-            }
-        }
+        // function deployReplies (question) {
+        //     if (question.isCollapse == false || !question.isCollapse) {
+        //         question.isCollapse = true;
+        //         vm.isCollapse = true;
+        //     } else {
+        //         question.isCollapse = false;
+        //         vm.isCollapse = false;
+        //     }
+        // }
 
         function isOwnedReply (reply, creator_user_id) {
             if (reply.user_id === creator_user_id) {

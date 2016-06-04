@@ -113,10 +113,10 @@
 							<aside id="mbbox" class="main-body-downBox" style="display: none">
 								<ul>
 									<li ng-click="main.getShuffleProject('Idea', main.cardInfo.category_name)" >Idea</li>
-									<li ng-click="main.getShuffleProject('Drafted projects', main.cardInfo.category_name)" >Drafted projects</li>
-									<li ng-click="main.getShuffleProject('Beta projects', main.cardInfo.category_name)" >Beta projects</li>
-									<li ng-click="main.getShuffleProject('Live projects', main.cardInfo.category_name)" >Live projects</li>
-									<li ng-click="main.getShuffleProject('All projects', main.cardInfo.category_name)" >All projects</li>
+									<li ng-click="main.getShuffleProject('Drafted projects', main.cardInfo.category_name)" >Drafted project</li>
+									<li ng-click="main.getShuffleProject('Beta projects', main.cardInfo.category_name)" >Beta project</li>
+									<li ng-click="main.getShuffleProject('Live projects', main.cardInfo.category_name)" >Live project</li>
+									<li ng-click="main.getShuffleProject('All projects', main.cardInfo.category_name)" >project</li>
 								</ul>
 							</aside>
 						</div>
@@ -142,8 +142,8 @@
 					</div>
 				</div>
 
-				<div class="main-body-cardList">
-					<div id="mbcardList_{{$index}}" class="main-body-card project-card" ng-repeat="cardsDisplay in main.cardsDisplays | wittyFilterDiscover: main.shuffleStatus + ' ' + main.shuffleCag: searchHL track by $index" ng-click="" style="display: none">
+				<div class="main-body-cardList" ng-if="!main.newCardDisplay">
+					<div id="mbcardList_{{$index}}" class="main-body-card project-card" ng-repeat="cardsDisplay in main.cardsDisplays track by $index" style="display: none">
 						<div class="card-tag" ng-click="main.goToDiscover(cardsDisplay.category_name)">
 							<div class="card-tag-content">
 								<div class="card-tag-bg">
@@ -186,6 +186,56 @@
 										<img ng-src="{{cardsDisplay.pic}}" alt="card-foot-picture">
 									</figure>
 									<h6>{{cardsDisplay.creator_user_name}}<h6 ng-if="cardsDisplay.usersIn.length">& {{cardsDisplay.usersIn.length}} more</h6></h6>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="main-body-cardList" ng-if="main.newCardDisplay">
+					<div id="mbcardList_{{$index}}" class="main-body-card project-card">
+						<div class="card-tag" ng-click="main.goToDiscover(main.newCardDisplay.category_name)">
+							<div class="card-tag-content">
+								<div class="card-tag-bg">
+								</div>
+								<img src="/images/tag-icon.png">
+								<h5>{{main.newCardDisplay.category_name}}</h5>
+							</div>
+						</div>
+						<div class="card-vote" ng-click="main.voteProjectCardShuffle(main.newCardDisplay.public_id, $index)">
+							<div class="card-vote-bg"></div>
+							<img ng-if="!main.newCardDisplay.check_vote" src="/images/Upvote_Icon_w.svg">
+							<img ng-if="main.newCardDisplay.check_vote" src="/images/Upvote_Icon.svg">
+							<span ng-bind="main.newCardDisplay.vote"></span>
+						</div>
+						<a class="card-project-page" ng-href="/project/{{main.newCardDisplay.public_id}}/{{main.encodeUrl(main.newCardDisplay.title)}}">
+							<div class="card-picture">
+								<img ng-src="{{ resizePic(main.newCardDisplay.picture_card, 285, 180)}}" alt="card-picture">
+							</div>
+							<div class="card-info">
+								<div class="card-title-space">
+									<h4>{{main.newCardDisplay.title}}</h4>
+								</div>
+								<div class="card-status">
+									<span>
+										<img ng-if="main.newCardDisplay.status == 'Live project'" src="images/live-picto.svg" alt="status-picture"/>
+										<img ng-if="main.newCardDisplay.status == 'Idea'" src="images/idea-picto.svg" alt="status-picture"/>
+										<img ng-if="main.newCardDisplay.status == 'Drafted project'" src="images/drafted-picto.svg" alt="status-picture"/>
+										<img ng-if="main.newCardDisplay.status == 'Beta project'" src="images/beta-picto.svg" alt="status-picture"/>
+										{{main.newCardDisplay.status}}
+									</span>
+								</div>
+								<div class="card-location">
+									<span><img src="/images/location-picto.svg" alt="location-picture" />{{main.newCardDisplay.location_city}}<i ng-hide="!main.newCardDisplay.location_country">,</i> {{main.newCardDisplay.location_country}}</span>
+								</div>
+								<div class="card-description-text">
+									<p>{{main.newCardDisplay.description}}</p>
+								</div>
+								<div class="card-info-by">
+									<figure class="card-info-by-picture">
+										<img ng-src="{{main.newCardDisplay.pic}}" alt="card-foot-picture">
+									</figure>
+									<h6>{{main.newCardDisplay.creator_user_name}}<h6 ng-if="main.newCardDisplay.usersIn.length">& {{main.newCardDisplay.usersIn.length}} more</h6></h6>
 								</div>
 							</div>
 						</a>

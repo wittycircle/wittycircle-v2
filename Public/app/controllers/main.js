@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData', 'Project_Follow',
-function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, Project_Follow) {
+angular.module('wittyApp').controller('MainCtrl', ['$scope', '$state', '$stateParams', '$rootScope', '$timeout', '$interval', 'Profile', 'Users', 'get_CategoryName', 'Authentication', 'Beauty_encode', 'Public_id', '$location', '$http', 'Projects', 'Data_project', 'showbottomAlert', 'RetrieveData', 'Project_Follow', '$filter',
+function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile, Users, get_CategoryName, Authentication, Beauty_encode, Public_id, $location, $http, Projects, Data_project, showbottomAlert, RetrieveData, Project_Follow, $filter) {
 
     $http.get('/profile').success(function(res){
         Authentication.SetCredentialsSocial(res.user, res.user_info);
@@ -30,6 +30,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     main.followUserFromCard     = followUserFromCard;
     main.voteProjectCard        = voteProjectCard;
     main.voteProjectCardShuffle = voteProjectCardShuffle;
+    main.shuffleSearch          = shuffleSearch;
 
     /*** Controller As Main Variable ***/
     main.ww                     = $(window).width();
@@ -93,7 +94,10 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
 
     RetrieveData.getData('/projects', 'GET').then(function(response) {
         main.projectCards     = response;
-        main.cardsDisplays    = response.slice(0, 9);
+    });
+
+    RetrieveData.getData('/projects/shuffler', 'GET').then(function(response) {
+        main.cardsDisplays    = response
         main.cardInfos        = response;
         main.cardInfo         = response[0];
         if (response[0])
@@ -133,7 +137,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     function loop() {
         n++;
         main.idNameP = "#mbcardList_" + (n - 1).toString();
-        if (n === 10)
+        if (n === 12)
         main.idName = "#mbcardList_0";
         else
         main.idName  = "#mbcardList_" + n.toString();
@@ -146,6 +150,15 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         n = 0;
     };
     main.interval = $interval(loop, 4000);
+
+    function shuffleSearch(searchText) {
+        var object = $filter('wittyFilterDiscover')(main.cardsDisplays, searchText);
+        main.newCardDisplay = object[0];
+        main.shuffleStatus = searchText === "project" ? "project" : object[0].status;
+        main.shuffleCag    = object[0].category_name;
+        $scope.shufflerLocation = object[0].location_state ? object[0].location_city + ', ' + object[0].location_state.toUpperCase() :
+        object[0].location_city + ', ' + object[0].location_country;
+    };
 
     function stopInterval() {
         $interval.cancel(main.interval);
@@ -182,6 +195,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         main.shuffleStatus = "project";
         else
         main.shuffleStatus = pName;
+        shuffleSearch(main.shuffleStatus);
         $('#mbcardList_0').fadeIn();
     };
 
@@ -190,6 +204,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         main.shuffleCag = cName;
         if (!main.shuffleStatus)
         main.shuffleStatus = cStatus + " project";
+        shuffleSearch(cName);
         $('#mbcardList_0').fadeIn();
     };
 

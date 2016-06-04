@@ -13,7 +13,6 @@ angular.module('wittyApp')
 
 	function searchProject(input, searchText, searchPlace) {
 		var searchTextSplit, returnArray, count;
-
 		returnArray = [];
 		
 		if (searchText === "  " && !searchPlace)
@@ -65,9 +64,7 @@ angular.module('wittyApp')
 			if (input) {
 				for (var x = 0, y = 0, check = 0; x < input.length;) {
 					for (var key in input[x]) {
-						if (typeof input[x][key] === "string" && key !== "post" && key !== "pic" && key !== "picture_card" && key !== "main_video_id"
-								&& key !== "picture_position" && key !== "creator_user_picture" && key !== "picture" && key !== "location_country" && key !== "location_state"
-								&& key !== "creator_user_name")
+						if (typeof input[x][key] === "string" && key === "category_name" || key === "status")
 						{
 								var searchKey = input[x][key].toLowerCase().indexOf(searchTextSplit[y]);
 								if (searchTextSplit[y] && searchKey !== -1) {

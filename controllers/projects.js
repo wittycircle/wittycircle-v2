@@ -108,7 +108,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC",
+    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC LIMIT 3",
     function (err, results, fields) {
         if (err) {
             var date = new Date();
@@ -118,17 +118,36 @@ exports.getProjects = function(req, res){
         }
         tf.sortProjectCard(results, function(data) {
             if (!data)
-            res.send({message: 'No projects has been found'});
+                return res.send({message: 'No projects has been found'});
             else {
                 if (req.isAuthenticated()) {
                     getVotedProject(data, req, function(newData) {
-                        res.send(newData);
+                        return res.send(newData);
                     }); 
                 } else
-                    res.send(data);
+                    return res.send(data);
             }
         });
     });
+};
+
+exports.getProjectsShuffler = function(req, res) {
+    pool.query("SELECT * FROM projects WHERE id IN (183, 168, 7, 59, 170, 143, 167, 153, 55, 142, 136, 138, 56) ORDER BY view DESC",
+        function(err, result) {
+            if (err) throw err;
+            tf.sortProjectCard(result, function(data) {
+                if (!data)
+                    return res.send({message: 'No projects has been found'});
+                else {
+                    if (req.isAuthenticated()) {
+                        getVotedProject(data, req, function(newData) {
+                            return res.send(newData);
+                        }); 
+                    } else
+                        return res.send(data);
+                }
+            });
+        });
 };
 
 exports.getProjectsDiscover = function(req, res){

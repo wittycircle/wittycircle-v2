@@ -38,9 +38,12 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         } else
         return false;
     }
-    console.log($rootScope.globals);
-    if ($rootScope.globals.currentUser)
-	$scope.moderator = $rootScope.globals.currentUser.moderator;
+
+    $timeout(function() {
+        if ($rootScope.globals.currentUser) {
+            $scope.moderator = $rootScope.globals.currentUser.moderator;
+        }
+    }, 2000);   
 
     $scope.updateUrlLogin = function () {
         $state.transitionTo('main', {login: 'true'}, { notify: false, inherit: true });

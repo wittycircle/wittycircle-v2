@@ -1,14 +1,45 @@
 <style>
 	#backoffice-mailpanel {
-		padding-top: 60px;
+		padding: 100px 60px 60px 60px;
 		height: 1000px;
 		background-color: #999999;
 	}
 
+	h1 {
+		margin-bottom: 20px;
+	}
+
+	label, button {
+		margin-bottom: 10px;
+		min-width: 400px;
+	}
 
 </style>
 <section id="backoffice-mailpanel">
-	<h1>Hello world !</h1>
-	<label>Incomplete Profile</label>
-	<button ng-click="getIncompleteProfile()">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+
+	<h1>CHAMPAGNE!</h1>
+	<h2>You must removed at first all subscribers in the list before updating a new member list.</h2>
+	<h3 style="color: blue; margin-bottom: 20px">ATTENTION ! : Once you send a campaign to list, all subscribers in the list will not be able to be remove for 7 days. </h3>
+
+	<div class="mail-profile">
+		<label>All Mails</label>
+		<button ng-click="getUpdateMail('all')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-incomplete-profile">
+		<label>Incomplete Profile</label>
+		<button ng-click="getUpdateMail('profile')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-project-picture">
+		<label>Incomplete Picture Project</label>
+		<button ng-click="getUpdateMail('pProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-project-content">
+		<label>Incomplete Content Project</label>
+		<button ng-click="getUpdateMail('tProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-upvote">
+		<label>Invite to upvote</label>
+		<button ng-click="getUpdateMail('upvote')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+
 </section>

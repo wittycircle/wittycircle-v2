@@ -37,8 +37,14 @@ exports.addMemberIncomplete = function(value, data, callback) {
             key = '30fe367eee';
         if (value === "upvote")
             key = '9e01316060';
-        if (value === "profile")
+        if (value === "experience")
             key = 'de455a3cd1';
+        if (value === "about")
+            key = '0e955c23d6';
+        if (value === "skill")
+            key = 'ed78a7e75c';
+        if (value === "private")
+            key = '83c84640aa';
 
         request({
             url: 'https://us12.api.mailchimp.com/3.0/lists/' + key + '/members',

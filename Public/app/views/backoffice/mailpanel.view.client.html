@@ -25,9 +25,17 @@
 		<label>All Mails</label>
 		<button ng-click="getUpdateMail('all')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
 	</div>
-	<div class="mail-incomplete-profile">
-		<label>Incomplete Profile</label>
-		<button ng-click="getUpdateMail('profile')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	<div class="mail-incomplete-profile-skill">
+		<label>Incomplete Profile Skill</label>
+		<button ng-click="getUpdateMail('skill')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-incomplete-profile-about">
+		<label>Incomplete Profile About</label>
+		<button ng-click="getUpdateMail('about')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-incomplete-profile-experience">
+		<label>Incomplete Profile Experience</label>
+		<button ng-click="getUpdateMail('experience')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
 	</div>
 	<div class="mail-project-picture">
 		<label>Incomplete Picture(only) Project</label>
@@ -37,9 +45,13 @@
 		<label>Incomplete Content(only) Project</label>
 		<button ng-click="getUpdateMail('tProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
 	</div>
-	<div class="mail-project-content">
+	<div class="mail-project-contents">
 		<label>Incomplete Picture/Content(both) Project</label>
 		<button ng-click="getUpdateMail('tpProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+	</div>
+	<div class="mail-project-private">
+		<label>Incomplete Private Project</label>
+		<button ng-click="getUpdateMail('prProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
 	</div>
 	<div class="mail-upvote">
 		<label>Invite to upvote</label>

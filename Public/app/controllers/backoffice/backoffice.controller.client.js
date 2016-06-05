@@ -8,14 +8,20 @@ angular.module('wittyApp')
 
 				if (value && value === "all")
 					url = '/admin/mailpanel/profiles';
-				if (value && value === "profile")
-					url = '/admin/mailpanel/profile/incomplete';
+				if (value && value === "experience")
+					url = '/admin/mailpanel/profile/incomplete/experience';
+				if (value && value === "skill")
+					url = '/admin/mailpanel/profile/incomplete/skill';
+				if (value && value === "about")
+					url = '/admin/mailpanel/profile/incomplete/about';
 				if (value && value === "pProject")
 					url = '/admin/mailpanel/project/incomplete/picture';
 				if (value && value === "tProject")
 					url = '/admin/mailpanel/project/incomplete/post';
 				if (value && value === "tpProject")
 					url = '/admin/mailpanel/project/incomplete/pp';
+				if (value && value === "prProject")
+					url = '/admin/mailpanel/project/incomplete/private';
 				if (value && value === "upvote")
 					url = '/admin/mailpanel/upvote';
 

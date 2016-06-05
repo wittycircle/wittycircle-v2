@@ -166,6 +166,7 @@ app.delete('/category/:id', categories.deleteCategory);
 /* Projects*/
 var projects = require('./controllers/projects');
 app.get('/projects', hasAccess, projects.getProjects);
+app.get('/projects/shuffler', projects.getProjectsShuffler);
 app.get('/projects/discover', hasAccess, projects.getProjectsDiscover);
 app.get('/project/:id', hasAccess, projects.getProject);
 app.get('/project/public_id/:public_id', projects.getProjectByPublicId);
@@ -317,7 +318,7 @@ app.get('*', function(req, res) {
                 //console.log(response);
     	});
     }
-    res.sendFile(__dirname + '/Public/app/index.html');
+    res.sendFile(__dirname + '/Public/dist/index.html');
     //res.cookie('name', 'tobi');
 });
 

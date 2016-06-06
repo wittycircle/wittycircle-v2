@@ -49,6 +49,19 @@
 					<img id="location-input2" ng-if="profileVm.showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="profileVm.editLocation()" />
 				</div>
 
+				<div class="profile-influencer" ng-if="profileVm.currentUser.moderator && profileVm.profile.founder > 0 && profileVm.profile.founder <= 100">
+					<p>Influencer #{{profileVm.profile.founder}}</p>
+				</div>
+				<div class="profile-influencer" ng-if="profileVm.currentUser.moderator && profileVm.profile.founder === 246">
+					<p>Master</p>
+				</div>
+				<div class="profile-influencer" ng-if="profileVm.currentUser.moderator && profileVm.profile.founder === 206">
+					<p>Founder</p>
+				</div>
+				<div class="profile-influencer" ng-if="profileVm.currentUser.moderator && profileVm.profile.founder === 999">
+					<p>Priest</p>
+				</div>
+
 				<div id="location-input-mobile" class="location">
 					<img ng-if="profileVm.profile.location_city" src="/images/location-picto-w.svg" alt="location-icon" />
 					<div class="location-name">

@@ -27,6 +27,42 @@ module.exports = function(app) {
 			return res.send(false);
 	});
 
+	app.get('/admin/list/profiles/complete', ensureAdmin, function(req, res) {
+		pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences group by user_id) group by user_id',
+			function(err, result) {
+				if (err) throw err;
+				else {
+					var arr = result.map( function(el) { return el.user_id; })
+					pool.query("SELECT id, first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id IN (" + arr + ")) && (DESCRIPTION != '' && DESCRIPTION is not null)",
+						function(err, result2) {
+							if (err) throw err;
+							else {
+								var list = [];
+								function recursive(index) {
+									if (result2[index]) {
+										pool.query('SELECT email, username, social_share, valid FROM users WHERE profile_id = ?', result2[index].id,
+											function(err, result3) {
+												if (err) throw err;
+												list.push({
+													first_name	: result2[index].first_name,
+													last_name	: result2[index].last_name,
+													email 		: result3[0].email,
+													username 	: result3[0].username,
+													social_share: result3[0].social_share,
+													valid 		: result3[0].valid
+												});
+												return recursive(index + 1);
+											});
+									} else
+										return res.send({success: true, list: list});
+								};
+								recursive(0);
+							}
+						});
+				}
+			});
+	});
+
 	app.get('/admin/mailpanel/profiles', ensureAdmin, function(req, res) {
 		pool.query('SELECT profile_id, email FROM users ORDER BY id ASC', function(err, result) {
 			if (err) throw err;

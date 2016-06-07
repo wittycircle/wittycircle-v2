@@ -6,30 +6,30 @@ const bcrypt = require('bcrypt-nodejs');
 
 //TODO: CHANGE Server url
 /** DEV **/
-exports.facebookAuth = {
-    'clientID'      : '793713660760465',
-    'clientSecret'  : '07591de283d45f6657dcf79aefcadb25',
-    'callbackURL'   : 'http://localhost/auth/facebook/callback'
-};
-
-exports.googleAuth = {
-    'clientID'      : '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
-    'clientSecret'  : 'qjVoxMQ-eU85H3ODsm86N5Fq',
-    'callbackURL'   : 'http://localhost/auth/google/callback'
-};
-
-/** PUBLIC **/
 // exports.facebookAuth = {
-//   'clientID'      : '487284094736758',
-//   'clientSecret'  : '01638b636efc1d6dce71c43138c7c88f',
-//   'callbackURL'   : 'https://www.wittycircle.com/auth/facebook/callback'
+//     'clientID'      : '793713660760465',
+//     'clientSecret'  : '07591de283d45f6657dcf79aefcadb25',
+//     'callbackURL'   : 'http://localhost/auth/facebook/callback'
 // };
 
 // exports.googleAuth = {
-//   'clientID'      : '1000804181890-epc9jh416f4hvqp7gklkk0f3ot1u7gg6.apps.googleusercontent.com',
-//   'clientSecret'  : 'EUQK_lzSb9Ba-z288oagNThx',
-//   'callbackURL'   : 'https://www.wittycircle.com/auth/google/callback'
+//     'clientID'      : '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
+//     'clientSecret'  : 'qjVoxMQ-eU85H3ODsm86N5Fq',
+//     'callbackURL'   : 'http://localhost/auth/google/callback'
 // };
+
+/** PUBLIC **/
+exports.facebookAuth = {
+  'clientID'      : '487284094736758',
+  'clientSecret'  : '01638b636efc1d6dce71c43138c7c88f',
+  'callbackURL'   : 'https://www.wittycircle.com/auth/facebook/callback'
+};
+
+exports.googleAuth = {
+  'clientID'      : '1000804181890-epc9jh416f4hvqp7gklkk0f3ot1u7gg6.apps.googleusercontent.com',
+  'clientSecret'  : 'EUQK_lzSb9Ba-z288oagNThx',
+  'callbackURL'   : 'https://www.wittycircle.com/auth/google/callback'
+};
 
 exports.checkLog = function(req, res) {
     if (req.isAuthenticated())

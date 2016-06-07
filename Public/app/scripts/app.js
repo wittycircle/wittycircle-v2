@@ -108,8 +108,18 @@ var wittyCircleApp = angular
 		}
 	})
 	.state('admin-panel', {
-		url: '/admin/mailpanel',
+		url: '/admin/panel',
 		templateUrl: 'views/backoffice/mailpanel.view.client.html',
+		controller: 'BackOfficeCtrl',
+		resolve : {
+			access: function(Authentication) {
+			    return Authentication.checkAdmin();
+			}
+		}
+	})
+	.state('admin-panel-profiles', {
+		url: '/admin/panel/profiles',
+		templateUrl: 'views/backoffice/profile-list.view.client.html',
 		controller: 'BackOfficeCtrl',
 		resolve : {
 			access: function(Authentication) {

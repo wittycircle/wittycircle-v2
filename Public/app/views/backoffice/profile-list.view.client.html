@@ -1,0 +1,43 @@
+<style>
+	#admin-profiles {
+		padding: 100px 60px 60px 60px;
+		min-height: 600px;
+		background-color: #e5e5e5;
+	}
+	h1 {
+		color: black;
+		margin-bottom: 20px;
+	}
+	table, th, td {
+	    border: 1px solid black;
+	    color: black;
+	}
+
+	th, td {
+		padding: 2px 5px;
+	}
+</style>
+<section id="admin-profiles">
+<h1>List of complete profiles</h1>
+
+<table>
+	<tr>
+		<th>Email Address</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Social Share</th>
+		<th>Username</th>
+		<th>Valid Account</th>
+	</tr>
+	<tr ng-repeat="list in lists">
+		<td ng-bind="list.email"></td>
+		<td ng-bind="list.first_name"></td>
+		<td ng-bind="list.last_name"></td>
+		<td ng-if="list.social_share">Yes</td>
+		<td ng-if="!list.social_share">No</td>
+		<td ng-bind="list.username"></td>
+		<td ng-if="list.valid">Verified</td>
+		<td ng-if="!list.valid">Not Verified</td>
+	</tr>
+</table>
+</section>

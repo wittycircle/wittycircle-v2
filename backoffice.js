@@ -299,7 +299,7 @@ module.exports = function(app) {
 										   }
 										}
 
-										mailchimp.addMemberIncomplete("pp", data, function() {
+										mailchimp.addMemberIncomplete("private", data, function() {
 											return recursive(index + 1);
 										});
 									} else {

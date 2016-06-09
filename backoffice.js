@@ -24,12 +24,12 @@ function getProjectInfo(id, callback) {
 			function(err, result) {
 				if (result[0]) {
 					var url = "https://www.wittycircle.com/project/" + result[0].public_id + "/" + result[0].title.replace(/ /g, '-');
-					callback(url);
+					callback(url, result[0].title);
 				} else
-					callback(false);
+					callback(false, false);
 			});
 	} else
-		callback(false);
+		callback(false, false);
 }
 
 module.exports = function(app) {
@@ -223,16 +223,17 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										getProjectInfo(result2[index].id, function(res) {
-												if (!res)
+										getProjectInfo(result2[index].id, function(url, title) {
+												if (!url || !title)
 													return recursive(index + 1);
 												var data = {
 												   'email_address': result2[index].email,
 												   'status': 'subscribed',
 												   'merge_fields': {
-												       'FNAME': result3[0].first_name,
-												       'LNAME': result3[0].last_name,
-												       'PRURL': res
+												       'FNAME' 	: result3[0].first_name,
+												       'LNAME' 	: result3[0].last_name,
+												       'PRURL' 	: url,
+												       'PTITLE' : title
 												   }
 												}
 												mailchimp.addMemberIncomplete("post", data, function() {
@@ -267,16 +268,17 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										getProjectInfo(result2[index].id, function(res) {
-											if (!res)
+										getProjectInfo(result2[index].id, function(url, title) {
+											if (!url || !title)
 												return recursive(index + 1);
 											var data = {
 											   'email_address': result2[index].email,
 											   'status': 'subscribed',
 											   'merge_fields': {
-											       'FNAME': result3[0].first_name,
-											       'LNAME': result3[0].last_name,
-											       'PRURL': res
+											       'FNAME'	: result3[0].first_name,
+											       'LNAME'	: result3[0].last_name,
+											       'PRURL'	: url,
+											       'PTITLE' : title
 											   }
 											}
 
@@ -312,16 +314,17 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										getProjectInfo(result2[index].id, function(res) {
-											if (!res)
+										getProjectInfo(result2[index].id, function(url, title) {
+											if (!url || !title)
 												return recursive(index + 1);
 											var data = {
 											   'email_address': result2[index].email,
 											   'status': 'subscribed',
 											   'merge_fields': {
-											       'FNAME': result3[0].first_name,
-											       'LNAME': result3[0].last_name,
-											       'PRURL': res
+											       'FNAME'	: result3[0].first_name,
+											       'LNAME'	: result3[0].last_name,
+											       'PRURL'	: url,
+											       'PTITLE' : title
 											   }
 											}
 
@@ -357,16 +360,17 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										getProjectInfo(result2[index].id, function(res) {
-											if (!res)
+										getProjectInfo(result2[index].id, function(url, title) {
+											if (!url || !title)
 												return recursive(index + 1);
 											var data = {
 											   'email_address': result2[index].email,
 											   'status': 'subscribed',
 											   'merge_fields': {
-											       'FNAME': result3[0].first_name,
-											       'LNAME': result3[0].last_name,
-											       'PRURL': res
+											       'FNAME'	: result3[0].first_name,
+											       'LNAME'	: result3[0].last_name,
+											       'PRURL'	: url,
+											       'PTITLE' : title
 											   }
 											}
 
@@ -397,7 +401,7 @@ module.exports = function(app) {
 					if (err) throw err;
 					if (result2[0]) {
 						function recursive(index) {
-							if (result2[index] && index < 30) {
+							if (result2[index]) {
 							pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result2[index].id,
 								function(err, result3) {
 									if (err) throw err;

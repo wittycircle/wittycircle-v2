@@ -18,6 +18,20 @@ var ensureAdmin = require('./controllers/auth').ensureAdminAuthenticated,
 
 // };
 
+function getProjectInfo(id, callback) {
+	if (id) {
+		pool.query('SELECT title, public_id FROM projects WHERE creator_user_id = ?', id,
+			function(err, result) {
+				if (result[0]) {
+					var url = "https://www.wittycircle.com/project/" + result[0].public_id + "/" + result[0].title.replace(/ /g, '-');
+					callback(url);
+				} else
+					callback(false);
+			});
+	} else
+		callback(false);
+}
+
 module.exports = function(app) {
 
 	app.get('/admin/check', function(req, res) {
@@ -96,7 +110,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/profile/incomplete/skill', ensureAdmin, function(req, res) {
-		pool.query('SELECT profile_id, email FROM users WHERE id NOT IN (SELECT user_id FROM user_skills GROUP BY user_id ORDER BY user_id) ORDER BY id', function(err, result) {
+		pool.query('SELECT profile_id, email, username FROM users WHERE id NOT IN (SELECT user_id FROM user_skills GROUP BY user_id ORDER BY user_id) ORDER BY id', function(err, result) {
 			if (err) throw err;
 			else {
 				function recursive(index) {
@@ -109,7 +123,8 @@ module.exports = function(app) {
 									'status': 'subscribed',
 									'merge_fields': {
 										'FNAME': result2[0].first_name,
-										'LNAME': result2[0].last_name
+										'LNAME': result2[0].last_name,
+										'PURL': "https://www.wittycircle.com/" + result[index].username
 									}
 								};
 								mailchimp.addMemberIncomplete('skill', data, function() {
@@ -131,15 +146,16 @@ module.exports = function(app) {
 			else  {
 				function recursive(index) {
 					if (result[index]) {
-						pool.query('SELECT email FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
+						pool.query('SELECT email, username FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
 							if (err) throw err;
 							else {
 								var data = {
-									'email_address': result2[index].email,
+									'email_address': result2[0].email,
 									'status': 'subscribed',
 									'merge_fields': {
-										'FNAME': result[0].first_name,
-										'LNAME': result[0].last_name
+										'FNAME': result[index].first_name,
+										'LNAME': result[index].last_name,
+										'PURL': "https://www.wittycircle.com/" + result2[0].username
 									}
 								};
 								mailchimp.addMemberIncomplete('about', data, function() {
@@ -156,7 +172,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/profile/incomplete/experience', ensureAdmin, function(req, res) {
-		pool.query('SELECT profile_id, email FROM users WHERE id NOT IN (SELECT user_id FROM user_experiences)', function(err, result) {
+		pool.query('SELECT profile_id, email, username FROM users WHERE id NOT IN (SELECT user_id FROM user_experiences)', function(err, result) {
 			if (err) throw err;
 			else {
 				if (result[0]) {
@@ -171,7 +187,8 @@ module.exports = function(app) {
 										   'status': 'subscribed',
 										   'merge_fields': {
 										       'FNAME': result2[0].first_name,
-										       'LNAME': result2[0].last_name
+										       'LNAME': result2[0].last_name,
+										       'PURL': "https://www.wittycircle.com/" + result[index].username
 										   }
 										}
 
@@ -193,7 +210,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/project/incomplete/post', ensureAdmin, function(req, res) {
-		pool.query("SELECT creator_user_id, title  FROM projects WHERE project_visibility = 1 AND post = '' AND picture != ''", function(err, result) {
+		pool.query("SELECT creator_user_id FROM projects WHERE project_visibility = 1 AND post = '' AND picture != ''", function(err, result) {
 			if (err) throw err;
 			else {
 				var arr = result.map( function(el) { return el.creator_user_id; });
@@ -206,18 +223,22 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										var data = {
-										   'email_address': result2[index].email,
-										   'status': 'subscribed',
-										   'merge_fields': {
-										       'FNAME': result3[0].first_name,
-										       'LNAME': result3[0].last_name
-										   }
-										}
-
-										mailchimp.addMemberIncomplete("post", data, function() {
-											return recursive(index + 1);
-										});
+										getProjectInfo(result2[index].id, function(res) {
+												if (!res)
+													return recursive(index + 1);
+												var data = {
+												   'email_address': result2[index].email,
+												   'status': 'subscribed',
+												   'merge_fields': {
+												       'FNAME': result3[0].first_name,
+												       'LNAME': result3[0].last_name,
+												       'PRURL': res
+												   }
+												}
+												mailchimp.addMemberIncomplete("post", data, function() {
+													return recursive(index + 1);
+												});
+											});
 									} else {
 										return res.send({success: true});
 									}
@@ -246,17 +267,22 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										var data = {
-										   'email_address': result2[index].email,
-										   'status': 'subscribed',
-										   'merge_fields': {
-										       'FNAME': result3[0].first_name,
-										       'LNAME': result3[0].last_name
-										   }
-										}
+										getProjectInfo(result2[index].id, function(res) {
+											if (!res)
+												return recursive(index + 1);
+											var data = {
+											   'email_address': result2[index].email,
+											   'status': 'subscribed',
+											   'merge_fields': {
+											       'FNAME': result3[0].first_name,
+											       'LNAME': result3[0].last_name,
+											       'PRURL': res
+											   }
+											}
 
-										mailchimp.addMemberIncomplete("picture", data, function() {
-											return recursive(index + 1);
+											mailchimp.addMemberIncomplete("picture", data, function() {
+												return recursive(index + 1);
+											});
 										});
 									} else {
 										return res.send({success: true});
@@ -286,17 +312,22 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										var data = {
-										   'email_address': result2[index].email,
-										   'status': 'subscribed',
-										   'merge_fields': {
-										       'FNAME': result3[0].first_name,
-										       'LNAME': result3[0].last_name
-										   }
-										}
+										getProjectInfo(result2[index].id, function(res) {
+											if (!res)
+												return recursive(index + 1);
+											var data = {
+											   'email_address': result2[index].email,
+											   'status': 'subscribed',
+											   'merge_fields': {
+											       'FNAME': result3[0].first_name,
+											       'LNAME': result3[0].last_name,
+											       'PRURL': res
+											   }
+											}
 
-										mailchimp.addMemberIncomplete("pp", data, function() {
-											return recursive(index + 1);
+											mailchimp.addMemberIncomplete("pp", data, function() {
+												return recursive(index + 1);
+											});
 										});
 									} else {
 										return res.send({success: true});
@@ -326,17 +357,22 @@ module.exports = function(app) {
 								function(err, result3) {
 									if (err) throw err;
 									if (result3[0]) {
-										var data = {
-										   'email_address': result2[index].email,
-										   'status': 'subscribed',
-										   'merge_fields': {
-										       'FNAME': result3[0].first_name,
-										       'LNAME': result3[0].last_name
-										   }
-										}
+										getProjectInfo(result2[index].id, function(res) {
+											if (!res)
+												return recursive(index + 1);
+											var data = {
+											   'email_address': result2[index].email,
+											   'status': 'subscribed',
+											   'merge_fields': {
+											       'FNAME': result3[0].first_name,
+											       'LNAME': result3[0].last_name,
+											       'PRURL': res
+											   }
+											}
 
-										mailchimp.addMemberIncomplete("private", data, function() {
-											return recursive(index + 1);
+											mailchimp.addMemberIncomplete("private", data, function() {
+												return recursive(index + 1);
+											});
 										});
 									} else {
 										return res.send({success: true});

@@ -119,14 +119,16 @@ module.exports = function(app) {
 						pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result[index].profile_id, function(err, result2) {
 							if (err) throw err;
 							else {
+								if (!result[index] || !result[index].username)
+									return recursive(index + 1);
 								var url = "https://www.wittycircle.com/" + result[index].username;
 								var data = {
 									'email_address': result[index].email,
 									'status': 'subscribed',
 									'merge_fields': {
-										'FNAME': result2[0].first_name,
-										'LNAME': result2[0].last_name,
-										'PURL': url
+										FNAME 	: result2[0].first_name,
+										LNAME 	: result2[0].last_name,
+										PURL 	: url,
 									}
 								};
 								mailchimp.addMemberIncomplete('skill', data, function() {
@@ -151,6 +153,8 @@ module.exports = function(app) {
 						pool.query('SELECT email, username FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
 							if (err) throw err;
 							else {
+								if (!result2[0] || !result2[0].username)
+									return recursive(index + 1);
 								var url = "https://www.wittycircle.com/" + result2[0].username;
 								var data = {
 									'email_address': result2[0].email,
@@ -185,6 +189,8 @@ module.exports = function(app) {
 								function(err, result2) {
 									if (err) throw err;
 									if (result2[0]) {
+										if (!result[index] || !result[index].username)
+											return recursive(index + 1);
 										var url = "https://www.wittycircle.com/" + result[index].username;
 										var data = {
 										   'email_address': result[index].email,
@@ -325,10 +331,10 @@ module.exports = function(app) {
 											   'email_address': result2[index].email,
 											   'status': 'subscribed',
 											   'merge_fields': {
-											       'FNAME'	: result3[0].first_name,
-											       'LNAME'	: result3[0].last_name,
-											       'PRURL'	: url,
-											       'PTITLE' : title
+											       FNAME	: result3[0].first_name,
+											       LNAME	: result3[0].last_name,
+											       PRURL	: url,
+											       PTITLE : title,
 											   }
 											}
 

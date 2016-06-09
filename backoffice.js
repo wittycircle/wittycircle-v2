@@ -53,8 +53,9 @@ module.exports = function(app) {
 												});
 												return recursive(index + 1);
 											});
-									} else
+									} else {
 										return res.send({success: true, list: list});
+}
 								};
 								recursive(0);
 							}

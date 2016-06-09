@@ -119,7 +119,7 @@ module.exports = function(app) {
 						pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result[index].profile_id, function(err, result2) {
 							if (err) throw err;
 							else {
-								if (!result[index] || !result[index].username)
+								if (!result[index] || !result[index].username || !result[index].email)
 									return recursive(index + 1);
 								var url = "https://www.wittycircle.com/" + result[index].username;
 								var data = {
@@ -153,7 +153,7 @@ module.exports = function(app) {
 						pool.query('SELECT email, username FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
 							if (err) throw err;
 							else {
-								if (!result2[0] || !result2[0].username)
+								if (!result2[0] || !result2[0].username || !result[index].email)
 									return recursive(index + 1);
 								var url = "https://www.wittycircle.com/" + result2[0].username;
 								var data = {
@@ -189,7 +189,7 @@ module.exports = function(app) {
 								function(err, result2) {
 									if (err) throw err;
 									if (result2[0]) {
-										if (!result[index] || !result[index].username)
+										if (!result[index] || !result[index].username || !result[index].email)
 											return recursive(index + 1);
 										var url = "https://www.wittycircle.com/" + result[index].username;
 										var data = {

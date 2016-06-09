@@ -59,12 +59,16 @@ exports.addMemberIncomplete = function(value, data, callback) {
                 console.log(error);
         return ;
             } else {
-        return callback();
+                setTimeout(function() {
+                    return callback();
+                }, 150);
                 // THEN log the user into the app
             }
         });
     } else {
         console.log("NO DATA");
-        return callback();
+        setTimeout(function() {
+            return callback();
+        }, 150);
     }
 };

@@ -119,13 +119,14 @@ module.exports = function(app) {
 						pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result[index].profile_id, function(err, result2) {
 							if (err) throw err;
 							else {
+								var url = "https://www.wittycircle.com/" + result[index].username;
 								var data = {
 									'email_address': result[index].email,
 									'status': 'subscribed',
 									'merge_fields': {
 										'FNAME': result2[0].first_name,
 										'LNAME': result2[0].last_name,
-										'PURL': "https://www.wittycircle.com/" + result[index].username
+										'PURL': url
 									}
 								};
 								mailchimp.addMemberIncomplete('skill', data, function() {
@@ -150,13 +151,14 @@ module.exports = function(app) {
 						pool.query('SELECT email, username FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
 							if (err) throw err;
 							else {
+								var url = "https://www.wittycircle.com/" + result2[0].username;
 								var data = {
 									'email_address': result2[0].email,
 									'status': 'subscribed',
 									'merge_fields': {
 										'FNAME': result[index].first_name,
 										'LNAME': result[index].last_name,
-										'PURL': "https://www.wittycircle.com/" + result2[0].username
+										'PURL': url
 									}
 								};
 								mailchimp.addMemberIncomplete('about', data, function() {
@@ -183,15 +185,16 @@ module.exports = function(app) {
 								function(err, result2) {
 									if (err) throw err;
 									if (result2[0]) {
+										var url = "https://www.wittycircle.com/" + result[index].username;
 										var data = {
 										   'email_address': result[index].email,
 										   'status': 'subscribed',
 										   'merge_fields': {
 										       'FNAME': result2[0].first_name,
 										       'LNAME': result2[0].last_name,
-										       'PURL': "https://www.wittycircle.com/" + result[index].username
+										       'PURL': url
 										   }
-										}
+										};
 
 										mailchimp.addMemberIncomplete("profile", data, function() {
 											return recursive(index + 1);

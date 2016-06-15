@@ -266,7 +266,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	/*** Scroll to display Popover ***/
 	var unique = 0;
-	setTimeout(function() {
+        setTimeout(function() {
 		if (ww >= 736) {
 			if (!$rootScope.globals.currentUser) {
 
@@ -284,7 +284,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 						}
 					}
 				});
-			} else {
+			} /* else { 
 				unique = 0;
 				$(document).scroll(function() {
 					if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
@@ -304,7 +304,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 						}
 					}
 				});
-			}
+			}*/
 		}
 	}, 1000);
 

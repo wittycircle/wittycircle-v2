@@ -36,5 +36,11 @@ angular.module('wittyApp')
 					}
 				});
 			};
+
+			$http.get('/admin/list/profiles/complete').success(function(res) {
+				if (res.success) {
+					$scope.lists = res.list;
+				}
+			});
 		}
 	});

@@ -562,7 +562,6 @@ angular.module('wittyApp')
             }
         }
     });
-
 })
 .directive('sharePop', function($http, $rootScope, $mdBottomSheet, $timeout) {
     return {
@@ -594,32 +593,32 @@ angular.module('wittyApp')
                             }
                         }
                     });
-                } else {
-                unique = 0;
-                $(document).scroll(function() {
-                if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
+                }/* else {
+                    unique = 0;
+                    $(document).scroll(function() {
+                    if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
                     var y = $(this).scrollTop();
-
+		    
                     if (!unique && y > 350) {
                     unique = 1;
-                     $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
-                         if (!res.success) {
-                         $rootScope.socialCheck = true;
-                            $mdBottomSheet.show({
-                                templateUrl: 'views/core/popover-share.view.client.html',
-                                controller: 'PopUpCtrl',
-                                clickOutsideToClose: true,
-                                disableParentScroll: false,
-                            });
-                         }
-                     });
+                    $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+                    if (!res.success) {
+                    $rootScope.socialCheck = true;
+                    $mdBottomSheet.show({
+                    templateUrl: 'views/core/popover-share.view.client.html',
+                    controller: 'PopUpCtrl',
+                    clickOutsideToClose: true,
+                    disableParentScroll: false,
+                    });
+                    }
+                    });
                     }
                     if (y <= 350) {
                     $mdBottomSheet.hide();
                     }
                 }
                 });
-            }
+            }*/
             }
             }, 1000);
         }

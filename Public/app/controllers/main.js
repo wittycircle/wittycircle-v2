@@ -120,7 +120,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
 
     RetrieveData.getData('/categories', 'GET').then(function(response) {
         main.categories = response;
-        main.ctgName    = response[0];
+        main.ctgName    = {name: "Any category", id: null};
     });
 
     /*** All Home Functions (Desktop) ***/
@@ -251,6 +251,8 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
             showbottomAlert.pop_it($event);
         }
         else {
+            if (main.ctgName.name === "Any category")
+                return ;
             var data          = {},
             errorMessage  = "";
 

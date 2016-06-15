@@ -98,6 +98,11 @@ var wittyCircleApp = angular
 		templateUrl: 'views/messaging/messaging.view.client.html',
 		controller: 'MessageCtrl',
 		resolve : {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'scripts/redactor/redactor.js',
+                ]);
+            }],
 		    auth: function($q, $rootScope, $stateParams) {
 			if ($rootScope.globals.currentUser) {
 			    return true;
@@ -172,22 +177,6 @@ var wittyCircleApp = angular
 
 	$httpProvider.defaults.withCredentials = true;
 	$httpProvider.interceptors.push(function ($q) { return { request: function (config) { if (!config.timeout) { config.cancel = $q.defer(); config.timeout = config.cancel.promise; } return config; } } });
-
-	// **Redactor configuration
-
-	redactorOptions.imageUpload = '/upload/redactor';
-	redactorOptions.buttonSource = true;
-	redactorOptions.imageResizable = true;
-	redactorOptions.imageEditable = true;
-	redactorOptions.imageLink = true;
-	redactorOptions.visual = true;// false for html mode
-
-	redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
-	redactorOptions.plugins = ['imagemanager'];
-	redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
-	/*
-	**End Redactor configuration
-	*/
 
 	//** Enabling Hmtl5 (pretty urls (removeing the hasbangs))
 	$locationProvider.html5Mode(true);

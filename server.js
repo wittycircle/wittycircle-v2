@@ -26,7 +26,6 @@ var express		= require('express')
 , algoliaClient	= require('./algo/algolia').algoliaClient
 , compression = require('compression')
 , helmet = require('helmet')
-, nstatic = require('node-static')
 , request = require('request')
 , log4js = require('log4js');
 
@@ -52,10 +51,7 @@ app.use(helmet.hsts({
 
 var updateUserActivity = require('./tools/mail_message_functions').sendMailUnread;
 
-var fileServer = new nstatic.Server('./Public/dist/images/', {cache: 3600});
-
 setInterval(function () {
-    console.log('start mail process');
     updateUserActivity();
 }, 21600000); // 6 hours in ms = 21600000
 

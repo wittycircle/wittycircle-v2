@@ -169,6 +169,7 @@ angular.module('wittyApp')
 
     RetrieveData.getData('/categories', 'GET').then(function(response) {
         discover.categories = response;
+        console.log(response);
         if ($stateParams.category) {
             var str = $stateParams.category.toLowerCase();
             str = capitalizeFirstLetter(str);
@@ -179,8 +180,8 @@ angular.module('wittyApp')
                 discover.searchCtg = str;
                 discover.ctgName = str;
             } else {
-                discover.searchCtg = 'Art';
-                discover.ctgName = 'Art';
+                discover.searchCtg = 'Any category';
+                discover.ctgName = 'Any category';
             }
         }
         if ($stateParams.help) {
@@ -220,8 +221,12 @@ angular.module('wittyApp')
             discover.ctgName = $stateParams.tagParams;
         }
         if (!$stateParams.tagParams && !$stateParams.category) {
-            discover.ctgName = "Art";
+            discover.ctgName = "Any category";
         }
+    });
+    
+    $rootScope.$on('$stateChangeStart', function() {
+        $stateParams.tagParams = null;
     });
 
     /*** All Discover Functions (Desktop) ***/

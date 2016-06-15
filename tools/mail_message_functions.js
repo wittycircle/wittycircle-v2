@@ -1,7 +1,6 @@
 const mandrill = require('mandrill-api/mandrill');
 
 exports.sendMailUnread = function() {
-    console.log('enter the send mail function');
     pool.query("SELECT * FROM messages where m_send = 0 AND m_read = 0",
     function (err, results) {
         if (err) {
@@ -126,7 +125,6 @@ exports.sendMailUnread = function() {
                                                     if (err) {
                                                         throw err;
                                                     } else {
-                                                        console.log("tout est ok maxence, ton mail a bien ete envoyer");
                                                         recursive(index + 1);
                                                     }
                                                 })

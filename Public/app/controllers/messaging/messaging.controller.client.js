@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location) {
+ 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
 	 	// var socket = io.connect('http://127.0.0.1');
@@ -111,7 +111,6 @@
 			}
 		};
 		if (currentUrl === '/messages') {
-			console.log("OK");
 			$scope.refreshDialogue();
 		}
 
@@ -303,7 +302,22 @@
 		 		}
 		 	}
 	 	};
-	 }
+
+	 	// **Redactor configuration
+
+		redactorOptions.buttonSource = false;
+		redactorOptions.imageResizable = false;
+		redactorOptions.imageEditable = false;
+		redactorOptions.imageLink = false;
+		redactorOptions.visual = false;// false for html mode
+
+		redactorOptions.buttons = false;
+		redactorOptions.plugins = false;
+		redactorOptions.formatting = false;
+		/*
+		**End Redactor configuration
+		*/
+	}
 }).directive('messageModal', function() {
 	var x = $(window).width();
 

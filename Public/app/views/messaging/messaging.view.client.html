@@ -116,7 +116,7 @@
 
 <div class="messages-conversation-textarea">
 	<div class="textarea-box">
-		<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message"></textarea>
+		<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message" redactor></textarea>
 	</div>
 	<div id="textbtn" class="textarea-button">
 		<button type="submit" ng-click="socket(username, nameuser)">Send</button>

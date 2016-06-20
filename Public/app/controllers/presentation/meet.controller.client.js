@@ -33,13 +33,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
 		pageTitle: "Wittycircle | Meet",
-		pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+		// pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+	    pageDescription: "Meet thousands of designers, programmers, engineers and creative people ready to help you grow your project."
 	};
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
 		url: "https://www.wittycircle.com/meet",
-		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
+		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
 	$scope.$on('$stateChangeStart', function(next, current) {

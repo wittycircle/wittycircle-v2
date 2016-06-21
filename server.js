@@ -58,7 +58,7 @@ setInterval(function () {
 require('./passport')(passport);
 //app.use(morgan('combined'));
 app.use(cookieParser());
-app.use(require('express-force-domain')('https://www.wittycircle.com') );
+// app.use(require('express-force-domain')('https://www.wittycircle.com') );
 app.use(require('prerender-node').set('prerenderToken', 'BzYfju05gGdTtLeibr1B'));
 
 app.use(session({
@@ -81,12 +81,12 @@ app.use(passport.session());
 
 app.use(compression());
 
-app.use(express.static(__dirname + '/Public/dist/'))
-app.use(express.static(__dirname + '/Public/dist/styles/'));
-app.use(express.static(__dirname + '/Public/dist/scripts/'));
+// app.use(express.static(__dirname + '/Public/dist/'))
+// app.use(express.static(__dirname + '/Public/dist/styles/'));
+// app.use(express.static(__dirname + '/Public/dist/scripts/'));
 app.use(express.static(__dirname + '/Public/app/'));;
-//app.use(express.static(__dirname + '/Public/'));
-//app.use(express.static(__dirname + '/Public/app/styles/css'));
+app.use(express.static(__dirname + '/Public/'));
+app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -95,7 +95,6 @@ app.use(bodyParser.json({limit: '100mb'}));
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
-
 
 app.use(Validator({
     customValidators: {
@@ -177,18 +176,20 @@ require('./routes')(app, passport);
 /* Algolia Search Engine */
 require('./algolia')(app, algoliaClient);
 
+// require('./controllers/bot.js');
+
 /* Socket */
 var ps = https.createServer(httpsOption, app, function(req, res) {
     request.addListener('end', function () {
         fileServer.serve(request, response);
     }).resume();
 });
-// var io = require('socket.io')(server);
-var io = require('socket.io').listen(ps);
+var io = require('socket.io')(server);
+// var io = require('socket.io').listen(ps);
 
 require('./io')(app, io, ensureAuth);
 
 /* Start Server */
 //reload(server, app);
-// server.listen(80);
-ps.listen(443);
+server.listen(80);
+// ps.listen(443);

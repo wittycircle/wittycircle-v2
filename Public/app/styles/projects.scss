@@ -6,6 +6,20 @@ $secondary-text: #999999;
 $font-h3: 'Open Sans', sans-serif;
 $font-h3: 'Open Sans', sans-serif;
 
+.tempo3-class, .tempo4-class {
+  display: inline-block;
+}
+
+.tempo3-class {
+  margin: 15px 10px 5px 30px;
+}
+
+.tempo4-class {
+  width: 80%;
+  margin-top: 15px;
+  vertical-align: top;
+}
+
 .circle_number {
   position: relative;
   margin-left: 5px;
@@ -677,6 +691,7 @@ $font-h3: 'Open Sans', sans-serif;
 
   .feedback_description {
     margin: 0px;
+    cursor: default;
 
     .mgr-bt-20 {
       margin-bottom: 20px;
@@ -695,11 +710,12 @@ $font-h3: 'Open Sans', sans-serif;
     .feedback-reply-field {
 /*      border: 1px solid #e5e5e5;
 */      border-radius: 4px;
+        padding: 15px 15px 5px 65px;
     }
   }
 
   .feedback_textarea {
-    margin: 0px;
+    margin-top: 15px;
 
     .mgr-bt-20 {
       margin-bottom: 20px;
@@ -920,6 +936,7 @@ $font-h3: 'Open Sans', sans-serif;
 
     .tempo-class, .tempo2-class {
       display: inline-block;
+      margin-right: 10px;
     }
 
     .img-responsive {

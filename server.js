@@ -165,10 +165,6 @@ String.prototype.capitalize = function() {
     return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 };
 
-/* pool.query('SELECT * FROM TOUT', function(err, result) {
-    if (err) throw err;
-}); */
-
 /* MailChimp API */
 require('./mailchimpAPI')(app, request);
 

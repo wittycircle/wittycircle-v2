@@ -325,7 +325,7 @@ exports.getUsersBySkillAl = function(req, res) {
         var array = [];
         function recursive(index) {
             if (list[index]) {
-                pool.query('SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
+                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
                     function(err, results) {
                         if (err) throw err;
                         if (results[0])
@@ -355,16 +355,24 @@ exports.getUsersBySkillAl = function(req, res) {
 
 exports.getUsersByAl = function(req, res) {
     if (req.body.about || req.body.geo) {
-        pool.query('SELECT * FROM `profiles` ORDER BY views DESC', function (err, results) {
+        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM `profiles` ORDER BY views DESC', function (err, results) {
             if (err) throw (err);
             if (results[0]) {
-                var al = new search(results, req.body);
-                pf.sortCardProfile(al.getAL(), function(data) {
-                    return res.send({success: true, data: al.getAL()});
-                });
+                var al = new search(results, req.body).getAL();
+                var array = [];
+                function recursive(index) {
+                    if (al[index]) {
+                        pf.sortCardProfile(al[index], function(data) {
+                            array.push(data);
+                            return recursive(index + 1);
+                        });
+                    } else
+                        return res.send({success: true, data: array});
+                };
+                recursive(0);
             }
         });
     }
     else 
-        res.send({success: false});
+        return res.send({success: false});
 };

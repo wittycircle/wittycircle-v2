@@ -331,6 +331,7 @@ $timeout.cancel(shareInterval);
 
 /*** Search Section ***/
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
+	console.log(value);
 	if (value) {
 
 		$('#ldm').css('display', 'block');
@@ -345,8 +346,10 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			about: value[0],
 			list: value[1],
 			geo: value[2],
+			country: $scope.searchMLC,
 		};
 		if (value[1] && value[1][0]) {
+			$scope.searchClicked = true;
 			$http.put('/search/users', object).success(function(res) {
 				if (res.success) {
 					meet.cardProfiles = res.data;
@@ -363,13 +366,15 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				$http.post('/search/users/al', object).success(function(res) {
-					if (res.success)
-					meet.cardProfiles = res.data;
-					if ($rootScope.globals.currentUser) {
-						Profile.getFollowedUser(res, function(res){
-							meet.followed = res;
-						});
+					if (res.success) {
+						$scope.searchClicked = true;
+						meet.cardProfiles = res.data;
 					}
+					// if ($rootScope.globals.currentUser) {
+					// 	Profile.getFollowedUser(res, function(res){
+					// 		meet.followed = res;
+					// 	});
+					// }
 				});
 			}
 		}
@@ -413,7 +418,9 @@ $(document).ready(function() {
 					model.$setViewValue(element.val());
 					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
 					var x = model.$viewValue.indexOf(',');
+					var y = model.$viewValue.lastIndexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
+					scope.searchMLC = model.$viewValue.slice(y + 2).toLowerCase();
 				});
 			});
 

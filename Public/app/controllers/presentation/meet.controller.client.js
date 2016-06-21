@@ -33,13 +33,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
 		pageTitle: "Wittycircle | Meet",
-		pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+		// pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+	    pageDescription: "Meet thousands of designers, programmers, engineers and creative people ready to help you grow your project."
 	};
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
 		url: "https://www.wittycircle.com/meet",
-		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,w_1885/v1458394341/Bf-cover/background-footer3.jpg",
+		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
 	$scope.$on('$stateChangeStart', function(next, current) {
@@ -330,6 +331,7 @@ $timeout.cancel(shareInterval);
 
 /*** Search Section ***/
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
+	console.log(value);
 	if (value) {
 
 		$('#ldm').css('display', 'block');
@@ -344,8 +346,10 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			about: value[0],
 			list: value[1],
 			geo: value[2],
+			country: $scope.searchMLC,
 		};
 		if (value[1] && value[1][0]) {
+			$scope.searchClicked = true;
 			$http.put('/search/users', object).success(function(res) {
 				if (res.success) {
 					meet.cardProfiles = res.data;
@@ -362,13 +366,15 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				$http.post('/search/users/al', object).success(function(res) {
-					if (res.success)
-					meet.cardProfiles = res.data;
-					if ($rootScope.globals.currentUser) {
-						Profile.getFollowedUser(res, function(res){
-							meet.followed = res;
-						});
+					if (res.success) {
+						$scope.searchClicked = true;
+						meet.cardProfiles = res.data;
 					}
+					// if ($rootScope.globals.currentUser) {
+					// 	Profile.getFollowedUser(res, function(res){
+					// 		meet.followed = res;
+					// 	});
+					// }
 				});
 			}
 		}
@@ -412,7 +418,9 @@ $(document).ready(function() {
 					model.$setViewValue(element.val());
 					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
 					var x = model.$viewValue.indexOf(',');
+					var y = model.$viewValue.lastIndexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
+					scope.searchMLC = model.$viewValue.slice(y + 2).toLowerCase();
 				});
 			});
 

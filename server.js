@@ -81,10 +81,10 @@ app.use(passport.session());
 
 app.use(compression());
 
-// app.use(express.static(__dirname + '/Public/dist/'))
+// app.use(express.static(__dirname + '/Public/dist/'));
 // app.use(express.static(__dirname + '/Public/dist/styles/'));
 // app.use(express.static(__dirname + '/Public/dist/scripts/'));
-app.use(express.static(__dirname + '/Public/app/'));;
+app.use(express.static(__dirname + '/Public/app/'));
 app.use(express.static(__dirname + '/Public/'));
 app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);
@@ -159,10 +159,6 @@ String.prototype.Nice = function() {
 String.prototype.capitalize = function() {
     return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
 };
-
-/* pool.query('SELECT * FROM TOUT', function(err, result) {
-    if (err) throw err;
-}); */
 
 /* MailChimp API */
 require('./mailchimpAPI')(app, request);

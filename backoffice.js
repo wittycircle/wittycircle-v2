@@ -153,7 +153,7 @@ module.exports = function(app) {
 						pool.query('SELECT email, username FROM users WHERE profile_id = ?', result[index].id, function(err, result2) {
 							if (err) throw err;
 							else {
-								if (!result2[0] || !result2[0].username || !result[index].email)
+								if (!result2[0] || !result2[0].username || !result2[0].email)
 									return recursive(index + 1);
 								var url = "https://www.wittycircle.com/" + result2[0].username;
 								var data = {

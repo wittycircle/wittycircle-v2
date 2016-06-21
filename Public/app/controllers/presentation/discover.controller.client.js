@@ -60,13 +60,14 @@ angular.module('wittyApp')
     /*** Discover Card Page SEO ***/
     $scope.$parent.seo = {
         pageTitle: "Wittycircle | Discover",
-        pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+        //pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
+	pageDescription: "Discover ideas, startups, products and many more awesome projects waiting for your help."
     };
 
     $scope.$parent.card = {
         title: "Wittycircle | Discover",
         url: "https://www.wittycircle.com/discover",
-        image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458394081/Bf-cover/background-footer1.jpg",
+        image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Discover.png",
     };
 
     $scope.$on('$stateChangeStart', function(next, current) {

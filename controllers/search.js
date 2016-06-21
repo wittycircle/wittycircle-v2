@@ -325,7 +325,7 @@ exports.getUsersBySkillAl = function(req, res) {
         var array = [];
         function recursive(index) {
             if (list[index]) {
-                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
+                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
                     function(err, results) {
                         if (err) throw err;
                         if (results[0])
@@ -355,7 +355,7 @@ exports.getUsersBySkillAl = function(req, res) {
 
 exports.getUsersByAl = function(req, res) {
     if (req.body.about || req.body.geo) {
-        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM `profiles` ORDER BY views DESC', function (err, results) {
+        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC', function (err, results) {
             if (err) throw (err);
             if (results[0]) {
                 var al = new search(results, req.body).getAL();

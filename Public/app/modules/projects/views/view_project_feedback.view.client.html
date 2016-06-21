@@ -147,11 +147,11 @@
             <div class="row feedback_description mgr-bt-20 feedback_description_asks" data-ng-repeat="reply in ask.replies" ng-init="isOwnedReply(reply, project.creator_user_id)">
               <div class="col-md-1">
               </div>
-              <div class="col-md-11 feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
-                <div class="col-md-1">
+              <div class="feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
+                <div class="tempo-class">
                   <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{reply.creator_picture}}">
                 </div>
-                <div class="col-md-11" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
+                <div class="tempo2-class" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
                     <span class="time_reply" am-time-ago="reply.created_at"></span>
                       from <a ui-sref="profile({username: reply.user_profile.username})" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>

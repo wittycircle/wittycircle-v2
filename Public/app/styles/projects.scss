@@ -693,8 +693,8 @@ $font-h3: 'Open Sans', sans-serif;
     }
 
     .feedback-reply-field {
-      border: 1px solid #e5e5e5;
-      border-radius: 4px;
+/*      border: 1px solid #e5e5e5;
+*/      border-radius: 4px;
     }
   }
 
@@ -915,6 +915,10 @@ $font-h3: 'Open Sans', sans-serif;
     }
 
     .text-feedback {
+      display: inline-block;
+    }
+
+    .tempo-class, .tempo2-class {
       display: inline-block;
     }
 

@@ -504,7 +504,8 @@
   #feedback_project .feedback_description .col-md-11 {
     padding-left: 0px; }
   #feedback_project .feedback_description .feedback-reply-field {
-    border: 1px solid #e5e5e5;
+    /*      border: 1px solid #e5e5e5;
+    */
     border-radius: 4px; }
 #feedback_project .feedback_textarea {
   margin: 0px; }
@@ -651,6 +652,8 @@
     padding: 10px 10px 10px 15px;
     float: left; }
   #feedback_project .cards-feedbacks-two .text-feedback {
+    display: inline-block; }
+  #feedback_project .cards-feedbacks-two .tempo-class, #feedback_project .cards-feedbacks-two .tempo2-class {
     display: inline-block; }
   #feedback_project .cards-feedbacks-two .img-responsive {
     margin: 0 auto; }

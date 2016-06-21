@@ -198,7 +198,7 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM `profiles` ORDER BY views DESC', function (err, results) {
+    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC', function (err, results) {
         if (err) throw (err);
 	pf.sortCardProfile(results, function(array) {
 	    res.send({success: true, data: array});
@@ -207,7 +207,7 @@ exports.getCardProfile = function(req, res) {
 };
 
 exports.getCardProfileHome = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards, founder FROM `profiles` ORDER BY views DESC LIMIT 4', function (err, results) {
+    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC LIMIT 4', function (err, results) {
         if (err) throw (err);
         pf.sortCardProfile(results, function(array) {
             res.send({success: true, data: array});

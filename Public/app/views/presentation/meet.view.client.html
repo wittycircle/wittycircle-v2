@@ -168,7 +168,7 @@
                                     </div>
                                     <div class="card-profile-skills">
                                         <ul>
-                                            <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name}}</li>
+                                            <li ng-repeat="profileSkill in cardProfile.skills | limitTo: 5">{{profileSkill.skill_name}}</li>
                                             <!-- <li>Business</li>
                                             <li>Programming</li>
                                             <li>Design</li> -->

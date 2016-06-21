@@ -16,7 +16,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
 	/* Vm Variable */
 	profileVm.currentUser = $rootScope.globals.currentUser || false;
-	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
+	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username || $rootScope.globals.currentUser.moderator ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
         profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
@@ -220,7 +220,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			Upload.dataUrl(file, true).then(function(url){
 				data.url = url;
 				$http.post('/upload/profile_pic_icon', data).success(function(res1) {
-					$http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
+					var object = {
+						picture: {
+							profile_picture: res1.secure_url,
+							profile_picture_icon: res1.secure_url
+						},
+						profile_id: profileVm.profile.id
+					}
+					$http.put('/profile/picture', object).success(function(res2) {
 						if (res2.success) {
 							init();
 							profileVm.reloadCredential();
@@ -240,7 +247,13 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			Upload.dataUrl(file, true).then(function(url){
 				data.url = url;
 				$http.post('/upload/profile/cover', data).success(function(res) {
-					$http.put('/profile/picture', {cover_picture: res.secure_url}).success(function(response) {
+					var object = {
+						picture: {
+							cover_picture: res.secure_url,
+						},
+						profile_id: profileVm.profile.id
+					}
+					$http.put('/profile/picture', object).success(function(response) {
 						if (response.success) {
 							init();
 							profileVm.imageCoverLoading  = false;
@@ -253,7 +266,13 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 				});
 
 				$http.post('/upload/profile/cover_card', data).success(function(res) {
-					$http.put('/profile/picture', {cover_picture_cards: res.secure_url}).success(function(res) {
+					var object = {
+						picture: {
+							cover_picture_cards: res.secure_url,
+						},
+						profile_id: profileVm.profile.id
+					}
+					$http.put('/profile/picture', object).success(function(res) {
 					});
 				}).error(function(res) {
 					console.log(res);

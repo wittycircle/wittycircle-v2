@@ -30,10 +30,18 @@ exports.updateProfilePicture = function(req, res) {
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);
     else {
-	pool.query('UPDATE profiles SET ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [req.body, req.user.id],
-		   function(err, result) {
-		       if (err) throw err;
-		       res.send({success: true});
-		   });
+        if (req.user.moderator) {
+            pool.query('UPDATE profiles SET ? WHERE id = ?', [req.body.picture, req.body.profile_id],
+                function(err, result) {
+                    if (err) throw err;
+                    return res.send({success: true});
+                });
+        } else {
+        	pool.query('UPDATE profiles SET ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [req.body.picture, req.user.id],
+                function(err, result) {
+                   if (err) throw err;
+                   return res.send({success: true});
+                });
+        }
     }
 };

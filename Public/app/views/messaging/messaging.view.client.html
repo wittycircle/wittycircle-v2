@@ -32,7 +32,7 @@
 									<h4>{{dialogue.to_username}}</h4>
 								</div>
 								<div class="messages-list-text">
-									<p>{{dialogue.last_message}}</p>
+									<div class="messages-main-text" ng-bind-html="dialogue.last_message"></div>
 								</div>
 								<span>{{dialogue.date}}</span>
 							</div>
@@ -78,10 +78,11 @@
 				<span>{{message.creation_date }}</span>
 			</div>
 			<div class="messages-texto-text">
-				<p>{{message.message}}</p>
+				<div class="messages-text" ng-bind-html=" transformHtml(message.message)"></div>
 			</div>
 		</div>
 	</div>
+
 
 	<div class="messages-cb-texto" ng-repeat="liveMessage in liveMessages track by $index">
 		<div class="messages-texto-picture">
@@ -93,7 +94,7 @@
 				<span>{{liveMessage.date}}</span>
 			</div>
 			<div class="messages-texto-text">
-				<p>{{liveMessage.message}}</p>
+				<div class="messages-text" ng-bind-html="transformHtml(liveMessage.message)"></div>
 			</div>
 		</div>
 	</div>
@@ -108,7 +109,7 @@
 				<span>{{offMessage.date}}</span>
 			</div>
 			<div class="messages-texto-text">
-				<p>{{offMessage.message}}</p>
+				<div class="messages-text" ng-bind-html="transformHtml(offMessage.message)"></div>
 			</div>
 		</div>
 	</div>
@@ -116,7 +117,7 @@
 
 <div class="messages-conversation-textarea">
 	<div class="textarea-box">
-		<textarea placeholder="Reply to {{name}}..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message" redactor></textarea>
+		<textarea placeholder="Write a reply..." ng-keyup="keyPress($event.keyCode, username, nameuser)" ng-model="socket.message" redactor></textarea>
 	</div>
 	<div id="textbtn" class="textarea-button">
 		<button type="submit" ng-click="socket(username, nameuser)">Send</button>

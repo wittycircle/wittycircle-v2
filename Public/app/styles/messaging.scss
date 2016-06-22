@@ -481,15 +481,19 @@ button {
 							.messages-list-text {
 								max-width: 200px;
 
-								p {
+								.messages-main-text {
 									font-family: 'FreigBook';
 									font-size: 15px;
 									word-wrap: break-word;
 									max-height: 40px;
 									overflow: hidden;
-									line-height: 18px;
 									margin-bottom: 0px;
 									margin-top: 4px;
+								}
+
+								p {
+									margin-bottom: 0;
+									line-height: 18px;
 								}
 							}
 
@@ -663,6 +667,10 @@ button {
 					height: 300px;
 					overflow-y: scroll;
 
+					a {
+						color: blue;
+					}
+
 					.messages-cb-texto {
 						padding: 25px 15px;
 						border-bottom: 1px solid #f5f5f5;
@@ -685,6 +693,8 @@ button {
 							padding: 2px 0px 0px 10px;
 
 							.messages-texto-name {
+								margin-bottom: 5px;
+								
 								h4 {
 									display: inline-block;
 									font-family: 'FreigSem';
@@ -705,13 +715,18 @@ button {
 							.messages-texto-text {
 								max-width: 500px;
 
-								p {
+								.messages-text {
 									font-family: 'FreigBook';
 									font-size: 15px;
 									line-height: 25px;
 									word-wrap: break-word;
 									margin-bottom: 0;
 								}
+
+								p {
+									margin-bottom: 0;
+								}
+
 							}
 						}
 					}
@@ -724,12 +739,21 @@ button {
 				}
 
 				.messages-conversation-textarea {
-					text-align: center;
 					border-top: 1px solid #e5e5e5;
 
 					.textarea-box {
 						width: 100%;
 						padding: 20px;
+
+						.redactor-editor {
+							padding: 10px 15px;
+							min-height: 100px !important;
+
+							p {
+								font-family: 'FreigBook';
+								margin-bottom: 0;
+							}
+						}
 
 						textarea:focus {
 							outline: 0;
@@ -1319,6 +1343,8 @@ textarea:focus {
 								margin-bottom: 0px;
 								margin-top: 4px;
 							}
+
+
 						}
 
 						span {

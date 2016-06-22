@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
+ 	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
 	 	var socket = io.connect('http://127.0.0.1');
@@ -60,8 +60,8 @@
 	 	socket.on('userOnline', function(data){
 	 	 	$scope.onlineUser = data;
 	 	 	// io.getUserOnline(data);
-	 	 	$scope.checkOnlinUser = true;
-	 	 	$scope.refreshDialogue();
+	 	 	$scope.checkOnlineUser = true;
+	 	 	$scope.$apply();
 	 	});
 
 	 	// $scope.$on("$destroy", function(){ 
@@ -115,7 +115,7 @@
 		}
 
 	 	$scope.showMessage = function(dialogue) { // show all messages between current user and client
-	 		if (!$scope.checkOnlinUser) {
+	 		// if (!$scope.checkOnlineUser) {
 		 		if (x <= 736) {
 			 		$scope.tab = dialogue.id;
 			 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
@@ -168,9 +168,13 @@
 			 			$scope.offMessages = [];
 			 		});
 			 	}
-			} else {
-				$scope.checkOnlinUser;
-			}
+			// } else {
+			// 	$scope.checkOnlineUser;
+			// }
+	 	};
+
+	 	$scope.transformHtml = function(html) {
+	 		return $sce.trustAsHtml(html);
 	 	};
 
 	 	$scope.showHomeMobile = function() {
@@ -282,6 +286,7 @@
 		
 
 	 	$scope.socket = function(username, nameuser) { // send message to a particular client 
+	 		console.log($scope.socket.message);
 	 		if ($scope.socket.message  || ($scope.newMessageArea && $scope.newMessageArea.message)) {
 	 			if (username && nameuser && $rootScope.globals.currentUser){
 	 				var msg;

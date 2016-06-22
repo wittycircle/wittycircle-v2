@@ -489,6 +489,12 @@ button {
 									overflow: hidden;
 									margin-bottom: 0px;
 									margin-top: 4px;
+
+									a {
+										color: #0645AD;
+										pointer-events: none;
+   										cursor: default;
+									}
 								}
 
 								p {
@@ -694,7 +700,7 @@ button {
 
 							.messages-texto-name {
 								margin-bottom: 5px;
-								
+
 								h4 {
 									display: inline-block;
 									font-family: 'FreigSem';

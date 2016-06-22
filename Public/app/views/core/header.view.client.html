@@ -116,7 +116,7 @@
                         </div>
                         <div class="header-list-message">
                             <h4>{{dialogue.to_username}}</h4>
-                            <p>{{dialogue.last_message}}</p>
+                            <div class="text-html-header" ng-bind-html="dialogue.last_message"></div>
                             <span>{{dialogue.date}}</span>
                         </div>
                     </div>

@@ -137,7 +137,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     function loop() {
         n++;
         main.idNameP = "#mbcardList_" + (n - 1).toString();
-        if (n === 12)
+        if (n === 10)
         main.idName = "#mbcardList_0";
         else
         main.idName  = "#mbcardList_" + n.toString();

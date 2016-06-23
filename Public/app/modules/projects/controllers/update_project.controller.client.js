@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload',
-function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload) {
+angular.module('wittyProjectModule').controller('UpdateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload', 'redactorOptions',
+function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload, redactorOptions) {
 
     $scope.currentUser = $rootScope.globals.currentUser;
     $scope.project_category = {};
@@ -502,6 +502,21 @@ $scope.uploadVideo = function() {
         $scope.files[name] = file;
 
     });
+
+    // **Redactor configuration
+      redactorOptions.imageUpload = '/upload/redactor';
+      redactorOptions.buttonSource = true;
+      redactorOptions.imageResizable = true;
+      redactorOptions.imageEditable = true;
+      redactorOptions.imageLink = true;
+      redactorOptions.visual = true;// false for html mode
+
+      redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
+      redactorOptions.plugins = ['imagemanager'];
+      redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+      /*
+      **End Redactor configuration
+      */
 
 };
 

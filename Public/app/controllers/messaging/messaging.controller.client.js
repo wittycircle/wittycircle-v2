@@ -9,7 +9,7 @@
  **/
 
  angular.module('wittyApp')
- 	.controller('MessageCtrl', function($http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location) {
+ 	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
 	 	// var socket = io.connect('http://127.0.0.1');
@@ -60,8 +60,8 @@
 	 	socket.on('userOnline', function(data){
 	 	 	$scope.onlineUser = data;
 	 	 	// io.getUserOnline(data);
-	 	 	$scope.checkOnlinUser = true;
-	 	 	$scope.refreshDialogue();
+	 	 	$scope.checkOnlineUser = true;
+	 	 	$scope.$apply();
 	 	});
 
 	 	// $scope.$on("$destroy", function(){ 
@@ -111,12 +111,11 @@
 			}
 		};
 		if (currentUrl === '/messages') {
-			console.log("OK");
 			$scope.refreshDialogue();
 		}
 
 	 	$scope.showMessage = function(dialogue) { // show all messages between current user and client
-	 		if (!$scope.checkOnlinUser) {
+	 		// if (!$scope.checkOnlineUser) {
 		 		if (x <= 736) {
 			 		$scope.tab = dialogue.id;
 			 		if (dialogue.sender !== $scope.userOnlineName && !$scope.c) { // take off notification when click on it
@@ -169,9 +168,13 @@
 			 			$scope.offMessages = [];
 			 		});
 			 	}
-			} else {
-				$scope.checkOnlinUser;
-			}
+			// } else {
+			// 	$scope.checkOnlineUser;
+			// }
+	 	};
+
+	 	$scope.transformHtml = function(html) {
+	 		return $sce.trustAsHtml(html);
 	 	};
 
 	 	$scope.showHomeMobile = function() {
@@ -303,7 +306,22 @@
 		 		}
 		 	}
 	 	};
-	 }
+
+	 	// **Redactor configuration
+
+		redactorOptions.buttonSource = false;
+		redactorOptions.imageResizable = false;
+		redactorOptions.imageEditable = false;
+		redactorOptions.imageLink = false;
+		redactorOptions.visual = false;// false for html mode
+
+		redactorOptions.buttons = false;
+		redactorOptions.plugins = false;
+		redactorOptions.formatting = false;
+		/*
+		**End Redactor configuration
+		*/
+	}
 }).directive('messageModal', function() {
 	var x = $(window).width();
 

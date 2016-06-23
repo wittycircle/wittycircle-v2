@@ -21,6 +21,9 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	profileVm.showEditLocation;
         profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
 
+	if (profileVm.currentUser && profileVm.currentUser.moderator)
+	    profileVm.moderator = true;
+
 	/* Vm Function */
 	profileVm.encodeUrl             = encodeUrl;
 	profileVm.followUser            = followUser;
@@ -75,6 +78,10 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		profileVm.cannotFollow   = true;
 		profileVm.canUpload      = true;
 		profileVm.canUploadCover = true;
+	}
+	if (profileVm.moderator) {
+	    profileVm.canUpload      = true;
+            profileVm.canUploadCover = true;
 	}
 
 
@@ -214,53 +221,72 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
 	/*** Upload picture ***/
 	function uploadProfilePicture(file) {
-		var data = {};
-		if (file) {
-			profileVm.imageProfileLoading           = true;
-			Upload.dataUrl(file, true).then(function(url){
-				data.url = url;
-				$http.post('/upload/profile_pic_icon', data).success(function(res1) {
-					$http.put('/profile/picture', {profile_picture: res1.secure_url, profile_picture_icon: res1.secure_url}).success(function(res2) {
-						if (res2.success) {
-							init();
-							profileVm.reloadCredential();
-							profileVm.imageProfileLoading = false;
-						}
-					});
-				});
+	    var data = {};
+	    if (file) {
+		profileVm.imageProfileLoading           = true;
+		Upload.dataUrl(file, true).then(function(url){
+		    data.url = url;
+		    $http.post('/upload/profile_pic_icon', data).success(function(res1) {
+			var object = {
+			    picture: {
+				profile_picture: res1.secure_url,
+				profile_picture_icon: res1.secure_url
+			    },
+			    profile_id: profileVm.profile.id
+			}
+			$http.put('/profile/picture', object).success(function(res2) {
+			    if (res2.success) {
+				init();
+				profileVm.reloadCredential();
+				profileVm.imageProfileLoading = false;
+			    }
 			});
-		}
+		    });
+		});
+	    }
 	};
-
+    
 	function uploadProfileCover(file) {
-		var data = {};
-		if (file) {
-			profileVm.imageCoverLoading          = true;
-			profileVm.randomCover                = false;
-			Upload.dataUrl(file, true).then(function(url){
-				data.url = url;
-				$http.post('/upload/profile/cover', data).success(function(res) {
-					$http.put('/profile/picture', {cover_picture: res.secure_url}).success(function(response) {
-						if (response.success) {
-							init();
-							profileVm.imageCoverLoading  = false;
-							profileVm.currentUser.profile_cover = res.secure_url;
-							$cookieStore.put('globals', $rootScope.globals);
-						}
-					});
-				}).error(function(res) {
-					console.log(res);
-				});
-
-				$http.post('/upload/profile/cover_card', data).success(function(res) {
-					$http.put('/profile/picture', {cover_picture_cards: res.secure_url}).success(function(res) {
-					});
-				}).error(function(res) {
-					console.log(res);
-				});
-
+	    var data = {};
+	    if (file) {
+		profileVm.imageCoverLoading          = true;
+		profileVm.randomCover                = false;
+		Upload.dataUrl(file, true).then(function(url){
+		    data.url = url;
+		    $http.post('/upload/profile/cover', data).success(function(res) {
+			var object = {
+			    picture: {
+				cover_picture: res.secure_url,
+			    },
+			    profile_id: profileVm.profile.id
+			}
+			$http.put('/profile/picture', object).success(function(response) {
+			    if (response.success) {
+				init();
+				profileVm.imageCoverLoading  = false;
+				profileVm.currentUser.profile_cover = res.secure_url;
+				$cookieStore.put('globals', $rootScope.globals);
+			    }
 			});
-		}
+		    }).error(function(res) {
+			console.log(res);
+		    });
+		    
+		    $http.post('/upload/profile/cover_card', data).success(function(res) {
+			var object = {
+			    picture: {
+				cover_picture_cards: res.secure_url,
+			    },
+			    profile_id: profileVm.profile.id
+			}
+			$http.put('/profile/picture', object).success(function(res) {
+			});
+		    }).error(function(res) {
+			console.log(res);
+		    });
+		    
+		});
+	    }
 	};
 
 	// profileVm.$watch('imageLoading', function (value) {

@@ -17,34 +17,31 @@
           <div class="text-feedback">
             <h5 data-ng-bind="::question.title"></h5>
             <p class="from_text">
-              <span am-time-ago="::question.date_added"></span><span> from</span>
-               <a ui-sref="profile({username: question.user.username})" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+	      <a ui-sref="profile({username: question.user.username})" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+              <span am-time-ago="::question.date_added"></span>
               <span class="feedback_badge">CREATOR</span>
-            </p>
-            <p class="replies_title">
-              <span class="number_replies" data-ng-bind="0 + question.replies.length"></span> replies
             </p>
           </div>
         </div>
         <div id="replies" class="row-custom-feed animate-if" >
           <div class="row feedback_description" data-ng-if="question.description">
-            <div class="col-md-11 col-md-offset-1 text_description_feed">
+            <div class="col-md-11 text_description_feed">
               <p data-ng-bind="question.description" style="margin-left: 15px;"></p>
             </div>
           </div>
           <div class="row feedback_description" >
             <!--<div class="row feedback_description mgr-bt-20" data-ng-repeat="reply in question.replies" data-ng-init="vm.isOwnedReply(reply, project.creator_user_id)">-->
-            <div class="row feedback_description mgr-bt-20" data-ng-repeat="reply in question.replies">
+            <div class="row feedback_description" data-ng-repeat="reply in question.replies">
               <div class="col-md-1">
               </div>
-              <div class="col-md-11 feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
-                <div class="col-md-1">
+              <div class="feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
+                <div class="tempo-class">
                   <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{::reply.user_profile.profile_picture_icon}}">
                 </div>
-                <div class="col-md-11" data-ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
+                <div class="tempo2-class" data-ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
+		    <a data-ui-sref="profile({username: reply.user_profile.username})" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
                     <span class="time_reply" am-time-ago="reply.created_at"></span>
-                      from <a data-ui-sref="profile({username: reply.user_profile.username})" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
                       <span data-ng-init="isInTheTeam(project, reply)">
                         <span class="feedback_badge" data-ng-if="vm.editable === true">CREATOR</span>
                       </span>
@@ -55,11 +52,11 @@
               </div>
             </div>
           </div>
-          <div class="row feedback_textarea mgr-tp-40" ng-if="vm.loggedUser">
-            <div class="col-md-1">
+          <div class="row feedback_textarea" ng-if="vm.loggedUser">
+            <div class="tempo3-class">
               <img class="img-responsive img-circle" height="36px" width="36px" data-ng-src="{{vm.loggedUser.profile_picture_icon}}">
             </div>
-            <div class="col-md-11">
+            <div class="tempo4-class">
               <form id="textareaQuestionReply">
                 <textarea class="textarea_new_reply" data-ng-model="reply" placeholder="Enter your comment..."></textarea>
               </form>
@@ -129,32 +126,29 @@
           <div class="view-project-feedback-ask">
             <h5 data-ng-bind="ask.title"></h5>
             <p class="from_text">
-              <span am-time-ago="ask.created_at"></span> <span>from</span>
               <a ui-sref="profile({profile: ask.user.username})" class="underline_user">{{ask.first_name}} {{ask.last_name}}</a>
-            </p>
-            <p class="replies_title">
-              <span class="number_replies" data-ng-bind="0 + ask.replies.length"></span> replies
+              <span am-time-ago="ask.created_at"></span>
             </p>
           </div>
         </div>
         <div id="replies" class="row-custom-feed animate-if">
-          <div class="row feedback_description"data-ng-if="ask.message">
-            <div class="col-md-11 col-md-offset-1 text_description_feed">
+          <div class="row feedback_description" data-ng-if="ask.message">
+            <div class="col-md-11 text_description_feed">
               <p data-ng-bind="ask.message" style="margin-left: 15px;"></p>
             </div>
           </div>
           <div class="row feedback_description" >
-            <div class="row feedback_description mgr-bt-20 feedback_description_asks" data-ng-repeat="reply in ask.replies" ng-init="isOwnedReply(reply, project.creator_user_id)">
+            <div class="row feedback_description feedback_description_asks" data-ng-repeat="reply in ask.replies" ng-init="isOwnedReply(reply, project.creator_user_id)">
               <div class="col-md-1">
               </div>
-              <div class="col-md-11 feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
-                <div class="col-md-1">
+              <div class="feedback-reply-field nomargin" data-ng-class="{ 'nested_replies_2': reply.owned }">
+                <div class="tempo-class">
                   <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{reply.creator_picture}}">
                 </div>
-                <div class="col-md-11" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
+                <div class="tempo2-class" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
-                    <span class="time_reply" am-time-ago="reply.created_at"></span>
-                      from <a ui-sref="profile({username: reply.user_profile.username})" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>
+                    <a ui-sref="profile({username: reply.user_profile.username})" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>
+                    <span class="time_reply" am-time-ago="reply.created_at">
                       <span ng-init="isInTheTeam(project, reply)">
                         <span class="feedback_badge" data-ng-if="reply.inTeam">CREATOR</span>
                       </span>
@@ -165,11 +159,11 @@
               </div>
             </div>
           </div>
-          <div class="row feedback_textarea mgr-tp-40" data-ng-if="vm.loggedUser">
-            <div class="col-md-1">
+          <div class="row feedback_textarea" data-ng-if="vm.loggedUser">
+            <div class="tempo3-class">
               <img class="img-responsive img-circle" height="36px" width="36px" data-ng-src="{{::vm.loggedUser.profile_picture_icon}}">
             </div>
-            <div class="col-md-11">
+            <div class="tempo4-class">
               <form id="textareaAskReply">
                 <textarea class="textarea_new_reply" data-ng-model="reply" placeholder="Enter your comment..."></textarea>
               </form>

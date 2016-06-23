@@ -344,15 +344,21 @@
                   max-width: 230px; }
                 #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text {
                   max-width: 200px; }
-                  #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text p {
+                  #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text .messages-main-text {
                     font-family: 'FreigBook';
                     font-size: 15px;
                     word-wrap: break-word;
                     max-height: 40px;
                     overflow: hidden;
-                    line-height: 18px;
                     margin-bottom: 0px;
                     margin-top: 4px; }
+                    #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text .messages-main-text a {
+                      color: #0645AD;
+                      pointer-events: none;
+                      cursor: default; }
+                  #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text p {
+                    margin-bottom: 0;
+                    line-height: 18px; }
                 #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object span {
                   font-family: 'FreigBook';
                   font-size: 14px; }
@@ -464,6 +470,8 @@
             background-color: white;
             height: 300px;
             overflow-y: scroll; }
+            #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body a {
+              color: blue; }
             #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto {
               padding: 25px 15px;
               border-bottom: 1px solid #f5f5f5; }
@@ -479,36 +487,45 @@
                 display: inline-block;
                 width: 514px;
                 padding: 2px 0px 0px 10px; }
-                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name h4 {
-                  display: inline-block;
-                  font-family: 'FreigSem';
-                  font-size: 16px;
-                  color: #222222; }
-                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name span {
-                  font-family: 'FreigBook';
-                  font-size: 14px;
-                  color: #999999;
-                  display: inline-block;
-                  float: right;
-                  padding: 0 5px; }
+                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name {
+                  margin-bottom: 5px; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name h4 {
+                    display: inline-block;
+                    font-family: 'FreigSem';
+                    font-size: 16px;
+                    color: #222222; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name span {
+                    font-family: 'FreigBook';
+                    font-size: 14px;
+                    color: #999999;
+                    display: inline-block;
+                    float: right;
+                    padding: 0 5px; }
                 #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text {
                   max-width: 500px; }
-                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text p {
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text {
                     font-family: 'FreigBook';
                     font-size: 15px;
                     line-height: 25px;
                     word-wrap: break-word;
+                    margin-bottom: 0; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text p {
                     margin-bottom: 0; } }
         @media only screen and (min-width: 736px) and (min-height: 720px) {
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body {
             height: 500px; } }
 @media only screen and (min-width: 736px) {
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea {
-            text-align: center;
             border-top: 1px solid #e5e5e5; }
             #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea .textarea-box {
               width: 100%;
               padding: 20px; }
+              #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea .textarea-box .redactor-editor {
+                padding: 10px 15px;
+                min-height: 100px !important; }
+                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea .textarea-box .redactor-editor p {
+                  font-family: 'FreigBook';
+                  margin-bottom: 0; }
               #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea .textarea-box textarea:focus {
                 outline: 0; }
               #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-textarea .textarea-box textarea {

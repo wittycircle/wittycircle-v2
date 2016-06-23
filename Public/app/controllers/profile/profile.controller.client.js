@@ -77,6 +77,11 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		profileVm.canUploadCover = true;
 	}
 
+	if (profileVm.moderator) {
+		profileVm.canUpload      = true;
+		profileVm.canUploadCover = true;
+	}
+
 
 	/***** MOBILE *****/
 

@@ -300,11 +300,11 @@
         height: 400px;
         overflow-y: scroll;
         overflow-x: hidden; }
-        #header-section #header-content .header-log-on .header-dropdown-lists h4, #header-section #header-content .header-log-on .header-dropdown-lists h5, #header-section #header-content .header-log-on .header-dropdown-lists p, #header-section #header-content .header-log-on .header-dropdown-lists span {
+        #header-section #header-content .header-log-on .header-dropdown-lists h4, #header-section #header-content .header-log-on .header-dropdown-lists h5, #header-section #header-content .header-log-on .header-dropdown-lists p, #header-section #header-content .header-log-on .header-dropdown-lists span, #header-section #header-content .header-log-on .header-dropdown-lists .text-html-header {
           color: #999999; }
         #header-section #header-content .header-log-on .header-dropdown-lists .unread-active {
           background-color: #f5f5f5; }
-          #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message h4, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message h5, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message p, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message span {
+          #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message h4, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message h5, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message p, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message span, #header-section #header-content .header-log-on .header-dropdown-lists .unread-active .header-list-message .text-html-header {
             color: #222222; }
         #header-section #header-content .header-log-on .header-dropdown-lists .header-noMessage-text,
         #header-section #header-content .header-log-on .header-dropdown-lists .header-noNotif-text {
@@ -346,7 +346,7 @@
               font-family: 'FreigBook';
               font-size: 15px;
               word-spacing: 1px; }
-            #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message p {
+            #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message .text-html-header {
               font-family: 'FreigBook';
               font-size: 15px;
               line-height: 18px;
@@ -354,12 +354,14 @@
               max-height: 36px;
               overflow: hidden;
               margin-bottom: 0px; }
+              #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message .text-html-header a {
+                color: blue; }
             #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message span {
               font-family: 'FreigBook';
               font-size: 13px; }
         #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover {
           background-color: #f5f5f5; }
-          #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h4, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h5, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover p, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover span {
+          #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h4, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h5, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover p, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover span, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover .text-html-header {
             color: #222222; }
   #header-section #header-findField {
     display: none;

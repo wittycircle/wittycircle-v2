@@ -1,3 +1,14 @@
+.tempo3-class, .tempo4-class {
+  display: inline-block; }
+
+.tempo3-class {
+  margin: 15px 10px 5px 30px; }
+
+.tempo4-class {
+  width: 80%;
+  margin-top: 15px;
+  vertical-align: top; }
+
 .circle_number {
   position: relative;
   margin-left: 5px;
@@ -494,7 +505,8 @@
 #feedback_project .view-project-feedback-ask {
   display: inline-block; }
 #feedback_project .feedback_description {
-  margin: 0px; }
+  margin: 0px;
+  cursor: default; }
   #feedback_project .feedback_description .mgr-bt-20 {
     margin-bottom: 20px;
     margin-left: 15px;
@@ -506,9 +518,10 @@
   #feedback_project .feedback_description .feedback-reply-field {
     /*      border: 1px solid #e5e5e5;
     */
-    border-radius: 4px; }
+    border-radius: 4px;
+    padding: 15px 15px 5px 65px; }
 #feedback_project .feedback_textarea {
-  margin: 0px; }
+  margin-top: 15px; }
   #feedback_project .feedback_textarea .mgr-bt-20 {
     margin-bottom: 20px;
     margin-left: 15px;
@@ -654,7 +667,8 @@
   #feedback_project .cards-feedbacks-two .text-feedback {
     display: inline-block; }
   #feedback_project .cards-feedbacks-two .tempo-class, #feedback_project .cards-feedbacks-two .tempo2-class {
-    display: inline-block; }
+    display: inline-block;
+    margin-right: 10px; }
   #feedback_project .cards-feedbacks-two .img-responsive {
     margin: 0 auto; }
   #feedback_project .cards-feedbacks-two .picto_delete {

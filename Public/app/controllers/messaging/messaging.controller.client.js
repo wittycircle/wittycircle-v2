@@ -286,7 +286,6 @@
 		
 
 	 	$scope.socket = function(username, nameuser) { // send message to a particular client 
-	 		console.log($scope.socket.message);
 	 		if ($scope.socket.message  || ($scope.newMessageArea && $scope.newMessageArea.message)) {
 	 			if (username && nameuser && $rootScope.globals.currentUser){
 	 				var msg;

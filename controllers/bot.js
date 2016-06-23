@@ -12,7 +12,7 @@ function checkLastConnection(timestamp, callback) {
 	}
 };
 
-pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_notif = "view" && n_read = 0 GROUP BY user_id',
+pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_notif = "view" && n_read = 0 && user_id IN (696, 552, 296) GROUP BY user_id',
 	function(err, result) {
 		if (err) throw err;
 		else {
@@ -41,9 +41,35 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 																			pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result2[0].profile_id, function(err, m_info){
 																				if (err) throw err;
 
-																				var main_name = m_info[0].first_name + ' ' + m_info[0].last_name;
-																				var subj = main_name + ", your profile is being viewed a lot.";
+																				var main_name = m_info[0].first_name;
+																				var subj = m_info[0].first_name + ' ' + m_info[0].last_name + ", your profile is being viewed a lot.";
 																				var view_number = result3.length;
+																				// if (info2[0].location_state)
+																				// 	var locat1 = info2[0].location_city + ", " + info2[0].location_state
+																				// else
+																				// 	var locat1 = info2[0].location_city + ", " + info2[0].location_country;
+
+																				// if (info2[1].location_state)
+																				// 	var locat2 = info2[1].location_city + ", " + info2[1].location_state
+																				// else
+																				// 	var locat2 = info2[1].location_city + ", " + info2[1].location_country;
+
+																				// if (info2[2].location_state)
+																				// 	var locat3 = info2[2].location_city + ", " + info2[2].location_state
+																				// else
+																				// 	var locat3 = info2[2].location_city + ", " + info2[2].location_country;
+
+																				// if (info2[3].location_state)
+																				// 	var locat4 = info2[3].location_city + ", " + info2[3].location_state
+																				// else
+																				// 	var locat4 = info2[3].location_city + ", " + info2[3].location_country;
+
+																				// console.log(info2[4]);
+																				// if (info2[4].location_state)
+																				// 	var locat5 = info2[4].location_city + ", " + info2[4].location_state
+																				// else
+																				// 	var locat5 = info2[4].location_city + ", " + info2[4].location_country;
+
 																				var locat1 = info2[0].location_state ? info2[0].location_city + ", " + info2[0].location_state : info2[0].location_city + ", " + info2[0].location_country;
 																				var locat2 = info2[1].location_state ? info2[1].location_city + ", " + info2[1].location_state : info2[1].location_city + ", " + info2[1].location_country;
 																				var locat3 = info2[2].location_state ? info2[2].location_city + ", " + info2[2].location_state : info2[2].location_city + ", " + info2[1].location_country;
@@ -108,7 +134,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname1",
-					                                                                                "content": info2[0].first_name
+					                                                                                "content": info2[0].first_name + ' ' + info2[0].last_name
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc1",
@@ -124,7 +150,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname2",
-					                                                                                "content": info2[1].first_name
+					                                                                                "content": info2[1].first_name + ' ' + info2[1].last_name
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc2",
@@ -140,7 +166,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname3",
-					                                                                                "content": info2[2].first_name
+					                                                                                "content": info2[2].first_name + ' ' + info2[2].last_name
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc3",
@@ -156,7 +182,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname4",
-					                                                                                "content": info2[3].first_name
+					                                                                                "content": info2[3].first_name + ' ' + info2[3].last_name
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc4",
@@ -172,7 +198,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname5",
-					                                                                                "content": info2[4].first_name
+					                                                                                "content": info2[4].first_name + ' ' + info2[4].last_name
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc5",

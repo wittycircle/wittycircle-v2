@@ -37,7 +37,9 @@ exports.updateProfilePicture = function(req, res) {
                     return res.send({success: true});
                 });
         } else {
-        	pool.query('UPDATE profiles SET ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [req.body.picture, req.user.id],
+            var object = req.body.picture || req.body;
+            
+        	pool.query('UPDATE profiles SET ? WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [object, req.user.id],
                 function(err, result) {
                    if (err) throw err;
                    return res.send({success: true});

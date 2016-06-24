@@ -89,10 +89,12 @@ function sortUserExperience(list, callback) {
 
 exports.getUserExperiences = function(req, res) {
     pool.query('SELECT * FROM user_experiences WHERE user_id = ?', req.user.id,
-	              function(err, result) {
-			     if (err) throw err;
-			     res.send({success: true, data: result});
-			         });
+        function(err, result) {
+        if (err) throw err;
+            sortUserExperience(result, function(newList) {
+                res.send({success: true, data: newList});
+            });
+        });
 };
 
 exports.getUserExperiencesByUsername = function(req, res) {

@@ -356,9 +356,15 @@
               margin-bottom: 0px; }
               #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message .text-html-header a {
                 color: blue; }
+              #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message .text-html-header p {
+                margin-bottom: 0; }
             #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .header-list-message span {
               font-family: 'FreigBook';
-              font-size: 13px; }
+              font-size: 14px; }
+          #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list .hlm-notif p {
+            margin-bottom: 0;
+            font-family: 'FreigBook';
+            font-size: 14px; }
         #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover {
           background-color: #f5f5f5; }
           #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h4, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover h5, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover p, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover span, #header-section #header-content .header-log-on .header-dropdown-lists .header-dropdown-list:hover .text-html-header {

@@ -1,5 +1,5 @@
-<section id="viewProject-page">
-	<project-message-modal></project-message-modal>
+<section id="viewProject-page" >
+	<div project-message-modal></div>
 	<header id="viewProject-header" data-ng-style="{'background-image': 'url(' + resizePic(vm.project.picture, 1200, 410) + ')', 'background-position': vm.project.picture_position}">
 		<div class="viewProject-filter"></div>
 		<div class="viewProject-title">
@@ -136,12 +136,12 @@
 							<vg-play-pause-button></vg-play-pause-button>
 							<vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
 							<vg-scrub-bar>
-									<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+								<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
 							</vg-scrub-bar>
 							<vg-time-display>{{ totalTime | date:'mm:ss':'+0000' }}</vg-time-display>
 							<vg-volume>
-									<vg-mute-button></vg-mute-button>
-									<vg-volume-bar></vg-volume-bar>
+								<vg-mute-button></vg-mute-button>
+								<vg-volume-bar></vg-volume-bar>
 							</vg-volume>
 							<!--<div class='my-button iconButton'><img src="/images/witty-logo-icon-w.svg" height="20px" width="20px"></div>-->
 							<vg-fullscreen-button></vg-fullscreen-button>
@@ -168,20 +168,16 @@
 		$(document).ready(function() {
 			document.getElementById('footer-page').style.visibility = "visible";
 			$(this).click(function(e) {
-				var target = e.target.id,
-					container = "#profile-modal-newMessageArea";
-	                       
-				if (target === "pnm" || target === "pnmn") {
-					$('#profile-modal-newMessageArea').show();
-				}
-				else {
-					if(target !== "profile-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
 
-						if ($('#profile-modal-newMessageArea').css('display') === "block") {
-							$('#profile-modal-newMessageArea').fadeOut(100);
-						}
+				if ($('#project-modal-newMessageArea').css('display') === "none") {
+					var target = e.target.id;
+							                       
+					if (target === "pnm" || target === "pnmn") {
+						$('#project-modal-newMessageArea').fadeIn(100);
+						return ;
 					}
 				}
+
 			});
 		});
 </script>

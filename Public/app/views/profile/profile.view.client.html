@@ -375,9 +375,8 @@
 							<span ng-if="!profileExp.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{profileExp.location_city}}, {{profileExp.location_country}}</span>
 							<span ng-if="profileExp.location_state" class="exp-location"><img src="/images/location-picto.svg"> {{profileExp.location_city}}, {{profileExp.location_state | uppercase}}</span>
 						</div>
-						<div class="profile-exp-description">
-							<h6>{{profileExp.description}}</h6>
-						</div>
+						<p class="profile-exp-description" ng-bind-html="profileExp.description">
+						</p>
 					</div>
 					<p class="profile-no-data" data-ng-if="profileVm.profileExps.length == 0">
 						No experience to show, yet.
@@ -497,17 +496,26 @@
 
 			$(this).click(function(e) {
 				var target = e.target.id,
-					container = "#profile-modal-newMessageArea";
+					container = $("#profile-modal-newMessageArea");
 
-				if (target === "pmpm" || target === "pmpma")
-					$('#profile-modal-newMessageArea').show();
-				if(target !== "profile-modal-newMessageArea" && target !== "pmpm" && target !== "pmpma" && !$(e.target).hasClass("messages-newMessageArea-to") && !$(e.target).hasClass("profile-newMessageArea-text")) {
-
-					if ($('#profile-modal-newMessageArea').css('display') === "block") {
-						$('#profile-modal-newMessageArea').fadeOut(100);
+				if (target === "pmpm" || target === "pmpma") {
+					$('#profile-modal-newMessageArea').fadeIn(100);
+					return ;
+				}
+				if ($('#profile-modal-newMessageArea').css('display') === "block") {
+					if(!container.is(e.target) && container.has(e.target).length === 0) {
+						if ($('#profile-m-text').val()) {
+			               		var r = confirm("You haven't finished your message yet. Do you want to leave without finishing?");
+			               		if (r == true) {
+									$('#profile-modal-newMessageArea').fadeOut(100);
+									$('#profile-m-text').val("");
+								}
+						} else 
+							$('#profile-modal-newMessageArea').fadeOut(100);
 					}
 				}
 			});
+
 
 			$('.follow-project').mouseover(function() {
 				$('#pfdd1').fadeIn(300);

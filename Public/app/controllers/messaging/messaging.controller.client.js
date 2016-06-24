@@ -214,7 +214,7 @@
 
 		};
 
-		$scope.createNewMessage = function() {
+		$scope.createNewMessage = function(modal) {
 			$scope.infoMessage = {
 				from_user_id: $rootScope.globals.currentUser.id,
 				to_user_id: $scope.Pi,
@@ -227,6 +227,15 @@
 				if ($rootScope.globals.currentUser.id !== $scope.Pi) {	
 				    $http.post('/messages', $scope.infoMessage).success(function(res){
 						if (res.success) {
+							if (modal) {
+								$('#messages-newpost-modal').hide();
+				            	$('#messages-modal-newMessageArea').hide();
+				            	$('#profile-modal-newMessageArea').hide();
+				            	$('#project-modal-newMessageArea').hide();
+				            	Users.count();
+				            	$scope.refreshDialogue(true);
+				            	return ;
+							}
 							Users.count();
 						    $scope.refreshDialogue(true);
 							setTimeout(function() {
@@ -238,16 +247,16 @@
 			}
 		};
 
-		if ($stateParams.user_id) {
-			$scope.searchArea($stateParams.profile, $stateParams.user_id, $stateParams.username);
-			setTimeout(function() {
-				$('#messages-modal-newMessageArea').fadeIn(function() {
-					$('#messages-modal-searchArea').fadeOut(function(){
-						$('#messages-newpost-modal').fadeIn();
-					});
-				});
-			}, 300);
-	 	}
+		// if ($stateParams.user_id) {
+		// 	$scope.searchArea($stateParams.profile, $stateParams.user_id, $stateParams.username);
+		// 	setTimeout(function() {
+		// 		$('#messages-modal-newMessageArea').fadeIn(function() {
+		// 			$('#messages-modal-searchArea').fadeOut(function(){
+		// 				$('#messages-newpost-modal').fadeIn();
+		// 			});
+		// 		});
+		// 	}, 300);
+	 // 	}
 
 		/***   SOCKET   ***/
 
@@ -330,17 +339,16 @@
 			templateUrl: 'views/messaging/messaging.modals.view.client.html',
 			restrict: "AE",
 			link: function(scope, element, attr) {
-				var myelem = (angular.element(element.children()[0]));
+				// var myelem = (angular.element(element.children()[0]));
 
-				myelem.on('click', function(e) {
-					var target = e.target.id;
+				// myelem.on('click', function(e) {
+				// 	var target = e.target.id;
 
-					if (target === "mmo") {
-						document.getElementById('messages-modal-searchArea').style.display = "none";
-						document.getElementById('messages-modal-newMessageArea').style.display = "block";
-					}
-				});
-
+				// 	if (target === "mmo") {
+				// 		document.getElementById('messages-modal-searchArea').style.display = "none";
+				// 		document.getElementById('messages-modal-newMessageArea').style.display = "block";
+				// 	}
+				// });
 			}
 		}
 	}

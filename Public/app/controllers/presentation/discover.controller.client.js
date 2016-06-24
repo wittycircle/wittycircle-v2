@@ -170,7 +170,6 @@ angular.module('wittyApp')
 
     RetrieveData.getData('/categories', 'GET').then(function(response) {
         discover.categories = response;
-        console.log(response);
         if ($stateParams.category) {
             var str = $stateParams.category.toLowerCase();
             str = capitalizeFirstLetter(str);

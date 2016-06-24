@@ -1,23 +1,23 @@
 <section id="messages-modals">
 	<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
-		<div id="mmo" class="messages-modal-header">
-			<div id="mmo" class="messages-modal-title">
-				<h3 id="mmo">New message</h3>
+		<div class="messages-modal-header">
+			<div class="messages-modal-title">
+				<h3>New message</h3>
 			</div>
-			<div id="mmo" class="messages-modal-cross" alt="witty-crosspicture">
+			<div class="messages-modal-cross" alt="witty-crosspicture">
 				<img src="/images/cross-icon.svg">
 			</div>
 		</div>
 		<article id="messages-modal-newMessageArea" class="animated fadeIn" style="display: none;">
-			<div id="mmo" class="messages-newMessageArea-to">
-				<label id="mmo">To : </label>
-				<h5 id="mmo">{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
+			<div class="messages-newMessageArea-to">
+				<label>To : </label>
+				<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
 			</div>
-			<div id="mmo" class="messages-newMessageArea-text">
-				<textarea id="mmo" ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
+			<div class="messages-newMessageArea-text">
+				<textarea id="header-m-texa" ng-model="newMessageArea.message" placeholder="Write a message..." redactor></textarea>
 			</div>
-			<div id="mmo" class="messages-newMessageArea-send">
-				<button type="submit" ng-click="createNewMessage()">Send</button>
+			<div class="messages-newMessageArea-send">
+				<button type="submit" ng-click="createNewMessage(true)">Send</button>
 			</div>
 		</article>
 		<article id="messages-modal-searchArea" style="display: block;">
@@ -25,19 +25,18 @@
 				<input id="mmoinput" type="search" placeholder="Search a username" ng-model="searchName">
 			</div>
 			<div id="mmolist" class="messages-newpost-users">
-				<div id="mmo" ng-if="checkId != profile.profile[0].id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 5" ng-click="searchArea(profile.profile[0], profile.id, profile.username)">
-					<div id="mmo" class="messages-newpost-puser">
-						<img id="mmo" ng-src="{{ resizePic(profile.profile[0].profile_picture, 60, 60, 'fill') }}" alt="witty-userpicture">
-						<div id="mmo" class="messages-newpost-iuser">
-							<h3 id="mmo">{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
-							<h5 id="mmo" >{{profile.profile[0].location_city}} <span ng-if="profile.profile[0].location_country">,</span> {{profile.profile[0].location_country}}</h5>
+				<div ng-if="checkId != profile.profile[0].id" class="messages-newpost-user" ng-repeat="profile in profiles | filter : searchName | limitTo : 5" ng-click="searchArea(profile.profile[0], profile.id, profile.username)">
+					<div class="messages-newpost-puser">
+						<img ng-src="{{ resizePic(profile.profile[0].profile_picture, 60, 60, 'fill') }}" alt="witty-userpicture">
+						<div class="messages-newpost-iuser">
+							<h3>{{profile.profile[0].first_name}} {{profile.profile[0].last_name}}</h3>
+							<h5 >{{profile.profile[0].location_city}} <span ng-if="profile.profile[0].location_country">,</span> {{profile.profile[0].location_country}}</h5>
 						</div>
 					</div>
 				</div>
-
-				<div class="messages-newpost-footer">
-					<img src="/images/witty-logo-icon-b.svg">
-				</div>
+			</div>
+			<div class="messages-newpost-footer">
+				<img src="/images/witty-logo-icon-b.svg">
 			</div>
 		</article>
 	</div>
@@ -65,7 +64,28 @@
 </section>
 <script>
 		$(document).ready(function() {
-			$(this).on('click', function(e) {
+			$('body').on('click', function(e) {
+
+					if ($('#messages-newpost-modal').css('display') === "block" && e.target.id != "hnmmopen") {
+						var container = $('#messages-newpost-modal')
+
+		               	if (!container.is(e.target) && container.has(e.target).length === 0) {
+		               		if ($('#header-m-texa').val()) {
+			               		var r = confirm("You haven't finished your message yet. Do you want to leave without finishing?");
+			               		if (r == true) {
+				               		$('#messages-newpost-modal').hide();
+				               		$('#messages-modal-newMessageArea').hide();
+				               		$('#header-m-texa').val("");
+				               	}
+				            } else {
+				            	$('#messages-newpost-modal').hide();
+				               	$('#messages-modal-newMessageArea').hide();
+				            }
+		               	}
+	            	}
+			});
+
+			$("#messages-newpost-modal").on('click', function(e) {
 				var eTarget = e.target.id;
 
 				if (eTarget === "mhop" && document.getElementById('mobox')) {
@@ -80,16 +100,12 @@
 
 				/*** section messaging modal ***/
 
-                  // message modal
-                  if (document.getElementById('messages-newpost-modal') && eTarget === 'mhn' || eTarget === 'mmo' || eTarget === 'mmoinput' || eTarget === 'mhnImg' || eTarget === 'hnmmopen') {
-                  	document.getElementById('messages-newpost-modal').style.display = "block";
-                  } else {
-                  	if (document.getElementById('messages-newpost-modal')) {
-                  		document.getElementById('messages-newpost-modal').style.display = "none";
-                  		document.getElementById('messages-modal-searchArea').style.display = "block";
-                  		document.getElementById('messages-modal-newMessageArea').style.display = "none";
-                  	}
-                  }
+               	var container = $('#mmolist');
+				if (container.is(e.target) || container.has(e.target).length > 0) {
+					$('#messages-modal-searchArea').hide();
+					$('#messages-modal-newMessageArea').show();
+				}
+
 
                   // confirm delete modal
                   if (eTarget === 'mcdm' || eTarget === 'mcdc' && document.getElementById('messages-confirmDelete-modal')) {
@@ -99,6 +115,7 @@
                   		document.getElementById('messages-confirmDelete-modal').style.display = "none";
                   }
               });
+
 		});
 
 		// function showUserList() {

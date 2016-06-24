@@ -5,7 +5,7 @@
 * # LoginCtrl
 * Controller of the wittyApp
 */
-angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStore, Upload, $filter, $stateParams, $location, $scope, $timeout, $rootScope, Authentication, Data_auth, Skills, Interests, Experiences, Locations, RetrieveData) {
+angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStore, Upload, $filter, $stateParams, $location, $scope, $timeout, $rootScope, Authentication, Data_auth, Skills, Interests, Experiences, Locations, RetrieveData, redactorOptions) {
 
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
@@ -42,7 +42,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.formMonth  = "Month";
 	$scope.formYear   = "Year";
 	/** about data **/
-	$scope.aboutText  = "discover new things";
+	$scope.aboutText  = "join projects";
 	/** experience data **/
 	$scope.startMonth = "Month";
 	$scope.startYear  = "Year";
@@ -261,7 +261,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		else
 		    $scope.sButton         = "Skip";
 	    });
-	};
+	}; $scope.getSignUpSkill();
 	
 	$scope.getSkill    = function(skill) {
 	    var object = {
@@ -269,8 +269,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		skill_name  : skill.name,
 	    };
 	    $http.post('/skills/add', object).success(function(res) {
-		if (res.success)
+		if (res.success) {
+
 		    $scope.getSignUpSkill();
+		}
 	    });
 	};
 	
@@ -305,7 +307,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		else
 		    $scope.iButton    = "Skip";
 	    });
-	};
+	}; $scope.getSignUpInterest();
 	
 	$scope.getInterest      = function(interest) {
 	    var object            = {
@@ -465,6 +467,12 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		$scope.exLocation       = $scope.positions[index].location_city + ', ' + $scope.positions[index].location_country;
 	    }
 	    
+	    if (disDate2 !== "Present") {
+			$scope.endMonth         	= disDate2.month;
+			$scope.endYear          	= disDate2.year;
+			$scope.endPeriod.month  	= {Num: disDate2.monthN, Pap: disDate2.month};
+			$scope.endPeriod.year   	= disDate2.year;
+		}
 	    $scope.startMonth         = disDate1.month;
 	    $scope.startYear          = disDate1.year;
 	    $scope.startPeriod.month  = {Num: disDate1.monthN, Pap: disDate1.month};
@@ -495,6 +503,20 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$rootScope.$on('$stateChangeStart', function(next, current) { 
 	    $('#header-section').show();
 	});
+	// **Redactor configuration
+
+		redactorOptions.buttonSource = false;
+		redactorOptions.imageResizable = false;
+		redactorOptions.imageEditable = false;
+		redactorOptions.imageLink = false;
+		redactorOptions.visual = false;// false for html mode
+
+		redactorOptions.buttons = false;
+		redactorOptions.plugins = false;
+		redactorOptions.formatting = false;
+	/*
+	**End Redactor configuration
+	*/
     }
 })
 .directive('locationSearch', function() {

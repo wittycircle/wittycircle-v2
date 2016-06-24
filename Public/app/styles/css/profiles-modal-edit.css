@@ -109,7 +109,8 @@
           background-color: white;
           border-radius: 8px;
           box-shadow: 0px 2px 8px #e5e5e5;
-          text-align: left; }
+          text-align: left;
+          z-index: 9999999; }
           #profile-about-body .profile-about-status .profile-status-general .profile-status-dropdown .ssa2-dropdown li {
             border-radius: 4px;
             padding: 5px 20px;
@@ -140,6 +141,16 @@
         resize: none;
         font-family: 'FreigBook';
         font-size: 16px; }
+      #profile-about-body .profile-about-aboutarea .profile-aboutarea-text .redactor-placeholder:after {
+        font-family: 'FreigBook';
+        font-size: 16px; }
+      #profile-about-body .profile-about-aboutarea .profile-aboutarea-text .redactor-editor {
+        padding: 10px 15px;
+        min-height: 200px !important; }
+        #profile-about-body .profile-about-aboutarea .profile-aboutarea-text .redactor-editor p {
+          font-family: 'FreigBook';
+          font-size: 18px;
+          margin-bottom: 0; }
       #profile-about-body .profile-about-aboutarea .profile-aboutarea-text textarea:focus {
         outline: none; }
   #profile-about-body .profile-about-button {
@@ -491,7 +502,8 @@
           border: 1px solid #e5e5e5;
           border-radius: 4px;
           text-align: center;
-          display: none; }
+          display: none;
+          z-index: 99999; }
           #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-month-dropdown li {
             font-family: 'FreigBook';
             font-size: 17px;
@@ -521,7 +533,8 @@
           border: 1px solid #e5e5e5;
           border-radius: 4px;
           display: none;
-          text-align: center; }
+          text-align: center;
+          z-index: 99999; }
           #profile-experience-modal .profile-modal-body .profile-modal-period .time-period .time-period-dropdown .time-year-dropdown li {
             font-family: 'FreigBook';
             font-size: 17px;
@@ -566,6 +579,18 @@
         border: 1px solid #e5e5e5;
         border-radius: 4px;
         resize: none; }
+      #profile-experience-modal .profile-modal-body .profile-modal-description .redactor-placeholder:after {
+        font-family: 'FreigBook';
+        font-size: 16px; }
+      #profile-experience-modal .profile-modal-body .profile-modal-description .redactor-editor {
+        padding: 10px 15px;
+        height: 120px !important; }
+        #profile-experience-modal .profile-modal-body .profile-modal-description .redactor-editor p {
+          font-family: 'FreigBook';
+          font-size: 16px;
+          margin-bottom: 0;
+          color: black;
+          margin-top: 0; }
       #profile-experience-modal .profile-modal-body .profile-modal-description textarea:focus {
         outline: 0; }
     #profile-experience-modal .profile-modal-body .profile-modal-button {
@@ -640,7 +665,8 @@
         background-color: white;
         border-radius: 8px;
         box-shadow: 0px 2px 8px #e5e5e5;
-        text-align: left; }
+        text-align: left;
+        z-index: 9999999; }
         #profile-mobile-about-body .profile-about-status .profile-status-general .general-dropdown .ssa2-dropdown li {
           border-radius: 4px;
           padding: 10px 30px;

@@ -340,7 +340,7 @@ angular.module('wittyApp')
 })
 .filter('wordsFilter', function() {
    return function(items, word) {
-       if (word && !word[0])
+       if (!word || (word && !word[0]))
 	   return items;
        else {
 	   var filtered = [], 

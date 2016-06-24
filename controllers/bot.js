@@ -222,8 +222,8 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                        ]
 					                                                                    }
 					                                                                ]
-									                                            };								                  
-									                                            mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+									                                            };					                  
+									                                            mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result_send) {
 									                                            	pool.query('INSERT INTO send_mail (user_id, sent) VALUES(?, 1) ON DUPLICATE KEY UPDATE user_id = "?", sent = 1', [result[index].user_id, result[index].user_id],
 									                                            		function(err, done) {
 									                                            			if (err) throw err;

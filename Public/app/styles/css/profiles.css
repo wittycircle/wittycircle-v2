@@ -605,8 +605,10 @@ a:hover {
           font-family: 'FreigBook';
           font-size: 18px;
           color: #222222;
-          margin-bottom: 20px;
-          line-height: 28px; }
+          margin-bottom: 0px;
+          line-height: 26px; }
+        #profile-corps .profile-contents .profile-main .profile-main-about a {
+          color: blue; }
       #profile-corps .profile-contents .profile-main .profile-main-experience {
         margin-top: 60px; }
         #profile-corps .profile-contents .profile-main .profile-main-experience .fa-plus {
@@ -666,11 +668,14 @@ a:hover {
               margin-left: 10px; }
           #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-description {
             margin-top: 4px; }
-            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp .profile-exp-description h6 {
-              font-family: 'FreigBook';
-              font-size: 15px;
-              color: #222222;
-              line-height: 18px; }
+          #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp p {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            color: #222222;
+            line-height: 18px;
+            margin-bottom: 0; }
+            #profile-corps .profile-contents .profile-main .profile-main-experience .profile-exp-list .profile-exp p a {
+              color: blue; }
       #profile-corps .profile-contents .profile-main .profile-main-portfolio {
         margin-top: 20px; }
 

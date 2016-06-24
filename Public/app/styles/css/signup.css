@@ -322,7 +322,8 @@
             background-color: white;
             border-radius: 8px;
             box-shadow: 0px 2px 8px #e5e5e5;
-            text-align: left; }
+            text-align: left;
+            z-index: 99999; }
             #signup-page #signup-about-body .signup-about-status .signup-status-general .signup-status-dropdown .ssa2-dropdown li {
               border-radius: 4px;
               padding: 5px 20px;
@@ -344,6 +345,18 @@
       #signup-page #signup-about-body .signup-about-aboutarea .signup-aboutarea-text {
         padding: 0 15px;
         margin-top: 20px; }
+        #signup-page #signup-about-body .signup-about-aboutarea .signup-aboutarea-text .redactor-editor {
+          padding: 10px 15px;
+          border-radius: 4px;
+          min-height: 150px !important;
+          max-height: 300px !important; }
+          #signup-page #signup-about-body .signup-about-aboutarea .signup-aboutarea-text .redactor-editor p {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            margin-bottom: 0; }
+        #signup-page #signup-about-body .signup-about-aboutarea .signup-aboutarea-text .redactor-placeholder:after {
+          font-family: 'FreigBook';
+          font-size: 16px; }
         #signup-page #signup-about-body .signup-about-aboutarea .signup-aboutarea-text textarea {
           width: 100%;
           height: 150px;
@@ -668,8 +681,11 @@
             margin-top: 4px; }
             #signup-page #signup-experience-body .signup-experience-add .signup-main-experience .signup-exp-list .signup-exp .signup-exp-description p {
               font-family: 'FreigBook';
-              font-size: 14px;
-              color: #222222; }
+              font-size: 15px;
+              color: #222222;
+              margin-bottom: 0; }
+            #signup-page #signup-experience-body .signup-experience-add .signup-main-experience .signup-exp-list .signup-exp .signup-exp-description a {
+              color: blue; }
     #signup-page #signup-experience-body .signup-experience-add .signup-experience-button {
       padding: 0 30px 30px 30px;
       margin-top: 20px; }
@@ -761,7 +777,8 @@
             border: 1px solid #e5e5e5;
             border-radius: 4px;
             text-align: center;
-            display: none; }
+            display: none;
+            z-index: 99999; }
             #signup-page #signup-experience-modal .signup-modal-body .signup-modal-period .time-period .time-period-dropdown .time-month-dropdown li {
               font-family: 'FreigBook';
               font-size: 17px;
@@ -791,7 +808,8 @@
             border: 1px solid #e5e5e5;
             border-radius: 4px;
             display: none;
-            text-align: center; }
+            text-align: center;
+            z-index: 99999; }
             #signup-page #signup-experience-modal .signup-modal-body .signup-modal-period .time-period .time-period-dropdown .time-year-dropdown li {
               font-family: 'FreigBook';
               font-size: 17px;
@@ -826,6 +844,18 @@
             color: #999999; }
       #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description {
         margin: 30px 0; }
+        #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description .redactor-placeholder:after {
+          font-family: 'FreigBook';
+          font-size: 16px; }
+        #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description .redactor-editor {
+          padding: 10px 15px;
+          height: 120px !important; }
+          #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description .redactor-editor p {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            margin-bottom: 0;
+            color: black;
+            margin-top: 0; }
         #signup-page #signup-experience-modal .signup-modal-body .signup-modal-description textarea {
           width: 100%;
           height: 100px;

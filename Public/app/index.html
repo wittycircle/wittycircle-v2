@@ -123,8 +123,11 @@ mixpanel.init("79778069a284e3bc2822e7f4145fa075");</script><!-- end Mixpanel -->
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
 mixpanel.init("79778069a284e3bc2822e7f4145fa075");</script><!-- end Mixpanel -->
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en&key=AIzaSyBhEkIv1T3-erlrSEKi3Sk8evEi0FucKO8" async></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en
+    " async></script>
+    <script src="http://localhost:8001/vogue-client.js" 
+        type="text/javascript">
+</script>
     <noscript>Your browser does not support JavaScript!</noscript>
   </head>
 <!-- build:js({.,.tmp,app}) scripts/vendor.js -->
@@ -181,6 +184,7 @@ mixpanel.init("79778069a284e3bc2822e7f4145fa075");</script><!-- end Mixpanel -->
     <script src="scripts/app.js"></script>
     <script src="scripts/witty.custom.filter.js" ></script>
     <script src="scripts/cloudinary_config.js" ></script>
+    <script src="scripts/redactor/redactor.js"></script>
 
     <!-- services -->
     <script src="services/GetData.service.client.js" ></script>

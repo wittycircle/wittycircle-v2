@@ -7,12 +7,15 @@
 	display: none;
 }
 
-#profile-modal-newMessageArea { 
+#profile-modal-newMessageArea,
+#project-modal-newMessageArea { 
 	display: none;
 }
 
 #messages-modal-newMessageArea,
-#profile-modal-newMessageArea {
+#profile-modal-newMessageArea,
+#project-modal-newMessageArea {
+
 	position: fixed;
 	background-color: white;
 	max-width: 500px;
@@ -64,15 +67,32 @@
 			font-size: 16px;
 		}
 
+		.redactor-editor {
+			border: 0;
+			padding: 20px;
+			min-height: 150px !important;
+			max-height: 300px !important;
+
+			p {
+				font-family: 'FreigBook';
+				font-size: 16px;
+				margin-bottom: 0;
+			}
+		}
+
+		.redactor-placeholder:after {
+			font-family: 'FreigBook';
+			font-size: 16px;
+		}
+
 		textarea:focus {
 			outline: 0;
 		}
 	}
 
 	.messages-newMessageArea-send {
-		width: 90%;
-		margin: 0 auto;
-		padding: 10px 0;
+		width: 100%;
+		padding: 10px 20px;
 		border-top: 1px solid #e5e5e5;
 		text-align: right;
 
@@ -83,7 +103,7 @@
 	}
 }
 
-#profile-modal-newMessageArea {
+#profile-modal-newMessageArea, #project-modal-newMessageArea {
 	-webkit-animation-delay: 0s;
 	-o-animation-delay: 0s;
 	-moz-animation-delay: 0s;
@@ -197,6 +217,7 @@ button {
 						position: relative;
 						top: 10px;
 						padding: 0 10px;
+						vertical-align: top;
 
 						h3 {
 							font-family: 'FreigSem';
@@ -224,8 +245,8 @@ button {
 			.messages-newpost-user:hover {
 				background-color: #f5f5f5;
 			}
-
-			.messages-newpost-footer {
+		}
+		.messages-newpost-footer {
 				text-align: center;
 				padding: 20px 0;
 
@@ -234,7 +255,6 @@ button {
 					height: 35px;
 				}
 			}
-		}
 	}
 
 	.messages-confirmDelete {
@@ -746,6 +766,11 @@ button {
 
 				.messages-conversation-textarea {
 					border-top: 1px solid #e5e5e5;
+
+					.redactor-placeholder:after {
+						font-family: 'FreigBook';
+						font-size: 16px;
+					}
 
 					.textarea-box {
 						width: 100%;

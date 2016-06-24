@@ -1,5 +1,4 @@
 <header id="header-section" data-ng-controller="HeaderCtrl">
-    <home-message-modal></home-message-modal>
     <section id="header-content" class="cbp-spmenu-push">
         <div id="hsmobile" class="header-searchBar-mobile">
             <figure>
@@ -136,7 +135,7 @@
                         <div class="header-list-picture">
                             <img ng-src="{{ resizePic(listNotif.pic, 48, 48, 'fill') }}" alt="header-notif-avatar">
                         </div>
-                        <div class="header-list-message">
+                        <div class="header-list-message hlm-notif">
                             <h4>{{listNotif.user_notif_username}} 
                             <span class="hlmspan" ng-if="listNotif.type_notif === 'u_follow'">is now following you.</span>
                             <span class="hlmspan" ng-if="listNotif.type_notif === 'view'">viewed your profile.</span>
@@ -213,6 +212,7 @@
             </div>
         </div>
     </section>
+    <home-message-modal></home-message-modal>
 
     <script>
         var y           = $(window).width();
@@ -327,15 +327,15 @@
                             /*** section messaging modal ***/
 
                             // message modal
-                            if (mnmodal && eTarget === 'mhn' || eTarget === 'mmo' || eTarget === 'mmoinput') {
-                                mnmodal.style.display = "block";
-                            } else {
-                                if (mnmodal) {
-                                    mnmodal.style.display = "none";
-                                    mmsearch.style.display = "block";
-                                    mmnew.style.display = "none";
-                                }
-                            }
+                            // if (mnmodal && eTarget === 'mhn' || eTarget === 'mmo' || eTarget === 'mmoinput') {
+                            //     mnmodal.style.display = "block";
+                            // } else {
+                            //     if (mnmodal) {
+                            //         mnmodal.style.display = "none";
+                            //         mmsearch.style.display = "block";
+                            //         mmnew.style.display = "none";
+                            //     }
+                            // }
 
                             // confirm delete modal
                             if (eTarget === 'mcdm' || eTarget === 'mcdc' && mcdmodal) {
@@ -378,7 +378,8 @@
                     }
 
                 $('#hnmmopen').on('click', function() {
-
+                    $('#messages-newpost-modal').show();
+                    $('#messages-modal-searchArea').show();
                 });
 
                 });

@@ -17,7 +17,7 @@
 			<input type="search" ng-model="interestSearch" placeholder="Search for a specific hobby, topic...">
 		</div>
 		<div class="profile-interest-list sss">
-			<li ng-repeat="cInterest in cInterests | filter: interestSearch | limitTo : 34 track by $index" ng-click="getInterest(cInterest)">
+			<li ng-repeat="cInterest in cInterests | wordsFilter: interestSearch | limitTo : 34 track by $index" ng-click="getInterest(cInterest)">
 				<h4>{{cInterest.name}}</h4>
 			</li>
 		</div>

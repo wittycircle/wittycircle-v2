@@ -360,9 +360,9 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* Public API Key */
-    // var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
     // /* Dev API Key */
-    var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
+    // var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');
@@ -482,17 +482,17 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 restrict: "AE",
                 scope: false,
                 controller: 'MessageCtrl',
-                link: function(scope, element, attr) {
-                    var myelem = (angular.element(element.children()[0]));
+                link: function(scope, element, attr, redactorOptions) {
+                    // var myelem = (angular.element(element.children()[0]));
 
-                    myelem.on('click', function(e) {
-                        var target = e.target.id;
+                    // myelem.on('click', function(e) {
+                    //     var target = e.target.id;
 
-                        if (target === "mmo") {
-                            document.getElementById('messages-modal-searchArea').style.display = "none";
-                            document.getElementById('messages-modal-newMessageArea').style.display = "block";
-                        }
-                    });
+                    //     if (target === "mmo") {
+                    //         document.getElementById('messages-modal-searchArea').style.display = "none";
+                    //         document.getElementById('messages-modal-newMessageArea').style.display = "block";
+                    //     }
+                    // });
 
                 }
             }

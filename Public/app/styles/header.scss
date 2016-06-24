@@ -547,16 +547,24 @@
 							}
 							
 							p {
-							  margin-bottom: 0;
+							  	margin-bottom: 0;
 							}							  
 							
 						}
 
 						span {
 							font-family: 'FreigBook';
-							font-size: 13px;
+							font-size: 14px;
 						}
 					}
+
+					.hlm-notif {
+							p {
+							  	margin-bottom: 0;
+							  	font-family: 'FreigBook';
+								font-size: 14px;
+							}	
+						}
 				}
 
 				.header-dropdown-list:hover {

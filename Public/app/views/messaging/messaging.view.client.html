@@ -8,7 +8,7 @@
 					<h1>Messages</h1>
 				</div>
 				<div id="mhn" class="messages-header-new" onmouseover="changeImgSrc()" onmouseout="RechangeImgSrc()" ng-click="getListUser()">
-					<a id="mhn"><img id="mhnImg" src="/images/write-icon.svg">New message</a>
+					<a><img id="mhnImg" src="/images/write-icon.svg">New message</a>
 				</div>
 			</div>
 		</header>
@@ -191,6 +191,16 @@
 		function RechangeImgSrc() {
 			document.getElementById('mhnImg').src = "/images/write-icon.svg";
 		};
+
+		$(document).ready(function() {
+			$(this).on('click', function(e) {
+				var container = $("#mhn");
+				if (container.is(e.target) || container.has(e.target).length > 0) {
+					$('#messages-newpost-modal').show();
+                	$('#messages-modal-searchArea').show();
+				}
+			});
+		});
 
 	} else {
 

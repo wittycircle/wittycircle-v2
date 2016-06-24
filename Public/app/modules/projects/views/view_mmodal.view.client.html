@@ -1,0 +1,36 @@
+<section id="project-modal-newMessageArea" class="animated fadeIn" ng-if="sendMess">
+	<div class="messages-newMessageArea-to">
+		<label>To : </label>
+		<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
+	</div>
+	<div class="messages-newMessageArea-text">
+		<textarea id="project-m-text" class="project-newMessageArea-text" ng-model="newMessageArea.message" placeholder="Write a message..." redactor></textarea>
+	</div>
+	<div class="messages-newMessageArea-send">
+		<button type="submit" ng-click="createNewMessage(true)">Send</button>
+	</div>
+
+	<!-- <script>
+		$(document).ready(function() {
+			$('body').on('click', function(e) {
+				console.log(e.target);
+				if ($('#project-modal-newMessageArea').css('display') === "block") {
+					var container = $("#project-modal-newMessageArea");
+
+					if(!container.is(e.target) && container.has(e.target).length === 0) {
+						console.log($('#project-m-text').val());
+						if ($('#project-m-text').val()) {
+			               		var r = confirm("You haven't finished your message yet. Do you want to leave without finishing?");
+			               		if (r == true) {
+									$('#project-modal-newMessageArea').fadeOut(100);
+									$('#project-m-text').val("");
+								} else 
+									return ;
+						} else 
+							$('#project-modal-newMessageArea').hide();
+					}
+				}
+			});
+		});
+	</script> -->
+</section>

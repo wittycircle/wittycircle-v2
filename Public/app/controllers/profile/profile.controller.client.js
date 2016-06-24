@@ -521,7 +521,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	if (x >= 736) {
 		return {
 			templateUrl: 'views/profile/modal/profile.message.view.client.html',
-			restrict: "AE",
+			restrict: "E",
 			scope: false,
 			controller: 'MessageCtrl'
 		}

@@ -313,6 +313,7 @@
     left: 0; }
   .project-post-box videogular,
   .project-post-video videogular {
+    height: 419px;
     margin-bottom: 40px; }
     .project-post-box videogular vg-time-display,
     .project-post-video videogular vg-time-display {
@@ -514,7 +515,7 @@
   #feedback_project .feedback_description .pd-20 {
     padding: 15px; }
   #feedback_project .feedback_description .col-md-11 {
-    padding-left: 0px; }
+    padding-left: 47px; }
   #feedback_project .feedback_description .feedback-reply-field {
     /*      border: 1px solid #e5e5e5;
     */
@@ -665,7 +666,14 @@
     padding: 10px 10px 10px 15px;
     float: left; }
   #feedback_project .cards-feedbacks-two .text-feedback {
-    display: inline-block; }
+    display: inline-block;
+    width: 80%; }
+  #feedback_project .cards-feedbacks-two .tempo-class, #feedback_project .cards-feedbacks-two .tempo2-class {
+    display: inline-block;
+    margin-right: 10px; }
+  #feedback_project .cards-feedbacks-two .tempo2-class {
+    width: 80%;
+    vertical-align: top; }
   #feedback_project .cards-feedbacks-two .tempo-class, #feedback_project .cards-feedbacks-two .tempo2-class {
     display: inline-block;
     margin-right: 10px; }

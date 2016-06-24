@@ -4,10 +4,10 @@
 		<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
 	</div>
 	<div class="messages-newMessageArea-text">
-		<textarea class="profile-newMessageArea-text" ng-model="newMessageArea.message" placeholder="Write a message..."></textarea>
+		<textarea id="profile-m-text" class="profile-newMessageArea-text" ng-model="newMessageArea.message" placeholder="Write a message..." redactor></textarea>
 	</div>
 	<div class="messages-newMessageArea-send">
-		<button type="submit" ng-click="createNewMessage()">Send</button>
+		<button type="submit" ng-click="createNewMessage(true)">Send</button>
 	</div>
 
 </section>

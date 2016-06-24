@@ -55,6 +55,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 		var disDate1              	= $filter('wittyDateFilterEx')($scope.positions[index].date_from, 1);
 		var disDate2              	= $filter('wittyDateFilterEx')($scope.positions[index].date_to, 1);
 
+		console.log($scope.positions);
 		if ($scope.positions[index].date_to.toLowerCase() !== "present") {
 			$scope.endMonth         = disDate2.month;
 			$scope.endYear          = disDate2.year;
@@ -70,6 +71,12 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 			$scope.addExLocation        = $scope.positions[index].location_city + ', ' + $scope.positions[index].location_country;
 		}
 
+		if (disDate2 !== "Present") {
+			$scope.endMonth         	= disDate2.month;
+			$scope.endYear          	= disDate2.year;
+			$scope.endPeriod.month  	= {Num: disDate2.monthN, Pap: disDate2.month};
+			$scope.endPeriod.year   	= disDate2.year;
+		}
 		$scope.startMonth         	= disDate1.month;
 		$scope.startYear          	= disDate1.year;
 		$scope.startPeriod.month  	= {Num: disDate1.monthN, Pap: disDate1.month};
@@ -98,6 +105,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 			return ;
 		}
 
+		console.log($scope.endPeriod.month, $scope.endPeriod.year)
 		if (!$scope.endPeriod.month || !$scope.endPeriod.year || $scope.checkboxEndTime)
 			endTime                 = "Present";
 		else {
@@ -108,7 +116,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 
 		dStart                		= new Date($scope.startPeriod.year + '.' + $scope.startPeriod.month.Num + '.' + "01");
 		if (isNaN(dStart))
-			dStart 					=new Date(Date.UTC($scope.startPeriod.year, parseInt($scope.startPeriod.month.Num, 10) - 1, 1, 12, 0, 0)).toISOString();
+			dStart 					= new Date(Date.UTC($scope.startPeriod.year, parseInt($scope.startPeriod.month.Num, 10) - 1, 1, 12, 0, 0)).toISOString();
 
 		position              	= {
 			title             : $scope.eJob,
@@ -117,6 +125,7 @@ angular.module('wittyApp').controller('EditExperiencesModalCtrl', function ($mod
 			date_from         : dStart,
 			date_to           : endTime,
 		};
+		console.log(position);
 		Locations.setplaces($scope.addExLocation, position);
 
 		$http.put('/experience/' + $scope.getIndex, position).success(function(res) {

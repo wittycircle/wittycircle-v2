@@ -11,10 +11,32 @@
 
         if (x >= 736) {
             return {
-                templateUrl: 'views/profile/modal/profile.message.view.client.html',
-                restrict: "AE",
+                restrict: "A",
                 scope: false,
-                controller: 'MessageCtrl'
+                templateUrl: 'modules/projects/views/view_mmodal.view.client.html',
+                controller: 'MessageCtrl',
+                link: function(scope, element, attr) {
+                    $(document).ready(function() {
+                        $('body').on('click', function(e) {
+                            if ($('#project-modal-newMessageArea').css('display') === "block") {
+                                var container = $("#project-modal-newMessageArea");
+
+                                if(!container.is(e.target) && container.has(e.target).length === 0) {
+                                    if ($('#project-m-text').val()) {
+                                            var r = confirm("You haven't finished your message yet. Do you want to leave without finishing?");
+                                            if (r == true) {
+                                                $('#project-modal-newMessageArea').fadeOut(100);
+                                                $('#project-m-text').val("");
+                                            } else 
+                                                return ;
+                                    } else 
+                                        $('#project-modal-newMessageArea').hide();
+                                }
+                            }
+                        });
+                    });
+
+                }
             }
         }
     });

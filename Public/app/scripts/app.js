@@ -98,11 +98,11 @@ var wittyCircleApp = angular
 		templateUrl: 'views/messaging/messaging.view.client.html',
 		controller: 'MessageCtrl',
 		resolve : {
-            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                return $ocLazyLoad.load([
-                    'scripts/redactor/redactor.js',
-                ]);
-            }],
+            // loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+            //     return $ocLazyLoad.load([
+            //         'scripts/redactor/redactor.js',
+            //     ]);
+            // }],
 		    auth: function($q, $rootScope, $stateParams) {
 			if ($rootScope.globals.currentUser) {
 			    return true;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($modalInstance, $http, $location, $scope, Locations, RetrieveData) {
+angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($timeout, $modalInstance, $http, $location, $scope, Locations, RetrieveData, redactorOptions) {
 
 	$scope.startMonth           = "Month";
 	$scope.startYear            = "Year";

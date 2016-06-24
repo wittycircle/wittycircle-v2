@@ -13,7 +13,7 @@ angular.module('wittyApp').controller('AboutModalCtrl', function (Users, $timeou
     if ($scope.profileVm.profile.about)
       $scope.aboutText      = $scope.profileVm.profile.about;
     else
-      $scope.aboutText      = "discover new things";
+      $scope.aboutText      = "join projects";
     $scope.aboutDescription = $scope.profileVm.profile.description;
 
     $scope.getAboutText     = function(text) {

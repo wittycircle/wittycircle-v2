@@ -97,10 +97,10 @@
                     <div class="meet-body-title presentation-body-title">
                         <h4>Browse <strong>the users</strong> <span>below</span> or filter them using our magic tool above.</h4>
                     </div>
-                    <div class="meet-body-found">
+<!--                     <div class="meet-body-found">
                         <h3>People from {{searchML}}</h3>
-                    </div>
-                    <!-- <div class="meet-body-cards" ng-if="!searchClicked">
+                    </div> -->
+                    <div class="meet-body-cards">
                         <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: meet.limit" ng-if="cardProfile.cover_picture_cards">
                             <div class="card-click-zone" ng-click="meet.goToProfile(cardProfile.id)">
                                 <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
@@ -114,13 +114,13 @@
                                     <h6>{{cardProfile.location_city}}<i data-ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
                                 </div>
                                 <div class="card-description">
-                                    <p ng-bind-html="cardProfile.description | cut:true:50:' ...'"></p>
+                                    <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
                                 </div>
-                                <div class="card-profile-skills">
+<!--                                 <div class="card-profile-skills">
                                     <ul>
                                         <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name}}</li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="card-follow">
@@ -144,18 +144,16 @@
                     <div class="meet-body-loadmore presentation-body-loadmore">
                         <button type="button" data-ng-click="meet.expand(8)">Load more</button>
                     </div>
-                </div> -->
+                </div>
 
-                <div ng-repeat="cardsProfile in meet.cardProfiles track by $index">
+                <!-- <div ng-repeat="cardsProfile in meet.cardProfiles track by $index">
                     
                     <div class="meet-body-cards" ng-if="searchClicked">
                             <div class="meet-body-card profile-card" ng-repeat="cardProfile in cardsProfile | limitTo: meet.limit" ng-if="cardProfile.cover_picture_cards">
                                 <div class="card-click-zone" ng-click="meet.goToProfile(cardProfile.id)">
                                     <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
-                                        <!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
                                         <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
                                         ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
-                                        <!-- <img ng-src="{{cardProfile.profile_picture}}"> -->
                                     </div>
                                 </div>
                                 <div class="card-info">
@@ -169,9 +167,6 @@
                                     <div class="card-profile-skills">
                                         <ul>
                                             <li ng-repeat="profileSkill in cardProfile.skills | limitTo: 5">{{profileSkill.skill_name}}</li>
-                                            <!-- <li>Business</li>
-                                            <li>Programming</li>
-                                            <li>Design</li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -198,7 +193,7 @@
                             <button type="button" data-ng-click="meet.expand(8)">Load more</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

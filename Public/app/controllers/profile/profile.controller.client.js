@@ -16,7 +16,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
 	/* Vm Variable */
 	profileVm.currentUser = $rootScope.globals.currentUser || false;
-	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username || $rootScope.globals.currentUser.moderator ? true : false;
+	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
         profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();

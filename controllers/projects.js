@@ -108,7 +108,58 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC LIMIT 3",
+    pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 3 DAY GROUP BY follow_project_public_id ORDER BY count(*) desc',
+        function(err, data) {
+            if (err) throw err;
+            if (data[0]) {
+                var arr = data.map( function(el) { return el.follow_project_public_id; });
+                if (arr[0]) {
+                    pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ') LIMIT 3',
+                        function (err, results, fields) {
+                            if (err) throw err;
+                            tf.sortProjectCard(results, function(data) {
+                                if (!data)
+                                    return res.send({message: 'No projects has been found'});
+                                else {
+                                    if (req.isAuthenticated()) {
+                                        getVotedProject(data, req, function(newData) {
+                                            return res.send(newData);
+                                        }); 
+                                    } else
+                                        return res.send(data);
+                                }
+                            });
+                        });
+                }
+            } else {
+                pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 3 DAY GROUP BY follow_project_public_id ORDER BY count(*) desc',
+                    function(err, data) {
+                        if (err) throw err;
+                        if (data[0]) {
+                            var arr = data.map( function(el) { return el.follow_project_public_id; });
+                            if (arr[0]) {
+                                pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ') LIMIT 3',
+                                    function (err, results, fields) {
+                                        if (err) throw err;
+                                        tf.sortProjectCard(results, function(data) {
+                                            if (!data)
+                                                return res.send({message: 'No projects has been found'});
+                                            else {
+                                                if (req.isAuthenticated()) {
+                                                    getVotedProject(data, req, function(newData) {
+                                                        return res.send(newData);
+                                                    }); 
+                                                } else
+                                                    return res.send(data);
+                                            }
+                                        });
+                                    });
+                            }
+                        }
+                    });
+            }
+        });
+/*    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC LIMIT 3",
     function (err, results, fields) {
         if (err) {
             var date = new Date();
@@ -128,7 +179,7 @@ exports.getProjects = function(req, res){
                     return res.send(data);
             }
         });
-    });
+    });*/
 };
 
 exports.getProjectsShuffler = function(req, res) {
@@ -151,7 +202,61 @@ exports.getProjectsShuffler = function(req, res) {
 };
 
 exports.getProjectsDiscover = function(req, res){
-    pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" ORDER BY view DESC',
+    pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 2 DAY GROUP BY follow_project_public_id ORDER BY creation_date DESC',
+        function(err, data) {
+            if (err) throw err;
+            if (data[0]) {
+                var arr = data.map( function(el) { return el.follow_project_public_id; });
+                console.log(arr);
+                pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE follow_project_public_id NOT IN (?) GROUP BY follow_project_public_id ORDER BY creation_date >= now() - INTERVAL 3 DAY DESC', arr, 
+                    function(err, data2) {
+                        if (err) throw err;
+                        var arr2 = data2.map( function(el) {return el.follow_project_public_id; });
+                        arr = arr.concat(arr2);
+                        if (arr[0]) {
+                            pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ')',
+                                function (err, results, fields) {
+                                    if (err) throw err;
+                                    tf.sortProjectCard(results, function(data) {
+                                        if (!data)
+                                            return res.send({message: 'No projects has been found'});
+                                        else {
+                                            if (req.isAuthenticated()) {
+                                                getVotedProject(data, req, function(newData) {
+                                                    return res.send(newData);
+                                                }); 
+                                            } else
+                                                return res.send(data);
+                                        }
+                                    });
+                                });
+                        }
+                    });
+            } else {
+                pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers GROUP BY follow_project_public_id ORDER BY creation_date >= now() - INTERVAL 3 DAY DESC',
+                    function(err, datab) {
+                        if (err) throw err;
+                        var arr = datab.map( function(el) {return el.follow_project_public_id});
+                        pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ')',
+                            function (err, results, fields) {
+                                if (err) throw err;
+                                tf.sortProjectCard(results, function(data) {
+                                    if (!data)
+                                        return res.send({message: 'No projects has been found'});
+                                    else {
+                                        if (req.isAuthenticated()) {
+                                            getVotedProject(data, req, function(newData) {
+                                                return res.send(newData);
+                                            }); 
+                                        } else
+                                            return res.send(data);
+                                    }
+                                });
+                            });
+                    });
+            }
+        });
+/*    pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" ORDER BY view DESC',
     function (err, results, fields) {
         if (err) {
             var date = new Date();
@@ -171,7 +276,7 @@ exports.getProjectsDiscover = function(req, res){
                     res.send(data);
             }
         });
-    });
+    });*/
 };
 
 exports.getProject = function(req, res){

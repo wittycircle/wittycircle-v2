@@ -3,7 +3,7 @@ var request = require('request');
 exports.addMember = function(data, callback) {
     if (data) {
 	request({
-            url: 'https://us12.api.mailchimp.com/3.0/lists/1d172e278a/members',
+            url: 'https://us12.api.mailchimp.com/3.0/lists/de359190ae/members',
             json: data,
             method: 'POST',
             headers: {
@@ -15,7 +15,7 @@ exports.addMember = function(data, callback) {
                 console.log(error);
 		return ;
             } else {
-		// console.log(response.statusCode, '>>>>> USER ADDED TO MAILCHIMP');
+		console.log(response.statusCode, '>>>>> USER ADDED TO MAILCHIMP');
 		return callback();
                 // THEN log the user into the app
             }

@@ -408,6 +408,7 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   videogular {
+	height: 419px;
     margin-bottom: 40px;
 
     vg-time-display {
@@ -704,7 +705,7 @@ $font-h3: 'Open Sans', sans-serif;
     }
 
     .col-md-11 {
-      padding-left: 0px;
+      padding-left: 47px;
     }
 
     .feedback-reply-field {
@@ -932,7 +933,17 @@ $font-h3: 'Open Sans', sans-serif;
 
     .text-feedback {
       display: inline-block;
+      width: 80%;
     }
+
+    .tempo-class, .tempo2-class {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .tempo2-class {
+    	width: 80%;
+	vertical-align: top;
+    }   
 
     .tempo-class, .tempo2-class {
       display: inline-block;

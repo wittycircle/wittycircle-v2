@@ -17,18 +17,15 @@
           <div class="text-feedback">
             <h5 data-ng-bind="::question.title"></h5>
             <p class="from_text">
-              <span am-time-ago="::question.date_added"></span><span> from</span>
-               <a ui-sref="profile({username: question.user.username})" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+	      <a ui-sref="profile({username: question.user.username})" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+              <span am-time-ago="::question.date_added"></span>
               <span class="feedback_badge">CREATOR</span>
-            </p>
-            <p class="replies_title">
-              <span class="number_replies" data-ng-bind="0 + question.replies.length"></span> replies
             </p>
           </div>
         </div>
         <div id="replies" class="row-custom-feed animate-if" >
           <div class="row feedback_description" data-ng-if="question.description">
-            <div class="col-md-11 col-md-offset-1 text_description_feed">
+            <div class="col-md-11 text_description_feed">
               <p data-ng-bind="question.description" style="margin-left: 15px;"></p>
             </div>
           </div>
@@ -43,8 +40,8 @@
                 </div>
                 <div class="tempo2-class" data-ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
+		    <a data-ui-sref="profile({username: reply.user_profile.username})" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
                     <span class="time_reply" am-time-ago="reply.created_at"></span>
-                      from <a data-ui-sref="profile({username: reply.user_profile.username})" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
                       <span data-ng-init="isInTheTeam(project, reply)">
                         <span class="feedback_badge" data-ng-if="vm.editable === true">CREATOR</span>
                       </span>
@@ -132,14 +129,11 @@
               <a ui-sref="profile({profile: ask.user.username})" class="underline_user">{{ask.first_name}} {{ask.last_name}}</a>
               <span am-time-ago="ask.created_at"></span>
             </p>
-            <p class="replies_title">
-              <span class="number_replies" data-ng-bind="0 + ask.replies.length"></span> replies
-            </p>
           </div>
         </div>
         <div id="replies" class="row-custom-feed animate-if">
-          <div class="row feedback_description"data-ng-if="ask.message">
-            <div class="col-md-11 col-md-offset-1 text_description_feed">
+          <div class="row feedback_description" data-ng-if="ask.message">
+            <div class="col-md-11 text_description_feed">
               <p data-ng-bind="ask.message" style="margin-left: 15px;"></p>
             </div>
           </div>

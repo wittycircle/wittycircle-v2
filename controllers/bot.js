@@ -12,13 +12,28 @@ function checkLastConnection(timestamp, callback) {
 	}
 };
 
-pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_notif = "view" && n_read = 0 && user_id IN (696, 552, 296) GROUP BY user_id',
+function checkSent(user_id, callback) {
+	pool.query('SELECT sent FROM send_mail WHERE user_id = ?', user_id,
+		function(err, result) {
+			if (err) throw err;
+			if (!result[0])
+				return callback(false);
+			else
+				return callback(result[0].sent);
+		});
+}
+
+// pool.query('')
+
+pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_notif = "view" && n_read = 0 GROUP BY user_id HAVING count >= 5',
 	function(err, result) {
 		if (err) throw err;
 		else {
 			function recursive(index) {
 				if (result[index]) {
-					if (result[index].count >= 5) {
+					checkSent(result[index].user_id, function(check) {
+						if (check)
+							return recursive(index + 1);
 						pool.query('SELECT profile_id, email, last_activity FROM users WHERE id = ?', result[index].user_id,
 							function(err, result2) {
 								if (err) throw err;
@@ -34,6 +49,8 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 															if (err) throw err;
 															else {
 																var arr2 = info.map( function(el) { return el.profile_id; });
+																if (arr2.length < 5)
+																	return recursive(index + 1);
 																pool.query('SELECT first_name, last_name, profile_picture, location_city, location_state, location_country FROM profiles WHERE id IN (' + arr2 + ')', 
 																	function(err, info2) {
 																		if (err) throw err;
@@ -44,44 +61,34 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 																				var main_name = m_info[0].first_name;
 																				var subj = m_info[0].first_name + ' ' + m_info[0].last_name + ", your profile is being viewed a lot.";
 																				var view_number = result3.length;
-																				// if (info2[0].location_state)
-																				// 	var locat1 = info2[0].location_city + ", " + info2[0].location_state
-																				// else
-																				// 	var locat1 = info2[0].location_city + ", " + info2[0].location_country;
 
-																				// if (info2[1].location_state)
-																				// 	var locat2 = info2[1].location_city + ", " + info2[1].location_state
-																				// else
-																				// 	var locat2 = info2[1].location_city + ", " + info2[1].location_country;
+																				var locat1 = info2[0].location_state ?
+																				// State existe
+																				info2[0].location_city ? info2[0].location_city + ", " + info2[0].location_state : info2[0].location_state + ", " + info2[0].location_country || ""
+																				// Or not
+																				: info2[0].location_city ? info2[0].location_city + ", " + (info2[0].location_country || "") : info2[0].location_country || "";
 
-																				// if (info2[2].location_state)
-																				// 	var locat3 = info2[2].location_city + ", " + info2[2].location_state
-																				// else
-																				// 	var locat3 = info2[2].location_city + ", " + info2[2].location_country;
+																				var locat2 = info2[1].location_state ?
+																				info2[1].location_city ? info2[1].location_city + ", " + info2[1].location_state : info2[1].location_state + ", " + info2[1].location_country || ""
+																				: info2[1].location_city ? info2[1].location_city + ", " + (info2[1].location_country || "") : info2[1].location_country || "";
 
-																				// if (info2[3].location_state)
-																				// 	var locat4 = info2[3].location_city + ", " + info2[3].location_state
-																				// else
-																				// 	var locat4 = info2[3].location_city + ", " + info2[3].location_country;
+																				var locat3 = info2[2].location_state ?
+																				info2[2].location_city ? info2[2].location_city + ", " + info2[2].location_state : info2[2].location_state + ", " + info2[2].location_country || ""
+																				: info2[2].location_city ? info2[2].location_city + ", " + (info2[2].location_country || "") : info2[2].location_country || "";
 
-																				// console.log(info2[4]);
-																				// if (info2[4].location_state)
-																				// 	var locat5 = info2[4].location_city + ", " + info2[4].location_state
-																				// else
-																				// 	var locat5 = info2[4].location_city + ", " + info2[4].location_country;
+																				var locat4 = info2[3].location_state ?
+																				info2[3].location_city ? info2[3].location_city + ", " + info2[3].location_state : info2[3].location_state + ", " + info2[3].location_country || ""
+																				: info2[3].location_city ? info2[3].location_city + ", " + (info2[3].location_country || "") : info2[3].location_country || "";
 
-																				var locat1 = info2[0].location_state ? info2[0].location_city + ", " + info2[0].location_state : info2[0].location_city + ", " + info2[0].location_country;
-																				var locat2 = info2[1].location_state ? info2[1].location_city + ", " + info2[1].location_state : info2[1].location_city + ", " + info2[1].location_country;
-																				var locat3 = info2[2].location_state ? info2[2].location_city + ", " + info2[2].location_state : info2[2].location_city + ", " + info2[1].location_country;
-																				var locat4 = info2[3].location_state ? info2[3].location_city + ", " + info2[3].location_state : info2[3].location_city + ", " + info2[1].location_country;
-																				var locat5 = info2[4].location_state ? info2[4].location_city + ", " + info2[4].location_state : info2[4].location_city + ", " + info2[1].location_country;
+																				var locat5 = info2[4].location_state ?
+																				info2[4].location_city ? info2[4].location_city + ", " + info2[4].location_state : info2[4].location_state + ", " + info2[4].location_country || ""
+																				: info2[4].location_city ? info2[4].location_city + ", " + (info2[4].location_country || "") : info2[4].location_country || "";
 
 																				var view_more = view_number - 5;
 																				if (view_more)
 																					var more = "and " + view_more + " more";
 																				else
-																					var more = " "; 
-
+																					var more = " ";
 																				var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
 									                                            var template_name = "view-notif";
@@ -138,7 +145,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc1",
-					                                                                                "content": locat1
+					                                                                                "content": locat1 || ""
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "purl1",
@@ -154,7 +161,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc2",
-					                                                                                "content": locat2
+					                                                                                "content": locat2 || ""
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "purl2",
@@ -170,7 +177,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc3",
-					                                                                                "content": locat3
+					                                                                                "content": locat3 || ""
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "purl3",
@@ -186,7 +193,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc4",
-					                                                                                "content": locat4
+					                                                                                "content": locat4 || ""
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "purl4",
@@ -194,7 +201,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pimg5",
-					                                                                                "content": info2[4].profile_picture
+					                                                                                "content": info2[4].profile_picture 
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "pname5",
@@ -202,7 +209,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "ploc5",
-					                                                                                "content": locat5
+					                                                                                "content": locat5 || ""
 					                                                                            },
 					                                                                            {
 					                                                                                "name": "purl5",
@@ -215,15 +222,19 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 					                                                                        ]
 					                                                                    }
 					                                                                ]
-									                                            };
-									                                            // mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
-									                                            // 	recursive(index + 1);
-									                                            // }, function(e) {
-									                                            //     // Mandrill returns the error as an object with name and message keys
-									                                            //     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-									                                            //     throw e;
-									                                            //     // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-									                                            // });
+									                                            };								                  
+									                                            mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+									                                            	pool.query('INSERT INTO send_mail (user_id, sent) VALUES(?, 1) ON DUPLICATE KEY UPDATE user_id = "?", sent = 1', [result[index].user_id, result[index].user_id],
+									                                            		function(err, done) {
+									                                            			if (err) throw err;
+									                                            			return recursive(index + 1);
+									                                            		});
+									                                            }, function(e) {
+									                                                // Mandrill returns the error as an object with name and message keys
+									                                                console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+									                                                throw e;
+									                                                // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+									                                            });
 																			});
 																		}
 																	});
@@ -236,9 +247,7 @@ pool.query('SELECT count(*) AS count, user_id FROM notification_list WHERE type_
 									});
 								}
 							});
-					} else {
-						recursive(index + 1);
-					}
+					});
 				} else
 					return ;
 			};

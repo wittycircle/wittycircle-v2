@@ -172,7 +172,7 @@ require('./routes')(app, passport);
 /* Algolia Search Engine */
 require('./algolia')(app, algoliaClient);
 
-// require('./controllers/bot.js');
+//require('./controllers/bot.js');
 
 /* Socket */
 var ps = https.createServer(httpsOption, app, function(req, res) {

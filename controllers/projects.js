@@ -159,27 +159,27 @@ exports.getProjects = function(req, res){
                     });
             }
         });
-    // pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC LIMIT 3",
-    // function (err, results, fields) {
-    //     if (err) {
-    //         var date = new Date();
-    //         console.log(date);
-    //         console.log("Error getting projects in projects.js/getProjects" + "\n");
-    //         throw err;
-    //     }
-    //     tf.sortProjectCard(results, function(data) {
-    //         if (!data)
-    //             return res.send({message: 'No projects has been found'});
-    //         else {
-    //             if (req.isAuthenticated()) {
-    //                 getVotedProject(data, req, function(newData) {
-    //                     return res.send(newData);
-    //                 }); 
-    //             } else
-    //                 return res.send(data);
-    //         }
-    //     });
-    // });
+/*    pool.query("SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != '' ORDER BY vote DESC LIMIT 3",
+    function (err, results, fields) {
+        if (err) {
+            var date = new Date();
+            console.log(date);
+            console.log("Error getting projects in projects.js/getProjects" + "\n");
+            throw err;
+        }
+        tf.sortProjectCard(results, function(data) {
+            if (!data)
+                return res.send({message: 'No projects has been found'});
+            else {
+                if (req.isAuthenticated()) {
+                    getVotedProject(data, req, function(newData) {
+                        return res.send(newData);
+                    }); 
+                } else
+                    return res.send(data);
+            }
+        });
+    });*/
 };
 
 exports.getProjectsShuffler = function(req, res) {
@@ -207,6 +207,7 @@ exports.getProjectsDiscover = function(req, res){
             if (err) throw err;
             if (data[0]) {
                 var arr = data.map( function(el) { return el.follow_project_public_id; });
+                console.log(arr);
                 pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE follow_project_public_id NOT IN (?) GROUP BY follow_project_public_id ORDER BY creation_date >= now() - INTERVAL 3 DAY DESC', arr, 
                     function(err, data2) {
                         if (err) throw err;
@@ -255,22 +256,27 @@ exports.getProjectsDiscover = function(req, res){
                     });
             }
         });
-    // pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" ORDER BY view DESC',
-    // function (err, results, fields) {
-    //     if (err) throw err;
-    //     tf.sortProjectCard(results, function(data) {
-    //         if (!data)
-    //         res.send({message: 'No projects has been found'});
-    //         else {
-    //             if (req.isAuthenticated()) {
-    //                 getVotedProject(data, req, function(newData) {
-    //                     res.send(newData);
-    //                 }); 
-    //             } else
-    //                 res.send(data);
-    //         }
-    //     });
-    // });
+/*    pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" ORDER BY view DESC',
+    function (err, results, fields) {
+        if (err) {
+            var date = new Date();
+            console.log(date);
+            console.log("Error getting projects in projects.js/getProjects" + "\n");
+            throw err;
+        }
+        tf.sortProjectCard(results, function(data) {
+            if (!data)
+            res.send({message: 'No projects has been found'});
+            else {
+                if (req.isAuthenticated()) {
+                    getVotedProject(data, req, function(newData) {
+                        res.send(newData);
+                    }); 
+                } else
+                    res.send(data);
+            }
+        });
+    });*/
 };
 
 exports.getProject = function(req, res){

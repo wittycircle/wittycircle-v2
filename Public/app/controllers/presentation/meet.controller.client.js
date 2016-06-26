@@ -26,9 +26,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.expand = expand;
 
 	var skillListUrl = "";
-	var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
 
-	checkParams();
+	// checkParams();
 
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
@@ -150,7 +150,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				if (meet.skillList.length == 0) {
 					meet.skillList.push({sName: name});
 					skillListUrl = name;
-					$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 					document.getElementById('input-msa').style.display = "none";
 
 				}
@@ -162,7 +162,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					if (i == meet.skillList.length) {
 						meet.skillList.push({sName: name});
 						skillListUrl = skillListUrl + "," + name;
-						$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
+						// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 						document.getElementById('input-msa').style.display = "none";
 					}
 				}
@@ -361,7 +361,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 		} else {
 			if (value[0] !== "Anything" || value[2]) {
 				if (value[0] && value[0] !== "Anything") {
-					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				// $http.post('/search/users/al', object).success(function(res) {
 				// 	if (res.success) {
@@ -423,7 +423,7 @@ $(document).ready(function() {
 			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
-					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
 					var x = model.$viewValue.indexOf(',');
 					// var y = model.$viewValue.lastIndexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();

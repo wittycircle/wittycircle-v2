@@ -108,7 +108,7 @@ exports.getMyInvolvedProject = function(req, res, callback) {
 };
 
 exports.getProjects = function(req, res){
-    pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 3 DAY GROUP BY follow_project_public_id ORDER BY count(*) desc',
+    pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 3 DAY GROUP BY follow_project_public_id ORDER BY count DESC',
         function(err, data) {
             if (err) throw err;
             if (data[0]) {
@@ -132,7 +132,7 @@ exports.getProjects = function(req, res){
                         });
                 }
             } else {
-                pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 3 DAY GROUP BY follow_project_public_id ORDER BY count(*) desc',
+                pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE creation_date >= now() - INTERVAL 6 DAY GROUP BY follow_project_public_id ORDER BY count DESC',
                     function(err, data) {
                         if (err) throw err;
                         if (data[0]) {

@@ -11,8 +11,8 @@
 angular.module('wittyApp')
 .controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow) {
 
-    var socket = io.connect('https://www.wittycircle.com');
-    // var socket = io.connect('http://127.0.0.1');
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 
@@ -37,9 +37,9 @@ angular.module('wittyApp')
     discover.cHelp = 'Any help';
     discover.limit = 9;
 
-    var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
-    var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
-    var skillListUrl = "";
+    // var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+    // var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
+    // var skillListUrl = "";
 
 
     discover.dmobile;
@@ -359,7 +359,7 @@ angular.module('wittyApp')
                 if (discover.skillList.length === 0) {
                     discover.skillList.push({sName: name});
                     skillListUrl = name;
-                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
+                    // $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     document.getElementById('input-dsa').style.display = "none";
                 }
                 else {
@@ -370,7 +370,7 @@ angular.module('wittyApp')
                     if (i == discover.skillList.length) {
                         discover.skillList.push({sName: name});
                         skillListUrl = skillListUrl + "," + name;
-                        $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
+                        // $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                         document.getElementById('input-dsa').style.display = "none";
                     }
                 }
@@ -425,7 +425,7 @@ angular.module('wittyApp')
             if (index >= 0) {
                 discover.skillList.splice(index, 1);
                 skillListUrl = skillListUrl.replace(',' + name, '');
-                $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
+                // $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                 if (discover.skillList[0]) {
                     RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillList).then(function(res) {
                         if (res.success)
@@ -433,7 +433,7 @@ angular.module('wittyApp')
                     });
                 } else {
                     skillListUrl = skillListUrl.replace(name, '');
-                    $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
+                    // $state.transitionTo('discover', {skills: skillListUrl}, { notify: false, inherit: true });
                     discover.skillSearch = [];
                 }
             }

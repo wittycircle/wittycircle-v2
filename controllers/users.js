@@ -198,7 +198,7 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC', function (err, results) {
+    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE profile_picture is not null ORDER BY rand()', function (err, results) {
         if (err) throw (err);
 	pf.sortCardProfile(results, function(array) {
 	    res.send({success: true, data: array});

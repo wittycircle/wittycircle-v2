@@ -26,9 +26,12 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.expand = expand;
 
 	var skillListUrl = "";
-	var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
+	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
 
-	checkParams();
+	// checkParams();
+
+	$scope.onSearch = false;
+	$scope.onLoadSearch = true;
 
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
@@ -77,7 +80,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	}
 
 	Users.getCardProfiles(function(result) {
-		meet.cardProfiles = result.data
+		$scope.onLoadSearch = false;
+		meet.cardProfiles = result.data;
 		if ($rootScope.globals.currentUser) {
 			Profile.getFollowedUser(result.data, function(res){
 				meet.followed = res;
@@ -127,7 +131,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	};
 
 	function getAnything (help) {
-		meet.mHelp = help;
+		meet.mHelp = help.toLowerCase();
 		if (ww < 736)
 		closemmodal();
 	};
@@ -150,7 +154,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				if (meet.skillList.length == 0) {
 					meet.skillList.push({sName: name});
 					skillListUrl = name;
-					$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 					document.getElementById('input-msa').style.display = "none";
 
 				}
@@ -162,7 +166,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					if (i == meet.skillList.length) {
 						meet.skillList.push({sName: name});
 						skillListUrl = skillListUrl + "," + name;
-						$state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
+						// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 						document.getElementById('input-msa').style.display = "none";
 					}
 				}
@@ -171,7 +175,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			meet.fullList = true;
 
 			$http.post('/search/users', meet.skillList).success(function(res) {
-				meet.skillSearch = res.data;
+				meet.skillSearch = res.newList;
 			});
 		} else {
 
@@ -330,38 +334,58 @@ $timeout.cancel(shareInterval);
 
 /*** Search Section ***/
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
-	if (value) {
+	if (value[0] !== "Anything" || value[1] || value[2]) {
+		$scope.onSearch = true;
+		$scope.onLoadSearch = true;
 
-		$('#ldm').css('display', 'block');
-		$('#mbd').css('display', 'none');
-
-		$timeout(function() {
-			$('#ldm').css('display', 'none');
-			$('#mbd').css('display', 'block');
-		}, 1500);
+		// $timeout(function() {
+		// 	$('#ldm').css('display', 'none');
+		// 	$('#mbd').css('display', 'block');
+		// }, 1500);
 
 		var object = {
 			about: value[0],
 			list: value[1],
 			geo: value[2],
-			// country: $scope.searchMLC,
+			country: $scope.searchMLC,
 		};
+
+		console.log(value);
 		if (value[1] && value[1][0]) {
-			// $scope.searchClicked = true;
-			$http.put('/search/users', object).success(function(res) {
-				if (res.success) {
-					meet.cardProfiles = res.data;
-					if ($rootScope.globals.currentUser) {
-						Profile.getFollowedUser(res, function(res){
-							meet.followed = res;
-						});
+			console.log("OKOK");
+			if (value[0] === "Anything" && !value[2] && !value[1])
+				return ;
+			else if (value[0] !== "Anything" || typeof value[2] !== "undefined") {
+				$http.put('/search/users', object).success(function(res) {
+					if (res.success) {
+						console.log(res.data);
+						$scope.onLoadSearch = false;
+						meet.cardProfiles = res.data;
+						// if ($rootScope.globals.currentUser) {
+						// 	Profile.getFollowedUser(res, function(res) {
+						// 		meet.followed = res;
+						// 	});
+						// }
 					}
-				}
-			});
+				});
+			} else {
+				$http.post('/search/users/skills', object).success(function(res) {
+					if (res.success) {
+						console.log(res.data);
+						$scope.onLoadSearch = false;
+						meet.cardProfiles = [res.data];
+						// if ($rootScope.globals.currentUser) {
+						// 	Profile.getFollowedUser(res, function(res) {
+						// 		meet.followed = res;
+						// 	});
+						// }
+					}
+				});
+			}
 		} else {
 			if (value[0] !== "Anything" || value[2]) {
 				if (value[0] && value[0] !== "Anything") {
-					$state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
 				}
 				// $http.post('/search/users/al', object).success(function(res) {
 				// 	if (res.success) {
@@ -375,13 +399,16 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 				// 	// }
 				// });
 				$http.post('/search/users/al', object).success(function(res) {
-                    if (res.success)
-                    meet.cardProfiles = res.data;
-                    if ($rootScope.globals.currentUser) {
-                            Profile.getFollowedUser(res, function(res){
-                                    meet.followed = res;
-                            });
+                    if (res.success) {
+                    	meet.cardProfiles = res.data;
+                    	$('#ldm').css('display', 'none');
+						$('#mbd').css('display', 'block');
                     }
+                    // if ($rootScope.globals.currentUser) {
+                    //         Profile.getFollowedUser(res, function(res){
+                    //                 meet.followed = res;
+                    //         });
+                    // }
             	});
 			}
 		}
@@ -418,19 +445,20 @@ $(document).ready(function() {
 				types: ['(cities)'],
 			};
 
+			setTimeout(function() {
 			scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
 
 			google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
 				scope.$apply(function() {
 					model.$setViewValue(element.val());
-					$state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
+					// $state.transitionTo('meet', {loc: model.$viewValue}, { notify: false, inherit: true });
 					var x = model.$viewValue.indexOf(',');
-					// var y = model.$viewValue.lastIndexOf(',');
+					var y = model.$viewValue.lastIndexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
-					// scope.searchMLC = model.$viewValue.slice(y + 2).toLowerCase();
+					scope.searchMLC = model.$viewValue.slice(y + 2).toLowerCase();
 				});
 			});
-
+			}, 1000);
 			scope.$watch('meetLocation', function(value) {
 				if (value) {
 					var checkCountry = value.indexOf('United States');

@@ -207,7 +207,6 @@ exports.getProjectsDiscover = function(req, res){
             if (err) throw err;
             if (data[0]) {
                 var arr = data.map( function(el) { return el.follow_project_public_id; });
-                console.log(arr);
                 pool.query('SELECT count(*) as count, follow_project_title, follow_project_public_id FROM project_followers WHERE follow_project_public_id NOT IN (?) GROUP BY follow_project_public_id ORDER BY creation_date >= now() - INTERVAL 3 DAY DESC', arr, 
                     function(err, data2) {
                         if (err) throw err;

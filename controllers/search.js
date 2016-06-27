@@ -2,6 +2,7 @@
 var tf = require('../tools/project_functions');
 var search = require('./prototype');
 var pf = require('../tools/profile_functions');
+var _  = require('underscore');
 /*** Prototype ***/
 // function SpeedTest(testImplement, testParams, repititions) {
 //     this.testImplement = testImplement;
@@ -25,6 +26,38 @@ var pf = require('../tools/profile_functions');
 //                             this.average);
 //     }
 // };
+
+function getVotedProject(list, req, callback) {
+    pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+        function(err, result) {
+            if (err) throw err;
+            if (result[0]) {
+                function recursive(index) {
+                    if (result[index]) {
+                        function recursive2(index2) {
+                            if (list[index2]) {
+                                if (list[index2].public_id == result[index].follow_project_public_id) {
+                                    list[index2].check_vote = 1;
+                                    recursive(index + 1);
+                                } 
+                                else {
+                                    recursive2(index2 + 1);
+                                }
+                            } else
+                                recursive(index + 1);
+
+                        };
+                        recursive2(0);
+                    } else {
+                        callback(list);
+                    }
+
+                };
+                recursive(0);
+            } else
+                callback(list);
+        });
+};
 
 
 // Check if the element is already in the list
@@ -208,7 +241,9 @@ exports.getProjectsBySkill = function(req, res) {
                             removeSameElem(sortList, function(list) {
                                 getProjectTitle(list, function(object) {
                                     tf.sortProjectCard(object, function(content) {
-                                        return content ? res.send({success: true, data: content}) : res.send({success: false});     
+                                        getVotedProject(content, req, function(newData) {
+                                            return newData ? res.send({success: true, data: newData}) : res.send({success: false});
+                                        });     
                                     });
                                 });
                             });
@@ -227,7 +262,9 @@ exports.getProjectsBySkill = function(req, res) {
 exports.getProjectBySkillScl = function(req, res) {
     if (req.body.list) {
         var scl = new search(req.body.list, req.body);
-        return res.send({success: true, data: scl.getSCL()});
+        getVotedProject(scl.getSCL(), req, function(newData) {
+            return res.send({success: true, data: newData});
+        });
     } else
         return res.send({success: false});
 };
@@ -246,15 +283,17 @@ exports.getProjectByHelp = function(req, res) {
                                 tf.sortProjectCard(object, function(content) {
                                     if (content) {
                                         unionArray(content, req.body, listId, function(finalData) {
-                                            if (!req.body.status && !req.body.ctg && !req.body.geo) {
-                                                //console.timeEnd("Time to run :");
-                                                return res.send({success: true, data: finalData});
-                                            }
-                                            else {
-                                                var scl = new search(finalData, req.body);
-                                                //console.timeEnd("Time to run :");
-                                                return res.send({success: true, data: scl.getSCL()});
-                                            }
+                                            getVotedProject(finalData, req, function(newData){
+                                                if (!req.body.status && !req.body.ctg && !req.body.geo) {
+                                                    //console.timeEnd("Time to run :");
+                                                    return res.send({success: true, data: newData});
+                                                }
+                                                else {
+                                                    var scl = new search(newData, req.body);
+                                                    //console.timeEnd("Time to run :");
+                                                    return res.send({success: true, data: scl.getSCL()});
+                                                }
+                                            });
                                         });
                                     }
                                     else
@@ -283,7 +322,9 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
                     tf.sortProjectCard(results, function(content) {
                         var scl = new search(content, req.body);
                         //console.timeEnd("Time to run :");
-                        return res.send({success: true, data: scl.getSCL()});
+                        getVotedProject(scl.getSCL(), req, function(newData){
+                            return res.send({success: true, data: scl.getSCL()});
+                        });
                     });
                 } else
                     return res.send({success: false});
@@ -293,62 +334,238 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
 };
 
 //*** Get all users by skill in meet search
-exports.getUsersBySkill = function(req, res) {
-    var arrayId, sortList;
-    arrayId = [];
-    console.time('Time to find: ');
-    function recursive(index) {
-        if (req.body[index]) {
-            pool.query('SELECT user_id FROM user_skills WHERE skill_name = ?', req.body[index].sName,
-                function(err, data) {
-                    if (err) throw err;
-                    if (data[0]) {
-                        sortListUser(data, sortList, function(res) {
-                            if (res.success)
-                                sortList = res.list;
-                            recursive(index + 1);
-                        });
+// exports.getUsersBySkill = function(req, res) {
+//     var arrayId, sortList;
+//     arrayId = [];
+//     console.time('Time to find: ');
+//     function recursive(index) {
+//         if (req.body[index]) {
+//             pool.query('SELECT user_id FROM user_skills WHERE skill_name = ?', req.body[index].sName,
+//                 function(err, data) {
+//                     if (err) throw err;
+//                     if (data[0]) {
+//                         sortListUser(data, sortList, function(res) {
+//                             if (res.success)
+//                                 sortList = res.list;
+//                             recursive(index + 1);
+//                         });
+//                     } else
+//                         recursive(index + 1);
+//                 });
+//         } else {
+// 	    console.timeEnd('Time to find: ')
+//             return sortList ? res.send({success: true, data: sortList}) : res.send({success: false});
+//         }
+//     };
+//     recursive(0);
+// };
+
+function autoRunQuery(id, skills, callback) {
+    pool.query("SELECT skill_name FROM user_skills WHERE user_id = ?", id, 
+        function(err, result) {
+            if (err) throw err;
+            var arr = result.map(function(el) { return el.skill_name });
+            var count = 0;
+            var temp = [];
+            function recursive(index) {
+                if (skills[index]) {
+                    if (arr.indexOf(skills[index]) >= 0) {
+                        count++;
+                        temp.push(skills[index]);
+                        return recursive(index + 1);
+                    } else {
+                        return recursive(index + 1);
+                    }
+                } else {
+                    if (count === 5)
+                        callback({num: 5, skill: temp, user_id: id});
+                    else if (count === 4)
+                        callback({num: 4, skill: temp, user_id: id});
+                    else if (count === 3)
+                        callback({num: 3, skill: temp, user_id: id});
+                    else if (count === 2)
+                        callback({num: 2, skill: temp, user_id: id});
+                    else if (count === 1)
+                        callback({num: 1, skill: temp, user_id: id});
+                    else
+                        callback(false);
+                }
+            };
+            return recursive(0);
+        });
+};
+
+function sortUserSkillArray(data, callback) {
+    var newData1 = [],
+        newData2 = [],
+        tempo   = data;
+    if (data[0]) {
+        function recursive(index) {
+            if (tempo[index]) {
+                if (_.isEqual(data[0].skill, tempo[index].skill)) {
+                    newData1.push(tempo[index]);
+                    return recursive(index + 1);
+                } else {
+                    newData2.push(tempo[index]);
+                    return recursive(index + 1);
+                }
+            } else {
+                return callback(newData1, newData2);
+            }
+        };
+        return recursive(0);
+    }
+};
+
+
+function getListUserSearch(data, callback) {
+    if (data[0]) {
+        function recursive(index) {
+            if (data[index]) {
+                function recursive2(index2) {
+                    if (data[index][index2]) {
+                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)',
+                            data[index][index2].user_id,
+                            function(err, result) {
+                                if (err) throw err;
+                                if (result[0])
+                                    data[index][index2].profiles = result[0];
+                                else
+                                    data[index].splice(index2, 1);
+                                return recursive2(index2 + 1);
+                            });
                     } else
-                        recursive(index + 1);
-                });
-        } else {
-	    console.timeEnd('Time to find: ')
-            return sortList ? res.send({success: true, data: sortList}) : res.send({success: false});
+                        return recursive(index + 1);
+                };
+                return recursive2(0);
+            } else
+                return callback(data);
+        };
+        return recursive(0);
+    }
+};
+
+//*** TEST
+exports.getUserBySkills = function(req, res) {
+    pool.query('SELECT * FROM user_skills GROUP BY user_id', function(err, result) {
+        if (err) throw err;
+        if (result[0]) {
+            var arr = req.body.map( function(el) { return el.sName});
+            var data = [];
+
+            function recursive(index) {
+                if (result[index]) {
+                    autoRunQuery(result[index].user_id, arr, function(newData) {
+                        if (newData)
+                            data.push(newData);
+                        return recursive(index + 1);
+                    });
+                } else {
+                    var bigData = [];
+                    var bigData2 = [];
+                    function recursive2(reData) {
+                        sortUserSkillArray(reData, function(arr1, arr2) {
+                            if (!arr2[0]) {
+                                if (arr1[0].skill.length === 3)
+                                    bigData.push(arr1);
+                                else if (arr1[0].skill.length === 2)
+                                    bigData2.unshift(arr1);
+                                else
+                                    bigData2.push(arr1);
+                                bigData = bigData.concat(bigData2);
+                                return res.send({success: true, newList: bigData});
+                            } else {
+                                if (arr1[0].skill.length === 3)
+                                    bigData.push(arr1);
+                                else if (arr1[0].skill.length === 2)
+                                    bigData2.unshift(arr1);
+                                else
+                                    bigData2.push(arr1);
+                                return recursive2(arr2);
+                            }
+                        });
+                    };
+                    return recursive2(data);
+                }
+            };
+            return recursive(0);
         }
-    };
-    recursive(0);
+    });
+};
+
+// exports.getUsersBySkillAl = function(req, res) {
+//     if (req.body.list[0]) {
+//         var list = req.body.list;
+//         var array = [];
+//         function recursive(index) {
+//             if (list[index]) {
+//                 pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
+//                     function(err, results) {
+//                         if (err) throw err;
+//                         if (results[0])
+//                             array.push(results[0]);
+//                         recursive(index + 1);
+//                 });
+//             } else {
+//                 if (array[0]) {
+//                     if (!req.body.about && !req.body.geo) {
+//                         pf.sortCardProfile(array, function(data) {
+//                             return res.send({success: true, data: array});
+//                         });
+//                     } else {
+//                         var al = new search(array, req.body);
+//                         pf.sortCardProfile(al.getAL(), function(data) {
+//                             return res.send({success: true, data: al.getAL()});
+//                         });
+//                     }
+//                 } else
+//                     return res.send({success: false});
+//             }
+//         };
+//         recursive(0);
+//     } else
+//         return res.send({success: false});
+// };
+
+exports.getUserBySkillsOnly = function(req, res) {
+    if (req.body.list[0]) {
+        var list = req.body.list;
+        getListUserSearch(list, function(data) {
+            return res.send({success: true, data: data});
+        });
+    }
 };
 
 exports.getUsersBySkillAl = function(req, res) {
+    console.time('Time to find: ');
     if (req.body.list[0]) {
         var list = req.body.list;
-        var array = [];
-        function recursive(index) {
-            if (list[index]) {
-                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) ORDER BY views DESC', list[index], 
-                    function(err, results) {
-                        if (err) throw err;
-                        if (results[0])
-                            array.push(results[0]);
-                        recursive(index + 1);
-                });
-            } else {
-                if (array[0]) {
-                    if (!req.body.about && !req.body.geo) {
-                        pf.sortCardProfile(array, function(data) {
-                            return res.send({success: true, data: array});
-                        });
-                    } else {
-                        var al = new search(array, req.body);
-                        pf.sortCardProfile(al.getAL(), function(data) {
-                            return res.send({success: true, data: al.getAL()});
-                        });
-                    }
-                } else
-                    return res.send({success: false});
-            }
-        };
-        recursive(0);
+        getListUserSearch(list, function(data) {
+            var array = [];
+            var bigArray = [];
+            function recursive(index) {
+                if (data[index]) {
+                    var al = new search(data[index], req.body).getALNew();
+                    function recursive2(index2) {
+                        console.log(al[0]);
+                        if (al[index2]) {
+                            pf.sortCardProfileNew(al[index2], function(newData) {
+                                array.push(newData);
+                                return recursive2(index2 + 1)
+                            });
+                        } else {
+                            bigArray.push(array);
+                            return recursive(index + 1);
+                        }
+                    };
+                    recursive2(0);
+                } else {
+                    console.timeEnd('Time to find: ');
+                    return res.send({success: true, data: bigArray})
+                }
+            };
+            recursive(0);
+        });
     } else
         return res.send({success: false});
 };
@@ -358,26 +575,26 @@ exports.getUsersByAl = function(req, res) {
         pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC', 
             function (err, results) {
             if (err) throw (err);
-            // if (results[0]) {
-            //     var al = new search(results, req.body).getAL();
-            //     var array = [];
-            //     function recursive(index) {
-            //         if (al[index]) {
-            //             pf.sortCardProfile(al[index], function(data) {
-            //                 array.push(data);
-            //                 return recursive(index + 1);
-            //             });
-            //         } else
-            //             return res.send({success: true, data: array});
-            //     };
-            //     recursive(0);
-            // }
             if (results[0]) {
-                var al = new search(results, req.body);
-                pf.sortCardProfile(al.getAL(), function(data) {
-                    return res.send({success: true, data: al.getAL()});
-                });
+                var al = new search(results, req.body).getAL();
+                var array = [];
+                function recursive(index) {
+                    if (al[index]) {
+                        pf.sortCardProfile(al[index], function(data) {
+                            array.push(data);
+                            return recursive(index + 1);
+                        });
+                    } else
+                        return res.send({success: true, data: array});
+                };
+                recursive(0);
             }
+            // if (results[0]) {
+            //     var al = new search(results, req.body);
+            //     pf.sortCardProfile(al.getAL(), function(data) {
+            //         return res.send({success: true, data: al.getAL()});
+            //     });
+            // }
         });
     }
     else 

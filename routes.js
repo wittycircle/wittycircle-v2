@@ -55,35 +55,35 @@ app.get('/profile', ensureAuth, function(req, res) {
 
 /* AUTHENTICATION API PUBLIC */
 /* Facebook Users && Google Users */
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-app.get('/auth/facebook/callback', 
-  	passport.authenticate('facebook', {
-  	    successRedirect : 'https://www.wittycircle.com',
-  	    failureRedirect : 'https://www.wittycircle.com'
-  	}));
+// app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+// app.get('/auth/facebook/callback', 
+//   	passport.authenticate('facebook', {
+//   	    successRedirect : 'https://www.wittycircle.com',
+//   	    failureRedirect : 'https://www.wittycircle.com'
+//   	}));
 
-  app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
-  app.get('/auth/google/callback',
-  	passport.authenticate('google', {
-  	    successRedirect : 'https://www.wittycircle.com',
-  	    failureRedirect : 'https://www.wittycircle.com'
-  	}));
+//   app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+//   app.get('/auth/google/callback',
+//   	passport.authenticate('google', {
+//   	    successRedirect : 'https://www.wittycircle.com',
+//   	    failureRedirect : 'https://www.wittycircle.com'
+//   	}));
 
 /* AUTHENTICATION API DEV */
 /* Facebook Users && Google Users */
-// app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
-// app.get('/auth/facebook/callback',
-// 	passport.authenticate('facebook', {
-// 	    successRedirect : 'http://localhost',
-// 	    failureRedirect : 'http://localhost'
-// 	}));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email'}));
+app.get('/auth/facebook/callback',
+	passport.authenticate('facebook', {
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
+	}));
 
-// app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
-// app.get('/auth/google/callback',
-// 	passport.authenticate('google', {
-// 	    successRedirect : 'http://localhost',
-// 	    failureRedirect : 'http://localhost'
-// 	}));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email']}));
+app.get('/auth/google/callback',
+	passport.authenticate('google', {
+	    successRedirect : 'http://localhost',
+	    failureRedirect : 'http://localhost'
+	}));
 
 /* Schedule */
 var schedule = require('./dateConvert');
@@ -308,9 +308,10 @@ app.post('/search/projects/help/:help', search.getProjectByHelp);
 app.post('/search/projects/skills', search.getProjectsBySkill);
 app.put('/search/projects/skills', search.getProjectBySkillScl);
 app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
-app.post('/search/users', search.getUsersBySkill);
 app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
+app.post('/search/users', search.getUserBySkills);
+app.post('/search/users/skills', search.getUserBySkillsOnly);
 
 app.get('*', function(req, res) {
     if (req.isAuthenticated()) {
@@ -318,7 +319,7 @@ app.get('*', function(req, res) {
                 //console.log(response);
     	});
     }
-    res.sendFile(__dirname + '/Public/dist/index.html');
+    res.sendFile(__dirname + '/Public/app/index.html');
     //res.cookie('name', 'tobi');
 });
 

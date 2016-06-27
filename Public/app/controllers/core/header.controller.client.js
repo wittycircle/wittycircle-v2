@@ -29,8 +29,8 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
-    // var socket = io.connect('http://127.0.0.1');
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -360,58 +360,58 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* Public API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    // var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
     // /* Dev API Key */
     // var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
 
-    var People  = client.initIndex('Users');
-    var Project = client.initIndex('Projects');
-    var PAndP   = client.initIndex('PAndP');
+    // var People  = client.initIndex('Users');
+    // var Project = client.initIndex('Projects');
+    // var PAndP   = client.initIndex('PAndP');
 
-    $scope.$watch('searchNameHeader', function(value) {
-        if (value) {
-            $scope.searchProjects();
-            $scope.searchUsers();
-        }
-    });
+    // $scope.$watch('searchNameHeader', function(value) {
+    //     if (value) {
+    //         $scope.searchProjects();
+    //         $scope.searchUsers();
+    //     }
+    // });
 
-    $scope.$watch('searchNameM', function(value) {
-        if (value) {
-            $scope.searchUsersAndProjects(value)
-        }
-    })
+    // $scope.$watch('searchNameM', function(value) {
+    //     if (value) {
+    //         $scope.searchUsersAndProjects(value)
+    //     }
+    // })
 
-    $scope.searchProjects = function() {
-        if ($scope.searchNameHeader) {
-            Project.search($scope.searchNameHeader)
-            .then(function searchSuccess(content) {
-                if (!content.hits[0]) {
-                    $scope.notFoundProject = true;
-                } else {
-                    $scope.notFoundProject = false;
-                    $scope.projectHits = content.hits;
-                }
-            }, function searchFailure(err) {
-                console.log(err);
-            });
-        }
-    };
+    // $scope.searchProjects = function() {
+    //     if ($scope.searchNameHeader) {
+    //         Project.search($scope.searchNameHeader)
+    //         .then(function searchSuccess(content) {
+    //             if (!content.hits[0]) {
+    //                 $scope.notFoundProject = true;
+    //             } else {
+    //                 $scope.notFoundProject = false;
+    //                 $scope.projectHits = content.hits;
+    //             }
+    //         }, function searchFailure(err) {
+    //             console.log(err);
+    //         });
+    //     }
+    // };
 
-    $scope.searchUsers = function() {
-        if ($scope.searchNameHeader) {
-            People.search($scope.searchNameHeader)
-            .then(function searchSuccess(content) {
-                if (!content.hits[0]) {
-                    $scope.notFoundUser = true;
-                } else {
-                    $scope.notFoundUser = false;
-                    $scope.peopleHits = content.hits;
-                }
-            }, function searchFailure(err) {
-                console.log(err);
-            })
-        }
-    };
+    // $scope.searchUsers = function() {
+    //     if ($scope.searchNameHeader) {
+    //         People.search($scope.searchNameHeader)
+    //         .then(function searchSuccess(content) {
+    //             if (!content.hits[0]) {
+    //                 $scope.notFoundUser = true;
+    //             } else {
+    //                 $scope.notFoundUser = false;
+    //                 $scope.peopleHits = content.hits;
+    //             }
+    //         }, function searchFailure(err) {
+    //             console.log(err);
+    //         })
+    //     }
+    // };
 
     $http.get('/projects/discover').success(function(res) {
         $scope.resultHits = res;

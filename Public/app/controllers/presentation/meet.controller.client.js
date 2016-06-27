@@ -139,6 +139,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
 		meet.skillName = [];
+		$scope.onSearchAl = false;
 
 		if (ww >= 736) {
 			if (document.getElementById('labelNoText')) {
@@ -202,6 +203,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	function removeSkill (name) {
 		var index;
+		$scope.onSearchAl = false;
 
 		if (ww >= 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
@@ -336,6 +338,7 @@ $timeout.cancel(shareInterval);
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
 	if (value[0] !== "Anything" || value[1] || value[2]) {
 		$scope.onSearch = true;
+		$scope.onSearchAl = false;
 		$scope.onLoadSearch = true;
 
 		// $timeout(function() {
@@ -383,6 +386,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 				});
 			}
 		} else {
+			$scope.onSearchAl = true;
 			if (value[0] !== "Anything" || value[2]) {
 				if (value[0] && value[0] !== "Anything") {
 					// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
@@ -400,9 +404,9 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 				// });
 				$http.post('/search/users/al', object).success(function(res) {
                     if (res.success) {
+                    	console.log(res.data);
+                    	$scope.onLoadSearch = false;
                     	meet.cardProfiles = res.data;
-                    	$('#ldm').css('display', 'none');
-						$('#mbd').css('display', 'block');
                     }
                     // if ($rootScope.globals.currentUser) {
                     //         Profile.getFollowedUser(res, function(res){

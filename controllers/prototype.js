@@ -55,7 +55,6 @@ SearchUP.prototype  = {
             eightPart   = [],
             lastPart    = []
         
-        console.log("OKKKKKK");
         if (this.about === null) {
             var x,
                 y,
@@ -71,6 +70,10 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart, thirdPart];
         } else if (this.location === null) {
             var x,
                 y,
@@ -82,6 +85,10 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart];
         } else {
             var x,
                 y,
@@ -103,22 +110,26 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }
 
-        if (!firstPart[0])
-            firstPart.unshift("Casse toi tu trouveras rien!");
-        else
-            firstPart.unshift("Putin t'as trouve d'un coup, va au casino!");
-        if (secondPart[0])
-            secondPart.unshift("T'as la chance tu trouve au moin un truc!");
-        if (thirdPart[0])
-            thirdPart.unshift("Demerde toi avec ca");
-        if (fourthPart[0])
-            fourthPart.unshift("Je te souhaite une tres bon retour sur google");
-        if (fifthPart[0])
-            fifthPart.unshift("Tiens je t'envoie ce que j'ai");
-        lastPart.unshift("Et le reste du monde, T'inquete c'est vaste");
-        return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
+        // if (!firstPart[0])
+        //     firstPart.unshift("Casse toi tu trouveras rien!");
+        // else
+        //     firstPart.unshift("Putin t'as trouve d'un coup, va au casino!");
+        // if (secondPart[0])
+        //     secondPart.unshift("T'as la chance tu trouve au moin un truc!");
+        // if (thirdPart[0])
+        //     thirdPart.unshift("Demerde toi avec ca");
+        // if (fourthPart[0])
+        //     fourthPart.unshift("Je te souhaite une tres bon retour sur google");
+        // if (fifthPart[0])
+        //     fifthPart.unshift("Tiens je t'envoie ce que j'ai");
+        // lastPart.unshift("Et le reste du monde, T'inquete c'est vaste");
+        // return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
     },
     getAL: function() {
         var firstPart   = [],
@@ -126,12 +137,9 @@ SearchUP.prototype  = {
             thirdPart   = [],
             fourthPart  = [],
             fifthPart   = [],
-            sixthPart   = [],
-            seventhPart = [], 
-            eightPart   = [],
             lastPart    = []
         
-        if (this.about === null) {
+        if (this.about === null && this.location !== null) {
             var x,
                 y,
                 ab;
@@ -143,9 +151,14 @@ SearchUP.prototype  = {
                 else if (y >= 0 && y !== null)
                     secondPart.push(this.data[i])
                 else
-                    lastPart.push(this.data[i]);
+                    thirdPart.push(this.data[i]);
             };
-        } else if (this.location === null) {
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart, thirdPart];
+
+        } else if (this.location === null && this.about !== null) {
             var x,
                 y,
                 ab;
@@ -154,8 +167,13 @@ SearchUP.prototype  = {
                 if (ab >= 0 && ab !== null)
                     firstPart.push(this.data[i]);
                 else
-                    lastPart.push(this.data[i]);
+                    secondPart.push(this.data[i]);
             };
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart];
+
         } else {
             var x,
                 y,
@@ -177,22 +195,24 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
+
+            if (!firstPart[0])
+                firstPart.unshift("Casse toi tu trouveras rien!");
+            return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }
 
-        if (!firstPart[0])
-            firstPart.unshift("Casse toi tu trouveras rien!");
-        else
-            firstPart.unshift("Putin t'as trouve d'un coup, va au casino!");
-        if (secondPart[0])
-            secondPart.unshift("T'as la chance tu trouve au moin un truc!");
-        if (thirdPart[0])
-            thirdPart.unshift("Demerde toi avec ca");
-        if (fourthPart[0])
-            fourthPart.unshift("Je te souhaite une tres bon retour sur google");
-        if (fifthPart[0])
-            fifthPart.unshift("Tiens je t'envoie ce que j'ai");
-        lastPart.unshift("Et le reste du monde, T'inquete c'est vaste");
-        return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
+        // if (!firstPart[0])
+        //     firstPart.unshift("Casse toi tu trouveras rien!");
+        // else
+        //     firstPart.unshift("Putin t'as trouve d'un coup, va au casino!");
+        // if (secondPart[0])
+        //     secondPart.unshift("T'as la chance tu trouve au moin un truc!");
+        // if (thirdPart[0])
+        //     thirdPart.unshift("Demerde toi avec ca");
+        // if (fourthPart[0])
+        //     fourthPart.unshift("Je te souhaite une tres bon retour sur google");
+        // if (fifthPart[0])
+        //     fifthPart.unshift("Tiens je t'envoie ce que j'ai");
     }
 };
 

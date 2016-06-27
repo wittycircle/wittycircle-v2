@@ -547,7 +547,6 @@ exports.getUsersBySkillAl = function(req, res) {
                 if (data[index]) {
                     var al = new search(data[index], req.body).getALNew();
                     function recursive2(index2) {
-                        console.log(al[0]);
                         if (al[index2]) {
                             pf.sortCardProfileNew(al[index2], function(newData) {
                                 array.push(newData);

@@ -591,6 +591,10 @@
         margin: 0px 16px 50px 16px;
         border: 1px solid #E5E5E5;
         border-radius: 5px; }
+    #meet-body-content .meet-body-container .meet-search-found h2 {
+      font-family: 'FreigLight';
+      color: black;
+      padding: 45px 20px 45px 16px; }
 
 /****** Work ******/
 .work-component .wst {

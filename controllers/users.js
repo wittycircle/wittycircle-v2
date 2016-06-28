@@ -198,12 +198,31 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE profile_picture is not null ORDER BY rand()', function (err, results) {
-        if (err) throw (err);
-	pf.sortCardProfile(results, function(array) {
-	    res.send({success: true, data: array});
-	});
-    });
+    pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
+        function(err, result) {
+            if (err) throw err;
+            else {
+                var arr = result.map( function(el) { return el.user_id; })
+                pool.query("SELECT id FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id IN (" + arr + ")) && (DESCRIPTION != '' && DESCRIPTION is not null)",
+                    function(err, result2) {
+                        if (err) throw err;
+                        var arr2 = result2.map( function(el) { return el.id});
+                        var newArray = [];
+                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
+                            function (err, result3) {                                
+                                if (err) throw (err);
+                                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
+                                    function (err, result4) {
+                                        if (err) throw (err);
+                                        newArray = result3.concat(result4);
+                                        pf.sortCardProfile(newArray, function(array) {
+                                            res.send({success: true, data: array});
+                                        });
+                                    });
+                            });
+                    });
+            }
+        });
 };
 
 exports.getCardProfileHome = function(req, res) {

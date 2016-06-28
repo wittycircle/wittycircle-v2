@@ -1,4 +1,4 @@
-<header id="header-section" data-ng-controller="HeaderCtrl">
+<header id="header-section" data-ng-controller="HeaderCtrl" style="position: fixed; transition: linear 2s">
     <section id="header-content" class="cbp-spmenu-push">
         <div id="hsmobile" class="header-searchBar-mobile">
             <figure>
@@ -238,6 +238,7 @@
  /*	mixpanel.track_links("#hnl a", "click nav link", {
 		"referrer": document.referrer
 	}); */
+
         $(document).ready(function() {
 
             if (y > 736) {
@@ -364,16 +365,16 @@
                             hff.style.display = "block";
                             hnlog.className = "header-nav-log2";
                         } else {
-                            hcontent.style.backgroundColor = "transparent";
-                            hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
-                            hnl.className = "header-nav-list";
-                            hsb.className = "header-searchBar";
-                            notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
-                            notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
-                            cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
-                            hlDrop[0].style.color = "white";
+                            // hcontent.style.backgroundColor = "transparent";
+                            // hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+                            // hnl.className = "header-nav-list";
+                            // hsb.className = "header-searchBar";
+                            // notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
+                            // notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
+                            // cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
+                            // hlDrop[0].style.color = "white";
                             hff.style.display = "none";
-                            hnlog.className = "header-nav-log";
+                            // hnlog.className = "header-nav-log";
                         }
                     }
 
@@ -499,7 +500,7 @@
                 hlDrop[0].style.color = "#999999";
                 hff.style.display = "block";
                 hnlog.className = "header-nav-log2";
-            } else {
+            } else if ($(window).scrollTop() === 0) {
                 hcontent.style.backgroundColor = "transparent";
                 hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
                 hnl.className = "header-nav-list";
@@ -512,6 +513,56 @@
                 hnlog.className = "header-nav-log";
             }
         };
+
+        function headerMove(display) {
+            if (display) {
+                hcontent.style.backgroundColor = "white";
+                hcontent.style.borderBottom = "1px solid #e5e5e5";
+                hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg";
+                hnl.className = "header-nav-list2";
+                hsb.className = "header-searchBar2";
+                notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png";
+                notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg";
+                cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg";
+                hlDrop[0].style.color = "#999999";
+                hnlog.className = "header-nav-log2";
+            } else {
+                hcontent.style.backgroundColor = "transparent";
+                hcontent.style.borderBottom = "none";
+                hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+                hnl.className = "header-nav-list";
+                hsb.className = "header-searchBar";
+                notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
+                notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
+                cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
+                hlDrop[0].style.color = "white";
+                hnlog.className = "header-nav-log";
+            }
+            // } else {
+            //     hcontent.style.backgroundColor = "transparent";
+            //     hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+            //     hnl.className = "header-nav-list";
+            //     hsb.className = "header-searchBar";
+            //     notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
+            //     notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
+            //     cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
+            //     hlDrop[0].style.color = "white";
+            //     hff.style.display = "none";
+            //     hnlog.className = "header-nav-log";
+            // }
+        };
+
+        var check = 0;
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 1 && !check) {
+                check = 1;
+                headerMove(true);
+            }
+            if ($(window).scrollTop() === 0 && check === 1) {
+                check = 0;
+                headerMove(false);
+            }
+        });
 
         function preventScroll() {
             bodypos = "fixed";

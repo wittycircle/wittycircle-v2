@@ -7,13 +7,16 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	var ww = $(window).width();
 
 	/* global var */
-	meet.limit = 12;
+	$scope.limit = 24;
+	$scope.limitc = 24;
+	$scope.limit1 = 1;
+	$scope.limit2 = 1;
+	$scope.limit3 = 1;
 	meet.mmobile = {};
 	meet.mHelp = "Anything";
 	meet.count = -1;
 	meet.skillList = [];
 	meet.skillListM = [];
-
 	/* functions */
 	meet.openmmodal = openmmodal;
 	meet.closemmodal = closemmodal;
@@ -23,15 +26,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.removeSkill = removeSkill;
 	meet.goToProfile = goToProfile;
 	meet.followUserFromCard = followUserFromCard;
-	meet.expand = expand;
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
 
 	// checkParams();
 
-	$scope.onSearch = false;
-	$scope.onLoadSearch = true;
+	// $scope.onLoadSearch = true;
+	meet.cardProfiles = false;
 
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
@@ -79,15 +81,24 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		meet.mmobile.general = false;
 	}
 
-	Users.getCardProfiles(function(result) {
-		$scope.onLoadSearch = false;
-		meet.cardProfiles = result.data;
-		if ($rootScope.globals.currentUser) {
-			Profile.getFollowedUser(result.data, function(res){
-				meet.followed = res;
-			});
-		}
-	});
+	function loaderDisplay(check) {
+		if (check)
+			document.getElementById('ldm').style.display = "block";
+		else
+			document.getElementById('ldm').style.display = "none";
+	};
+
+	function initializeProfile() {
+		Users.getCardProfiles(function(result) {
+			loaderDisplay(false);
+			meet.cardProfiles = result.data;
+			if ($rootScope.globals.currentUser) {
+				Profile.getFollowedUser(result.data, function(res){
+					meet.followed = res;
+				});
+			}
+		});
+	}; initializeProfile();
 
 	RetrieveData.getData('/skills', 'GET').then(function(res) {
 		meet.skills = res.skills;
@@ -126,10 +137,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 		}
 	}
 
-	function expand (value) {
-		meet.limit = meet.limit + value;
-	};
-
 	function getAnything (help) {
 		meet.mHelp = help.toLowerCase();
 		if (ww < 736)
@@ -139,7 +146,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
 		meet.skillName = [];
-		$scope.onSearchAl = false;
+		meet.cardProfiles = false;
+		loaderDisplay(true);
 
 		if (ww >= 736) {
 			if (document.getElementById('labelNoText')) {
@@ -155,29 +163,39 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				if (meet.skillList.length == 0) {
 					meet.skillList.push({sName: name});
 					skillListUrl = name;
+					meet.cardProfiles = false;
+					$http.post('/search/users', meet.skillList).success(function(res) {
+						if (res.success)
+							meet.skillSearch = res.newList;
+						else
+							meet.skillSearch = null;
+					});
 					// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 					document.getElementById('input-msa').style.display = "none";
 
-				}
-				else {
+				} else {
 					for(var i = 0; i < meet.skillList.length; i++) {
 						if (meet.skillList[i].sName === name)
-						break;
+							break;
 					}
 					if (i == meet.skillList.length) {
 						meet.skillList.push({sName: name});
 						skillListUrl = skillListUrl + "," + name;
+						loaderDisplay(true);
+						meet.cardProfiles = false;
+						$http.post('/search/users', meet.skillList).success(function(res) {
+							if (res.success)
+								meet.skillSearch = res.newList;
+							else
+								meet.skillSearch = null;
+						});
 						// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 						document.getElementById('input-msa').style.display = "none";
 					}
 				}
 			}
-			if (meet.skillList.length == 5)
-			meet.fullList = true;
-
-			$http.post('/search/users', meet.skillList).success(function(res) {
-				meet.skillSearch = res.newList;
-			});
+			if (meet.skillList.length === 5)
+				meet.fullList = true;
 		} else {
 
 			if (meet.skillListM.length < 5) {
@@ -191,19 +209,24 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					}
 					if (i == meet.skillListM.length) {
 						meet.skillListM.push({sName: name});
+						loaderDisplay(true);
+						meet.cardProfiles = false;
+						$http.post('/search/users', meet.skillListM).success(function(res) {
+							if (res.success)
+								meet.skillSearch = res.newList;
+							else
+								meet.skillSearch = null;
+						});
 					}
 				}
 			}
-
-			$http.post('/search/users', meet.skillListM).success(function(res) {
-				meet.skillSearch = res.data;
-			});
 		}
 	}
 
 	function removeSkill (name) {
 		var index;
-		$scope.onSearchAl = false;
+		meet.cardProfiles = false;
+		loaderDisplay(true);
 
 		if (ww >= 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
@@ -216,15 +239,21 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				}
 			}
 			if (index >= 0)
-			meet.skillList.splice(index, 1);
+				meet.skillList.splice(index, 1);
 			if (meet.skillList.length < 5)
-			meet.fullList = false;
+				meet.fullList = false;
 			if(meet.skillList[0]) {
 				$http.post('/search/users', meet.skillList).success(function(res) {
-					meet.skillSearch = res.data;
+					if (res.success)
+						meet.skillSearch = res.newList;
+					else
+						meet.skillSearch = null;
 				});
-			} else
-			meet.skillSearch = [];
+			} else {
+				meet.cardProfiles = [];
+				initializeProfile();
+				meet.skillSearch = null;
+			}
 		} else {
 			for (var i = 0; i < meet.skillListM.length; i++) {
 				if (meet.skillListM[i].sName === name) {
@@ -236,10 +265,15 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			meet.skillListM.splice(index, 1);
 			if(meet.skillListM[0]) {
 				$http.post('/search/users', meet.skillListM).success(function(res) {
-					meet.skillSearch = res.data;
+					if (res.success)
+						meet.skillSearch = res.newList;
+					else
+						meet.skillSearch = null;
 				});
-			} else
-			meet.skillSearch = [];
+			} else {
+				initializeProfile();
+				meet.skillSearch = null;
+			}
 		}
 	}
 
@@ -335,12 +369,12 @@ $timeout.cancel(shareInterval);
 // });
 
 /*** Search Section ***/
+
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
 	if (value[0] !== "Anything" || value[1] || value[2]) {
-		$scope.onSearch = true;
-		$scope.onSearchAl = false;
-		$scope.onLoadSearch = true;
-
+		
+		meet.cardProfiles = false;
+		loaderDisplay(true);
 		// $timeout(function() {
 		// 	$('#ldm').css('display', 'none');
 		// 	$('#mbd').css('display', 'block');
@@ -353,16 +387,17 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			country: $scope.searchMLC,
 		};
 
-		console.log(value);
 		if (value[1] && value[1][0]) {
-			console.log("OKOK");
+			$scope.searchAl = false
 			if (value[0] === "Anything" && !value[2] && !value[1])
 				return ;
 			else if (value[0] !== "Anything" || typeof value[2] !== "undefined") {
+				$scope.noAl = false;
 				$http.put('/search/users', object).success(function(res) {
 					if (res.success) {
-						console.log(res.data);
-						$scope.onLoadSearch = false;
+						loaderDisplay(false);
+						$scope.searchSk = true;
+						$scope.limit4 = 24;
 						meet.cardProfiles = res.data;
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
@@ -373,9 +408,11 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 				});
 			} else {
 				$http.post('/search/users/skills', object).success(function(res) {
+					$scope.noAl = true;
 					if (res.success) {
-						console.log(res.data);
-						$scope.onLoadSearch = false;
+						loaderDisplay(false);
+						$scope.searchSk = true;
+						$scope.limit4 = 24;
 						meet.cardProfiles = [res.data];
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
@@ -385,36 +422,34 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					}
 				});
 			}
-		} else {
-			$scope.onSearchAl = true;
-			if (value[0] !== "Anything" || value[2]) {
-				if (value[0] && value[0] !== "Anything") {
-					// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
-				}
-				// $http.post('/search/users/al', object).success(function(res) {
-				// 	if (res.success) {
-				// 		// $scope.searchClicked = true;
-				// 		meet.cardProfiles = res.data;
-				// 	}
-				// 	// if ($rootScope.globals.currentUser) {
-				// 	// 	Profile.getFollowedUser(res, function(res){
-				// 	// 		meet.followed = res;
-				// 	// 	});
-				// 	// }
-				// });
-				$http.post('/search/users/al', object).success(function(res) {
-                    if (res.success) {
-                    	console.log(res.data);
-                    	$scope.onLoadSearch = false;
-                    	meet.cardProfiles = res.data;
-                    }
-                    // if ($rootScope.globals.currentUser) {
-                    //         Profile.getFollowedUser(res, function(res){
-                    //                 meet.followed = res;
-                    //         });
-                    // }
-            	});
-			}
+		} else if (value[0] !== "Anything" || value[2]){
+			$scope.searchSk = false;
+			// if (value[0] && value[0] !== "Anything") {
+				// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
+			//}
+			// $http.post('/search/users/al', object).success(function(res) {
+			// 	if (res.success) {
+			// 		// $scope.searchClicked = true;
+			// 		meet.cardProfiles = res.data;
+			// 	}
+			// 	// if ($rootScope.globals.currentUser) {
+			// 	// 	Profile.getFollowedUser(res, function(res){
+			// 	// 		meet.followed = res;
+			// 	// 	});
+			// 	// }
+			// });
+			$http.post('/search/users/al', object).success(function(res) {
+                if (res.success) {
+                	loaderDisplay(false);
+                	$scope.searchAl = true;
+                	meet.cardProfiles = res.data;
+                }
+                // if ($rootScope.globals.currentUser) {
+                //         Profile.getFollowedUser(res, function(res){
+                //                 meet.followed = res;
+                //         });
+                // }
+        	});
 		}
 	}
 });
@@ -439,6 +474,54 @@ $(document).ready(function() {
 			}
 		}
 	});
+	var wait = 1;
+	$(window).scroll(function() {
+        if($(window).scrollTop() > $(document).height() - $(window).height() - 1100) {
+        	$timeout(function() {
+        		wait = 0;
+        	}, 1000);
+        	if (!wait) {
+        		wait = 1;
+            	$scope.limit = $scope.limit + 12;
+            	$scope.limitc = $scope.limitc + 12;
+
+            	if (meet.cardProfiles.length > 1) {
+	            	if (meet.cardProfiles[$scope.limit2 - 1].length < $scope.limit3) {
+	            		$scope.limit2 = $scope.limit2 + 1;
+	            		$timeout(function() {$scope.limit3 = 1}, 1000);
+	            	} else {
+	            		if (meet.cardProfiles[$scope.limit2 - 1][$scope.limit3 - 1].length < $scope.limit4) {
+		            		$scope.limit3 += 1;
+		     				$timeout(function() {$scope.limit4 = 24}, 1000);
+		            	} else
+		            		$scope.limit4 += 12;
+	            	}
+	            } else {
+	            		if (meet.cardProfiles[0][$scope.limit3 - 1]){
+						if	(meet.cardProfiles[0][$scope.limit3 - 1].length < $scope.limit4) {
+		            		$scope.limit3 = $scope.limit3 + 1;
+		     				$timeout(function() {$scope.limit4 = 24}, 1000);
+		     			} else
+	            			$scope.limit4 += 12;
+	            		} else
+	            			$scope.limit4 = 24;
+	            }
+        	}
+        }
+    });
+});
+
+$scope.$watch('limit', function(value) {
+	if (meet.cardProfiles.length === 2) {
+		if (meet.cardProfiles[0].length > 20 && meet.cardProfiles[0].length > value) {
+			$scope.limit1 = 1;
+		} else if (value > meet.cardProfiles[0].length) {
+ 			$scope.limit1 = 2;
+ 			$timeout(function() {
+ 				$scope.limit1 = 24;
+ 			}, 1000)
+    	}// else if (meet.cardProfiles.length === 3) {
+    }
 });
 })
 .directive('preGoLocation', function($state) {
@@ -460,6 +543,8 @@ $(document).ready(function() {
 					var y = model.$viewValue.lastIndexOf(',');
 					scope.searchML = model.$viewValue.slice(0, x).toLowerCase();
 					scope.searchMLC = model.$viewValue.slice(y + 2).toLowerCase();
+					scope.fCity = model.$viewValue;
+					scope.fCountry = model.$viewValue.slice(y + 2);
 				});
 			});
 			}, 1000);

@@ -204,14 +204,14 @@
       margin-bottom: 4px;
       word-break: break-word; }
     .profile-card .card-info .card-location {
-      height: 16px; }
+      height: 14px; }
       .profile-card .card-info .card-location h6 {
         font-family: 'FreigBook';
         font-size: 13px;
-        color: #999999;
-        margin-bottom: 15px; }
+        color: #999999; }
     .profile-card .card-info .card-description {
       margin-top: 10px;
+      height: 45px;
       overflow: hidden; }
       .profile-card .card-info .card-description p {
         font-family: 'FreigBook';
@@ -221,7 +221,8 @@
         word-break: break-word;
         margin-bottom: 5px; }
     .profile-card .card-info .card-profile-skills {
-      text-align: left; }
+      text-align: left;
+      margin-top: 8px; }
       .profile-card .card-info .card-profile-skills li {
         display: inline-block;
         padding: 1px 6px 1px 6px;
@@ -231,7 +232,8 @@
         text-transform: uppercase;
         background-color: black;
         border-radius: 4px;
-        margin-right: 5px; }
+        margin-right: 5px;
+        margin-bottom: 1px; }
   .profile-card .card-follow {
     border-top: 1px solid #F5F5F5;
     		/*.tooltips {

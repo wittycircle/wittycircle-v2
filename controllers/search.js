@@ -489,6 +489,23 @@ exports.getUserBySkills = function(req, res) {
                 }
             };
             return recursive(0);
+        } else {
+            // return res.send({success: false});
+            // function recursive(index) {
+            //     if (req.body[index]) {
+            //         pool.query('SELECT category FROM skills WHERE name = ?', req.body[index].sName,
+            //             function(err, result) {
+            //                 if (err) throw err;
+            //                 if (result[0])
+            //                     pool.query('SELECT user_id FROM user_skills WHERE skill_name IN (SELECT name FROM skills WHERE category = ?) GROUP BY user_id', result[0].category,
+            //                         function(err, result2) {})
+            //                 else
+            //                     recursive(index + 1);
+
+            //             });
+            //     }
+            // };
+            // recursive(0);
         }
     });
 };
@@ -528,10 +545,25 @@ exports.getUserBySkills = function(req, res) {
 // };
 
 exports.getUserBySkillsOnly = function(req, res) {
+    console.time('Time to find: ');
     if (req.body.list[0]) {
         var list = req.body.list;
         getListUserSearch(list, function(data) {
-            return res.send({success: true, data: data});
+            var array = [];
+            function recursive(index) {
+                if (data[index]) {
+                    pf.sortCardProfileNew(data[index], function(newData) {
+                        if (data[index][0].skill[0])
+                            newData.unshift(data[index][0].skill);
+                        array.push(newData);
+                        return recursive(index + 1)
+                    });
+                } else {
+                    console.timeEnd('Time to find: ');
+                    return res.send({success: true, data: array});
+                }
+            };
+            recursive(0);
         });
     }
 };
@@ -544,6 +576,7 @@ exports.getUsersBySkillAl = function(req, res) {
             var array = [];
             var bigArray = [];
             function recursive(index) {
+                array = [];
                 if (data[index]) {
                     var al = new search(data[index], req.body).getALNew();
                     function recursive2(index2) {
@@ -553,6 +586,7 @@ exports.getUsersBySkillAl = function(req, res) {
                                 return recursive2(index2 + 1)
                             });
                         } else {
+                            array.unshift({skills: data[index][0].skill})
                             bigArray.push(array);
                             return recursive(index + 1);
                         }

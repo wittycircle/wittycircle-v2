@@ -13,6 +13,12 @@
 
 	#header-content {
 		padding: 12px 20px 0px 20px;
+		-webkit-transition: all 200ms linear;
+		-o-transition: all 200ms linear;
+		-moz-transition: all 200ms linear;
+		-ms-transition: all 200ms linear;
+		-kthtml-transition: all 200ms linear;
+		transition: all 200ms linear;
 
 		hr {
 			display: none;

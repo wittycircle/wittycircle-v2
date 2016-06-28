@@ -313,6 +313,8 @@ app.put('/search/users', search.getUsersBySkillAl);
 app.post('/search/users', search.getUserBySkills);
 app.post('/search/users/skills', search.getUserBySkillsOnly);
 
+/* Learn & Articles */
+
 app.get('*', function(req, res) {
     if (req.isAuthenticated()) {
     	updateUserActivity(req.user.id, function (response) {

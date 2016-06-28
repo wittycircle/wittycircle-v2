@@ -555,10 +555,11 @@
     margin: 0px 10px 0px 0px; }
 
 #meet-body-content {
-  min-height: 400px; }
+  min-height: 700px; }
   #meet-body-content .meet-body-container {
     max-width: 1000px;
     margin: 0 auto;
+    padding-left: 10px;
     -webkit-transition-delay: all 500ms linear;
     -o-transition-delay: all 500ms linear;
     -moz-transition-delay: all 500ms linear;
@@ -582,7 +583,7 @@
     backface-visibility: hidden; }
     #meet-body-content .meet-body-container .meet-body-cards {
       text-align: left;
-      padding-left: 15px; }
+      display: inline-block; }
       #meet-body-content .meet-body-container .meet-body-cards .meet-body-card {
         display: inline-table;
         text-align: center;

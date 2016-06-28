@@ -62,6 +62,11 @@ var wittyCircleApp = angular
 		controller  : 'MeetCtrl',
 		controllerAs: 'meet',
 	})
+	.state('learn', {
+		url 		: '/learn',
+		templateUrl : 'views/presentation/learn.view.client.html',
+		controller  : 'LearnCtrl',	
+	})
 	.state('signup', {
 	    url         : '/signup',
 	    params      : { tagCheckFirst: false},
@@ -174,6 +179,8 @@ var wittyCircleApp = angular
 							$state.go('messages');
 						} if (!res && $stateParams.username === "my-projects") {
 							$state.go('my-projects');
+						} if (!res && $stateParams.username === "learn") {
+
 						} else {
 							$state.go('notfound');
 						}

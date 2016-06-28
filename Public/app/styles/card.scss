@@ -280,18 +280,19 @@
 		}
 
 		.card-location {
-			height: 16px;
+			height: 14px;
 
 			h6 {
 				font-family: 'FreigBook';
 				font-size: 13px;
 				color: #999999;
-				margin-bottom: 15px;
+				// margin-bottom: 15px;
 			}
 		}
 
 		.card-description {
 			margin-top: 10px;
+			height: 45px;
 			overflow: hidden;
 
 			p {
@@ -306,6 +307,7 @@
 
 		.card-profile-skills {
 			text-align: left;
+			margin-top: 8px;
 
 			li {
 				display: inline-block;
@@ -317,6 +319,7 @@
 				background-color: black;
 				border-radius: 4px;
 				margin-right: 5px;
+				margin-bottom: 1px;
 			}
 		}
 	}

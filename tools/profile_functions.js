@@ -1,4 +1,5 @@
 /*** Meet tool function ***/
+var _  = require('underscore');
 
 exports.sortCardProfile = function(data, callback) {
     if (data[0]) {
@@ -69,11 +70,13 @@ exports.sortCardProfileNew = function(data, callback) {
 											function(err, result) {
 												if (err) throw err;
 												if (row[0]) {
-													data[index].profiles.followers 	= followers[0].followers;
-													data[index].profiles.following 	= following[0].following;
-													data[index].profiles.user_id 	= row[0].id;
-													data[index].profiles.skills 		= result;
-													data[index].profiles.username 	= row[0].username;
+													if (result[0])
+														var arr = result.map(function(el) { return el.skill_name})
+													data[index].followers 	= followers[0].followers;
+													data[index].following 	= following[0].following;
+													data[index].user_id 	= row[0].id;
+													data[index].skills 		= _.difference(arr, data[index].skill);
+													data[index].username 	= row[0].username;
 													newCardProfile.push(data[index]);
 													return recursive(index + 1);
 												} else
@@ -83,7 +86,6 @@ exports.sortCardProfileNew = function(data, callback) {
 						});
 				});
 		    } else { 
-		    	console.log(newCardProfile);
 				return callback(newCardProfile);
 		    }
 		};

@@ -50,16 +50,12 @@ SearchUP.prototype  = {
             thirdPart   = [],
             fourthPart  = [],
             fifthPart   = [],
-            sixthPart   = [],
-            seventhPart = [], 
-            eightPart   = [],
             lastPart    = []
         
-        if (this.about === null) {
+        if ((this.about === null || this.about === "Anything") && this.location !== null) {
             var x,
                 y,
                 ab;
-            console.log(this.location);
             for(var i = 0; i < this.data.length; i++) {
                 x = this.data[i].profiles["location_city"] && this.data[i].profiles["location_city"].toLowerCase().indexOf(this.location);
                 y = this.data[i].profiles["location_country"] && this.data[i].profiles["location_country"].toLowerCase().indexOf(this.country);                
@@ -68,13 +64,11 @@ SearchUP.prototype  = {
                 else if (y >= 0 && y !== null)
                     secondPart.push(this.data[i])
                 else
-                    lastPart.push(this.data[i]);
+                    thirdPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart, thirdPart];
-        } else if (this.location === null) {
+
+        } else if (this.location === null && this.about !== null && this.about !== "Anything") {
             var x,
                 y,
                 ab;
@@ -83,11 +77,8 @@ SearchUP.prototype  = {
                 if (ab >= 0 && ab !== null)
                     firstPart.push(this.data[i]);
                 else
-                    lastPart.push(this.data[i]);
+                    secondPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart];
         } else {
             var x,
@@ -110,9 +101,6 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }
 
@@ -134,12 +122,10 @@ SearchUP.prototype  = {
     getAL: function() {
         var firstPart   = [],
             secondPart  = [],
-            thirdPart   = [],
-            fourthPart  = [],
-            fifthPart   = [],
-            lastPart    = []
-        
-        if (this.about === null && this.location !== null) {
+            thirdPart   = [];
+
+        if ((this.about === null || this.about === "Anything") && this.location !== null) {
+
             var x,
                 y,
                 ab;
@@ -153,12 +139,9 @@ SearchUP.prototype  = {
                 else
                     thirdPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart, thirdPart];
 
-        } else if (this.location === null && this.about !== null) {
+        } else if (this.location === null && this.about !== null && this.about !== "Anything") {
             var x,
                 y,
                 ab;
@@ -169,15 +152,16 @@ SearchUP.prototype  = {
                 else
                     secondPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart];
 
         } else {
             var x,
                 y,
-                ab;
+                ab,
+            fourthPart  = [],
+            fifthPart   = [],
+            lastPart    = [];
+
             for(var i = 0; i < this.data.length; i++) {
                 x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(this.location);
                 y = this.data[i]["location_country"] && this.data[i]["location_country"].toLowerCase().indexOf(this.country);
@@ -195,9 +179,6 @@ SearchUP.prototype  = {
                 else
                     lastPart.push(this.data[i]);
             };
-
-            if (!firstPart[0])
-                firstPart.unshift("Casse toi tu trouveras rien!");
             return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }
 

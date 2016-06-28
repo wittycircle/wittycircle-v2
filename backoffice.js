@@ -42,7 +42,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/list/profiles/complete', ensureAdmin, function(req, res) {
-		pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences group by user_id) group by user_id',
+		pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
 			function(err, result) {
 				if (err) throw err;
 				else {

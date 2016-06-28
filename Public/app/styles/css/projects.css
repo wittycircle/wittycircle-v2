@@ -504,7 +504,8 @@
   #feedback_project .feedback_textarea_question .col-md-11 {
     padding: 0; }
 #feedback_project .view-project-feedback-ask {
-  display: inline-block; }
+  display: inline-block;
+  width: 85%; }
 #feedback_project .feedback_description {
   margin: 0px;
   cursor: default; }

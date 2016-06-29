@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="card-profile-skills">
                                         <ul>
-                                            <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name}}</li>
+                                            <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name | cut:true:20:' ...'}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -160,20 +160,19 @@
                         <div class="meet-search-found" ng-if="!noAl && cardsFound.length === 4">
                             <h2 ng-if="cardProfiles.length && $index === 1">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCity}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 2">People skilled in <span ng-repeat="skillAll in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAll}}</span><span ng-if="!$last">, </span></span> in {{fCountry}}</h2>
-                            <h2 ng-if="cardProfiles.length && $index === 3">People skilled in <span ng-repeat="skillAll in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAll}}</span><span ng-if="!$last">, </span></span> in other countries</h2>
+                            <h2 ng-if="cardProfiles.length && $index === 3">People skilled in <span ng-repeat="skillAll in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAll}}</span><span ng-if="!$last">, </span></span> from the rest of the world</h2>
                         </div>
                         <div class="meet-search-found" ng-if="!noAl && cardsFound.length === 7">
                             <h2 ng-if="cardProfiles.length && $index === 1">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} in {{fCity}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 2">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} in {{fCountry}}</h2>
-                            <h2 ng-if="cardProfiles.length && $index === 3">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} in other countries</h2>
+                            <h2 ng-if="cardProfiles.length && $index === 3">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} from the rest of the world</h2>
                             <h2 ng-if="cardProfiles.length && $index === 4">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCity}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 5">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCountries}}</h2>
-                            <h2 ng-if="cardProfiles.length && $index === 6">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in others countries</h2>
+                            <h2 ng-if="cardProfiles.length && $index === 6">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> from the rest of the world</h2>
                         </div>
                         <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles track by $index">
                             <a ng-href="/{{cardProfile.profiles.username}}" class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
                                 <div class="card-click-zone">
-                                {{$index}}
                                     <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.cover_picture_cards, 205, 40, 'fill') }})'}">
                                         <div ng-hide="!cardProfile.profiles.profile_picture" class="card-profile-picture"
                                         ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.profile_picture, 60, 60, 'fill') }})'}">
@@ -189,8 +188,8 @@
                                         </div>
                                         <div class="card-profile-skills">
                                             <ul>
-                                                <li ng-repeat="searchSkill in cardProfile.skill">{{searchSkill}}</li>
-                                                <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill}}</li>
+                                                <li ng-repeat="searchSkill in cardProfile.skill">{{searchSkill | cut:true:20:' ...'}}</li>
+                                                <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill | cut:true:20:' ...'}}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -231,15 +230,15 @@
                             <div class="meet-search-found" ng-if="meet.cardProfiles.length === 3">
                                 <h2 ng-if="cardProfiles.length && $index === 0">People from {{fCity}}</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 1">People from {{fCountry}}</h2>
-                                <h2 ng-if="cardProfiles.length && $index === 2">People from everywhere</h2>
+                                <h2 ng-if="cardProfiles.length && $index === 2">People from the rest of the world</h2>
                             </div>
                             <div class="meet-search-found" ng-if="meet.cardProfiles.length === 6">
                                 <h2 ng-if="cardProfiles.length && $index === 0">People looking to {{meet.mHelp}} in {{fCity}}</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 1">People looking to {{meet.mHelp}} in {{fCountry}}</h2>
-                                <h2 ng-if="cardProfiles.length && $index === 2">People looking to {{meet.mHelp}} in others countries</h2>
+                                <h2 ng-if="cardProfiles.length && $index === 2">People looking to {{meet.mHelp}} from the rest of the world</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 3">People from {{fCity}}</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 4">People from {{fCountry}}</h2>
-                                <h2 ng-if="cardProfiles.length && $index === 5">Others</h2>
+                                <h2 ng-if="cardProfiles.length && $index === 5">People from the rest of the world</h2>
                             </div>
                             <div class="meet-body-cards" style="display: inline-block; padding-left: 0; margin-bottom: 20px;" ng-repeat="cardProfile in cardProfiles | limitTo: limit track by $index">
                                 <!-- <h1 style="color: black; width: 1000px" ng-if="meet.cardProfiles.length > 1 && $index === 0 && cardProfiles.length">{{ ::cardProfile}}</h1> -->
@@ -260,7 +259,7 @@
                                             </div>
                                             <div class="card-profile-skills">
                                                 <ul>
-                                                    <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name}}</li>
+                                                    <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name | cut:true:20:' ...'}}</li>
                                                 </ul>
                                             </div>
                                         </div>

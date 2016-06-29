@@ -307,7 +307,9 @@
 
 		.card-profile-skills {
 			text-align: left;
-			margin-top: 8px;
+			height: 42px;
+			margin-top: 2px;
+			overflow: hidden;
 
 			li {
 				display: inline-block;

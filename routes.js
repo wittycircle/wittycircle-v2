@@ -13,6 +13,7 @@ app.get('/users', hasAccess, users.getUsers);
 app.get('/profiles', hasAccess, users.getProfiles);
 app.get('/user/:id', hasAccess, users.getUser);
 app.get('/user/card/profiles', users.getCardProfile);
+app.put('/user/card/profiles', users.getCardProfilePlus);
 app.get('/user/card/profiles/home', users.getCardProfileHome);
 app.get('/user_email/:email', users.getUserbyEmail);
 app.get('/username/:username', users.getUserbyUsername);

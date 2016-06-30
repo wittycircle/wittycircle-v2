@@ -595,7 +595,8 @@
     #meet-body-content .meet-body-container .meet-search-found h2 {
       font-family: 'FreigLight';
       color: black;
-      padding: 45px 20px 45px 16px; }
+      padding: 45px 20px 45px 16px;
+      line-height: 38px; }
 
 /****** Work ******/
 .work-component .wst {

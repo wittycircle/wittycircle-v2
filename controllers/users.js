@@ -13,7 +13,6 @@ exports.getUserShare = function(req, res) {
     else {
         pool.query('SELECT social_share FROM users WHERE id = ?', req.params.user_id,
             function(err, result) {
-                console.log(result[0]);
                 if (err) throw err;
                 if (!result[0].social_share)
                     return res.send({success: false})
@@ -198,6 +197,7 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
+    console.time('Time to find: ');
     pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
         function(err, result) {
             if (err) throw err;
@@ -207,22 +207,37 @@ exports.getCardProfile = function(req, res) {
                     function(err, result2) {
                         if (err) throw err;
                         var arr2 = result2.map( function(el) { return el.id});
-                        var newArray = [];
                         pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
                             function (err, result3) {                                
                                 if (err) throw (err);
-                                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
-                                    function (err, result4) {
-                                        if (err) throw (err);
-                                        newArray = result3.concat(result4);
-                                        pf.sortCardProfile(newArray, function(array) {
-                                            res.send({success: true, data: array});
-                                        });
-                                    });
+                                pf.sortCardProfile(result3, function(array1) {
+                                    console.timeEnd('Time to find: ');
+                                    if (array1[0]) {
+                                        return res.send({success: true, data: array1})
+                                    } else
+                                        return res.send({success: false});
+                                });
                             });
                     });
             }
         });
+};
+
+exports.getCardProfilePlus = function(req, res) {
+    console.time('Time to find: ');
+    if (req.body[0]) {
+        var arr = req.body.map(function(el) { return el.id});
+        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null ORDER BY rand() LIMIT 100', 
+            function (err, result) {
+                if (err) throw (err);
+                pf.sortCardProfile(result, function(array) {
+                    console.timeEnd('Time to find: ');
+                    var newArray = req.body.concat(array);
+                    return res.send({success: true, data: newArray});
+                });
+            });
+    } else
+        res.status(400).send("Error data!");
 };
 
 exports.getCardProfileHome = function(req, res) {
@@ -506,7 +521,6 @@ exports.createUser = function(req, res){
     			       var date = new Date();
     			       console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.body.email);
     			       console.log("response is:");
-    			       console.log(result);
     			   }, function(e) {
     			       // Mandrill returns the error as an object with name and message keys
     			       console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -746,7 +760,6 @@ exports.updateUserCredentials = function(req, res){
         if (!req.body.curentPass) {
             console.log('hi');
         }
-        console.log(req.user.password);
         if (!req.body.currentPass && !req.user.password && req.isAuthenticated()) {
             pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
             function(err, result) {

@@ -110,7 +110,7 @@
                                         <h6>{{cardProfile.location_city}}<i data-ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
                                     </div>
                                     <div class="card-description">
-                                        <p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
+                                        <p ng-bind-html="cardProfile.description | cut:true:56:' ...'"></p>
                                     </div>
                                     <div class="card-profile-skills">
                                         <ul>
@@ -143,9 +143,9 @@
                     </div>
 
                 <div class="meet-search-sal" ng-if="meet.cardProfiles && searchSk && !searchAl">
-                <div class="meet-search-sal-cards" ng-repeat="cardsFound in meet.cardProfiles  track by $index" ng-init="parentIndex = $index">
-                    <div class="meet-search-sal-display" ng-repeat="cardProfiles in cardsFound " style="padding-left: 20px">
-                        <div class="meet-search-found" ng-if="noAl && parentIndex === 0">
+                <div ng-if="$index <= limitSkp" class="meet-search-sal-cards" ng-repeat="cardsFound in meet.cardProfiles track by $index">
+                    <div ng-if="$index <= limitSk" class="meet-search-sal-display" ng-repeat="cardProfiles in cardsFound" style="padding-left: 20px">
+                        <div class="meet-search-found" ng-if="noAl && $parent.$parent.$first">
                             <h2>People skilled in <span ng-repeat="skill in cardProfiles[0]"><span style="border-bottom: 1px solid black">{{skill}}</span><span ng-if="!$last">, </span></span></h2>
                         </div>
                         <div class="meet-search-found" ng-if="!noAl && cardsFound.length === 3">
@@ -167,11 +167,11 @@
                             <h2 ng-if="cardProfiles.length && $index === 2">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} in {{fCountry}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 3">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> looking to {{meet.mHelp}} from the rest of the world</h2>
                             <h2 ng-if="cardProfiles.length && $index === 4">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCity}}</h2>
-                            <h2 ng-if="cardProfiles.length && $index === 5">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCountries}}</h2>
+                            <h2 ng-if="cardProfiles.length && $index === 5">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCountry}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 6">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> from the rest of the world</h2>
                         </div>
-                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles track by $index">
-                            <a ng-href="/{{cardProfile.profiles.username}}" class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
+                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | limitTo: limitSk1 track by $index">
+                            <a ng-href="/{{cardProfile.username}}" class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
                                 <div class="card-click-zone">
                                     <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.cover_picture_cards, 205, 40, 'fill') }})'}">
                                         <div ng-hide="!cardProfile.profiles.profile_picture" class="card-profile-picture"
@@ -189,7 +189,7 @@
                                         <div class="card-profile-skills">
                                             <ul>
                                                 <li ng-repeat="searchSkill in cardProfile.skill">{{searchSkill | cut:true:20:' ...'}}</li>
-                                                <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill | cut:true:20:' ...'}}</li>
+                                                <li ng-repeat="profileSkill in cardProfile.skills track by $index">{{profileSkill | cut:true:20:' ...'}}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -217,7 +217,7 @@
                 </div>
 
                 <div class="meet-search-al" ng-if="meet.cardProfiles && !searchSk && searchAl">
-                    <div class="meet-search-al-cards" ng-repeat="cardProfiles in meet.cardProfiles | limitTo: limit1 track by $index" style="padding-left: 20px">
+                    <div ng-if="$index <= limitAl" class="meet-search-al-cards" ng-repeat="cardProfiles in meet.cardProfiles track by $index" style="padding-left: 20px">
                             <div class="meet-search-found" ng-if="meet.cardProfiles.length === 2">
                                 <!-- <h2>People skilled in <span style="border-bottom: 1px solid black">Javascript</span>, <span style="border-bottom: 1px solid black">Design</span>, <span style="border-bottom: 1px solid black">Social Network Marketing</span> looking to join project in Paris, France</h2> -->
 <!--                                 <h2>People looking to <u>"status"</u> in "city"</h2>
@@ -225,7 +225,7 @@
                                 <h2>People from "country"</h2>
                                 <h2>People from everywhere</h2> -->
                                 <h2 ng-if="cardProfiles.length && $index === 0">People looking to {{meet.mHelp}}</h2>
-                                <h2 ng-if="$index === 1">Others</h2>
+                                <h2 ng-if="$index === 1">People from everywhere</h2>
                             </div>
                             <div class="meet-search-found" ng-if="meet.cardProfiles.length === 3">
                                 <h2 ng-if="cardProfiles.length && $index === 0">People from {{fCity}}</h2>
@@ -240,7 +240,7 @@
                                 <h2 ng-if="cardProfiles.length && $index === 4">People from {{fCountry}}</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 5">People from the rest of the world</h2>
                             </div>
-                            <div class="meet-body-cards" style="display: inline-block; padding-left: 0; margin-bottom: 20px;" ng-repeat="cardProfile in cardProfiles | limitTo: limit track by $index">
+                            <div class="meet-body-cards" style="display: inline-block; padding-left: 0; margin-bottom: 20px;" ng-repeat="cardProfile in cardProfiles | limitTo: limitAl1 track by $index">
                                 <!-- <h1 style="color: black; width: 1000px" ng-if="meet.cardProfiles.length > 1 && $index === 0 && cardProfiles.length">{{ ::cardProfile}}</h1> -->
                                 <a ng-href="/{{cardProfile.username}}" class="meet-body-card profile-card" ng-if="cardProfile.cover_picture_cards">
                                     <div class="card-click-zone">
@@ -335,7 +335,7 @@
                 </section>
             </div>
         </div>
-        <div id="ldmis" class="loader" style="display: block; margin-top: 20px"></div>
+        <div id="ldmis" class="loader" style="display: none; margin-top: 20px"></div>
                 </div>
 
     <script>

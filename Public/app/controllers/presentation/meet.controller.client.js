@@ -7,11 +7,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	var ww = $(window).width();
 
 	/* global var */
-	$scope.limit = 24;
-	$scope.limitc = 24;
-	$scope.limit1 = 1;
-	$scope.limit2 = 1;
-	$scope.limit3 = 1;
+	$scope.limit = 32;
+	$scope.limitc = 32;
 	meet.mmobile = {};
 	meet.mHelp = "Anything";
 	meet.count = -1;
@@ -88,6 +85,13 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			document.getElementById('ldm').style.display = "none";
 	};
 
+	function loaderMore(check) {
+		if (check)
+			document.getElementById('ldmis').style.display = "block";
+		else
+			document.getElementById('ldmis').style.display = "none";
+	};
+
 	function initializeProfile() {
 		Users.getCardProfiles(function(result) {
 			loaderDisplay(false);
@@ -97,8 +101,16 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					meet.followed = res;
 				});
 			}
+			reInitializeProfile();
+			loaderMore(true);
 		});
 	}; initializeProfile();
+
+	function reInitializeProfile() {
+		RetrieveData.ppdData('/user/card/profiles', 'PUT', meet.cardProfiles, false, true).then(function(res) {
+			meet.cardProfiles = res.data;
+		});
+	};
 
 	RetrieveData.getData('/skills', 'GET').then(function(res) {
 		meet.skills = res.skills;
@@ -146,8 +158,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	/*** SECTION SEARCH MEET ***/
 	function searchSkill (name) {
 		meet.skillName = [];
-		meet.cardProfiles = false;
-		loaderDisplay(true);
 
 		if (ww >= 736) {
 			if (document.getElementById('labelNoText')) {
@@ -225,8 +235,6 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	function removeSkill (name) {
 		var index;
-		meet.cardProfiles = false;
-		loaderDisplay(true);
 
 		if (ww >= 736) {
 			var x = document.getElementsByClassName('meet-skill-list');
@@ -370,6 +378,31 @@ $timeout.cancel(shareInterval);
 
 /*** Search Section ***/
 
+function displaySkProfiles(value) {
+	var count = 0;
+	for(var i = 0; i < meet.cardProfiles.length; i++) {
+		for (var n = 0; n < meet.cardProfiles[i].length; n++) {
+			if (!isNaN(meet.cardProfiles[i][n].length))
+				count = count + meet.cardProfiles[i][n].length;
+			if (count > value) {
+				if (value === 32)
+					$scope.limitSk1 = 32;
+				else
+					$scope.limitSk1 = count;
+				$scope.limitSkp = i;
+				$scope.limitSk = n;
+				break ;
+			}
+		}
+		if (count > value)
+			break ;
+	}
+	if (meet.cardProfiles.length === i) {
+		loaderMore(false);
+	}
+};
+
+
 $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (value) {
 	if (value[0] !== "Anything" || value[1] || value[2]) {
 		
@@ -392,6 +425,7 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 			if (value[0] === "Anything" && !value[2] && !value[1])
 				return ;
 			else if (value[0] !== "Anything" || typeof value[2] !== "undefined") {
+				loaderMore(true);
 				$scope.noAl = false;
 				$http.put('/search/users', object).success(function(res) {
 					if (res.success) {
@@ -399,6 +433,8 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 						$scope.searchSk = true;
 						$scope.limit4 = 24;
 						meet.cardProfiles = res.data;
+
+						displaySkProfiles(32);
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
 						// 		meet.followed = res;
@@ -407,13 +443,16 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					}
 				});
 			} else {
+				loaderMore(true);
+				$scope.noAl = true;
 				$http.post('/search/users/skills', object).success(function(res) {
-					$scope.noAl = true;
 					if (res.success) {
 						loaderDisplay(false);
 						$scope.searchSk = true;
 						$scope.limit4 = 24;
 						meet.cardProfiles = [res.data];
+
+						displaySkProfiles(32);
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
 						// 		meet.followed = res;
@@ -423,25 +462,26 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 				});
 			}
 		} else if (value[0] !== "Anything" || value[2]){
+			loaderMore(true);
 			$scope.searchSk = false;
-			// if (value[0] && value[0] !== "Anything") {
-				// $state.transitionTo('meet', {help: value[0]}, { notify: false, inherit: true });
-			//}
-			// $http.post('/search/users/al', object).success(function(res) {
-			// 	if (res.success) {
-			// 		// $scope.searchClicked = true;
-			// 		meet.cardProfiles = res.data;
-			// 	}
-			// 	// if ($rootScope.globals.currentUser) {
-			// 	// 	Profile.getFollowedUser(res, function(res){
-			// 	// 		meet.followed = res;
-			// 	// 	});
-			// 	// }
-			// });
+
 			$http.post('/search/users/al', object).success(function(res) {
                 if (res.success) {
                 	loaderDisplay(false);
                 	$scope.searchAl = true;
+                	for (var i = 0; i < res.data.length; i++) {
+                		if (res.data[i].length > 32) {
+                			$scope.limitAl = i;
+                			$scope.limitAl1 = 32;
+                			break ;
+                		} else {
+                			if (res.data[i + 1].length + res.data[i].length > 32) {
+                				$scope.limitAl = i + 1;
+                				$scope.limitAl1 = res.data[i].length + 32;
+                				break ;
+                			}
+                		}
+                	};
                 	meet.cardProfiles = res.data;
                 }
                 // if ($rootScope.globals.currentUser) {
@@ -474,38 +514,57 @@ $(document).ready(function() {
 			}
 		}
 	});
-	var wait = 1;
+	var wait = 1,
+		first = 0;
 	$(window).scroll(function() {
-        if($(window).scrollTop() > $(document).height() - $(window).height() - 1100) {
+        if($(window).scrollTop() > $(document).height() - $(window).height() - 1400) {
         	$timeout(function() {
         		wait = 0;
         	}, 1000);
         	if (!wait) {
         		wait = 1;
-            	$scope.limit = $scope.limit + 12;
-            	$scope.limitc = $scope.limitc + 12;
-
-            	if (meet.cardProfiles.length > 1) {
-	            	if (meet.cardProfiles[$scope.limit2 - 1].length < $scope.limit3) {
-	            		$scope.limit2 = $scope.limit2 + 1;
-	            		$timeout(function() {$scope.limit3 = 1}, 1000);
-	            	} else {
-	            		if (meet.cardProfiles[$scope.limit2 - 1][$scope.limit3 - 1].length < $scope.limit4) {
-		            		$scope.limit3 += 1;
-		     				$timeout(function() {$scope.limit4 = 24}, 1000);
-		            	} else
-		            		$scope.limit4 += 12;
+        		if (!$scope.searchAl && !$scope.searchSk) {
+	        		$scope.limitc += 12;
+	            	// $scope.limit = $scope.limit + 12;
+	            	if ($scope.limitc > meet.cardProfiles.length) {
+	            		loaderMore(false);
+	            	}
+	            } else if ($scope.searchAl && !$scope.searchSk) {
+	            	$scope.limitAl1 += 12;
+	            	if (meet.cardProfiles[$scope.limitAl].length < $scope.limitAl1) {
+	            		if (meet.cardProfiles[$scope.limitAl + 1]) {
+	            			$scope.limitAl += 1;
+	            		} else {
+	            			loaderMore(false);
+	            		}
 	            	}
 	            } else {
-	            		if (meet.cardProfiles[0][$scope.limit3 - 1]){
-						if	(meet.cardProfiles[0][$scope.limit3 - 1].length < $scope.limit4) {
-		            		$scope.limit3 = $scope.limit3 + 1;
-		     				$timeout(function() {$scope.limit4 = 24}, 1000);
-		     			} else
-	            			$scope.limit4 += 12;
-	            		} else
-	            			$scope.limit4 = 24;
+	            	$scope.limitSk1 += 12;
+	            	var count = 0;
+	            	if ($scope.limitSk1 > 32)
+	            		displaySkProfiles($scope.limitSk1);
 	            }
+      //       	if (meet.cardProfiles.length > 1) {
+	     //        	if (meet.cardProfiles[$scope.limit2 - 1].length < $scope.limit3) {
+	     //        		$scope.limit2 = $scope.limit2 + 1;
+	     //        		$timeout(function() {$scope.limit3 = 1}, 1000);
+	     //        	} else {
+	     //        		if (meet.cardProfiles[$scope.limit2 - 1][$scope.limit3 - 1].length < $scope.limit4) {
+		    //         		$scope.limit3 += 1;
+		    //  				$timeout(function() {$scope.limit4 = 24}, 1000);
+		    //         	} else
+		    //         		$scope.limit4 += 12;
+	     //        	}
+	     //        } else {
+	     //        		if (meet.cardProfiles[0][$scope.limit3 - 1]){
+						// if	(meet.cardProfiles[0][$scope.limit3 - 1].length < $scope.limit4) {
+		    //         		$scope.limit3 = $scope.limit3 + 1;
+		    //  				$timeout(function() {$scope.limit4 = 24}, 1000);
+		    //  			} else
+	     //        			$scope.limit4 += 12;
+	     //        		} else
+	     //        			$scope.limit4 = 24;
+	     //        }
         	}
         }
     });

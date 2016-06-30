@@ -25,7 +25,40 @@ var pf = require('../tools/profile_functions');
 //                             this.average);
 //     }
 // };
-
+function getVotedProject(list, req, callback) {
+    if (req.isAuthenticated()) {
+	pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+		   function(err, result) {
+		       if (err) throw err;
+		       if (result[0]) {
+			   function recursive(index) {
+			       if (result[index]) {
+				   function recursive2(index2) {
+				       if (list[index2]) {
+					   if (list[index2].public_id == result[index].follow_project_public_id) {
+					       list[index2].check_vote = 1;
+					       recursive(index + 1);
+					   } 
+					   else {
+					       recursive2(index2 + 1);
+					   }
+				       } else
+					   recursive(index + 1);
+				       
+				   };
+				   recursive2(0);
+			       } else {
+				   callback(list);
+			       }
+			       
+			   };
+			   recursive(0);
+		       } else
+			   callback(list);
+		   });
+    } else
+	callback(list);
+};
 
 // Check if the element is already in the list
 function checkElement(elem, list, callback) {
@@ -208,7 +241,9 @@ exports.getProjectsBySkill = function(req, res) {
                             removeSameElem(sortList, function(list) {
                                 getProjectTitle(list, function(object) {
                                     tf.sortProjectCard(object, function(content) {
-                                        return content ? res.send({success: true, data: content}) : res.send({success: false});     
+                                        getVotedProject(content, req, function(newData) {
+                                            return newData ? res.send({success: true, data: newData}) : res.send({success: false});
+                                        });     
                                     });
                                 });
                             });
@@ -227,7 +262,9 @@ exports.getProjectsBySkill = function(req, res) {
 exports.getProjectBySkillScl = function(req, res) {
     if (req.body.list) {
         var scl = new search(req.body.list, req.body);
-        return res.send({success: true, data: scl.getSCL()});
+        getVotedProject(scl.getSCL(), req, function(newData) {
+            return res.send({success: true, data: newData});
+        });
     } else
         return res.send({success: false});
 };
@@ -246,15 +283,17 @@ exports.getProjectByHelp = function(req, res) {
                                 tf.sortProjectCard(object, function(content) {
                                     if (content) {
                                         unionArray(content, req.body, listId, function(finalData) {
-                                            if (!req.body.status && !req.body.ctg && !req.body.geo) {
-                                                //console.timeEnd("Time to run :");
-                                                return res.send({success: true, data: finalData});
-                                            }
-                                            else {
-                                                var scl = new search(finalData, req.body);
-                                                //console.timeEnd("Time to run :");
-                                                return res.send({success: true, data: scl.getSCL()});
-                                            }
+                                            getVotedProject(finalData, req, function(newData){
+                                                if (!req.body.status && !req.body.ctg && !req.body.geo) {
+                                                    //console.timeEnd("Time to run :");
+                                                    return res.send({success: true, data: newData});
+                                                }
+                                                else {
+                                                    var scl = new search(newData, req.body);
+                                                    //console.timeEnd("Time to run :");
+                                                    return res.send({success: true, data: scl.getSCL()});
+                                                }
+                                            });
                                         });
                                     }
                                     else
@@ -283,7 +322,9 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
                     tf.sortProjectCard(results, function(content) {
                         var scl = new search(content, req.body);
                         //console.timeEnd("Time to run :");
-                        return res.send({success: true, data: scl.getSCL()});
+                        getVotedProject(scl.getSCL(), req, function(newData){
+                            return res.send({success: true, data: scl.getSCL()});
+                        });
                     });
                 } else
                     return res.send({success: false});

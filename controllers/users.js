@@ -13,7 +13,6 @@ exports.getUserShare = function(req, res) {
     else {
         pool.query('SELECT social_share FROM users WHERE id = ?', req.params.user_id,
             function(err, result) {
-                console.log(result[0]);
                 if (err) throw err;
                 if (!result[0].social_share)
                     return res.send({success: false})
@@ -198,12 +197,31 @@ exports.getUser = function(req, res){
 };
 
 exports.getCardProfile = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC', function (err, results) {
-        if (err) throw (err);
-	pf.sortCardProfile(results, function(array) {
-	    res.send({success: true, data: array});
-	});
-    });
+    pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
+        function(err, result) {
+            if (err) throw err;
+            else {
+                var arr = result.map( function(el) { return el.user_id; })
+                pool.query("SELECT id FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id IN (" + arr + ")) && (DESCRIPTION != '' && DESCRIPTION is not null)",
+                    function(err, result2) {
+                        if (err) throw err;
+                        var arr2 = result2.map( function(el) { return el.id});
+                        var newArray = [];
+                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
+                            function (err, result3) {                                
+                                if (err) throw (err);
+                                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
+                                    function (err, result4) {
+                                        if (err) throw (err);
+                                        newArray = result3.concat(result4);
+                                        pf.sortCardProfile(newArray, function(array) {
+                                            res.send({success: true, data: array});
+                                        });
+                                    });
+                            });
+                    });
+            }
+        });
 };
 
 exports.getCardProfileHome = function(req, res) {
@@ -727,7 +745,6 @@ exports.updateUserCredentials = function(req, res){
         if (!req.body.curentPass) {
             console.log('hi');
         }
-        console.log(req.user.password);
         if (!req.body.currentPass && !req.user.password && req.isAuthenticated()) {
             pool.query('UPDATE `users` SET ? WHERE `id` = ' + req.params.id, newSetting,
             function(err, result) {

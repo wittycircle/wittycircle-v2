@@ -216,18 +216,22 @@ exports.getProjectsDiscover = function(req, res){
                             pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ')',
                                 function (err, results, fields) {
                                     if (err) throw err;
-                                    tf.sortProjectCard(results, function(data) {
-                                        if (!data)
-                                            return res.send({message: 'No projects has been found'});
-                                        else {
-                                            if (req.isAuthenticated()) {
-                                                getVotedProject(data, req, function(newData) {
-                                                    return res.send(newData);
-                                                }); 
-                                            } else
-                                                return res.send(data);
-                                        }
-                                    });
+				    pool.query('SELECT * FROM projects WHERE project_visibility = 1 AND picture_card != "" AND public_id NOT IN (' + arr + ')', function(err, lastR) {
+					if (err) throw err;
+					results = results.concat(lastR);
+					tf.sortProjectCard(results, function(data) {
+                                            if (!data)
+						return res.send({message: 'No projects has been found'});
+                                            else {
+						if (req.isAuthenticated()) {
+                                                    getVotedProject(data, req, function(newData) {
+							return res.send(newData);
+                                                    }); 
+						} else
+                                                    return res.send(data);
+                                            }
+					});
+				    });
                                 });
                         }
                     });
@@ -239,18 +243,22 @@ exports.getProjectsDiscover = function(req, res){
                         pool.query('SELECT * FROM `projects` WHERE project_visibility = 1 AND picture_card != "" AND public_id IN (' + arr + ') ORDER BY field(public_id, ' + arr + ')',
                             function (err, results, fields) {
                                 if (err) throw err;
-                                tf.sortProjectCard(results, function(data) {
-                                    if (!data)
-                                        return res.send({message: 'No projects has been found'});
-                                    else {
-                                        if (req.isAuthenticated()) {
-                                            getVotedProject(data, req, function(newData) {
-                                                return res.send(newData);
-                                            }); 
-                                        } else
-                                            return res.send(data);
-                                    }
-                                });
+				pool.query('SELECT * FROM projects WHERE project_visibility = 1 AND picture_card != "" AND public_id NOT IN (' + arr + ')',function(err, lastR) {
+				    if (err) throw err;
+				    results= results.concat(lastR);
+                                    tf.sortProjectCard(results, function(data) {
+					if (!data)
+                                            return res.send({message: 'No projects has been found'});
+					else {
+                                            if (req.isAuthenticated()) {
+						getVotedProject(data, req, function(newData) {
+                                                    return res.send(newData);
+						}); 
+                                            } else
+						return res.send(data);
+					}
+                                    });
+				});
                             });
                     });
             }

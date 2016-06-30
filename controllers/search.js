@@ -491,6 +491,7 @@ exports.getUserBySkills = function(req, res) {
             };
             return recursive(0);
         } else {
+            return res.send({success: false});
             // return res.send({success: false});
             // function recursive(index) {
             //     if (req.body[index]) {

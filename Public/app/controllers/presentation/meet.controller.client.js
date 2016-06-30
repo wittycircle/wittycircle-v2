@@ -173,12 +173,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 				if (meet.skillList.length == 0) {
 					meet.skillList.push({sName: name});
 					skillListUrl = name;
+					var tempo = meet.cardProfiles;
+					loaderDisplay(true);
 					meet.cardProfiles = false;
 					$http.post('/search/users', meet.skillList).success(function(res) {
 						if (res.success)
 							meet.skillSearch = res.newList;
 						else
-							meet.skillSearch = null;
+							meet.cardProfiles = tempo;
 					});
 					// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 					document.getElementById('input-msa').style.display = "none";
@@ -191,13 +193,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					if (i == meet.skillList.length) {
 						meet.skillList.push({sName: name});
 						skillListUrl = skillListUrl + "," + name;
+						var tempo = meet.cardProfiles;
 						loaderDisplay(true);
 						meet.cardProfiles = false;
 						$http.post('/search/users', meet.skillList).success(function(res) {
 							if (res.success)
 								meet.skillSearch = res.newList;
 							else
-								meet.skillSearch = null;
+								meet.cardProfiles = tempo;
 						});
 						// $state.transitionTo('meet', {skills: skillListUrl}, { notify: false, inherit: true });
 						document.getElementById('input-msa').style.display = "none";
@@ -219,13 +222,14 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					}
 					if (i == meet.skillListM.length) {
 						meet.skillListM.push({sName: name});
+						var tempo = meet.cardProfiles;
 						loaderDisplay(true);
 						meet.cardProfiles = false;
 						$http.post('/search/users', meet.skillListM).success(function(res) {
 							if (res.success)
 								meet.skillSearch = res.newList;
 							else
-								meet.skillSearch = null;
+								meet.cardProfiles = tempo;
 						});
 					}
 				}
@@ -255,9 +259,10 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					if (res.success)
 						meet.skillSearch = res.newList;
 					else
-						meet.skillSearch = null;
+						return ;
 				});
 			} else {
+				$scope.searchSk = false;
 				meet.cardProfiles = [];
 				initializeProfile();
 				meet.skillSearch = null;
@@ -276,9 +281,11 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 					if (res.success)
 						meet.skillSearch = res.newList;
 					else
-						meet.skillSearch = null;
+						return ;
 				});
 			} else {
+				$scope.searchSk = false;
+				meet.cardProfiles = [];
 				initializeProfile();
 				meet.skillSearch = null;
 			}
@@ -380,6 +387,10 @@ $timeout.cancel(shareInterval);
 
 function displaySkProfiles(value) {
 	var count = 0;
+
+	$scope.limitSkp = 0;
+	$scope.limitSk = 0;
+	$scope.limitSk1 = value;
 	for(var i = 0; i < meet.cardProfiles.length; i++) {
 		for (var n = 0; n < meet.cardProfiles[i].length; n++) {
 			if (!isNaN(meet.cardProfiles[i][n].length))
@@ -397,7 +408,10 @@ function displaySkProfiles(value) {
 		if (count > value)
 			break ;
 	}
+
 	if (meet.cardProfiles.length === i) {
+		$scope.limitSkp = 100;
+		$scope.limitSk = 100;
 		loaderMore(false);
 	}
 };

@@ -389,8 +389,13 @@
 										<h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
 									</div>
 									<div class="card-description">
-										<p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
+										<p ng-bind-html="cardProfile.description | cut:true:56:' ...'"></p>
 									</div>
+									<div class="card-profile-skills">
+                                        <ul>
+                                            <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name | cut:true:20:' ...'}}</li>
+                                        </ul>
+                                    </div>
 								</div>
 							</div>
 							<div class="card-follow">
@@ -425,8 +430,13 @@
 										<h6>{{cardProfile.location_city}}<i ng-hide="!cardProfile.location_country">,</i> {{cardProfile.location_country}}</h6>
 									</div>
 									<div class="card-description">
-										<p ng-bind-html="cardProfile.description | cut:true:76:' ...'"></p>
+										<p ng-bind-html="cardProfile.description | cut:true:56:' ...'"></p>
 									</div>
+									<div class="card-profile-skills">
+                                        <ul>
+                                            <li ng-repeat="profileSkill in cardProfile.skills">{{profileSkill.skill_name | cut:true:20:' ...'}}</li>
+                                        </ul>
+                                    </div>
 								</div>
 							</div>
 							<div class="card-follow">

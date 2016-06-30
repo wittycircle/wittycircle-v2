@@ -1,6 +1,6 @@
 
 #header-section {
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	z-index: 101;
 
@@ -763,6 +763,7 @@
 
 	/* Main start project */
 	#header-section {
+		position: absolute;
 		#header-content {
 			padding: 12px 20px 0px 20px;
 			text-align: center;

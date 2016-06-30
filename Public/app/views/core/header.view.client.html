@@ -1,4 +1,4 @@
-<header id="header-section" data-ng-controller="HeaderCtrl" style="position: fixed; transition: linear 2s">
+<header id="header-section" data-ng-controller="HeaderCtrl">
     <section id="header-content" class="cbp-spmenu-push">
         <div id="hsmobile" class="header-searchBar-mobile">
             <figure>
@@ -159,7 +159,7 @@
             <ul class="header-nav-list">
                 <li class="left" ><a href="/discover">Discover</a></li>
                 <li class="normal"><a href="/meet" >Meet</a></li>
-                <li class="normal"><a>Work<sup>soon</sup></a></li>
+                <li class="normal"><a>Learn<sup>soon</sup></a></li>
                 <li class="right" ng-click="goToStart()"><a><strong>Start</strong></a></li>
             </ul>
         </div>
@@ -554,11 +554,11 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if ($(window).scrollTop() > 1 && !check) {
+            if ($(window).scrollTop() > 1 && !check && y >= 736) {
                 check = 1;
                 headerMove(true);
             }
-            if ($(window).scrollTop() === 0 && check === 1) {
+            if ($(window).scrollTop() === 0 && check === 1 && y >= 736) {
                 check = 0;
                 headerMove(false);
             }

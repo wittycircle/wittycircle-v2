@@ -360,7 +360,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* Public API Key */
-    // var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
     // /* Dev API Key */
     // var client  = algolia.Client("YMYOX3976J", "994a1e2982d400f0ab7147549b830e4a");
 

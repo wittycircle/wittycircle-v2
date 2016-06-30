@@ -48,7 +48,6 @@ exports.uploadVideoProject = function(req, res) {
 exports.deleteVideoProject = function(req, res) {
 //    req.checkBody('project_id', 'error message').isInt().min(1).max(128);
     req.checkBody('video_id', 'error message').isString().min(1).max(128);
-    console.log(req.body);
     var errors = req.validationErrors(true);
     if (errors) {
       res.status(400).send(errors);

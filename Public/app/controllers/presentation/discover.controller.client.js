@@ -11,8 +11,8 @@
 angular.module('wittyApp')
 .controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow) {
 
-    // var socket = io.connect('https://www.wittycircle.com');
-    var socket = io.connect('http://127.0.0.1');
+    var socket = io.connect('https://www.wittycircle.com');
+    // var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 

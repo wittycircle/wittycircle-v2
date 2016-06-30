@@ -241,12 +241,23 @@ exports.getCardProfilePlus = function(req, res) {
 };
 
 exports.getCardProfileHome = function(req, res) {
-    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` ORDER BY views DESC LIMIT 4', function (err, results) {
-        if (err) throw (err);
-        pf.sortCardProfile(results, function(array) {
-            res.send({success: true, data: array});
+    pool.query('SELECT count(*) as count, follow_user_id FROM user_followers GROUP BY follow_user_id HAVING count >= 10',
+        function(err, result) {
+            if (err) throw err;
+            var arr = result.map(function(el) { return el.follow_user_id });
+            pool.query('SELECT profile_id FROM users WHERE id IN (' + arr + ')', 
+                function(err, result2) {
+                    if (err) throw err;
+                    var arr2 = result2.map(function(el) { return el.profile_id});
+                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') ORDER BY rand() LIMIT 4',
+                        function (err, results) {
+                            if (err) throw (err);
+                            pf.sortCardProfile(results, function(array) {
+                                res.send({success: true, data: array});
+                            });
+                        });
+                });
         });
-    });
 }
 
 exports.getUserbyEmail = function(req, res){

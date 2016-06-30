@@ -26,39 +26,40 @@ var _  = require('underscore');
 //                             this.average);
 //     }
 // };
-
 function getVotedProject(list, req, callback) {
-    pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
-        function(err, result) {
-            if (err) throw err;
-            if (result[0]) {
-                function recursive(index) {
-                    if (result[index]) {
-                        function recursive2(index2) {
-                            if (list[index2]) {
-                                if (list[index2].public_id == result[index].follow_project_public_id) {
-                                    list[index2].check_vote = 1;
-                                    recursive(index + 1);
-                                } 
-                                else {
-                                    recursive2(index2 + 1);
-                                }
-                            } else
-                                recursive(index + 1);
-
-                        };
-                        recursive2(0);
-                    } else {
-                        callback(list);
-                    }
-
-                };
-                recursive(0);
-            } else
-                callback(list);
-        });
+    if (req.isAuthenticated()) {
+	pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+		   function(err, result) {
+		       if (err) throw err;
+		       if (result[0]) {
+			   function recursive(index) {
+			       if (result[index]) {
+				   function recursive2(index2) {
+				       if (list[index2]) {
+					   if (list[index2].public_id == result[index].follow_project_public_id) {
+					       list[index2].check_vote = 1;
+					       recursive(index + 1);
+					   } 
+					   else {
+					       recursive2(index2 + 1);
+					   }
+				       } else
+					   recursive(index + 1);
+				       
+				   };
+				   recursive2(0);
+			       } else {
+				   callback(list);
+			       }
+			       
+			   };
+			   recursive(0);
+		       } else
+			   callback(list);
+		   });
+    } else
+	callback(list);
 };
-
 
 // Check if the element is already in the list
 function checkElement(elem, list, callback) {

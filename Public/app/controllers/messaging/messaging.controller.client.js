@@ -12,8 +12,8 @@
  	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('http://127.0.0.1');
-	 	// var socket = io.connect('https://www.wittycircle.com/');
+	 	// var socket = io.connect('http://127.0.0.1');
+	 	var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
 	 	var currentUrl = $location.path();
 

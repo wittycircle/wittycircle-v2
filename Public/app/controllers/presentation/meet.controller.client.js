@@ -324,7 +324,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
         setTimeout(function() {
 		if (ww >= 736) {
 			if (!$rootScope.globals.currentUser) {
-
+			    
+			    $(document).unbind('scroll');
 				$(document).scroll(function () {
 					if ($('#meet-body-page')[0]) {
 						var y = $(this).scrollTop();

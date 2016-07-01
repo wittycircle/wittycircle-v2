@@ -651,6 +651,12 @@ a:hover {
 					border: 1px solid #E5E5E5;
 					border-radius: 5px;
 					overflow: hidden;
+
+					.card-tag {
+						  .card-tag-content {
+						  	z-index: 0;
+						  }
+					}						  
 				}
 
 				.profile-slideDown-text {

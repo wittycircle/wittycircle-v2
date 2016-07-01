@@ -17,6 +17,7 @@
                 controller: 'MessageCtrl',
                 link: function(scope, element, attr) {
                     $(document).ready(function() {
+			$('body').unbind('click');
                         $('body').on('click', function(e) {
                             if ($('#project-modal-newMessageArea').css('display') === "block") {
                                 var container = $("#project-modal-newMessageArea");

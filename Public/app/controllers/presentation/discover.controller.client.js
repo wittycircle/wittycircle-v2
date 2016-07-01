@@ -573,7 +573,8 @@ angular.module('wittyApp')
             setTimeout(function() {
             if (ww >= 736) {
                 if (!$rootScope.globals.currentUser) {
-
+		    
+		    $(document).unbind('scroll');
                     $(document).scroll(function () {
                         if ($('#discover-body-page')[0]) {
                             var y = $(this).scrollTop();

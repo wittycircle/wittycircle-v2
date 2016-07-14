@@ -235,9 +235,12 @@
             bodypos     = document.body.style.position,
             bodyover    = document.body.style.overflow;
 
- /*	mixpanel.track_links("#hnl a", "click nav link", {
-		"referrer": document.referrer
-	}); */
+        /*	mixpanel.track_links("#hnl a", "click nav link", {
+        	"referrer": document.referrer
+        }); */
+
+        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+            headerCon.style.position = "fixed";
 
         $(document).ready(function() {
 
@@ -554,13 +557,15 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if ($(window).scrollTop() > 1 && !check && y >= 736) {
-                check = 1;
-                headerMove(true);
-            }
-            if ($(window).scrollTop() === 0 && check === 1 && y >= 736) {
-                check = 0;
-                headerMove(false);
+            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+                if ($(window).scrollTop() > 1 && !check && y >= 736) {
+                    check = 1;
+                    headerMove(true);
+                }
+                if ($(window).scrollTop() === 0 && check === 1 && y >= 736) {
+                    check = 0;
+                    headerMove(false);
+                }
             }
         });
 

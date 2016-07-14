@@ -20,7 +20,6 @@ exports.createPoll = function(req, res) {
 	var already = 0;
         results.forEach(function (key) {
 	    if (key.user_id == req.user.id || req.params.project_creator_id == req.user.id) {
-		console.log(already);
 		if (already == 0) {
 		already = 1;
 		req.body.project_id = req.params.project_id;

@@ -23,7 +23,6 @@ exports.checkExistProfilePicture = function(req, res) {
 		pool.query('SELECT profile_picture FROM profiles WHERE id = ?', req.params.profileId,
 			function(err, result) {
 				if (err) throw err;
-				console.log(result);
 				if (result[0].profile_picture)
 					return res.send({success: false});
 				else
@@ -66,7 +65,7 @@ exports.getRandomCoverPicture = function(req, res) {
 				      function(err, result) {
 			       		  algoliaClient.deleteIndex('Users', function(error) {
 					      if (!err) {
-						  pool.query('SELECT * FROM profiles', function(err, profile_data) {
+						  pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles', function(err, profile_data) {
 					 	      if (err) throw err;
 					 	      People.addObjects(profile_data, function(err, content) {
 							  if (err) throw err;

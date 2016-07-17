@@ -26,7 +26,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     }; checkCredential();
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        console.log($location.path());
         if ($location.path() === "/discover" || $location.path() === "/meet")
             document.getElementById('header-section').style.position = "fixed";
         else {

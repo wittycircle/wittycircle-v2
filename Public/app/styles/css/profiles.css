@@ -479,6 +479,8 @@ a:hover {
       border: 1px solid #E5E5E5;
       border-radius: 5px;
       overflow: hidden; }
+      #profile-slideDown .profile-slideDown-container .profile-slideDown-project .profile-slideDown-article .profile-slideDown-card .card-tag .card-tag-content {
+        z-index: 0; }
     #profile-slideDown .profile-slideDown-container .profile-slideDown-project .profile-slideDown-article .profile-slideDown-text p {
       font-family: 'FreigBook';
       font-size: 15px;

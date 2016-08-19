@@ -182,7 +182,7 @@
 	 	};
 
 	 	$scope.deleteMessage = function() {
-	 		$http.put('/messages', $scope.messages).success(function(res) {
+	 		$http.put('/messages/delete', $scope.messages).success(function(res) {
 	 			$scope.refreshDialogue();
 	 			$state.reload();
 	 		});
@@ -233,7 +233,10 @@
 				            	$('#profile-modal-newMessageArea').hide();
 				            	$('#project-modal-newMessageArea').hide();
 				            	Users.count();
-				            	$scope.refreshDialogue(true);
+				            	$scope.refreshDialogue(modal);
+				            	setTimeout(function() {
+								    $state.reload()
+								}, 1000);
 				            	return ;
 							}
 							Users.count();

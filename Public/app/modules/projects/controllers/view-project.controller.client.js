@@ -172,14 +172,23 @@
             vm.project_followers = project_followersResolve.data;
             vm.followNumber = vm.project_followers.length;
             if (vm.project.main_video) {
+                // vm.config = {
+                //     preload: 'auto',
+                //     sources: [
+                //         {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
+                //     ],
+                //     theme: {
+                //         url: '../../../styles/css/videogular.css'
+                //     },
+                //     plugins: {
+                //         controls: {
+                //             autoHide: true,
+                //             autoHideTime: 2000
+                //         }
+                //     }
+                // };
                 vm.config = {
-                    preload: 'auto',
-                    sources: [
-                        {src: $sce.trustAsResourceUrl(vm.project.main_video), type: 'video/mp4'}
-                    ],
-                    theme: {
-                        url: '../../../styles/css/videogular.css'
-                    },
+                    sources: $sce.trustAsResourceUrl(vm.project.main_video),
                     plugins: {
                         controls: {
                             autoHide: true,
@@ -187,6 +196,8 @@
                         }
                     }
                 };
+
+                console.log(vm.config.sources);
                 if (vm.project.video_poster) {
                     vm.config.plugins.poster = vm.project.video_poster;
                 }

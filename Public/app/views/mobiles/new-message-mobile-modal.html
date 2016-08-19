@@ -45,10 +45,10 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{message.from_username}}</h4>
-							<p>{{message.creation_date}}</p>
 						</div>
 						<div class="messages-texto-text">
-							<p>{{message.message}}</p>
+							<div ng-bind-html="transformHtml(message.message)"></div>
+							<span>{{message.creation_date}}</span>
 						</div>
 					</div>
 				</div>
@@ -60,10 +60,10 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{liveMessage.from_username}}</h4>
-							<p>{{liveMessage.date}}</p>
 						</div>
 						<div class="messages-texto-text">
-							<p>{{liveMessage.message}}</p>
+							<div ng-bind-html="transformHtml(liveMessage.message)"></div>
+							<span>{{liveMessage.date}}</span>
 						</div>
 					</div>
 				</div>
@@ -75,10 +75,10 @@
 					<div class="messages-texto">
 						<div class="messages-texto-name">
 							<h4>{{offMessage.from_username}}</h4>
-							<p>{{offMessage.date}}</p>
 						</div>
 						<div class="messages-texto-text">
-							<p>{{offMessage.message}}</p>
+							<div ng-bind-html="transformHtml(offMessage.message)"></div>
+							<span>{{offMessage.date}</span>
 						</div>
 					</div>
 				</div>

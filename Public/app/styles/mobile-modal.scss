@@ -694,22 +694,35 @@
 								color: #222222;
 							}
 
+						}
+
+						.messages-texto-text {
+							font-family: 'FreigBook';
+							font-size: 15px;
+							line-height: 20px;
+							word-wrap: break-word;
+							margin-bottom: 0;
+
 							p {
+								font-family: 'FreigBook';
+								font-size: 15px;
+								line-height: 20px;
+								word-wrap: break-word;
+								margin-bottom: 0;
+							}
+
+							span {
 								font-family: 'FreigBook';
 								font-size: 14px;
 								color: #999999;
 								margin-bottom: 0;
 							}
-						}
 
-						.messages-texto-text {
-
-							p {
-								font-family: 'FreigBook';
-								font-size: 16px;
-								line-height: 25px;
-								word-wrap: break-word;
-								margin-bottom: 0;
+							.video-container {
+								iframe {
+									width: 220px;
+									height: auto
+								}
 							}
 						}
 					}

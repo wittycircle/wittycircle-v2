@@ -386,8 +386,62 @@ $font-h3: 'Open Sans', sans-serif;
   max-width: 740px;
   padding: 0 2px;
   margin: 0px auto;
+  margin-bottom: 40px;
   background-color: white;
   overflow: hidden;
+
+
+  // Custom VideoJs
+  .video-js {
+    width: 736px;
+    height: 414px;
+    margin: 0 auto;
+
+    .vjs-big-play-button {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top: 45%;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .vjs-control:before {
+      font-size: 2.3em;
+    }
+
+    .vjs-control-bar {
+      height: 4.0em;
+    }
+
+    .vjs-time-control {
+      font-size: 1.3em;
+    }
+
+    .vjs-remaining-time {
+      top: 1px;
+    }
+
+    .vjs-volume-bar {
+      margin: 1.8em 1em;
+    }
+
+    .vjs-volume-menu-button {
+      right: 7px;
+    }
+
+    .vjs-slider {
+      margin-bottom: 2px;
+    }
+
+    .vjs-progress-holder {
+      transition: all 80ms;
+    }
+
+    .vjs-control-bar {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
 
   vg-overlay-play .play {
     font-size: 50px;

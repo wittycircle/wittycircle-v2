@@ -549,17 +549,26 @@
               font-family: 'FreigSem';
               font-size: 16px;
               color: #222222; }
-            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-name p {
+            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text {
               font-family: 'FreigBook';
-              font-size: 14px;
-              color: #999999;
-              margin-bottom: 0; }
-            #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
-              font-family: 'FreigBook';
-              font-size: 16px;
-              line-height: 25px;
+              font-size: 15px;
+              line-height: 20px;
               word-wrap: break-word;
               margin-bottom: 0; }
+              #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text p {
+                font-family: 'FreigBook';
+                font-size: 15px;
+                line-height: 20px;
+                word-wrap: break-word;
+                margin-bottom: 0; }
+              #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text span {
+                font-family: 'FreigBook';
+                font-size: 14px;
+                color: #999999;
+                margin-bottom: 0; }
+              #message-modal-mobile #messages-body-messages-mobile .messages-body-conversation-mobile .messages-body-textos .messages-cb-texto .messages-texto .messages-texto-text .video-container iframe {
+                width: 220px;
+                height: auto; }
 
   .right-to-left-message {
     -webkit-animation: rightToLeft 0.3s;

@@ -1075,7 +1075,15 @@
               color: black;
               max-width: 230px; }
             #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list .messages-list-object .messages-list-text {
-              max-width: 200px; }
+              max-width: 200px;
+              font-family: 'FreigBook';
+              font-size: 14px;
+              word-wrap: break-word;
+              max-height: 40px;
+              overflow: hidden;
+              line-height: 18px;
+              margin-bottom: 0px;
+              margin-top: 4px; }
               #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list .messages-list-object .messages-list-text p {
                 font-family: 'FreigBook';
                 font-size: 14px;
@@ -1083,8 +1091,7 @@
                 max-height: 40px;
                 overflow: hidden;
                 line-height: 18px;
-                margin-bottom: 0px;
-                margin-top: 4px; }
+                margin-bottom: 0px; }
             #messages-body-page-mobile #messages-body-list-mobile .messages-convers-list-mobile .messages-list .messages-list-object span {
               font-family: 'FreigBook';
               font-size: 14px; } }

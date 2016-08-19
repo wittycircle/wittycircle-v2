@@ -129,7 +129,7 @@
 				<h2>No more details yet.</h2>
 			</div>
 			<div class="project-post-video">
-				<videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">
+				<!-- <videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">
 					<vg-media vg-src="vm.config.sources" class="animated fadeIn">
 					</vg-media>
 					<vg-controls ng-if="itsOk == 3" vg-autohide="vm.config.plugins.controls.autoHide" vg-autohide-time="vm.config.plugins.controls.autoHideTime">
@@ -143,12 +143,19 @@
 								<vg-mute-button></vg-mute-button>
 								<vg-volume-bar></vg-volume-bar>
 							</vg-volume>
-							<!--<div class='my-button iconButton'><img src="/images/witty-logo-icon-w.svg" height="20px" width="20px"></div>-->
 							<vg-fullscreen-button></vg-fullscreen-button>
 					</vg-controls>
 					<vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
 					<vg-poster vg-url='vm.config.plugins.poster'></vg-poster>
-				</videogular>
+				</videogular> -->
+
+				<video id="my-video" class="video-js" controls preload="auto" poster="{{vm.config.plugins.poster}}" ng-if="vm.config.sources" data-setup="{}">
+					<source src="{{vm.config.sources}}" type='video/mp4'>
+<!-- 					<source src="MY_VIDEO.webm" type='video/webm'>
+ -->					<p class="vjs-no-js">
+						<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+					</p>
+				</video>
 			</div>
 			<div class="project-post-box">
 				<div class="custom-project-post" ng-bind-html="vm.project.post">
@@ -181,4 +188,5 @@
 			});
 		});
 </script>
+<script src="http://vjs.zencdn.net/5.10.7/video.js"></script>
 </section>

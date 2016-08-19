@@ -363,5 +363,12 @@ angular.module('wittyApp')
 	   return filtered;
        }
    };
-});
+})
+.filter("trustUrl", ['$sce', function ($sce) {
+    return function (recordingUrl) {
+    	console.log(recordingUrl);
+    	return ;
+        return $sce.trustAsResourceUrl(recordingUrl);
+    };
+}]);
 

@@ -154,7 +154,7 @@
 						<h4>{{dialogue.to_username}}</h4>
 					</div>
 					<div class="messages-list-text">
-						<p>{{dialogue.last_message}}</p>
+						<div ng-bind-html="transformHtml(dialogue.last_message)"></div>
 					</div>
 					<span>{{dialogue.date}}</span>
 				</div>

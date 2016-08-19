@@ -1241,6 +1241,18 @@ $font-h3: 'Open Sans', sans-serif;
 
 }
 
+@media only screen and (max-width: 736px) {
+  
+  .project-post-box,
+  .project-post-video {
+    .video-js {
+      width: 100%;
+      height: 250px;
+    }
+  }
+   
+}
+
 @media only screen and (max-width: 320px) {
   
   #feedback_project {
@@ -1259,4 +1271,13 @@ $font-h3: 'Open Sans', sans-serif;
       }
     }
   }
+
+  .project-post-box,
+  .project-post-video {
+    .video-js { 
+      width: 100%;
+      height: 250px;
+    }
+  }
+
 }

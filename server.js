@@ -81,10 +81,13 @@ app.use(passport.session());
 
 app.use(compression());
 
+
 app.use(express.static(__dirname + '/Public/dist/'));
 app.use(express.static(__dirname + '/Public/dist/styles/'));
 app.use(express.static(__dirname + '/Public/dist/scripts/'));
+
 app.use(express.static(__dirname + '/Public/app/'));
+
 // app.use(express.static(__dirname + '/Public/'));
 // app.use(express.static(__dirname + '/Public/app/styles/css'));
 app.engine('html', require('ejs').renderFile);

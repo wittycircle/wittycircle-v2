@@ -197,7 +197,6 @@
                     }
                 };
 
-                console.log(vm.config.sources);
                 if (vm.project.video_poster) {
                     vm.config.plugins.poster = vm.project.video_poster;
                 }
@@ -249,7 +248,6 @@
         }
 
         function voteProjectCard(public_id) {
-            console.log(public_id);
             if (currentUser) {
                 if (!vm.followCheck) {
                     vm.followNumber += 1;

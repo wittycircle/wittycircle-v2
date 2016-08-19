@@ -322,7 +322,7 @@ app.get('*', function(req, res) {
                 //console.log(response);
     	});
     }
-    res.sendFile(__dirname + '/Public/app/index.html');
+    res.sendFile(__dirname + '/Public/dist/index.html');
     //res.cookie('name', 'tobi');
 });
 

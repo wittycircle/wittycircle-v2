@@ -37,12 +37,13 @@ var wittyCircleApp = angular
 	.state('login', {
 		url: '/login',
 		templateUrl : 'modules/login/views/login.view.client.html',
-		controller : 'LoginCtrl'
+		css: 'styles/css/headlog.css'
 	})
-	.state('join', {
-		url: '/join',
+	.state('register', {
+		url: '/register',
 		templateUrl : 'modules/signup/views/signup.view.client.html',
-		controller : 'Signup_modalCtrl'
+		controller : 'Signup_modalCtrl',
+		css: 'styles/css/headlog.css'
 	})
 	.state('discover', {
 		url         : '/discover?pstatus&category&help&skills&loc',
@@ -61,7 +62,11 @@ var wittyCircleApp = angular
 	.state('learn', {
 		url 		: '/learn',
 		templateUrl : 'views/presentation/learn.view.client.html',
-		controller  : 'LearnCtrl',	
+		controller  : 'LearnCtrl',
+	})
+	.state('learn.article', {
+		url 		: '/39550',
+		templateUrl	: 'views/presentation/learn.view.article.client.html'
 	})
 	.state('signup', {
 	    url         : '/signup',

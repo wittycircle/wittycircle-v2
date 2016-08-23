@@ -2,6 +2,10 @@
 
 angular.module('wittyApp')
 	.controller('LearnCtrl',
-		function(/* Module goes here */) {
-			/* Function goes here */
+		function($rootScope, $scope, $location, $http) {
+
+			var currentUser = $rootScope.globals.currentUser || false;
+		    if (!currentUser.moderator)
+		       $location.path('/').replace();
+
 		});

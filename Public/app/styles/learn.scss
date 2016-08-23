@@ -1,0 +1,498 @@
+/****** LEARN *******/
+
+#learn-body-page {
+	height: auto;
+	width: 100%;
+
+	.learn-header {
+		background: linear-gradient(
+				      rgba(0, 0, 0, 0.5), 
+				      rgba(0, 0, 0, 0.5)
+				    ),
+					url('/images/backgrounds/background-footer1-desktop.jpg');
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+		height: 550px;
+
+		.learn-header-title {
+			text-align: center;
+			padding-top: 150px;
+			max-width: 500px;
+			margin: 0 auto;
+
+			h1 {
+				font-family: 'FreigSem';
+				color: white;
+				font-size: 55px;
+			}
+		}
+
+		.learn-header-text {
+			text-align: center;
+			max-width: 500px;
+			margin: 0 auto 10px auto;
+
+			h3 {
+				font-family: 'FreigMed';
+				color: white;
+				line-height: 28px;
+			}
+		}
+
+		.learn-header-tag {
+			text-align: center;
+			max-width: 450px;
+			margin: 0 auto;
+
+			ul {
+				li {
+					display: inline-block;
+					font-family: 'FreigBook';
+					color: white;
+					font-size: 14px;
+					border: 1px solid white;
+					border-radius: 4px;
+					padding: 1px 5px;
+					margin: 4px 3px;
+					cursor: pointer;
+				}
+
+				li:hover {
+					background-color: white;
+					border: 1px solid black;
+					color: black;
+				}
+			}
+		}
+	}
+
+	.learn-corp-article-article {
+		margin-bottom: 25px;
+
+		.lcaahead {
+			margin-bottom: 25px;
+
+			.lcaaheada {
+				display: inline-block;
+
+				.lcaaheadai {
+					display: inline-block;
+					margin-right: 10px;
+
+					img {
+						border-radius: 50%;
+						width: 35px;
+						height: auto;
+					}
+				}
+
+				.lcaaheadan {
+					display: inline-block;
+					vertical-align: middle;
+					
+					h5 {
+						font-family: 'FreigMed';
+						font-size: 16px;
+						color: black;
+					}
+
+					.lcaaheadans {
+						span {
+							font-family: 'FreigBook';
+							font-size: 13px;
+							color: black;
+						}
+					}
+				}
+			}
+
+			.lcaaheadt {
+				display: inline-block;
+				float: right;
+				text-align: right;
+
+				.lcaaheadtt {
+					.di {
+						display: inline-block;
+					}
+
+					ul {
+						margin-right: 10px;
+
+						li {
+							display: inline-block;
+							font-family: 'FreigBook';
+							color: #999999;
+							font-size: 13px;
+							margin-right: 5px;
+						}
+					}
+
+					span {
+						font-family: 'FreigBook';
+						font-size: 14px;
+						margin-right: 15px;
+					}
+
+					.fa-heart {
+						color: rgba(255, 52, 52, 0.9);
+					}
+				}
+
+				.lcaaheadtb {
+					span {
+						font-family: 'FreigBook';
+						font-size: 14px;
+						margin-right: 15px;
+					}
+				}
+			}
+		}
+
+		.lcaadoc {
+			h2 {
+				font-family: 'FreigSem';
+				margin-bottom: 15px;
+
+			}
+			.lcaadocimg {
+				height: 250px;
+				overflow-y: hidden;
+
+				img {
+					width: 100%;
+					height: auto;
+				}
+			}
+
+			h4 {
+				font-family: "FreigMed";
+				font-size: 21px;
+				color: black;
+				padding-left: 50px;
+				margin: 15px 0 20px 0;
+			}
+
+			p {
+				font-family: 'FreigBook';
+				font-size: 19px;
+				color: black;
+				text-indent: 25px;
+			}
+
+			a {
+				font-family: 'FreigMed';
+				color: gray;
+				font-size: 16px;
+			}
+
+			a:hover {
+				color: black;
+			}
+		}
+	}
+
+	.learn-corp-aside {
+		width: 30%;
+		display: inline-block;
+		margin-left: 60px;
+
+		.learn-corp-aside-title {
+			margin-bottom: 45px;
+
+			h2 {
+				padding-left: 20px;
+			}
+		}
+
+		.learn-corp-aside-article {
+			padding-left: 20px;
+			margin-bottom: 20px;
+
+			.lcaaimg {
+				display: inline-block;
+				margin-right: 10px;
+				vertical-align: top;
+
+				img {
+					border-radius: 50%;
+					width: 35px;
+					height: auto;
+				}
+			}
+
+			.lcaainfo {
+				display: inline-block;
+
+				h5 {
+					font-family: 'FreigSem';
+					color: black;
+					font-size: 14px;
+					width: 200px;
+					height: 32px;
+					overflow-y: hidden;
+				}
+
+				.lcaainfon {
+					span {
+						font-family: 'FreigBook';
+						font-size: 14px;
+						margin-right: 15px;
+					}
+
+					.fa-heart {
+						color: rgba(255, 52, 52, 0.9);
+					}
+				}
+
+				.lcaainfot {
+					ul {
+						li {
+							display: inline-block;
+							font-family: 'FreigBook';
+							color: #999999;
+							font-size: 13px;
+							margin-right: 5px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#learn-article-page {
+		width: 1000px;
+		height: auto;
+		margin: 35px auto 35px auto;
+
+
+		h2 {
+			font-family: 'FreigBook';
+			color: black;
+			font-size: 27px;
+		}
+
+		.learn-article {
+			width: 60%;
+			display: inline-block;
+			vertical-align: top;
+
+			.learn-article-header {
+				margin-bottom: 45px;
+
+				h2 {
+					display: inline-block;
+				}
+
+				ul {
+					display: inline-block;
+					float: right;
+					margin-right: 5px;
+
+					li {
+						display: inline-block;
+						margin: 0 6px;
+						cursor: pointer;
+
+						i {
+							width: 32px;
+							height: 32px;
+							border-radius: 50%;
+						}
+
+						.fa-facebook {
+							position: relative;
+							color: white;
+							font-size: 20px;
+							background-color: #3B5998;
+						}
+
+						.fa-facebook:hover {
+							background-color: #2f4779;
+						}
+
+						.fa-facebook:before {
+							position: relative;
+							left: 10px;
+							top: 6px;
+						}
+
+						.fa-twitter {
+							position: relative;
+							color: white;
+							font-size: 20px;
+							background-color: #1dcaff;
+						}
+
+						.fa-twitter:hover {
+							background-color: #1ab5e5;
+						}
+
+						.fa-twitter:before {
+							position: relative;
+							left: 7px;
+							top: 6px;
+						}
+
+						.fa-linkedin {
+							position: relative;
+							color: white;
+							font-size: 20px;
+							background-color: #0076B6;
+						}
+
+						.fa-linkedin:hover {
+							background-color: #005983;
+						}
+
+						.fa-linkedin:before {
+							position: relative;
+							left: 7px;
+							top: 5px;
+						}
+					}
+				}
+			}
+
+			.learn-article-text {
+				margin-bottom: 45px;
+
+				h2 {
+					font-family: 'FreigSem';
+				}
+
+				.learn-article-footer {
+					h4 {
+						display: inline-block;
+						font-family: 'FreigBook';
+						color: #999999;
+						font-size: 18px;
+					}
+
+					h2 {
+						display: inline-block;
+						font-family: 'FreigBook';
+						float: right;
+					}
+
+					.lafcimg {
+						display: inline-block;
+						margin-right: 15px;
+
+						img {
+							border-radius: 50%;
+							width: 35px;
+							height: auto;
+						}
+					}
+
+					.learn-article-footer-comments {
+						margin-top: 45px;
+						margin-bottom: 20px;
+
+						.lafcinfo {
+							display: inline-block;
+							vertical-align: top;
+							max-width: 540px;
+
+							.lafcinfot {
+								margin-bottom: 10px;
+
+								span {
+									font-family: 'FreigBook';
+									font-size: 16px;
+									color: #999999;
+								}
+							}
+
+							.lafcinfob {
+								p {
+									font-family: 'FreigBook';
+									font-size: 17px;
+								}
+							}
+						}
+					}
+				}
+
+				.learn-article-footer-textarea {
+					.lafta {
+						display: inline-block;
+
+						.laftacss {
+							width: 540px;
+						    border: 1px solid #e5e5e5;
+						    border-radius: 4px;
+						    resize: none;
+						    outline: none;
+						    font-family: 'FreigBook';
+						    font-size: 16px;
+						    color: black;
+						    padding: 10px;
+						    height: auto;
+						    min-height: 100px;
+						}
+					}
+
+					.lafbutton {
+						text-align: right;
+						margin-top: 25px;
+						margin-right: 7px;
+					}
+				}
+			}
+		}
+
+		.learn-aside {
+			width: 30%;
+			display: inline-block;
+			margin-left: 60px;
+		}
+	}
+
+
+	.learn-corp {
+		width: 1000px;
+		height: auto;
+		margin: 35px auto 35px auto;
+
+		h2 {
+			font-family: 'FreigBook';
+			color: black;
+			font-size: 27px;
+		}
+
+		.learn-corp-article {
+			width: 60%;
+			display: inline-block;
+			vertical-align: top;
+
+			.learn-corp-article-title {
+				margin-bottom: 45px;
+
+				.lcat {
+					display: inline-block;
+				}
+
+				.lcatl {
+				}
+
+				.lcatr {
+					float: right;
+					margin-top: 4px;
+					h4 {
+						display: inline-block;
+						font-family: 'FreigBook';
+						color: black;
+					}
+
+					img {
+						display: inline-block;
+						margin-left: 2px;
+					}
+				}
+			}
+		}
+	}
+}

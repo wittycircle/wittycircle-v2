@@ -503,7 +503,9 @@
                 hlDrop[0].style.color = "#999999";
                 hff.style.display = "block";
                 hnlog.className = "header-nav-log2";
-            } else if ($(window).scrollTop() === 0) {
+            } else if (location.pathname === "/login" || location.pathname === "/register") {
+                hff.style.display = "none";
+            } else if ($(window).scrollTop() === 0 && (location.pathname !== "/login" && location.pathname !== "/register")) {
                 hcontent.style.backgroundColor = "transparent";
                 hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
                 hnl.className = "header-nav-list";

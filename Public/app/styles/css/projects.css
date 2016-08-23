@@ -871,6 +871,11 @@
     display: none; }
   #feedback_project .mgr-bt-40 {
     margin-bottom: 0 !important; } }
+@media only screen and (max-width: 736px) {
+  .project-post-box .video-js,
+  .project-post-video .video-js {
+    width: 100%;
+    height: 250px; } }
 @media only screen and (max-width: 320px) {
   #feedback_project .pdt-tp-bt-75 {
     padding: 30px 10px 30px 15px; }
@@ -878,6 +883,11 @@
     width: 240px;
     margin: 0 auto; }
   #feedback_project .cards_openings_footer .footer_text {
-    display: none; } }
+    display: none; }
+
+  .project-post-box .video-js,
+  .project-post-video .video-js {
+    width: 100%;
+    height: 250px; } }
 
 /*# sourceMappingURL=projects.css.map */

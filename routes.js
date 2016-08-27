@@ -287,6 +287,7 @@ app.post('/upload/profile/cover', ensureAuth, upload.uploadProfileCover);
 app.post('/upload/profile_pic_icon', ensureAuth, upload.uploadPhotoIcon);
 app.post('/upload/profile/cover_card', ensureAuth, upload.uploadProfileCard);
 app.post('/upload/delete/videos', ensureAuth, upload.deleteVideoProject);
+app.post('/upload/article/picture', ensureAuth, upload.uploadArticlePicture);
 app.get('/image/transformation/resize/:public_id/:width/:height/:crop', upload.resizePhoto);
 /* Redactor */
 app.post('/upload/redactor', upload.redactorImage);
@@ -315,6 +316,10 @@ app.post('/search/users', search.getUserBySkills);
 app.post('/search/users/skills', search.getUserBySkillsOnly);
 
 /* Learn & Articles */
+var learn = require('./controllers/learn');
+app.get('/learn/articles/all', learn.getAllArticle);
+app.post('/learn/articles/id', learn.getSingleArticle);
+app.post('/learn/articles/new', learn.postNewArticle);
 
 app.get('*', function(req, res) {
     if (req.isAuthenticated()) {

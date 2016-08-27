@@ -33,6 +33,7 @@
 				<div class="learn-corp-article-title">
 					<div class="lcatl lcat">
 						<h2>All stories</h2>
+						<a data-ui-sref=".new">Add new article</a>
 					</div>
 
 					<div class='lcatr lcat'>
@@ -41,18 +42,18 @@
 					</div>
 				</div>
 
-				<div class="learn-corp-article-article">
+				<div class="learn-corp-article-article" ng-repeat="article in articles track by $index">
 					<section class="lcaahead">
 						<div class="lcaaheada">
 							<div class="lcaaheadai">
-								<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+								<img ng-src="{{article.profile.profile_picture}}" atl="profile-img">
 							</div>
 
 							<div class="lcaaheadan">
-								<h5>Abigail Stenberg</h5>
+								<h5>{{article.profile.first_name}} {{article.profile.last_name}}</h5>
 								<div class="lcaaheadans">
-									<span>2 days ago</span>
-									<span>5 mins read</span>
+									<span ng-bind="article.creation_date"></span>
+									<span style="margin-left: 5px">{{article.read_time}} mins read</span>
 								</div>
 							</div>
 						</div>
@@ -60,9 +61,7 @@
 						<div class="lcaaheadt">
 							<div class="lcaaheadtt">
 								<ul class="di">
-									<li>#interview</li>
-									<li>#smart</li>
-									<li>#politics</li>
+									<li ng-repeat="tag in article.tags">#{{tag.tag_name}}</li>
 								</ul>
 
 								<span class="di"><i class="fa fa-heart" aria-hidden="true"></i> 64</span>
@@ -75,11 +74,11 @@
 					</section>
 
 					<article class="lcaadoc">
-						<h2>How Donald Trump became smart with this 5 mins tutorial</h2>
-						<div class="lcaadocimg"><img src="/images/backgrounds/background-footer1-desktop.jpg"></div>
-						<h4>"It really takes 5 min no more."</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-						<a data-ui-sref=".article">Read more...</a>
+						<h2 ng-bind="article.title"></h2>
+						<div class="lcaadocimg"><img ng-src="{{article.picture}}"></div>
+						<h4>"It really takes {{article.read_time}} mins no more."</h4>
+						<div class="lcaadoctext" ng-bind-html="article.text"></div>
+						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/id/{{article.article_id}}">Read more...</a>
 					</article>
 				</div>
 			</article>
@@ -151,6 +150,7 @@
 						</div>
 					</div>
 				</div>
+
 			</aside>
 		</div>
 	</div>

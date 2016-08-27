@@ -1,0 +1,48 @@
+<section id="learn-new-page" ng-init="loadRedactor()">
+	<div class="learn-new-head">
+		<h2>New article</h2>
+	</div>
+
+	<div class="learn-new-field" ng-init="loadTime()">
+		<form>
+			<div class="learn-new-field-title lnfm">
+				<label for="ntitle">Title</label>
+				<input type="text" id="ntitle" ng-model="learn.title"/>
+			</div>
+
+			<div class="learn-new-field-picture lnfm">
+				<label>Article Picture</label>
+				<div class="learn-nf-picture-add">
+					<button ngf-select="uploadProfilePicture(learn.picture)" ng-model="learn.picture" ngf-multiple="false" ngf-allow-dir="false"
+		            accept="image/*"
+		            ngf-pattern="'image/*'">Add picture</button>
+				</div>
+				<figure class="learn-imgDisplay">
+					<img ng-if="learn.picture" ng-src="{{learn.picture}}" />
+				</figure>
+			</div>
+
+			<div class="learn-new-field-tag lnfm">
+				<label>Tag</label>
+				<input type="text" ng-model="learn.tags" />
+				<span> Multiple tag separated by comma</span>
+			</div>
+
+			<div class="learn-new-field-time lnfm">
+				<label>Time to read</label>
+				<select ng-model="learn.read_time">
+					<option value="">Select time</option>
+					<option ng-repeat="time in times" value="{{time}}">{{time}} mins</option>
+				</select>
+			</div>
+			
+			<div class="learn-new-field-text lnfm">
+				<textarea redactor ng-model="learn.text"></textarea>
+			</div>
+
+			<div class="learn-new-field-button lnfm">
+				<button ng-click="publishArticle()">Publish article</button>
+			</div>
+		</form>
+	</div>
+</section>

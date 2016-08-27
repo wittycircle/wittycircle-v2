@@ -27,9 +27,9 @@ exports.convertDate = function(date, callback) { // convert default format date 
     else if (gPS > 10 && gPS <= 60)     {d = Math.floor(gPS) + " seconds ago"; callback(d);}
     else if (gPMin >= 1 && gPMin < 2)   {d = Math.floor(gPMin) + " minute ago"; callback(d);}
     else if (gPMin >= 2 && gPMin <= 60) {d = Math.floor(gPMin) + " minutes ago"; callback(d);}
-    else if (gPH >= 1 && gPH <= 2)      {d = Math.floor(gPH) + "  hour ago"; callback(d);}
-    else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + "  hours ago"; callback(d);}
-    else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + "  hours ago"; callback(d);}
+    else if (gPH >= 1 && gPH <= 2)      {d = Math.floor(gPH) + " hour ago"; callback(d);}
+    else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + " hours ago"; callback(d);}
+    else if (gPH >= 1 && gPH < 24)      {d = Math.floor(gPH) + " hours ago"; callback(d);}
     else if (gPD >= 1 && gPD < 2)       {d = "Yesterday"; callback(d);}
     else if (gPD >= 2 && gPD <= 3)      {d = Math.floor(gPD) + " days ago"; callback(d);}
     else if (gPD > 3 && gPD <= 7)       {if (WDay == 0) {d = "Monday"; callback(d);}

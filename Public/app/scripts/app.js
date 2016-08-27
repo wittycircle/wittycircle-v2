@@ -65,8 +65,12 @@ var wittyCircleApp = angular
 		controller  : 'LearnCtrl',
 	})
 	.state('learn.article', {
-		url 		: '/39550',
+		url 		: '/id/:article_id',
 		templateUrl	: 'views/presentation/learn.view.article.client.html'
+	})
+	.state('learn.new', {
+		url 		: '/new',
+		templateUrl : 'views/presentation/learn.add.article.client.html'
 	})
 	.state('signup', {
 	    url         : '/signup',

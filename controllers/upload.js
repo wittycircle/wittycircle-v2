@@ -38,6 +38,12 @@ exports.uploadProfileCard = function(req, res) {
     }, {width: 200, height: 100, crop: "fill", format: "jpg"});
 };
 
+exports.uploadArticlePicture = function(req, res) {
+    cloudinary.uploader.upload(req.body.url, function(result) {
+        res.send(result);
+    }, {width: 600, height: 400, crop: "fill", format: "jpg"});
+};
+
 exports.uploadVideoProject = function(req, res) {
     cloudinary.uploader.upload(req.body.url, function(result) {
 	   res.send(result);

@@ -5,7 +5,7 @@
 
 			<ul data-ng-controller="PopUpCtrl">
 				<li><a href="https://twitter.com/intent/tweet?text=Need help to develop your project? Want to discover cool ideas? Join now &url=https://www.wittycircle.com"><i class="fa fa-twitter" ></i></a></li>
-				<li><i class="fa fa-facebook" ng-click="facebookShare(uArticle.title, lLink, uArticle.picture, uArticle.text)"></i></li>
+				<li><i class="fa fa-facebook" ng-click="facebookShare(uArticle.title, lLink, uArticle.picture, aDes)"></i></li>
 				<li><i class="fa fa-linkedin"></i></li>
 			</ul>
 		</div>
@@ -46,7 +46,7 @@
 					<h2 ng-bind="uArticle.title"></h2>
 					<div class="lcaadocimg"><img ng-src="{{uArticle.picture}}"></div>
 					<h4>"It really takes {{uArticle.read_time}} mins no more."</h4>
-					<div ng-bind-html="uArticle.text"></div>
+					<div id="latext" ng-bind-html="uArticle.text"></div>
 				</article>
 			</div>
 

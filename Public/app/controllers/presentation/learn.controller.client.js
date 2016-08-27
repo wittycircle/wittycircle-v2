@@ -34,6 +34,7 @@ angular.module('wittyApp')
 				$http.post('/learn/articles/id', article).success(function(res) {
 					if (res.success)
 						$scope.uArticle = res.article;
+					$scope.aDes = $(res.article.text).text();
 					$scope.lLink = $location.absUrl();
 				}).error(function(res) {
 					$location.path('/404').replace();

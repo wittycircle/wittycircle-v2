@@ -316,6 +316,7 @@ exports.getProjectByHelp = function(req, res) {
 exports.getProjectsByStatusAndSkill = function(req, res) { 
     //console.time("Time to run :");
     if (req.body) {
+        
         pool.query('SELECT * FROM projects WHERE picture_card IS NOT NULL AND project_visibility = 1 ORDER BY view DESC',
             function(err, results) {
                 if (err) throw err;
@@ -324,14 +325,14 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
                         var scl = new search(content, req.body);
                         //console.timeEnd("Time to run :");
                         getVotedProject(scl.getSCL(), req, function(newData){
-                            return res.send({success: true, data: scl.getSCL()});
+                            return res.send({success: true, data: newData});
                         });
                     });
                 } else
                     return res.send({success: false});
             });
     } else
-        return res.send(404).send("Error params");
+        return res.status(404).send("Error params");
 };
 
 //*** Get all users by skill in meet search
@@ -360,6 +361,8 @@ exports.getProjectsByStatusAndSkill = function(req, res) {
 //     };
 //     recursive(0);
 // };
+
+//*** MEET SEARCH FUNCTION
 
 function autoRunQuery(id, skills, callback) {
     pool.query("SELECT skill_name FROM user_skills WHERE user_id = ?", id, 
@@ -446,7 +449,6 @@ function getListUserSearch(data, callback) {
     }
 };
 
-//*** TEST
 exports.getUserBySkills = function(req, res) {
     pool.query('SELECT * FROM user_skills GROUP BY user_id', function(err, result) {
         if (err) throw err;

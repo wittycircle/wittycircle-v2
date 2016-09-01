@@ -11,8 +11,8 @@
 angular.module('wittyApp')
 .controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow) {
 
-    var socket = io.connect('https://www.wittycircle.com');
-    // var socket = io.connect('http://127.0.0.1');
+    // var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 
@@ -465,6 +465,7 @@ angular.module('wittyApp')
         RetrieveData.ppdData('/search/projects/scl', 'POST', object).then(function(res) {
             if (!res.success) return getDiscoverCard();
             discover.cards = res.data;
+            console.log(discover.cards);
         });
     };
     function searchSkill2(object) {
@@ -513,6 +514,7 @@ angular.module('wittyApp')
     $scope.$watchGroup(['discover.searchStatus', 'discover.searchCtg', 'discover.searchHelp', 'discover.skillSearch', 'searchDL'], function (value) {
         if (value) {
 
+            console.log(value);
             $('#hoho').css('display', 'block');
             $('#haha').css('display', 'none');
 
@@ -521,45 +523,15 @@ angular.module('wittyApp')
                 $('#haha').css('display', 'block');
             }, 500);
 
-            if (value[2] || value[3]) {
-                var object = {
-                    status 	: value[0],
-                    ctg 	: value[1],
-                    list 	: value[3],
-                    geo 	: value[4]
-                };
-                if (value[2]) {
-                    // $state.transitionTo('discover', {help: value[2]}, { notify: false, inherit: true });
-                    return searchHelpF(value[2], object);
-                } else {
-                    if (value[0] || value[1] || value[4]) {
-                        if (!value[3][0]) {
-                            if (value[0]) {
-                               // $state.transitionTo('discover', {pstatus: value[0]}, { notify: false, inherit: true });
-                            }
-                            if (value[1]) {
-                               // $state.transitionTo('discover', {category: value[1]}, { notify: false, inherit: true });
-                            }
-                            return searchScl(object);
-                        }
-                        return searchSkill2(object);
-                    } else {
-                        if (value[3][0]) {
-                            discover.cards = value[3];
-                        }
-                    }
-                }
-            } else {
-                var object = {
-                    status 	: value[0],
-                    ctg 	: value[1],
-                    geo 	: value[4]
-                };
-                if (value[0] || value[1] || value[4]) {
-                    // $state.transitionTo('discover', {pstatus: value[0], category: value[1]}, { notify: false, inherit: true });
-                    return searchScl(object);
-                }
-            }
+            var object = {
+                status 	: value[0] || null,
+                ctg 	: value[1] || null,
+                list 	: value[3] || null,
+                geo 	: value[4] || null
+            };
+
+            if (value[0] || value[1] || value[2] || value[3] || value[4])
+                return searchScl(object);
         }
     });
 })

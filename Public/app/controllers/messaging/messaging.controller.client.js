@@ -18,15 +18,13 @@
 	 	var currentUrl = $location.path();
 
 	 	/* Function vm */
-
-		if ($rootScope.globals.currentUser) {
-	 	    $scope.my_id = $rootScope.globals.currentUser.id;
+	 		$scope.my_id = $rootScope.globals.currentUser.id;
 	 	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
 
-		    /***   DATA ***/
-	            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
-	            $scope.currentUsername = $rootScope.globals.currentUser.username;
-		}
+	    /***   DATA ***/
+            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
+            $scope.currentUsername = $rootScope.globals.currentUser.username;
+
 		$scope.onlineUser = $stateParams.userOn;
 
 	 	$scope.scrollDownMessage = function() {
@@ -333,6 +331,10 @@
 		/*
 		**End Redactor configuration
 		*/
+	} else {
+		if ($location.path() === "/messages") {
+			$location.path('/login').replace();
+		}
 	}
 }).directive('messageModal', function() {
 	var x = $(window).width();

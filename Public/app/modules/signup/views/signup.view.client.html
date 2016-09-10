@@ -56,27 +56,15 @@
 </div>
 <script>
 $(document).ready(function() {
-
-    var hcontent    = document.getElementById('header-content'),
-        hbp         = document.getElementById('hbp'),
-        hnl         = document.getElementById('hnl'),
-        hsb         = document.getElementById('hsb'),
-        notifWI     = document.getElementById('notif-w-i'),
-        notifMI     = document.getElementById('notif-m-i'),
-        hlDrop      = document.getElementsByClassName('header-log-dropdown'),
-        hff         = document.getElementById('header-findField'),
-        hnlog       = document.getElementById('hnlog'),
-        cImg        = document.getElementById('c-img');
-
-    hcontent.style.backgroundColor = "white";
-    hcontent.style.borderBottom = "1px solid #e5e5e5";
-    hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg";
-    hnl.className = "header-nav-list2";
-    hsb.style.height = "48px";
-    notifWI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png";
-    notifMI.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg";
-    cImg.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg";
-    hlDrop[0].style.color = "#999999";
-    hnlog.className = "header-nav-log2";
+    $('#header-content').css("backgroundColor", "white");
+    $('#header-content').css("borderBottom", "1px solid #e5e5e5");
+    $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
+    $('#hnl').attr("class", "header-nav-list2");
+    $('#hsb').css("height", "48px");
+    $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png");
+    $('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg");
+    $('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg");
+    $('.header-log-dropdown').first().css("color", "#999999");
+    $('#hnlog').attr("class", "header-nav-log2");
 });
 </script>

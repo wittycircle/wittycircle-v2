@@ -92,15 +92,15 @@ var wittyCircleApp = angular
 		url: '/setting',
 		templateUrl: 'views/setting/setting.view.client.html',
 		controller: 'SettingCtrl',
-		resolve : {
-			auth: function($q, $rootScope, $stateParams) {
-				if ($rootScope.globals.currentUser.username) {
-					return true;
-				} else {
-					return $q.reject('not authorized');
-				}
-			}
-		}
+		// resolve : {
+		// 	auth: function($q, $rootScope, $stateParams) {
+		// 		if ($rootScope.globals.currentUser.username) {
+		// 			return true;
+		// 		} else {
+		// 			return $q.reject('not authorized');
+		// 		}
+		// 	}
+		// }
 	})
 	.state('messages', {
 		url: '/messages',

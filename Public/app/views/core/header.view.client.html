@@ -239,7 +239,7 @@
         	"referrer": document.referrer
         }); */
 
-        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+        if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
 
         $(document).ready(function() {
@@ -559,7 +559,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if ($(window).scrollTop() > 1 && !check && y >= 736) {
                     check = 1;
                     headerMove(true);

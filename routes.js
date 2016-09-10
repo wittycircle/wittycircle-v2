@@ -306,14 +306,18 @@ app.post('/picture/get/cover', picture.getCoverPicture);
 
 /* Search */
 var search = require('./controllers/search');
-app.post('/search/projects/help/:help', search.getProjectByHelp);
-app.post('/search/projects/skills', search.getProjectsBySkill);
-app.put('/search/projects/skills', search.getProjectBySkillScl);
-app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
+// Meet Search 
 app.post('/search/users/al', search.getUsersByAl);
 app.put('/search/users', search.getUsersBySkillAl);
 app.post('/search/users', search.getUserBySkills);
 app.post('/search/users/skills', search.getUserBySkillsOnly);
+
+// Discover Search
+app.post('/search/projects/help/:help', search.getProjectByHelp);
+app.post('/search/projects/skills', search.getProjectsBySkill);
+app.put('/search/projects/skills', search.getProjectBySkillScl);
+app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
+
 
 /* Learn & Articles */
 var learn = require('./controllers/learn');

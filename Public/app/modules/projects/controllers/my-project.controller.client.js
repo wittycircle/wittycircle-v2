@@ -7,8 +7,12 @@
     .module('wittyProjectModule')
     .controller('MyProjectCtrl', MyProjectCtrl);
 
-    MyProjectCtrl.$inject = ['$rootScope', 'Beauty_encode', '$state', 'myProject_Resolve', 'myProjectFollowed_Resolve', 'myProjectHistory_Resolve'];
-    function MyProjectCtrl ($rootScope, Beauty_encode, $state, myProject_Resolve, myProjectFollowed_Resolve, myProjectHistory_Resolve) {
+    MyProjectCtrl.$inject = ['$rootScope', 'Beauty_encode', '$state', '$location', '$http'];
+    function MyProjectCtrl ($rootScope, Beauty_encode, $state, $location, $http) {
+
+        var currentUser = $rootScope.globals.currentUser || null;
+
+        if (currentUser) {
 
         var vm = this;
 
@@ -19,48 +23,35 @@
         vm.encodeUrl = encodeUrl;
         vm.goToStart = goToStart;
 
-        getMyProject();
-        getProjectFollowed();
-        getProjectHistory();
-
         function encodeUrl (url) {
             url = Beauty_encode.encodeUrl(url);
             return url;
         }
 
-        function goToStart () {
+        function goToStart() {
             $state.go('main', {tagStart: true});
         };
 
-        function getMyProject () {
-            if (myProject_Resolve.status === 200) {
-                vm.myprojects = myProject_Resolve.data;
-            } else {
-                vm.myprojects = false;
+        function getMyProject() {
+            $http.get('/projects/user/' + currentUser.id).success(function(res) {
+                vm.myprojects = res;
+            });
+
+            $http.get('/follow/projects/'+ currentUser.username).success(function(res) {
+                vm.projectFollowed = res;
+            });
+
+            $http.get('/history/project/'+ currentUser.id).success(function(res) {
+                vm.project_history = res;
+            });
+        };
+        getMyProject();
+
+        } else {
+            if($location.path() === "/my-projects") {
+                $location.path('/login').replace();
             }
         }
-
-        // TODO:20 getProjectFollowed not returning user from back
-        function getProjectFollowed () {
-            if (myProjectFollowed_Resolve.status === 200) {
-                if (myProjectFollowed_Resolve.data.data && myProjectFollowed_Resolve.data.data.length === 0) {
-                    vm.projectFollowed = false;
-                } else {
-                    vm.projectFollowed = myProjectFollowed_Resolve.data;
-                }
-            } else {
-                vm.projectFollowed = false;
-            }
-        }
-
-        function getProjectHistory () {
-            if (myProjectHistory_Resolve.status === 200) {
-                vm.project_history = myProjectHistory_Resolve.data;
-            } else {
-                vm.project_history = false;
-            }
-        }
-
 
 
     }

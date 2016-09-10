@@ -18,11 +18,6 @@ height: 700px;
 #bodyCore button {
   padding: 6px 18px 8px 18px; }
 
-.body-main-page, #main-body-content, #main-body2-content, #main-body3-content {
-  opacity: 0;
-  -webkit-animation: startAnim 0.4s forwards;
-  animation: startAnim 0.4s forwards; }
-
 #header-section {
   opacity: 0;
   -webkit-animation: startAnim 0.4s forwards 1s;

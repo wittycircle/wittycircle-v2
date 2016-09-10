@@ -12,21 +12,19 @@
  	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('http://127.0.0.1');
-	 	// var socket = io.connect('https://www.wittycircle.com/');
+	 	// var socket = io.connect('http://127.0.0.1');
+	 	var socket = io.connect('https://www.wittycircle.com/');
 	 	var x = $(window).width();
 	 	var currentUrl = $location.path();
 
 	 	/* Function vm */
-
-		if ($rootScope.globals.currentUser) {
-	 	    $scope.my_id = $rootScope.globals.currentUser.id;
+	 		$scope.my_id = $rootScope.globals.currentUser.id;
 	 	    $scope.backPic = $rootScope.globals.currentUser.profile_cover;
 
-		    /***   DATA ***/
-	            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
-	            $scope.currentUsername = $rootScope.globals.currentUser.username;
-		}
+	    /***   DATA ***/
+            $scope.userOnlineName = $rootScope.globals.currentUser.first_name + ' ' + $rootScope.globals.currentUser.last_name;
+            $scope.currentUsername = $rootScope.globals.currentUser.username;
+
 		$scope.onlineUser = $stateParams.userOn;
 
 	 	$scope.scrollDownMessage = function() {
@@ -333,6 +331,10 @@
 		/*
 		**End Redactor configuration
 		*/
+	} else {
+		if ($location.path() === "/messages") {
+			$location.path('/login').replace();
+		}
 	}
 }).directive('messageModal', function() {
 	var x = $(window).width();

@@ -175,22 +175,6 @@
                          // css
                      ]);
             }],
-            auth: function ($q, $rootScope, $state) {
-              if ($rootScope.globals.currentUser) {
-                return true;
-              } else {
-                return $state.go(main);
-              }
-            },
-            myProject_Resolve: function ($rootScope, Projects) {
-              return Projects.getUserProjectUnresolved($rootScope.globals.currentUser.id);
-            },
-            myProjectFollowed_Resolve: function($rootScope, Project_Follow) {
-              return Project_Follow.getFollowedProjectUnresolved($rootScope.globals.currentUser.username);
-            },
-            myProjectHistory_Resolve: function(Project_History) {
-              return Project_History.getCurrentUserProjectHistoryUnresolved();
-            }
           }
       })
     })

@@ -3,4 +3,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: http://www.example.com/sitemap.xml
+Sitemap: https://www.wittycircle.com/sitemap.xml

@@ -37,7 +37,7 @@
 						</div>
 
 						<div class="lcaaheadtb">
-							<span>27 comments</span>
+							<span>{{uArticle.numCom}} comments</span>
 						</div>
 					</div>
 				</section>
@@ -51,37 +51,37 @@
 			</div>
 
 			<div class="learn-article-footer">
-				<h4>Comments (10)</h4>
+				<h4 style="margin-bottom: 45px">Comments <span ng-if="nome">({{nome}})</span></h4>
 				<a href="learn"><h2>Back to all stories</h2></a>
 
-				<div class="learn-article-footer-comments">
+				<div class="learn-article-footer-comments" ng-repeat="userMessage in userMessages">
 					<div class="lafcimg">
-						<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+						<img ng-src="{{userMessage.profile.profile_picture}}" atl="profile-img">
 					</div>
 
 					<div class="lafcinfo">
 						<div class="lafcinfot">
-							<span style="margin-right: 5px;"><u>Frida Wang</u></span>
-							<span>7 days ago</span>
+							<span style="margin-right: 5px;"><u>{{userMessage.profile.first_name}} {{userMessages.profile.last_name}}</u></span>
+							<span ng-bind="userMessage.creation_date"></span>
 						</div>
 
 						<div class="lafcinfob">
-							<p>Any more details you can share on your page ? Look neat. lsdkflksdkfjsdlfjsdlkfjsdkjfksdjfklsdjfkdsjfkljdslfkjdskfj</p>
+							<p ng-bind="userMessage.message"></p>
 						</div>
 
 					</div>
 				</div>
 
-				<div class="learn-article-footer-textarea">
+				<div ng-if="logUser" class="learn-article-footer-textarea">
 					<div class="lafcimg">
-						<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+						<img src="{{logUser.profile_picture_icon}}" atl="profile-img">
 					</div>
 
 					<div class="lafta">
-						<textarea class="laftacss" placeholder="Enter your comment..."></textarea>
+						<textarea class="laftacss" placeholder="Enter your comment..." ng-model="artcl.message"></textarea>
 					</div>
 					<div class="lafbutton">
-						<button>Post comment</button>
+						<button type="button" ng-click="sendArticleMessage(uArticle)">Post comment</button>
 					</div>
 				</div>
 			</div>

@@ -21,10 +21,22 @@ angular.module('wittyApp')
 		   
 		   
 			var currentUser = $rootScope.globals.currentUser || false;
-		    if (!currentUser.moderator)
-		       $location.path('/').replace();
+			$scope.logUser = currentUser;
 
+		    // if (!currentUser.moderator)
+		    //    $location.path('/').replace();
+
+		    $scope.headTags = ["innovation", "interview", "products", "engineering", "design", "startups", "programming", "entrepreneurship", "politics", "news", "art", "technology", "science", "software", "hardware"];
 			$scope.learn = {};
+			$scope.artcl = {};
+
+			function loadArticleMessages(article_id) {
+				$http.get('/learn/articles/article/messages/' + article_id).success(function(res) {
+					if (res.success)
+						$scope.nome = res.data.length; 
+						$scope.userMessages = res.data;
+				});
+			};
 
 			if ($state.params.article_id) {
 				var article = {
@@ -32,8 +44,10 @@ angular.module('wittyApp')
 				};
 
 				$http.post('/learn/articles/id', article).success(function(res) {
-					if (res.success)
+					if (res.success) {
 						$scope.uArticle = res.article;
+						loadArticleMessages(res.article.id);
+					}
 					$scope.aDes = $(res.article.text).text();
 					$scope.lLink = $location.absUrl();
 				}).error(function(res) {
@@ -49,7 +63,9 @@ angular.module('wittyApp')
 			$scope.loadAllArticles();
 
 			$scope.loadArticle = function(index) {
+				$scope.artcl = {};
 				$scope.uArticle = $scope.articles[index];
+				loadArticleMessages($scope.articles[index].id);
 			};
 
 			$scope.uploadProfilePicture = function(file) {
@@ -76,10 +92,37 @@ angular.module('wittyApp')
 					$http.post('/upload/article/picture', data).success(function(res1) {
 						$scope.learn.picture = res1.secure_url;
 						$http.post('/learn/articles/new', $scope.learn).success(function(res) {
+							if (res.success) {
+								$scope.learn = {};
+								$location.path('/learn').replace();
+							}
 						});
 					});
 				} else
 					$location.path('/').replace();
 			};
 
+			$scope.sendArticleMessage = function(article) {
+				if ($scope.logUser) {
+					$scope.artcl.article_id = article.id;
+					$scope.artcl.user_id 	= currentUser.id;
+					$http.post('/learn/articles/article/message', $scope.artcl).success(function(res) {
+						if (res.success) {
+							$scope.artcl = {};
+							loadArticleMessages($scope.uArticle.id);
+						}
+					});
+				}
+			};
+
+			// SEARCH ARTICLE
+
+			$scope.getArticleByTag = function(tag) {
+				$http.get('/learn/articles/search/tags/' + tag).success(function(res) {
+					if (res.success) {
+						$location.path('/learn').replace();
+						$scope.articles = res.articles;
+					}
+				});
+			};
 		});

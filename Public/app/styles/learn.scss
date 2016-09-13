@@ -42,16 +42,17 @@
 
 		.learn-header-tag {
 			text-align: center;
-			max-width: 450px;
+			max-width: 500px;
 			margin: 0 auto;
 
 			ul {
 				li {
 					display: inline-block;
-					font-family: 'FreigBook';
+					font-family: 'FreigMed';
 					color: white;
-					font-size: 14px;
+					font-size: 16px;
 					border: 1px solid white;
+					opacity: 0.8;
 					border-radius: 4px;
 					padding: 1px 5px;
 					margin: 4px 3px;
@@ -399,7 +400,6 @@
 					}
 
 					.learn-article-footer-comments {
-						margin-top: 45px;
 						margin-bottom: 20px;
 
 						.lafcinfo {

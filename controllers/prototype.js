@@ -18,51 +18,33 @@ SearchUP.prototype  = {
 
     // Meet Search Discover
     getSCL: function() {
-        var firstPart = [],
-            secondPart = [];
+	var firstPart = [], 
+            secondPart = [],
+            thirdPart = [],
+            lastPart = []
 
-        var x,
-            dStatus = this.status,
-            dCategory = this.category,
-            dAbout = this.about,
-            dLocation = this.location;
-
-        if (this.status || this.category || this.about || this.location) {
-            var dLength = this.data.length,
-                dData   = this.data;
-
-            for(var i = 0; i < dLength; i++) {
-                x = dData[i]["location_city"] && dData[i]["location_city"].toLowerCase().indexOf(dLocation);
-
-                if (dData[i]["category_name"] === dCategory)
-                    firstPart.push(dData[i]);
-                else 
-                    secondPart.push(dData[i]);
-            };
-            return [firstPart, secondPart];
-        }
-
-        // for(var i = 0; i < this.data.length; i++) {
-        //     x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(this.location);
-        //     if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category && x >= 0)
-        //         firstPart.unshift(this.data[i]);
-        //     else if (this.data[i]["status"] === this.status && x >= 0)
-        //         firstPart.push(this.data[i]);
-        //     else if (this.data[i]["category_name"] === this.category && x >= 0)
-        //         secondPart.unshift(this.data[i]);
-        //     else if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category)
-        //         secondPart.push(this.data[i]);
-        //     else if (x >= 0)
-        //         thirdPart.unshift(this.data[i]);
-        //     else if (this.data[i]["status"] === this.status)
-        //         thirdPart.push(this.data[i]);
-        //     else if (this.data[i]["category_name"] === this.category)
-        //         lastPart.unshift(this.data[i]);
-        //     else
-        //         lastPart.push(this.data[i]);
-        // };
-        // firstPart = firstPart.concat(secondPart, thirdPart, lastPart);
-        // return firstPart;
+        var x;
+        for(var i = 0; i < this.data.length; i++) {
+             x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(this.location);
+             if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category && x >= 0)
+                 firstPart.unshift(this.data[i]);
+             else if (this.data[i]["status"] === this.status && x >= 0)
+                 firstPart.push(this.data[i]);
+             else if (this.data[i]["category_name"] === this.category && x >= 0)
+                 secondPart.unshift(this.data[i]);
+             else if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category)
+                 secondPart.push(this.data[i]);
+             else if (x >= 0)
+                 thirdPart.unshift(this.data[i]);
+             else if (this.data[i]["status"] === this.status)
+                 thirdPart.push(this.data[i]);
+             else if (this.data[i]["category_name"] === this.category)
+                 lastPart.unshift(this.data[i]);
+             else
+                 lastPart.push(this.data[i]);
+         };
+         firstPart = firstPart.concat(secondPart, thirdPart, lastPart);
+         return firstPart;
     },
 
     // Meet Search Function

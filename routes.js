@@ -322,8 +322,11 @@ app.post('/search/projects/scl', search.getProjectsByStatusAndSkill);
 /* Learn & Articles */
 var learn = require('./controllers/learn');
 app.get('/learn/articles/all', learn.getAllArticle);
+app.get('/learn/articles/article/messages/:id', learn.getArticleMessages);
+app.get('/learn/articles/search/tags/:tag', learn.getArticleByTag);
 app.post('/learn/articles/id', learn.getSingleArticle);
 app.post('/learn/articles/new', learn.postNewArticle);
+app.post('/learn/articles/article/message', learn.postArticleMessage);
 
 app.get('*', function(req, res) {
     if (req.isAuthenticated()) {

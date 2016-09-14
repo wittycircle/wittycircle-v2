@@ -50,7 +50,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -149,7 +149,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     };
 
     $scope.showMessagePageMobile = function() {
-        window.location.href = "https://www.wittycircle.com/messages";
+        window.location.href = "http://127.0.0.1/messages";
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
@@ -168,7 +168,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {

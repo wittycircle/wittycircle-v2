@@ -378,7 +378,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         }
     });
 
-
     /*** Search Bar ***/
     /* API Key */
     var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");

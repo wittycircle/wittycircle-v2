@@ -51,7 +51,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -150,7 +150,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     };
 
     $scope.showMessagePageMobile = function() {
-        window.location.href = "https://www.wittycircle.com/messages";
+        window.location.href = "http://127.0.0.1/messages";
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
@@ -169,7 +169,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {
@@ -221,7 +221,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     });
 
     /*** All notifications ***/
-    $scope.getNotifList = function () {
+    function getNotifList() {
         $scope.notifLists = [];
         if ($rootScope.globals.currentUser) {
             Notification.getNotificationList(function(res) {
@@ -233,31 +233,21 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $scope.checkRead = false;
             });
         }
-    }; $timeout($scope.getNotifList, 2000);
-
-    $scope.getAllRead = function() {
-        if ($rootScope.globals.currentUser) {
-            $http.put('/notification/update/all').success(function(res) {
-                if (res.success) {
-                    $scope.getNotifList();
-                    $scope.checkRead = true;
-                }
-            });
-        }
-    };
+    }; $timeout(getNotifList(), 2000);
 
     function updateNotificationRead(id) {
         $http.put("/notification/update/single", id).success(function(res) {
             if (res.success) {
-                $scope.getNotifList();
+                getNotifList();
             }
         });
     };
 
     function getNotifUser(username) {
+        $scope.notifBubble -= 1;
         $timeout(function() {
             $location.path(username);
-        }, 1500)
+        }, 1000)
     };
 
     function getNotifProject(titleUrl, public_id, state) {
@@ -267,6 +257,17 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             else
                 $location.path("project/" + public_id + "/" + titleUrl + state);
         }, 1500);
+    };
+
+    $scope.getAllRead = function() {
+        if ($rootScope.globals.currentUser) {
+            $http.put('/notification/update/all').success(function(res) {
+                if (res.success) {
+                    getNotifList();
+                    $scope.checkRead = true;
+                }
+            });
+        }
     };
 
     $scope.showUserProfile = function(user_notif_id, user_followed_id, type, project_id, n_id, check_read) {
@@ -343,27 +344,27 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /* follow notification */
     socket.on('follow-notification', function(data) {
-        $scope.getNotifList();
+        getNotifList();
     });
 
     /* view notification */
     socket.on('view-notification', function(data) {
-        $scope.getNotifList();
+        getNotifList();
     });
 
     /* project follow notification */
     socket.on('follow-project-notification', function(data) {
-        $scope.getNotifList();
+        getNotifList();
     });
 
     /* project involve notification */
     socket.on('involve-notification', function(data) {
-        $scope.getNotifList();
+        getNotifList();
     }); 
 
     /* ask project notification */
     socket.on('ask-project-notification', function(data) {
-        $scope.getNotifList();
+        getNotifList();
     });
 
     socket.on('my-follow-users', function(data) {
@@ -371,7 +372,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (data !== $rootScope.globals.currentUser.id) {
                 $http.get("/user_followed/" + data).success(function(res) {
                     if (res.success) {
-                        $scope.getNotifList();
+                        getNotifList();
                     }
                 });
             }
@@ -380,7 +381,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("NW1WO4K4T4", "63fdc08829d41111a970cd948256be71");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');

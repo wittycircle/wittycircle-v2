@@ -224,11 +224,14 @@ exports.getTrendingArticle = function(req, res) {
 		function(err, result) {
 			if (err) throw err;
 			else {
+			    if (result[0]) {
 				var arr = result.map( function(el) { return el.article_id; });
-				var order = "ORDER BY FIELD(id, " + arr + ")";
+				var order = "ORDER BY FIELD(id," + arr + ")";
 				loadArticleParam(req, arr, order, function(articles) {
 					return res.status(200).send({success: true, trendArticles: articles});
 				});
+			    } else
+				return res.status(400).send("NOT FOUND");
 			}
 		});
 };

@@ -12,7 +12,7 @@
  	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('https://www.wittycircle.com');
+	 	var socket = io.connect('http://127.0.0.1');
 	 	var x = $(window).width();
 	 	var currentUrl = $location.path();
 
@@ -175,7 +175,7 @@
 	 	};
 
 	 	$scope.showHomeMobile = function() {
-	 		window.location.href = "https://www.wittycircle.com";
+	 		window.location.href = "http://127.0.0.1";
 	 	};
 
 	 	$scope.deleteMessage = function() {
@@ -222,23 +222,24 @@
 				$scope.socket($scope.createName, $scope.pUser);
 			} else {
 				if ($rootScope.globals.currentUser.id !== $scope.Pi) {	
-				    $http.post('/messages', $scope.infoMessage).success(function(res){
+				    $http.post('/messages', $scope.infoMessage).success(function(res) {
 						if (res.success) {
 							if (modal) {
+								$rootScope.$emit('message-send', true);
 								$('#messages-newpost-modal').hide();
 				            	$('#messages-modal-newMessageArea').hide();
 				            	$('#profile-modal-newMessageArea').hide();
 				            	$('#project-modal-newMessageArea').hide();
 				            	Users.count();
 				            	$scope.refreshDialogue(modal);
-				            	setTimeout(function() {
+				            	$timeout(function() {
 								    $state.reload()
 								}, 1000);
 				            	return ;
 							}
 							Users.count();
 						    $scope.refreshDialogue(true);
-							setTimeout(function() {
+							$timeout(function() {
 							    $state.reload()
 							}, 1500);
 						}

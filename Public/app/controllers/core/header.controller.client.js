@@ -25,8 +25,9 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         }
     }; checkCredential();
 
-    if ($location.path() === "/discover" || $location.path() === "/meet")
-	document.getElementById('header-section').style.position = "fixed";
+    if ($location.path() === "/discover" || $location.path() === "/meet") {
+       document.getElementById('header-section').style.position = "fixed";
+    }
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         if ($location.path() === "/discover" || $location.path() === "/meet")
@@ -50,7 +51,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -149,7 +150,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     };
 
     $scope.showMessagePageMobile = function() {
-        window.location.href = "https://www.wittycircle.com/messages";
+        window.location.href = "http://127.0.0.1/messages";
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
@@ -168,7 +169,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {
@@ -191,7 +192,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $scope.dialogues = data.topic;
             });
         }
-    }; $timeout($scope.getMessageList, 1000);
+    }; $timeout($scope.getMessageList, 2000);
 
     $scope.showMessagePage = function(data) {
         if ($rootScope.globals.currentUser) {
@@ -214,6 +215,11 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         $scope.getMessageList();
     });
 
+    $rootScope.$on('message-send', function(event, data) {
+        if (data)
+            $scope.getMessageList();
+    });
+
     /*** All notifications ***/
     $scope.getNotifList = function () {
         $scope.notifLists = [];
@@ -227,7 +233,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $scope.checkRead = false;
             });
         }
-    }; $timeout($scope.getNotifList, 700);
+    }; $timeout($scope.getNotifList, 2000);
 
     $scope.getAllRead = function() {
         if ($rootScope.globals.currentUser) {
@@ -238,6 +244,29 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 }
             });
         }
+    };
+
+    function updateNotificationRead(id) {
+        $http.put("/notification/update/single", id).success(function(res) {
+            if (res.success) {
+                $scope.getNotifList();
+            }
+        });
+    };
+
+    function getNotifUser(username) {
+        $timeout(function() {
+            $location.path(username);
+        }, 1000)
+    };
+
+    function getNotifProject(titleUrl, public_id, state) {
+        $timeout(function() {
+            if (!state)
+                $location.path("project/" + public_id + "/" + titleUrl);
+            else
+                $location.path("project/" + public_id + "/" + titleUrl + state);
+        }, 1000);
     };
 
     $scope.showUserProfile = function(user_notif_id, user_followed_id, type, project_id, n_id, check_read) {
@@ -255,83 +284,55 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         if (type === "view") {
             Users.getUserbyId(user_notif_id, function(res) {
                 if (res.success) {
-                    if (!check_read) {
-                        $http.put("/notification/update/view", value).success(function(res) {
-                            if (res.success)
-                            $scope.getNotifList();
-                        });
-                    }
-                    $location.path(res.data.username);
+                    if (!check_read)
+                        updateNotificationRead(id);
+                    getNotifUser(res.data.username);
                 }
             });
         }
         if (type === "u_follow") {
             Users.getUserbyId(user_notif_id, function(res) {
-                if (!check_read) {
-                    $http.put('/notification/update/user-follow', value).success(function(res) {
-                        if (res.success)
-                        $scope.getNotifList();
-                    });
-                }
-                $location.path(res.data.username);
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifUser(res.data.username);
             });
         }
         if (type === "p_follow") {
             Users.getUserbyId(user_notif_id, function(res) {
-                if (!check_read) {
-                    $http.put('/notification/update/project-follow', value).success(function(res) {
-                        if (res.success)
-                        $scope.getNotifList();
-                    });
-                }
-                $location.path(res.data.username);
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifUser(res.data.username);
             });
         }
         if (type === "p_user_follow") {
             Projects.getProjectbyId(project_id, function(res) {
                 var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read) {
-                    $http.put("/notification/update/project-follow-by", value).success(function(res) {
-                        if (res.success)
-                        $scope.getNotifList();
-                    });
-                }
-                $location.path("project/" + res[0].public_id + "/" + titleUrl);
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifProject(titleUrl, res[0].public_id, false);
             });
         }
         if (type === "u_user_follow") {
             Users.getUserbyId(user_followed_id, function(res) {
-                if (!check_read) {
-                    $http.put('/notification/update/user-follow-by', value).success(function(res) {
-                        if (res.success)
-                        $scope.getNotifList();
-                    });
-                }
-                $location.path(res.data.username);
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifUser(res.data.username);
             });
         }
         if (type === "p_involve") {
             Projects.getProjectbyId(project_id, function(res) {
                 var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read) {
-                    $http.put('/notification/update/project-involve', id).success(function(res) {
-                        if (res.success)
-                        $scope.getNotifList();
-                    });
-                }
-                $location.path("project/" + res[0].public_id + "/" + titleUrl);
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifProject(titleUrl, res[0].public_id, false);
             });
         }
         if (type === "p_ask" || type === "p_help" || type === "p_reply_ask" || type === "p_reply_help") {
             Projects.getProjectbyId(project_id, function(res) {
                 var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read) {
-                    $http.put('/notification/update/project-ask', id).success(function(res) {
-                        if (res.success)
-                            $scope.getNotifList();
-                    });
-                }
-                $location.path("project/" + res[0].public_id + "/" + titleUrl + "/feedback");
+                if (!check_read)
+                    updateNotificationRead(id);
+                getNotifProject(titleUrl, res[0].public_id, "/feedback")
             });
         }
     };
@@ -379,7 +380,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("AXNUO2UVXP", "ea1f8aaf4f2d8d033917d58a38b519ef");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');
@@ -393,7 +394,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     });
 
     $scope.$watch('searchNameM', function(value) {
-        if (value) {
+        if (value !== undefined) {
             $scope.searchUsersAndProjects(value)
         }
     })

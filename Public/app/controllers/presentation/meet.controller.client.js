@@ -41,7 +41,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -305,14 +305,10 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			showbottomAlert.pop_it();
 		} else {
 			Users.getUserIdByProfileId(id).then(function(data) {
+				meet.followed[index] = meet.followed[index] ? false : true;	
 				if ($rootScope.globals.currentUser.id !== data.userId.id) {
 					Profile.followUser(data.userId.username, function(res) {
-						if (res.success) {
-							if (res.msg === "User followed")
-							meet.followed[index] = true;
-							else
-							meet.followed[index] = false;
-						}
+						return ;	
 					});
 				}
 			});

@@ -22,6 +22,16 @@
 				</figure>
 			</div>
 
+			<div class="learn-new-field-author" style="margin-bottom: 15px;">
+				<label>Author</label>
+				<input id="lnfainput" type="text" ng-model="searchAuthor" />
+				<div class='lnfadropdown'>
+					<ul id="lnfaul">
+						<li ng-repeat="author in authors | filter: searchAuthor | limitTo: 10" ng-click="getAuthorId(author.user_id, author.first_name, author.last_name)"><img ng-src="{{author.profile_picture}}"/> {{author.first_name}} {{author.last_name}}</li>
+					</ul>
+				</div>
+			</div>
+
 			<div class="learn-new-field-tag lnfm">
 				<label>Tag</label>
 				<input type="text" ng-model="learn.tags" />
@@ -37,7 +47,7 @@
 			</div>
 			
 			<div class="learn-new-field-text lnfm">
-				<textarea redactor ng-model="learn.text"></textarea>
+				<textarea ng-model="learn.text" redactor="{buttons: ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'], plugins: ['source', 'imagemanager']}"></textarea>
 			</div>
 
 			<div class="learn-new-field-button lnfm">
@@ -46,3 +56,14 @@
 		</form>
 	</div>
 </section>
+<script>
+	$(document).ready(function() {
+		$('#lnfainput').click(function() {
+			$('.lnfadropdown').slideToggle();
+		});
+
+		$('#lnfaul').click(function() {
+			$('.lnfadropdown').slideUp();
+		});
+	});
+</script>

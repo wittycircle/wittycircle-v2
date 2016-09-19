@@ -27,14 +27,15 @@
         line-height: 28px; }
     #learn-body-page .learn-header .learn-header-tag {
       text-align: center;
-      max-width: 450px;
+      max-width: 500px;
       margin: 0 auto; }
       #learn-body-page .learn-header .learn-header-tag ul li {
         display: inline-block;
-        font-family: 'FreigBook';
+        font-family: 'FreigMed';
         color: white;
-        font-size: 14px;
+        font-size: 16px;
         border: 1px solid white;
+        opacity: 0.8;
         border-radius: 4px;
         padding: 1px 5px;
         margin: 4px 3px;
@@ -85,15 +86,23 @@
           font-family: 'FreigBook';
           font-size: 14px;
           margin-right: 15px; }
-        #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt .fa-heart {
+        #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt .fa-heart-red {
           color: rgba(255, 52, 52, 0.9); }
+        #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt .fa-heart-white {
+          color: #999999; }
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb span {
           font-family: 'FreigBook';
           font-size: 14px;
           margin-right: 15px; }
     #learn-body-page .learn-corp-article-article .lcaadoc h2 {
       font-family: 'FreigSem';
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      cursor: pointer; }
+    #learn-body-page .learn-corp-article-article .lcaadoc h2:hover {
+      text-decoration: underline; }
+    #learn-body-page .learn-corp-article-article .lcaadoc img {
+      max-width: 600px;
+      height: auto; }
     #learn-body-page .learn-corp-article-article .lcaadoc .lcaadocimg {
       height: 350px;
       overflow-y: hidden; }
@@ -150,14 +159,18 @@
           color: black;
           font-size: 14px;
           width: 200px;
-          height: 32px;
+          max-height: 32px;
           overflow-y: hidden; }
+        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo h5:hover {
+          text-decoration: underline; }
         #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon span {
           font-family: 'FreigBook';
           font-size: 14px;
           margin-right: 15px; }
-        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon .fa-heart {
+        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon .fa-heart-red {
           color: rgba(255, 52, 52, 0.9); }
+        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon .fa-heart-white {
+          color: #999999; }
         #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfot ul li {
           display: inline-block;
           font-family: 'FreigBook';
@@ -246,7 +259,6 @@
             width: 35px;
             height: auto; }
         #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer .learn-article-footer-comments {
-          margin-top: 45px;
           margin-bottom: 20px; }
           #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer .learn-article-footer-comments .lafcinfo {
             display: inline-block;
@@ -262,7 +274,8 @@
               font-family: 'FreigBook';
               font-size: 17px; }
         #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafta {
-          display: inline-block; }
+          display: inline-block;
+          vertical-align: top; }
           #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafta .laftacss {
             width: 540px;
             border: 1px solid #e5e5e5;
@@ -320,14 +333,34 @@
           color: white; }
         #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr {
           float: right;
-          margin-top: 4px; }
+          margin-top: 4px;
+          cursor: pointer; }
           #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr h4 {
             display: inline-block;
             font-family: 'FreigBook';
             color: black; }
           #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr img {
             display: inline-block;
-            margin-left: 2px; }
+            margin-left: 2px;
+            -webkit-transition: all 150ms linear;
+            -o-transition: all 150ms linear;
+            -moz-transition: all 150ms linear;
+            -ms-transition: all 150ms linear;
+            -kthtml-transition: all 150ms linear; }
+          #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr .lcatr-dropdown {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px; }
+            #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr .lcatr-dropdown ul {
+              padding: 5px; }
+              #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr .lcatr-dropdown ul li {
+                font-family: 'FreigBook';
+                font-size: 16px;
+                padding: 3px 15px 3px 10px; }
+              #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatr .lcatr-dropdown ul li:hover {
+                background-color: #f5f5f5;
+                border-radius: 4px; }
   #learn-body-page #learn-new-page {
     background-color: #f5f5f5; }
     #learn-body-page #learn-new-page h2 {
@@ -370,6 +403,30 @@
         #learn-body-page #learn-new-page .learn-new-field .learn-new-field-picture .learn-imgDisplay img {
           width: 500px;
           height: auto; }
+      #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author {
+        /*input {
+        	margin-bottom: 15px;
+        }*/ }
+        #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author input {
+          display: block; }
+        #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author .lnfadropdown {
+          display: none;
+          background-color: white;
+          width: 300px; }
+          #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author .lnfadropdown img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            margin-right: 10px; }
+          #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author .lnfadropdown ul {
+            padding: 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px; }
+            #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author .lnfadropdown ul li {
+              padding: 5px 15px;
+              cursor: pointer; }
+            #learn-body-page #learn-new-page .learn-new-field .learn-new-field-author .lnfadropdown ul li:hover {
+              background-color: #e5e5e5; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-text .redactor-editor {
         height: 250px; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button {

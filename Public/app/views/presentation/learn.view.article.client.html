@@ -1,3 +1,18 @@
+<section id="learn-body-page">
+<div class="learn-header">
+	<div class="learn-header-title">
+		<h1>Learn</h1>
+	</div>
+	<div class="learn-header-text">
+		<h3>Ressources, stories, interviews & curated content from our community</h3>
+	</div>
+	<div class="learn-header-tag">
+		<ul>
+			<li ng-repeat="headTag in headTags" ng-click="getArticleByTag(headTag)">#{{headTag}}</li>
+		</ul>
+	</div>
+</div>
+
 <section id="learn-article-page">
 	<div class="learn-article">
 		<div class="learn-article-header">
@@ -33,7 +48,7 @@
 								<li ng-repeat="tag in uArticle.tags">#{{tag.tag_name}}</li>
 							</ul>
 
-							<span class="di"><i class="fa fa-heart" aria-hidden="true"></i> 64</span>
+							<span class="di"><i class="fa fa-heart" ng-class="uArticle.likedArticle ? 'fa-heart-red' : 'fa-heart-white'" ng-click="postSingleLikeArticle(uArticle.id)" aria-hidden="true"></i> {{uArticle.numberOfLike}}</span>
 						</div>
 
 						<div class="lcaaheadtb">
@@ -45,14 +60,13 @@
 				<article class="lcaadoc">
 					<h2 ng-bind="uArticle.title"></h2>
 					<div class="lcaadocimg"><img ng-src="{{uArticle.picture}}"></div>
-					<h4>"It really takes {{uArticle.read_time}} mins no more."</h4>
 					<div id="latext" ng-bind-html="uArticle.text"></div>
 				</article>
 			</div>
 
 			<div class="learn-article-footer">
 				<h4 style="margin-bottom: 45px">Comments <span ng-if="nome">({{nome}})</span></h4>
-				<a href="learn"><h2>Back to all stories</h2></a>
+				<a href="/learn"><h2>Back to all stories</h2></a>
 
 				<div class="learn-article-footer-comments" ng-repeat="userMessage in userMessages">
 					<div class="lafcimg">
@@ -74,17 +88,18 @@
 
 				<div ng-if="logUser" class="learn-article-footer-textarea">
 					<div class="lafcimg">
-						<img src="{{logUser.profile_picture_icon}}" atl="profile-img">
+						<img src="{{logUser.profile_picture_icon}}" alt="profile-img">
 					</div>
 
 					<div class="lafta">
-						<textarea class="laftacss" placeholder="Enter your comment..." ng-model="artcl.message"></textarea>
+						<textarea class="laftacss" placeholder="Enter your comment..." ng-model="artcl.message" ></textarea>
 					</div>
 					<div class="lafbutton">
 						<button type="button" ng-click="sendArticleMessage(uArticle)">Post comment</button>
 					</div>
 				</div>
 			</div>
+
 		</article>
 	</div>
 
@@ -93,16 +108,16 @@
 				<h2>Similar stories</h2>
 			</div>
 
-			<div class="learn-corp-aside-article">
+			<div class="learn-corp-aside-article" ng-repeat="sArticle in sArticles track by $index">
 				<div class="lcaaimg">
-					<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+					<img ng-src="{{sArticle.profile.profile_picture}}" atl="profile-img">
 				</div>
 
 				<div class="lcaainfo">
-					<h5>How I founded a multi billion company with a pend and a ...</h5>
+					<h5 ng-bind="sArticle.title"></h5>
 					<div class="lcaainfon">
-						<span>Sarah Ho</span>
-						<span><i class="fa fa-heart" aria-hidden="true"></i> 24</span>
+						<span>{{sArticle.profile.first_name}} {{sArticle.profile.last_name}}</span>
+						<span><i class="fa fa-heart" ng-class="sArticle.likedArticle ? 'fa-heart-red' : 'fa-heart-white'" ng-click="postSimilarLikeArticle($index, sArticle.id)" aria-hidden="true"></i> {{sArticle.numberOfLike}}</span>
 					</div>
 
 					<div class="lcaainfot">
@@ -114,46 +129,6 @@
 				</div>
 			</div>
 
-			<div class="learn-corp-aside-article">
-				<div class="lcaaimg">
-					<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
-				</div>
-
-				<div class="lcaainfo">
-					<h5>How I founded a multi billion company with a pend and a ...</h5>
-					<div class="lcaainfon">
-						<span>Jean Colmane</span>
-						<span><i class="fa fa-heart" aria-hidden="true"></i> 12</span>
-					</div>
-
-					<div class="lcaainfot">
-						<ul>
-							<li>#business</li>
-							<li>#startups</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<div class="learn-corp-aside-article">
-				<div class="lcaaimg">
-					<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
-				</div>
-
-				<div class="lcaainfo">
-					<h5>How I founded a multi billion company with a pend and a ...</h5>
-					<div class="lcaainfon">
-						<span>Quentin Vrr</span>
-						<span><i class="fa fa-heart" aria-hidden="true"></i> 64</span>
-					</div>
-
-					<div class="lcaainfot">
-						<ul>
-							<li>#business</li>
-							<li>#startups</li>
-						</ul>
-					</div>
-				</div>
-			</div>
 		</aside>
+</section>
 </section>

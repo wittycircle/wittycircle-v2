@@ -11,15 +11,29 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 
 	console.time('loading profile');
 
+	$(document).ready(function() {
+		$('#header-section').css("position", "absolute");
+            $('#header-content').css("backgroundColor", "transparent");
+            $('#header-content').css("borderBottom", "none");
+            $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
+            $('#hnl').attr("class", "header-nav-list");
+            $('#hsb').attr("class", "header-searchBar");
+            $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png");
+        	$('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png");
+        	$('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg");
+            $('.header-log-dropdown').first().css("color", "white");
+            $('#hnlog').attr("class", "header-nav-log");
+        });
+	
 	var profileVm = this;
-	var socket = io.connect('https://www.wittycircle.com');
+	var socket = io.connect('http://127.0.0.1');
 
 	/* Vm Variable */
 	profileVm.currentUser = $rootScope.globals.currentUser || false;
 	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
-        profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
+    profileVm.currentUrl = 'http://127.0.0.1' + $location.path();
 
 	if (profileVm.currentUser && profileVm.currentUser.moderator)
 	    profileVm.moderator = true;
@@ -131,6 +145,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		});
 	};
 
+	function checkHideUser(username) {
+		var array = ["Morgan.Denis", "Hélène.deLépinau"];
+		if (array.indexOf(username) > -1)
+			return false
+		else
+			return true;
+	};
+
 	function init() {
 		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername).then(function(res) {
 			if (res && res[0]) {
@@ -194,16 +216,20 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 					});
 				}
 			    /* SEO */
-			    $scope.$parent.seo = {
-				pageTitle: profileVm.profile.first_name + " " + profileVm.profile.last_name + " | Wittycircle",
-				pageDescription: profileVm.profile.description || "Take a look at " + profileVm.profile.first_name + " " + profileVm.profile.last_name + "'s profile" ,
-			    };
-			    
-			    $scope.$parent.card = {
-				title: profileVm.profile.first_name + " " + profileVm.profile.last_name,
-				url: profileVm.currentUrl,
-				image: $rootScope.resizePic(profileVm.profile.profile_picture, 160, 160, 'fill')
-			    };
+			    var hideUser = $location.path().slice(1);
+
+			    if (checkHideUser(hideUser)) {
+				    $scope.$parent.seo = {
+						pageTitle: profileVm.profile.first_name + " " + profileVm.profile.last_name + " | Wittycircle",
+						pageDescription: profileVm.profile.description || "Take a look at " + profileVm.profile.first_name + " " + profileVm.profile.last_name + "'s profile" ,
+				    };
+				    
+				    $scope.$parent.card = {
+						title: profileVm.profile.first_name + " " + profileVm.profile.last_name,
+						url: profileVm.currentUrl,
+						image: $rootScope.resizePic(profileVm.profile.profile_picture, 160, 160, 'fill')
+				    };
+				}
 			} else {
 				console.log("error");
 				$location.path('/');

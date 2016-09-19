@@ -17,7 +17,7 @@
                 <li class="normal" ><a href="/discover">Discover</a></li>
                 <li class="normal"><a href="/meet" >Meet</a></li>
                 <div class="list-soon">
-                    <li class="normal"><a>Learn<sup>soon</sup></a></li>
+                    <li class="normal"><a href="/learn">Learn<sup>soon</sup></a></li>
                 </div>
                 <div class="strong-start">
                     <li ng-click="goToStart()"><a><strong>Start a project</strong></a></li>
@@ -75,11 +75,11 @@
 
         <nav id="hlon" class="header-log-on" ng-hide="!log">
             <div class="header-notif-mail">
-                <div id="hlogn" class="header-log-notif header-notification" ng-click="getNotifListOnClick()">
+                <div id="hlogn" class="header-log-notif header-notification">
                     <img id="notif-w-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png" alt="notif-waves">
                     <div id="notifBubble" class="header-bubble">{{notifBubble}}</div>
                 </div>
-                <div id="hlogm" class="header-log-mailbox header-notification" ng-click="getMesssageListOnClick()">
+                <div id="hlogm" class="header-log-mailbox header-notification">
                     <img id="notif-m-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png" alt="notif-mailbox">
                     <div id="notifMailbox" class="header-bubble-mailbox">{{numberNotif}}</div>
                 </div>
@@ -170,7 +170,7 @@
                 <h1>Projects</h1>
             </div>
             <div class="header-find-list" ng-repeat="projectHit in projectHits | limitTo : 5" ng-if="projectHit.project_visibility">
-	      <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
+          <a ng-href="/project/{{ projectHit.public_id }}/{{ encodeUrl(projectHit.title) }}">
                 <div ng-if="projectHit.picture_card" class="header-findProject-picture" ng-style="{'background-image': 'url({{ resizePic(projectHit.picture_card, 60, 60, 'fill') }})'}"></div>
                 <div ng-if="!projectHit.picture_card && projectHit.status === 'Idea'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Idea.svg');"></div>
                 <div ng-if="!projectHit.picture_card && projectHit.status === 'Drafted project'" class="header-findProject-picture" style="background-image: url('/images/Thumbnail_Drafted.svg');"></div>
@@ -185,7 +185,7 @@
                         <h3>{{projectHit.category_name}}</h3>
                     </div>
                 </div>
-		</a>
+        </a>
             </div>
             <div class="header-find-seemore">
                 <a href="/discover">See more projects</a>
@@ -235,12 +235,14 @@
             bodypos     = document.body.style.position,
             bodyover    = document.body.style.overflow;
 
-        /*	mixpanel.track_links("#hnl a", "click nav link", {
-        	"referrer": document.referrer
+        /*  mixpanel.track_links("#hnl a", "click nav link", {
+            "referrer": document.referrer
         }); */
 
         if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
+        else
+            headerCon.style.position = "absolute";
 
         $(document).ready(function() {
 
@@ -559,7 +561,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if ($(window).scrollTop() > 1 && !check && y >= 736) {
                     check = 1;
                     headerMove(true);

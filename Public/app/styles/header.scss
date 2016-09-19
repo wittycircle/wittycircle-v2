@@ -604,7 +604,16 @@
 		box-shadow: 0px 5px 10px #999999;
 		overflow: hidden;
 		-webkit-animation-duration: 250ms;
+		-o-animation-duration: 250ms;
 		-moz-animation-duration: 250ms;
+		-ms-animation-duration: 250ms;
+		-kthtml-animation-duration: 250ms;
+		animation-duration: 250ms;
+		-webkit-animation-delay: 200ms;
+		-o-animation-delay: 200ms;
+		-moz-animation-delay: 200ms;
+		-ms-animation-delay: 200ms;
+		-kthtml-animation-delay: 200ms;
 
 		.header-notFound {
 			text-align: center;

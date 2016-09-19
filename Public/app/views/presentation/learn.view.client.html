@@ -23,8 +23,14 @@
 					</div>
 
 					<div class='lcatr lcat'>
-						<h4>most recent</h4>
-						<img src="/images/arrow-down-icon-b.svg" alt="arrow">
+						<h4 id="lcatrh4">{{ a_rank }}</h4>
+						<img id="lcatrddimg" src="/images/arrow-down-icon-b.svg" alt="arrow">
+						<div class="lcatr-dropdown" style="display: none">
+							<ul>
+								<li ng-click="getArticleByRank(1)">most recent</li>
+								<li ng-click="getArticleByRank(2)">most viewed</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
@@ -50,7 +56,7 @@
 									<li ng-repeat="tag in article.tags">#{{tag.tag_name}}</li>
 								</ul>
 
-								<span class="di"><i class="fa fa-heart" aria-hidden="true"></i> 64</span>
+								<span class="di"><i class="fa fa-heart" ng-class="article.likedArticle ? 'fa-heart-red' : 'fa-heart-white'" ng-click="postLikeArticle($index, article.id)" aria-hidden="true"></i> {{article.numberOfLike}}</span>
 							</div>
 
 							<div class="lcaaheadtb">
@@ -60,11 +66,10 @@
 					</section>
 
 					<article class="lcaadoc">
-						<h2 ng-bind="article.title"></h2>
+						<a ng-href="/learn/article/id/{{article.article_id}}"><h2 ng-bind="article.title"></h2></a>
 						<div class="lcaadocimg"><img ng-if="article.picture" ng-src="{{article.picture}}"></div>
-						<h4>"It really takes {{article.read_time}} mins no more."</h4>
 						<div class="lcaadoctext" ng-bind-html="article.text"></div>
-						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/id/{{article.article_id}}">Read more...</a>
+						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/article/id/{{article.article_id}}">Read more...</a>
 					</article>
 				</div>
 			</article>
@@ -74,64 +79,21 @@
 					<h2># trending</h2>
 				</div>
 
-				<div class="learn-corp-aside-article">
+				<div class="learn-corp-aside-article" ng-repeat="tArticle in tArticles track by $index">
 					<div class="lcaaimg">
-						<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+						<img ng-src="{{tArticle.profile.profile_picture}}">
 					</div>
 
 					<div class="lcaainfo">
-						<h5>How I founded a multi billion company with a pend and a ...</h5>
+						<a href="/learn/article/id/{{tArticle.article_id}}"><h5 ng-bind="tArticle.title"></h5></a>
 						<div class="lcaainfon">
-							<span>Sarah Ho</span>
-							<span><i class="fa fa-heart" aria-hidden="true"></i> 24</span>
+							<span>{{tArticle.profile.first_name}} {{tArticle.profile.last_name}}</span>
+							<span><i class="fa fa-heart" ng-class="tArticle.likedArticle ? 'fa-heart-red' : 'fa-heart-white'" ng-click="postLikeTrendingArticle($index, tArticle.id)" aria-hidden="true"></i> {{tArticle.numberOfLike}}</span>
 						</div>
 
 						<div class="lcaainfot">
 							<ul>
-								<li>#business</li>
-								<li>#startups</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="learn-corp-aside-article">
-					<div class="lcaaimg">
-						<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
-					</div>
-
-					<div class="lcaainfo">
-						<h5>How I founded a multi billion company with a pend and a ...</h5>
-						<div class="lcaainfon">
-							<span>Jean Colmane</span>
-							<span><i class="fa fa-heart" aria-hidden="true"></i> 12</span>
-						</div>
-
-						<div class="lcaainfot">
-							<ul>
-								<li>#business</li>
-								<li>#startups</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				<div class="learn-corp-aside-article">
-					<div class="lcaaimg">
-						<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
-					</div>
-
-					<div class="lcaainfo">
-						<h5>How I founded a multi billion company with a pend and a ...</h5>
-						<div class="lcaainfon">
-							<span>Quentin Vrr</span>
-							<span><i class="fa fa-heart" aria-hidden="true"></i> 64</span>
-						</div>
-
-						<div class="lcaainfot">
-							<ul>
-								<li>#business</li>
-								<li>#startups</li>
+								<li ng-repeat="tTag in tArticle.tags">#{{tTag.tag_name}}</li>
 							</ul>
 						</div>
 					</div>
@@ -141,3 +103,16 @@
 		</div>
 	</div>
 </section>
+<script>
+	$(document).ready(function() {
+		$(this).on("click", function(e) {
+			if (e.target.id === "lcatrh4") {
+				$(".lcatr-dropdown").css("display", "block");
+				$("#lcatrddimg").css("transform", "rotate(-180deg)");
+			} else {
+				$(".lcatr-dropdown").css("display", "none");
+				$("#lcatrddimg").css("transform", "rotate(0deg)");
+			}
+		});		
+	});
+</script>

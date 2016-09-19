@@ -320,77 +320,93 @@ exports.getNotifications = function(req, res) {
 
 /*** NOTIFICATION UPDATE READ ***/
 
-exports.updateViewNotification = function(req, res) { // update n_read of view
-	if (req.body.type === "view") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateViewNotification = function(req, res) { // update n_read of view
+// 	if (req.body.type === "view") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateUserFollowNotif = function(req, res) { // update n_read of user follow
-	if (req.body.type === "u_follow") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateUserFollowNotif = function(req, res) { // update n_read of user follow
+// 	if (req.body.type === "u_follow") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateProjectFollowNotif = function(req, res) {
-	if (req.body.type === "p_follow") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?', 
-			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateProjectFollowNotif = function(req, res) {
+// 	if (req.body.type === "p_follow") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?', 
+// 			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateProjectFollowBy = function(req, res) {
-	if (req.body.type === "p_user_follow") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?',
-			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateProjectFollowBy = function(req, res) {
+// 	if (req.body.type === "p_user_follow") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?',
+// 			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateUserFollowBy = function(req, res) {
-	if (req.body.type === "u_user_follow") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && user_followed_id = ? && type_notif = ?',
-			[req.user.id, req.body.notifId, req.body.userFollowId, req.body.type],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateUserFollowBy = function(req, res) {
+// 	if (req.body.type === "u_user_follow") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && user_followed_id = ? && type_notif = ?',
+// 			[req.user.id, req.body.notifId, req.body.userFollowId, req.body.type],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateProjectInvolve = function(req, res) { // update n_read of view
-	if (typeof req.body.id === "number") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
-};
+// exports.updateProjectInvolve = function(req, res) { // update n_read of view
+// 	if (typeof req.body.id === "number") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
 
-exports.updateProjectAsk = function(req, res) {
-	if (typeof req.body.id === "number") {
-		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
-			function(err, result) {
-				if (err) throw err;
-				res.send({success: true});
-			});
-	}
+// exports.updateProjectAsk = function(req, res) {
+// 	if (typeof req.body.id === "number") {
+// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
+// 			function(err, result) {
+// 				if (err) throw err;
+// 				res.send({success: true});
+// 			});
+// 	}
+// };
+
+exports.updateSingleNotif = function(req, res) {
+	/* Validation */
+    req.checkBody('id', 'Error Message').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+    	return res.status(400).send(errors);
+    } else {
+    	pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
+    		function(err, result) {
+    			if (err) throw err;
+    			return res.send({success: true});
+    		});
+    }
 };
 
 exports.updateAllNotif = function(req, res) {

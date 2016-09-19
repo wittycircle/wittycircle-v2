@@ -11,24 +11,24 @@
 angular.module('wittyApp')
 .controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow) {
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 
     /*** Controller As Discover Function ***/
-    discover.opendmodal 	= opendmodal;
-    discover.closemmodal 	= closemmodal;
-    discover.getProject 	= getProject;
-    discover.getCategory 	= getCategory;
-    discover.encodeUrl 		= encodeUrl;
-    discover.getTagCag 		= getTagCag;
-    discover.getHelp		= getHelp;
-    discover.expand  		= expand;
-    discover.searchSkill 	= searchSkill;
-    discover.removeSkill 	= removeSkill;
+    discover.opendmodal     = opendmodal;
+    discover.closemmodal    = closemmodal;
+    discover.getProject     = getProject;
+    discover.getCategory    = getCategory;
+    discover.encodeUrl      = encodeUrl;
+    discover.getTagCag      = getTagCag;
+    discover.getHelp        = getHelp;
+    discover.expand         = expand;
+    discover.searchSkill    = searchSkill;
+    discover.removeSkill    = removeSkill;
     discover.voteProjectCard= voteProjectCard;
 
-    // discover.goToProfile 	= goToProfile;
+    // discover.goToProfile     = goToProfile;
 
     /*** Controller As Discover Variable ***/
     discover.ww = $(window).width();
@@ -60,12 +60,12 @@ angular.module('wittyApp')
     $scope.$parent.seo = {
         pageTitle: "Wittycircle | Discover",
         //pageDescription: "What do you want to discover? Art, Design, Music, Science, Technology, Sport, find projects that fit your favorite categories."
-	pageDescription: "Discover ideas, startups, products and many more awesome projects waiting for your help."
+    pageDescription: "Discover ideas, startups, products and many more awesome projects waiting for your help."
     };
 
     $scope.$parent.card = {
         title: "Wittycircle | Discover",
-        url: "https://www.wittycircle.com/discover",
+        url: "http://127.0.0.1/discover",
         image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Discover.png",
     };
 
@@ -89,7 +89,7 @@ angular.module('wittyApp')
 
         if (discover.ww <= 736) {
             $('body').css('overflow-y', 'hidden');
-            discover.dmobile.modal	= value;
+            discover.dmobile.modal  = value;
             if (value === 1)
             discover.dmobile.headerText = "Show me...";
             if (value === 2)
@@ -99,15 +99,15 @@ angular.module('wittyApp')
             if (value === 4)
             discover.dmobile.headerText = "Someone with specific skills?";
             // if (value === 5)
-            // 	discover.dmobile.headerText = "Show me projects near...";
-            discover.dmobile.general 	= true;
+            //  discover.dmobile.headerText = "Show me projects near...";
+            discover.dmobile.general    = true;
         }
     };
 
     function closemmodal() {
         $('#dmmodal').css("display", "none");
         $('body').css('overflow-y', 'scroll');
-        discover.dmobile.general 	= false;
+        discover.dmobile.general    = false;
     }
 
     /***** DESKTOP *****/
@@ -213,8 +213,8 @@ angular.module('wittyApp')
             }
         }
         if ($stateParams.loc) {
-			$scope.discoverLocation = $stateParams.loc;
-		}
+            $scope.discoverLocation = $stateParams.loc;
+        }
         if ($stateParams.tagParams) {
             discover.searchCtg = $stateParams.tagParams;
             discover.ctgName = $stateParams.tagParams;
@@ -235,19 +235,19 @@ angular.module('wittyApp')
     }
 
     // $scope.$on("$destroy", function(){
-    // 	$scope.skills = 0;
-    // 	var container = $('.custom-popover');
-    // 	if (container.length) {
-    // 		$mdBottomSheet.hide();
-    // 		$('.md-bottom-sheet-backdrop').css('display', 'none')
-    // 		$('#page-wrap').css('display', 'none');
-    // 	}
+    //  $scope.skills = 0;
+    //  var container = $('.custom-popover');
+    //  if (container.length) {
+    //      $mdBottomSheet.hide();
+    //      $('.md-bottom-sheet-backdrop').css('display', 'none')
+    //      $('#page-wrap').css('display', 'none');
+    //  }
     // });
 
     // function goToProfile(id) {
-    // 	Users.getUserIdByProfileId(id).then(function(data) {
-    // 		$location.path('/' + data.userId.username);
-    // 	});
+    //  Users.getUserIdByProfileId(id).then(function(data) {
+    //      $location.path('/' + data.userId.username);
+    //  });
     // };
 
     /*** get project name ***/
@@ -280,16 +280,16 @@ angular.module('wittyApp')
 
     /*** get category name ***/
     function getCategory(cName) {
-        discover.ctgName 		= cName;
-        discover.searchCtg 	= cName;
+        discover.ctgName        = cName;
+        discover.searchCtg  = cName;
         if (discover.ww <= 736)
         discover.closemmodal();
     };
 
     /*** get tag category name ***/
     function getTagCag(tagName) {
-        discover.ctgName 		= tagName;
-        discover.searchCtg 	= tagName;
+        discover.ctgName        = tagName;
+        discover.searchCtg  = tagName;
     };
 
     /*** get help name ***/
@@ -302,16 +302,16 @@ angular.module('wittyApp')
                 document.getElementById('dstext').style.display = "inline-block";
                 document.getElementById('dsdrop1').style.display = "inline-block";
                 // setTimeout(function() {
-                // 	document.getElementById('dsdrop1').style.display = "inline-block";
+                //  document.getElementById('dsdrop1').style.display = "inline-block";
                 // }, 400);
             } else {
                 document.getElementById('dstext').style.display = "none";
                 document.getElementById('dsdrop1').style.display = "none";
             }
-            discover.cHelp	 		= hName;
-            discover.searchHelp 		= hName;
+            discover.cHelp          = hName;
+            discover.searchHelp         = hName;
             if (discover.cHelp === 'Feedback') {
-                discover.skillList 	= [];
+                discover.skillList  = [];
                 if (document.getElementById('labelNoText')) {
                     document.getElementById('labelNoText').id = "labelText";
                     document.getElementById('labelNoText2').id = "labelText2";
@@ -326,8 +326,8 @@ angular.module('wittyApp')
             else
             $scope.displaySk = false;
         } else {
-            discover.cHelp	 		= hName;
-            discover.searchHelp 		= hName;
+            discover.cHelp          = hName;
+            discover.searchHelp         = hName;
         }
     };
 
@@ -398,7 +398,7 @@ angular.module('wittyApp')
                 }
             }
             // if (discover.skillListM.length == 5)
-            // 	discover.fullList = true;
+            //  discover.fullList = true;
 
             RetrieveData.ppdData('/search/projects/skills', 'POST', discover.skillListM).then(function(res) {
                 if (res.success)
@@ -520,8 +520,8 @@ angular.module('wittyApp')
                 $('#hoho').css('display', 'none');
                 $('#haha').css('display', 'block');
             }, 500);
-	    
-	    if (value[2] || value[3]) {
+        
+        if (value[2] || value[3]) {
                 var object = {
                     status : value[0],
                     ctg : value[1],
@@ -573,8 +573,8 @@ angular.module('wittyApp')
             setTimeout(function() {
             if (ww >= 736) {
                 if (!$rootScope.globals.currentUser) {
-		    
-		    $(document).unbind('scroll');
+            
+            $(document).unbind('scroll');
                     $(document).scroll(function () {
                         if ($('#discover-body-page')[0]) {
                             var y = $(this).scrollTop();
@@ -599,7 +599,7 @@ angular.module('wittyApp')
                     $(document).scroll(function() {
                     if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
                     var y = $(this).scrollTop();
-		    
+            
                     if (!unique && y > 350) {
                     unique = 1;
                     $http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {

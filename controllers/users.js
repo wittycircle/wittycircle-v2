@@ -207,7 +207,7 @@ exports.getCardProfile = function(req, res) {
                     function(err, result2) {
                         if (err) throw err;
                         var arr2 = result2.map( function(el) { return el.id});
-                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null ORDER BY rand()', 
+                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null && fake = 0 ORDER BY rand()', 
                             function (err, result3) {                                
                                 if (err) throw (err);
                                 pf.sortCardProfile(result3, function(array1) {
@@ -227,7 +227,7 @@ exports.getCardProfilePlus = function(req, res) {
     console.time('Time to find: ');
     if (req.body[0]) {
         var arr = req.body.map(function(el) { return el.id});
-        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null ORDER BY rand() LIMIT 100', 
+        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null && fake = 0 ORDER BY rand() LIMIT 100', 
             function (err, result) {
                 if (err) throw (err);
                 pf.sortCardProfile(result, function(array) {
@@ -249,7 +249,7 @@ exports.getCardProfileHome = function(req, res) {
                 function(err, result2) {
                     if (err) throw err;
                     var arr2 = result2.map(function(el) { return el.profile_id});
-                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') ORDER BY rand() LIMIT 4',
+                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && fake = 0 ORDER BY rand() LIMIT 4',
                         function (err, results) {
                             if (err) throw (err);
                             pf.sortCardProfile(results, function(array) {

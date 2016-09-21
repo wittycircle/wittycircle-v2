@@ -66,14 +66,16 @@ SearchUP.prototype  = {
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-                x = this.data[i].profiles["location_city"] && this.data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
-                y = this.data[i].profiles["location_country"] && this.data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);                
-                if (x >= 0 && x !== null)
-                    firstPart.push(this.data[i])
-                else if (y >= 0 && y !== null)
-                    secondPart.push(this.data[i])
-                else
-                    thirdPart.push(this.data[i]);
+		if (this.data[i].profiles) {
+                    x = this.data[i].profiles["location_city"] && this.data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
+                    y = this.data[i].profiles["location_country"] && this.data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);                
+                    if (x >= 0 && x !== null)
+			firstPart.push(this.data[i])
+                    else if (y >= 0 && y !== null)
+			secondPart.push(this.data[i])
+                    else
+			thirdPart.push(this.data[i]);
+		}
             };
             return [firstPart, secondPart, thirdPart];
 

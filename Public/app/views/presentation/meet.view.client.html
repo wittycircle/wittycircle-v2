@@ -97,7 +97,7 @@
                         <h4>Browse <span>the users below</span> or filter them using our magic tool above.</h4>
                     </div>
                     <div class="meet-body-cards" ng-if="meet.cardProfiles && !searchSk && !searchAl">
-                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: limitc" ng-if="cardProfile.cover_picture_cards">
+                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
                             <a ng-href="/{{cardProfile.username}}" class="card-click-zone">
                                 <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
                                     <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"

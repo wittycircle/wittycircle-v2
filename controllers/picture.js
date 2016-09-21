@@ -65,7 +65,7 @@ exports.getRandomCoverPicture = function(req, res) {
 				      function(err, result) {
 			       		  algoliaClient.deleteIndex('Users', function(error) {
 					      if (!err) {
-						  pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id NOT IN ("1463", "1465", "1466", "1467", "1468", "1469", "1470", "1471", "1472", "1473", "1475", "1476", "1477", "1478", "1479", "1480", "1481", "1482", "1483", "1484", "1485", "1486", "1487", "1488", "1489", "1490", "1491", "1492", "1493", "1494")', function(err, profile_data) {
+						  pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id NOT IN ("1463", "1465", "1466", "1467", "1468", "1469", "1470", "1471", "1472", "1473", "1475", "1476", "1477", "1478", "1479", "1480", "1481", "1482", "1483", "1484", "1485", "1486", "1487", "1488", "1489", "1490", "1491", "1492", "1493", "1494", "1495", "1496", "1497", "1498", "1499", "1500", "1501", "1502", "1503", "1504", "1505", "1506", "1508", "1509", "1510", "1511", "1512", "1513", "1514", "1515", "1516", "1518", "1519", "1520", "1521", "1522", "1523", "1524", "1525", "1526", "1527", "1528", "1529", "1530", "1531", "1532", "1533", "1534", "1535", "1536")', function(err, profile_data) {
 					 	      if (err) throw err;
 					 	      People.addObjects(profile_data, function(err, content) {
 							  if (err) throw err;

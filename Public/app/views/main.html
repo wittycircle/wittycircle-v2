@@ -375,7 +375,7 @@
 						</div>
 					</div>
 					<main-body3 class="main-body3-body" data="main">
-						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index">
+						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index" ng-if="!cardProfile.fake">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
 									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->

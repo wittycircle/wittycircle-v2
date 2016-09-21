@@ -57,6 +57,7 @@ exports.sortCardProfileNew = function(data, callback) {
 		    		newCardProfile.push(data[index]);
 		    		return recursive(index + 1);
 		    	}
+			if (data[index].profiles) {
 				pool.query('SELECT count(*) as followers FROM user_followers WHERE follow_user_id IN (SELECT id FROM users WHERE profile_id = ?)', data[index].profiles.id,
 				    function(err, followers) {
 				        if (err) throw err;
@@ -85,6 +86,8 @@ exports.sortCardProfileNew = function(data, callback) {
 								});
 						});
 				});
+			} else 
+			    return recursive(index + 1);
 		    } else { 
 				return callback(newCardProfile);
 		    }

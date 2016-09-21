@@ -10,20 +10,31 @@
 angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$modal , $state, $timeout, $cookieStore, Authentication, Upload, $http, $location, $scope, Profile, $rootScope, $stateParams, Experiences, Users, Skills, Interests, Locations, Projects, showbottomAlert, RetrieveData) {
 
 	console.time('loading profile');
+	var y           = $(window).width();
 
 	$(document).ready(function() {
-		$('#header-section').css("position", "absolute");
-            $('#header-content').css("backgroundColor", "transparent");
+		if (y >= 736) {
+			$('#header-section').css("position", "absolute");
+	        $('#header-content').css("backgroundColor", "transparent");
+	        $('#header-content').css("borderBottom", "none");
+	        $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
+	        $('#hnl').attr("class", "header-nav-list");
+	        $('#hsb').attr("class", "header-searchBar");
+	        $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png");
+	    	$('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png");
+	    	$('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg");
+	        $('.header-log-dropdown').first().css("color", "white");
+	        $('#hnlog').attr("class", "header-nav-log");
+	    } else {
+	    	$('#header-section').css("position", "absolute");
+	    	$('#header-content').css("backgroundColor", "transparent");
             $('#header-content').css("borderBottom", "none");
             $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
-            $('#hnl').attr("class", "header-nav-list");
-            $('#hsb').attr("class", "header-searchBar");
-            $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png");
-        	$('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png");
-        	$('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg");
-            $('.header-log-dropdown').first().css("color", "white");
-            $('#hnlog').attr("class", "header-nav-log");
-        });
+            document.getElementById('srpimg').src = "/images/littleman-w.svg";
+            document.getElementById('hsmobileimg').src = "/images/search-icon-w.svg";
+            document.getElementById('hnmid').className = "header-nav-list";
+	    }
+    });
 	
 	var profileVm = this;
 	var socket = io.connect('http://127.0.0.1');

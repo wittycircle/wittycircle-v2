@@ -25,25 +25,37 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         }
     }; checkCredential();
 
+    var y           = $(window).width();
+
     if ($location.path() === "/discover" || $location.path() === "/meet") {
-       document.getElementById('header-section').style.position = "fixed";
+        $timeout(function() {document.getElementById('header-section').style.position = "fixed";}, 1000)
     }
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         if ($location.path() === "/discover" || $location.path() === "/meet")
             document.getElementById('header-section').style.position = "fixed";
         else {
-            document.getElementById('header-section').style.position = "absolute";
-            document.getElementById('header-content').style.backgroundColor = "transparent";
-            document.getElementById('header-content').style.borderBottom = "none";
-            document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
-            document.getElementById('hnl').className = "header-nav-list";
-            document.getElementById('hsb').className = "header-searchBar";
-            document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
-            document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
-            document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
-            document.getElementsByClassName('header-log-dropdown')[0].style.color = "white";
-            document.getElementById('hnlog').className = "header-nav-log";
+            if (y >= 736) {
+                document.getElementById('header-section').style.position = "absolute";
+                document.getElementById('header-content').style.backgroundColor = "transparent";
+                document.getElementById('header-content').style.borderBottom = "none";
+                document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+                document.getElementById('hnl').className = "header-nav-list";
+                document.getElementById('hsb').className = "header-searchBar";
+                document.getElementById('notif-w-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png";
+                document.getElementById('notif-m-i').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png";
+                document.getElementById('c-img').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg";
+                document.getElementsByClassName('header-log-dropdown')[0].style.color = "white";
+                document.getElementById('hnlog').className = "header-nav-log";
+            } else {
+                document.getElementById('header-section').style.position = "absolute";
+                document.getElementById('header-content').style.backgroundColor = "transparent";
+                document.getElementById('header-content').style.borderBottom = "none";
+                document.getElementById('hbp').src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+                document.getElementById('srpimg').src = "/images/littleman-w.svg";
+                document.getElementById('hsmobileimg').src = "/images/search-icon-w.svg";
+                document.getElementById('hnmid').className = "header-nav-list";
+            }
         }
     });
 
@@ -381,7 +393,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("NW1WO4K4T4", "63fdc08829d41111a970cd948256be71");
+    var client  = algolia.Client("AXNUO2UVXP", "ea1f8aaf4f2d8d033917d58a38b519ef");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');

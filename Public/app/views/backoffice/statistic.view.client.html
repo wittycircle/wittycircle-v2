@@ -1,0 +1,9 @@
+<style>
+	h4 {
+		color: black;
+	}
+</style>
+<li ng-repeat="message in messages" style="padding-top: 60px;">
+	<h4>{{message.from_username}} to {{message.to_username}} :</h4>
+	<div ng-bind-html=" transformHtml(message.message)">{{message.message}}</div>
+</li>

@@ -104,6 +104,11 @@ var wittyCircleApp = angular
 		// 	}
 		// }
 	})
+	.state('statistic', {
+		url: '/admin/statistic',
+		templateUrl: 'views/backoffice/statistic.view.client.html',
+		controller: 'BackOfficeStatisticCtrl',
+	})
 	.state('messages', {
 		url: '/messages',
 		params: {profile: null, user_id: null, username: null, input: null, userOn: null},

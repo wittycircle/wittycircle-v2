@@ -173,17 +173,17 @@ exports.getAllConversation = function(req, res) {
 		if (err) throw err;
 		if (data[0]) {
 			getDialogue(req, data, function(result) {
-				res.send({success: true, topic: result});
+				return res.send({success: true, topic: result});
 			});
 		} else
-		res.send({success: false});
+		return res.send({success: false});
 	});
 };
 
 exports.updateConversation = function(req, res) {
 	pool.query('UPDATE messages SET m_read = 1 WHERE from_user_id = ? && to_user_id = ?', [req.body.id, req.user.id], function(err, result) {
 		if (err) throw err;
-		res.send({success: true});
+		return res.send({success: true});
 	});
 };
 
@@ -214,7 +214,7 @@ exports.getSpecificConversation =  function(req, res) { // get all messages of a
 								recursive(index + 1);
 							});
 						} else
-						res.send({success: true, messages: data, name: name, picture: profile_picture});
+							return res.send({success: true, messages: data, name: name, picture: profile_picture});
 					}; recursive(0);
 				});
 			});
@@ -229,9 +229,22 @@ exports.deleteConversation = function(req, res) {
 		pool.query('DELETE FROM messages WHERE from_user_id = ? && parent_id = ?', [id, req.body[0].parent_id],
 		function(err, result) {
 			if (err) throw err;
-			res.send({success: true});
+			return res.send({success: true});
 		});
 	}
+};
+
+exports.getAllMessage = function(req, res) {
+	if (req.user.moderator) {
+		pool.query('SELECT from_username, to_username, message, creation_date, m_read, m_send FROM messages ORDER BY parent_id DESC',
+			function(err, result) {
+				if (err) throw err;
+				else {
+					return res.status(200).send(result);
+				}
+			});
+	} else 
+		return res.status(403).send("NOT AUTHORIZED");
 };
 
 function checkFirstMessage (info, callback) {
@@ -368,7 +381,7 @@ function checkFirstMessage (info, callback) {
 
 													var async = false;
 													mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-														callback(true);
+														return callback(true);
 													}, function(e) {
 														// Mandrill returns the error as an object with name and message keys
 														console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);

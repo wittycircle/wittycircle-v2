@@ -9,6 +9,11 @@ body {
   -o-backface-visibility: hidden;
   backface-visibility: hidden; }
 
+.mobile-color-a li {
+  margin-bottom: 5px; }
+  .mobile-color-a li a {
+    color: #999999; }
+
 @-webkit-keyframes startAnim {
   0% {
     opacity: 0; }

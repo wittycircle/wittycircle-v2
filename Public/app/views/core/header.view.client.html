@@ -2,7 +2,7 @@
     <section id="header-content" class="cbp-spmenu-push">
         <div id="hsmobile" class="header-searchBar-mobile">
             <figure>
-                <img src="/images/search-icon-w.svg">
+                <img id="hsmobileimg" src="/images/search-icon-w.svg">
             </figure>
         </div>
 
@@ -32,7 +32,7 @@
 
         <div id="showRightPush" class="header-log-off-mobile">
             <div ng-if="notifBubble || numberNotif" class="header-mobile-bubble"></div>
-            <img src="/images/littleman-w.svg">
+            <img id="srpimg" src="/images/littleman-w.svg">
         </div>
         <nav md-swipe-right="onSwipeRight()" class="header-log-aside cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 <!--            <h3>Menu</h3> -->
@@ -156,7 +156,7 @@
         </nav>
 
         <div class="header-navigation-mobile">
-            <ul class="header-nav-list">
+            <ul id="hnmid" class="header-nav-list">
                 <li class="left" ><a href="/discover">Discover</a></li>
                 <li class="normal"><a href="/meet" >Meet</a></li>
                 <li class="normal"><a>Learn<sup>soon</sup></a></li>
@@ -559,16 +559,45 @@
             // }
         };
 
+        function headerMoveMobile(display) {
+            if (display) {
+                hcontent.style.backgroundColor = "white";
+                hcontent.style.borderBottom = "1px solid #e5e5e5";
+                hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg";
+                document.getElementById('srpimg').src = "/images/littleman.svg";
+                document.getElementById('hsmobileimg').src = "/images/search-icon-b.svg";
+                document.getElementById('hnmid').className = "header-nav-list mobile-color-a";
+            } else {
+                hcontent.style.backgroundColor = "transparent";
+                hcontent.style.borderBottom = "none";
+                hbp.src = "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg";
+                document.getElementById('srpimg').src = "/images/littleman-w.svg";
+                document.getElementById('hsmobileimg').src = "/images/search-icon-w.svg";
+                document.getElementById('hnmid').className = "header-nav-list";
+            }
+        };
+
         var check = 0;
         $(window).scroll(function() {
             if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
-                if ($(window).scrollTop() > 1 && !check && y >= 736) {
-                    check = 1;
-                    headerMove(true);
-                }
-                if ($(window).scrollTop() === 0 && check === 1 && y >= 736) {
-                    check = 0;
-                    headerMove(false);
+                if (y >= 736) {
+                    if ($(window).scrollTop() > 1 && !check) {
+                        check = 1;
+                        headerMove(true);
+                    }
+                    if ($(window).scrollTop() === 0 && check === 1) {
+                        check = 0;
+                        headerMove(false);
+                    }
+                } else {
+                    if ($(window).scrollTop() > 1 && !check) {
+                        check = 1;
+                        headerMoveMobile(true);
+                    }
+                    if ($(window).scrollTop() === 0 && check === 1) {
+                        check = 0;
+                        headerMoveMobile(false);
+                    }
                 }
             }
         });

@@ -23,7 +23,6 @@
 
          function setplaces(string, obj) {
           var specialCity = ['Hong Kong', 'Vatican City'];
-          console.log(string);
           if (!string || !obj) {
             return;
           }

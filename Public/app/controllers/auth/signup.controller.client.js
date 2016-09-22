@@ -15,7 +15,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     var currentUser = $rootScope.globals.currentUser;
     
     if (!currentUser || !$stateParams.tagCheckFirst)
-	$location.path('/');
+		$location.path('/');
     else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
@@ -158,40 +158,40 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $scope.formYear   = year;
 	};
 	
-	$scope.$watchGroup(['sexe', 'formDay', 'formMonth', 'formYear', 'basicLocation'], function(newValue, oldValue, scope) {
-	    if (newValue[0] && newValue[1] !== "Day" && newValue[2] !== "Month" && newValue[3] !== "Year" && newValue[4]) {
-		$scope.checked = true;
-		$scope.canPass = true;
+	$scope.$watchGroup(['sexe', 'basicLocation'], function(newValue, oldValue, scope) {
+	    if (newValue[0] && newValue[1]) {
+			$scope.checked = true;
+			$scope.canPass = true;
 	    }
 	});
 	
 	$scope.nLocation = {};
 	$scope.saveBasics = function() {
 	    var profileData = {};
-	    if ($scope.formDay === "Day" || $scope.formMonth1 === "Month" || $scope.formYear === "Year" || !$scope.basicLocation || !$scope.sexe) {
-		console.log("ERROR");
-		return ;
-	}
+	    if (!$scope.basicLocation || !$scope.sexe) {
+			console.log("ERROR");
+			return ;
+		}
 	    else {
 		Locations.setplaces($scope.basicLocation, $scope.nLocation);
-		var timestamp                 = new Date(($scope.formYear + '.' + $scope.formMonth1 + '.' + $scope.formDay).toString());
-		if (isNaN(timestamp))
-		    profileData.birthdate       = new Date(Date.UTC($scope.formYear, parseInt($scope.formMonth1, 10) - 1, $scope.formDay, 12, 0, 0)).toISOString();
-		else
-		    profileData.birthdate       = timestamp;
+		// var timestamp                 = new Date(($scope.formYear + '.' + $scope.formMonth1 + '.' + $scope.formDay).toString());
+		// if (isNaN(timestamp))
+		//     profileData.birthdate       = new Date(Date.UTC($scope.formYear, parseInt($scope.formMonth1, 10) - 1, $scope.formDay, 12, 0, 0)).toISOString();
+		// else
+		//     profileData.birthdate       = timestamp;
 		profileData.genre             = $scope.sexe;
 		profileData.location_country  = $scope.nLocation.location_country;
 		profileData.location_city     = $scope.nLocation.location_city;
 		profileData.location_state    = $scope.nLocation.location_state;
 		$http.put('/signup/basic/' + currentUser.id, profileData).success(function(res) {
 		    if (res.success) {
-			$scope.canPass = true;
-			bClassName.attr('class', inRightBig);
-			bClassName.css('display', 'block');
-			aClassName.attr('class', outLeftBig);
-			setTimeout(function() {
-			    aClassName.hide();
-			}, 200);
+				$scope.canPass = true;
+				bClassName.attr('class', inRightBig);
+				bClassName.css('display', 'block');
+				aClassName.attr('class', outLeftBig);
+				setTimeout(function() {
+				    aClassName.hide();
+				}, 200);
 		    }
 		});
 	    }

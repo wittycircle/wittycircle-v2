@@ -9,8 +9,8 @@ angular.module('wittyApp')
 		var recentArticles;
 		$scope.logUser = currentUser;
 
-	    // if (!currentUser.moderator)
-	    //    $location.path('/').replace();
+	    if (!currentUser.moderator)
+	       $location.path('/').replace();
 
 	    $scope.headTags = ["innovation", "interview", "products", "engineering", "design", "startups", "programming", "entrepreneurship", "politics", "news", "art", "technology", "science", "software", "hardware"];
 	    $scope.learn 	= {};

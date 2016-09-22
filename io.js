@@ -87,7 +87,6 @@ module.exports = function(app, io, ensureAuth) {
 
         /*** Follow User Notification ***/
         app.post('/follow/user/:username', function(req, res){
-            console.log(req);
             req.checkParams('username', 'id parameter must be an integer.').isString().min(1);
             var errors = req.validationErrors(true);
             if (errors) {
@@ -1118,6 +1117,8 @@ module.exports = function(app, io, ensureAuth) {
                 pool.query('SELECT first_name, last_name, profile_picture_icon, CASE id WHEN ? then 1 WHEN ? then 2 END AS myorder FROM profiles WHERE id in (?, ?) ORDER BY myorder',
                 [data[0].profile_id, data[1].profile_id, data[0].profile_id, data[1].profile_id],
                 function(err, result) {
+                    if (err) throw err;
+
                     var parent = data[0].id + data[1].id;
                     var infoMessage = {
                         from_user_id     : data[0].id,
@@ -1156,7 +1157,6 @@ module.exports = function(app, io, ensureAuth) {
             } else {
                 if (data[0]) {
                     // relation exist already, now i must check the last connect of user
-                    console.log('data0 exits1');
                     callback(false);
                 } else {
                     pool.query('SELECT * FROM messages where from_user_id = ? and to_user_id = ?', // checking also the relation in the 2 way
@@ -1167,7 +1167,7 @@ module.exports = function(app, io, ensureAuth) {
                         } else {
                             if (data[0]) {
                                 // relation exist already, now i must check the last connect of user
-                                callback(false);
+                                return callback(false);
                             } else {
                                 // send mail because no relations exist
                                 pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
@@ -1188,106 +1188,106 @@ module.exports = function(app, io, ensureAuth) {
                                                     if (err) {
                                                         throw err;
                                                     } else {
-                                                        return ;
-                                                        // function getNewD(value, wordwise, max, tail) {
-                                                        //     if (!value) return '';
-                                                        //     if (!max) return value;
-                                                        //     if (value.length <= max) return value;
-                                                        //     value = value.substr(0, max);
-                                                        //     if (wordwise) {
-                                                        //         var lastspace = value.lastIndexOf(' ');
-                                                        //         if (lastspace != -1) {
-                                                        //             value = value.substr(0, lastspace);
-                                                        //         }
-                                                        //     }
-                                                        //     return value + (tail || ' ...');
-                                                        // }
+                                                        
+                                                        function getNewD(value, wordwise, max, tail) {
+                                                            if (!value) return '';
+                                                            if (!max) return value;
+                                                            if (value.length <= max) return value;
+                                                            value = value.substr(0, max);
+                                                            if (wordwise) {
+                                                                var lastspace = value.lastIndexOf(' ');
+                                                                if (lastspace != -1) {
+                                                                    value = value.substr(0, lastspace);
+                                                                }
+                                                            }
+                                                            return value + (tail || ' ...');
+                                                        }
 
-                                                        // var subj = rslt[0].first_name + " " + rslt[0].last_name + " sent you a message" ;
-                                                        // var newd = getNewD(info.message, true, 76, ' ...');
-                                                        // if (rslt[0].location_country) {
-                                                        //     var loc = rslt[0].location_city + ', ' + rslt[0].location_country;
-                                                        // }
-                                                        // if (rslt[0].location_state) {
-                                                        //     var loc = rslt[0].location_city + ', ' + rslt[0].location_state;
-                                                        // }
+                                                        var subj = rslt[0].first_name + " " + rslt[0].last_name + " sent you a message" ;
+                                                        var newd = getNewD(info.message, true, 76, ' ...');
+                                                        if (rslt[0].location_country) {
+                                                            var loc = rslt[0].location_city + ', ' + rslt[0].location_country;
+                                                        }
+                                                        if (rslt[0].location_state) {
+                                                            var loc = rslt[0].location_city + ', ' + rslt[0].location_state;
+                                                        }
 
-                                                        // var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+                                                        var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                        // var template_name = "new-message";
-                                                        // var template_content = [{
-                                                        //     "name": "new-message",
-                                                        //     "content": "content",
-                                                        // }];
+                                                        var template_name = "new-message";
+                                                        var template_content = [{
+                                                            "name": "new-message",
+                                                            "content": "content",
+                                                        }];
 
-                                                        // var message = {
-                                                        //     "html": "<p>HTML content</p>",
-                                                        //     "subject": subj,
-                                                        //     "from_email": "noreply@wittycircle.com",
-                                                        //     "from_name": "Wittycircle",
-                                                        //     "to": [{
-                                                        //         "email": mail[0].email,
-                                                        //         "name": 'Recipient',
-                                                        //         "type": "to"
-                                                        //     }],
-                                                        //     "headers": {
-                                                        //         "Reply-To": "noreply@wittycircle.com"
-                                                        //     },
-                                                        //     "important": false,
-                                                        //     "inline_css": null,
-                                                        //     "preserve_recipients": null,
-                                                        //     "view_content_link": null,
-                                                        //     "tracking_domain": null,
-                                                        //     "signing_domain": null,
-                                                        //     "return_path_domain": null,
-                                                        //     "merge": true,
-                                                        //     "merge_language": "mailchimp",
-                                                        //     "global_merge_vars": [{
-                                                        //         "name": "merge1",
-                                                        //         "content": "merge1 content"
-                                                        //     }],
-                                                        //     "merge_vars": [
-                                                        //         {
-                                                        //             "rcpt": mail[0].email,
-                                                        //             "vars": [
-                                                        //                 {
-                                                        //                     "name": "fname",
-                                                        //                     "content": response[0].first_name
-                                                        //                 },
-                                                        //                 {
-                                                        //                     "name": "ffname",
-                                                        //                     "content": rslt[0].first_name
-                                                        //                 },
-                                                        //                 {
-                                                        //                     "name": "flname",
-                                                        //                     "content": rslt[0].last_name
-                                                        //                 },
-                                                        //                 {
-                                                        //                     "name": "fimg",
-                                                        //                     "content": rslt[0].profile_picture_icon
-                                                        //                 },
-                                                        //                 {
-                                                        //                     "name": "fdesc",
-                                                        //                     "content": newd
-                                                        //                 },
-                                                        //                 {
-                                                        //                     "name": "floc",
-                                                        //                     "content": loc
-                                                        //                 }
-                                                        //             ]
-                                                        //         }
-                                                        //     ]
-                                                        // };
+                                                        var message = {
+                                                            "html": "<p>HTML content</p>",
+                                                            "subject": subj,
+                                                            "from_email": "noreply@wittycircle.com",
+                                                            "from_name": "Wittycircle",
+                                                            "to": [{
+                                                                "email": mail[0].email,
+                                                                "name": 'Recipient',
+                                                                "type": "to"
+                                                            }],
+                                                            "headers": {
+                                                                "Reply-To": "noreply@wittycircle.com"
+                                                            },
+                                                            "important": false,
+                                                            "inline_css": null,
+                                                            "preserve_recipients": null,
+                                                            "view_content_link": null,
+                                                            "tracking_domain": null,
+                                                            "signing_domain": null,
+                                                            "return_path_domain": null,
+                                                            "merge": true,
+                                                            "merge_language": "mailchimp",
+                                                            "global_merge_vars": [{
+                                                                "name": "merge1",
+                                                                "content": "merge1 content"
+                                                            }],
+                                                            "merge_vars": [
+                                                                {
+                                                                    "rcpt": mail[0].email,
+                                                                    "vars": [
+                                                                        {
+                                                                            "name": "fname",
+                                                                            "content": response[0].first_name
+                                                                        },
+                                                                        {
+                                                                            "name": "ffname",
+                                                                            "content": rslt[0].first_name
+                                                                        },
+                                                                        {
+                                                                            "name": "flname",
+                                                                            "content": rslt[0].last_name
+                                                                        },
+                                                                        {
+                                                                            "name": "fimg",
+                                                                            "content": rslt[0].profile_picture_icon
+                                                                        },
+                                                                        {
+                                                                            "name": "fdesc",
+                                                                            "content": newd
+                                                                        },
+                                                                        {
+                                                                            "name": "floc",
+                                                                            "content": loc
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        };
 
-                                                        // var async = false;
-                                                        // mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                        //     callback(true);
-                                                        // }, function(e) {
-                                                        //     // Mandrill returns the error as an object with name and message keys
-                                                        //     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                        //     throw e;
-                                                        //     // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                        // });
+                                                        var async = false;
+                                                        mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                                                            return callback(true);
+                                                        }, function(e) {
+                                                            // Mandrill returns the error as an object with name and message keys
+                                                            console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                                                            throw e;
+                                                            // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                                                        });
                                                     }
                                                 });
                                             }

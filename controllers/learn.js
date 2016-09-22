@@ -45,7 +45,7 @@ function getArticleLike(article_id, callback) {
 };
 
 function checkLikeArticle(req, article_id, callback) {
-	if (req.isAuthenticated) {
+	if (req.isAuthenticated()) {
 		pool.query('SELECT user_id FROM article_likes WHERE user_id = ? AND article_id = ?', [req.user.id, article_id],
 			function(err, result) {
 				if (err) throw err;
@@ -55,7 +55,7 @@ function checkLikeArticle(req, article_id, callback) {
 					return callback(false);
 			});
 	} else
-		return res.status(403).send("NOT AUTHORIZED");
+		return callback("error");
 }
 
 function loadArticleParam(req, arr, order, callback) {
@@ -85,8 +85,12 @@ function loadArticleParam(req, arr, order, callback) {
 																result2[index].numberOfLike = like;
 																result2[index].creation_date = newDate;
 																checkLikeArticle(req, result2[index].id, function(check) {
-																	result2[index].likedArticle = check;
-																	return recursive(index + 1);
+																	if (check === 'error')
+																		return callback('error');
+																	else {
+																		result2[index].likedArticle = check;
+																		return recursive(index + 1);
+																	}
 																});
 															});
 														});
@@ -135,8 +139,12 @@ exports.getSingleArticle = function(req, res) {
 														getArticleLike(result[0].id, function(like) {
 															article.numberOfLike = like;
 															checkLikeArticle(req, result[0].id, function(check) {
-																article.likedArticle = check;
-																return res.status(200).send({success: true, article: article})
+																if (check === 'error')
+																	return res.status(403).send("NOT AUTHORIZED");
+																else {
+																	article.likedArticle = check;
+																	return res.status(200).send({success: true, article: article})
+																}
 															});
 														});
 													});
@@ -178,9 +186,13 @@ exports.getAllArticle = function(req, res) {
 															getArticleLike(result[index].id, function(like) {
 															article.numberOfLike = like;
 																checkLikeArticle(req, result[index].id, function(check) {
-																	article.likedArticle = check;
-																	array.push(article);
-																	return recursive(index + 1);
+																	if (check === 'error')
+																		return res.status(403).send("NOT AUTHORIZED");
+																	else {
+																		article.likedArticle = check;
+																		array.push(article);
+																		return recursive(index + 1);
+																	}
 																});
 															});
 														});
@@ -210,7 +222,10 @@ exports.getMostLikeArticle = function(req, res) {
 						var finalArr = arr.concat(arr2);
 						var order = "ORDER BY FIELD(id, " + finalArr + ")";
 						loadArticleParam(req, finalArr, order, function(articles) {
-							return res.status(200).send({success: true, articles: articles});
+							if (articles === 'error')
+								return res.status(403).send("NOT AUTHORIZED");
+							else
+								return res.status(200).send({success: true, articles: articles});
 						});
 					});
 			} else {
@@ -228,7 +243,10 @@ exports.getTrendingArticle = function(req, res) {
 				var arr = result.map( function(el) { return el.article_id; });
 				var order = "ORDER BY FIELD(id," + arr + ")";
 				loadArticleParam(req, arr, order, function(articles) {
-					return res.status(200).send({success: true, trendArticles: articles});
+					if (articles === 'error')
+						return res.status(403).send("NOT AUTHORIZED");
+					else
+						return res.status(200).send({success: true, trendArticles: articles});
 				});
 			    } else
 				return res.status(400).send("NOT FOUND");
@@ -382,7 +400,10 @@ exports.getArticleByTag = function(req, res) {
     			if (result[0]) {
     				var arr = result.map( function(el) { return el.article_id; })
     				loadArticleParam(req, arr, "ORDER BY creation_date DESC", function(articles) {
-    					return res.status(200).send({success: true, articles: articles});
+    					if (articles === 'error')
+							return res.status(403).send("NOT AUTHORIZED");
+						else
+    						return res.status(200).send({success: true, articles: articles});
     				});
     			} else
     				return res.status(200).send({success: false});

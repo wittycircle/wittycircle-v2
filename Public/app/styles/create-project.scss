@@ -21,6 +21,7 @@ $blue: #416299;
 
 /*** search user project ***/
 #messages-modals {
+  position: initial !important;
   background-color: white;
   max-width: 500px;
   margin: 0 auto;
@@ -2897,4 +2898,12 @@ div + .no-items-founds {
 			}
 		}
 	}
+}
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+
+@media only screen and (max-width: 1280px) {
+  #messages-modals {
+    transform: scale(0.9, 0.9);
+  }
 }

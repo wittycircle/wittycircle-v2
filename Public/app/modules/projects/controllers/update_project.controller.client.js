@@ -147,6 +147,7 @@ $scope.initiateProject = function () {
                 $scope.noOpenings = true;
             } else {
                 $scope.openings = response.data;
+                console.log($scope.openings);
                 Object.keys($scope.openings).forEach(function(key) {
                     if ($scope.openings[key].taggs != false) {
                         $scope.openings[key].taggs = JSON.parse($scope.openings[key].taggs);

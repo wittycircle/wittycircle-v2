@@ -10,6 +10,7 @@
 
 /*** search user project ***/
 #messages-modals {
+  position: initial !important;
   background-color: white;
   max-width: 500px;
   margin: 0 auto;
@@ -165,9 +166,72 @@
     padding: 0 10px; }
     #form-project-1 .cards_openings .card-description-text {
       margin-bottom: 0; }
+    #form-project-1 .cards_openings .update-project-needs-contrib-users {
+      padding-left: 15px; }
+      #form-project-1 .cards_openings .update-project-needs-contrib-users ul a {
+        display: inline-table;
+        margin-right: 5px;
+        margin-bottom: 5px; }
+        #form-project-1 .cards_openings .update-project-needs-contrib-users ul a li .tooltipw {
+          display: block;
+          position: absolute;
+          background: black;
+          font-family: 'FreigSem';
+          font-size: 13px;
+          color: #fff;
+          opacity: 0;
+          padding: 3px 5px;
+          border-radius: 4px;
+          pointer-events: none;
+          -webkit-transform: translateY(10px);
+          -moz-transform: translateY(10px);
+          -ms-transform: translateY(10px);
+          -o-transform: translateY(10px);
+          transform: translateY(10px);
+          -webkit-transition: all .25s ease-out;
+          -moz-transition: all .25s ease-out;
+          -ms-transition: all .25s ease-out;
+          -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+          /*-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);*/ }
+        #form-project-1 .cards_openings .update-project-needs-contrib-users ul a li .tooltipw:before {
+          bottom: -20px;
+          content: " ";
+          display: block;
+          height: 20px;
+          left: 0;
+          position: absolute; }
+        #form-project-1 .cards_openings .update-project-needs-contrib-users ul a li .tooltipw:after {
+          border-left: solid transparent 6px;
+          border-right: solid transparent 6px;
+          border-top: solid black 6px;
+          /*            bottom: -5px;
+          */
+          content: " ";
+          height: 0;
+          left: 50%;
+          margin-left: -7px;
+          position: absolute; }
+        #form-project-1 .cards_openings .update-project-needs-contrib-users ul a li img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%; }
+        #form-project-1 .cards_openings .update-project-needs-contrib-users ul a li:hover .tooltipw {
+          opacity: 1;
+          pointer-events: auto;
+          -webkit-transform: translateY(0px);
+          -moz-transform: translateY(0px);
+          -ms-transform: translateY(0px);
+          -o-transform: translateY(0px);
+          transform: translateY(0px); }
   #form-project-1 .cards_openings_body {
     border: 1px solid #eee;
     border-radius: 4px;
+    margin-bottom: 10px;
     overflow: hidden; }
   #form-project-1 .project-card .card-picture {
     height: 100px;
@@ -2068,5 +2132,10 @@ div + .no-items-founds {
           cursor: pointer; }
           #createProject-page #myProject-history .myProject-body-history .myProject-body-hContainer .myProject-body-hElement:hover h4 {
             color: #23527C; }
+
+/*********************** MEDIA QUERIES MOBILE WIDTH \*320px to 736px*\ **************************/
+@media only screen and (max-width: 1280px) {
+  #messages-modals {
+    transform: scale(0.9, 0.9); } }
 
 /*# sourceMappingURL=create-project.css.map */

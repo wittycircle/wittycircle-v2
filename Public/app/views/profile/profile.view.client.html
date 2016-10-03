@@ -1,5 +1,6 @@
 <section id="profile-header">
 	<profile-message-modal></profile-message-modal>
+	<profile-help-need></profile-help-need>
 	<div ng-if="!profileVm.imageCoverLoading" class="filter"></div>
 	<div ng-if="profileVm.imageCoverLoading" class="spinner-load">
 		<div class="spinner__item1 spinner-item"></div>
@@ -27,6 +28,10 @@
 				    	<i id="pipi" class="fa fa-camera animated bounceIn"></i>
 				</div>
 				<img ng-src="{{ resizePic(profileVm.profile.profile_picture, 154, 154, 'fill') }}" alt="profile-picture">
+				<div class="profile-info-top-rank">
+					<div class="tooltipw" ng-if="profileVm.currentUser.username === profileVm.paramUsername">{{profileVm.profile.first_name}} rank among the {{topRank}} most influent users of the community</div>
+					<h5 ng-if="topRank">#{{topRank}}</h5>
+				</div>
 			</div>
 			<div class="profile-info-cv">
 				<div class="name info-line">
@@ -47,6 +52,11 @@
 						<input ng-if="profileVm.modifyLocation" type="text" placeholder="Search for a place" profile-location-search="" ng-model="displayLocation2"/>
 					</div>
 					<img id="location-input2" ng-if="profileVm.showEditLocation" src="/images/picto-edit-w.svg" alt="edit-icon" ng-click="profileVm.editLocation()" />
+					<div class="profile-info-rank" ng-if="myRank >= 1">
+						<div class="tooltipw">Improve your ranking and gain exposure. Visit your <a href="/rank"><u>statistics</u></a> page.</div>
+						<h4># {{myRank}}</h4>
+						<img ng-if="myCompareRank" src="/images/Upvote_Icon.svg" alt="rank-up-down"/>
+					</div>
 				</div>
 
 			<!--	<div class="profile-influencer" ng-if="profileVm.currentUser.moderator && profileVm.profile.founder > 0 && profileVm.profile.founder <= 100">
@@ -96,7 +106,7 @@
 			<div class="profile-mobile-user-options">
 				<div ng-if="!profileVm.trueUser" class="profile-mobile-connect">
 					<div class="profile-text-link">
-						<a ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
+						<a ng-click="profileVm.goToMessage(profileVm.profile.id, 0)">Message</a>
 					</div>
 					<button class="profile-follow-link" type="button" ng-click="profileVm.followUser()"><i ng-if="profileVm.followText === 'Following'" class="fa fa-check"></i><i ng-if="profileVm.followText === 'Follow'" class="fa fa-plus"></i>{{profileVm.followText}}</button>
 				</div>
@@ -170,9 +180,21 @@
 				</div>
 			</div>
 			<div ng-if="!profileVm.cannotFollow" class="profile-user-options">
-<!-- 				<div class="profile-text-link">
-					<a>Share</a>
-				</div> -->
+				<div class="profile-text-link">
+					<a id="ptlaska">Ask for help</a>
+					<div id="ptlask" class="ptl-ask" style="display: none">
+						<li ng-repeat="iPrj in profileVm.askProjects" ng-if="profileVm.askProjects.length" ng-click="getToNeed(iPrj.public_id, iPrj.status, iPrj.title)">
+							<img ng-if="iPrj.picture_card" ng-src="{{ resizePic(iPrj.picture_card, 40, 40, 'fill') }}" alt="project-picture">
+			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Idea'" src="/images/Thumbnail_Idea.svg">
+			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Drafted project'" src="/images/Thumbnail_Drafted.svg">
+			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Beta project'" src="/images/Thumbnail_Beta.svg">
+			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Live project'" src="/images/Thumbnail_Live.svg">
+							<h4>{{iPrj.title}}</h4>
+						</a></li>
+
+						<li style="max-width: 200px; font-family: 'FreigBook';" ng-if="!profileVm.askProjects.length">You must <u style="color: red" ng-click="goToStart()">create a project</u> and share your needs to ask for contributions.</li>
+					</div>
+				</div>
 				<div id="pmpm" class="profile-text-link">
 					<a id="pmpma" ng-click="profileVm.goToMessage(profileVm.profile.id)">Message</a>
 				</div>
@@ -496,11 +518,12 @@
 	
 			$(this).unbind('click');
 			$(this).click(function(e) {
-				var target = e.target.id,
-					container = $("#profile-modal-newMessageArea");
+				var target 		= e.target.id,
+					container 	= $("#profile-modal-newMessageArea"),
+					container2 	= $("#php-need");
 
 				if (target === "pmpm" || target === "pmpma") {
-					$('#profile-modal-newMessageArea').fadeIn(100);
+					$('#profile-modal-newMessageArea').fadeIn(200);
 					return ;
 				}
 				if ($('#profile-modal-newMessageArea').css('display') === "block") {
@@ -514,6 +537,28 @@
 						} else 
 							$('#profile-modal-newMessageArea').fadeOut(100);
 					}
+				}
+				if ($("#ptlask").is(e.target) || $("#ptlask").has(e.target).length > 0) {
+					container2.fadeIn(200);
+					$("#ptlask").fadeOut(100);
+					// $('#profile-modal-newMessageArea').fadeOut(100);
+					return ;
+				}
+
+				if ($('#php-need').css('display') === "block") {
+					if((!container2.is(e.target) && container2.has(e.target).length === 0) || target === "phpnb-button") {
+						container2.fadeOut(100);
+						if (target === "phpnb-button")
+							$('#profile-modal-newMessageArea').fadeIn(300);
+						return ;
+					}
+				}
+				if (target === "ptlaska") {
+					$('#ptlask').fadeIn(200);
+					return ;
+				} else {
+					$('#ptlask').fadeOut(200);
+					return ;
 				}
 			});
 
@@ -567,6 +612,10 @@
 				$('#profile-slideDown').slideToggle();
 
 		};
+
+		// function getAskProjectdd() {
+		// 	$('#ptlask').fadeToggle(200);
+		// };
 
 	} else {
 

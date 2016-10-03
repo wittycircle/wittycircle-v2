@@ -3,8 +3,22 @@
 		<label>To : </label>
 		<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
 	</div>
+	<div id="pmnhelp" class="profile-message-needs" ng-if="sendNeed" >
+		<h5>You've got a new inquiry from {{profileVm.currentUser.first_name}} {{profileVm.currentUser.last_name}}: </h5>
+
+		<div class="profile-message-need">
+			<div class="profile-message-need-project-title">
+				<img ng-src="{{nPpicture}}">
+				<h5>{{nPtitle}}</h5>
+			</div>
+
+			<p>Looking for {{demandForm.nSta | lowercase}} in <u>{{demandForm.nSkill}}</u>,
+				<span ng-repeat="tag in demandForm.nTags"><span ng-if="$last"> and </span><u>{{tag}}</u><span ng-if="!$last">, </span></span>
+			</p>
+		</div>
+	</div>
 	<div class="messages-newMessageArea-text">
-		<textarea id="profile-m-text" class="profile-newMessageArea-text" ng-model="newMessageArea.message" placeholder="Write a message..." redactor></textarea>
+		<textarea id="profile-m-text" class="profile-newMessageArea-text" ng-model="newMessageArea.message" placeholder="{{textPlaceholder}}" redactor></textarea>
 	</div>
 	<div class="messages-newMessageArea-send">
 		<button type="submit" ng-click="createNewMessage(true)">Send</button>

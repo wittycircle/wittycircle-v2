@@ -256,9 +256,9 @@ exports.getTrendingArticle = function(req, res) {
 
 exports.postNewArticle = function(req, res) {
 	/* Validation */
-    req.checkBody('title', 'Error Message').isString().max(256);
-    req.checkBody('picture', 'Error Message').optional().isString().max(512);
-    req.checkBody('text', 'Error Message').optional().isString().max(10000);
+    req.checkBody('title', 'Error Message').isString();
+    req.checkBody('picture', 'Error Message').optional().isString();
+    req.checkBody('text', 'Error Message').optional().isString();
     req.checkBody('creator_user_id').isInt();
 
     var errors = req.validationErrors(true);

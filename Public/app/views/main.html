@@ -11,16 +11,16 @@
 		<section id="main-discover" ng-show="!main.isstartclicked">
 			<div class="row">
 				<div class="main-title-market">
-					<h1>Entrepreneurs should never be alone</h1>
+					<h1>Enabling entrepreneurs</h1>
 				</div>
 				<div class="main-title-market-mobile">
-					<h1>Entrepreneurs should never be alone</h1>
+					<h1>Enabling entrepreneurs</h1>
 				</div>
 				<div class="main-title-text">
-					<h4>We help people with projects to get exposure, support and feedback.</h4>
+					<h4>We help entrepreneurs connect with the people willing to contribute to their projects.</h4>
 				</div>
 				<div class="main-title-text-mobile">
-					<h4>We help people with projects to get exposure, support and feedback.</h4>
+					<h4>We help entrepreneurs connect with the people willing to contribute to their projects.</h4>
 				</div>
 				<div class="main-button-discover">
 					<div class="button-start-project">
@@ -377,6 +377,9 @@
 					<main-body3 class="main-body3-body" data="main">
 						<div class="main-body3-card profile-card" ng-repeat="cardProfile in main.cardProfiles track by $index" ng-if="!cardProfile.fake">
 							<div class="card-click-zone" ng-click="main.goToProfile(cardProfile.id)">
+								<div class="card-rank" ng-if="cardProfile.myRank">
+									<span>#{{cardProfile.myRank}}</span>
+								</div>
 								<div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture, 205, 40, 'fill') }})'}">
 									<!-- <img ng-src="{{cardProfile.cover_picture}}"> -->
 									<div class="card-profile-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60) }})'}">

@@ -80,11 +80,10 @@
 
                     </div>
 
-
-                    <div class="meet-search2-text2">
-                        <h2>near</h2>
-                    </div>
                     <div class="meet-search2-anylocation inputfield">
+                         <div class="meet-search2-text2" style="margin-left: 10px;">
+                            <h2>near</h2>
+                        </div>
                         <input id="msai" type="text" pre-go-location="" types="['geocode']" placeholder="Any location" ng-model="meetLocation">
                     </div>
                 </div>
@@ -99,6 +98,9 @@
                     <div class="meet-body-cards" ng-if="meet.cardProfiles && !searchSk && !searchAl">
                         <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
                             <a ng-href="/{{cardProfile.username}}" class="card-click-zone">
+                                <div class="card-rank" ng-if="cardProfile.myRank">
+                                    <span>#{{cardProfile.myRank}}</span>
+                                </div>
                                 <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
                                     <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
                                     ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
@@ -173,6 +175,9 @@
                         <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | limitTo: limitSk1 track by $index">
                             <div class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
                                 <a ng-href="/{{cardProfile.username}}" class="card-click-zone">
+                                    <div class="card-rank" ng-if="cardProfile.myRank">
+                                        <span>#{{cardProfile.myRank}}</span>
+                                    </div>
                                     <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.cover_picture_cards, 205, 40, 'fill') }})'}">
                                         <div ng-hide="!cardProfile.profiles.profile_picture" class="card-profile-picture"
                                         ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.profile_picture, 60, 60, 'fill') }})'}">
@@ -244,6 +249,9 @@
                                 <!-- <h1 style="color: black; width: 1000px" ng-if="meet.cardProfiles.length > 1 && $index === 0 && cardProfiles.length">{{ ::cardProfile}}</h1> -->
                                 <div class="meet-body-card profile-card" ng-if="cardProfile.cover_picture_cards">
                                     <a ng-href="/{{cardProfile.username}}" class="card-click-zone">
+                                        <div class="card-rank" ng-if="cardProfile.myRank">
+                                            <span>#{{cardProfile.myRank}}</span>
+                                        </div>
                                         <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
                                             <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
                                             ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">

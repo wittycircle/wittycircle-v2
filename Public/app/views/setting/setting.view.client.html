@@ -12,7 +12,7 @@
 					<li class="setting-navbar-password" onclick="showPassword()">Password</li>
 					<li class="setting-navbar-notif">Notifications <sup>soon</sup></li>
 <!-- 					<li>Social networks<sup>soon</sup></li>
- -->				</ul>
+ -->			</ul>
 			</div>
 		</div>
 	</header>
@@ -68,6 +68,7 @@
 
 			<button type="submit" ng-click="passwordUpdate()"><i ng-if="passwordChanged" class="fa fa-check"> </i><span ng-show="!passwordChanged">Save new password</span><span ng-show="passwordChanged"> Saved</span></button>
 		</div>
+
 	</section>
 
 <!-- 	<section id="setting-delete">
@@ -84,10 +85,11 @@
 			if (document.getElementsByClassName('setting-general')[0].style.display == "none") {
 				document.getElementsByClassName('setting-general')[0].style.display = "block";
 				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.getElementsByClassName('setting-ranking')[0].style.display = "none";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "white";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
-				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";;
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
 			}
 		}
 
@@ -95,10 +97,23 @@
 			if (document.getElementsByClassName('setting-password')[0].style.display == "none") {
 				document.getElementsByClassName('setting-password')[0].style.display = "block";
 				document.getElementsByClassName('setting-general')[0].style.display = "none";
+				document.getElementsByClassName('setting-ranking')[0].style.display = "none";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
-				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";;
-				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "white";
-				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";;
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-ranking")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-ranking")[0].style.backgroundColor = "transparent";
+			}
+		}
+
+		function showRanking() {
+			if (document.getElementsByClassName('setting-ranking')[0].style.display == "none") {
+				document.getElementsByClassName('setting-ranking')[0].style.display = "block";
+				document.getElementsByClassName('setting-general')[0].style.display = "none";
+				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
 			}
 		}
 	</script>

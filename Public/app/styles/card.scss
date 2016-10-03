@@ -265,6 +265,20 @@
 		}
 	}
 
+	.card-rank {
+		position: absolute;
+		width: 207px;
+		margin-top: 42px;
+		text-align: right;
+
+		span {
+			font-family: 'FreigMed';
+			font-size: 14px;
+			color: #999999;
+			padding-right: 10px;
+		}
+	}
+
 	.card-info {
 		padding: 20px 15px;
 		height: 163px;

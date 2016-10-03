@@ -167,11 +167,35 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	function init() {
 		RetrieveData.ppdData('/username/', 'GET', null, profileVm.paramUsername).then(function(res) {
 			if (res && res[0]) {
+				// Get Profile Project Involved
 				Projects.getUserProject(res[0].id, function(res) {
 					profileVm.inProjects = res;
 				});
+
+				// Get Ranking Profile
+				RetrieveData.ppdData('/rank/statistic', 'POST', { user_id: res[0].id }).then(function(res) {
+					if (res.success) {
+						$scope.myRank = res.rank;
+						$scope.myCompareRank = res.compareR || null;
+						if ($scope.myRank <= 10)
+							$scope.topRank = 10;
+						else if ($scope.myRank > 10 && $scope.myRank <= 50)
+							$scope.topRank = 50;
+						else if ($scope.myRank > 50 && $scope.myRank <= 100)
+							$scope.topRank = 100;
+						else
+							$scope.topRank = 0;
+					}
+				});
 			}
 		});
+
+		// RetrieveData.getData('/setting/rank', 'GET').then(function(res) {
+		// 	console.log(res);
+		// 	if (res.success)
+		// 		$scope.pRank = res.data;
+		// });
+
 
 		if (profileVm.currentUser) {
 			if (profileVm.currentUser.username !== profileVm.paramUsername) {
@@ -183,6 +207,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 					else {
 						// profileVm.follow         = false;
 						profileVm.followText     = "Follow";
+					}
+				});
+
+				RetrieveData.ppdData('/username/', 'GET', null, profileVm.currentUser.username).then(function(res) {
+					if (res && res[0]) {
+						Projects.getUserProject(res[0].id, function(res) {
+							profileVm.askProjects = res;
+						});
 					}
 				});
 			}
@@ -338,10 +370,18 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	// });
 
 	/*** Message ***/
-	function goToMessage(id) {
+	function goToMessage(id, check) {
 		if (!profileVm.currentUser)
 			showbottomAlert.pop_it();
 		else {
+
+			if (!check)
+				$scope.sendNeed = false;
+			if (!$scope.sendNeed)
+				$scope.textPlaceholder = "Write a message..."
+			else
+				$scope.textPlaceholder = "Add a personal note..."
+
 			$scope.sendMess = true;
 		    Users.getUserIdByProfileId(id).then(function(res) {
 			if (res.success)
@@ -349,6 +389,41 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			    // $state.go('messages', {profile: profileVm.profile, user_id: res.userId.id, username: res.userId.username});
 		    });
 		}
+	};
+
+	/*** Message NEED ***/ 
+	$scope.getToNeed = function(public_id, project_status, project_title) {
+		if (project_status === "Idea")
+			$scope.nPpicture = "/images/Thumbnail_Idea.svg";
+		else if (project_status === "Drafted project")
+			$scope.nPpicture = "/images/Thumbnail_Drafted.svg";
+		else if (project_status === "Beta project" )
+			$scope.nPpicture = "/images/Thumbnail_Beta.svg";
+		else
+			$scope.nPpicture = "/images/Thumbnail_Live.svg"
+
+		$http.get('/openings/project/' + public_id).success(function(res) {
+			$scope.needToHelp = res;
+		});
+		$scope.addNeedPublicId = public_id;
+		$scope.nPtitle = project_title;
+	};
+
+	$scope.goToAddNeed = function() {
+		$location.path('/project/' + $scope.addNeedPublicId + '/update/needs');
+	};
+
+	$scope.selectNeed = function(index, p_picture, p_title, n_status, n_skill, n_tags, p_id) {
+		$scope.activeCard = index;
+		$scope.needSelected = true;
+		$scope.demandForm = {nSta: n_status, nSkill: n_skill, nTags: n_tags};
+		$scope.project_p_id = p_id;
+	};
+
+	$scope.displayDemand = function() {
+		$scope.sendNeed = true;
+		$scope.textPlaceholder = "Add a personal note...";
+		goToMessage(profileVm.profile.id, true);
 	};
 
 	/*** MOBILE EDIT ***/
@@ -549,6 +624,10 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 				getProfileExp();
 		});
 	};
+
+	$scope.goToStart = function() {
+        $state.transitionTo('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
+    }
     
 	console.timeEnd('loading profile');
 })
@@ -561,6 +640,17 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 			restrict: "E",
 			scope: false,
 			controller: 'MessageCtrl'
+		}
+	}
+})
+.directive('profileHelpNeed', function() {
+	var x = $(window).width();
+
+	if (x >= 736) {
+		return {
+			templateUrl: 'views/profile/modal/profile.help.view.client.html',
+			restrict: "E",
+			scope: false,
 		}
 	}
 })

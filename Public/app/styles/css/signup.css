@@ -133,14 +133,15 @@
         display: inline-block;
         width: 49%;
         padding: 20px 15px 20px 25px;
-        text-align: left; }
+        text-align: left;
+        vertical-align: top; }
         #signup-page #signup-basic-body .signup-body-info .signup-info-info label {
           font-family: 'FreigSem';
           font-size: 16px;
           color: #222222;
           margin-bottom: 5px; }
         #signup-page #signup-basic-body .signup-body-info .signup-info-info .signup-info-gender {
-          margin-bottom: 25px;
+          margin-bottom: 30px;
           height: 52px; }
           #signup-page #signup-basic-body .signup-body-info .signup-info-info .signup-info-gender h5 {
             display: inline-block;

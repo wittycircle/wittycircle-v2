@@ -12,9 +12,10 @@ angular.module('wittyApp')
 	.controller('SettingCtrl', function($http, $timeout, $location, $scope, $rootScope, $state, Authentication, $stateParams) {
 
 	var currentUser = $rootScope.globals.currentUser || null;
-	console.log(currentUser);
+
 	if (currentUser) {
 	/*** BACKGROUND ***/
+	$scope.moderator = $rootScope.globals.currentUser.moderator;
 	$scope.backPic = $rootScope.globals.currentUser.profile_cover;
 
 	/*** WATCH GENERAL ***/

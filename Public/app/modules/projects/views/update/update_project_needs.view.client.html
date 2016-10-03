@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <h5>Ask for help and advices</h5>
         <p class="second-line">
-          Post ads about what you need. They will be displayed in the <strong>get involved</strong> tab of your project page.
+          Post ads about what you need and ask our community for help. Your ads will be displayed in the <strong>get involved</strong> tab of your project page.
         </p>
       </div>
     </div>
@@ -55,6 +55,19 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="update-project-needs-contrib-title" style="text-align: center" ng-if="open.contributors">
+          <h4 style="font-size: 14px; margin-bottom: 15px">Those people could help you: </h4>
+        </div>
+        <div class='update-project-needs-contrib-users'>
+          <ul>
+            <a ng-href="/{{contrib.username}}" ng-repeat="contrib in open.contributors">
+              <li>
+                <img ng-src="{{contrib.profile_picture}}">
+                <div class="tooltipw">{{contrib.first_name}} {{contrib.last_name}}</div>
+              </li>
+            </a>
+          </ul>
         </div>
       </div>
       <div class="col-md-3 project-needs-question">

@@ -96,6 +96,7 @@
                     <li><a href="" data-ui-sref="profile({username: user.username})">My Profile</a></li>
                     <li ng-if="moderator" ><a href="/admin/panel">Admin Panel</a></li>
                     <li><a href="/my-projects">Projects</a></li>
+                    <li><a href="/rank">Statistic</a></li>
                     <li><a href="/setting">Settings</a></li>
                     <li><a ng-click="logout()">Log out</a></li>
                 </ul>
@@ -103,7 +104,7 @@
             <div id="hdropm" class="header-dropdown-mailbox header-dropdownBox" onmouseover="preventScroll()" onmouseout="allowScroll()" style="display: none;">
                 <div class="header-dropdown-head">
                     <a class="header-see-all" href="/messages">See All</a>
-                    <a id="hnmmopen" class="header-new-message" ng-click="getTemplate()">Write A New Message</a>
+                    <a id="hnmmopen" class="header-new-message">Write A New Message</a>
                 </div>
                 <div class="header-dropdown-lists">
                     <div ng-if="!dialogues.length" class="header-noMessage-text">
@@ -239,6 +240,7 @@
             "referrer": document.referrer
         }); */
 
+
         if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
         else
@@ -246,7 +248,7 @@
 
         $(document).ready(function() {
 
-            if (y > 736) {
+            if (y >= 736) {
                 var messCon     = document.getElementById('messages-body-page');
 
                 window.onclick = function(e) {
@@ -255,6 +257,7 @@
                     var messCon     = document.getElementById('messages-body-page');
 
                     /* Message DOM variable */
+
                     if (messCon) {
                         var mobox       = document.getElementById('mobox'),
                             mhopI       = document.getElementById('mhop-i'),

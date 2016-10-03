@@ -11,14 +11,14 @@
 angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 
 	$scope.seo = {
-		pageTitle: "Wittycircle | Where creators meet",
-		pageDescription: "Have an idea worth spreading? You found the right place. Start with finding skilled peope around you, ask for feedback, support and meet your early fans.",
+		pageTitle: "Wittycircle | Where the world meets entrepreneurs",
+		pageDescription: "Nobody can build great things alone. Share your ideas or projects on Wittycircle and be connected to the right people, at the right time.",
 	};
 
 	$scope.card = {
-		title: "Wittycircle | Where creators meet",
+		title: "Wittycircle | Where the world meets entrepreneurs",
 		url: "https://www.wittycircle.com",
-		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458576687/Share_banner_cover/banner_share.png"
+		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1475443938/Cover_Share_FB_Tw_mmyt5p.jpg"
 	};
 
 	if ($(window).width() < 736) {

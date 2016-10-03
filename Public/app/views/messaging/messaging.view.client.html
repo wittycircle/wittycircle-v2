@@ -67,7 +67,7 @@
 </div>
 </div>
 <div id="mcb" class="messages-conversation-body">
-	<div class="messages-cb-texto" ng-repeat="message in messages track by $index">
+	<div class="messages-cb-texto" ng-repeat="message in messages track by $index" ng-if="showAcceptItem(message)">
 		<div class="messages-texto-picture">
 			<img ng-if="my_id === message.from_user_id" ng-src="{{ resizePic(profile_my_picture, 50, 50, 'fill') }}">
 			<img ng-if="my_id !== message.from_user_id" ng-src="{{ resizePic(profile_user_picture, 50, 50, 'fill') }}">
@@ -79,6 +79,14 @@
 			</div>
 			<div class="messages-texto-text">
 				<div class="messages-text" ng-bind-html=" transformHtml(message.message)"></div>
+				<div class="messages-text-help-demand" ng-if="message.ask_for_help === 1 && message.to_user_id === my_id">
+					<h5>Do you want to help?</h5>
+					<span ng-click="acceptHelpMessage($index, message.id, true, message.from_user_id, message.ask_project_id)"><i class="fa fa-check" aria-hidden="true"></i> Yes</span>
+					<span ng-click="acceptHelpMessage($index, message.id, false, message.from_user_id, message.ask_project_id)"><i class="fa fa-times" aria-hidden="true"></i> No</span>
+				</div>
+				<div class="messages-text-help-pending" ng-if="message.ask_for_help === 1 && message.from_user_id === my_id">
+					<i>{{name}} did not answer yet...</i>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -192,6 +192,16 @@
       background-size: auto 60px;
       background-repeat: no-repeat;
       background-position: center center; }
+  .profile-card .card-rank {
+    position: absolute;
+    width: 207px;
+    margin-top: 42px;
+    text-align: right; }
+    .profile-card .card-rank span {
+      font-family: 'FreigMed';
+      font-size: 14px;
+      color: #999999;
+      padding-right: 10px; }
   .profile-card .card-info {
     padding: 20px 15px;
     height: 163px;

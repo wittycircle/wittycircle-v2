@@ -861,6 +861,7 @@ exports.updateProject = function(req, res){
     }
 };
 
+
 exports.getProjectOpenings = function(req, res){
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
     var errors = req.validationErrors(true);
@@ -870,14 +871,7 @@ exports.getProjectOpenings = function(req, res){
         pool.query("SELECT * FROM `project_openings` WHERE `id` = ?",
         [req.params.id],
         function (err, results, fields) {
-            if(err){
-                var date = new Date();
-                console.log(date);
-                console.log("Error getting projects in projects.js/getProjectOpenings");
-                console.log(err);
-                console.log("\n");
-                throw err;
-            }
+            if (err) throw err;
             function recursive(index){
                 if(index !== results.length){
                     pool.query("SELECT * FROM `skills` WHERE `id` IN (SELECT `skill_id` FROM `opening_skills` WHERE `opening_id` = ?)",
@@ -890,7 +884,8 @@ exports.getProjectOpenings = function(req, res){
                         recursive(index + 1);
                     });
                 } else {
-                    res.send(results);
+
+                    return res.send(results);
                 }
             }
             recursive(0);

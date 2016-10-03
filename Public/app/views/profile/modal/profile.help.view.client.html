@@ -1,0 +1,40 @@
+<section id="php-need" class="profile-help-project animated fadeIn" style="display: none;">
+	<div class="profile-help-project-title">
+		<h4 ng-if="needToHelp.length">Ask {{profileVm.profile.first_name}} for help</h4>
+		<h4 ng-if="!needToHelp.length">What {{profileVm.profile.first_name}} could help you ?</h4>
+	</div>
+
+	<div class="profile-help-project-needs">
+
+		<div class="profile-help-project-need-card" ng-repeat="needP in needToHelp track by $index" ng-class="{ 'selected-card' : activeCard === $index }" ng-click="selectNeed($index, projectInfo.picture, projectInfo.title, needP.status, needP.skill, needP.taggs, needP.project_id)">
+			<div class="phpnc-picture" ng-style="{'background-image': 'url(' + needP.picture + ')'}">
+				<h5>{{needP.status}} <span>skilled in</span></h5>
+				<h5>{{needP.skill}}</h5>
+			</div>
+
+			<div class="phpnc-body">
+				<p ng-bind="needP.description"></p>
+
+				<ul>
+					<li ng-repeat="tag in needP.taggs">{{tag}}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="profile-help-project-add-need" ng-click="goToAddNeed()">
+			<img src="images/needs-icon.png">
+			<h5><i class="fa fa-plus"></i> Add a need</h5>
+			<p>Our fancy algorithm will do the rest.</p>
+		</div>
+
+		<!-- <div class="profile-help-project-add-need">
+			<img src="images/needs-icon.png">
+			<h5><i class="fa fa-plus"></i> Add a need</h5>
+			<p>Our fancy algorithm will do the rest.</p>
+		</div> -->
+	</div>
+
+	<div class="profile-help-project-need-button">
+		<button id="phpnb-button" type="button" ng-class="{ 'disabled-button' : !needSelected }" ng-click="displayDemand()">Ask {{profileVm.profile.first_name}}</button>
+	</div>
+</section>

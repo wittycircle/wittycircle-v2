@@ -428,7 +428,7 @@ function getListUserSearch(data, callback) {
             if (data[index]) {
                 function recursive2(index2) {
                     if (data[index][index2]) {
-                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?) AND fake = 0 ',
+                        pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)',
                             data[index][index2].user_id,
                             function(err, result) {
                                 if (err) throw err;

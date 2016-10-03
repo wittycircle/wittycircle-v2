@@ -201,6 +201,9 @@
                     vm.config.plugins.poster = vm.project.video_poster;
                 }
             }
+            $http.put('/contributor/project', {project_id: vm.project.id}).success(function(res) {
+                $scope.projectContributor = res.data;
+            });
             // disable following if the currentUser is the creator
             if (currentUser && currentUser.id === vm.project.creator_user_id) {
                 vm.no_follow = false;

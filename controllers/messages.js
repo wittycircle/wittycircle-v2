@@ -128,7 +128,7 @@ exports.createMessage = function(req, res){
 	req.checkBody('from_user_id', 'Error Message').isInt();
 	req.checkBody('to_user_id', 'Error Message').isInt();
 	req.checkBody('parent_id', 'Error Message').optional().isInt();
-	req.checkBody('message', 'Error Message').isString().max(512);
+	req.checkBody('message', 'Error Message').isString();
 
 	var errors = req.validationErrors(true);
 	if (errors) {
@@ -142,7 +142,7 @@ exports.createMessage = function(req, res){
 			[data[0].profile_id, data[1].profile_id, data[0].profile_id, data[1].profile_id],
 			function(err, result) {
 				if (err) throw err;
-				req.body.parent_id	= req.body.from_user_id + req.body.to_user_id;
+				req.body.parent_id	 	= req.body.from_user_id + req.body.to_user_id;
 				req.body.from_username	= result[0].first_name + ' ' + result[0].last_name;
 				req.body.to_username	= result[1].first_name + ' ' + result[1].last_name;
 				//				      req.body.m_read		= 1;
@@ -245,6 +245,22 @@ exports.getAllMessage = function(req, res) {
 			});
 	} else 
 		return res.status(403).send("NOT AUTHORIZED");
+};
+
+exports.updateMessageAskHelp = function(req, res) {
+	req.checkBody('id', 'Error Message').isInt();
+
+	var errors = req.validationErrors(true);
+	if (errors) {
+		return res.status(400).send(errors);
+	} else {
+		req.body.check = req.body.check ? 0 : -1;
+		pool.query('UPDATE messages SET ask_for_help = ? WHERE id = ?', [req.body.check, req.body.id],
+			function(err, result) {
+				if (err) throw err;
+				return res.status(200).send({success: true});
+			});
+	}
 };
 
 function checkFirstMessage (info, callback) {

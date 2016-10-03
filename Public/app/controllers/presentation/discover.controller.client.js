@@ -464,7 +464,6 @@ angular.module('wittyApp')
         RetrieveData.ppdData('/search/projects/scl', 'POST', object).then(function(res) {
             if (!res.success) return getDiscoverCard();
             discover.cards = res.data;
-            console.log(discover.cards);
         });
     };
     function searchSkill2(object) {

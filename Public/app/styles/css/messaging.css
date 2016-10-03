@@ -64,7 +64,7 @@
       border: 0;
       padding: 20px;
       min-height: 150px !important;
-      max-height: 300px !important; }
+      max-height: 200px !important; }
       #messages-modal-newMessageArea .messages-newMessageArea-text .redactor-editor p,
       #profile-modal-newMessageArea .messages-newMessageArea-text .redactor-editor p,
       #project-modal-newMessageArea .messages-newMessageArea-text .redactor-editor p {
@@ -383,7 +383,14 @@
                       color: #0645AD;
                       pointer-events: none;
                       cursor: default; }
+                    #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text .messages-main-text h5, #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text .messages-main-text h4 {
+                      font-family: 'FreigBook';
+                      font-size: 15px;
+                      color: black;
+                      line-height: 19px;
+                      margin-bottom: 5px; }
                   #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object .messages-list-text p {
+                    color: #222;
                     margin-bottom: 0;
                     line-height: 18px; }
                 #messages-page #messages-body .messages-component .messages-contact-list .messages-contact .messages-list .messages-list-object span {
@@ -496,12 +503,13 @@
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body {
             background-color: white;
             height: 300px;
-            overflow-y: scroll; }
+            overflow-y: scroll;
+            padding-bottom: 25px; }
             #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body a {
               color: blue; }
             #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto {
               padding: 25px 15px;
-              border-bottom: 1px solid #f5f5f5; }
+              border-top: 1px solid #f5f5f5; }
               #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto-picture {
                 display: inline-block;
                 margin: 5px;
@@ -515,7 +523,8 @@
                 width: 514px;
                 padding: 2px 0px 0px 10px; }
                 #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name {
-                  margin-bottom: 5px; }
+                  margin-bottom: 0px;
+                  margin-top: 5px; }
                   #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-name h4 {
                     display: inline-block;
                     font-family: 'FreigSem';
@@ -536,8 +545,54 @@
                     line-height: 25px;
                     word-wrap: break-word;
                     margin-bottom: 0; }
+                    #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs {
+                      padding: 25px 0px; }
+                      #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs h5 {
+                        font-family: 'FreigBook';
+                        font-size: 16px;
+                        color: #222;
+                        margin-bottom: 15px; }
+                      #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs .profile-message-need .profile-message-need-project-title img {
+                        display: inline-block;
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 4px;
+                        margin-right: 10px; }
+                      #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs .profile-message-need .profile-message-need-project-title h5 {
+                        display: inline-block;
+                        font-family: 'FreigSem';
+                        font-size: 16px;
+                        color: #222;
+                        margin-bottom: 5px; }
+                      #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs .profile-message-need p {
+                        font-family: 'FreigBook';
+                        font-size: 15px;
+                        margin-bottom: 5px; }
+                      #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text .messages-text .profile-message-needs .profile-message-need u {
+                        color: #555D8B; }
                   #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-texto-text p {
-                    margin-bottom: 0; } }
+                    margin-bottom: 0; }
+                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-demand h5 {
+                  display: inline-block;
+                  font-family: 'FreigBook';
+                  font-size: 15px;
+                  color: black;
+                  margin-bottom: 15px;
+                  margin-right: 50px; }
+                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-demand span {
+                  font-family: 'FreigBook';
+                  font-size: 15px;
+                  color: black;
+                  margin-bottom: 15px;
+                  margin-right: 20px; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-demand span .fa-check {
+                    color: #7BC087; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-demand span .fa-times {
+                    color: #BB463F; }
+                #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-pending {
+                  text-align: left; }
+                  #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body .messages-cb-texto .messages-texto .messages-text-help-pending i {
+                    font-family: 'FreigBook'; } }
         @media only screen and (min-width: 736px) and (min-height: 720px) {
           #messages-page #messages-body .messages-component .messages-conversation .messages-conversation-body {
             height: 500px; } }

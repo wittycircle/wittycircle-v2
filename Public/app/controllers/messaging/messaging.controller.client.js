@@ -25,6 +25,7 @@
             $scope.currentUsername = $rootScope.globals.currentUser.username;
 
 		$scope.onlineUser = $stateParams.userOn;
+		$scope.newMessageArea = {};
 
 	 	$scope.scrollDownMessage = function() {
 	 		setTimeout(function() {
@@ -211,11 +212,68 @@
 
 		};
 
+		$scope.acceptHelpMessage = function(index, m_id, check, to_user_id, project_id) {
+			$scope.messages[index].ask_for_help = 0;
+
+			if (check) {
+				$http.put('/messages/ask/accept', {id: m_id, check: check}).success(function(res) {
+					if (res.success) {
+						$scope.newMessageArea.message = "<i>... " + $rootScope.globals.currentUser.first_name + " accepted your request. Let's chat</i> <br />";
+						$scope.Pi = to_user_id;
+						$scope.checkAccept = true;
+						$scope.createNewMessage(false);
+					}
+				});
+				$http.post('/contributor/project', {project_id: project_id, user_id: $scope.my_id, contributor_check: 1});
+				return ;	
+			} else {
+				$http.put('/messages/ask/accept', {id: m_id, check: check});
+				$http.post('/contributor/project', {project_id: project_id, user_id: $scope.my_id, contributor_check: 0});
+			}
+		};
+
+		$scope.showAcceptItem = function(message) {
+			if (message.accept_help === 0)
+				return true;
+			else if (message.accept_help === 1) {
+				if (message.from_user_id === $scope.my_id)
+					return false;
+				else
+					return true;
+			} else 
+				return false;
+		};
+
 		$scope.createNewMessage = function(modal) {
-			$scope.infoMessage = {
-				from_user_id: $rootScope.globals.currentUser.id,
-				to_user_id: $scope.Pi,
-				message: $scope.newMessageArea.message
+
+			if (!$scope.newMessageArea.message && !$scope.sendNeed)
+				return ;
+			if ($scope.sendNeed) {
+				var needHelp = angular.element(pmnhelp).html();
+				$scope.newMessageArea.message = $scope.newMessageArea.message ? $scope.newMessageArea.message : " ";
+				needHelp = "<div id='pmnhelp' class='profile-message-needs'>" + "\n" + needHelp + "<i>" + $scope.newMessageArea.message + "</i>";
+
+				$scope.infoMessage = {
+					from_user_id	: $rootScope.globals.currentUser.id,
+					to_user_id 		: $scope.Pi,
+					message 		: needHelp,
+					ask_project_id	: $scope.project_p_id,
+					ask_for_help: 1,
+					accept_help: 0
+				}
+			} else {
+
+				if ($scope.checkAccept) {
+					$scope.infoMessage = {
+						from_user_id: $rootScope.globals.currentUser.id,
+						to_user_id: $scope.Pi,
+						message: $scope.newMessageArea.message,
+						ask_for_help: 0,
+						accept_help: 1
+					}
+				}
+
+				$scope.checkAccept = false;
 			}
 
 			if ($scope.onlineUser && $scope.onlineUser[$scope.createName] !== undefined) {

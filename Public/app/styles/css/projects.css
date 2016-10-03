@@ -269,7 +269,26 @@
 .project-post-container {
   text-align: center;
   min-height: 200px;
-  padding: 40px 0px; }
+  padding: 20px 0px 40px 0; }
+  .project-post-container .project-contributor-show {
+    width: 740px;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 20px; }
+    .project-post-container .project-contributor-show h4 {
+      display: inline-block;
+      font-family: 'FreigBook';
+      font-size: 16px;
+      color: black;
+      margin-right: 10px; }
+    .project-post-container .project-contributor-show ul {
+      display: inline-block; }
+      .project-post-container .project-contributor-show ul li {
+        display: inline-block;
+        margin-right: 5px; }
+        .project-post-container .project-contributor-show ul li img {
+          width: 34px;
+          border-radius: 50%; }
   .project-post-container .video-container iframe {
     width: 738px;
     height: 416px; }

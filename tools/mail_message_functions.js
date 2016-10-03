@@ -148,3 +148,100 @@ exports.sendMailUnread = function() {
         }
     });
 };
+
+function sendMailByMandrill(info, callback) {
+
+    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+
+    var fullname    = info.first_name + " " + info.last_name;
+    var subj        = fullname + " invited you to join Wittycircle";
+    var desc        = "I just joined Wittycircle, the place where the world meets entrepreneurs. Join me and become part of a vibrant ecosystem.";
+
+    var template_name = "invitation";
+    var template_content = [{
+        "name": "invitation",
+        "content": "content",
+    }];
+
+    var message = {
+        "html": "<p>HTML content</p>",
+        "subject": subj,
+        "from_email": "noreply@wittycircle.com",
+        "from_name": "Wittycircle",
+        "to": info.to_mailList,
+        "headers": {
+            "Reply-To": "noreply@wittycircle.com"
+        },
+        "important": false,
+        "inline_css": null,
+        "preserve_recipients": null,
+        "view_content_link": null,
+        "tracking_domain": null,
+        "signing_domain": null,
+        "return_path_domain": null,
+        "merge": true,
+        "merge_language": "mailchimp",
+        "global_merge_vars": [{
+            "name": "merge1",
+            "content": "merge1 content"
+        }],
+        "global_merge_vars": [
+            {
+                "name": "ffname",
+                "content": info.first_name
+            },
+            {
+                "name": "flname",
+                "content": info.last_name
+            },
+            {
+                "name": "pimg",
+                "content": info.profile_picture
+            },
+            {
+                "name": "funame",
+                "content": fullname
+            },
+            {
+                "name": "fdesc",
+                "content": desc
+            },
+        ]
+    };
+
+    var async = false;
+    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+        return callback({success: true, msg: "Invitation Send"});
+    }, function(e) {
+        // Mandrill returns the error as an object with name and message keys
+        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        throw e;
+        // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+    });
+};
+
+function getInformationForSendMail(user_id, callback) {
+    pool.query("SELECT first_name, last_name, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", user_id,
+        function(err, result) {
+            if (err) throw err;
+            else 
+                return callback(result[0]);
+        });
+};
+
+exports.sendInvitationMail = function(user_id, mails, callback) {
+    getInformationForSendMail(user_id, function(info) {
+        var newMailList = [];
+        for (var i = 0; i < mails.length; i++) {
+            newMailList.push({
+                email: mails[i],
+                name: info.first_name,
+                type: "to"
+            })
+        }
+        info.to_mailList = newMailList;
+        sendMailByMandrill(info, function(done) {
+            callback(done);
+        });
+    });
+};

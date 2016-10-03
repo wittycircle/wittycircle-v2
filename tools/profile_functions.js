@@ -86,8 +86,7 @@ exports.sortCardProfileNew = function(data, callback) {
 								});
 						});
 				});
-			} else 
-			    return recursive(index + 1);
+			}
 		    } else { 
 				return callback(newCardProfile);
 		    }

@@ -128,7 +128,7 @@ exports.createMessage = function(req, res){
 	req.checkBody('from_user_id', 'Error Message').isInt();
 	req.checkBody('to_user_id', 'Error Message').isInt();
 	req.checkBody('parent_id', 'Error Message').optional().isInt();
-	req.checkBody('message', 'Error Message').isString().max(512);
+	req.checkBody('message', 'Error Message').isString();
 
 	var errors = req.validationErrors(true);
 	if (errors) {

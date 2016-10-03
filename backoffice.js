@@ -220,7 +220,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/project/incomplete/post', ensureAdmin, function(req, res) {
-		pool.query("SELECT creator_user_id FROM projects WHERE project_visibility = 1 AND post = '' AND picture != ''", function(err, result) {
+		pool.query("SELECT creator_user_id FROM projects WHERE project_visibility = 1 AND (post = '' OR post is null) AND picture != ''", function(err, result) {
 			if (err) throw err;
 			else {
 				var arr = result.map( function(el) { return el.creator_user_id; });

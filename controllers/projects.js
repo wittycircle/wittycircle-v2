@@ -727,7 +727,7 @@ exports.createProject = function(req, res){
 	    pool.query('SELECT count(*) as count FROM projects WHERE creator_user_id = ?', req.user.id,
 		       function(err, check) {
 			   if (err) throw err;
-			   if (check[0].count >= 2)
+			   if (check[0].count >= 5)
 			       return ;
 			   pool.query('INSERT INTO `projects` SET ?', req.body, function(err, result) {
 			       if (err){

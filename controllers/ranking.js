@@ -118,6 +118,16 @@ function getSuccessSocialSharing(user_id, callback) {
 		});
 };
 
+function getCountSuccessInvitation(user_id, callback) {
+	pool.query('SELECT count(*) as number FROM invitation WHERE user_id = ? AND status = "registed"', user_id,
+		function(err, result) {
+			if (err) throw err;
+			else {
+				return callback(result[0].number);
+			}
+		});
+};
+
 function getAllProfileRank(user_id, callback) {
 	var rankObject = {};
 	
@@ -146,7 +156,11 @@ function getAllProfileRank(user_id, callback) {
 								getSuccessSocialSharing(user_id, function(ssPer) {
 									rankObject.socialPercentage = ssPer;
 
-									return callback(rankObject);
+									getCountSuccessInvitation(user_id, function(nInvit) {
+										rankObject.successInvitation = nInvit;
+
+										return callback(rankObject);
+									});
 								});
 							});
 						});
@@ -159,7 +173,7 @@ function getAllProfileRank(user_id, callback) {
 
 function getRankPoints(object, callback) {
 	var totalPoint = Math.round((object.startedProject * 10) + (object.feedbackProject * 50) + object.followUser + (object.userFollowed * 2) + (object.upvotedProject * 40) 
-	+ (object.receivedMessage * 10) + (object.profileViews * 0.5) + (object.profilePercentage * 10) + (object.socialPercentage + 300));
+	+ (object.receivedMessage * 10) + (object.profileViews * 0.5) + (object.profilePercentage * 10) + (object.socialPercentage + 300) + (object.successInvitation * 500));
 
 	callback(totalPoint);
 };

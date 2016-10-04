@@ -36,13 +36,13 @@
 			<section class="setting-ranking-up">
 				<aside class="setting-ranking-psi">
 					<div class="setting-ranking-profile">
-						<div class="tooltipw">Complete your profile (+1000)</div>
+						<div class="tooltipw" style="margin-left: -45px">Complete your profile (+1000)</div>
 						<span class="srpsi-text">Full profile</span>
 						<span class="srpsi-number">{{pRank.profilePercentage}}% <span class="srpsi-number-est" ng-if="pRank.profilePercentage">(+{{pRank.profilePercentage * 10}})</span></span>
 					</div>
 
 					<div class="setting-ranking-social">
-						<div class="tooltipw">Share the project to your network (+400)</div>
+						<div class="tooltipw" style="margin-left: -85px">Share the project to your network (+400)</div>
 						<span class="srpsi-text">Social Sharing</span>
 						<span class="srpsi-number" ng-if="pRank.socialPercentage">Yes <span class="srpsi-number-est" ng-if="pRank.socialPercentage">(+{{pRank.profilePercentage * 4}})</span></span>
 						<span class="srpsi-number" ng-if="!pRank.socialPercentage">No <span class="srpsi-number-est" ng-if="pRank.socialPercentage">(+{{pRank.profilePercentage * 4}})</span></span>
@@ -64,7 +64,7 @@
 
 					<div class="setting-ranking-invitation">
 						<div class="sri-title">
-							<div class="tooltipw">Share the project to your friends (+500)</div>
+							<div class="tooltipw" style="margin-left: -78px">Share the project to your friends (+500)</div>
 							<span class="srpsi-text">Invitations</span>
 
 							<span class="srpsi-number">{{pRank.successInvitation}} <span ng-if="pRank.successInvitation" style="font-weight: 500">(+{{pRank.successInvitation * 500}})</span></span>
@@ -90,23 +90,23 @@
 			<section class="setting-ranking-down">
 				<ul class="srd-ul">
 					<li>
-						<div class="tooltipw">Number of public projects (+200)</div>
+						<div class="tooltipw" style="margin-left: -43px">Number of public projects (+200)</div>
 						<div class="srpsi-text">Started projects</div> <div class="srpsi-number">{{pRank.startedProject}} <div class="srpsi-number-est" ng-if="pRank.startedProject">(+{{pRank.startedProject * 200}})</div> </div>
 </li>
-					<li><div class="tooltipw">Number of public projects (+15)</div><div class="srpsi-text">Project feedback</div> <div class="srpsi-number">{{pRank.feedbackProject}} <div class="srpsi-number-est" ng-if="pRank.feedbackProject">(+{{pRank.feedbackProject * 15}})</div> </div></li>
-					<li><div class="tooltipw">Number of time you helped a project (+100)</div><div class="srpsi-text">Project contributions</div> <div class="srpsi-number">0</div></li>
+					<li><div class="tooltipw" style="margin-left: -40px">Number of public projects (+15)</div><div class="srpsi-text">Project feedback</div> <div class="srpsi-number">{{pRank.feedbackProject}} <div class="srpsi-number-est" ng-if="pRank.feedbackProject">(+{{pRank.feedbackProject * 15}})</div> </div></li>
+					<li><div class="tooltipw" style="margin-left: -46px">Number of time you helped a project (+100)</div><div class="srpsi-text">Project contributions</div> <div class="srpsi-number">0</div></li>
 				</ul>
 
 				<ul class="srd-ul">
-					<li><div class="tooltipw">Number of people you follow (+1)</div><div class="srpsi-text">Following</div> <div class="srpsi-number">{{pRank.followUser}} <div class="srpsi-number-est" ng-if="pRank.followUser">(+{{pRank.followUser}})</div></div></li>
-					<li><div class="tooltipw">Number of people following you (+2)</div><div class="srpsi-text">Followers</div> <div class="srpsi-number">{{pRank.userFollowed}} <div class="srpsi-number-est" ng-if="pRank.userFollowed">(+{{pRank.userFollowed * 2}})</div></div> </li>
-					<li><div class="tooltipw">Number of projects you upvoted (+15)</div><div class="srpsi-text">Upvoted projects</div> <div class="srpsi-number">{{pRank.upvotedProject}} <div class="srpsi-number-est" ng-if="pRank.upvotedProject">(+{{pRank.upvotedProject * 15}})</div></div></li>
+					<li><div class="tooltipw" style="margin-left: -60px">Number of people you follow (+1)</div><div class="srpsi-text">Following</div> <div class="srpsi-number">{{pRank.followUser}} <div class="srpsi-number-est" ng-if="pRank.followUser">(+{{pRank.followUser}})</div></div></li>
+					<li><div class="tooltipw" style="margin-left: -70px">Number of people following you (+2)</div><div class="srpsi-text">Followers</div> <div class="srpsi-number">{{pRank.userFollowed}} <div class="srpsi-number-est" ng-if="pRank.userFollowed">(+{{pRank.userFollowed * 2}})</div></div> </li>
+					<li><div class="tooltipw" style="margin-left: -50px">Number of projects you upvoted (+15)</div><div class="srpsi-text">Upvoted projects</div> <div class="srpsi-number">{{pRank.upvotedProject}} <div class="srpsi-number-est" ng-if="pRank.upvotedProject">(+{{pRank.upvotedProject * 15}})</div></div></li>
 				</ul>
 
 				<ul class="srd-ul">
-					<li><div class="tooltipw">Number of messages you received (+2)</div><div class="srpsi-text">Messages received</div> <div class="srpsi-number">{{pRank.receivedMessage}} <div class="srpsi-number-est" ng-if="pRank.receivedMessage">(+{{pRank.receivedMessage * 2}})</div></div></li>
-					<li><div class="tooltipw">Number of people who viewed your profile (+0.5)</div><div class="srpsi-text">Profile views</div> <div class="srpsi-number">{{pRank.profileViews}} <div class="srpsi-number-est" ng-if="pRank.profileViews">(+{{pRank.profileViews * 0.5}})</div></div> </li>
-					<li><div class="tooltipw">Number of recurring session (+50)</div><div class="srpsi-text">Recurring sessions</div> <div class="srpsi-number">1 <div class="srpsi-number-est" ng-if="pRank.profileViews">(+50)</div></div></li>
+					<li><div class="tooltipw" style="margin-left: -45px">Number of messages you received (+2)</div><div class="srpsi-text">Messages received</div> <div class="srpsi-number">{{pRank.receivedMessage}} <div class="srpsi-number-est" ng-if="pRank.receivedMessage">(+{{pRank.receivedMessage * 2}})</div></div></li>
+					<li><div class="tooltipw" style="margin-left: -90px">Number of people who viewed your profile (+0.5)</div><div class="srpsi-text">Profile views</div> <div class="srpsi-number">{{pRank.profileViews}} <div class="srpsi-number-est" ng-if="pRank.profileViews">(+{{pRank.profileViews * 0.5}})</div></div> </li>
+					<li><div class="tooltipw" style="margin-left: -30px">Number of recurring session (+50)</div><div class="srpsi-text">Recurring sessions</div> <div class="srpsi-number">1 <div class="srpsi-number-est" ng-if="pRank.profileViews">(+50)</div></div></li>
 				</ul>
 			</section>
 		</div>

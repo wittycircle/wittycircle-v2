@@ -439,12 +439,18 @@ exports.createUser = function(req, res){
 						       pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
 								  function(err, success) {
 								        if (err) throw err;
-										res.send({success: true, result: result});
-								  });
+                                        else {
+                                            pool.query('UPDATE invitation SET status = "registed" WHERE invite_email = ? AND status = "pending"', req.body.email,
+                                                function(err, done) {
+                                                    if (err) throw err;
+                                                    return res.send({success: true, result: result});
+                                                })
+								        }
+                                  });
 						   });
 					       }
 					       else {
-						   recursive(index + 1);
+						      return recursive(index + 1);
 					       }
 					   });
 				       }

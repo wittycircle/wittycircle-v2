@@ -48,14 +48,14 @@
 						<span class="srpsi-number" ng-if="!pRank.socialPercentage">No <span class="srpsi-number-est" ng-if="pRank.socialPercentage">(+{{pRank.profilePercentage * 4}})</span></span>
 					</div>
 
-					<div class="setting-ranking-share" ng-controller="PopUpCtrl" ng-click="facebookShare('Wittycircle', 'https://www.wittycircle.com', 'https://res.cloudinary.com/dqpkpmrgk/image/upload/v1475443938/Cover_Share_FB_Tw_mmyt5p.jpg', 'hello world!')">
-						<div id="fshare" class="fb-share">
+					<div class="setting-ranking-share" ng-controller="PopUpCtrl">
+						<div id="fshare" class="fb-share" ng-click="facebookShare('Wittycircle', 'https://www.wittycircle.com', 'https://res.cloudinary.com/dqpkpmrgk/image/upload/v1475443938/Cover_Share_FB_Tw_mmyt5p.jpg', 'hello world!')">
 						  <a target="_self">
 						    <button><i class="fa fa-facebook" style="color: white"></i>Share on Facebook</button>
 						  </a>
 						</div>
 						<div id="twshare" class="tw-share">
-						  <a href="https://twitter.com/intent/tweet?text=Need help to develop your project? Want to discover cool ideas? Join now &url=https://www.wittycircle.com">
+						  <a href="https://twitter.com/intent/tweet?text=Just joined @wittycircle, where the #world meets #entrepreneurs &url=https://www.wittycircle.com">
 						    <button class="tw-share"><i class="fa fa-twitter"></i> Share on Twitter</button>
 						  </a>
 			 			</div>
@@ -65,7 +65,7 @@
 						<div class="sri-title">
 							<div class="tooltipw">Share the project to your friends (+500)</div>
 							<span class="srpsi-text">Invitations</span>
-							<span class="srpsi-number">3</span>
+							<span class="srpsi-number">{{pRank.successInvitation}} <span ng-if="pRank.successInvitation">(+{{pRank.successInvitation * 500}}</span></span>
 						</div>
 
 						<div class="sri-box">

@@ -139,7 +139,7 @@ function getCountSuccessInvitation(user_id, callback) {
 													username		: result2[0].username,
 													first_name		: result3[0].first_name,
 													last_name 		: result3[0].last_name,
-													profile_picture : result3[0].picture
+													profile_picture : result3[0].profile_picture
 												});
 												return recursive(index + 1);
 											}
@@ -147,7 +147,7 @@ function getCountSuccessInvitation(user_id, callback) {
 								}
 							});
 					} else
-						return callback(result.length, data);
+						return callback(result.length, usersInvite);
 				};
 				recursive(0);
 			}

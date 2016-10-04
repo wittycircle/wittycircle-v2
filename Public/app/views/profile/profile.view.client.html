@@ -29,7 +29,7 @@
 				</div>
 				<img ng-src="{{ resizePic(profileVm.profile.profile_picture, 154, 154, 'fill') }}" alt="profile-picture">
 				<div class="profile-info-top-rank">
-					<div class="tooltipw" ng-if="profileVm.currentUser.username === profileVm.paramUsername">{{profileVm.profile.first_name}} rank among the {{topRank}} most influent users of the community</div>
+					<div class="tooltipw">{{profileVm.profile.first_name}} ranked among the {{topRank}} most influent users of the community</div>
 					<h5 ng-if="topRank">#{{topRank}}</h5>
 				</div>
 			</div>

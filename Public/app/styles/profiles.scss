@@ -173,6 +173,7 @@ a:hover {
 						background-color: black;
 						padding: 2px 5px;
 						margin-bottom: 4px;
+						margin-right: 5px;
 						border-radius: 4px;
 						font-family: 'FreigSem';
 						font-size: 14px;
@@ -406,7 +407,7 @@ a:hover {
 					font-size: 13px;
 					color: #fff;
 					opacity: 0;
-					width: 200px;
+					min-width: 220px;
 					z-index: 10000000;
 					padding: 3px 5px;
 					border-radius: 4px;
@@ -919,8 +920,7 @@ a:hover {
 						left: 20px;
 
 						li {
-							display: inline-block;
-
+						
 							img {
 								height: 36px;
 								width: 36px;

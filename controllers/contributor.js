@@ -43,27 +43,30 @@ exports.contributorsToProject = function(req, res) {
         pool.query("SELECT user_id FROM project_followers WHERE follow_project_id = ?", req.body.project_id,
             function(err, result) {
                 if (err) throw err;
-
-                var arr = result.map( function(el) { return el.user_id; });
-                pool.query("SELECT id, first_name, last_name, profile_picture FROM profiles WHERE id IN (" + arr + ")",
-                    function(err, result2) {
-                        if (err) throw err;
-                        function recursive(index) {
-                            if (result2[index]) {
-                                pool.query("SELECT username FROM users WHERE profile_id = ?", result2[index].id,
-                                    function(err, result3) {
-                                        if (err) throw err;
-                                        else {
-                                            result2[index].username = result3[0].username;
-                                            return recursive(index + 1);
-                                        }
-                                    });
-                            } else {
-                                return res.status(200).send({success: true, data: result2});
-                            }
-                        };
-                        recursive(0);
-                    });
+		if (!result[0])
+		    return res.send({success: false});
+		else {
+                    var arr = result.map( function(el) { return el.user_id; });
+		    pool.query("SELECT id, first_name, last_name, profile_picture FROM profiles WHERE id IN (" + arr + ")",
+			       function(err, result2) {
+				   if (err) throw err;
+				   function recursive(index) {
+				       if (result2[index]) {
+					   pool.query("SELECT username FROM users WHERE profile_id = ?", result2[index].id,
+						      function(err, result3) {
+							  if (err) throw err;
+							  else {
+							      result2[index].username = result3[0].username;
+							      return recursive(index + 1);
+							  }
+						      });
+				       } else {
+					   return res.status(200).send({success: true, data: result2});
+				       }
+				   };
+				   recursive(0);
+			       });
+		}
             })
     }
 };

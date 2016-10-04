@@ -87,7 +87,7 @@ exports.sortCardProfileNew = function(data, callback) {
 															data[index].user_id 	= row[0].id;
 															data[index].skills 		= _.difference(arr, data[index].skill);
 															data[index].username 	= row[0].username;
-															data[index].myRank 		= done[0].rank || null;
+															data[index].myRank 		= done[0] ? done[0].rank : null;
 															newCardProfile.push(data[index]);
 
 															return recursive(index + 1);

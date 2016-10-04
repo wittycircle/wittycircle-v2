@@ -1,5 +1,4 @@
 var sendMailAPI = require('../tools/mail_message_functions');
-var emailCheck = require('email-check');
 
 function checkDataMail(email, callback) {
 	pool.query('SELECT id FROM users WHERE email = ?', email,
@@ -12,7 +11,7 @@ function checkDataMail(email, callback) {
 		})
 };
 
-exports.checkExistenceMail = function(req, res) {
+/*exports.checkExistenceMail = function(req, res) {
 
 	emailCheck(req.body.email).then(function (check) {
 		if (check)
@@ -31,7 +30,7 @@ exports.checkExistenceMail = function(req, res) {
 		}
 	});
 
-};
+};*/
 
 exports.addInvitationMail = function(req, res) {
 	/* Validation */

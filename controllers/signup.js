@@ -32,8 +32,8 @@ exports.updateBasic = function(req, res) {
 };
 
 exports.updateAbout = function(req, res) {
-    req.checkBody('about', 'About must be a string.').isString().optional();
-    req.checkBody('description', 'Description must be a string.').isString().optional();
+    req.checkBody('about', 'About must be a string.').optional().isString();
+    req.checkBody('description', 'Description must be a string.').optional().isString();
 
   //  req.sanitize('about').Clean(true);
  

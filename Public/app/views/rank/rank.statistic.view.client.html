@@ -69,10 +69,8 @@
 						</div>
 
 						<div class="sri-box">
-							<div class="sri-box-illustre-img" style="display:none">
-								<span><img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_36,h_36,c_fill/v1461796994/j4woipyu0xaaumg1kxpo.jpg"/></span>
-								<span><img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_36,h_36,c_fill/v1461796994/j4woipyu0xaaumg1kxpo.jpg"/></span>
-								<span><img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_36,h_36,c_fill/v1461796994/j4woipyu0xaaumg1kxpo.jpg"/></span>
+							<div class="sri-box-illustre-img" ng-if="pRank.successInvitation">
+								<span ng-repeat="inviteUser in pRank.inviteUsers" ><a ng-href="{{inviteUser.username}}"><img ng-src="{{inviteUser.profile_picture}}" alt="profile_picture"/></a></span>
 							</div>
 							<span id="srpsib" class="srpsi-button"> <img src="/images/mailbox-icon-b-3.svg" />Tell a friend</span>
 						</div>

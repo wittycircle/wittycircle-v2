@@ -119,11 +119,37 @@ function getSuccessSocialSharing(user_id, callback) {
 };
 
 function getCountSuccessInvitation(user_id, callback) {
-	pool.query('SELECT count(*) as number FROM invitation WHERE user_id = ? AND status = "registed"', user_id,
+	pool.query('SELECT invite_email FROM invitation WHERE user_id = ? AND status = "registed"', user_id,
 		function(err, result) {
 			if (err) throw err;
 			else {
-				return callback(result[0].number);
+
+				var usersInvite = [];
+				function recursive(index) {
+					if (result[index]) {
+						pool.query('SELECT profile_id, username FROM users WHERE email = ?', result[index].invite_email,
+							function(err, result2) {
+								if (err) throw err;
+								else {
+									pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', result2[0].profile_id,
+										function(err, result3) {
+											if (err) throw err;
+											else {
+												usersInvite.push({
+													username		: result2[0].username,
+													first_name		: result3[0].first_name,
+													last_name 		: result3[0].last_name,
+													profile_picture : result3[0].picture
+												});
+												return recursive(index + 1);
+											}
+										});
+								}
+							});
+					} else
+						return callback(result.length, data);
+				};
+				recursive(0);
 			}
 		});
 };
@@ -156,8 +182,9 @@ function getAllProfileRank(user_id, callback) {
 								getSuccessSocialSharing(user_id, function(ssPer) {
 									rankObject.socialPercentage = ssPer;
 
-									getCountSuccessInvitation(user_id, function(nInvit) {
+									getCountSuccessInvitation(user_id, function(nInvit, users) {
 										rankObject.successInvitation = nInvit;
+										rankObject.inviteUsers = users;
 
 										return callback(rankObject);
 									});

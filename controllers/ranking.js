@@ -205,7 +205,7 @@ function registeAllRank() {
 };
 
 function compareRank(user_id, newRank, callback) {
-	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking ) ) AS rank FROM profile_ranking WHERE points >= 1000 && DATE(creation_date) = CURDATE() - 1 && user_id = ? ORDER BY rank', user_id,
+	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE() - 1) ) AS rank FROM profile_ranking WHERE points >= 1000 && DATE(creation_date) = CURDATE() - 1 && user_id = ? ORDER BY rank', user_id,
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -223,7 +223,7 @@ function compareRank(user_id, newRank, callback) {
 };
 
 var job = new CronJob({
-  cronTime: '00 33 10 * * 0-6',
+  cronTime: '00 00 00 * * 0-6',
   onTick: function() {
     registeAllRank();
   },
@@ -239,7 +239,7 @@ exports.getProfileStatisticRank = function(req, res) {
     if (errors) {
     	return res.status(400).send(errors);
     } else {
-    	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank', req.body.user_id,
+    	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE()) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank', req.body.user_id,
 		function(err, result) {
 			if (err) throw err;
 			else {

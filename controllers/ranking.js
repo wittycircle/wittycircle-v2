@@ -250,7 +250,7 @@ function compareRank(user_id, newRank, callback) {
 };
 
 var job = new CronJob({
-  cronTime: '00 00 00 * * 0-6',
+  cronTime: '00 00 15 * * 0-6',
   onTick: function() {
     registeAllRank();
   },

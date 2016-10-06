@@ -141,7 +141,7 @@
 						<img ng-if="card.check_vote" src="/images/Upvote_Icon.svg">
 						<span ng-bind="card.vote"></span>
 					</div>
-					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ discover.encodeUrl(card.title) }}">
+					<a class="card-project-page" ng-href="/project/{{ card.public_id }}/{{ discover.encodeUrl(card.title) }}" target="_blank">
 						<div ng-if="card.picture_card" class="card-picture" ng-style="{'background-image': 'url(' + card.picture_card + ')'}"></div>
 						<div ng-if="!card.picture_card" class="card-picture" ng-style="{'background-image': 'url(https://res.cloudinary.com/dqpkpmrgk/image/upload/v1456744591/no-bg_k0b9ob.jpg)'}"></div>
 						<div class="card-info">

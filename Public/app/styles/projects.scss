@@ -368,13 +368,18 @@ $font-h3: 'Open Sans', sans-serif;
       font-size: 16px;
       color: black;
       margin-right: 10px;
+      vertical-align: top;
+      margin-top: 8px;
     }
 
     ul {
       display: inline-block;
+      width: 600px;
+
       li {
         display: inline-block;
         margin-right: 5px;
+        margin-bottom: 5px;
 
         img {
           width: 34px;

@@ -141,14 +141,23 @@ a:hover {
 			vertical-align: top;
 
 			.phpnc-picture {
-				padding: 25px 20px;
 				border-bottom: 1px solid #e5e5e5;
 				text-align: left;
 
+				.filter_needs_cards {
+					background-color: rgba(0, 0, 0, 0.6);
+					position: absolute;
+					width: 208px;
+					height: 97px;
+				}
+
 				h5 {
-					font-family: 'FreigMed';
-					color: black;
+					padding: 0px 20px;
+					font-family: 'FreigSem';
+					color: white;
 					margin-bottom: 5px;
+					position: relative;
+					z-index: 10000000;
 					
 					span {
 						font-family: 'FreigBook';
@@ -401,7 +410,7 @@ a:hover {
 					background: black;
 	/*					bottom: 38px;
 					left: -7.5px;*/
-					left: -80px;
+					left: -90px;
 					top: 55px;
 					font-family: 'FreigSem';
 					font-size: 13px;
@@ -429,6 +438,10 @@ a:hover {
 					-ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
 					-o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
 					box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);*/
+
+					p {
+						text-align: center;
+					}
 				}
 
 				h5 {
@@ -545,7 +558,7 @@ a:hover {
 							background: black;
 			/*					bottom: 38px;
 							left: -7.5px;*/
-							left: 50px;
+							margin-left: -90px;
 							top: 95px;
 							font-family: 'FreigSem';
 							font-size: 13px;
@@ -920,7 +933,7 @@ a:hover {
 						left: 20px;
 
 						li {
-						
+							padding: 5px 0;
 							img {
 								height: 36px;
 								width: 36px;

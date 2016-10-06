@@ -89,18 +89,28 @@ exports.getOpeningsOfProject = function(req, res) {
       function recursive (index) {
           if (result[index]) {
           	var list = [];
-          	result[index].taggs = JSON.parse(result[index].taggs);
-          	if (result[index].taggs) {
-          		list = result[index].taggs;
-          		list.push(result[index].skill);
-          	} else {
-          		list.push(result[index].skill);
-          	}
 
-          	getProjectMentor(list, function(result2) {
-          		result[index].contributors = result2;
-				return recursive(index + 1);
-          	});
+          	pool.query('SELECT picture_card FROM projects WHERE public_id = ?', req.params.project_id, 
+          		function(err, picture) {
+          			if (err) throw err;
+
+          			if (!picture[0])
+          				result[index].picture = "https://res.cloudinary.com/dqpkpmrgk/image/upload/w_200,h_200,c_fill/v1456744591/no-bg_k0b9ob.jpg";
+          			else
+          				result[index].picture = picture[0].picture_card;
+		          	result[index].taggs = JSON.parse(result[index].taggs);
+		          	if (result[index].taggs) {
+		          		list = result[index].taggs;
+		          		list.push(result[index].skill);
+		          	} else {
+		          		list.push(result[index].skill);
+		          	}
+
+		          	getProjectMentor(list, function(result2) {
+		          		result[index].contributors = result2;
+						return recursive(index + 1);
+		          	});
+		        });
           } else {
               return res.send(result);
           }

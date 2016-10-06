@@ -280,12 +280,16 @@
       font-family: 'FreigBook';
       font-size: 16px;
       color: black;
-      margin-right: 10px; }
+      margin-right: 10px;
+      vertical-align: top;
+      margin-top: 8px; }
     .project-post-container .project-contributor-show ul {
-      display: inline-block; }
+      display: inline-block;
+      width: 600px; }
       .project-post-container .project-contributor-show ul li {
         display: inline-block;
-        margin-right: 5px; }
+        margin-right: 5px;
+        margin-bottom: 5px; }
         .project-post-container .project-contributor-show ul li img {
           width: 34px;
           border-radius: 50%; }

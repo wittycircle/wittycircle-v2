@@ -346,7 +346,9 @@
       border-radius: 4px;
       pointer-events: none;
       position: absolute;
-      margin-top: -25px;
+      z-index: 1000000;
+      /*				margin-top: -25px;
+      */
       -webkit-transform: translateY(10px);
       -moz-transform: translateY(10px);
       -ms-transform: translateY(10px);
@@ -372,8 +374,8 @@
     .setting-ranking .setting-ranking-up .setting-ranking-psi .tooltipw:after {
       border-left: solid transparent 6px;
       border-right: solid transparent 6px;
-      border-top: solid black 6px;
-      bottom: -5px;
+      border-bottom: solid black 6px;
+      bottom: 24px;
       content: " ";
       height: 0;
       left: 50%;
@@ -382,11 +384,11 @@
     .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-profile:hover .tooltipw {
       opacity: 1;
       pointer-events: auto;
-      -webkit-transform: translateY(0px);
-      -moz-transform: translateY(0px);
-      -ms-transform: translateY(0px);
-      -o-transform: translateY(0px);
-      transform: translateY(0px); }
+      -webkit-transform: translateY(30px);
+      -moz-transform: translateY(30px);
+      -ms-transform: translateY(30px);
+      -o-transform: translateY(30px);
+      transform: translateY(30px); }
     .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-share {
       margin-bottom: 15px; }
       .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-share .fb-share {
@@ -430,21 +432,21 @@
     .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-social:hover .tooltipw {
       opacity: 1;
       pointer-events: auto;
-      -webkit-transform: translateY(0px);
-      -moz-transform: translateY(0px);
-      -ms-transform: translateY(0px);
-      -o-transform: translateY(0px);
-      transform: translateY(0px); }
+      -webkit-transform: translateY(30px);
+      -moz-transform: translateY(30px);
+      -ms-transform: translateY(30px);
+      -o-transform: translateY(30px);
+      transform: translateY(30px); }
   .setting-ranking .setting-ranking-up .setting-ranking-invitation .sri-title {
     margin-bottom: 15px; }
   .setting-ranking .setting-ranking-up .setting-ranking-invitation .sri-title:hover .tooltipw {
     opacity: 1;
     pointer-events: auto;
-    -webkit-transform: translateY(0px);
-    -moz-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    -o-transform: translateY(0px);
-    transform: translateY(0px); }
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px); }
   .setting-ranking .setting-ranking-up .setting-ranking-invitation .sri-box .sri-box-illustre-img {
     display: inline-block;
     margin-right: 25px;
@@ -478,6 +480,7 @@
       transition: all 200ms linear; }
   .setting-ranking .setting-ranking-up .setting-ranking-invitation .sri-box .srpsi-button:hover {
     background-color: black;
+    border: 1px solid white;
     color: white; }
   .setting-ranking .setting-ranking-up .setting-ranking-graph {
     display: inline-block;
@@ -495,6 +498,10 @@
         font-family: 'FreigLight';
         font-size: 21px;
         bottom: 2px; }
+    .setting-ranking .setting-ranking-up .setting-ranking-graph h5 {
+      font-family: 'FreigBook';
+      color: #999999;
+      margin-top: 10px; }
 .setting-ranking .setting-ranking-down {
   text-align: center;
   padding-left: 30px;
@@ -521,7 +528,6 @@
         border-radius: 4px;
         pointer-events: none;
         position: absolute;
-        margin-top: -25px;
         -webkit-transform: translateY(10px);
         -moz-transform: translateY(10px);
         -ms-transform: translateY(10px);
@@ -547,8 +553,8 @@
       .setting-ranking .setting-ranking-down ul li .tooltipw:after {
         border-left: solid transparent 6px;
         border-right: solid transparent 6px;
-        border-top: solid black 6px;
-        bottom: -5px;
+        border-bottom: solid black 6px;
+        bottom: 24px;
         content: " ";
         height: 0;
         left: 50%;
@@ -557,11 +563,11 @@
     .setting-ranking .setting-ranking-down ul li:hover .tooltipw {
       opacity: 1;
       pointer-events: auto;
-      -webkit-transform: translateY(0px);
-      -moz-transform: translateY(0px);
-      -ms-transform: translateY(0px);
-      -o-transform: translateY(0px);
-      transform: translateY(0px); }
+      -webkit-transform: translateY(30px);
+      -moz-transform: translateY(30px);
+      -ms-transform: translateY(30px);
+      -o-transform: translateY(30px);
+      transform: translateY(30px); }
     .setting-ranking .setting-ranking-down ul span {
       margin-right: 20px; }
 

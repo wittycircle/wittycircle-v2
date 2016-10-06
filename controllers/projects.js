@@ -823,14 +823,15 @@ exports.updateProject = function(req, res){
     req.checkParams('id', 'id parameter must be an integer.').isInt().min(1);
     req.checkBody('category_id', 'Error Message1').isInt();
     req.checkBody('title', 'Error Message2').isString().max(256);
-    req.checkBody('description', 'Error Message3').optional().isString().max(512);
+    // req.checkBody('description', 'Error Message3').optional().isString().max(512);
 /*    req.checkBody('location_city', 'Error Message4').isString().max(64);
     req.checkBody('location_country', 'Error Message6').isString().max(64); */
-    req.checkBody('picture', 'Error Message7').optional().isString().max(128);
-    req.checkBody('main_video', 'Error Message9').optional().isString().max(256);
-    req.checkBody('picture_position', 'Error Message10').optional().isString().max(128);
-    req.checkBody('main_video_id', 'Error message11').optional().isString().max(256);
-    req.checkBody('picture_card', 'Error message12').optional().isString().max(258);
+    // req.checkBody('picture', 'Error Message7').optional().isString().max(128);
+    // req.checkBody('main_video', 'Error Message9').optional().isString().max(256);
+    // req.checkBody('picture_position', 'Error Message10').optional().isString().max(128);
+    // req.checkBody('main_video_id', 'Error message11').optional().isString().max(256);
+    // req.checkBody('picture_card', 'Error message12').optional().isString().max(258);
+    req.body.creation_date = null;
     
 
     var errors = req.validationErrors(true);

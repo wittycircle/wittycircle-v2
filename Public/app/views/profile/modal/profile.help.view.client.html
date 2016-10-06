@@ -8,7 +8,8 @@
 
 		<div class="profile-help-project-need-card" ng-repeat="needP in needToHelp track by $index" ng-class="{ 'selected-card' : activeCard === $index }" ng-click="selectNeed($index, projectInfo.picture, projectInfo.title, needP.status, needP.skill, needP.taggs, needP.project_id)">
 			<div class="phpnc-picture" ng-style="{'background-image': 'url(' + needP.picture + ')'}">
-				<h5>{{needP.status}} <span>skilled in</span></h5>
+				<div class="filter_needs_cards"></div>
+				<h5 style="padding-top: 25px">{{needP.status}} <span>skilled in</span></h5>
 				<h5>{{needP.skill}}</h5>
 			</div>
 

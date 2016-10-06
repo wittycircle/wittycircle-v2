@@ -82,6 +82,7 @@
 
 				<aside class="setting-ranking-graph">
 					<h2>Ranking: <span class="srg-myrank">#{{myRank}}<span> <span ng-if="myCompareRank > 0" class="srg-compare">( {{myCompareRank}}<img src="/images/Upvote_Icon.svg" alt="rank-up-down" style="margin-left: 3px"/> )</span> <span ng-if="!myCompareRank" class="srg-compare">( - )</span></h2>
+					<h5 ng-if="!myCompareRank">We rank users with more than 1000 pts. Complete your profile now and get connected to 38x more people and projects.</h5>
 				</aside>
 
 				<hr width="80%" />
@@ -93,7 +94,7 @@
 						<div class="tooltipw" style="margin-left: -43px">Number of public projects (+200)</div>
 						<div class="srpsi-text">Started projects</div> <div class="srpsi-number">{{pRank.startedProject}} <div class="srpsi-number-est" ng-if="pRank.startedProject">(+{{pRank.startedProject * 200}})</div> </div>
 </li>
-					<li><div class="tooltipw" style="margin-left: -40px">Number of public projects (+15)</div><div class="srpsi-text">Project feedback</div> <div class="srpsi-number">{{pRank.feedbackProject}} <div class="srpsi-number-est" ng-if="pRank.feedbackProject">(+{{pRank.feedbackProject * 15}})</div> </div></li>
+					<li><div class="tooltipw" style="margin-left: -40px">Number of feedback you gave (+15)</div><div class="srpsi-text">Project feedback</div> <div class="srpsi-number">{{pRank.feedbackProject}} <div class="srpsi-number-est" ng-if="pRank.feedbackProject">(+{{pRank.feedbackProject * 15}})</div> </div></li>
 					<li><div class="tooltipw" style="margin-left: -46px">Number of time you helped a project (+100)</div><div class="srpsi-text">Project contributions</div> <div class="srpsi-number">0</div></li>
 				</ul>
 

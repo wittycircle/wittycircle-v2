@@ -98,13 +98,20 @@ a:hover {
       min-height: 328px;
       vertical-align: top; }
       #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture {
-        padding: 25px 20px;
         border-bottom: 1px solid #e5e5e5;
         text-align: left; }
+        #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture .filter_needs_cards {
+          background-color: rgba(0, 0, 0, 0.6);
+          position: absolute;
+          width: 208px;
+          height: 97px; }
         #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture h5 {
-          font-family: 'FreigMed';
-          color: black;
-          margin-bottom: 5px; }
+          padding: 0px 20px;
+          font-family: 'FreigSem';
+          color: white;
+          margin-bottom: 5px;
+          position: relative;
+          z-index: 10000000; }
           #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture h5 span {
             font-family: 'FreigBook';
             font-size: 16px; }
@@ -120,6 +127,7 @@ a:hover {
           background-color: black;
           padding: 2px 5px;
           margin-bottom: 4px;
+          margin-right: 5px;
           border-radius: 4px;
           font-family: 'FreigSem';
           font-size: 14px;
@@ -286,13 +294,13 @@ a:hover {
           background: black;
           /*					bottom: 38px;
           				left: -7.5px;*/
-          left: -80px;
+          left: -90px;
           top: 55px;
           font-family: 'FreigSem';
           font-size: 13px;
           color: #fff;
           opacity: 0;
-          width: 200px;
+          min-width: 220px;
           z-index: 10000000;
           padding: 3px 5px;
           border-radius: 4px;
@@ -314,6 +322,8 @@ a:hover {
           -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
           -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
           box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);*/ }
+          #profile-header .profile-contents .profile-info .profile-info-top-rank .tooltipw p {
+            text-align: center; }
         #profile-header .profile-contents .profile-info .profile-info-top-rank h5 {
           color: black;
           padding: 2px 8px 4px 8px;
@@ -396,7 +406,7 @@ a:hover {
             background: black;
             /*					bottom: 38px;
             				left: -7.5px;*/
-            left: 50px;
+            margin-left: -90px;
             top: 95px;
             font-family: 'FreigSem';
             font-size: 13px;
@@ -679,7 +689,7 @@ a:hover {
             margin-top: 15px;
             left: 20px; }
             #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-text-link .ptl-ask li {
-              display: inline-block; }
+              padding: 5px 0; }
               #profile-header .profile-bottom .profile-bottom-info .profile-user-options .profile-text-link .ptl-ask li img {
                 height: 36px;
                 width: 36px;

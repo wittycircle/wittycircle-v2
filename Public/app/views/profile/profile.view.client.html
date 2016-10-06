@@ -183,7 +183,7 @@
 				<div class="profile-text-link">
 					<a id="ptlaska">Ask for help</a>
 					<div id="ptlask" class="ptl-ask" style="display: none">
-						<li ng-repeat="iPrj in profileVm.askProjects" ng-if="profileVm.askProjects.length" ng-click="getToNeed(iPrj.public_id, iPrj.status, iPrj.title)">
+						<li ng-repeat="iPrj in profileVm.askProjects" ng-if="profileVm.askProjects.length" ng-click="getToNeed(iPrj.public_id, iPrj.status, iPrj.title, iPrj.picture_card)">
 							<img ng-if="iPrj.picture_card" ng-src="{{ resizePic(iPrj.picture_card, 40, 40, 'fill') }}" alt="project-picture">
 			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Idea'" src="/images/Thumbnail_Idea.svg">
 			                <img ng-if="!iPrj.picture_card && iPrj.status === 'Drafted project'" src="/images/Thumbnail_Drafted.svg">

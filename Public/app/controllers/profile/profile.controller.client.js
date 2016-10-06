@@ -392,18 +392,21 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	};
 
 	/*** Message NEED ***/ 
-	$scope.getToNeed = function(public_id, project_status, project_title) {
-		if (project_status === "Idea")
-			$scope.nPpicture = "/images/Thumbnail_Idea.svg";
-		else if (project_status === "Drafted project")
-			$scope.nPpicture = "/images/Thumbnail_Drafted.svg";
-		else if (project_status === "Beta project" )
-			$scope.nPpicture = "/images/Thumbnail_Beta.svg";
-		else
-			$scope.nPpicture = "/images/Thumbnail_Live.svg"
+	$scope.getToNeed = function(public_id, project_status, project_title, project_picture) {
+		if (!project_picture) {
+			if (project_status === "Idea")
+				$scope.nPpicture = "/images/Thumbnail_Idea.svg";
+			else if (project_status === "Drafted project")
+				$scope.nPpicture = "/images/Thumbnail_Drafted.svg";
+			else if (project_status === "Beta project" )
+				$scope.nPpicture = "/images/Thumbnail_Beta.svg";
+			else
+				$scope.nPpicture = "/images/Thumbnail_Live.svg"
+		} else {
+			$scope.nPpicture = $rootScope.resizePic(project_picture, 40, 40, 'fill');		
+		}
 
 		$http.get('/openings/project/' + public_id).success(function(res) {
-			console.log(res);
 			$scope.needToHelp = res;
 		});
 		$scope.addNeedPublicId = public_id;

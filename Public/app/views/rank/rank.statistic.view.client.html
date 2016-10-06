@@ -82,7 +82,7 @@
 
 				<aside class="setting-ranking-graph">
 					<h2>Ranking: <span class="srg-myrank">#{{myRank}}<span> <span ng-if="myCompareRank > 0" class="srg-compare">( {{myCompareRank}}<img src="/images/Upvote_Icon.svg" alt="rank-up-down" style="margin-left: 3px"/> )</span> <span ng-if="!myCompareRank" class="srg-compare">( - )</span></h2>
-					<h5 ng-if="!myCompareRank">We rank users with more than 1000 pts. Complete your profile now and get connected to 38x more people and projects.</h5>
+					<h5 ng-if="myRank === '-'">We rank users with more than 1000 pts. Complete your profile now and get connected to 38x more people and projects.</h5>
 				</aside>
 
 				<hr width="80%" />

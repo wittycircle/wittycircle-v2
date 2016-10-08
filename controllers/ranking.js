@@ -259,8 +259,6 @@ var job = new CronJob({
 });
 job.start();
 
-registeAllRank();
-
 exports.getProfileStatisticRank = function(req, res) {
 
 	req.checkBody('user_id', 'Error Message').isInt();

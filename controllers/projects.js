@@ -935,20 +935,25 @@ exports.getProjectFeedbacksPublic = function(req, res){
             }
             function recursive (index) {
                 if (results[index]) {
-                    pool.query('SELECT id, description, created_at, user_id FROM `feedback_replies` WHERE `feedback_id` = ?',
-                    results[index].id,
-                    function (err, response) {
-                        if (err) {
-                            console.log(new Date());
-                            throw err;
-                        }
-                        /*if (response.length === 1) {
-                        results[index].replies = response[0];
-                    }*/
-                    //if (response.length > 1) {
-                    results[index].replies = response;
-                    //}
-                    recursive(index + 1);
+                    pool.query('SELECT username FROM users WHERE id = ?', results[index].user_id,
+                        function(err, username) {
+                            if (err) throw err;
+                            pool.query('SELECT id, description, created_at, user_id FROM `feedback_replies` WHERE `feedback_id` = ?',
+                            results[index].id,
+                            function (err, response) {
+                                if (err) {
+                                    console.log(new Date());
+                                    throw err;
+                                }
+                                /*if (response.length === 1) {
+                                results[index].replies = response[0];
+                            }*/
+                            //if (response.length > 1) {
+                            results[index].username = username[0].username;
+                            results[index].replies = response;
+                            //}
+                            recursive(index + 1);
+                        });
                 });
             } else {
                 tf.addprofilestoFeedbacks(req.user, results, function(rez) {

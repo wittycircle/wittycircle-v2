@@ -345,6 +345,7 @@
         // }
 
         function isOwnedReply (reply, creator_user_id) {
+
             if (reply.user_id === creator_user_id) {
                 reply.owned = true;
             } else {

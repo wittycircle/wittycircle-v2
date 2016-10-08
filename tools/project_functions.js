@@ -94,16 +94,20 @@ exports.addprofilestoFeedbacks = function (user, data, callback) {
                             console.log('error in addUserPictureToProject l58');
                             throw err;
                         }
-                        if (user && data[ind].replies[index].user_id === user.id) {
-                            data[ind].replies[index].isOwned = true;
-                            delete data[ind].replies[index].user_id;
-                            data[ind].replies[index].user_profile = response[0];
-                        } else {
-                            data[ind].replies[index].isOwned = false;
-                            delete data[ind].replies[index].user_id;
-                            data[ind].replies[index].user_profile = response[0];
-                        }
-                        recursive(ind, index + 1);
+                        pool.query('SELECT username FROM users WHERE id = ?', data[ind].replies[index].user_id,
+                            function(err, username) {
+                                data[ind].replies[index].username = username[0].username;
+                                if (user && data[ind].replies[index].user_id === user.id) {
+                                    data[ind].replies[index].isOwned = true;
+                                    delete data[ind].replies[index].user_id;
+                                    data[ind].replies[index].user_profile = response[0];
+                                } else {
+                                    data[ind].replies[index].isOwned = false;
+                                    delete data[ind].replies[index].user_id;
+                                    data[ind].replies[index].user_profile = response[0];
+                                }
+                                recursive(ind, index + 1);
+                            });
                     });
                 } else {
                     recursive(ind + 1, 0);

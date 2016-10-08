@@ -404,16 +404,21 @@ exports.getAsksofProjectByPublicId = function (req, res) {
             } else {
                 function recursive (index) {
                     if (results[index]) {
-                        pool.query('SELECT * FROM `ask_replies` WHERE `ask_id` = ?',
-                        results[index].id,
-                        function (err, response) {
-                          if (err) {
-                            console.log(new Date());
-                            throw err;
-                          }
-                          results[index].replies = response;
-                          recursive(index + 1);
-                        });
+                        pool.query('SELECT username FROM users WHERE id = ?', results[index].user_id,
+                            function(err, username) {
+                                if (err) throw err;
+                                pool.query('SELECT * FROM `ask_replies` WHERE `ask_id` = ?',
+                                results[index].id,
+                                function (err, response) {
+                                  if (err) {
+                                    console.log(new Date());
+                                    throw err;
+                                  }
+                                  results[index].replies = response;
+                                  results[index].username = username[0].username;
+                                  recursive(index + 1);
+                                });
+                            });
                     } else {
                         tf.addprofilestoFeedbacks(req.user, results, function(rez) {
                             if (!rez) {

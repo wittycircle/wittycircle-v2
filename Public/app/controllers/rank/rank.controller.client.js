@@ -4,6 +4,7 @@ angular.module('wittyApp')
 		var currentUser = $rootScope.globals.currentUser || null;
 
 		if (currentUser) {
+			
 			/*** BACKGROUND ***/
 			$scope.backPic = $rootScope.globals.currentUser.profile_cover;
 			$scope.mailList = [];
@@ -64,10 +65,12 @@ angular.module('wittyApp')
 		 			});
 		 		}
 		 	};
-
+		 	$timeout(function() {
+		 		$scope.displayPage = true;
+		 	}, 1000)
 		
 		} else {
-			if($location.path() === "/rank/statistic") {
+			if($location.path() === "/rank") {
 	            $location.path('/login').replace();
 	        }
 		}

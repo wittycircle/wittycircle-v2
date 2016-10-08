@@ -17,7 +17,7 @@
           <div class="text-feedback">
             <h5 data-ng-bind="::question.title"></h5>
             <p class="from_text">
-	      <a ui-sref="profile({username: question.user.username})" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+	      <a ng-href="{{question.username}}" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
               <span am-time-ago="::question.date_added"></span>
               <span class="feedback_badge">CREATOR</span>
             </p>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="tempo2-class" data-ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
-		    <a data-ui-sref="profile({username: reply.user_profile.username})" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
+		    <a ng-href="/{{reply.username}}" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
                     <span class="time_reply" am-time-ago="reply.created_at"></span>
                       <span data-ng-init="isInTheTeam(project, reply)">
                         <span class="feedback_badge" data-ng-if="vm.editable === true">CREATOR</span>
@@ -126,7 +126,7 @@
           <div class="view-project-feedback-ask">
             <h5 data-ng-bind="ask.title"></h5>
             <p class="from_text">
-              <a ui-sref="profile({profile: ask.user.username})" class="underline_user">{{ask.first_name}} {{ask.last_name}}</a>
+              <a ng-href="/{{ask.username}}" class="underline_user">{{ask.first_name}} {{ask.last_name}}</a>
               <span am-time-ago="ask.created_at"></span>
             </p>
           </div>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="tempo2-class" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
                   <div class="title">
-                    <a ui-sref="profile({username: reply.user_profile.username})" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>
+                    <a ng-href="/{{reply.username}}" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>
                     <span class="time_reply" am-time-ago="reply.created_at">
                       <span ng-init="isInTheTeam(project, reply)">
                         <span class="feedback_badge" data-ng-if="reply.inTeam">CREATOR</span>

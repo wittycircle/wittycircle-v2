@@ -4,6 +4,13 @@
 		min-height: 600px;
 		background-color: #e5e5e5;
 	}
+
+	.spinner-load {
+		width: initial;
+		margin-top: 10px;
+		margin-left: 30px;
+		background-color: transparent;
+	} 
 	h1 {
 		color: black;
 		margin-bottom: 20px;
@@ -28,13 +35,17 @@
 		<th>Status</th>
 		<th>Action</th>
 	</tr>
-	<tr ng-repeat="projectList in projectLists">
+	<tr ng-repeat="projectList in projectLists track by $index">
 		<td ng-bind="projectList.title"></td>
 		<td>{{projectList.creator_first_name}} {{ projectList.creator_last_name}}</td>
 		<td ng-bind="projectList.network"></td>
 		<td ng-if="projectList.verified">Verified</td>
 		<td ng-if="!projectList.verified">Not Verified</td>
-		<td ng-if="!projectList.verified"><button ng-click="sendInviteToNetwork(projectList)">Send Invite</button></td>
+		<td ng-if="!projectList.verified && !projectList.admin_check"><div ng-if="sendOnGoing" class="spinner-load">
+		<div class="spinner__item1 spinner-item"></div>
+		<div class="spinner__item2 spinner-item"></div>
+		<div class="spinner__item3 spinner-item"></div>
+	</div><button ng-click="sendInviteToNetwork(projectList, $index)">Send Invite</button></td>
 	</tr>
 </table>
 </section>

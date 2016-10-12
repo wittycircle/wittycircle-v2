@@ -119,23 +119,17 @@ $scope.initiateProject = function () {
         }
         if ($scope.project.main_video) {
             $scope.config = {
-                preload: "auto",
-                sources: [
-                    {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
-                ],
-                theme: {
-                    url: "styles/css/videogular.css"
-                },
-                plugins: {
-                    controls: {
-                        autoHide: true,
-                        autoHideTime: 2000
+                    sources: $sce.trustAsResourceUrl($scope.project.main_video),
+                    plugins: {
+                        controls: {
+                            autoHide: true,
+                            autoHideTime: 2000
+                        }
                     }
-                }
-            };
-	    if ($scope.project.video_poster) {
-		$scope.config.plugins.poster = $scope.project.video_poster;
-	    }
+                };
+	        if ($scope.project.video_poster) {
+    		  $scope.config.plugins.poster = $scope.project.video_poster;
+    	    }
         }
         Categories.getCategory(response[0].category_id, function (response) {
             $scope.project_category.obj = response[0];
@@ -237,7 +231,7 @@ $scope.uploadFiles = function(file) {
 };
 
 $scope.uploadPoster = function () {
-        $scope.modalInstance = $modal.open({
+    $scope.modalInstance = $modal.open({
         animation: true,
         templateUrl: 'views/projects/create/modal/upload_poster.client.html',
         controller: 'UploadPosterCtrl',
@@ -297,7 +291,8 @@ $scope.savebasics = function(data, project_category, places_after, statechoose) 
     }
     if ($scope.chooseNetwork) {
         data.network = $scope.networkName;
-    }
+    } else
+        data.network = null;
 
     Locations.setplaces(places_after, data);
     Projects.updateProject(data.id, data, function(response) {

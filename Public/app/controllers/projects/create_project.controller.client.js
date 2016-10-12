@@ -419,7 +419,8 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     }
     if ($scope.chooseNetwork) {
         data.network = $scope.networkName;
-    }
+    } else
+      data.network = null;
     data.category_id = project_category.id;
     Locations.setplaces(places_after, data);
     Projects.updateProject(data.id, data, function(response) {

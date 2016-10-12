@@ -342,8 +342,13 @@ exports.sendValidateNetwork = function(info, callback) {
             else {
                 info.token = result[0].token;
                 sendMailToValidateNetwork(info, function(res) {
-                    if (res.success)
-                        return callback(true);
+                    if (res.success) {
+                        pool.query('UPDATE project_network SET admin_check = 1 WHERE id = ?', info.id,
+                            function(err, result2) {
+                                if (err) throw err;
+                                return callback(true);
+                            });
+                    }
                 });
             }
         });

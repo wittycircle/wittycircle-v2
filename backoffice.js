@@ -450,7 +450,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/project/network/list', ensureAdmin, function(req, res) {
-		pool.query('SELECT id, project_id, network, verified FROM project_network',
+		pool.query('SELECT id, project_id, network, verified, admin_check FROM project_network',
 			function(err, result) {
 				if (err) throw err;
 				else {

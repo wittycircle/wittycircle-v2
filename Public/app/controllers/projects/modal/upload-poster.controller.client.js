@@ -18,8 +18,8 @@ angular.module('wittyApp').controller('UploadPosterCtrl', function ($scope, $roo
             $timeout(function() {
                 $scope.up = false;
             }, 100);
-            $scope.poster = resp.secure_url;
-	    $scope.project.video_poster = resp.secure_url;
+            $scope.poster = $rootScope.resizePic(resp.secure_url, '720', '', 'fill');
+	         $scope.project.video_poster = $scope.poster;
         }).error(function(response) {
             console.log(response);
         });

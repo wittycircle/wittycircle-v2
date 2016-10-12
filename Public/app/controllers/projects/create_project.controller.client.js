@@ -23,6 +23,8 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     $scope.categories = response;
   });
 
+  $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
+
   /*** Cloudinary jQuery Plugin ***/
 
 
@@ -303,6 +305,16 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
   $scope.dragcv = true;
   $scope.cursorpt = false;
 
+  $scope.getNetwork = function(network) {
+    if (network === "None") {
+        $scope.chooseNetwork = false;
+        $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
+        return ;
+    }
+    $scope.chooseNetwork = true;
+    $scope.networkName = network;
+  };
+
   $scope.editPosition = function() {
     $scope.dragcv = false;
     $scope.cursorpt = true;
@@ -404,6 +416,9 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     data.picture = $scope.imagecover;
     if ($scope.picture_card) {
         data.picture_card = $scope.picture_card;
+    }
+    if ($scope.chooseNetwork) {
+        data.network = $scope.networkName;
     }
     data.category_id = project_category.id;
     Locations.setplaces(places_after, data);

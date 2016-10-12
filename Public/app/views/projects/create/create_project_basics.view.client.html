@@ -48,6 +48,27 @@
             </p>
           </div>
         </div>
+        <div class="row custom-row-project">
+          <div class="col-md-3">
+            <h5>Network</h5>
+          </div>
+          <div class="col-md-9">
+            <div id="upni" class="update-project-network">
+              <h4 ng-style="chooseNetwork && {color: 'black'}">{{networkName}}</h4>
+              <img src="/images/arrow-down-icon-b.svg">
+              <div id="upnid" class="update-project-network-dropdown" style="display: none">
+                <ul>
+                  <li ng-click="getNetwork('The Refiners')">The Refiners</li>
+                  <li ng-click="getNetwork('500 Startups')">500 Startups</li>
+                  <li ng-click="getNetwork('Techstars')">Techstars</li>
+                  <li ng-click="getNetwork('Y Combinator')">Y Combinator</li>
+                  <li ng-click="getNetwork('None')">None</li>
+                </ul>
+              </div>
+            </div>
+            <p ng-if="chooseNetwork" style="font-size: 14px; margin-left: 2px"><i>We may proceed to background verification.</i></p>
+          </div>
+        </div>
       </div>
 
 
@@ -163,21 +184,27 @@
 $(function() {
   $(document).ready(function() {
     window.scrollTo(0, 0);
+
+    $(this).click(function(e) {
+      if (e.target.id === "dst" && $('#dsd2').css('display') === "none") {
+        $('#dsd2').css('display', 'block');
+        $('#dst img').css('transform', 'rotate(-180deg)');
+      } else {
+        $('#dsd2').css('display', 'none');
+        $('#dst img').css('transform', 'rotate(0deg)')
+      }
+
+      if ($('#upni').is(e.target) || $('#upni').has(e.target).length > 0 && $('#upnid').css('display') === "none") {
+        $('#upnid').slideDown(200);
+        $('#upni img').css('transform', 'rotate(-180deg)');       
+      } else {
+        $('#upnid').slideUp(200);
+        $('#upni img').css('transform', 'rotate(0deg)');
+      }
+    });
   });
+
 });
 
-document.getElementById('main-body').onclick = function(e) {
-
-	if (e.target.id == 'dst' && document.getElementById('dsd2').style.display == "none") {
-		document.getElementById('dsd2').style.display = "block";
-		document.querySelectorAll("#dst img")[0].style.transform = "rotate(-180deg)";
-	} else {
-		if (document.getElementById('dsd2')) {
-			document.getElementById('dsd2').style.display = "none";
-			document.querySelectorAll("#dst img")[0].style.transform = "rotate(0deg)";
-		}
-	}
-
-}
 
 </script>

@@ -263,6 +263,130 @@ function sendMailToValidateNetwork(info, callback) {
     var subj        = fullname + " needs you to verify " + info.title + " is part of the " + info.network + " network";
     var link        = "https://www.wittycircle.com/validation/network/" + info.token;
     var network     = info.network.replace(/ +/g, "");
+    var emails      = [];
+
+    console.log(info.network);
+    return ;
+
+    if (info.network === "The Refiners") {
+        emails = [{
+            email: 'pierre@theref.co',
+            name: info.creator_first_name,
+            type: "to"
+        }, {
+            email: 'carlos@theref.co',
+            name: info.creator_first_name,
+            type: "to"
+        }]
+    } else if (info.network === "Techstars") {
+        emails = [{
+            email: 'brad.feld@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'Joel.Alcaraz@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'Chris.Chang@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'Karina.Costa@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'John.Hill@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'Erin.Ford@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'Mark.Solon@techstars.com',
+            name: info.creator_first_name,
+            type: "to"
+        }]
+    } else if (info.network === "500 Startups") {
+        emails = [{
+            email: 'bedy@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'jess@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'christine@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'jonathan@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'bailey@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'mat@500.co',
+            name: info.creator_first_name,
+            type: "to"
+        }] 
+    } else if (info.network === "Y Combinator") {
+        emails = [{
+            email: 'Steven@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'sharon@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'erica@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'sam@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'adora@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'kat@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'craig@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        },
+        {
+            email: 'tim@ycombinator.com',
+            name: info.creator_first_name,
+            type: "to"
+        }]
+    }
 
     var template_name = "validation-network";
     var template_content = [{
@@ -275,11 +399,7 @@ function sendMailToValidateNetwork(info, callback) {
         "subject": subj,
         "from_email": "noreply@wittycircle.com",
         "from_name": "Wittycircle",
-        "to": [{
-                email: 'jayho@wittycircle.com',
-                name: info.creator_first_name,
-                type: "to"
-            }],
+        "to": emails,
         "headers": {
             "Reply-To": "noreply@wittycircle.com"
         },

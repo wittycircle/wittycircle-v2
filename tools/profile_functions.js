@@ -24,7 +24,7 @@ exports.sortCardProfile = function(data, callback) {
 											function(err, result) {
 												if (err) throw err;
 												if (row[0]) {
-													pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank',
+													pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE() ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank',
 														row[0].id, function(err, done) {
 															if (err) throw err;
 															data[index].followers 	= followers[0].followers;
@@ -78,7 +78,7 @@ exports.sortCardProfileNew = function(data, callback) {
 												if (row[0]) {
 													if (result[0])
 														var arr = result.map(function(el) { return el.skill_name})
-													pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank',
+													pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE() ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank',
 														data[index].user_id, function(err, done) {
 															if (err) throw err;
 

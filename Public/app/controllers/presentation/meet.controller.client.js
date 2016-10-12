@@ -41,7 +41,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -316,49 +316,49 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	};
 
 	/*** Scroll to display Popover ***/
-	var unique = 0;
-        setTimeout(function() {
-		if (ww >= 736) {
-			if (!$rootScope.globals.currentUser) {
+	// var unique = 0;
+ //        setTimeout(function() {
+	// 	if (ww >= 736) {
+	// 		if (!$rootScope.globals.currentUser) {
 			    
-			    $(document).unbind('scroll');
-				$(document).scroll(function () {
-					if ($('#meet-body-page')[0]) {
-						var y = $(this).scrollTop();
+	// 		    $(document).unbind('scroll');
+	// 			$(document).scroll(function () {
+	// 				if ($('#meet-body-page')[0]) {
+	// 					var y = $(this).scrollTop();
 
-						if (!unique && y > 350) {
-							unique = 1;
-							showbottomAlert.pop_it_persistance();
-						}
-						if (y <= 350) {
-							unique = 0;
-							$mdBottomSheet.cancel();
-						}
-					}
-				});
-			} /* else { 
-				unique = 0;
-				$(document).scroll(function() {
-					if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
-						var y = $(this).scrollTop();
+	// 					if (!unique && y > 350) {
+	// 						unique = 1;
+	// 						showbottomAlert.pop_it_persistance();
+	// 					}
+	// 					if (y <= 350) {
+	// 						unique = 0;
+	// 						$mdBottomSheet.cancel();
+	// 					}
+	// 				}
+	// 			});
+	// 		}  else { 
+	// 			unique = 0;
+	// 			$(document).scroll(function() {
+	// 				if ($('#discover-body-page')[0] && !$rootScope.socialCheck) {
+	// 					var y = $(this).scrollTop();
 
-						if (!unique && y > 350) {
-							unique = 1;
-							$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
-								if (!res.success) {
-									$rootScope.socialCheck = true;
-									showbottomAlert.pop_share();
-								}
-							});
-						}
-						if (y <= 350) {
-							$mdBottomSheet.cancel();
-						}
-					}
-				});
-			}*/
-		}
-	}, 1000);
+	// 					if (!unique && y > 350) {
+	// 						unique = 1;
+	// 						$http.get('/share/' + $rootScope.globals.currentUser.id).success(function(res) {
+	// 							if (!res.success) {
+	// 								$rootScope.socialCheck = true;
+	// 								showbottomAlert.pop_share();
+	// 							}
+	// 						});
+	// 					}
+	// 					if (y <= 350) {
+	// 						$mdBottomSheet.cancel();
+	// 					}
+	// 				}
+	// 			});
+	// 		}
+	// 	}
+	// }, 1000);
 
 	/*var shareInterval = $timeout(function() {
 	if ($rootScope.globals.currentUser && !$rootScope.socialCheck) {

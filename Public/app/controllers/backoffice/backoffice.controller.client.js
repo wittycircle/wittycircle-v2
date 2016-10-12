@@ -42,5 +42,16 @@ angular.module('wittyApp')
 					$scope.lists = res.list;
 				}
 			});
+
+			$http.get('/admin/project/network/list').success(function(res) {
+				if (res.success)
+					$scope.projectLists = res.list;
+			});
+
+			$scope.sendInviteToNetwork = function(project) {
+				$http.post('/admin/project/network/list', {project: project}).success(function() {
+
+				});
+			};
 		}
 	});

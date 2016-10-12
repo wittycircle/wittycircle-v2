@@ -3,6 +3,8 @@ var algoliaClient = require('../algo/algolia').algoliaClient;
 var Project       = algoliaClient.initIndex('Projects');
 var _             = require('underscore');
 var mandrill      = require('mandrill-api/mandrill');
+const crypto      = require('crypto');
+
 
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
@@ -347,7 +349,13 @@ exports.getProjectByPublicId = function(req, res){
                         throw eror;
                     }
                     results[0].creator_user_picture = rez[0].profile_picture_icon;
-                    res.send(results);
+                    pool.query("SELECT network FROM project_network WHERE project_id = ? AND verified = 1", results[0].id,
+                        function(err, result2) {
+                            if (err) throw err;
+                            results[0].networks = result2;
+                            return res.send(results);
+
+                        });
                 });
             }
         });
@@ -700,6 +708,50 @@ exports.searchProjects = function(req, res){
     }
 };
 
+function verifyProjectNetwork(project_id, network, callback) {
+    pool.query('SELECT count(*) as number FROM project_network WHERE project_id = ? AND network = ?', [project_id, network],
+        function(err, result) {
+            if (err) throw err;
+            if (!result[0].number) {
+                return callback(true);
+            } else
+                return callback(false);
+        });
+};
+
+function getProjectNetworkToken(user_id, p_public_id, network, callback) {
+    if (network) {
+        pool.query('SELECT id FROM projects WHERE creator_user_id = ? AND public_id = ?', [user_id, p_public_id],
+            function(err, result) {
+                if (err) throw err;
+                else {
+                    verifyProjectNetwork(result[0].id, network, function(check) {
+                        if (check) {
+                            var buf     = crypto.randomBytes(20),
+                                token   = buf.toString('hex');
+                                // link    = 'https://www.wittycircle.com/verify/network/' + token;
+
+                            var project = {
+                                project_id  : result[0].id,
+                                network     : network, 
+                                token       : token,
+                            }
+
+                            pool.query('INSERT INTO project_network SET ?', project,
+                                function(err, result2) {
+                                    if (err) throw err;
+                                    return callback(true);
+                                });
+                        } else
+                            return callback(false);
+                    });
+                }
+        });
+    } else
+        return callback(false);
+
+};
+
 exports.createProject = function(req, res){
     /* Validation */
     req.checkBody('public_id', 'Must be an integrer').isInt();
@@ -723,6 +775,11 @@ exports.createProject = function(req, res){
     } else {
         if(req.isAuthenticated()){
             req.body.creator_user_id = req.user.id;
+
+        if (req.body.network) {
+            var network = req.body.network;
+            delete req.body.network;
+        }
 	    
 	    pool.query('SELECT count(*) as count FROM projects WHERE creator_user_id = ?', req.user.id,
 		       function(err, check) {
@@ -738,75 +795,77 @@ exports.createProject = function(req, res){
 				   console.log("\n");
 				   throw err;
 			       } else {
-				   pool.query("SELECT first_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", req.user.id, 
-					      function(err, data) {
-						  if (err) throw err;
-						  else {
-						      console.log("New Project !!!");
-						      var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-						      
-						      var template_name = "new project";
-						      var template_content = [{
-							  "name": "new project",
-							  "content": "content",
-						      }];
-						      
-						      var message = {
-							  "html": "<p>HTML content</p>",
-							  "subject": "Your project on Wittycircle",
-							  "from_email": "quentin@wittycircle.com",
-							  "from_name": "Quentin Verriere",
-							  "to": [{
-							      "email": req.user.email,
-							      "name": data[0].first_name,
-							      "type": "to"
-							  }],
-							  "headers": {
-							      "Reply-To": "quentin@wittycircle.com"
-							  },
-							  "important": false,
-							  "track_opens": null,
-							  "track_clicks": null,
-							  "auto_text": null,
-							  "auto_html": null,
-							  "inline_css": null,
-							  "url_strip_qs": null,
-							  "preserve_recipients": null,
-							  "view_content_link": null,
-							  "tracking_domain": null,
-							  "signing_domain": null,
-							  "return_path_domain": null,
-							  "merge": true,
-							  "merge_language": "mailchimp",
-							  "global_merge_vars": [{
-							      "name": "merge1",
-							      "content": "merge1 content"
-							  }],
-							  "merge_vars": [
-							      {
-								  "vars": [
-								      {
-									  "name": "fname",
-									  "content": data[0].first_name
-								      },
-								      {
-									  "name": "lname",
-									  "content": "Smith"
-								      }
-								  ]
-							      }
-							  ]
-						      };
-						      var async = false;
-						      mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-							  var date = new Date();
-							  console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.user.email);
-						      }, function(e) {
-							  console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-						      });
-						      return res.send(result);
-						  }
-					      });
+                        getProjectNetworkToken(req.user.id, req.body.public_id, network, function(done) {
+        				        pool.query("SELECT first_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", req.user.id, 
+        					      function(err, data) {
+        						  if (err) throw err;
+        						  else {
+        						      console.log("New Project !!!");
+        						      var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+        						      
+        						      var template_name = "new project";
+        						      var template_content = [{
+        							  "name": "new project",
+        							  "content": "content",
+        						      }];
+        						      
+        						      var message = {
+        							  "html": "<p>HTML content</p>",
+        							  "subject": "Your project on Wittycircle",
+        							  "from_email": "quentin@wittycircle.com",
+        							  "from_name": "Quentin Verriere",
+        							  "to": [{
+        							      "email": req.user.email,
+        							      "name": data[0].first_name,
+        							      "type": "to"
+        							  }],
+        							  "headers": {
+        							      "Reply-To": "quentin@wittycircle.com"
+        							  },
+        							  "important": false,
+        							  "track_opens": null,
+        							  "track_clicks": null,
+        							  "auto_text": null,
+        							  "auto_html": null,
+        							  "inline_css": null,
+        							  "url_strip_qs": null,
+        							  "preserve_recipients": null,
+        							  "view_content_link": null,
+        							  "tracking_domain": null,
+        							  "signing_domain": null,
+        							  "return_path_domain": null,
+        							  "merge": true,
+        							  "merge_language": "mailchimp",
+        							  "global_merge_vars": [{
+        							      "name": "merge1",
+        							      "content": "merge1 content"
+        							  }],
+        							  "merge_vars": [
+        							      {
+        								  "vars": [
+        								      {
+        									  "name": "fname",
+        									  "content": data[0].first_name
+        								      },
+        								      {
+        									  "name": "lname",
+        									  "content": "Smith"
+        								      }
+        								  ]
+        							      }
+        							  ]
+        						      };
+        						      var async = false;
+        						      mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+        							  var date = new Date();
+        							  console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.user.email);
+        						      }, function(e) {
+        							  console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        						      });
+        						      return res.send(result);
+        						  }
+        					      });
+                        });
 			       }
 			   });
 		       });
@@ -815,6 +874,7 @@ exports.createProject = function(req, res){
         }
     }
 };
+
 
 exports.updateProject = function(req, res){
     if(!req.isAuthenticated()){
@@ -831,15 +891,17 @@ exports.updateProject = function(req, res){
     // req.checkBody('picture_position', 'Error Message10').optional().isString().max(128);
     // req.checkBody('main_video_id', 'Error message11').optional().isString().max(256);
     // req.checkBody('picture_card', 'Error message12').optional().isString().max(258);
-    req.body.creation_date = null;
-    
+    req.body.creation_date = null;    
 
     var errors = req.validationErrors(true);
-    console.log(errors);
     if (errors) {
         console.log(errors);
         return res.status(400).send(errors);
     } else {
+        if (req.body.network) {
+            var project_network = req.body.network
+            delete req.body.network;
+        }
         pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
             if (err) {
                 var date = new Date();
@@ -854,7 +916,9 @@ exports.updateProject = function(req, res){
                     if (err) throw err;
                     Project.addObjects(data, function(err, content) {
                         if (err) throw err;
-                        res.send(result);
+                        getProjectNetworkToken(req.user.id, req.body.public_id, project_network, function(done) {
+                            return res.status(200).send(result);
+                        });
                     });
                 });
             });

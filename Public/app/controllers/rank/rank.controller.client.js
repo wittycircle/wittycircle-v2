@@ -41,7 +41,7 @@ angular.module('wittyApp')
 		 		if (keycode == 13 && email) {
 		 			$scope.errorMail = false;
 		 			$scope.mailList.push(email);
-		 			$scope.email = null;
+		 			$scope.email = [];
 		 		}
 		 	};
 

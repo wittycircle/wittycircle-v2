@@ -179,7 +179,6 @@ module.exports = function(passport) {
 														       if (err) { 
 															   throw err;
 														       }
-														       console.log("OK!!!!!");
 														       var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 														       
 														       var template_name = "welcome";

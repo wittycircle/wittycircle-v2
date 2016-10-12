@@ -97,7 +97,7 @@
       color: black; }
   #viewProject-page #viewProject-header .viewProject-title {
     position: relative;
-    top: 140px;
+    top: 125px;
     z-index: 50; }
     #viewProject-page #viewProject-header .viewProject-title h1 {
       font-family: 'FreigSem';
@@ -110,7 +110,8 @@
       margin: 7px 0; }
   #viewProject-page #viewProject-header .viewProject-info {
     padding: 20px 0;
-    margin-bottom: 20px; }
+    /*			margin-bottom: 20px;
+    */ }
     #viewProject-page #viewProject-header .viewProject-info li {
       display: inline-block;
       margin-right: 20px; }
@@ -196,7 +197,7 @@
             transition: all 100ms linear; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-facebook {
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             display: inline; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle-twitter {
             color: #1dcaff;
@@ -208,7 +209,7 @@
             transition: all 100ms linear; }
           #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-twitter {
             display: inline;
-            font-size: 16px; }
+            font-size: 18px; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle {
           color: #2f4779; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle-twitter {

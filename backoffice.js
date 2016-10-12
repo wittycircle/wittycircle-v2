@@ -1,5 +1,6 @@
 var ensureAdmin = require('./controllers/auth').ensureAdminAuthenticated,
-	mailchimp = require('./mailchimpRequest')
+	mailchimp 	= require('./mailchimpRequest'),
+	mail 		= require('./tools/mail_message_functions')
 
 // function sortList(data, callback) {
 // 	if (list[0]) {
@@ -445,6 +446,48 @@ module.exports = function(app) {
 	app.get('/admin/mailpanel/followers', ensureAdmin, function(req, res) {
 		pool.query('SELECT follow_user_id FROM user_followers GROUP BY follow_user_id ORDER BY follow_user_id', function(err, result) {
 
+		});
+	});
+
+	app.get('/admin/project/network/list', ensureAdmin, function(req, res) {
+		pool.query('SELECT id, project_id, network, verified FROM project_network',
+			function(err, result) {
+				if (err) throw err;
+				else {
+					function recursive(index) {
+						if (result[index]) {
+							pool.query('SELECT creator_user_id, title FROM projects WHERE id = ?', result[index].project_id,
+								function(err, result2) {
+									if (err) throw err;
+									else {
+										result[index].title = result2[0].title;
+										result[index].creator_user_id = result2[0].creator_user_id;
+										pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result2[0].creator_user_id,
+											function(err, result3) {
+												if (err) throw err;
+												else {
+													result[index].creator_first_name = result3[0].first_name;
+													result[index].creator_last_name = result3[0].last_name;
+													result[index].creator_picture = result3[0].profile_picture;
+													recursive(index + 1);
+												}
+											});
+									}
+								});
+						} else
+							return res.status(200).send({success: true, list: result});
+					};
+					recursive(0);
+				}
+			});
+	});
+
+	app.post('/admin/project/network/list', ensureAdmin, function(req, res) {
+		mail.sendValidateNetwork(req.body.project, function(check) {
+			if (check)
+				return res.status(200).send({success: true});
+			else
+				return res.status(404).send({success: false});
 		});
 	});
 };

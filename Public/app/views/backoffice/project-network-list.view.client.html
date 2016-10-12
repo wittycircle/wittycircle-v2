@@ -1,0 +1,40 @@
+<style>
+	#admin-profiles {
+		padding: 100px 60px 60px 60px;
+		min-height: 600px;
+		background-color: #e5e5e5;
+	}
+	h1 {
+		color: black;
+		margin-bottom: 20px;
+	}
+	table, th, td {
+	    border: 1px solid black;
+	    color: black;
+	}
+
+	th, td {
+		padding: 2px 5px;
+	}
+</style>
+<section id="admin-profiles">
+<h1>List of projects with incubator</h1>
+
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Creator</th>
+		<th>Network</th>
+		<th>Status</th>
+		<th>Action</th>
+	</tr>
+	<tr ng-repeat="projectList in projectLists">
+		<td ng-bind="projectList.title"></td>
+		<td>{{projectList.creator_first_name}} {{ projectList.creator_last_name}}</td>
+		<td ng-bind="projectList.network"></td>
+		<td ng-if="projectList.verified">Verified</td>
+		<td ng-if="!projectList.verified">Not Verified</td>
+		<td ng-if="!projectList.verified"><button ng-click="sendInviteToNetwork(projectList)">Send Invite</button></td>
+	</tr>
+</table>
+</section>

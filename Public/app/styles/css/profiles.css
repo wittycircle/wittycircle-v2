@@ -98,7 +98,8 @@ a:hover {
       min-height: 328px;
       vertical-align: top; }
       #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture {
-        border-bottom: 1px solid #e5e5e5;
+        /*				border-bottom: 1px solid #e5e5e5;
+        */
         text-align: left; }
         #profile-header .profile-help-project .profile-help-project-need-card .phpnc-picture .filter_needs_cards {
           background-color: rgba(0, 0, 0, 0.6);
@@ -117,6 +118,7 @@ a:hover {
             font-size: 16px; }
       #profile-header .profile-help-project .profile-help-project-need-card .phpnc-body {
         padding: 25px 20px;
+        margin-top: 25px;
         text-align: left; }
         #profile-header .profile-help-project .profile-help-project-need-card .phpnc-body p {
           font-family: 'FreigBook';

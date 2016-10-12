@@ -14,6 +14,7 @@ function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stat
         $scope.categories = response;
     });
     $scope.elementPost = {};
+    $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
 
 
     //$('#viewProject-header').backgroundDraggable();
@@ -171,6 +172,16 @@ $scope.selectCategory = function(cat) {
 $scope.dragcv = true;
 $scope.cursorpt = false;
 
+$scope.getNetwork = function(network) {
+    if (network === "None") {
+        $scope.chooseNetwork = false;
+        $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
+        return ;
+    }
+    $scope.chooseNetwork = true;
+    $scope.networkName = network;
+};
+
 $scope.editPosition = function() {
     $scope.dragcv = false;
     $scope.cursorpt = true;
@@ -281,6 +292,10 @@ $scope.savebasics = function(data, project_category, places_after, statechoose) 
     if (statechoose != undefined) {
         data.status = statechoose;
     }
+    if ($scope.chooseNetwork) {
+        data.network = $scope.networkName;
+    }
+
     Locations.setplaces(places_after, data);
     Projects.updateProject(data.id, data, function(response) {
         //$state.go('updateproject.story');

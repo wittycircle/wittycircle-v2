@@ -90,6 +90,16 @@ var wittyCircleApp = angular
 			}
 		}
 	})
+	.state('validate_network', {
+		url: '/validation/network/:token',
+		templateUrl: 'views/core/validate-network.view.client.html',
+		controller: 'ValidateNetworkCtrl',
+		resolve: {
+			access: function($http, $stateParams) {
+				return $http.get('/api/verify/network/project/' + $stateParams.token);
+			}
+		}
+	})
 	.state('setting', {
 		url: '/setting',
 		templateUrl: 'views/setting/setting.view.client.html',
@@ -147,6 +157,16 @@ var wittyCircleApp = angular
 	.state('admin-panel-profiles', {
 		url: '/admin/panel/profiles',
 		templateUrl: 'views/backoffice/profile-list.view.client.html',
+		controller: 'BackOfficeCtrl',
+		resolve : {
+			access: function(Authentication) {
+			    return Authentication.checkAdmin();
+			}
+		}
+	})
+	.state('admin-panel-network', {
+		url: '/admin/panel/network',
+		templateUrl: 'views/backoffice/project-network-list.view.client.html',
 		controller: 'BackOfficeCtrl',
 		resolve : {
 			access: function(Authentication) {

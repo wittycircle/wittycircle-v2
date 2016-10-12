@@ -364,9 +364,27 @@ angular.module('wittyApp')
        }
    };
 })
+.filter( 'domain', function () {
+  return function ( input ) {
+    var matches,
+        output = "",
+        urls = /\w+:\/\/([\w|\.]+)/;
+
+    matches = urls.exec( input );
+
+    if ( matches !== null ) output = matches[1];
+    console.log(output);
+    return output;
+  };
+})
+.filter('removeSpace', function() {
+	return function (input) {
+		var str = input.replace(/ +/g, "");
+		return str;
+	}
+})
 .filter("trustUrl", ['$sce', function ($sce) {
     return function (recordingUrl) {
-    	console.log(recordingUrl);
     	return ;
         return $sce.trustAsResourceUrl(recordingUrl);
     };

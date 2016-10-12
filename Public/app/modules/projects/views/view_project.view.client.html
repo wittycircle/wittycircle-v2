@@ -16,10 +16,9 @@
 					<img src="/images/location-picto-w.svg" alt="icon-location">
 					<h5 data-ng-bind="(vm.project.location_city) + ', ' + (vm.project.location_country)"></h5>
 				</li>
-<!-- 				<li class="user-icon">
-					<img src="/images/littleman-w.svg" alt="icon-followers">
-					<h5><span data-ng-bind="vm.project_followers.length"></span> followers</h5>
-				</li> -->
+				<li class="user-icon" style="margin-bottom: 20px">
+					<h5 ng-repeat="network in vm.project.networks" style="margin-right: 10px">#{{network.network | removeSpace}}</h5>
+				</li>
 				<li class="ng-cloak">
 					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="vm.goToProfile(vm.project.creator_user_id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img data-ng-click="vm.goToProfile(user.id)" class="img-circle" height="30px" width="30px" data-ng-repeat="user in vm.involved_users" data-ng-src="{{user.profile_picture}}" />
 					</h5>
@@ -63,9 +62,9 @@
 						<span class="fa-stack fa-lg"
 						socialshare
 						socialshare-provider="twitter"
-						socialshare-url="{{::vm.currentUrl}}"
-						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, where creators meet."
-						socialshare-hashtags="{{vm.project.title}}, meet, creators"
+						socialshare-url="{{::vm.currentShortUrl}}"
+						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, Where the world meets entrepreneurs"
+						socialshare-hashtags="{{vm.project.title}}, meet, entrepreneurs"
 						socialshare-trigger="click"
 						socialshare-popup-height="400"
 						socialshare-popup-width="800">
@@ -122,16 +121,16 @@
 
 	<div ui-view>
 		<div class="project-post-container">
+			<div class="project-contributor-show" ng-if="projectContributor.length">
+                <h4>Contributors: </h4>
+                <ul>
+                    <li ng-repeat="contribut in projectContributor"><a ng-href="{{contribut.username}}"><img ng-src="{{contribut.profile_picture}}" /></a></li>
+                </ul>
+        	</div>
 			<div ng-if="!vm.project.post && !vm.config.sources" class="project-post-nodetail">
 				<h2>No more details yet.</h2>
 			</div>
-			<div class="project-contributor-show" ng-if="projectContributor.length">
-				<h4>Contributors: </h4>
-				<ul>
-					<li ng-repeat="contribut in projectContributor"><a ng-href="{{contribut.username}}"><img ng-src="{{contribut.profile_picture}}" /></a></li>
-				</ul>
-			</div>
-			<div class="project-post-video">
+			<div class="project-post-video"> 
 				<!-- <videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">
 					<vg-media vg-src="vm.config.sources" class="animated fadeIn">
 					</vg-media>

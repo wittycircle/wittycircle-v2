@@ -62,6 +62,7 @@
         vm.showAskForm = false;
         vm.newAsk = {};
         vm.followNumber;
+        vm.currentShortUrl;
 
 
         // function
@@ -141,6 +142,7 @@
             var err;
 
             vm.project = projectResolve.data[0];
+            console.log(vm.project);
             /*** Project Card Page ***/
             $scope.$parent.seo = {
                 pageTitle: vm.project.title,
@@ -204,6 +206,13 @@
             $http.put('/contributor/project', {project_id: vm.project.id}).success(function(res) {
                 $scope.projectContributor = res.data;
             });
+
+            // Get shorten Url
+            $http.post('/url/shortener', {url: vm.currentUrl}).success(function(res) {
+                if (res.success)
+                    vm.currentShortUrl = res.url;
+            });
+
             // disable following if the currentUser is the creator
             if (currentUser && currentUser.id === vm.project.creator_user_id) {
                 vm.no_follow = false;

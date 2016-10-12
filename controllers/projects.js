@@ -776,11 +776,8 @@ exports.createProject = function(req, res){
         if(req.isAuthenticated()){
             req.body.creator_user_id = req.user.id;
 
-        if (req.body.network) {
-            var network = req.body.network;
-            delete req.body.network;
-        }
-	    
+	    delete req.body.networks;
+
 	    pool.query('SELECT count(*) as count FROM projects WHERE creator_user_id = ?', req.user.id,
 		       function(err, check) {
 			   if (err) throw err;
@@ -795,7 +792,7 @@ exports.createProject = function(req, res){
 				   console.log("\n");
 				   throw err;
 			       } else {
-                        getProjectNetworkToken(req.user.id, req.body.public_id, network, function(done) {
+                        getProjectNetworkToken(req.user.id, req.body.public_id, req.body.network, function(done) {
         				        pool.query("SELECT first_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", req.user.id, 
         					      function(err, data) {
         						  if (err) throw err;
@@ -898,10 +895,8 @@ exports.updateProject = function(req, res){
         console.log(errors);
         return res.status(400).send(errors);
     } else {
-        if (req.body.network)
-            var project_network = req.body.network
-	delete req.body.networks;
-	delete req.body.network;
+
+    	delete req.body.networks;
 
         pool.query("UPDATE projects SET ? WHERE id = ?", [req.body, req.body.id], 
 		   function(err, result) {
@@ -911,7 +906,7 @@ exports.updateProject = function(req, res){
 			       if (err) throw err;
 			       Project.addObjects(data, function(err, content) {
 				   if (err) throw err;
-				   getProjectNetworkToken(req.user.id, req.body.public_id, project_network, function(done) {
+				   getProjectNetworkToken(req.user.id, req.body.public_id, req.body.network, function(done) {
 				       return res.status(200).send(result);
 				   });
 			       });

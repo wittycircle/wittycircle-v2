@@ -102,6 +102,10 @@ $scope.initiateProject = function () {
     });
     $scope.project = Projects.getProjectbyPublicId(projectId, function (response) {
         $scope.project = response[0];
+        if ($scope.project.network) {
+            $scope.networkName = $scope.project.network;
+            $scope.chooseNetwork = true;
+        }
         if ($scope.project.project_visibility == 1) {
             $scope.project.project_visibility = true;
         }
@@ -148,7 +152,6 @@ $scope.initiateProject = function () {
                 $scope.noOpenings = true;
             } else {
                 $scope.openings = response.data;
-                console.log($scope.openings);
                 Object.keys($scope.openings).forEach(function(key) {
                     if ($scope.openings[key].taggs != false) {
                         $scope.openings[key].taggs = JSON.parse($scope.openings[key].taggs);

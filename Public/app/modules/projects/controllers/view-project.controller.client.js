@@ -142,7 +142,6 @@
             var err;
 
             vm.project = projectResolve.data[0];
-            console.log(vm.project);
             /*** Project Card Page ***/
             $scope.$parent.seo = {
                 pageTitle: vm.project.title,

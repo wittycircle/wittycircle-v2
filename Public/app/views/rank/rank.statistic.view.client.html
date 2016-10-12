@@ -118,7 +118,7 @@
 		
 		$(this).click(function(e) {
 			if (e.target.id === "srpsib") {
-				$("#sinvitem").fadeToggle(200);
+				$("#sinvitem").fadeIn(200);
 			} else {
 				if (!$("#sinvitem").is(e.target) && $("#sinvitem").has(e.target).length === 0) {
 					$("#sinvitem").fadeOut(200);

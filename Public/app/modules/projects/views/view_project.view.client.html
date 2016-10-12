@@ -122,14 +122,14 @@
 
 	<div ui-view>
 		<div class="project-post-container">
+		  <div class="project-contributor-show" ng-if="projectContributor.length">
+                                <h4>Contributors: </h4>
+                                <ul>
+                                        <li ng-repeat="contribut in projectContributor"><a ng-href="{{contribut.username}}"><img ng-src="{{contribut.profile_picture}}" /></a></li>
+                                </ul>
+                        </div>
 			<div ng-if="!vm.project.post && !vm.config.sources" class="project-post-nodetail">
 				<h2>No more details yet.</h2>
-			</div>
-			<div class="project-contributor-show" ng-if="projectContributor.length">
-				<h4>Contributors: </h4>
-				<ul>
-					<li ng-repeat="contribut in projectContributor"><a ng-href="{{contribut.username}}"><img ng-src="{{contribut.profile_picture}}" /></a></li>
-				</ul>
 			</div>
 			<div class="project-post-video">
 				<!-- <videogular vg-theme="vm.config.theme.url" class="video_custom animated fadeIn" ng-if="vm.config.sources">

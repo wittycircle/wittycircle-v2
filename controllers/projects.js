@@ -898,31 +898,26 @@ exports.updateProject = function(req, res){
         console.log(errors);
         return res.status(400).send(errors);
     } else {
-        if (req.body.network) {
+        if (req.body.network)
             var project_network = req.body.network
-            delete req.body.network;
-        }
-        pool.query('UPDATE `projects` SET ? WHERE `id` = ' + req.params.id, req.body, function(err, result) {
-            if (err) {
-                var date = new Date();
-                console.log(date);
-                console.log("Error getting projects in projects.js/createProject");
-                console.log(err);
-                console.log("\n");
-                throw err;
-            }
-            algoliaClient.deleteIndex('Projects', function(error) {
-                pool.query('SELECT * FROM projects', function(err, data) {
-                    if (err) throw err;
-                    Project.addObjects(data, function(err, content) {
-                        if (err) throw err;
-                        getProjectNetworkToken(req.user.id, req.body.public_id, project_network, function(done) {
-                            return res.status(200).send(result);
-                        });
-                    });
-                });
-            });
-        });
+	delete req.body.networks;
+	delete req.body.network;
+
+        pool.query("UPDATE projects SET ? WHERE id = ?", [req.body, req.body.id], 
+		   function(err, result) {
+		       if (err) throw err;
+		       algoliaClient.deleteIndex('Projects', function(error) {
+			   pool.query('SELECT * FROM projects', function(err, data) {
+			       if (err) throw err;
+			       Project.addObjects(data, function(err, content) {
+				   if (err) throw err;
+				   getProjectNetworkToken(req.user.id, req.body.public_id, project_network, function(done) {
+				       return res.status(200).send(result);
+				   });
+			       });
+			   });
+		       });
+		   });
     }
 };
 

@@ -265,9 +265,6 @@ function sendMailToValidateNetwork(info, callback) {
     var network     = info.network.replace(/ +/g, "");
     var emails      = [];
 
-    console.log(info.network);
-    return ;
-
     if (info.network === "The Refiners") {
         emails = [{
             email: 'pierre@theref.co',

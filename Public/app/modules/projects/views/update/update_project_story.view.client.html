@@ -10,8 +10,8 @@
             </div>
             <div class="col-md-9 update-project-video">
                 <input id="file" type="file" name="file" ng-model="file" class="cloudinary_fileupload" />
-                <label ng-class="{ 'drop-box-cover-video': !videoproject && !project.main_video }" for="file">
-                    <div class="video-text" ng-if="!videoproject && !project.main_video">
+                <label ng-class="{ 'drop-box-cover-video': !config.sources }" for="file">
+                    <div class="video-text" ng-if="!config.sources">
                         <h5><i class="fa fa-cloud-upload"></i> Upload a video</h5>
                         <p>
                             100 Mb max, AVI, MPEG or MP4 format
@@ -40,14 +40,16 @@
                     <vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
                     <vg-poster class="video-poster-update" vg-url='config.plugins.poster'></vg-poster>
                 </videogular> -->
-                <video id="my-video" ng-if="videoproject || project.main_video" class="video-js" data-setup='{ "controls": true, "preload": "auto" }' poster="{{config.plugins.poster}}" ng-if="config.sources">
-                    <source src="{{config.sources}}" type='video/mp4' />
-<!--                    <source src="MY_VIDEO.webm" type='video/webm'>
+                <div class="video-project" ng-if="config.sources">
+                <video id="my-video" class="video-js" controls="true" preload="auto" data-setup={} poster="{{config.video_poster}}">
+                    <source src="{{config.sources | trustUrl}}" type='video/mp4' />
+<!--                    <source src="{{config.sources}}" type='video/mov'>
  -->                    <p class="vjs-no-js">
                         <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                     </p>
                 </video>
-            <div ng-if="videoproject || project.main_video" style="text-align:center; margin-top: 20px;">
+            </div>
+            <div ng-if="config.sources" style="text-align:center; margin-top: 20px;">
                 <p class="text_delete" style="display: inline; margin-right: 20px;" data-ng-click="uploadPoster()">
                     Update video poster <i class="fa fa-picture-o"></i>
                 </p>
@@ -72,7 +74,6 @@
         </div>
     </div>
 </div>
-<script src="https://vjs.zencdn.net/5.10.8/video.js"></script>
 
 
 <!--redactor="{buttons: ['formatting', '|', 'bold', 'italic', 'unorderedlist', 'outdent', 'indent', 'link', 'horizontalerule', 'image']

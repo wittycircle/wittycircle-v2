@@ -8,10 +8,10 @@
                     Optional, but highly recommended.
                 </p>
             </div>
-            <div class="col-md-9 update-project-video">
+            <div class="col-md-9 update-project-video" >
                 <input id="file" type="file" name="file" ng-model="file" class="cloudinary_fileupload" />
-                <label ng-class="{ 'drop-box-cover-video': !videoproject && !project.main_video }" for="file">
-                    <div class="video-text" ng-if="!videoproject && !project.main_video">
+                <label ng-class="{ 'drop-box-cover-video': !config.sources }" for="file">
+                    <div class="video-text" ng-if="!config.sources">
                         <h5><i class="fa fa-cloud-upload"></i> Upload a video</h5>
                         <p>
                             100 Mb max, AVI, MPEG or MP4 format
@@ -19,7 +19,7 @@
                         <span ng-bind="status"></span>
                     </div>
                 </label>
-                <videogular ng-if="videoproject || project.main_video" vg-theme="config.theme.url" class="video_custom animated fadeIn">
+<!--                 <videogular ng-if="videoproject || project.main_video" vg-theme="config.theme.url" class="video_custom animated fadeIn">
                     <vg-media vg-src="config.sources" class="animated fadeIn"
                     >
                 </vg-media>
@@ -40,8 +40,17 @@
                 </vg-controls>
                 <vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
                 <vg-poster vg-url='config.plugins.poster'></vg-poster>
-            </videogular>
-            <div ng-if="videoproject || project.main_video" style="text-align:center; margin-top: 20px;">
+            </videogular> -->
+            <div class="video-project" ng-if="config.sources">
+            <video id="my-video" class="video-js" controls="true" preload="true" data-setup='{"poster": "{{config.video_poster}}" }'>
+                    <source src="{{config.sources | trustUrl}}" type='video/mp4'/>
+<!--                    <source src="{{sources}}" type='video/webm'>
+ -->                    <p class="vjs-no-js">
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+            <div ng-if="config.sources" style="text-align:center; margin-top: 20px;">
                 <p class="text_delete" style="display: inline; margin-right: 20px;" data-ng-click="uploadPoster()">
                     Update video poster <i class="fa fa-picture-o"></i>
                 </p>
@@ -50,47 +59,6 @@
                 </p>
             </div>
         </div>
-        <!-- <div class="col-md-9">
-        <div ngf-drop="uploadVideo(videoproject)" ngf-select="uploadVideo(videoproject)" ngf-select-disabled="videoproject || project.main_video" ng-model="videoproject" ng-class="{ 'drop-box-cover-video': !videoproject && !project.main_video }"
-        ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false"
-        accept="video/*"
-        ngf-pattern="'video/*'">
-        <div class="video-text" ng-if="!videoproject && !project.main_video">
-        <h5><i class="fa fa-cloud-upload"></i> Upload a video</h5>
-        <p>
-        100 Mb max, AVI, MPEG or MP4 format
-    </p>
-</div>
-<videogular ng-if="videoproject || project.main_video" vg-theme="config.theme.url" class="video_custom animated fadeIn">
-<vg-media vg-src="config.sources" class="animated fadeIn"
->
-</vg-media>
-
-
-<vg-controls ng-if="itsOk == 3" vg-autohide="config.plugins.controls.autoHide" vg-autohide-time="config.plugins.controls.autoHideTime">
-<vg-play-pause-button></vg-play-pause-button>
-<vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
-<vg-scrub-bar>
-<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-</vg-scrub-bar>
-<vg-time-display>{{ totalTime | date:'mm:ss':'+0000' }}</vg-time-display>
-<vg-volume>
-<vg-mute-button></vg-mute-button>
-<vg-volume-bar></vg-volume-bar>
-</vg-volume>
-<div class='my-button iconButton'><img src="images/witty-logo-icon-w.svg" height="20px" width="20px"></div>
-<vg-fullscreen-button></vg-fullscreen-button>
-</vg-controls>
-
-<vg-overlay-play ng-click="itsOk = 3"></vg-overlay-play>
-</videogular>
-<div ng-if="videoproject || project.main_video">
-<p class="text_delete" ng-click="deleteVideo()">
-delete <i class="fa fa-trash-o"></i>
-</p>
-</div>
-</div>
-</div> -->
 </div>
 </div>
 </div>
@@ -108,16 +76,5 @@ delete <i class="fa fa-trash-o"></i>
         </div>
     </div>
 </div>
+<script src="https://vjs.zencdn.net/5.10.8/video.js"></script>
 
-<!-- <div id="form-project-1">
-<div class="row">
-<div class="container-fluid container-custom-project">
-<div class="row state-project">
-<div class="col-md-12 text-center">
-<button class="back-button" ng-click="back()">Back</button>
-<button class="go-button" ng-click="savestory(project)" >Next</button>
-</div>
-</div>
-</div>
-</div>
-</div> -->

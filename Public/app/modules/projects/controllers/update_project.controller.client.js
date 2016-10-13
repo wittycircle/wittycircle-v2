@@ -15,6 +15,7 @@ function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stat
     });
     $scope.elementPost = {};
     $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
+    $scope.config = {};
 
 
     //$('#viewProject-header').backgroundDraggable();
@@ -118,17 +119,9 @@ $scope.initiateProject = function () {
             }
         }
         if ($scope.project.main_video) {
-            $scope.config = {
-                    sources: $sce.trustAsResourceUrl($scope.project.main_video),
-                    plugins: {
-                        controls: {
-                            autoHide: true,
-                            autoHideTime: 2000
-                        }
-                    }
-                };
+            $scope.config.sources = $scope.project.main_video;
 	        if ($scope.project.video_poster) {
-    		  $scope.config.plugins.poster = $scope.project.video_poster;
+    		  $scope.config.video_poster = $scope.project.video_poster;
     	    }
         }
         Categories.getCategory(response[0].category_id, function (response) {
@@ -243,12 +236,13 @@ $scope.deleteVideo = function() {
     var data = {};
 
     if ($scope.project.main_video) {
-        data.video_id = $scope.project.main_video_id;
+        data.video_id = $scope.project.main_video;
         data.project_id = $scope.project.id;
+        $scope.config.sources = false;
+
         $http.post('/upload/delete/videos', data).success(function(response) {
             if (response.result == "ok") {
                 $scope.project.main_video = "";
-                $scope.config.sources = "";
             }
         }).error(function(error_message) {
             console.log(error_message);
@@ -256,10 +250,10 @@ $scope.deleteVideo = function() {
     } else {
         data.video_id = $scope.project_video_id;
         data.project_id = $scope.project.id;
+        $scope.config.sources = false;
         $http.post('/upload/delete/videos', data).success(function(response) {
             if (response.result == "ok") {
                 $scope.project.main_video = "";
-                $scope.config.sources = [];
                 $scope.project_video = [];
                 $scope.project_video_id = [];
                 $scope.videoproject = false;
@@ -482,22 +476,11 @@ $scope.uploadVideo = function() {
         $scope.$apply();
         /*** Display video when success ***/
         $scope.videoproject = true;
+
         Upload.dataUrl(data.files[0], true).then(function(url){
-            $scope.config = {
-                preload: "auto",
-                sources: [
-                    {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
-                ],
-                theme: {
-                    url: "styles/css/videogular.css"
-                },
-                plugins: {
-                    controls: {
-                        autoHide: true,
-                        autoHideTime: 2000
-                    }
-                }
-            };
+            $scope.config.sources = $scope.result.secure_url;
+            $scope.status = null;
+            $scope.progress = 0;
             data.url = url;
             $scope.itsOk = true;
         });
@@ -508,6 +491,7 @@ $scope.uploadVideo = function() {
     }).on("cloudinaryfail", function(e, data){
         if (data.files[0].size > 100000000) {
             $scope.status = "File too large!";
+            $scope.progress = 0;
             return ;
         }
         var file = $scope.files[name] ||{};

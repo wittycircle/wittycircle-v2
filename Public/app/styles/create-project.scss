@@ -749,6 +749,7 @@ $blue: #416299;
   }
 
   .redactor-editor {
+    min-height: 220px !important;
 
     p {
       font-family: 'FreigBook';
@@ -756,6 +757,7 @@ $blue: #416299;
       line-height: 21px;
       color: #222;
       text-align: left;
+      margin-bottom: 0;
     }
 
     h1 {

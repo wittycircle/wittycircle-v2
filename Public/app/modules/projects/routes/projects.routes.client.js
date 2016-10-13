@@ -35,7 +35,14 @@
       })
       .state('createproject.story', {
         url: '/story',
-        templateUrl: 'views/projects/create/create_project_story.view.client.html'
+        templateUrl: 'views/projects/create/create_project_story.view.client.html',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'https://vjs.zencdn.net/5.10.8/video.js',
+                    ]);
+              }]
+        }
       })
       .state('createproject.people', {
         url: '/people',
@@ -149,7 +156,14 @@
       })
       .state('updateproject.story', {
         url: '/story',
-        templateUrl: 'modules/projects/views/update/update_project_story.view.client.html'
+        templateUrl: 'modules/projects/views/update/update_project_story.view.client.html',
+        resolve: {
+            loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                return $ocLazyLoad.load([
+                    'https://vjs.zencdn.net/5.10.8/video.js',
+                ])
+              }]
+        }
       })
       .state('updateproject.people', {
         url: '/people',

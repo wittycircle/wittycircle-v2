@@ -521,16 +521,19 @@
   max-width: 1000px; }
   .container-custom-project .video-poster-update {
     overflow: hidden; }
-  .container-custom-project .redactor-editor p {
-    font-family: 'FreigBook';
-    font-size: 16px;
-    line-height: 21px;
-    color: #222;
-    text-align: left; }
-  .container-custom-project .redactor-editor h1 {
-    font-family: 'FreigBook';
-    color: #222;
-    font-size: 28px; }
+  .container-custom-project .redactor-editor {
+    min-height: 220px !important; }
+    .container-custom-project .redactor-editor p {
+      font-family: 'FreigBook';
+      font-size: 16px;
+      line-height: 21px;
+      color: #222;
+      text-align: left;
+      margin-bottom: 0; }
+    .container-custom-project .redactor-editor h1 {
+      font-family: 'FreigBook';
+      color: #222;
+      font-size: 28px; }
   .container-custom-project .text_delete {
     color: #bbb !important;
     margin-top: 5px;

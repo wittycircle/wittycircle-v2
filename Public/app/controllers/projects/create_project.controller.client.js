@@ -7,8 +7,8 @@
  * # CreateProjectCtrl
  * Controller of the wittyApp
  */
-angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload',
-  function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload) {
+angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload', 'redactorOptions',
+  function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload, redactorOptions) {
 
   $scope.currentUser = $rootScope.globals.currentUser;
   $scope.project_category = {};
@@ -22,11 +22,23 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
   Categories.getCategories(function (response) {
     $scope.categories = response;
   });
-
+  $scope.config = {sources: null, video_poster: null};
   $scope.networkName = "The Refiners, 500 Startups, Y Combinator, Techstars...";
 
-  /*** Cloudinary jQuery Plugin ***/
+  /*** Redactor Configuration ***/
+  redactorOptions.imageUpload = '/upload/redactor';
+  redactorOptions.buttonSource = true;
+  redactorOptions.imageResizable = true;
+  redactorOptions.imageEditable = true;
+  redactorOptions.imageLink = true;
+  redactorOptions.visual = true;// false for html mode
 
+  redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
+  redactorOptions.plugins = ['imagemanager'];
+  redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+  /*
+  **End Redactor configuration
+  */
 
   /*** Getting the project id previouslt set in a cookie in data_project service **/
   var projectId = Data_project.returnProjectId().id;
@@ -252,21 +264,10 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
         }
       }
       if ($scope.project.main_video) {
-        $scope.config = {
-                      preload: "auto",
-                      sources: [
-                          {src: $sce.trustAsResourceUrl($scope.project.main_video), type: "video/mp4"}
-                      ],
-                      theme: {
-                          url: "styles/css/videogular.css"
-                      },
-                      plugins: {
-                          controls: {
-                              autoHide: true,
-                              autoHideTime: 2000
-                          }
-                      }
-                  };
+        $scope.config.sources = $scope.project.main_video;
+        if ($scope.project.video_poster) {
+          $scope.config.video_poster = $scope.project.video_poster;
+        }
       }
       Categories.getCategory(response[0].category_id, function (response) {
         $scope.project_category.obj = response[0];
@@ -376,12 +377,13 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
     var data = {};
 
     if ($scope.project.main_video) {
-      data.video_id = $scope.project.main_video_id;
+      data.video_id = $scope.project.main_video;
       data.project_id = $scope.project.id;
+      $scope.config.sources = false;
+
       $http.post('/upload/delete/videos', data).success(function(response) {
         if (response.result == "ok") {
           $scope.project.main_video = "";
-          $scope.config.sources = "";
         }
       }).error(function(error_message) {
         console.log(error_message);
@@ -392,7 +394,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
       //$http.post('/upload/delete/videos', data).success(function(response) {
         //console.log($scope.config.sources);
         //if (response.result == "ok") {
-        $scope.config.sources = [];
+        $scope.config.sources = false;
         $scope.videoproject = false;
         //}
         //console.log($scope.config.sources);
@@ -576,7 +578,6 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
         //maxFileSize: 20000000, // 20MB
         dropZone: ".update-project-video",
         start: function (e) {
-          console.log(document.getElementById("file").value);
           $scope.status = "Starting upload...";
           $scope.file = {};
           $scope.$apply();
@@ -616,22 +617,10 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
          /*** Display video when success ***/
         $scope.videoproject = true;
          Upload.dataUrl(data.files[0], true).then(function(url){
-          $scope.config = {
-                         preload: "auto",
-                         sources: [
-                             {src: $sce.trustAsResourceUrl(data.result.secure_url), type: "video/mp4"}
-                         ],
-                         theme: {
-                             url: "styles/css/videogular.css"
-                         },
-                         plugins: {
-                             controls: {
-                                 autoHide: true,
-                                 autoHideTime: 2000
-                             }
-                         }
-                     };
            data.url = url;
+           $scope.config.sources = $scope.result.secure_url;
+           $scope.status = null;
+            $scope.progress = 0;
            $scope.itsOk = true;
          });
          $scope.project_video = data.result.secure_url;
@@ -640,6 +629,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
       }).on("cloudinaryfail", function(e, data){
         if (data.files[0].size > 100000000) {
           $scope.status = "File too large!";
+          $scope.progress = 0;
           return ;
         }
           var file = $scope.files[name] ||{};

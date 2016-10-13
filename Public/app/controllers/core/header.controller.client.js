@@ -63,7 +63,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -162,7 +162,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     };
 
     $scope.showMessagePageMobile = function() {
-        window.location.href = "https://www.wittycircle.com/messages";
+        window.location.href = "http://127.0.0.1/messages";
     };
 
     // $rootScope.$watch('notifBubble', function(value, old) {
@@ -181,7 +181,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {
@@ -240,12 +240,16 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $scope.listNotifs = res.data;
                 $scope.notifBubble = res.number;
                 if (!res.number)
-                $scope.checkRead = true;
+                    $scope.checkRead = true;
                 else
-                $scope.checkRead = false;
+                    $scope.checkRead = false;
             });
         }
     }; $timeout(getNotifList(), 2000);
+
+    $scope.hideNotifBubble = function() {
+        $scope.hideNBubble = true;
+    };
 
     function updateNotificationRead(id) {
         $http.put("/notification/update/single", id).success(function(res) {
@@ -393,7 +397,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("1KMLSBQSEW", "9ff7bd4394a3c40cc8e3f3d2f2690619");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');
@@ -485,11 +489,13 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** All watch function ***/
     $scope.$watch('notifBubble', function(value, old) {
-        if (document.getElementById('header-section')) {
-            if (value)
-            document.getElementById('notifBubble').style.display = "block";
-            else
-            document.getElementById('notifBubble').style.display = "none";
+        if (!$scope.hideNBubble && value || old) {
+            if (document.getElementById('header-section')) {
+                if (value)
+                    document.getElementById('notifBubble').style.display = "block";
+                else
+                    document.getElementById('notifBubble').style.display = "none";
+            }
         }
     });
 

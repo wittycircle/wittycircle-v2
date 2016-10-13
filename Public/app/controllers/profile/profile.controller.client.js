@@ -13,38 +13,40 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	var y           = $(window).width();
 
 	$(document).ready(function() {
-		if (y >= 736) {
-			$('#header-section').css("position", "absolute");
-	        $('#header-content').css("backgroundColor", "transparent");
-	        $('#header-content').css("borderBottom", "none");
-	        $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
-	        $('#hnl').attr("class", "header-nav-list");
-	        $('#hsb').attr("class", "header-searchBar");
-	        $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png");
-	    	$('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png");
-	    	$('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg");
-	        $('.header-log-dropdown').first().css("color", "white");
-	        $('#hnlog').attr("class", "header-nav-log");
-	    } else {
-	    	$('#header-section').css("position", "absolute");
-	    	$('#header-content').css("backgroundColor", "transparent");
-            $('#header-content').css("borderBottom", "none");
-            $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
-            document.getElementById('srpimg').src = "/images/littleman-w.svg";
-            document.getElementById('hsmobileimg').src = "/images/search-icon-w.svg";
-            document.getElementById('hnmid').className = "header-nav-list";
-	    }
+		$timeout(function() {
+			if (y >= 736) {
+				$('#header-section').css("position", "absolute");
+		        $('#header-content').css("backgroundColor", "transparent");
+		        $('#header-content').css("borderBottom", "none");
+		        $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
+		        $('#hnl').attr("class", "header-nav-list");
+		        $('#hsb').attr("class", "header-searchBar");
+		        $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png");
+		    	$('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png");
+		    	$('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-w_csniet.svg");
+		        $('.header-log-dropdown').first().css("color", "white");
+		        $('#hnlog').attr("class", "header-nav-log");
+		    } else {
+		    	$('#header-section').css("position", "absolute");
+		    	$('#header-content').css("backgroundColor", "transparent");
+	            $('#header-content').css("borderBottom", "none");
+	            $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-w_qtyz0j.svg");
+	            document.getElementById('srpimg').src = "/images/littleman-w.svg";
+	            document.getElementById('hsmobileimg').src = "/images/search-icon-w.svg";
+	            document.getElementById('hnmid').className = "header-nav-list";
+		    }
+		}, 1500);
     });
 	
 	var profileVm = this;
-	var socket = io.connect('https://www.wittycircle.com');
+	var socket = io.connect('http://127.0.0.1');
 
 	/* Vm Variable */
 	profileVm.currentUser = $rootScope.globals.currentUser || false;
 	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
-    profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
+    profileVm.currentUrl = 'http://127.0.0.1' + $location.path();
 
 	if (profileVm.currentUser && profileVm.currentUser.moderator)
 	    profileVm.moderator = true;

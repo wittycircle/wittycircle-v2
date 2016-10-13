@@ -20,7 +20,12 @@
 					<h5 ng-repeat="network in vm.project.networks" style="margin-right: 10px">#{{network.network | removeSpace}}</h5>
 				</li>
 				<li class="ng-cloak">
-					<h5><span data-ng-bind="vm.project.status"></span> by <img data-ng-click="vm.goToProfile(vm.project.creator_user_id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}"><img data-ng-click="vm.goToProfile(user.id)" class="img-circle" height="30px" width="30px" data-ng-repeat="user in vm.involved_users" data-ng-src="{{user.profile_picture}}" />
+					<h5><span data-ng-bind="vm.project.status"></span> by 
+
+						<img data-ng-click="vm.goToProfile(vm.project.creator_user_id)" class="img-circle" height="30px" width="30px" data-ng-src="{{vm.project.user.profile_picture}}">
+
+						<img data-ng-click="vm.goToProfile(user.user_id)" class="img-circle" height="30px" width="30px" data-ng-repeat="user in vm.involved_users" data-ng-src="{{user.profile_picture}}" />
+
 					</h5>
 				</li>
 			</div>

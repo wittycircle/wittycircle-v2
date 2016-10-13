@@ -75,9 +75,9 @@
 
         <nav id="hlon" class="header-log-on" ng-hide="!log">
             <div class="header-notif-mail">
-                <div id="hlogn" class="header-log-notif header-notification">
+                <div id="hlogn" class="header-log-notif header-notification" ng-click="hideNotifBubble()">
                     <img id="notif-w-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-w_wslyzh.png" alt="notif-waves">
-                    <div id="notifBubble" class="header-bubble">{{notifBubble}}</div>
+                    <div id="notifBubble" class="header-bubble" ng-if="!hideNBubble" style="display: none">{{notifBubble}}</div>
                 </div>
                 <div id="hlogm" class="header-log-mailbox header-notification">
                     <img id="notif-m-i" src="https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-w_sji3lw.png" alt="notif-mailbox">
@@ -241,7 +241,7 @@
         }); */
 
 
-        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+        if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
         else
             headerCon.style.position = "absolute";
@@ -582,7 +582,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if (y >= 736) {
                     if ($(window).scrollTop() > 1 && !check) {
                         check = 1;

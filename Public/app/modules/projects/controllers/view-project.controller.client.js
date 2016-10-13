@@ -320,6 +320,7 @@
 
         function goToProfile (id) {
             if (id && id !== null && id !== undefined && typeof id === 'number') {
+                console.log(id);
                 Users.getUserbyId(id, function (response) {
                     $state.go('profile', {username: response.data.username});
                 });

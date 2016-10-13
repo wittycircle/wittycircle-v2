@@ -153,7 +153,7 @@ exports.getProfiles = function(req,res){
     pool.query('SELECT * FROM `profiles` ORDER BY views DESC', function (err, results) {
 	if (err) throw (err);
 	else
-	    res.send(results);
+	    return res.status(200).send(results);
     });
 };
 
@@ -173,7 +173,7 @@ exports.getUser = function(req, res){
             if (results[0]) {
 	            function recursive(index){
 	                if(index !== results.length){
-	                    pool.query('SELECT * FROM `profiles` WHERE `id` = ?',
+	                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?',
 	                    [results[index].profile_id],
 	                    function (err, result, field) {
 	                        if(err){

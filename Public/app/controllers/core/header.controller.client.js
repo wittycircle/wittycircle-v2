@@ -240,12 +240,16 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
                 $scope.listNotifs = res.data;
                 $scope.notifBubble = res.number;
                 if (!res.number)
-                $scope.checkRead = true;
+                    $scope.checkRead = true;
                 else
-                $scope.checkRead = false;
+                    $scope.checkRead = false;
             });
         }
     }; $timeout(getNotifList(), 2000);
+
+    $scope.hideNotifBubble = function() {
+        $scope.hideNBubble = true;
+    };
 
     function updateNotificationRead(id) {
         $http.put("/notification/update/single", id).success(function(res) {
@@ -485,11 +489,13 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** All watch function ***/
     $scope.$watch('notifBubble', function(value, old) {
-        if (document.getElementById('header-section')) {
-            if (value)
-            document.getElementById('notifBubble').style.display = "block";
-            else
-            document.getElementById('notifBubble').style.display = "none";
+        if (!$scope.hideNBubble && value || old) {
+            if (document.getElementById('header-section')) {
+                if (value)
+                    document.getElementById('notifBubble').style.display = "block";
+                else
+                    document.getElementById('notifBubble').style.display = "none";
+            }
         }
     });
 

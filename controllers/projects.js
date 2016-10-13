@@ -584,12 +584,13 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                             editable = true;
                         }
                         if (results[index].n_accept === 1) {
-                            pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
+                            pool.query("SELECT profile_picture FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
                             [results[index].user_id],
                             function (err, result, field) {
                                 if(err){
                                     throw err;
                                 }
+                                result[0].user_id = results[index].user_id;
                                 results.splice(index, 1);
                                 userIn.push(result[0]);
                                 recursive(index + 1);

@@ -18,7 +18,7 @@ angular.module('wittyApp').controller('HeadCtrl', function ($scope) {
 	$scope.card = {
 		title: "Wittycircle | Where the world meets entrepreneurs",
 		url: "https://www.wittycircle.com",
-		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1475443938/Cover_Share_FB_Tw_mmyt5p.jpg"
+		image: "http://res.cloudinary.com/dqpkpmrgk/image/upload/v1476481759/Capture_d_e%CC%81cran_2016-10-14_a%CC%80_11.51.00_xdd1hm.png"
 	};
 
 	if ($(window).width() < 736) {

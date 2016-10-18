@@ -720,34 +720,70 @@ function verifyProjectNetwork(project_id, network, callback) {
         });
 };
 
-function getProjectNetworkToken(user_id, p_public_id, network, callback) {
+function getProjectNetworkToken(req, p_public_id, network, callback) {
     if (network) {
-        pool.query('SELECT id FROM projects WHERE creator_user_id = ? AND public_id = ?', [user_id, p_public_id],
-            function(err, result) {
-                if (err) throw err;
-                else {
-                    verifyProjectNetwork(result[0].id, network, function(check) {
-                        if (check) {
-                            var buf     = crypto.randomBytes(20),
-                                token   = buf.toString('hex');
-                                // link    = 'https://www.wittycircle.com/verify/network/' + token;
-
-                            var project = {
-                                project_id  : result[0].id,
-                                network     : network, 
-                                token       : token,
-                            }
-
-                            pool.query('INSERT INTO project_network SET ?', project,
-                                function(err, result2) {
-                                    if (err) throw err;
-                                    return callback(true);
-                                });
-                        } else
-                            return callback(false);
-                    });
-                }
-        });
+	if (req.user.moderator) {
+	    pool.query('SELECT creator_user_id FROM projects WHERE public_id = ?', p_public_id,
+		       function(err, u_id) {
+			   if (err) throw err;
+			   else {
+			       var user_id = u_id[0].creator_user_id;
+			       pool.query('SELECT id FROM projects WHERE creator_user_id = ? AND public_id = ?', [user_id, p_public_id],
+					  function(err, result) {
+					      if (err) throw err;
+					      else {
+						  verifyProjectNetwork(result[0].id, network, function(check) {
+						      if (check) {
+							  var buf     = crypto.randomBytes(20),
+							  token   = buf.toString('hex');
+							  // link    = 'https://www.wittycircle.com/verify/network/' + token;
+							  
+							  var project = {
+							      project_id  : result[0].id,
+							      network     : network,
+							      token       : token,
+							  }
+							  
+							  pool.query('INSERT INTO project_network SET ?', project,
+								     function(err, result2) {
+									 if (err) throw err;
+									 return callback(true);
+								     });
+						      } else
+							  return callback(false);
+						  });
+					      }
+					  });
+			   }
+		       });
+	} else {
+            pool.query('SELECT id FROM projects WHERE creator_user_id = ? AND public_id = ?', [req.user.id, p_public_id],
+		       function(err, result) {
+			   if (err) throw err;
+			   else {
+			       verifyProjectNetwork(result[0].id, network, function(check) {
+				   if (check) {
+				       var buf     = crypto.randomBytes(20),
+                                       token   = buf.toString('hex');
+                                       // link    = 'https://www.wittycircle.com/verify/network/' + token;
+				       
+				       var project = {
+					   project_id  : result[0].id,
+					   network     : network, 
+					   token       : token,
+				       }
+				       
+				       pool.query('INSERT INTO project_network SET ?', project,
+						  function(err, result2) {
+						      if (err) throw err;
+						      return callback(true);
+						  });
+				   } else
+				       return callback(false);
+			       });
+			   }
+		       });
+	}
     } else
         return callback(false);
 
@@ -907,7 +943,7 @@ exports.updateProject = function(req, res){
 			       if (err) throw err;
 			       Project.addObjects(data, function(err, content) {
 				   if (err) throw err;
-				   getProjectNetworkToken(req.user.id, req.body.public_id, req.body.network, function(done) {
+				   getProjectNetworkToken(req, req.body.public_id, req.body.network, function(done) {
 				       return res.status(200).send(result);
 				   });
 			       });

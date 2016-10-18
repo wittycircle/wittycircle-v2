@@ -12,7 +12,7 @@
  	.controller('MessageCtrl', function($sce, $http, $scope, $modal, $rootScope, $state, $stateParams, Users, $timeout, $filter, $location, redactorOptions) {
 
  	if ($rootScope.globals.currentUser) {
-	 	var socket = io.connect('https://www.wittycircle.com');
+	 	var socket = io.connect('http://127.0.0.1');
 	 	var x = $(window).width();
 	 	var currentUrl = $location.path();
 
@@ -176,7 +176,7 @@
 	 	};
 
 	 	$scope.showHomeMobile = function() {
-	 		window.location.href = "https://www.wittycircle.com";
+	 		window.location.href = "http://127.0.0.1";
 	 	};
 
 	 	$scope.deleteMessage = function() {

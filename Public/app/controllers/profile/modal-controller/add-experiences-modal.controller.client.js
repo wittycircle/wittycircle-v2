@@ -41,6 +41,8 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($time
 
 	function displayProfiles(profiles) {
 
+		console.log(profiles);
+
 		var member 			 = profiles.values[0],
 			linPositions 	 = member.positions.values,
 			newSavePositions = {}; 
@@ -51,11 +53,11 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($time
 		function recursive(index) {
 			if (linPositions[index]) {
 				newSavePositions = {
-					company 			: linPositions[index].company.name,
-					description 		: linPositions[index].summary,
-					location_city 		: linPositions[index].location.name,
-					location_country 	: linPositions[index].location.country.name,
-					title				: linPositions[index].title,
+					company 			: linPositions[index].company.name || null,
+					description 		: linPositions[index].summary || null,
+					location_city 		: linPositions[index].location.name || null,
+					location_country 	: linPositions[index].location.country.name || null,
+					title				: linPositions[index].title || null,
 				};
 
 				if (linPositions[index].isCurrent)

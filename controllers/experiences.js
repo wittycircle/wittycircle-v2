@@ -125,9 +125,9 @@ exports.createUserExperience = function(req, res){
     req.checkBody('company', 'Error Message').isString().max(128);
     req.checkBody('date_from', 'Error Message').isString().max(128);
     req.checkBody('date_to', 'Error Message').isString().max(128);
-    req.checkBody('location_city', 'Error Message').optional().isString().max(128);
-    req.checkBody('location_state', 'Error Message').optional().isString().max(128);
-    req.checkBody('location_country', 'Error Message').optional().isString().max(128);
+    // req.checkBody('location_city', 'Error Message').isString().optional();
+    // req.checkBody('location_state', 'Error Message').isString().optional();
+    // req.checkBody('location_country', 'Error Message').isString().optional();
     
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);

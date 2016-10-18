@@ -52,13 +52,11 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($time
 
 		function recursive(index) {
 			if (linPositions[index]) {
-				newSavePositions = {
-					company 			: linPositions[index].company.name || null,
-					description 		: linPositions[index].summary || null,
-					location_city 		: linPositions[index].location.name || null,
-					location_country 	: linPositions[index].location.country.name || null,
-					title				: linPositions[index].title || null,
-				};
+				newSavePositions.company 			= linPositions[index].company.name || null;
+				newSavePositions.description 		= linPositions[index].summary || null;
+				newSavePositions.location_city		= linPositions[index].location.name || null;
+				newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
+				newSavePositions.title  			= linPositions[index].title || null;
 
 				if (linPositions[index].isCurrent)
 					newSavePositions.date_to = "Present";

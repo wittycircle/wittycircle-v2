@@ -403,13 +403,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
 		function recursive(index) {
 			if (linPositions[index]) {
-				newSavePositions = {
-					company 			: linPositions[index].company.name,
-					description 		: linPositions[index].summary,
-					location_city 		: linPositions[index].location.name,
-					location_country 	: linPositions[index].location.country.name,
-					title				: linPositions[index].title,
-				};
+				newSavePositions.company 			= linPositions[index].company.name || null;
+				newSavePositions.description 		= linPositions[index].summary || null;
+				newSavePositions.location_city		= linPositions[index].location.name || null;
+				newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
+				newSavePositions.title  			= linPositions[index].title || null;
 
 				if (linPositions[index].isCurrent)
 					newSavePositions.date_to = "Present";

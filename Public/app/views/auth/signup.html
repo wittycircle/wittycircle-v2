@@ -6,10 +6,10 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba"><strong>Basics</strong></li>
-				<li class="sbnab" ng-disabled="!canPass">About you</li>
-				<li class="sbnsk">Skills</li>
+				<li class="sbnsk" ng-disabled="!canPass">Skills</li>
 				<li class="sbnin">Interests</li>
 				<li class="sbnex">Experience</li>
+				<li class="sbnab">About you</li>
 			</ul>
 		</div>
 
@@ -96,59 +96,14 @@
 		</div>
 	</section>
 
-	<section id="signup-about-body">
-		<div class="signup-body-nav">
-			<ul>
-				<li class="sbnba">Basics</li></a>
-				<li class="sbnab"><strong>About you</strong></li></a>
-				<li class="sbnsk">Skills</li>
-				<li class="sbnin">Interests</li>
-				<li class="sbnex">Experience</li>
-			</ul>
-		</div>
-
-		<div class="signup-about-status">
-			<div class="signup-status-general">
-				<div class="signup-status-area1 ssar">
-					<div class="ssa ssa1">
-						<h1>I am looking to</h1>
-					</div>
-					<div class="signup-status-dropdown">
-						<div class="ssa ssa2">
-							<h1>{{aboutText}}</h1>
-							<img src="/images/arrow-down-icon-b.svg">
-						</div>
-						<div class="ssa2-dropdown">
-						<li ng-click="getAboutText('Join projects')">Join projects</li>
-							<li ng-click="getAboutText('Discover new things')">Discover new things</li>
-							<li ng-click="getAboutText('Find teammates')">Find teammates</li>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="signup-about-aboutarea">
-			<h4>Tell us a bit about yourself</h4>
-			<div class="signup-aboutarea-text">
-				<textarea ng-model="aboutDescription" placeholder="Your story matters..." redactor></textarea>
-			</div>
-		</div>
-
-		<div class="signup-about-button">
-			<span id="bab">Back</span>
-			<button ng-click="saveAbout()">Continue</button>
-		</div>
-	</section>
-
 	<section id="signup-skill-body">
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
-				<li class="sbnab">About you</li></a>
 				<li class="sbnsk"><strong>Skills</strong></li>
 				<li class="sbnin">Interests</li>
 				<li class="sbnex">Experience</li>
+				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
 
@@ -180,10 +135,10 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
-				<li class="sbnab">About you</li></a>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin"><strong>Interests</strong></li>
 				<li class="sbnex">Experience</li>
+				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
 
@@ -215,10 +170,10 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
-				<li class="sbnab">About you</li></a>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin">Interests</li>
 				<li class="sbnex"><strong>Experience</strong></li>
+				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
 
@@ -227,6 +182,17 @@
 				<h3>Tell us about your work experience</h3>
 			</div>
 
+			<div class="signup-experience-linkedin">
+				<button type="button" ng-click="getLinkedinField()">
+					<img ng-if="!onImport" src="/images/social_media/linkedin-logo.svg" /> 
+					<span ng-if="!onImport">Import from Linkedin</span>
+					<div ng-if="onImport" class="spinner-load">
+					<div class="spinner__item1 spinner-item"></div>
+					<div class="spinner__item2 spinner-item"></div>
+					<div class="spinner__item3 spinner-item"></div> 
+				</button>
+			</div>
+			
 			<div id="senew" class="signup-experience-new" ng-click="addNewPosition()">
 				<h4><i class="fa fa-plus"></i> Add a new reference</h4>
 				<h5>Job position, role in an association, volunteering...</h5>
@@ -240,7 +206,7 @@
 							<h4 ng-bind="position.company"></h4>
 							<div class="signup-exp-param">
 								<img src="/images/picto_edit.svg" ng-click="editPosition($index, position.id)">
-								<i class="fa fa-trash" ng-click="removePosition(position.id)"></i>
+								<i class="fa fa-trash" ng-click="removePosition(position.id, $index)"></i>
 							</div>
 						</div>
 						<div class="signup-exp-period">
@@ -257,8 +223,53 @@
 
 			<div class="signup-experience-button">
 				<span id="bex">Back</span>
-				<button type="submit" ng-click="saveProfile()">{{exButton}}</button>
+				<button type="submit" ng-click="saveExperience()">{{exButton}}</button>
 			</div>
+		</div>
+	</section>
+
+	<section id="signup-about-body">
+		<div class="signup-body-nav">
+			<ul>
+				<li class="sbnba">Basics</li></a>
+				<li class="sbnsk">Skills</li>
+				<li class="sbnin">Interests</li>
+				<li class="sbnex">Experience</li>
+				<li class="sbnab"><strong>About you</strong></li></a>
+			</ul>
+		</div>
+
+		<div class="signup-about-status">
+			<div class="signup-status-general">
+				<div class="signup-status-area1 ssar">
+					<div class="ssa ssa1">
+						<h1>I am looking to</h1>
+					</div>
+					<div class="signup-status-dropdown">
+						<div class="ssa ssa2">
+							<h1>{{aboutText}}</h1>
+							<img src="/images/arrow-down-icon-b.svg">
+						</div>
+						<div class="ssa2-dropdown">
+						<li ng-click="getAboutText('Join projects')">Join projects</li>
+							<li ng-click="getAboutText('Discover new things')">Discover new things</li>
+							<li ng-click="getAboutText('Find teammates')">Find teammates</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="signup-about-aboutarea">
+			<h4>Tell us a bit about yourself</h4>
+			<div class="signup-aboutarea-text">
+				<textarea ng-model="aboutDescription" value="{{linkedInDescription}}" placeholder="Your story matters..." redactor></textarea>
+			</div>
+		</div>
+
+		<div class="signup-about-button">
+			<span id="bab">Back</span>
+			<button ng-click="saveAbout()">Continue</button>
 		</div>
 	</section>
 
@@ -431,21 +442,21 @@
 
 				if (scope.canPass) {
 					var c0			= $('.sbnba');
-					var c1 			= $('.sbnab');
-					var c2 	 		= $('.sbnsk');
-					var c3 			= $('.sbnin');
-					var c4 			= $('.sbnex');
+					var c1 	 		= $('.sbnsk');
+					var c2 			= $('.sbnin');
+					var c3 			= $('.sbnex');
+					var c4 			= $('.sbnab');
 
-					var b1 			= $('#bab');
-					var b2 			= $('#bsk');
-					var b3 			= $('#bin');
-					var b4 			= $('#bex');
+					var b1 			= $('#bsk');
+					var b2 			= $('#bin');
+					var b3 			= $('#bex');
+					var b4 			= $('#bab');
 
 					var aClassName 	= $('#signup-basic-body'),
-						bClassName	= $('#signup-about-body'),
-						cClassName  = $('#signup-skill-body'),
-						dClassName  = $('#signup-interest-body'),
-						eClassName 	= $('#signup-experience-body');
+						bClassName  = $('#signup-skill-body'),
+						cClassName  = $('#signup-interest-body'),
+						dClassName 	= $('#signup-experience-body'),
+						eClassName	= $('#signup-about-body');
 
 					if (mobileSize > 736) {
 						var inRightBig 	= "animated fadeInRightBig",
@@ -464,21 +475,21 @@
 						var count 	 = 0;
 						var cDisplay = $('#signup-basic-body');
 					}
-					if ($('#signup-about-body').css('display') === "block") {
-						var count 	 = 1;
-						var cDisplay = $('#signup-about-body');
-					}
 					if ($('#signup-skill-body').css('display') === "block") {
-						var count 	 = 2;
+						var count 	 = 1;
 						var cDisplay = $('#signup-skill-body');
 					}
 					if ($('#signup-interest-body').css('display') === "block") {
-						var count 	 = 3;
+						var count 	 = 2;
 						var cDisplay = $('#signup-interest-body');
 					}
 					if ($('#signup-experience-body').css('display') === "block") {
-						var count 	 = 4;
+						var count 	 = 3;
 						var cDisplay = $('#signup-experience-body');
+					}
+					if ($('#signup-about-body').css('display') === "block") {
+						var count 	 = 4;
+						var cDisplay = $('#signup-about-body');
 					}
 
 					if (b1.is(e.target)) {

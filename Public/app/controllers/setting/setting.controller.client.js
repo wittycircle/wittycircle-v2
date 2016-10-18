@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * @ngdoc function
@@ -231,6 +230,139 @@ angular.module('wittyApp')
 				}
 			}
 		}
+	};
+
+	/*** NOTIFICATION SETTING ***/
+	var dataNotif  = {};
+	$scope.notif_1 = true;
+	$scope.notif_2 = true;
+	$scope.notif_3 = true;
+	$scope.notif_4 = true;
+	$scope.notif_5 = true;
+	$scope.notif_6 = true;
+	$scope.notif_7 = true;
+
+	function registrePermission(data) {
+		if (data === 'all') {
+			$scope.notif_1 = true;
+			$scope.notif_2 = true;
+			$scope.notif_3 = true;
+			$scope.notif_4 = true;
+			$scope.notif_5 = true;
+			$scope.notif_6 = true;
+			$scope.notif_7 = true;
+		} else {
+			for (var i = 0; i < data.length; i++) {
+				if (data[i].notif_type === "profile_view") {
+					if (data[i].permission)
+						$scope.notif_1 = true;
+					else
+						$scope.notif_1 = false;
+				} else if (data[i].notif_type === "user_follow") {
+					if (data[i].permission)
+						$scope.notif_2 = true;
+					else
+						$scope.notif_2 = false;
+				} else if (data[i].notif_type === "follow_project") {
+					if (data[i].permission === 1)
+						$scope.notif_3 = true;
+					else
+						$scope.notif_3 = false;
+				} else if (data[i].notif_type === "feedback") {
+					if (data[i].permission === 1)
+						$scope.notif_4 = true;
+					else
+						$scope.notif_4 = false;
+				} else if (data[i].notif_type === "ask_project") {
+					if (data[i].permission === 1)
+						$scope.notif_5 = true;
+					else
+						$scope.notif_5 = false;
+				} else if (data[i].notif_type === "reply_project") {
+					if (data[i].permission === 1)
+						$scope.notif_6 = true;
+					else
+						$scope.notif_6 = false;
+				} else {
+					if (data[i].permission === 1)
+						$scope.notif_7 = true;
+					else
+						$scope.notif_7 = false;
+				}
+			}
+		}
+
+	};
+
+	function getNotificationPermissions() {
+		$http.get('/notification/permissions').success(function(res) {
+			if (res.success) {
+				registrePermission(res.data);
+			}
+		});
+	};
+	getNotificationPermissions();
+
+	$scope.selectBox = function(index) {
+		if (index === 1) {
+			if ($scope.notif_1) {
+				$scope.notif_1 = false;
+				dataNotif = {notif_type: 'profile_view', permission: 0}
+			} else {
+				$scope.notif_1 = true;
+				dataNotif = {notif_type: 'profile_view', permission: 1}
+			}
+		} else if (index === 2) {
+			if ($scope.notif_2) {
+				$scope.notif_2 = false;
+				dataNotif = {notif_type: 'user_follow', permission: 0}
+			} else {
+				$scope.notif_2 = true;
+				dataNotif = {notif_type: 'user_follow', permission: 1}
+			}
+		} else if (index === 3) {
+			if ($scope.notif_3) {
+				$scope.notif_3 = false;
+				dataNotif = {notif_type: 'follow_project', permission: 0}
+			} else {
+				$scope.notif_3 = true;
+				dataNotif = {notif_type: 'follow_project', permission: 1}
+			}
+		} else if (index === 4) {
+			if ($scope.notif_4) {
+				$scope.notif_4 = false;
+				dataNotif = {notif_type: 'feedback', permission: 0}
+			} else {
+				$scope.notif_4 = true;
+				dataNotif = {notif_type: 'feedback', permission: 1}
+			}
+		} else if (index === 5) {
+			if ($scope.notif_5) {
+				$scope.notif_5 = false;
+				dataNotif = {notif_type: 'ask_project', permission: 0}
+			} else {
+				$scope.notif_5 = true;
+				dataNotif = {notif_type: 'ask_project', permission: 1}
+			}
+		} else if (index === 6) {
+			if ($scope.notif_6) {
+				$scope.notif_6 = false;
+				dataNotif = {notif_type: 'reply_project', permission: 0}
+			} else {
+				$scope.notif_6 = true;
+				dataNotif = {notif_type: 'reply_project', permission: 1}
+			}
+		} else {
+			if ($scope.notif_7) {
+				$scope.notif_7 = false;
+				dataNotif = {notif_type: 'new_message', permission: 0}
+			} else {
+				$scope.notif_7 = true;
+				dataNotif = {notif_type: 'new_message', permission: 1}
+			}
+		}
+
+		$http.put('/notification/update/permission', dataNotif);
 	};
 
 	$scope.deleteProfile = function() {

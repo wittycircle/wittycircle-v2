@@ -222,6 +222,97 @@ $blue: #416299;
   background-color: #fafafa;
   border-bottom: 1px solid #eee;
 
+  .create-project-invite-modal {
+    position: fixed;
+    max-width: 1000px;
+    margin: 0 auto;
+    top: 15%;
+    right: 0;
+    left: 0;
+    text-align: center;
+    z-index: 10000000;
+
+    .setting-invite-modal-block {
+      display: inline-block;
+      min-width: 400px;
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+
+      .setting-invite-modal-head {
+        background-color: #fafafa;
+
+        h4 {
+          font-family: 'FreigMed';
+          font-size: 16px;
+          color: black;
+          padding: 10px 0;
+          border-bottom: 1px solid #e5e5e5;
+        }
+      }
+
+      .setting-invite-modal-body {
+        padding: 25px 20px;
+
+        input {
+          width: 100%;
+          padding: 6px 10px;
+          border-radius: 4px;
+          border: 1px solid #e5e5e5;
+          font-family: 'FreigBook';
+          font-size: 16px;
+        }
+
+        p {
+          font-family: 'FreigBook';
+          color: red;
+          font-size: 15px;
+          margin-top: 10px;
+          margin-bottom: 0;
+        }
+
+        .simbpress {
+          font-style: italic;
+          color: #999999; 
+        }
+      }
+
+      .setting-invite-modal-list {
+        padding: 25px 0px;
+        margin: 0 20px;
+        border-top: 1px solid #e5e5e5;
+        text-align: center;
+
+        .setting-invite-modal-list-email {
+          text-align: left;
+          
+          li {
+            font-family: 'FreigBook';
+            font-size: 16px;
+            padding: 5px 5px 5px 5px;
+            margin-bottom: 10px;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+
+            img {
+              float: right;
+              position: relative;
+              top: 5px;
+              margin-right: 5px;
+              width: 12px;
+            }
+          }
+        }
+
+        button {
+          margin-top: 10px;
+          font-size: 15px;
+          padding: 5px 12px 6px 12px;
+        }
+      }
+    }
+  } 
+
   .project-basics-category {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -1540,7 +1631,7 @@ div + .no-items-founds {
 .people-add-users {
   border: 2px dashed #e5e5e5;
   border-radius: 5px;
-  padding: 25px;
+  padding: 15px;
   margin-bottom: 40px;
   margin-right: 40px !important;
   width: 90%;
@@ -1577,6 +1668,56 @@ div + .no-items-founds {
   -o-transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
   transition: 200ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 }
+
+.create-project-ranking-invitation {
+
+    .sri-box {
+      .sri-box-illustre-img {
+        display: inline-block;
+        margin-right: 25px;
+/*          width: 170px;
+*/
+        img {
+          border-radius: 50%;
+        }
+      }
+
+      .srpsi-button {
+        padding: 8px 25px;
+        border: 1px solid black;
+        border-radius: 4px;
+        font-family: 'FreigMed';
+        font-size: 16px;
+        color: black;
+        cursor: pointer;
+        webkit-transition: all 200ms linear;
+        -o-transition: all 200ms linear;
+        -moz-transition: all 200ms linear;
+        -ms-transition: all 200ms linear;
+        -kthtml-transition: all 200ms linear;
+        transition: all 200ms linear;
+
+        img {
+          position: relative;
+          bottom: 1px;
+          margin-right: 10px;
+
+          webkit-transition: all 200ms linear;
+          -o-transition: all 200ms linear;
+          -moz-transition: all 200ms linear;
+          -ms-transition: all 200ms linear;
+          -kthtml-transition: all 200ms linear;
+          transition: all 200ms linear;
+        }
+      }
+
+      .srpsi-button:hover {
+        background-color: black;
+        border: 1px solid white;
+        color: white;
+      }
+    }
+  }
 
 .people-add-users:hover {
   cursor: pointer;

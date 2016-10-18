@@ -28,41 +28,45 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://vjs.zencdn.net/5.10.7/video-js.css" />
-    <!-- build:css({.,.tmp}) styles/main.css -->    
+    <!-- build:css({.,.tmp}) styles/css/main.css -->    
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick-theme.css" />
     <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/home.css" />
-    <link rel="stylesheet" href="styles/profiles.css" />
-    <link rel="stylesheet" href="styles/signup.css" />
-    <link rel="stylesheet" href="styles/custom-select.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
-    <link rel="stylesheet" href="styles/bfooter.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/witty-animate.css" />
-    <link rel="stylesheet" href="styles/animate.css">
-    <link rel="stylesheet" href="styles/modal.css" />
-    <link rel="stylesheet" href="styles/card.css" />
-    <link rel="stylesheet" href="styles/popover.css" />
-    <link rel="stylesheet" href="styles/mobile-modal.css" />
-    <link rel="stylesheet" href="styles/presentation-mobile-modal.css" />
-    <link rel="stylesheet" href="styles/presentation.css" />
-    <link rel="stylesheet" href="styles/terms.css" />
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/messaging.css">
-    <link rel="stylesheet" href="styles/projects.css" />
-    <link rel="stylesheet" href="styles/myProjects.css" />
-    <link rel="stylesheet" href="styles/create-project.css" />
-    <link rel="stylesheet" href="styles/video_custom.css" />
-    <link rel="stylesheet" href="styles/setting.css">
-    <link rel="stylesheet" href="styles/profiles-modal-edit.css" />
-    <link rel="stylesheet" href="styles/_scss/redactor.css" />
-    <link rel="stylesheet" href="styles/learn.css" />
-    <link rel="stylesheet" href="styles/log.css" />
+    <link rel="stylesheet" href="styles/css/main.css" />
+    <link rel="stylesheet" href="styles/css/home.css" />
+    <link rel="stylesheet" href="styles/css/profiles.css" />
+    <link rel="stylesheet" href="styles/css/signup.css" />
+    <link rel="stylesheet" href="styles/css/custom-select.css" />
+    <link rel="stylesheet" href="styles/css/footer.css" />
+    <link rel="stylesheet" href="styles/css/bfooter.css" />
+    <link rel="stylesheet" href="styles/css/header.css" />
+    <link rel="stylesheet" href="styles/css/witty-animate.css" />
+    <link rel="stylesheet" href="styles/css/animate.css">
+    <link rel="stylesheet" href="styles/css/modal.css" />
+    <link rel="stylesheet" href="styles/css/card.css" />
+    <link rel="stylesheet" href="styles/css/popover.css" />
+    <link rel="stylesheet" href="styles/css/mobile-modal.css" />
+    <link rel="stylesheet" href="styles/css/presentation-mobile-modal.css" />
+    <link rel="stylesheet" href="styles/css/presentation.css" />
+    <link rel="stylesheet" href="styles/css/terms.css" />
+    <link rel="stylesheet" href="styles/css/reset.css" />
+    <link rel="stylesheet" href="styles/css/messaging.css">
+    <link rel="stylesheet" href="styles/css/projects.css" />
+    <link rel="stylesheet" href="styles/css/myProjects.css" />
+    <link rel="stylesheet" href="styles/css/create-project.css" />
+    <link rel="stylesheet" href="styles/css/video_custom.css" />
+    <link rel="stylesheet" href="styles/css/setting.css">
+    <link rel="stylesheet" href="styles/css/profiles-modal-edit.css" />
+    <link rel="stylesheet" href="styles/css/_scss/redactor.css" />
+    <link rel="stylesheet" href="styles/css/learn.css" />
+    <link rel="stylesheet" href="styles/css/log.css" />
     <!-- endbuild -->
 
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+        api_key:   77miinyxrqpnja
+        authorize: true
+    </script>
     <script>
         if (screen.width >= 736) {
             var mvp = document.getElementById('testViewport');
@@ -126,9 +130,11 @@ mixpanel.init("79778069a284e3bc2822e7f4145fa075");</script><!-- end Mixpanel -->
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
 mixpanel.init("79778069a284e3bc2822e7f4145fa075");</script><!-- end Mixpanel -->
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en
-    " async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&language=en" async></script>
     <noscript>Your browser does not support JavaScript!</noscript>
+    <script src="http://localhost:8001/vogue-client.js" 
+        type="text/javascript">
+    </script>
   </head>
 <!-- build:js({.,.tmp,app}) scripts/vendor.js -->
     <!-- bower:js -->

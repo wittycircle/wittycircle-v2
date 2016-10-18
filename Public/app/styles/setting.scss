@@ -184,8 +184,8 @@
 	#setting-body {
 		/*background-color: #f5f5f5;*/
 		label {
-			font-family: 'FreigSem';
-			font-size: 17px;
+			font-family: 'FreigMed';
+			font-size: 16px;
 			color: #222222;
 			width: 150px;
 		}
@@ -265,6 +265,67 @@
 					left: 205px;
 					font-family: 'FreigBook';
 					color: red;
+				}
+			}
+		}
+
+		/***** Notification body *****/
+		.setting-notification {
+			background-color: white;
+
+			.setting-notification-center {
+				background-color: white;
+				padding-top: 30px;
+				border-top: 1px solid #e5e5e5;
+
+				.setting-notification-body {
+					max-width: 1000px;
+					margin: 0 auto;
+					padding: 0px 20px 90px 20px;
+
+					li {
+						padding: 15px 0;
+					}
+
+					.li-top {
+						font-family: 'FreigMed';
+						font-size: 16px;
+						color: #999999;
+					}
+
+					.li-body {
+						font-family: 'FreigSem';
+						font-size: 16px;
+						color: black;
+
+						span {
+							font-family: 'FreigBook';
+							margin-left: 10px;
+						}
+
+						p {
+							display: inline-block;
+							min-width: 350px;
+							padding-right: 15px;
+						}
+
+						.checkbox-notif {
+							position: relative;
+							top: 3px;
+							display: inline-block;
+							vertical-align: top;
+							height: 18px;
+							width: 18px;
+							border: 1px solid black;
+							border-radius: 4px;
+							cursor: pointer;
+
+							.fa-check {
+								position: relative;
+								bottom: 2px;
+							}
+						}
+					}
 				}
 			}
 		}

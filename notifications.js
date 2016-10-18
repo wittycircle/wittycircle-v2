@@ -318,6 +318,51 @@ exports.getNotifications = function(req, res) {
 	});
 };
 
+/*** NOTIF PERMISSIONS ***/
+
+function setUpPermissons(id, callback) {
+	pool.query('INSERT INTO notification_permission (user_id, notif_type) VALUES (?, "profile_view"), (?, "user_follow"), (?, "follow_project"), (?, "feedback"), (?, "ask_project"), (?, "reply_project"), (?, "new_message")',
+		[id, id, id, id, id, id, id],
+		function(err, result) {
+			if (err) throw err;
+			else
+				return callback(true);
+		});
+};
+
+exports.getNotifPermissions = function(req, res) {
+	pool.query('SELECT * FROM notification_permission WHERE user_id = ?', req.user.id,
+		function(err, result) {
+			if (err) throw err;
+			else {
+				if (!result[0]) {
+					setUpPermissons(req.user.id, function(done) {
+						if (done)
+							return res.status(200).send({success: true, data: "all"});
+					});
+				} else
+					return res.status(200).send({success: true, data: result});
+			}
+		});
+};
+
+exports.updateNotifPermissions = function(req, res) {
+	req.checkBody('notif_type', 'Error Message').isString();
+    req.checkBody('permission', 'Error Message').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+    	return res.status(400).send(errors);
+    } else {
+    	pool.query('UPDATE notification_permission SET permission = ? WHERE notif_type = ? AND user_id = ?', [req.body.permission, req.body.notif_type, req.user.id],
+    		function(err, result) {
+    			if (err) throw err;
+    			else
+    				return res.status(200);
+    		});
+    }
+};
+
 /*** NOTIFICATION UPDATE READ ***/
 
 // exports.updateViewNotification = function(req, res) { // update n_read of view

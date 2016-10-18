@@ -14,9 +14,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
     
-    if (!currentUser || !$stateParams.tagCheckFirst)
-		$location.path('/');
-    else {
+  //   if (!currentUser || !$stateParams.tagCheckFirst)
+		// $location.path('/');
+  //   else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
 	    $rootScope.globals.currentUser.profile_cover = response.data.data;
@@ -26,10 +26,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*** * * * JQUERY * * * ***/
 	$('#header-section').hide();
 	var aClassName  = $('#signup-basic-body');
-	var bClassName  = $('#signup-about-body');
-	var cClassName  = $('#signup-skill-body');
-	var dClassName  = $('#signup-interest-body');
-	var eClassName  = $('#signup-experience-body');
+	var bClassName  = $('#signup-skill-body');
+	var cClassName  = $('#signup-interest-body');
+	var dClassName  = $('#signup-experience-body');
+	var eClassName  = $('#signup-about-body');
 	
 	var inRightBig  = "animated fadeInRightBig";
 	var inLeftBig   = "animated fadeInLeftBig";
@@ -73,7 +73,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 			if (data.content.profile_picture) {
 			    if (data.content.profile_picture.indexOf("default_profile") < 0)
 				$scope.signUpPicture    = data.content.profile_picture;
+				
 			}
+			if (data.content.description)
+				$scope.aboutDescription = data.content.description;
 			if (data.content.birthdate) {
 			    var d                   = data.content.birthdate.toString();
 			    var e                   = new Date(d);
@@ -234,16 +237,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    if (profileData.about) {
 		$http.put('/signup/about', profileData).success(function(res) {
 		    if (res.success) {
-			cClassName.attr('class', inRightBig);
-			cClassName.css('display', 'block');
-			bClassName.attr('class', outLeftBig);
-			setTimeout(function() {
-			    bClassName.hide();
-			}, 200);
+				$location.path('/'+ $rootScope.globals.currentUser.username);
 		    }
 		});
 	    } else
-		console.log("ERROR!");
+	    	console.log("ERROR!");
 	};
 	
 	/*** Skills ***/
@@ -284,11 +282,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	};
 	
 	$scope.saveSkill   = function() {
-	    dClassName.attr('class', inRightBig);
-	    dClassName.css('display', 'block');
-	    cClassName.attr('class', outLeftBig);
+	    cClassName.attr('class', inRightBig);
+	    cClassName.css('display', 'block');
+	    bClassName.attr('class', outLeftBig);
 	    setTimeout(function() {
-		cClassName.hide();
+		bClassName.hide();
 	    }, 200);
 	}
 	
@@ -329,11 +327,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	};
 	
 	$scope.saveInterest     = function() {
-	    eClassName.attr('class', inRightBig);
-	    eClassName.css('display', 'block');
-	    dClassName.attr('class', outLeftBig);
+	    dClassName.attr('class', inRightBig);
+	    dClassName.css('display', 'block');
+	    cClassName.attr('class', outLeftBig);
 	    setTimeout(function() {
-		dClassName.hide();
+		cClassName.hide();
 	    }, 200);
 	}
 	
@@ -348,6 +346,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $http.get('/experiences').success(function(res) {
 		if (res.success)
 		    $scope.positions  = res.data;
+		else
+			$scope.positions  = [];
 		if ($scope.positions[0])
 		    $scope.exButton   = "Continue";
 	    });
@@ -391,6 +391,62 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $('#signup-experience-body').fadeOut();
 	    $('#signup-experience-modal').fadeIn();
 	};
+
+	function displayProfiles(profiles) {
+
+		var member 			 = profiles.values[0],
+			linPositions 	 = member.positions.values,
+			newSavePositions = {}; 
+
+		$scope.aboutDescription = member.summary ? member.summary : null;
+		$scope.$apply();
+
+		function recursive(index) {
+			if (linPositions[index]) {
+				newSavePositions = {
+					company 			: linPositions[index].company.name,
+					description 		: linPositions[index].summary,
+					location_city 		: linPositions[index].location.name,
+					location_country 	: linPositions[index].location.country.name,
+					title				: linPositions[index].title,
+				};
+
+				if (linPositions[index].isCurrent)
+					newSavePositions.date_to = "Present";
+				newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
+
+				$http.post('/experiences', newSavePositions).success(function(res) {
+				    if (res.success)
+						return recursive(index + 1);
+				});			
+			} else {
+				$scope.loadEx();
+				$scope.onImport 		= false;
+				$scope.exButton         = "Continue";
+			}
+		};
+		recursive(0);
+	};
+
+	function retrieveLinkedinPosition() {
+		IN.API.Profile('me').fields([
+			'headline', // Current Headline 
+			'summary', // Current summary
+			'first-name', 'last-name', // Add these to get the name
+			'industry', 'date-of-birth', 'educations:(id,school-name)',
+			'positions', // Add this one to get the job history
+		])
+		.result(displayProfiles)
+		.error(function(err) {
+			$scope.onImport = false;
+	    	alert(err);
+	    });;
+	};
+
+	$scope.getLinkedinField = function() {
+		$scope.onImport = true;
+		IN.User.authorize(retrieveLinkedinPosition);
+	};
 	
 	$scope.savePosition   = function(no) {
 	    var endTime, dStart, position;
@@ -418,11 +474,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		dStart = new Date(Date.UTC($scope.startPeriod.year, parseInt($scope.startPeriod.month.Num, 10) - 1, 1, 12, 0, 0)).toISOString();
 	    
 	    position = {
-		title             : $scope.eJob,
-		company           : $scope.eCompany,
-		description       : $scope.eJobDescription,
-		date_from         : dStart,
-		date_to           : endTime,
+			title             : $scope.eJob,
+			company           : $scope.eCompany,
+			description       : $scope.eJobDescription,
+			date_from         : dStart,
+			date_to           : endTime,
 	    };
 	    Locations.setplaces($scope.exLocation, position);
 	    
@@ -489,15 +545,24 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $('#signup-experience-body').fadeOut();
 	};
 	
-	$scope.removePosition       = function(id) {
-	    $http.delete('/experience/' + id).success(function(res) {
-		if (res.success)
-		    $scope.loadEx();
-	    });
+	$scope.removePosition       = function(id, index) {
+		if (index)
+			$scope.positions.splice(index, 1);
+		if (id) {
+	 	    $http.delete('/experience/' + id).success(function(res) {
+			if (res.success)
+			    $scope.loadEx();
+		    });
+	 	}
 	};
 	
-	$scope.saveProfile          = function() {
-	    $location.path('/'+ $rootScope.globals.currentUser.username);
+	$scope.saveExperience          = function() {
+		eClassName.attr('class', inRightBig);
+	    eClassName.css('display', 'block');
+	    dClassName.attr('class', outLeftBig);
+	    setTimeout(function() {
+		dClassName.hide();
+	    }, 200);
 	};
 	
 	$rootScope.$on('$stateChangeStart', function(next, current) { 
@@ -517,7 +582,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*
 	**End Redactor configuration
 	*/
-    }
+    // }
 })
 .directive('locationSearch', function() {
 	return {

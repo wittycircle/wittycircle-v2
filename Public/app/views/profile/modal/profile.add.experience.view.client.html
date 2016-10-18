@@ -5,6 +5,18 @@
 	</div>
 
 	<div class="profile-modal-body">
+
+		<div class="signup-experience-linkedin">
+			<button type="button" ng-click="getLinkedinField()">
+				<img ng-if="!onImport" src="/images/social_media/linkedin-logo.svg" /> 
+				<span ng-if="!onImport">Import from Linkedin</span>
+				<div ng-if="onImport" class="spinner-load">
+				<div class="spinner__item1 spinner-item"></div>
+				<div class="spinner__item2 spinner-item"></div>
+				<div class="spinner__item3 spinner-item"></div> 
+			</button>
+		</div>
+
 		<div class="profile-modal-job sminput">
 			<label>Job title</label>
 			<input type="text" ng-model="eJob" />

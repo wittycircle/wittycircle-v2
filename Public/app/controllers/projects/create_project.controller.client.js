@@ -7,8 +7,8 @@
  * # CreateProjectCtrl
  * Controller of the wittyApp
  */
-angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload', 'redactorOptions',
-  function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload, redactorOptions) {
+angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scope', 'Categories', 'Feedbacks', '$http', 'Users', '$state', '$stateParams', 'Beauty_encode', 'Projects', 'Locations', '$sce', '$timeout', 'Project_Follow', '$location', 'Data_project', '$modal', 'Upload', 'cloudinary', 'Upload', 'redactorOptions', 'RetrieveData',
+  function ($rootScope, $scope, Categories, Feedbacks, $http, Users, $state, $stateParams, Beauty_encode, Projects, Locations, $sce, $timeout, Project_Follow, $location, Data_project, $modal, $upload, cloudinary, Upload, redactorOptions, RetrieveData) {
 
   $scope.currentUser = $rootScope.globals.currentUser;
   $scope.project_category = {};
@@ -43,6 +43,42 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
   /*** Getting the project id previouslt set in a cookie in data_project service **/
   var projectId = Data_project.returnProjectId().id;
 
+  /*** Email Invitation ***/
+  $scope.mailList = [];
+  $scope.inviteW = "Invite";
+
+  $scope.addEmailToList = function(keycode, email) {
+    if (keycode === 13 && !email) {
+      $scope.errorMail = true;
+      return ;
+    }
+    if (keycode == 13 && email) {
+      $scope.errorMail = false;
+      $scope.mailList.push(email);
+      $scope.emailInvite = "";
+    }
+  };
+
+  $scope.removeMailFromList = function(index) {
+    $scope.mailList.splice(index, 1);
+  };
+
+  $scope.sendInvitation = function() {
+    if ($scope.mailList[0]) {
+      RetrieveData.ppdData('/invitation/new', "POST", {user_id: $scope.currentUser.id, mailList: $scope.mailList}).then(function(res) {
+        if (res.success) {
+          $scope.inviteW = "Invited";
+          $scope.sended = true;
+          $timeout(function() {
+            $("#sinvitem").fadeOut(200);
+            $scope.mailList = [];
+            $scope.sended = false;
+            $scope.inviteW = "Invite";
+          }, 500);
+        }
+      });
+    }
+  };
 
   function capitalizeFirstLetter(string) {
     if (string) {

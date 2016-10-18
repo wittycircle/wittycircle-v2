@@ -91,9 +91,12 @@ exports.getUserExperiences = function(req, res) {
     pool.query('SELECT * FROM user_experiences WHERE user_id = ?', req.user.id,
         function(err, result) {
         if (err) throw err;
-            sortUserExperience(result, function(newList) {
-                res.send({success: true, data: newList});
-            });
+            if (result[0]) {
+                sortUserExperience(result, function(newList) {
+                    return res.status(200).send({success: true, data: newList});
+                }); 
+            } else
+                return res.status(200).send({success: false});  
         });
 };
 
@@ -169,6 +172,8 @@ exports.deleteUserExperience = function(req, res){
 	    pool.query("SELECT user_id FROM user_experiences WHERE id = ?", req.params.id,
 		       function(err, check) {
 			   if (err) throw err;
+               if (!check[0])
+                return res.status(404).send("UNAUTHORIZED");
 			   if (req.user.id === check[0].user_id) {
 			       pool.query("DELETE FROM `user_experiences` WHERE `id` = ?", [req.params.id],
 					  function(err, result) {

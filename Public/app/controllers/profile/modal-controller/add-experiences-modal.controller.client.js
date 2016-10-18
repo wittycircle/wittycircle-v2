@@ -37,6 +37,63 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($time
 		$modalInstance.dismiss();
 	};
 
+	//** LinkedIN API
+
+	function displayProfiles(profiles) {
+
+		var member 			 = profiles.values[0],
+			linPositions 	 = member.positions.values,
+			newSavePositions = {}; 
+
+		$scope.aboutDescription = member.summary ? member.summary : null;
+		$scope.$apply();
+
+		function recursive(index) {
+			if (linPositions[index]) {
+				newSavePositions = {
+					company 			: linPositions[index].company.name,
+					description 		: linPositions[index].summary,
+					location_city 		: linPositions[index].location.name,
+					location_country 	: linPositions[index].location.country.name,
+					title				: linPositions[index].title,
+				};
+
+				if (linPositions[index].isCurrent)
+					newSavePositions.date_to = "Present";
+				newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
+
+				$http.post('/experiences', newSavePositions).success(function(res) {
+				    if (res.success)
+						return recursive(index + 1);
+				});			
+			} else {
+				$scope.profileVm.getProfileExp();
+				$modalInstance.dismiss();
+			}
+		};
+		recursive(0);
+	};
+
+	function retrieveLinkedinPosition() {
+		IN.API.Profile('me').fields([
+			'headline', // Current Headline 
+			'summary', // Current summary
+			'first-name', 'last-name', // Add these to get the name
+			'industry', 'date-of-birth', 'educations:(id,school-name)',
+			'positions', // Add this one to get the job history
+		])
+		.result(displayProfiles)
+		.error(function(err) {
+			$scope.onImport = false;
+	    	alert(err);
+	    });;
+	};
+
+	$scope.getLinkedinField = function() {
+		$scope.onImport = true;
+		IN.User.authorize(retrieveLinkedinPosition);
+	};
+
 	$scope.savePosition         = function() {
 		var endTime, dStart, position;
 

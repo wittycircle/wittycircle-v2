@@ -10,7 +10,7 @@
 				<ul>
 					<li class="setting-navbar-general" onclick="showGeneral()">General</li>
 					<li class="setting-navbar-password" onclick="showPassword()">Password</li>
-					<li class="setting-navbar-notif">Notifications <sup>soon</sup></li>
+					<li class="setting-navbar-notif" onclick="showNotification()">Notifications</li>
 <!-- 					<li>Social networks<sup>soon</sup></li>
  -->			</ul>
 			</div>
@@ -69,6 +69,57 @@
 			<button type="submit" ng-click="passwordUpdate()"><i ng-if="passwordChanged" class="fa fa-check"> </i><span ng-show="!passwordChanged">Save new password</span><span ng-show="passwordChanged"> Saved</span></button>
 		</div>
 
+		<div class="setting-notification" style="display: none;">
+
+			<div class="setting-notification-center">
+				<div class="setting-notification-body">
+					<ul>
+						<li class="li-top">Get notify about...</li>
+						<li class="li-body">
+							<p>Who viewed your profile</p>
+							<div class="checkbox-notif" ng-click="selectBox(1)"><i class="fa fa-check" ng-if="notif_1"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>Who starts following you</p>
+							<div class="checkbox-notif" ng-click="selectBox(2)"><i class="fa fa-check" ng-if="notif_2"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>Who starts follow your project</p>
+							<div class="checkbox-notif" ng-click="selectBox(3)"><i class="fa fa-check" ng-if="notif_3"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>Feedback from project you follow</p>
+							<div class="checkbox-notif" ng-click="selectBox(4)"><i class="fa fa-check" ng-if="notif_4"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>Questions from project you follow</p>
+							<div class="checkbox-notif" ng-click="selectBox(5)"><i class="fa fa-check" ng-if="notif_5"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>Comments from project you follow</p>
+							<div class="checkbox-notif" ng-click="selectBox(6)"><i class="fa fa-check" ng-if="notif_6"></i></div>
+							<span>By Email</span>
+						</li>
+						<li class="li-body">
+							<p>New message</p>
+							<div class="checkbox-notif" ng-click="selectBox(7)"><i class="fa fa-check" ng-if="notif_7"></i></div>
+							<span>By Email</span>
+						</li>
+						<!-- <li class="li-body">
+							<p>People text you</p>
+							<div class="checkbox-notif"><i class="fa fa-check"></i></div>
+							<span>By Email</span>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</div>
+
 	</section>
 
 <!-- 	<section id="setting-delete">
@@ -85,11 +136,13 @@
 			if (document.getElementsByClassName('setting-general')[0].style.display == "none") {
 				document.getElementsByClassName('setting-general')[0].style.display = "block";
 				document.getElementsByClassName('setting-password')[0].style.display = "none";
-				document.getElementsByClassName('setting-ranking')[0].style.display = "none";
+				document.getElementsByClassName('setting-notification')[0].style.display = "none";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "white";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
 			}
 		}
 
@@ -97,19 +150,23 @@
 			if (document.getElementsByClassName('setting-password')[0].style.display == "none") {
 				document.getElementsByClassName('setting-password')[0].style.display = "block";
 				document.getElementsByClassName('setting-general')[0].style.display = "none";
-				document.getElementsByClassName('setting-ranking')[0].style.display = "none";
+				document.getElementsByClassName('setting-notification')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
-				document.querySelectorAll("#setting-header .setting-navbar-ranking")[0].style.color = "#999999";
-				document.querySelectorAll("#setting-header .setting-navbar-ranking")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
 			}
 		}
 
-		function showRanking() {
-			if (document.getElementsByClassName('setting-ranking')[0].style.display == "none") {
-				document.getElementsByClassName('setting-ranking')[0].style.display = "block";
+		function showNotification() {
+			if (document.getElementsByClassName('setting-notification')[0].style.display == "none") {
+				document.getElementsByClassName('setting-notification')[0].style.display = "block";
 				document.getElementsByClassName('setting-general')[0].style.display = "none";
 				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";

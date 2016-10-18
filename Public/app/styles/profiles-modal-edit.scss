@@ -635,6 +635,41 @@
 		padding: 0 20px;
 		text-align: left;
 
+		.signup-experience-linkedin {
+			margin-top: 20px;
+			text-align: center;
+
+			button {
+				background-color: #0077b5;
+				border: none;
+				padding: 6px 15px 10px 15px;
+				width: 248px;
+				height: 41px;
+
+				img {
+					margin-right: 8px;
+				}
+
+				span {
+					position: relative;
+					font-family: 'FreigSem';
+					top: 3px;
+				}
+
+				.spinner-load {
+					width: initial;
+					height: initial;
+					left: 46%;
+					margin-top: -12px;
+					background-color: transparent;
+				}
+			}
+
+			button:hover {
+				background-color: #016da3;
+			}
+		}		
+
 		label {
 			font-family: "FreigSem";
 			font-size: 14px;

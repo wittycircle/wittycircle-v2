@@ -39,14 +39,14 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
     });
 	
 	var profileVm = this;
-	var socket = io.connect('https://www.wittycircle.com');
+	var socket = io.connect('http://127.0.0.1');
 
 	/* Vm Variable */
 	profileVm.currentUser = $rootScope.globals.currentUser || false;
 	profileVm.trueUser = $stateParams.username === profileVm.currentUser.username ? true : false;
 	profileVm.paramUsername = $stateParams.username;
 	profileVm.showEditLocation;
-    profileVm.currentUrl = 'https://www.wittycircle.com' + $location.path();
+    profileVm.currentUrl = 'http://127.0.0.1' + $location.path();
 
 	if (profileVm.currentUser && profileVm.currentUser.moderator)
 	    profileVm.moderator = true;
@@ -576,6 +576,8 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		$http.get('/experiences/' + profileVm.paramUsername).success(function(res) {
 		    if (res.success)
 			    profileVm.profileExps      = res.data;
+			else
+				profileVm.profileExps 	   = [];
 		});
 	}; getProfileExp();
 
@@ -625,6 +627,7 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 	};
 
 	function removeExp(id) {
+
 		RetrieveData.ppdData('/experience/', 'DELETE', null, id).then(function(res) {
 			if (res.success)
 				getProfileExp();

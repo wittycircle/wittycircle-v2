@@ -111,10 +111,18 @@
           background-repeat: no-repeat;
           background-position: center bottom;
           background-size: 145px;
-          cursor: pointer; }
+          cursor: pointer;
+          -webkit-transition-duration: 0.2s;
+          -o-transition-duration: 0.2s;
+          -moz-transition-duration: 0.2s;
+          -ms-transition-duration: 0.2s;
+          -kthtml-transition-duration: 0.2s;
+          transition-duration: 0.2s; }
           #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2 img {
             width: auto;
             height: 200px; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-picture-2:hover {
+          border: 2px dashed #222222; }
         #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text h4,
         #signup-page #signup-basic-body .signup-body-info .signup-info-picture .signup-dd-text-mobile h4 {
           font-family: 'FreigSem';
@@ -605,9 +613,31 @@
         font-family: 'FreigBook';
         font-size: 18px;
         color: #222222; }
+    #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin {
+      margin-top: 20px; }
+      #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin button {
+        background-color: #0077b5;
+        border: none;
+        padding: 6px 15px 10px 15px;
+        width: 248px;
+        height: 41px; }
+        #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin button img {
+          margin-right: 8px; }
+        #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin button span {
+          position: relative;
+          font-family: 'FreigSem';
+          top: 3px; }
+        #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin button .spinner-load {
+          width: initial;
+          height: initial;
+          left: 46%;
+          margin-top: -12px;
+          background-color: transparent; }
+      #signup-page #signup-experience-body .signup-experience-add .signup-experience-linkedin button:hover {
+        background-color: #016da3; }
     #signup-page #signup-experience-body .signup-experience-add .signup-experience-new {
       max-width: 500px;
-      margin: 30px auto 10px auto;
+      margin: 20px auto 10px auto;
       padding: 15px 20px;
       border: 2px dashed #e5e5e5;
       border-radius: 5px;

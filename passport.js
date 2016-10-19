@@ -168,85 +168,89 @@ module.exports = function(passport) {
 									  username	: username1[index],
 								      }, function(err, data){
 									  if (err) throw err;
-									  pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
-										     function(err, success) {
-											 if (err) throw err;
-											 pool.query('SELECT * FROM `users` WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize.
-												    function(err, user) {
-													if (err) throw err;
-													pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
-														   function(err, save) {
-														       if (err) { 
-															   throw err;
-														       }
-														       var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-														       
-														       var template_name = "welcome";
-														       var template_content = [{
-															      "name": "welcome",
-															      "content": "content",
-															  }];
-														       
-														       var message = {
-															      "html": "<p>HTML content</p>",
-															      "subject": "Welcome to Wittycircle",
-															      "from_email": "quentin@wittycircle.com",
-															      "from_name": "Quentin Verriere",
-															      "to": [{
-																	 "email": info.email,
-																	 "name": info.first_name,
-																	 "type": "to"
-																     }],
-															      "headers": {
-																	 "Reply-To": "message.reply@example.com"
-																     },
-															      "important": false,
-															      "track_opens": null,
-															      "track_clicks": null,
-															      "auto_text": null,
-															      "auto_html": null,
-															      "inline_css": null,
-															      "url_strip_qs": null,
-															      "preserve_recipients": null,
-															      "view_content_link": null,
-															      "tracking_domain": null,
-															      "signing_domain": null,
-															      "return_path_domain": null,
-															      "merge": true,
-															      "merge_language": "mailchimp",
-															      "global_merge_vars": [{
-																  "name": "merge1",
-																  "content": "merge1 content"
-															      }],
-															   "merge_vars": [
-															       {
-																   "rcpt": "maxencemasson.mm@gmail.com",
-																   "vars": [
-																       {
-																	   "name": "fname",
-																	   "content": info.first_name
-																       },
-																       {
-																	   "name": "lname",
-																	   "content": "Smith"
+									  pool.query('UPDATE invitation SET status = "registed" WHERE invite_email = ? AND status = "pending"', info.email,
+                                                function(err, check) {
+                                                    if (err) throw err;
+											  pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
+												     function(err, success) {
+													 if (err) throw err;
+													 pool.query('SELECT * FROM `users` WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize.
+														    function(err, user) {
+															if (err) throw err;
+															pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
+																   function(err, save) {
+																       if (err) { 
+																	   throw err;
 																       }
-																   ]
-															       }
-															   ]
-														       };
-														       var async = false;
-														       mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-															   var date = new Date();
-															   console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + info.email);
-															   console.log("response is:");
-															   console.log(result);
-														       }, function(e) {
-															   console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-														       });
-														       return done(null, user[0]);
-														   });
-												    });
-										     });
+																       var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+																       
+																       var template_name = "welcome";
+																       var template_content = [{
+																	      "name": "welcome",
+																	      "content": "content",
+																	  }];
+																       
+																       var message = {
+																	      "html": "<p>HTML content</p>",
+																	      "subject": "Welcome to Wittycircle",
+																	      "from_email": "quentin@wittycircle.com",
+																	      "from_name": "Quentin Verriere",
+																	      "to": [{
+																			 "email": info.email,
+																			 "name": info.first_name,
+																			 "type": "to"
+																		     }],
+																	      "headers": {
+																			 "Reply-To": "message.reply@example.com"
+																		     },
+																	      "important": false,
+																	      "track_opens": null,
+																	      "track_clicks": null,
+																	      "auto_text": null,
+																	      "auto_html": null,
+																	      "inline_css": null,
+																	      "url_strip_qs": null,
+																	      "preserve_recipients": null,
+																	      "view_content_link": null,
+																	      "tracking_domain": null,
+																	      "signing_domain": null,
+																	      "return_path_domain": null,
+																	      "merge": true,
+																	      "merge_language": "mailchimp",
+																	      "global_merge_vars": [{
+																		  "name": "merge1",
+																		  "content": "merge1 content"
+																	      }],
+																	   "merge_vars": [
+																	       {
+																		   "rcpt": "maxencemasson.mm@gmail.com",
+																		   "vars": [
+																		       {
+																			   "name": "fname",
+																			   "content": info.first_name
+																		       },
+																		       {
+																			   "name": "lname",
+																			   "content": "Smith"
+																		       }
+																		   ]
+																	       }
+																	   ]
+																       };
+																       var async = false;
+																       mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+																	   var date = new Date();
+																	   console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + info.email);
+																	   console.log("response is:");
+																	   console.log(result);
+																       }, function(e) {
+																	   console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+																       });
+																       return done(null, user[0]);
+																   });
+														    });
+												     });
+												});
 								      });
 								  } else {
 								      recursive(index + 1);
@@ -411,19 +415,23 @@ module.exports = function(passport) {
 									  username	: username1[index],
 								      }, function(err, data) {
 									  if (err) throw err;
-									  pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
-										     function(err, success) {
-											 if (err) throw err;
-											 pool.query('SELECT * FROM users WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize
-												    function(err, user) {
-													if (err) throw err;
-													pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
-														   function(err, save) {
-														       if (err) throw err;
-														       return done(null, user[0]);
-														   });
-												    });
-										     });
+									  	pool.query('UPDATE invitation SET status = "registed" WHERE invite_email = ? AND status = "pending"', user.emails[0].value,
+                                                function(err, check) {
+                                                    if (err) throw err;
+													  pool.query('UPDATE profiles SET username = ? WHERE id = ?', [username1[index], result.insertId],
+														     function(err, success) {
+															 if (err) throw err;
+															 pool.query('SELECT * FROM users WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize
+																    function(err, user) {
+																	if (err) throw err;
+																	pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
+																		   function(err, save) {
+																		       if (err) throw err;
+																		       return done(null, user[0]);
+																		   });
+																    });
+														     });
+												});
 								      });
 								  } else {
 								      recursive(index + 1);

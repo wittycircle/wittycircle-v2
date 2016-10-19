@@ -724,14 +724,18 @@
 				.sri-box-illustre-img {
 					display: inline-block;
 					margin-right: 25px;
-/*					width: 170px;
-*/
+					width: 144px;
+
 					img {
 						border-radius: 50%;
+						height: 34px;
+						width: 34px;
 					}
 				}
 
 				.srpsi-button {
+					display: inline-block;
+					vertical-align: top;
 					padding: 8px 15px;
 					border: 1px solid black;
 					border-radius: 4px;

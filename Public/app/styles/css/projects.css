@@ -1,6 +1,18 @@
 .tempo3-class, .tempo4-class {
   display: inline-block; }
 
+#formNewAskTextarea .redactor-editor,
+#textareaAskReply .redactor-editor,
+#textareaQuestionReply .redactor-editor {
+  font-family: 'FreigBook';
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+  color: black;
+  line-height: 26px;
+  height: 160px; }
+
 .tempo3-class {
   margin: 15px 10px 5px 30px; }
 
@@ -406,6 +418,7 @@
     border-left: 1px solid #ddd; }
   .project-post-box ul,
   .project-post-video ul {
+    list-style: circle;
     list-style-type: disc;
     margin-left: 20px; }
     .project-post-box ul li,
@@ -419,6 +432,10 @@
 
 .custom-project-post {
   width: inherit; }
+  .custom-project-post ul {
+    margin-bottom: 10px; }
+  .custom-project-post ul, .custom-project-post li {
+    list-style-type: none !important; }
   .custom-project-post figure {
     width: inherit; }
   .custom-project-post img {
@@ -596,10 +613,15 @@
     padding: 15px; }
   #feedback_project .feedback_textarea .col-md-11 {
     padding-left: 15px; }
-#feedback_project .feedback_reply_text {
+#feedback_project .cards-feedbacks-two p {
   font-size: 16px;
   font-family: 'FreigBook';
-  color: #222222; }
+  color: #222222;
+  margin-bottom: 5px;
+  /*    a {
+        font-family: 'FreigBook';
+        color: #256bc9;
+      }*/ }
 #feedback_project .title {
   color: #999999;
   font-size: 14px;
@@ -791,7 +813,7 @@
   cursor: pointer;
   border-color: #C9C9C9; }
 #feedback_project #asks .input_new_ask {
-  padding: 7px 10px;
+  padding: 7px 15px;
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;

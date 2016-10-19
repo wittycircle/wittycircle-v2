@@ -10,6 +10,21 @@ $font-h3: 'Open Sans', sans-serif;
   display: inline-block;
 }
 
+#formNewAskTextarea, 
+#textareaAskReply,
+#textareaQuestionReply {
+  .redactor-editor {
+    font-family: 'FreigBook';
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: 1px solid #e5e5e5;
+    color: black;
+    line-height: 26px;
+    height: 160px;
+  }
+}
+
 .tempo3-class {
   margin: 15px 10px 5px 30px;
 }
@@ -34,6 +49,7 @@ $font-h3: 'Open Sans', sans-serif;
   background-color: #ff4d4d;
   display: inline-block;
 }
+
 
 .text-number {
   padding: 10px 0px !important;
@@ -526,7 +542,7 @@ $font-h3: 'Open Sans', sans-serif;
   }
 
   ul {
-    //list-style: circle;
+    list-style: circle;
     list-style-type: disc;
     margin-left: 20px;
 
@@ -543,6 +559,15 @@ $font-h3: 'Open Sans', sans-serif;
 
 .custom-project-post {
   width: inherit;
+
+  ul {
+    margin-bottom: 10px;
+  }
+
+  ul,li {
+    list-style-type: none !important;
+
+  }
 
   figure {
     width: inherit;
@@ -821,12 +846,19 @@ $font-h3: 'Open Sans', sans-serif;
     }
   }
 
-  .feedback_reply_text {
-    font-size: 16px;
-    font-family: 'FreigBook';
-    color: #222222;
-  }
+  .cards-feedbacks-two {
+  p {
+      font-size: 16px;
+      font-family: 'FreigBook';
+      color: #222222;
+      margin-bottom: 5px;
 
+/*    a {
+      font-family: 'FreigBook';
+      color: #256bc9;
+    }*/
+  }
+}
   .title {
     color: #999999;
     font-size: 14px;
@@ -1108,7 +1140,7 @@ $font-h3: 'Open Sans', sans-serif;
   #asks {
 
     .input_new_ask {
-      padding: 7px 10px;
+      padding: 7px 15px;
       width: 100%;
       border: 1px solid #ddd;
       border-radius: 4px;

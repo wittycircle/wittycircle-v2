@@ -131,19 +131,22 @@ function getCountSuccessInvitation(user_id, callback) {
 							function(err, result2) {
 								if (err) throw err;
 								else {
-									pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', result2[0].profile_id,
-										function(err, result3) {
-											if (err) throw err;
-											else {
-												usersInvite.push({
-													username		: result2[0].username,
-													first_name		: result3[0].first_name,
-													last_name 		: result3[0].last_name,
-													profile_picture : result3[0].profile_picture
-												});
-												return recursive(index + 1);
-											}
-										});
+									if (result2[0]) {
+										pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', result2[0].profile_id,
+											function(err, result3) {
+												if (err) throw err;
+												else {
+													usersInvite.push({
+														username		: result2[0].username,
+														first_name		: result3[0].first_name,
+														last_name 		: result3[0].last_name,
+														profile_picture : result3[0].profile_picture
+													});
+													return recursive(index + 1);
+												}
+											});
+									} else
+										return recursive(index + 1);
 								}
 							});
 					} else

@@ -1,14 +1,6 @@
 <section id="messages-modals">
-	<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
-		<div class="messages-modal-header">
-			<div class="messages-modal-title">
-				<h3>New message</h3>
-			</div>
-			<div class="messages-modal-cross" alt="witty-crosspicture">
-				<img src="/images/cross-icon.svg">
-			</div>
-		</div>
-		<article id="messages-modal-newMessageArea" class="animated fadeIn" style="display: none;">
+
+	<article id="messages-modal-newMessageArea" class="animated fadeIn" style="display: none;">
 			<div class="messages-newMessageArea-to">
 				<label>To : </label>
 				<h5>{{newMessageArea.first_name}} {{newMessageArea.last_name}}</h5>
@@ -20,6 +12,15 @@
 				<button type="submit" ng-click="createNewMessage(true)">Send</button>
 			</div>
 		</article>
+	<div id="messages-newpost-modal" class="messages-newpost" style="display: none">
+		<div class="messages-modal-header">
+			<div class="messages-modal-title">
+				<h3>New message</h3>
+			</div>
+			<div class="messages-modal-cross" alt="witty-crosspicture">
+				<img id="mmcimg" src="/images/cross-icon.svg">
+			</div>
+		</div>
 		<article id="messages-modal-searchArea" style="display: block;">
 			<div class="messages-newpost-search">
 				<input id="mmoinput" type="search" placeholder="Search a username" ng-model="searchName">
@@ -83,6 +84,17 @@
 				            }
 		               	}
 	            	}
+
+	            	if ($('#messages-modal-newMessageArea').css('display') === "block") {
+	            		if (!$('#messages-modal-newMessageArea').is(e.target) && $('#messages-modal-newMessageArea').has(e.target).length === 0 && !$('#messages-modal-searchArea').is(e.target) && $('#messages-modal-searchArea').has(e.target).length === 0) {
+	            			$('#messages-modal-newMessageArea').hide();
+	            		}
+	            	}
+
+	            	if (e.target.id === "mmcimg") {
+	               		$('#messages-modal-searchArea').hide();
+	               		$('#messages-newpost-modal').hide();
+	               	}
 			});
 
 			$("#messages-newpost-modal").on('click', function(e) {
@@ -104,6 +116,7 @@
 				if (container.is(e.target) || container.has(e.target).length > 0) {
 					$('#messages-modal-searchArea').hide();
 					$('#messages-modal-newMessageArea').show();
+					$('#messages-newpost-modal').hide();
 				}
 
 

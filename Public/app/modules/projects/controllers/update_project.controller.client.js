@@ -140,6 +140,9 @@ $scope.initiateProject = function () {
     });
     $scope.project = Projects.getProjectbyPublicId(projectId, function (response) {
         $scope.project = response[0];
+        if (!$scope.project.post) {
+            $scope.project.post = "<p><em style='color: #999999'>Note: images, gifs&nbsp;and videos can be &nbsp;directly&nbsp;embedded by copy pasting urls below.</em></p>" + "<p><br /></p><p>Here are a a helpful&nbsp;guideline&nbsp;so that people can fully understand what you have in mind:</p><br><h1>What?</h1><ul><li>What is&nbsp;your product&nbsp;/&nbsp;idea&nbsp;/&nbsp;service&nbsp;/&nbsp;project / initiative?</li><li>How does it work?</li><li>What does it do?</li></ul><p><br /></p><h1>Why?</h1><ul><li>Why are you working on it?</li><li>Why does it matter to you?</li><li>If you are trying to solve a problem, &nbsp;what is it?</li></ul><p><br /></p><h1>When?</h1><ul><li>What stage are you in?</li><li>When did you start working on it?</li><li>What are your next steps</li></ul><p><strong></strong><br></p>";
+        };
         if ($scope.project.network) {
             $scope.networkName = $scope.project.network;
             $scope.chooseNetwork = true;
@@ -311,6 +314,20 @@ $scope.savebasics = function(data, project_category, places_after, statechoose) 
     }
     if ($scope.post) {
         data.post = $scope.post;
+    } else {
+        var lastOcc = data.post.length;
+        if (data.post.indexOf('<p><em style="color: #999999">Note: images, gifs&nbsp;and videos can be &nbsp;directly&nbsp;embedded by copy pasting urls below.</em></p>') >= 0) {
+            var newPost = data.post.substring(137, lastOcc);
+            data.post = newPost;
+        }
+
+        var newOcc = data.post.indexOf('<p>Here are a a helpful&nbsp;guideline&nbsp;so that people can fully understand what you have in mind:</p>');
+        if (newOcc >= 0) {
+            lastOcc = data.post.length;
+            var newPost2 = data.post.substring(106 + newOcc, lastOcc);
+            data.post = newPost2;
+        }
+
     }
     data.picture = $scope.imagecover;
     if ($scope.picture_card) {

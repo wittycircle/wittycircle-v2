@@ -840,7 +840,14 @@ $blue: #416299;
   }
 
   .redactor-editor {
-    min-height: 220px !important;
+    min-height: 220px ;
+
+    ul {
+      li {
+        font-family: 'FreigBook';
+        font-size: 16px;
+      }
+    }
 
     p {
       font-family: 'FreigBook';

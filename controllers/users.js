@@ -134,16 +134,17 @@ exports.getUsers = function(req, res){
         }
         function recursive(index){
             if (results[index]) {
-                pool.query('SELECT * FROM `profiles` WHERE `id` = ?', [results[index].profile_id],
+                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?', [results[index].profile_id],
                 function (err, result, field) {
                     if(err){
                         throw err;
                     }
                     results[index].profile = result;
+                    results[index].fullname = result[0].first_name + ' ' + result[0].last_name;
                     recursive(index + 1);
                 });
             } else
-                res.send(results);
+                return res.send(results);
         }
         recursive(0);
     });
@@ -444,7 +445,7 @@ exports.createUser = function(req, res){
                                                 function(err, done) {
                                                     if (err) throw err;
                                                     return res.send({success: true, result: result});
-                                                })
+                                                });
 								        }
                                   });
 						   });

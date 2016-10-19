@@ -65,7 +65,7 @@ angular.module('wittyApp').controller('CreateProjectCtrl', ['$rootScope', '$scop
 
   $scope.sendInvitation = function() {
     if ($scope.mailList[0]) {
-      RetrieveData.ppdData('/invitation/new', "POST", {user_id: $scope.currentUser.id, mailList: $scope.mailList}).then(function(res) {
+      RetrieveData.ppdData('/invitation/new', "POST", {user_id: $scope.currentUser.id, mailList: $scope.mailList, team: true}).then(function(res) {
         if (res.success) {
           $scope.inviteW = "Invited";
           $scope.sended = true;

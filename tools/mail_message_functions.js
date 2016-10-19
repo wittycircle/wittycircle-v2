@@ -1,4 +1,5 @@
-const mandrill = require('mandrill-api/mandrill');
+const mandrill  = require('mandrill-api/mandrill');
+var uf          = require('./useful_function');
 
 exports.sendMailUnread = function() {
     pool.query("SELECT * FROM messages where m_send = 0 AND m_read = 0",
@@ -158,6 +159,21 @@ function getInformationForSendMail(user_id, callback) {
         });
 };
 
+function getInformationForSendMailToTeam(user_id, callback) {
+    pool.query("SELECT title, location_city, location_state, location_country, picture_card, public_id FROM projects WHERE creator_user_id = ?", user_id,
+        function(err, result) {
+            if (err) throw err;
+            if (result[0]) {
+                var lastIndex = result.length - 1;
+                uf.encodeUrl(result[lastIndex].title, function(newTitle) {
+                    result[lastIndex].urlTitle = newTitle;
+                    return callback(result[lastIndex]);
+                });
+            } else
+                return callback(false);
+        });
+};
+
 // INVITATION PEOPLE MANDRILL TEMPLATE
 /* This function send invitation email to friends */
 function sendMailByMandrill(info, callback) {
@@ -232,23 +248,6 @@ function sendMailByMandrill(info, callback) {
         console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
         throw e;
         // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-    });
-};
-
-exports.sendInvitationMail = function(user_id, mails, callback) {
-    getInformationForSendMail(user_id, function(info) {
-        var newMailList = [];
-        for (var i = 0; i < mails.length; i++) {
-            newMailList.push({
-                email: mails[i],
-                name: info.first_name,
-                type: "to"
-            })
-        }
-        info.to_mailList = newMailList;
-        sendMailByMandrill(info, function(done) {
-            callback(done);
-        });
     });
 };
 
@@ -452,6 +451,82 @@ function sendMailToValidateNetwork(info, callback) {
     });
 };
 
+function sendMailByMandrillToTeam(info, infoProject, callback) {
+
+    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+
+    var fullname    = info.first_name + " " + info.last_name;
+    var subj        = fullname + " invited you to join " + infoProject.title;
+    var projectUrl  = "https://www.wittycircle.com/project/" + infoProject.public_id + "/" + infoProject.urlTitle;
+    
+    if (infoProject.location_state)
+        var loc    = infoProject.location_city + ", " + infoProject.location_state;
+    else
+        var loc    = infoProject.location_city + ", " + infoProject.location_country;
+
+    var template_name = "invite-team";
+    var template_content = [{
+        "name": "invite-team",
+        "content": "content",
+    }];
+
+    var message = {
+        "html": "<p>HTML content</p>",
+        "subject": subj,
+        "from_email": "noreply@wittycircle.com",
+        "from_name": "Wittycircle",
+        "to": info.to_mailList,
+        "headers": {
+            "Reply-To": "noreply@wittycircle.com"
+        },
+        "important": false,
+        "inline_css": null,
+        "preserve_recipients": null,
+        "view_content_link": null,
+        "tracking_domain": null,
+        "signing_domain": null,
+        "return_path_domain": null,
+        "merge": true,
+        "merge_language": "mailchimp",
+        "global_merge_vars": [{
+            "name": "merge1",
+            "content": "merge1 content"
+        }],
+        "global_merge_vars": [
+            {
+                "name": "funame",
+                "content": fullname
+            },
+            {
+                "name": "ptitle",
+                "content": infoProject.title,
+            },
+            {
+                "name": "pimg",
+                "content": infoProject.picture_card,
+            },
+            {
+                "name": "floc",
+                "content": loc,
+            },
+            {
+                "name": "purl",
+                "content": projectUrl,
+            },
+        ]
+    };
+
+    var async = false;
+    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+        return callback({success: true, msg: "Invitation Send"});
+    }, function(e) {
+        // Mandrill returns the error as an object with name and message keys
+        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        throw e;
+        // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+    });
+};
+
 exports.sendValidateNetwork = function(info, callback) {
     pool.query('SELECT token FROM project_network WHERE id = ?', info.id,
         function(err, result) {
@@ -469,4 +544,44 @@ exports.sendValidateNetwork = function(info, callback) {
                 });
             }
         });
+};
+
+// SEND INVITATION TO FRIENDS
+
+exports.sendInvitationMail = function(user_id, mails, callback) {
+    getInformationForSendMail(user_id, function(info) {
+        var newMailList = [];
+        for (var i = 0; i < mails.length; i++) {
+            newMailList.push({
+                email: mails[i],
+                name: info.first_name,
+                type: "to"
+            })
+        }
+        info.to_mailList = newMailList;
+        sendMailByMandrill(info, function(done) {
+            callback(done);
+        });
+    });
+};
+
+// SEND INVITATION TO PROJECT TEAM
+
+exports.sendInvitationMailToTeam = function(user_id, mails, callback) {
+    getInformationForSendMail(user_id, function(info) {
+        getInformationForSendMailToTeam(user_id, function(infoProject) {
+            var newMailList = [];
+            for (var i = 0; i < mails.length; i++) {
+                newMailList.push({
+                    email: mails[i],
+                    name: info.first_name,
+                    type: "to"
+                })
+            }
+            info.to_mailList = newMailList;
+            sendMailByMandrillToTeam(info, infoProject, function(done) {
+                callback(done);
+            });
+        });
+    });
 };

@@ -47,21 +47,36 @@ exports.addInvitationMail = function(req, res) {
 
     	function recursive(index) {
     		if (mailList[index]) {
-    			checkDataMail(mailList[index], function(valid) {
-    				if (valid) {
-    					newMailList.push(mailList[index]);
-						pool.query('INSERT INTO invitation SET user_id = ?, invite_email = ?', [id, mailList[index]],
-	    					function(err, result) {
-	    						if (err) throw err;
-	    						return recursive(index + 1);
-	    					}); 
-					} else
-						return recursive(index + 1);
-				});
+    			if (!req.body.team) {
+	    			checkDataMail(mailList[index], function(valid) {
+	    				if (valid) {
+	    					newMailList.push(mailList[index]);
+							pool.query('INSERT INTO invitation SET user_id = ?, invite_email = ?', [id, mailList[index]],
+		    					function(err, result) {
+		    						if (err) throw err;
+		    						return recursive(index + 1);
+		    					}); 
+						} else
+							return recursive(index + 1);
+					});
+    			} else {
+					newMailList.push(mailList[index]);
+					pool.query('INSERT INTO invitation SET user_id = ?, invite_email = ?', [id, mailList[index]],
+    					function(err, result) {
+    						if (err) throw err;
+    						return recursive(index + 1);
+    					}); 
+    			}
     		} else {
-    			sendMailAPI.sendInvitationMail(id, newMailList, function(done) {
-    				return res.status(200).send(done);
-    			});
+    			if (!req.body.team) {
+	    			sendMailAPI.sendInvitationMail(id, newMailList, function(done) {
+	    				return res.status(200).send(done);
+	    			});
+	    		} else {
+	    			sendMailAPI.sendInvitationMailToTeam(id, newMailList, function(done) {
+	    				return res.status(200).send(done);
+	    			});
+	    		}
     		}
     	};
     	recursive(0);

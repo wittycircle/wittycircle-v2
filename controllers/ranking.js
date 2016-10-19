@@ -131,6 +131,7 @@ function getCountSuccessInvitation(user_id, callback) {
 							function(err, result2) {
 								if (err) throw err;
 								else {
+								    if (result2[0]) {
 									pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', result2[0].profile_id,
 										function(err, result3) {
 											if (err) throw err;
@@ -144,6 +145,8 @@ function getCountSuccessInvitation(user_id, callback) {
 												return recursive(index + 1);
 											}
 										});
+								    } else
+									return recursive(index + 1);
 								}
 							});
 					} else

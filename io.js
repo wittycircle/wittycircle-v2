@@ -316,7 +316,6 @@ module.exports = function(app, io, ensureAuth) {
                                 np.sortEmailNotificationPermission('follow_project', [{user_id: id[0].creator_user_id}], function(pArray) {
                                     if (!pArray)
                                         return res.status(200).send({success: true, msg: "Project followed"});
-                                    return ;
                                     pool.query("SELECT * FROM users WHERE id = ?",
                                     [id[0].creator_user_id],
                                     function (err, rslt) {
@@ -639,7 +638,6 @@ module.exports = function(app, io, ensureAuth) {
                                                     getFollowersEmail(pArray, function(mailList) {
                                                         console.log(mailList);
                                                         if (!mailList[0]) return ;
-                                                        return ;
                                                         getNewD(req.body.message, true, 76, ' ...', function(newMessage) {
                                                             var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
                                                             var ptitle = req.body.title,
@@ -773,7 +771,6 @@ module.exports = function(app, io, ensureAuth) {
                                                 return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
-                                                return ;
                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
                                                     var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
                                                     var finame = req.body.creator_first_name + " " + req.body.creator_last_name,

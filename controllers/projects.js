@@ -568,19 +568,6 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                 var userIn   = [];
                 function recursive (index) {
                     if(results[index]) {
-                        if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 0) {
-                            show = true;
-                            pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
-                            [results[index].invited_by],
-                            function (err, result) {
-                                if (err) throw err;
-                                involver.push(result[0]);
-                                return recursive(index + 1);
-                            });
-                        }
-                        if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
-                            editable = true;
-                        }
                         if (results[index].n_accept === 1) {
                             pool.query("SELECT profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", [results[index].user_id],
                                 function (err, result, field) {
@@ -590,12 +577,26 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                                     userIn.push(result[0]);
                                     return recursive(index + 1);
                                 });
-                        }
-                        if (req.user && results[index].user_id !== req.user.id && results[index].n_accept !== 1) {
-                            return recursive(index + 1);
-                        }
-                        if (!req.isAuthenticated() && results[index].n_accept !== 1) {
-                            return recursive(index + 1);
+                            if (req.isAuthenticated() && results[index].user_id === req.user.id) {
+                                editable = true;
+                            }
+                        } else {
+                            if (req.isAuthenticated() && results[index].user_id === req.user.id ) {
+                                show = true;
+                                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
+                                [results[index].invited_by],
+                                function (err, result) {
+                                    if (err) throw err;
+                                    involver.push(result[0]);
+                                    return recursive(index + 1);
+                                });
+                            }
+                            if (req.user && results[index].user_id !== req.user.id) {
+                                return recursive(index + 1);
+                            }
+                            if (!req.isAuthenticated()) {
+                                return recursive(index + 1);
+                            }
                         }
                     } else {
                         return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});

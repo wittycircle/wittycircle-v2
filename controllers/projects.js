@@ -554,7 +554,7 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
     if (errors) {
         return res.status(400).send(errors);
     } else {
-        pool.query("SELECT * FROM project_users WHERE project_id = (SELECT id FROM projects WHERE public_id = ?)",
+        pool.query("SELECT * FROM project_users WHERE project_id IN (SELECT id FROM projects WHERE public_id = ?)",
         req.params.public_id,
         function(er, results) {
             if (er) {
@@ -570,37 +570,32 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                     if(results[index]) {
                         if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 0) {
                             show = true;
-                            pool.query("SELECT * FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
+                            pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
                             [results[index].invited_by],
                             function (err, result) {
-                                if(err){
-                                    throw err;
-                                }
+                                if (err) throw err;
                                 involver.push(result[0]);
-                                recursive(index + 1);
+                                return recursive(index + 1);
                             });
                         }
                         if (req.isAuthenticated() && results[index].user_id === req.user.id && results[index].n_accept === 1) {
                             editable = true;
                         }
                         if (results[index].n_accept === 1) {
-                            pool.query("SELECT profile_picture FROM `profiles` WHERE `id` IN (SELECT `profile_id` FROM `users` WHERE `id` = ?)",
-                            [results[index].user_id],
-                            function (err, result, field) {
-                                if(err){
-                                    throw err;
-                                }
-                                result[0].user_id = results[index].user_id;
-                                results.splice(index, 1);
-                                userIn.push(result[0]);
-                                recursive(index + 1);
-                            });
+                            pool.query("SELECT profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", [results[index].user_id],
+                                function (err, result, field) {
+                                    if (err) throw err;
+                                    result[0].user_id = results[index].user_id;
+                                    results.splice(index, 1);
+                                    userIn.push(result[0]);
+                                    return recursive(index + 1);
+                                });
                         }
-                        if (req.user && results[index].user_id !== req.user.id && results[index].n_accept != 1) {
-                            recursive(index + 1);
+                        if (req.user && results[index].user_id !== req.user.id && results[index].n_accept !== 1) {
+                            return recursive(index + 1);
                         }
                         if (!req.isAuthenticated() && results[index].n_accept !== 1) {
-                            recursive(index + 1);
+                            return recursive(index + 1);
                         }
                     } else {
                         return res.send({content: results, editable: editable, show: show, involver: involver, userIn: userIn});

@@ -7,7 +7,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
 
-    var socket = io.connect('http://127.0.0.1');
+    var socket = io.connect('https://www.wittycircle.com');
 
     var main    = this,
     n       = 0;
@@ -109,7 +109,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     });
 
     $(document).ready(function() {
-        $.getJSON("http://jsonip.com/", function (data) {
+        $.getJSON("https://jsonip.com/", function (data) {
             RetrieveData.ppdData('/user/card/profiles/home', 'POST', {ip: data.ip}).then(function(result) {
                 main.cardProfiles = result.data;
                 if (main.currentUser) {

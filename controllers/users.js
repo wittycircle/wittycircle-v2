@@ -226,7 +226,7 @@ exports.getCardProfile = function(req, res) {
 };
 
 exports.getCardProfilePlus = function(req, res) {
-    console.time('Time to find: ');
+
     if (req.body[0]) {
         var arr = req.body.map(function(el) { return el.id});
         pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null && fake = 0 ORDER BY rand() LIMIT 100', 
@@ -243,7 +243,7 @@ exports.getCardProfilePlus = function(req, res) {
 };
 
 exports.getCardProfileHome = function(req, res) {
-
+    console.log(req.body);
     req.checkBody('ip', "error").isString();
 
     var errors = req.validationErrors(true);

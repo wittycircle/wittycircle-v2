@@ -573,7 +573,6 @@ exports.getAllUsersInvolvedByPublicId = function(req, res) {
                                 function (err, result, field) {
                                     if (err) throw err;
                                     result[0].user_id = results[index].user_id;
-                                    results.splice(index, 1);
                                     userIn.push(result[0]);
                                     return recursive(index + 1);
                                 });

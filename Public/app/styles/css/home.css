@@ -751,7 +751,7 @@ overflow: hidden;
     #main-discover .main-title-text {
       display: none; }
     #main-discover .main-title-text-mobile {
-      display: block;
+      display: none;
       margin-left: auto;
       margin-right: auto;
       margin-top: 10px;
@@ -911,7 +911,7 @@ overflow: hidden;
     #main-discover .main-button-discover {
       margin: 15px 20px; }
     #main-discover .main-title-text-mobile {
-      display: block;
+      display: none;
       width: 305px;
       margin-left: auto;
       margin-right: auto;

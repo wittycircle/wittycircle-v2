@@ -7,7 +7,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var main    = this,
     n       = 0;
@@ -108,13 +108,17 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         $timeout(hello, 400);
     });
 
-    RetrieveData.getData('/user/card/profiles/home', 'GET').then(function(result) {
-        main.cardProfiles = result.data;
-        if (main.currentUser) {
-            Profile.getFollowedUser(result.data, function(res){
-                main.followed = res;
+    $(document).ready(function() {
+        $.getJSON("http://jsonip.com/", function (data) {
+            RetrieveData.ppdData('/user/card/profiles/home', 'POST', {ip: data.ip}).then(function(result) {
+                main.cardProfiles = result.data;
+                if (main.currentUser) {
+                    Profile.getFollowedUser(result.data, function(res){
+                        main.followed = res;
+                    });
+                }
             });
-        }
+        });
     });
 
     RetrieveData.getData('/categories', 'GET').then(function(response) {

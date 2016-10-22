@@ -1,8 +1,9 @@
-var bcrypt = require('bcrypt-nodejs');
-var mandrill = require('mandrill-api/mandrill');
-var pf = require('../tools/profile_functions');
-var mailchimp = require('../mailchimpRequest');
-const crypto = require('crypto');
+var bcrypt      = require('bcrypt-nodejs');
+var mandrill    = require('mandrill-api/mandrill');
+var pf          = require('../tools/profile_functions');
+var mailchimp   = require('../mailchimpRequest');
+var geo         = require('../tools/geolocation');
+const crypto    = require('crypto');
 
 exports.getUserShare = function(req, res) {
     req.checkParams('user_id', 'username must be an integer.').isInt();
@@ -242,23 +243,79 @@ exports.getCardProfilePlus = function(req, res) {
 };
 
 exports.getCardProfileHome = function(req, res) {
-    pool.query('SELECT count(*) as count, follow_user_id FROM user_followers GROUP BY follow_user_id HAVING count >= 10',
-        function(err, result) {
-            if (err) throw err;
-            var arr = result.map(function(el) { return el.follow_user_id });
-            pool.query('SELECT profile_id FROM users WHERE id IN (' + arr + ')', 
-                function(err, result2) {
-                    if (err) throw err;
-                    var arr2 = result2.map(function(el) { return el.profile_id});
-                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && fake = 0 ORDER BY rand() LIMIT 4',
-                        function (err, results) {
-                            if (err) throw (err);
-                            pf.sortCardProfile(results, function(array) {
-                                res.send({success: true, data: array});
-                            });
-                        });
-                });
+
+    req.checkBody('ip', "error").isString();
+
+    var errors = req.validationErrors(true);
+    if (errors) 
+        return res.status(400).send(errors);
+    else {
+        geo.getLocation(req.body, function(city, state, country) {
+            if (city) {
+                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_city LIKE '%" + city + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                    function(err, result) {
+                        if (err) throw err;
+                        else {
+                            if (result.length < 4) {
+                                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_state LIKE '%" + state + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                                    function(err, result2) {
+                                        if (err) throw err;
+                                        else {
+                                            result = result.concat(result2);
+                                            if (result.length < 4) {
+                                                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_country LIKE '%" + country + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                                                    function(err, result3) {
+                                                        if (err) throw err;
+                                                        else {
+                                                            result = result.concat(result3);
+                                                            if (result.length < 4) {
+                                                                pf.sortCardProfile(result, function(array) {
+                                                                    return res.status(200).send({success: true, data: array});
+                                                                });
+                                                            } else {
+                                                                var newResult = result.slice(0, 5);
+                                                                pf.sortCardProfile(newResult, function(array) {
+                                                                    return res.status(200).send({success: true, data: array});
+                                                                });
+                                                            }
+                                                        }
+                                                    });
+                                            } else {
+                                                var newResult = result.slice(0, 5);
+                                                pf.sortCardProfile(newResult, function(array) {
+                                                    return res.status(200).send({success: true, data: array});
+                                                });
+                                            }
+                                        }
+                                    });
+                            } else {
+                                pf.sortCardProfile(result, function(array) {
+                                    return res.status(200).send({success: true, data: array});
+                                });
+                            } 
+                        }
+                    });
+            }
         });
+    }
+
+    // pool.query('SELECT count(*) as count, follow_user_id FROM user_followers GROUP BY follow_user_id HAVING count >= 10',
+    //     function(err, result) {
+    //         if (err) throw err;
+    //         var arr = result.map(function(el) { return el.follow_user_id });
+    //         pool.query('SELECT profile_id FROM users WHERE id IN (' + arr + ')', 
+    //             function(err, result2) {
+    //                 if (err) throw err;
+    //                 var arr2 = result2.map(function(el) { return el.profile_id});
+    //                 pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && fake = 0 ORDER BY rand() LIMIT 4',
+    //                     function (err, results) {
+    //                         if (err) throw (err);
+    //                         pf.sortCardProfile(results, function(array) {
+    //                             res.send({success: true, data: array});
+    //                         });
+    //                     });
+    //             });
+    //     });
 }
 
 exports.getUserbyEmail = function(req, res){

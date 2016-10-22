@@ -1,6 +1,8 @@
 var ensureAdmin = require('./controllers/auth').ensureAdminAuthenticated,
 	mailchimp 	= require('./mailchimpRequest'),
-	mail 		= require('./tools/mail_message_functions')
+	mail 		= require('./tools/mail_message_functions');
+
+
 
 // function sortList(data, callback) {
 // 	if (list[0]) {

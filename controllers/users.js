@@ -239,11 +239,11 @@ exports.getCardProfilePlus = function(req, res) {
                 });
             });
     } else
-        res.status(400).send("Error data!");
+        return res.status(400).send("Error data!");
 };
 
 exports.getCardProfileHome = function(req, res) {
-    console.log(req.body);
+
     req.checkBody('ip', "error").isString();
 
     var errors = req.validationErrors(true);

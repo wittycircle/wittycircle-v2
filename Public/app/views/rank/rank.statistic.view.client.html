@@ -81,6 +81,7 @@
 				</aside>
 
 				<aside class="setting-ranking-graph">
+					<canvas id="myCanvas" width="400" height="200"></canvas>
 					<h2>Ranking: <span class="srg-myrank">#{{myRank}}<span> <span ng-if="myCompareRank > 0" class="srg-compare">( {{myCompareRank}}<img src="/images/Upvote_Icon.svg" alt="rank-up-down" style="margin-left: 3px"/> )</span> <span ng-if="!myCompareRank" class="srg-compare">( - )</span></h2>
 					<h5 ng-if="myRank === '-'">We rank users with more than 1000 pts. Complete your profile now and get connected to 38x more people and projects.</h5>
 				</aside>
@@ -115,6 +116,70 @@
 
 <script>
 	$(document).ready(function() {
+
+		var context,
+    		canvas,
+    		sections 	= 20,
+    		data = [4103, 4103, 4108, 4193, 4193, 4193, 4197, 4280, 5163, 5325, 5547, 5591, 5591, 5592, 5928, 5511, 5645, 5801, 5844, 5897];
+
+
+    	function init() {
+
+    		var	val_max 	= 5897,
+    			val_min 	= 4103,
+    			stepSize 	= 143,
+				columnSize 	= 50,
+				rowSize 	= 50,
+				margin 		= 10,
+				xAxis 		= [" ", "05/05", "06/05", "07/05", "08/05", "09/05", "10/05", "11/05", "12/05", "13/05", "14/05", "15/05", "16/05", "17/05", "18/05", "19/05", "20/05", "21/05", "22/05", "23/05", "24/05"]
+				canvas 		= document.getElementById("myCanvas"),
+				context 	= canvas.getContext("2d"),
+				yScale 		= (canvas.height - columnSize - margin) / (val_max - val_min),
+				xScale 		= (canvas.width - rowSize) / sections ;
+				
+
+				// Start date of ranking
+				context.beginPath();
+				context.fillText("05/05", 30, canvas.height);
+
+				// Today ranking
+				context.beginPath();
+				context.fillText("Now", canvas.width - 30, 20);
+
+				// Middle of ranking
+				context.beginPath();
+				context.setLineDash([5, 3]);
+				var rest = val_max - val_min;
+				var temScale = rest / 2 + val_min;
+				context.fillText(temScale, margin, canvas.height / 2);
+				context.moveTo(50, canvas.height / 2);
+				context.lineTo(canvas.width, canvas.height / 2);
+				context.strokeStyle = "#999999"
+				context.stroke();
+
+				// Ranking curve
+				context.beginPath();
+				context.translate(rowSize, canvas.height + val_min * yScale);
+				context.scale(1, -1 * yScale);
+
+				context.strokeStyle = "#222";
+				plotData(data);
+
+    	};
+
+    	function plotData(dataSet) {
+			context.beginPath();
+			context.setLineDash([0, 0]);
+			context.moveTo(0, dataSet[0] + 200);
+			for (i = 1; i < sections; i++) {
+				context.lineTo(i * xScale, dataSet[i] + 200);
+				context.strokeStyle = "black";
+				context.stroke();
+			}
+			context.stroke();
+		}
+
+    	init();
 		
 		$(this).click(function(e) {
 			if (e.target.id === "srpsib") {

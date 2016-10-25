@@ -530,9 +530,14 @@
     display: inline-block;
     width: 50%;
     text-align: center; }
+    .setting-ranking .setting-ranking-up .setting-ranking-graph #myCanvas {
+      position: relative;
+      right: 10px; }
     .setting-ranking .setting-ranking-up .setting-ranking-graph h2 {
+      position: relative;
+      top: 10px;
       font-family: 'FreigLight';
-      font-size: 32px;
+      font-size: 28px;
       color: black; }
       .setting-ranking .setting-ranking-up .setting-ranking-graph h2 .srg-myrank {
         font-family: 'FreigSem';

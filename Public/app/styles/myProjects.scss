@@ -243,6 +243,11 @@ $blue: #416299;
 						transition: all 200ms linear;
 					}
 
+					.shareSocialProject {
+						position: relative;
+						left: 4px;
+						cursor: pointer;
+					}
 
           #sharer {
             cursor: pointer;
@@ -254,52 +259,97 @@ $blue: #416299;
             }
           }
 
-          .icon-share {
-          	display: inline-block;
-          	margin: 0 5px;
-          	cursor: pointer;
+          .icon-share-social {
+          	position: absolute;
+          	width: 200px;
+          	padding-top: 10px;
 
-            .fa-lg {
-              font-size: inherit;
-            }
+          	ul {
+          		padding-top: 4px;
+          		border: 1px solid #e5e5e5;
+	          	border-radius: 4px;
+	          	background-color: white;
+	      		li {
+	      			font-family: 'FreigMed';
+	      			font-size: 16px;
+	      			color: black;
+	      			display: block;
+	      			padding: 6px 15px 8px 15px; 
 
-            .fa-circle {
-              color: #3B5998;
-              font-size: 35px;
-              -webkit-transition: all 100ms linear;
-              -o-transition: all 100ms linear;
-              -moz-transition: all 100ms linear;
-              -ms-transition: all 100ms linear;
-              -kthtml-transition: all 100ms linear;
-              transition: all 100ms linear;
-            }
-            .fa-facebook {
-              color: white;
-              font-size: 18px;
-              display: inline;
-            }
-            .fa-circle-twitter {
-              color: #1dcaff;
-              -webkit-transition: all 100ms linear;
-              -o-transition: all 100ms linear;
-              -moz-transition: all 100ms linear;
-              -ms-transition: all 100ms linear;
-              -kthtml-transition: all 100ms linear;
-              transition: all 100ms linear;
-            }
-            .fa-twitter {
-              display: inline;
-              font-size: 18px;
-            }
-          }
-          .fa-stack:hover {
-            .fa-circle {
-              color: #2f4779;
-            }
-            .fa-circle-twitter {
-              color: #1ab5e5;
-            }
-          }
+	      			i {
+	      				display: inline-block;
+	      			}
+
+	      			.fa-facebook {
+		              color: #3B5998;
+		              font-size: 18px;
+		              display: inline;
+		              margin-right: 15px;
+		            }
+		            .fa-twitter {
+		              color: #1dcaff;
+		              -webkit-transition: all 100ms linear;
+		              -o-transition: all 100ms linear;
+		              -moz-transition: all 100ms linear;
+		              -ms-transition: all 100ms linear;
+		              -kthtml-transition: all 100ms linear;
+		              transition: all 100ms linear;
+		              margin-right: 15px;
+		            }
+	      		}
+	      	}
+
+      		li:hover {
+      			background-color: #fafafa;
+      		}
+
+	          /*.icon-share {
+	          	display: inline-block;
+	          	margin: 0 5px;
+	          	cursor: pointer;
+
+	            .fa-lg {
+	              font-size: inherit;
+	            }
+
+	            .fa-circle {
+	              color: #3B5998;
+	              font-size: 35px;
+	              -webkit-transition: all 100ms linear;
+	              -o-transition: all 100ms linear;
+	              -moz-transition: all 100ms linear;
+	              -ms-transition: all 100ms linear;
+	              -kthtml-transition: all 100ms linear;
+	              transition: all 100ms linear;
+	            }
+	            .fa-facebook {
+	              color: white;
+	              font-size: 18px;
+	              display: inline;
+	            }
+	            .fa-circle-twitter {
+	              color: #1dcaff;
+	              -webkit-transition: all 100ms linear;
+	              -o-transition: all 100ms linear;
+	              -moz-transition: all 100ms linear;
+	              -ms-transition: all 100ms linear;
+	              -kthtml-transition: all 100ms linear;
+	              transition: all 100ms linear;
+	            }
+	            .fa-twitter {
+	              display: inline;
+	              font-size: 18px;
+	            }
+	          }*/
+	      }
+	          .fa-stack:hover {
+	            .fa-circle {
+	              color: #2f4779;
+	            }
+	            .fa-circle-twitter {
+	              color: #1ab5e5;
+	            }
+	          }
 
 					button {
 /*						width: 105px;

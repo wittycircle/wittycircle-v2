@@ -47,35 +47,44 @@
 				</ul>
 
 				<ul class="viewProject-option">
-					<div class="icon-share">
-						<span class="fa-stack fa-lg"
-						socialshare
-						socialshare-provider="facebook"
-						socialshare-text="{{vm.project.title}}"
-						socialshare-hashtags="wittycircle, projects"
-						socialshare-url="{{::vm.currentUrl}}"
-						socialshare-description="{{vm.project.description}}"
-						socialshare-media="{{ resizePic(vm.project.picture, 450, 300)}}"
-						socialshare-via="487284094736758"
-						socialshare-display="popup"
-						socialshare-source="https://www.wittycircle.com"
-						socialshare-type="feed">
-						  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-						</span>
-					</div>
-					<div class="icon-share">
-						<span class="fa-stack fa-lg"
-						socialshare
-						socialshare-provider="twitter"
-						socialshare-url="{{::vm.currentShortUrl}}"
-						socialshare-text="{{vm.project.title}} is now live on @Wittycircle, Where the world meets entrepreneurs"
-						socialshare-hashtags="{{vm.project.title}}, meet, entrepreneurs"
-						socialshare-trigger="click"
-						socialshare-popup-height="400"
-						socialshare-popup-width="800">
-							<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-						</span>
-					</div>
+					<li id="shareSocial" class="shareSocialProject">Share
+						<div id="iconSS" class="icon-share-social" ng-controller="PopUpCtrl" style="display:none">
+							<ul>
+								<li ng-click="facebookShare(vm.project.title, vm.currentUrl, vm.project.picture, vm.project.description)"><i class="fa fa-facebook"></i><span>Share on Facebook</span></li>
+								<a ng-href="https://twitter.com/intent/tweet?text={{vm.project.title}} is now live on @wittycircle, where the world meets entrepreneurs&hashtags={{vm.project.title}} {{vm.currentShortUrl}}"><li>
+						  <i class="fa fa-twitter"></i><span>Share on Twitter</span></li></a>
+							</ul>
+							<!-- <div class="icon-share">
+								<span class="fa-stack fa-lg"
+								socialshare
+								socialshare-provider="facebook"
+								socialshare-text="{{vm.project.title}}"
+								socialshare-hashtags="wittycircle, projects"
+								socialshare-url="{{::vm.currentUrl}}"
+								socialshare-description="{{vm.project.description}}"
+								socialshare-media="{{ resizePic(vm.project.picture, 450, 300)}}"
+								socialshare-via="487284094736758"
+								socialshare-display="popup"
+								socialshare-source="https://www.wittycircle.com"
+								socialshare-type="feed">
+								  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+								</span>Share on Facebook
+							</div>
+							<div class="icon-share">
+								<span class="fa-stack fa-lg"
+								socialshare
+								socialshare-provider="twitter"
+								socialshare-url="{{::vm.currentShortUrl}}"
+								socialshare-text="{{vm.project.title}} is now live on @Wittycircle, Where the world meets entrepreneurs"
+								socialshare-hashtags="{{vm.project.title}}, meet, entrepreneurs"
+								socialshare-trigger="click"
+								socialshare-popup-height="400"
+								socialshare-popup-width="800">
+									<i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+								Share on Twitter</span>
+							</div> -->
+						</div>
+					</li>
 					<li id="pnm" data-ng-if="!vm.editable || vm.editable" data-ng-click="vm.goToMessage(vm.project.creator_user_id)">Contact</li>
 					<!-- <li id="sharer">
 						Share
@@ -191,6 +200,13 @@
 					}
 				}
 
+				if (e.target.id === "shareSocial") {
+					if ($('#iconSS').css('display') === "none") {
+						$('#iconSS').fadeIn(200);
+					} else
+						$('#iconSS').fadeOut(200);
+				} else 
+					$('#iconSS').fadeOut(200);
 			});
 		});
 </script>

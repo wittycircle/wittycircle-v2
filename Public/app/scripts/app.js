@@ -114,8 +114,8 @@ var wittyCircleApp = angular
 		// 	}
 		// }
 	})
-	.state('rank', {
-		url: '/rank',
+	.state('statistics', {
+		url: '/statistics',
 		templateUrl: 'views/rank/rank.statistic.view.client.html',
 		controller: 'RankCtrl'
 	})

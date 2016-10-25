@@ -296,3 +296,23 @@ exports.getProfileRank = function(req, res) {
 	} else
 		return res.status(403).send("FORBIDDEN");	
 };
+
+exports.getProfileAllTimeRank = function(req, res) {
+	pool.query("SELECT * FROM profile_ranking WHERE user_id = ? ORDER BY creation_date", req.user.id,
+		function(err, result) {
+			if (err) throw err;
+			else {
+				if (result[0]) {
+					
+					var arr = result.map( function(el) { return el.points; });
+					
+					pool.query("SELECT MIN(points) as min, MAX(points) as max FROM profile_ranking WHERE user_id = ?", req.user.id,
+						function(err, result2) {
+							if (err) throw err;
+							return res.status(200).send({success: true, begin: result[0].creation_date, data: arr, dataMax: result2[0].max, dataMin: result2[0].min});
+						});
+				} else
+					return res.status(200).send({success: false});
+			}
+		});
+};

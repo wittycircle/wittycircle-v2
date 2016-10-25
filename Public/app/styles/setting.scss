@@ -777,9 +777,16 @@
 			width: 50%;
 			text-align: center;
 
+			#myCanvas {
+				position: relative;
+				right: 10px;
+			}
+
 			h2 {
+				position: relative;
+				top: 10px;
 				font-family: 'FreigLight';
-				font-size: 32px;
+				font-size: 28px;
 				color: black;
 
 				.srg-myrank {

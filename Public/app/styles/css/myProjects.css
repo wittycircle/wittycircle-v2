@@ -175,41 +175,86 @@
           -ms-transition: all 200ms linear;
           -kthtml-transition: all 200ms linear;
           transition: all 200ms linear; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .shareSocialProject {
+          position: relative;
+          left: 4px;
+          cursor: pointer; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer {
           cursor: pointer; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option #sharer:hover .icon-share {
           display: block;
           position: absolute; }
-        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share {
-          display: inline-block;
-          margin: 0 5px;
-          cursor: pointer; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-lg {
-            font-size: inherit; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle {
-            color: #3B5998;
-            font-size: 35px;
-            -webkit-transition: all 100ms linear;
-            -o-transition: all 100ms linear;
-            -moz-transition: all 100ms linear;
-            -ms-transition: all 100ms linear;
-            -kthtml-transition: all 100ms linear;
-            transition: all 100ms linear; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-facebook {
-            color: white;
-            font-size: 18px;
-            display: inline; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-circle-twitter {
-            color: #1dcaff;
-            -webkit-transition: all 100ms linear;
-            -o-transition: all 100ms linear;
-            -moz-transition: all 100ms linear;
-            -ms-transition: all 100ms linear;
-            -kthtml-transition: all 100ms linear;
-            transition: all 100ms linear; }
-          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share .fa-twitter {
-            display: inline;
-            font-size: 18px; }
+        #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social {
+          position: absolute;
+          width: 200px;
+          padding-top: 10px;
+          	          /*.icon-share {
+          	          	display: inline-block;
+          	          	margin: 0 5px;
+          	          	cursor: pointer;
+          
+          	            .fa-lg {
+          	              font-size: inherit;
+          	            }
+          
+          	            .fa-circle {
+          	              color: #3B5998;
+          	              font-size: 35px;
+          	              -webkit-transition: all 100ms linear;
+          	              -o-transition: all 100ms linear;
+          	              -moz-transition: all 100ms linear;
+          	              -ms-transition: all 100ms linear;
+          	              -kthtml-transition: all 100ms linear;
+          	              transition: all 100ms linear;
+          	            }
+          	            .fa-facebook {
+          	              color: white;
+          	              font-size: 18px;
+          	              display: inline;
+          	            }
+          	            .fa-circle-twitter {
+          	              color: #1dcaff;
+          	              -webkit-transition: all 100ms linear;
+          	              -o-transition: all 100ms linear;
+          	              -moz-transition: all 100ms linear;
+          	              -ms-transition: all 100ms linear;
+          	              -kthtml-transition: all 100ms linear;
+          	              transition: all 100ms linear;
+          	            }
+          	            .fa-twitter {
+          	              display: inline;
+          	              font-size: 18px;
+          	            }
+          	          }*/ }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social ul {
+            padding-top: 4px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            background-color: white; }
+            #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social ul li {
+              font-family: 'FreigMed';
+              font-size: 16px;
+              color: black;
+              display: block;
+              padding: 6px 15px 8px 15px; }
+              #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social ul li i {
+                display: inline-block; }
+              #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social ul li .fa-facebook {
+                color: #3B5998;
+                font-size: 18px;
+                display: inline;
+                margin-right: 15px; }
+              #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social ul li .fa-twitter {
+                color: #1dcaff;
+                -webkit-transition: all 100ms linear;
+                -o-transition: all 100ms linear;
+                -moz-transition: all 100ms linear;
+                -ms-transition: all 100ms linear;
+                -kthtml-transition: all 100ms linear;
+                transition: all 100ms linear;
+                margin-right: 15px; }
+          #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .icon-share-social li:hover {
+            background-color: #fafafa; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle {
           color: #2f4779; }
         #viewProject-page #viewProject-header .viewProject-bottom .viewProject-nav .viewProject-option .fa-stack:hover .fa-circle-twitter {

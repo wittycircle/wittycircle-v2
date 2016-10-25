@@ -3,11 +3,12 @@ angular.module('wittyApp')
 	.controller('PopUpCtrl', function($scope, $http, $rootScope, $mdBottomSheet) {
 
 	$scope.facebookShare = function(title, link, img, text) {
+		var newImg = $rootScope.resizePic(img, 450, 300);
 		var options = {
 			method: 'feed',
 			name: title,
 			link: link,
-			picture: img,
+			picture: newImg,
 			caption: 'Wittycircle.com',
 			description: text
 		};

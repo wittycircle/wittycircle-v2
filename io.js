@@ -115,7 +115,6 @@ module.exports = function(app, io, ensureAuth) {
                                             np.sortEmailNotificationPermission('user_follow', [{user_id: data[0].id}], function(pArray) {
                                                 if (!pArray)
                                                     return res.status(200).send({success: true, message: "User followed"})
-                                                return ;
                                                 pool.query("SELECT username FROM users WHERE id = ?",
                                                 [req.user.id],
                                                 function (err, rslt) {
@@ -317,7 +316,6 @@ module.exports = function(app, io, ensureAuth) {
                                 np.sortEmailNotificationPermission('follow_project', [{user_id: id[0].creator_user_id}], function(pArray) {
                                     if (!pArray)
                                         return res.status(200).send({success: true, msg: "Project followed"});
-                                    return ;
                                     pool.query("SELECT * FROM users WHERE id = ?",
                                     [id[0].creator_user_id],
                                     function (err, rslt) {
@@ -637,7 +635,6 @@ module.exports = function(app, io, ensureAuth) {
                                                 np.sortEmailNotificationPermission('ask_project', newArray, function(pArray) {
                                                     if (!pArray)
                                                         return ;
-                                                    return ;
                                                     getFollowersEmail(pArray, function(mailList) {
                                                         if (!mailList[0]) return ;
                                                         return ;
@@ -772,7 +769,6 @@ module.exports = function(app, io, ensureAuth) {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
                                             if (!pArray)
                                                 return ;
-                                            return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
                                                 return ;
@@ -893,7 +889,6 @@ module.exports = function(app, io, ensureAuth) {
                                                 np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
                                                     if (!newArray)
                                                         return ;
-                                                    return ;
                                                     getFollowersEmail(newArray, function(mailList) {
                                                         getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
                                                             var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
@@ -1026,7 +1021,6 @@ module.exports = function(app, io, ensureAuth) {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
                                             if (!pArray)
                                                 return ;
-                                            return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
@@ -1207,7 +1201,6 @@ module.exports = function(app, io, ensureAuth) {
                                 np.sortEmailNotificationPermission('new_message', [{user_id: info.to_user_id}], function(check) {
                                     if (!check)
                                         return callback(true);
-                                    return;
                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                     [info.from_user_id],
                                     function (err, rslt) {

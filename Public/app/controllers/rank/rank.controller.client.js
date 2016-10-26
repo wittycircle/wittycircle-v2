@@ -25,7 +25,8 @@ angular.module('wittyApp')
 
 				RetrieveData.getData('/rank/statistic/alltime', 'GET').then(function(res) {
 					if (res.success) {
-						initGraph(res.dataMin, res.dataMax, res.begin, res.data);
+						console.log(res.data);
+						initGraph(res.min, res.max, res.data);
 					}
 				});
 			};
@@ -78,66 +79,107 @@ angular.module('wittyApp')
 
 		 	// CANVAS GRAPH HTML5
 
-    		function initGraph(min, max, begin, data) {
-    			var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    			var sections 	= data.length - 1,
+    		function initGraph(min, max, data) {
+    			data.unshift(" ");
+    			var monthNames 	= ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    			var sections 	= data.length,
     				canvas 		= document.getElementById("myCanvas"),
 					context 	= canvas.getContext("2d");
 
     			$(document).ready(function() {
-		    		var	val_max 	= max,
-		    			val_min 	= min,
-		    			stepSize 	= max / min * 100,
-						columnSize 	= 50,
-						rowSize 	= 50,
-						margin 		= 10,
-						yScale 		= (canvas.height - columnSize - margin) / (val_max - val_min),
-						xScale 		= (canvas.width - rowSize) / sections ;
-						
+		    		var	val_max 	= max - min,
+		    			val_min 	= 0,
+		    			yScale 		= (canvas.height - 30) / val_max,
+		    			xScale 		= (canvas.width - 10) / sections,
+		    			d 			= new Date(data[1].date),
+                        beginDate 	= monthNames[d.getMonth()] + " " + d.getFullYear().toString().slice(2, 4);
 
-					// Start date of ranking
-					var d = new Date(begin);
-					var beginDate = monthNames[d.getMonth()] + " " + d.getFullYear().toString().slice(2, 4);
-					context.beginPath();
-					context.font="14px FreigBook";
-					context.fillText(beginDate, 30, canvas.height);
-
-					// Today ranking
-					context.beginPath();
-					context.font="16px FreigBook";
-					context.fillText("Now", canvas.width - 30, 20);
-
-					// Middle of ranking
-					context.beginPath();
-					context.setLineDash([5, 3]);
-					var rest = val_max - val_min;
-					if ($scope.myRank <= 10)
-						var temScale = "#10";
-					else if ($scope.myRank > 10 && $scope.myRank <= 50)
-						var temScale = "#50";
-					else if ($scope.myRank > 50 && $scope.myRank <= 100)
-						var temScale = "#100";
-					else if ($scope.myRank > 100 && $scope.myRank <= 500)
-						var temScale = "#500";
-					context.fillText(temScale, canvas.width - 30, canvas.height / 2 + 3);
-					context.moveTo(50, canvas.height / 2);
-					context.lineTo(canvas.width - 40, canvas.height / 2);
-					context.strokeStyle = "#999999"
+					
+                    // Start date of Ranking (easting)
+                    context.beginPath();
+                    context.font="14px FreigBook";
+					context.fillText(beginDate, 0, canvas.height);
+					context.strokeStyle = "black"
 					context.stroke();
 
-					// Ranking curve
+					// Middle of Ranking (easting)
+					var middleEasting = Math.round(val_max / 2);
+					var middleRank 	  = Math.round(max / 2);
 					context.beginPath();
-					context.translate(rowSize, canvas.height + val_min * yScale);
-					context.scale(1, -1 * yScale);
+					context.setLineDash([5, 3]);
+					context.fillText("#" + middleRank, canvas.width - 30, middleEasting * yScale + 3);
+					context.moveTo(xScale, middleEasting * yScale);
+					context.lineTo(canvas.width - 40, middleEasting * yScale)
+					context.strokeStyle = "#999999";
+					context.lineWidth 	= 2; 
+					context.stroke();
+
+					// Today Ranking (northing)
+					var length = data.length - 1;
+					context.beginPath();
+					context.font="14px FreigBook";
+					context.fillText("Now", length * xScale, 10);
+					context.strokeStyle = "black"
+					context.stroke();
 
 					context.beginPath();
 					context.setLineDash([0, 0]);
-					context.moveTo(0, data[0] + 220);
-					for (i = 1; i < sections; i++) {
-						context.lineTo(i * xScale, data[i] + 220);
-						context.strokeStyle = "#222";
+					var count = 2;
+					var beginDraw = (data[1].rank - min) * yScale + 30;
+					context.moveTo(xScale, beginDraw);
+					for (i = 2; i < sections; i++) {
+						var scaleRank = data[count].rank - min;
+						context.lineTo(i * xScale, scaleRank * yScale + 30);
+						context.strokeStyle = "black";
+						count++;
 					}
+					context.lineWidth = 2;
 					context.stroke();
+
+					// Start date of ranking
+					// var d = new Date(begin);
+					// var beginDate = monthNames[d.getMonth()] + " " + d.getFullYear().toString().slice(2, 4);
+					// context.beginPath();
+					// context.font="14px FreigBook";
+					// context.fillText(beginDate, 30, canvas.height);
+
+					// Today ranking
+					// context.beginPath();
+					// context.font="16px FreigBook";
+					// context.fillText("Now", canvas.width - 30, 20);
+
+					// Middle of ranking
+					// context.beginPath();
+					// context.setLineDash([5, 3]);
+					// var rest = val_max - val_min;
+					// if ($scope.myRank <= 10)
+					// 	var temScale = "#10";
+					// else if ($scope.myRank > 10 && $scope.myRank <= 50)
+					// 	var temScale = "#50";
+					// else if ($scope.myRank > 50 && $scope.myRank <= 100)
+					// 	var temScale = "#100";
+					// else if ($scope.myRank > 100 && $scope.myRank <= 500)
+					// 	var temScale = "#500";
+					// console.log(temScale);
+					// context.fillText(temScale, canvas.width - 30, canvas.height / 2 + 3);
+					// context.moveTo(50, canvas.height / 2);
+					// context.lineTo(canvas.width - 40, canvas.height / 2);
+					// context.strokeStyle = "#999999"
+					// context.stroke();
+
+					// Ranking curve
+					// context.beginPath();
+					// context.translate(rowSize, canvas.height + val_min * yScale);
+					// context.scale(1, -1 * yScale);
+
+					// context.beginPath();
+					// context.setLineDash([0, 0]);
+					// context.moveTo(0, data[0] + 220);
+					// for (i = 1; i < sections; i++) {
+					// 	context.lineTo(i * xScale, data[i] + 220);
+					// 	context.strokeStyle = "#222";
+					// }
+					// context.stroke();
 				});
 
 	    	};

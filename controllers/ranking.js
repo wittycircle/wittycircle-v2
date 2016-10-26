@@ -298,19 +298,35 @@ exports.getProfileRank = function(req, res) {
 };
 
 exports.getProfileAllTimeRank = function(req, res) {
-	pool.query("SELECT * FROM profile_ranking WHERE user_id = ? ORDER BY creation_date", req.user.id,
+	pool.query("SELECT count(*) as number FROM profile_ranking WHERE user_id = ? ORDER BY creation_date", req.user.id,
 		function(err, result) {
 			if (err) throw err;
 			else {
 				if (result[0]) {
-					
-					var arr = result.map( function(el) { return el.points; });
-					
-					pool.query("SELECT MIN(points) as min, MAX(points) as max FROM profile_ranking WHERE user_id = ?", req.user.id,
-						function(err, result2) {
-							if (err) throw err;
-							return res.status(200).send({success: true, begin: result[0].creation_date, data: arr, dataMax: result2[0].max, dataMin: result2[0].min});
-						});
+					var rankArr = [];
+					function recursive(index) {
+						if (index < result[0].number - 1) {
+							if (!index)
+								var curdate = "CURDATE()"
+							else 
+								var curdate = "CURDATE() - " + index;
+							pool.query('SELECT creation_date, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = ' + curdate + ' ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = ' + curdate + ' ORDER BY rank', req.user.id,
+								function(err, result2) {
+									if (err) throw err;
+									else {
+										if (result2[0])
+											rankArr.unshift({rank: result2[0].rank, date: result2[0].creation_date});
+										return recursive(index + 1);
+									}
+								})
+						} else {
+							var numberArr = rankArr.map( function(el) { return el.rank; });
+							var maxum = Math.max.apply(Math, numberArr);
+							var minum = Math.min.apply(Math, numberArr);
+							return res.status(200).send({success: true, data: rankArr, min: minum, max: maxum});
+						}
+					};
+					recursive(0);
 				} else
 					return res.status(200).send({success: false});
 			}

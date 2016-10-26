@@ -25,7 +25,6 @@ angular.module('wittyApp')
 
 				RetrieveData.getData('/rank/statistic/alltime', 'GET').then(function(res) {
 					if (res.success) {
-						console.log(res.data);
 						initGraph(res.min, res.max, res.data);
 					}
 				});
@@ -89,7 +88,7 @@ angular.module('wittyApp')
     			$(document).ready(function() {
 		    		var	val_max 	= max - min,
 		    			val_min 	= 0,
-		    			yScale 		= (canvas.height - 30) / val_max,
+		    			yScale 		= (canvas.height - 40) / val_max,
 		    			xScale 		= (canvas.width - 10) / sections,
 		    			d 			= new Date(data[1].date),
                         beginDate 	= monthNames[d.getMonth()] + " " + d.getFullYear().toString().slice(2, 4);

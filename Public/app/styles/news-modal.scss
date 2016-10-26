@@ -1,0 +1,49 @@
+
+#modal-news-section {
+	position: absolute;
+	right: 0;
+	top: 60px;
+	width: 380px;
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	background-color: #fafafa;
+	margin-right: 20px;
+	z-index: 10000000000;
+
+	h4 {
+		font-family: 'FreigMed';
+		font-size: 16px;
+		color: #999999;
+		padding: 10px 25px;
+		line-height: 21px;
+
+		a {
+			font-family: 'FreigMed';
+			font-size: 16px;
+			color: #3366BB;
+			border-bottom: 1px solid #3366BB;
+		}
+
+		a:hover {
+			border-bottom: none;
+		}
+	}
+
+	img {
+		position: absolute;
+		right: 0;
+		margin-right: 8px;
+		margin-top: 8px;
+		width: 9px;
+		height: auto;
+	}
+}
+
+.faInRi {
+	-webkit-animation-duration: 300ms;
+	-webkit-animation-delay: 2s;
+}
+
+.faOuRi {
+	-webkit-animation-duration: 300ms;
+}

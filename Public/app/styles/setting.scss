@@ -559,7 +559,7 @@
 		text-align: left;
 		padding-left: 80px;
 		padding-right: 80px;
-		margin-bottom: 60px;
+		margin-bottom: 30px;
 		
 		.setting-ranking-psi {
 			display: inline-block;
@@ -814,6 +814,13 @@
 		text-align: center;
 		padding-left: 30px;
 		margin-bottom: 30px;
+
+		h4 {
+			font-family: 'FreigBook';
+			font-size: 18px;
+			color: black;
+			margin-bottom: 30px;
+		}
 
 		.srd-ul {
 			display: inline-block;

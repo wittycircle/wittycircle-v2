@@ -368,7 +368,7 @@
   text-align: left;
   padding-left: 80px;
   padding-right: 80px;
-  margin-bottom: 60px; }
+  margin-bottom: 30px; }
   .setting-ranking .setting-ranking-up .setting-ranking-psi {
     display: inline-block;
     width: 45%; }
@@ -555,6 +555,11 @@
   text-align: center;
   padding-left: 30px;
   margin-bottom: 30px; }
+  .setting-ranking .setting-ranking-down h4 {
+    font-family: 'FreigBook';
+    font-size: 18px;
+    color: black;
+    margin-bottom: 30px; }
   .setting-ranking .setting-ranking-down .srd-ul {
     display: inline-block;
     padding-right: 30px; }

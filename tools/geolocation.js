@@ -9,7 +9,7 @@ exports.getLocation = function(ip, callback) {
 				country 	= payload.country.en,
 				location 	= cities.gps_lookup(lat, long);
 
-			return callback(location.city, location.state, country);
+		    return callback(location.city, location.state, country);
 			
 		});
 };

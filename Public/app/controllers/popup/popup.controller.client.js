@@ -49,9 +49,11 @@ angular.module('wittyApp')
     };
 
     $scope.popSwL = function() {
+ 		var height 	= $(window).height();
+ 		console.log(height);
         var x       = $('#main-signup-modal');
         var filter  = $("#page-wrap");
-        var marge = (x - 600)/2/2;
+        var marge = (height - x.height())/2;
 
         if (x.css('display') === "none") {
             filter.fadeIn(500);

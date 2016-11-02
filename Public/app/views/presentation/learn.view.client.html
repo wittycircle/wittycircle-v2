@@ -6,11 +6,11 @@
 		<div class="learn-header-text">
 			<h3>Ressources, stories, interviews & curated content from our community</h3>
 		</div>
-		<div class="learn-header-tag">
+<!-- 		<div class="learn-header-tag">
 			<ul>
 				<li ng-repeat="headTag in headTags" ng-click="getArticleByTag(headTag)">#{{headTag}}</li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 
 	<div ui-view>
@@ -19,7 +19,7 @@
 				<div class="learn-corp-article-title">
 					<div class="lcatl lcat">
 						<h2>All stories</h2>
-						<a data-ui-sref=".new">Add new article</a>
+						<a data-ui-sref=".new" ng-if="logUser.moderator">Add new article</a>
 					</div>
 
 					<div class='lcatr lcat'>
@@ -60,17 +60,17 @@
 							</div>
 
 							<div class="lcaaheadtb">
-								<span>{{article.numCom}} comments</span>
+								<a href="/learn/article/id/{{article.article_id}}"><span>{{article.numCom}} comments</span></a>
 							</div>
 						</div>
 					</section>
 
-					<article class="lcaadoc">
-						<a ng-href="/learn/article/id/{{article.article_id}}"><h2 ng-bind="article.title"></h2></a>
+					<a ng-href="/learn/article/id/{{article.article_id}}"><article class="lcaadoc">
+						<h2 ng-bind="article.title"></h2>
 						<div class="lcaadocimg"><img ng-if="article.picture" ng-src="{{article.picture}}"></div>
 						<div class="lcaadoctext" ng-bind-html="article.text"></div>
 						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/article/id/{{article.article_id}}">Read more...</a>
-					</article>
+					</article></a>
 				</div>
 			</article>
 

@@ -1,6 +1,6 @@
 angular.module('wittyApp')
 .controller('LearnArticleCtrl',
-	function($rootScope, $scope, $location, $http, $state, showbottomAlert) {
+	function($rootScope, $scope, $location, $http, $state, showbottomAlert, Beauty_encode) {
 		// BEGIN OF CONTROLLER
 
 		var currentUser = $rootScope.globals.currentUser || false;
@@ -33,6 +33,20 @@ angular.module('wittyApp')
 	    		$scope.lLink = $location.absUrl();
 	    	}).error(function(res) {
 	    		$location.path('/404').replace();
+	    	});
+
+	    	$http.get('/projects/user/' + currentUser.id).success(function(res) {
+	    		if (res[0]) {
+	    			$scope.shareProject = true;
+	    			$scope.project 		= res[0];
+	    			$scope.projectUrl 	= "https://www.wittycircle.com/project/" + res[0].public_id + "/" + Beauty_encode.encodeUrl(res[0].title);
+	    			// Get shorten Url
+		            $http.post('/url/shortener', {url: $scope.projectUrl}).success(function(res) {
+		                if (res.success)
+		                    $scope.ShortProjectUrl = res.url;
+		            });
+	    		} else
+	    			$scope.shareProject = false;
 	    	});
 		}; 
 
@@ -104,6 +118,17 @@ angular.module('wittyApp')
 		$scope.postSimilarLikeArticle = function(index, article_id) {
 			postLikeArticle(article_id, "S", index);
 		};
+
+		// MODIFY ARTICLE
+		$scope.modifyArticle = function() {
+			$state.go('learn.new', {article_id: $state.params.article_id});
+		};
+
+		// GO TO POST PROJECT
+		$scope.postProject = function() {
+			$state.go('main', {tagStart: true}, {reload: true, inherit: false, notify: true});
+		};
+
 		// END OF CONTROLLER
 	});
 

@@ -433,7 +433,10 @@
 .custom-project-post {
   width: inherit; }
   .custom-project-post ul {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    font-family: 'FreigBook';
+    font-size: 18px;
+    text-align: left; }
   .custom-project-post ul, .custom-project-post li {
     list-style-type: none !important; }
   .custom-project-post figure {

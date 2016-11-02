@@ -6,23 +6,24 @@
 	<div class="learn-header-text">
 		<h3>Ressources, stories, interviews & curated content from our community</h3>
 	</div>
-	<div class="learn-header-tag">
+	<!-- <div class="learn-header-tag">
 		<ul>
 			<li ng-repeat="headTag in headTags" ng-click="getArticleByTag(headTag)">#{{headTag}}</li>
 		</ul>
-	</div>
+	</div> -->
 </div>
 
 <section id="learn-article-page">
 	<div class="learn-article">
 		<div class="learn-article-header">
-			<a href="learn"><h2>Back to all stories</h2></a>
+			<a href="learn"><img src="images/arrow-back-01.svg" alt="arrow" /><h2>Back to all stories</h2></a>
+			<button ng-click="modifyArticle()" ng-if="logUser.moderator">Modify article</button>
 
 			<ul data-ng-controller="PopUpCtrl">
 				<li><a href="https://twitter.com/intent/tweet?text=Need help to develop your project? Want to discover cool ideas? Join now &url=https://www.wittycircle.com"><i class="fa fa-twitter" ></i></a></li>
 				<li><i class="fa fa-facebook" ng-click="facebookShare(uArticle.title, lLink, uArticle.picture, aDes)"></i></li>
-				<li><i class="fa fa-linkedin"></i></li>
-			</ul>
+<!-- 				<li><i class="fa fa-linkedin"></i></li>
+ -->			</ul>
 		</div>
 
 		<article class="learn-article-text">
@@ -30,7 +31,7 @@
 				<section class="lcaahead">
 					<div class="lcaaheada">
 						<div class="lcaaheadai">
-							<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/w_154,h_154,c_fill/v1457649179/tp4f4nre7dci6xlsvz2l.jpg" atl="profile-img">
+							<img ng-src="{{uArticle.profile.profile_picture}}">
 						</div>
 
 						<div class="lcaaheadan">
@@ -64,9 +65,24 @@
 				</article>
 			</div>
 
+			<section class="learn-corp-article-event">
+				<img src="http://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,h_85,w_85/v1478021343/1098263_10151896325062317_1452756933_n_k52i2w.jpg">
+				<h3>Want to talk to Nish? Post your project<br /> and spread the word!</h3>
+
+				<div ng-if="!shareProject">
+					<button ng-click="postProject()">Post a project</button>
+				</div>
+
+				<div ng-if="shareProject">
+	 				<p>Share your project on:</p>
+	 				<button ng-controller="PopUpCtrl" class="lcaefa"  ng-click="facebookShare(project.title, projectUrl, project.picture, project.description)"><i class="fa fa-facebook"></i> Share on Facebook</button>
+	 				<a ng-href="https://twitter.com/intent/tweet?text={{project.title}} is now live on @wittycircle, where the world meets future entrepreneurs&hashtags={{project.title}} {{ShortProjectUrl}}"><button class="lcaetw"><i class="fa fa-twitter"></i> Share on Twitter</button></a>
+				</div>
+			</section>
+
 			<div class="learn-article-footer">
 				<h4 style="margin-bottom: 45px">Comments <span ng-if="nome">({{nome}})</span></h4>
-				<a href="/learn"><h2>Back to all stories</h2></a>
+				<a href="/learn"><h2><img src="images/arrow-back-01.svg" alt="arrow" />Back to all stories</h2></a>
 
 				<div class="learn-article-footer-comments" ng-repeat="userMessage in userMessages">
 					<div class="lafcimg">

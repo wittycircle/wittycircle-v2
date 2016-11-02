@@ -32,7 +32,7 @@ height: 700px;
 }
 
 #bodyCore{
-	      button {
+	    button {
 		padding: 6px 18px 8px 18px;
 }
 }
@@ -128,19 +128,30 @@ overflow: hidden;
 
 #main-discover {
 	position: absolute;
-	max-width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
+/*	max-width: 1000px;
+*/	margin-left: 50px;
+	margin-right: 50px;
 	z-index: 90;
 	left: 0;
 	right: 0;
 	text-align: center;
-	top: 180px;
+	top: 160px;
+
+	button {
+		padding: 0 0 0 0;
+	}
+
+	.main-discover-slick {
+		.slick-dots li button:before {
+			color: white;
+			font-size: 10px;
+		}
+	}
 
 	.main-title-market {
 		h1 {
 			font-family: 'FreigSem';
-			font-size: 42px;
+			font-size: 38px;
 			text-shadow: 1px 1px 10px black;
 		}
 	}
@@ -151,14 +162,43 @@ overflow: hidden;
 
 	.main-title-text {
 		max-width: 750px;
-		margin: 10px auto 50px auto;
+		margin: 15px auto 30px auto;
 
 		h4 {
 			color: #ededed;
 			font-family: 'FreigBook';
-			font-size: 22px;
+			font-size: 21px;
 			line-height: 26px;
 			text-shadow: 1px 1px 10px black;
+		}
+	}
+
+	.main-title-text-meet-people {
+		max-width: 750px;
+		margin: 15px auto 30px auto;
+
+		a {
+			display: inline-block;
+			width: 15%;
+			margin-right: 10px;
+
+			img {
+				width: auto;
+				height: 85px;
+				border-radius: 50%;
+			}
+		}
+
+		h4 {
+			display: inline-block;
+			vertical-align: top;
+			width: 80%;
+			color: #ededed;
+			font-family: 'FreigBook';
+			font-size: 21px;
+			line-height: 26px;
+			text-shadow: 1px 1px 10px black;
+			text-align: left;
 		}
 	}
 
@@ -168,31 +208,34 @@ overflow: hidden;
 
 	.main-button-discover {
 		margin-top: 25px;
-		margin-bottom: 30px;
+		margin-bottom: 20px;
 
 		.button-discover {
 			display: inline-block;
 			// margin: 3px 12px 3px 10px;
 			button {
 				height: 45px;
-				border: 2px solid white;
+				border: 2px solid rgba(255, 255, 255, 0.8);
 				border-radius: 3px;
-				background-color: transparent;
-				color: white;
+				background-color: rgba(255, 255, 255, 0.8);
+				background-clip: padding-box;
+				color: black;
 				font-family: 'FreigSem';
 				font-size: 18px;
+				padding: 6px 18px 8px 18px;
 			}
 
 			button:hover {
-				background-color: white;
-				color: $bgColor;
+				background-color: transparent;
+				color: white;
+				border: 2px solid white;
 			}
 		}
 
 		.button-start-project {
 			display: inline-block;
-			margin: 3px 20px 3px 0px;
-
+/*			margin: 3px 20px 3px 0px;
+*/
 			button {
 				height: 45px;
 				border: none;
@@ -903,6 +946,7 @@ a:hover {
 
 
 @media only screen and (max-width: 1024px) {
+	
 	.home-video-bg {
 		display: none;
 	}
@@ -942,6 +986,10 @@ a:hover {
 }
 
 @media only screen and (max-width: 736px) {
+
+	.main-discover-slick {
+		display: none;
+	}
 
 	.slick-dots {
 		bottom: -50px;

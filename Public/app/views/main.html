@@ -9,15 +9,9 @@
 		<div id="hibg" class="home-image-bg"></div>
 
 		<section id="main-discover" ng-show="!main.isstartclicked">
-			<div class="row">
-				<div class="main-title-market">
-					<h1>Where the world meets future entrepreneurs</h1>
-				</div>
+			<div class="row" ng-if="mobile">
 				<div class="main-title-market-mobile">
 					<h1>Where the world meets future entrepreneurs</h1>
-				</div>
-				<div class="main-title-text">
-					<h4>Nobody can build great things alone. Share your idea or project to our community, get instant feedback and be connected to the right people, at the right time.</h4>
 				</div>
 				<div class="main-title-text-mobile">
 					<h4>Nobody can build great things alone. Share your idea or project to our community, get instant feedback and be connected to the right people, at the right time.</h4>
@@ -35,6 +29,62 @@
 					<p>How can we help?</p>
 				</div>
 			</div>
+			<slick-main class="main-discover-slick" init-onload=true ng-show="!main.isstartclicked">
+				<div class="main-carousel-slick">
+					<div class="main-title-market">
+						<h1>Where the world meets future entrepreneurs</h1>
+					</div>
+					<div class="main-title-text">
+						<h4>Nobody can build great things alone. Share your idea or project to our community, get instant feedback and be connected to the right people, at the right time.</h4>
+					</div>
+					<div class="main-button-discover">
+					<div class="button-start-project">
+						<button ng-click="main.goforstarter()">Post a project</button>
+					</div>
+				</div>
+				</div>
+				<div class="main-carousel-slick">
+					<div class="main-title-market">
+						<h1>Need a helping hand?</h1>
+					</div>
+					<div class="main-title-text">
+						<h4>They are designers, engineers, product lovers, artists, programmers, entrepreneurs, writers, students, marketers, investors, business developers, and much more.</h4>
+					</div>
+
+					<div class="main-button-discover">
+						<div class="button-discover">
+							<button data-ui-sref="meet">Meet our community</button>
+						</div>
+					</div>
+				</div>
+				<div class="main-carousel-slick">
+					<div class="main-title-market">
+						<h1>Get inspired, find the next big thing</h1>
+					</div>
+					<div class="main-title-text">
+						<h4>Ideas, products, side projects: they all need people like you to be turned into real things. Discover thousands of them and see how you can help.</h4>
+					</div>
+					<div class="main-button-discover">
+						<div class="button-start-project">
+							<button data-ui-sref="discover">Explore our projects</button>
+						</div>
+					</div>
+				</div>
+				<div class="main-carousel-slick">
+					<div class="main-title-market">
+						<h1>Meet Nish, first head of marketing & community at Yelp!</h1>
+					</div>
+					<div class="main-title-text-meet-people">
+						<a href=""><img src="http://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,h_85,w_85/v1478021343/1098263_10151896325062317_1452756933_n_k52i2w.jpg"></a>
+						<h4>The <b>most upvoted project</b> of this week will have the opportunity to meet Nish Nadaraja to talk about community building, branding, customer experience and much more.</h4>
+					</div>
+					<div class="main-button-discover">
+						<div class="button-start-project">
+							<a href="/learn/article/id/67181"><button>Learn more</button></a>
+						</div>
+					</div>
+				</div>
+			</slick-main>
 		</section>
 
 		<section id="main-start-project" class="animated fadeInRightBig" ng-hide="!main.isstartclicked">
@@ -489,6 +539,17 @@
 
 		        if (screen.height > 1280 && document.getElementById('hvbg'))
 		            document.getElementById('hvbg').style.height = "650px"; 
+
+		        $('.main-discover-slick').slick({
+		        	dots: true,
+		        	infinite: true,
+		        	speed: 500,
+		        	autoplay: true,
+		        	autoplaySpeed: 7000,
+		        	swipeToSlide: false,
+		        	prevArrow:"<img class='a-left control-c prev slick-prev' src='images/arrow-back-w-01.svg'>",
+    				nextArrow:"<img class='a-right control-c next slick-next' src='images/arrow-back-w-02.svg'>",
+		        });
 
 		        $('#main-body-page').on('click', function(e) {
 

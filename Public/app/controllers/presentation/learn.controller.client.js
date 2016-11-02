@@ -2,20 +2,68 @@
 
 angular.module('wittyApp')
 .controller('LearnCtrl',
-	function($rootScope, $scope, $location, $http, Upload ,$state, $timeout, showbottomAlert) {
+	function($rootScope, $scope, $location, $http, Upload, $state, $stateParams, $timeout, showbottomAlert, redactorOptions) {
 
+		// **Redactor configuration
+			redactorOptions.imageUpload = '/upload/redactor';
+			redactorOptions.buttonSource = true;
+			redactorOptions.imageResizable = true;
+			redactorOptions.imageEditable = true;
+			redactorOptions.imageLink = true;
+			redactorOptions.visual = true;// false for html mode
 
+			redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
+			redactorOptions.plugins = ['imagemanager'];
+			redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+		/*
+		**End Redactor configuration
+		*/
 		var currentUser = $rootScope.globals.currentUser || false;
 		var recentArticles;
 		$scope.logUser = currentUser;
 
-	    if (!currentUser.moderator)
-	       $location.path('/').replace();
+	    // if (!currentUser.moderator)
+	    //    $location.path('/').replace();
 
 	    $scope.headTags = ["innovation", "interview", "products", "engineering", "design", "startups", "programming", "entrepreneurship", "politics", "news", "art", "technology", "science", "software", "hardware"];
 	    $scope.learn 	= {};
 	    $scope.artLike 	= {};
 	    $scope.a_rank 	= "most recent";
+
+	    if ($stateParams.article_id) {
+	    	$scope.removeA = true;
+	    	var article = {
+	    		article_id: $stateParams.article_id
+	    	};
+	    	$http.post('/learn/articles/id', article).success(function(res) {
+	    		if (res.success) {
+	    			var article 			= res.article;
+	    			var tags;
+	    			$scope.article_id 		= article.id;
+	    			$scope.learn.id 		= article.id;
+	    			$scope.learn.title 		= article.title;
+	    			$scope.learn.picture 	= article.picture;
+	    			$scope.searchAuthor 	= article.profile.first_name + " " + article.profile.last_name;
+	    			$scope.learn.creator_user_id = article.creator_user_id;
+	    			$scope.learn.read_time	= article.read_time;
+	    			$scope.learn.text 		= article.text;
+
+
+	    			for (var i = 0; i < article.tags.length; i++) {
+	    				if (i === 0)
+	    					tags = article.tags[i].tag_name;
+	    				else
+	    					tags += ", " + article.tags[i].tag_name;
+	    			};
+
+	    			$scope.learn.tags = tags;
+	    		}
+	    		// $scope.aDes = $(res.article.text).text();
+	    		// $scope.lLink = $location.absUrl();
+	    	}).error(function(res) {
+	    		$location.path('/404').replace();
+	    	});
+	    }
 
 	    // FUNCTIONS
 	    function getArticle(tag) {
@@ -65,7 +113,7 @@ angular.module('wittyApp')
 		};
 
 		$scope.loadTime = function() {
-			$scope.times = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60];
+			$scope.times = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 		};
 
 		$scope.getArticleByRank = function(id) {
@@ -88,8 +136,10 @@ angular.module('wittyApp')
 		}; $scope.getAuthors();
 
 		$scope.getAuthorId = function(user_id, first_name, last_name) {
+			console.log(user_id);
 			$scope.searchAuthor = first_name + " " + last_name;
 			$scope.learn.creator_user_id = user_id;
+			console.log($scope.searchAuthor);
 		};
 
 		$scope.publishArticle = function() {
@@ -101,15 +151,27 @@ angular.module('wittyApp')
 				var data = { url: $scope.learn.picture };
 				$http.post('/upload/article/picture', data).success(function(res1) {
 					$scope.learn.picture = res1.secure_url;
-					$http.post('/learn/articles/new', $scope.learn).success(function(res) {
-						if (res.success) {
-							$scope.learn = {};
-							loadAllArticles();
-							$timeout(function(){
-								$location.path('/learn').replace();
-							}, 1000);
-						}
-					});
+					if ($stateParams.article_id) {
+						$http.put('/learn/articles/new', $scope.learn).success(function(res) {
+							if (res.success) {
+								$scope.learn = {};
+								loadAllArticles();
+								$timeout(function(){
+									$location.path('/learn').replace();
+								}, 1000);
+							}
+						});
+					} else {
+						$http.post('/learn/articles/new', $scope.learn).success(function(res) {
+							if (res.success) {
+								$scope.learn = {};
+								loadAllArticles();
+								$timeout(function(){
+									$location.path('/learn').replace();
+								}, 1000);
+							}
+						});
+					}
 				});
 			} else
 				$location.path('/').replace();
@@ -122,7 +184,6 @@ angular.module('wittyApp')
 		};
 
 		// LIKE ARTICLE
-
 		function postLikeAll(index, article_id, location) {
 			if (currentUser) {
 				$scope.artLike.article_id = article_id;
@@ -161,7 +222,22 @@ angular.module('wittyApp')
 
 		$scope.postLikeTrendingArticle = function(index, article_id) {
 			postLikeAll(index, article_id, "T");
-		}
+		};
+
+		// REMOVE ARTICLE
+
+		$scope.removeArticle = function(id) {
+			$http.delete('/learn/articles/delete/' + id).success(function(res) {
+				if (res.success) {
+					$scope.learn = {};
+					loadAllArticles();
+					$timeout(function(){
+						$location.path('/learn').replace();
+					}, 1000);
+				}
+			});
+		};
+
 
 	// END OF CONTROLLER
 });

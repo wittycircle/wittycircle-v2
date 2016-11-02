@@ -7,7 +7,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var main    = this,
     n       = 0;
@@ -227,6 +227,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     };
 
     if ($stateParams.tagStart) {
+        console.log("HELLO");
         main.goforstarter();
     }
 
@@ -508,6 +509,93 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
                         });
                     });
                 };
+                if (scope.initOnload) {
+                    isInitialized = false;
+                    return scope.$watch('data', function (newVal, oldVal) {
+                        if (newVal != null) {
+                            if (isInitialized) {
+                                destroySlick();
+                            }
+                            initializeSlick();
+                            return isInitialized = true;
+                        }
+                    });
+                } else {
+                    return initializeSlick();
+                }
+            }
+        };
+    }
+])
+.directive('slickMain', [
+    '$timeout',
+    function ($timeout) {
+        return {
+            restrict: 'AEC',
+            scope: {
+                initOnload: '@',
+                data: '=',
+            },
+            link: function (scope, element, attrs) {
+                var destroySlick, initializeSlick, isInitialized;
+                destroySlick = function () {
+                    return $timeout(function () {
+                        var slider;
+                        slider = $(element);
+                        slider.unslick();
+                        slider.find('.slick-list').remove();
+                        return slider;
+                    });
+                };
+
+                // initializeSlick = function () {
+                //     return $timeout(function () {
+                //         var currentIndex, customPaging, slider;
+                //         slider = $(element);
+                //         if (scope.currentIndex != null) {
+                //             currentIndex = scope.currentIndex;
+                //         }
+                //         customPaging = function (slick, index) {
+                //             return scope.customPaging({
+                //                 slick: slick,
+                //                 index: index
+                //             });
+                //         };
+                //         slider.slick({
+                //             dots: true,
+                //             infinite: true,
+                //             autoplay: true,
+                //             prevArrow:"<img class='a-left control-c prev slick-prev' src='images/arrow-back-w-01.svg'>",
+                //             nextArrow:"<img class='a-right control-c next slick-next' src='images/arrow-back-w-02.svg'>",
+                //             swipeToSlide: true,
+                //             speed: 200,
+                //         });
+                //         slider.on('init', function (sl) {
+                //             if (attrs.onInit) {
+                //                 scope.onInit();
+                //             }
+                //             if (currentIndex != null) {
+                //                 return sl.slideHandler(currentIndex);
+                //             }
+                //         });
+                //         slider.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+                //             if (scope.onAfterChange) {
+                //                 scope.onAfterChange();
+                //             }
+                //             if (currentIndex != null) {
+                //                 return scope.$apply(function () {
+                //                     currentIndex = currentSlide;
+                //                     return scope.currentIndex = currentSlide;
+                //                 });
+                //             }
+                //         });
+                //         return scope.$watch('currentIndex', function (newVal, oldVal) {
+                //             if (currentIndex != null && newVal != null && newVal !== currentIndex) {
+                //                 return slider.slick('slickGoTo', newVal);
+                //             }
+                //         });
+                //     });
+                // };
                 if (scope.initOnload) {
                     isInitialized = false;
                     return scope.$watch('data', function (newVal, oldVal) {

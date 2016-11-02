@@ -98,52 +98,83 @@ overflow: hidden;
 /*********************** Main Discover **************************/
 #main-discover {
   position: absolute;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  /*	max-width: 1000px;
+  */
+  margin-left: 50px;
+  margin-right: 50px;
   z-index: 90;
   left: 0;
   right: 0;
   text-align: center;
-  top: 180px;
+  top: 160px;
   -webkit-animation-duration: 0.3s;
   -moz-animation-duration: 0.3s; }
+  #main-discover button {
+    padding: 0 0 0 0; }
+  #main-discover .main-discover-slick .slick-dots li button:before {
+    color: white;
+    font-size: 10px; }
   #main-discover .main-title-market h1 {
     font-family: 'FreigSem';
-    font-size: 42px;
+    font-size: 38px;
     text-shadow: 1px 1px 10px black; }
   #main-discover .main-title-market-mobile {
     display: none; }
   #main-discover .main-title-text {
     max-width: 750px;
-    margin: 10px auto 50px auto; }
+    margin: 15px auto 30px auto; }
     #main-discover .main-title-text h4 {
       color: #ededed;
       font-family: 'FreigBook';
-      font-size: 22px;
+      font-size: 21px;
       line-height: 26px;
       text-shadow: 1px 1px 10px black; }
+  #main-discover .main-title-text-meet-people {
+    max-width: 750px;
+    margin: 15px auto 30px auto; }
+    #main-discover .main-title-text-meet-people a {
+      display: inline-block;
+      width: 15%;
+      margin-right: 10px; }
+      #main-discover .main-title-text-meet-people a img {
+        width: auto;
+        height: 85px;
+        border-radius: 50%; }
+    #main-discover .main-title-text-meet-people h4 {
+      display: inline-block;
+      vertical-align: top;
+      width: 80%;
+      color: #ededed;
+      font-family: 'FreigBook';
+      font-size: 21px;
+      line-height: 26px;
+      text-shadow: 1px 1px 10px black;
+      text-align: left; }
   #main-discover .main-title-text-mobile {
     display: none; }
   #main-discover .main-button-discover {
     margin-top: 25px;
-    margin-bottom: 30px; }
+    margin-bottom: 20px; }
     #main-discover .main-button-discover .button-discover {
       display: inline-block; }
       #main-discover .main-button-discover .button-discover button {
         height: 45px;
-        border: 2px solid white;
+        border: 2px solid rgba(255, 255, 255, 0.8);
         border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.8);
+        background-clip: padding-box;
+        color: black;
+        font-family: 'FreigSem';
+        font-size: 18px;
+        padding: 6px 18px 8px 18px; }
+      #main-discover .main-button-discover .button-discover button:hover {
         background-color: transparent;
         color: white;
-        font-family: 'FreigSem';
-        font-size: 18px; }
-      #main-discover .main-button-discover .button-discover button:hover {
-        background-color: white;
-        color: #222222; }
+        border: 2px solid white; }
     #main-discover .main-button-discover .button-start-project {
       display: inline-block;
-      margin: 3px 20px 3px 0px; }
+      /*			margin: 3px 20px 3px 0px;
+      */ }
       #main-discover .main-button-discover .button-start-project button {
         height: 45px;
         border: none;
@@ -680,6 +711,9 @@ overflow: hidden;
   #main-body-content .main-body-container .main-body-contents .main-body-cardList .main-body-card {
     top: -70px; } }
 @media only screen and (max-width: 736px) {
+  .main-discover-slick {
+    display: none; }
+
   .slick-dots {
     bottom: -50px; }
     .slick-dots li button:before {

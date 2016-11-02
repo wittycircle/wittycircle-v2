@@ -84,14 +84,18 @@ function loadArticleParam(req, arr, order, callback) {
 															getArticleLike(result2[index].id, function(like) {
 																result2[index].numberOfLike = like;
 																result2[index].creation_date = newDate;
-																checkLikeArticle(req, result2[index].id, function(check) {
-																	if (check === 'error')
-																		return callback('error');
-																	else {
-																		result2[index].likedArticle = check;
-																		return recursive(index + 1);
-																	}
-																});
+																if (req.isAuthenticated()) {
+																	checkLikeArticle(req, result2[index].id, function(check) {
+																		if (check === 'error')
+																			return callback('error');
+																		else {
+																			result2[index].likedArticle = check;
+																			return recursive(index + 1);
+																		}
+																	});
+																} else {
+																	return recursive(index + 1);
+																}
 															});
 														});
 													});
@@ -138,14 +142,17 @@ exports.getSingleArticle = function(req, res) {
 														article.creation_date = newDate;
 														getArticleLike(result[0].id, function(like) {
 															article.numberOfLike = like;
-															checkLikeArticle(req, result[0].id, function(check) {
-																if (check === 'error')
-																	return res.status(403).send("NOT AUTHORIZED");
-																else {
-																	article.likedArticle = check;
-																	return res.status(200).send({success: true, article: article})
-																}
-															});
+															if (req.isAuthenticated()) {
+	 															checkLikeArticle(req, result[0].id, function(check) {
+																	if (check === 'error')
+																		return res.status(403).send("NOT AUTHORIZED");
+																	else {
+																		article.likedArticle = check;
+																		return res.status(200).send({success: true, article: article})
+																	}
+																});
+ 															} else
+ 																return res.status(200).send({success: true, article: article})
 														});
 													});
 												});
@@ -185,15 +192,20 @@ exports.getAllArticle = function(req, res) {
 															article.creation_date = newDate;															
 															getArticleLike(result[index].id, function(like) {
 															article.numberOfLike = like;
-																checkLikeArticle(req, result[index].id, function(check) {
-																	if (check === 'error')
-																		return res.status(403).send("NOT AUTHORIZED");
-																	else {
-																		article.likedArticle = check;
-																		array.push(article);
-																		return recursive(index + 1);
-																	}
-																});
+																if (req.isAuthenticated()) {
+																	checkLikeArticle(req, result[index].id, function(check) {
+																		if (check === 'error')
+																			return res.status(403).send("NOT AUTHORIZED");
+																		else {
+																			article.likedArticle = check;
+																			array.push(article);
+																			return recursive(index + 1);
+																		}
+																	});
+																} else {
+																	array.push(article);
+																	return recursive(index + 1);
+																}
 															});
 														});
 													});
@@ -307,6 +319,51 @@ exports.postNewArticle = function(req, res) {
     			});
     	} else
     		return res.status(401).send("Request Unauthorized");
+    }
+};
+
+exports.updateNewArticle = function(req, res) {
+	/* Validation */
+    req.checkBody('title', 'Error Message').isString();
+    req.checkBody('picture', 'Error Message').optional().isString();
+    req.checkBody('text', 'Error Message').optional().isString();
+    req.checkBody('creator_user_id').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+    	return res.status(400).send(errors);
+    } else {
+    	if (req.user && req.user.moderator) {
+    		var tags = req.body.tags;
+    		delete req.body.tags;
+    		
+    		pool.query('UPDATE articles SET ? WHERE id = ?', [req.body, req.body.id], 
+				function(err, result2) {
+					if (err) throw err;
+					if (tags[0]) {
+						var article_id = req.body.id;
+						pool.query('DELETE FROM article_tags WHERE article_id = ?', article_id,
+							function(err, result) {
+								if (err) throw err;
+								else {
+									function recursive(index) {
+										if (tags[index]) {
+											pool.query('INSERT INTO article_tags (tag_name, article_id) VALUES (?, ?)', [tags[index].trim(), article_id],
+												function(err, result4) {
+													if (err) throw err;
+													return recursive(index + 1);
+												});
+										} else
+											return res.status(200).send({success: true}); 
+									};
+									recursive(0);
+								}
+							});
+					} else {
+						return res.status(200).send({success: true});
+					}
+				});
+    	}
     }
 };
 
@@ -445,5 +502,29 @@ exports.postArticleLike = function(req, res) {
 	    	return res.status(401).send("Request Unauthorized");
     }
 };
+
+// * DELETE ARTICLE
+
+exports.deleteArticle = function(req, res) {
+	req.checkParams('article_id', 'Error Message').isInt();
+
+	var errors = req.validationErrors(true);
+    if (errors) {
+    	return res.status(400).send(errors);
+    } else {
+    	if (req.isAuthenticated) {
+    		if (req.user.moderator) {
+    			pool.query('DELETE FROM articles WHERE id = ?', req.params.article_id,
+    				function(err, result) {
+    					if (err) throw err;
+    					else
+    						return res.status(200).send({success: true});
+    				});
+    		} else
+    			return res.status(404).send("FORBIDDEN");
+    	} else
+    		return res.status(404).send("FORBIDDEN");
+    }
+}
 
 

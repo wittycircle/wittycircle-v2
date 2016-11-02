@@ -61,7 +61,7 @@ var wittyCircleApp = angular
 	})
 	.state('learn', {
 		url 		: '/learn',
-		params 		: { tag: ''},
+		params 		: { tag: '', article_id: '' },
 		templateUrl : 'views/presentation/learn.view.client.html',
 		controller  : 'LearnCtrl',
 	})

@@ -7,16 +7,16 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    height: 550px; }
+    height: 250px; }
     #learn-body-page .learn-header .learn-header-title {
       text-align: center;
-      padding-top: 150px;
+      padding-top: 80px;
       max-width: 500px;
       margin: 0 auto; }
       #learn-body-page .learn-header .learn-header-title h1 {
         font-family: 'FreigSem';
         color: white;
-        font-size: 55px; }
+        font-size: 42px; }
     #learn-body-page .learn-header .learn-header-text {
       text-align: center;
       max-width: 500px;
@@ -24,6 +24,7 @@
       #learn-body-page .learn-header .learn-header-text h3 {
         font-family: 'FreigMed';
         color: white;
+        font-size: 21px;
         line-height: 28px; }
     #learn-body-page .learn-header .learn-header-tag {
       text-align: center;
@@ -45,7 +46,7 @@
         border: 1px solid black;
         color: black; }
   #learn-body-page .learn-corp-article-article {
-    margin-bottom: 45px; }
+    margin-bottom: 35px; }
     #learn-body-page .learn-corp-article-article .lcaahead {
       margin-bottom: 25px; }
       #learn-body-page .learn-corp-article-article .lcaahead .lcaaheada {
@@ -66,7 +67,7 @@
             color: black; }
           #learn-body-page .learn-corp-article-article .lcaahead .lcaaheada .lcaaheadan .lcaaheadans span {
             font-family: 'FreigBook';
-            font-size: 13px;
+            font-size: 14px;
             color: black; }
       #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt {
         display: inline-block;
@@ -85,15 +86,24 @@
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt span {
           font-family: 'FreigBook';
           font-size: 14px;
-          margin-right: 15px; }
+          /*						margin-right: 15px;
+          */ }
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt .fa-heart-red {
-          color: rgba(255, 52, 52, 0.9); }
+          color: rgba(255, 52, 52, 0.9);
+          outline: none; }
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt .fa-heart-white {
-          color: #999999; }
+          color: #999999;
+          outline: none; }
+        #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb a {
+          font-family: 'FreigBook';
+          font-size: 14px;
+          margin-right: 15px;
+          color: black; }
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb span {
           font-family: 'FreigBook';
           font-size: 14px;
-          margin-right: 15px; }
+          /*						margin-right: 15px;
+          */ }
     #learn-body-page .learn-corp-article-article .lcaadoc h2 {
       font-family: 'FreigSem';
       margin-bottom: 15px;
@@ -109,9 +119,12 @@
       #learn-body-page .learn-corp-article-article .lcaadoc .lcaadocimg img {
         width: 100%;
         height: auto; }
+    #learn-body-page .learn-corp-article-article .lcaadoc #latext {
+      margin-top: 15px; }
     #learn-body-page .learn-corp-article-article .lcaadoc .lcaadoctext {
       height: 195px;
       overflow-y: hidden;
+      margin-top: 10px;
       margin-bottom: 15px; }
       #learn-body-page .learn-corp-article-article .lcaadoc .lcaadoctext p {
         word-break: break-all;
@@ -168,15 +181,19 @@
           font-size: 14px;
           margin-right: 15px; }
         #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon .fa-heart-red {
-          color: rgba(255, 52, 52, 0.9); }
+          color: rgba(255, 52, 52, 0.9);
+          outline: none; }
         #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfon .fa-heart-white {
-          color: #999999; }
-        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfot ul li {
-          display: inline-block;
-          font-family: 'FreigBook';
           color: #999999;
-          font-size: 14px;
-          margin-right: 5px; }
+          outline: none; }
+        #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfot {
+          width: 200px; }
+          #learn-body-page .learn-corp-aside .learn-corp-aside-article .lcaainfo .lcaainfot ul li {
+            display: inline-block;
+            font-family: 'FreigBook';
+            color: #999999;
+            font-size: 14px;
+            margin-right: 5px; }
   #learn-body-page #learn-article-page {
     width: 1000px;
     height: auto;
@@ -191,8 +208,20 @@
       vertical-align: top; }
       #learn-body-page #learn-article-page .learn-article .learn-article-header {
         margin-bottom: 45px; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-header button {
+          background-color: transparent;
+          border: 1px solid black;
+          color: black;
+          margin-left: 10px; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-header a img {
+          vertical-align: initial; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-header button:hover {
+          background-color: black;
+          border: 1px solid white;
+          color: white; }
         #learn-body-page #learn-article-page .learn-article .learn-article-header h2 {
-          display: inline-block; }
+          display: inline-block;
+          margin-left: 10px; }
         #learn-body-page #learn-article-page .learn-article .learn-article-header ul {
           display: inline-block;
           float: right;
@@ -242,6 +271,43 @@
         margin-bottom: 45px; }
         #learn-body-page #learn-article-page .learn-article .learn-article-text h2 {
           font-family: 'FreigSem'; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event {
+          text-align: center;
+          margin-bottom: 60px; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event h3 {
+            display: inline-block;
+            font-family: 'FreigSem';
+            font-size: 21px;
+            color: black;
+            width: 58%;
+            text-align: left;
+            vertical-align: middle; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event img {
+            display: inline-block;
+            width: 15%;
+            border-radius: 50%;
+            margin-right: 15px; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 15px; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event i {
+            margin-right: 10px; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event p {
+            font-family: 'FreigBook';
+            font-size: 18px;
+            color: black; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaefa {
+            background-color: #3B5998;
+            padding: 10px 15px;
+            border: 1px solid #3B5998;
+            font-family: 'FreigMed'; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaetw {
+            background-color: #4099FF;
+            padding: 10px 20px;
+            border: 1px solid #4099FF;
+            font-family: 'FreigMed';
+            margin-top: 10px; }
         #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer h4 {
           display: inline-block;
           font-family: 'FreigBook';
@@ -251,6 +317,9 @@
           display: inline-block;
           font-family: 'FreigBook';
           float: right; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer h2 img {
+            margin-right: 10px;
+            vertical-align: initial; }
         #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer .lafcimg {
           display: inline-block;
           margin-right: 15px; }
@@ -320,7 +389,7 @@
           font-size: 18px;
           color: black;
           margin-left: 15px;
-          border: 2px solid black;
+          border: 1px solid black;
           border-radius: 4px;
           padding: 3px 10px;
           -webkit-transition: all 100ms linear;
@@ -431,5 +500,7 @@
         height: 250px; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button {
         text-align: right; }
+      #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button-remove {
+        text-align: center; }
 
 /*# sourceMappingURL=learn.css.map */

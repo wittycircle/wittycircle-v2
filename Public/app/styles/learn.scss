@@ -13,18 +13,18 @@
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
-		height: 550px;
+		height: 250px;
 
 		.learn-header-title {
 			text-align: center;
-			padding-top: 150px;
+			padding-top: 80px;
 			max-width: 500px;
 			margin: 0 auto;
 
 			h1 {
 				font-family: 'FreigSem';
 				color: white;
-				font-size: 55px;
+				font-size: 42px;
 			}
 		}
 
@@ -36,6 +36,7 @@
 			h3 {
 				font-family: 'FreigMed';
 				color: white;
+				font-size: 21px;
 				line-height: 28px;
 			}
 		}
@@ -69,7 +70,7 @@
 	}
 
 	.learn-corp-article-article {
-		margin-bottom: 45px;
+		margin-bottom: 35px;
 
 		.lcaahead {
 			margin-bottom: 25px;
@@ -101,7 +102,7 @@
 					.lcaaheadans {
 						span {
 							font-family: 'FreigBook';
-							font-size: 13px;
+							font-size: 14px;
 							color: black;
 						}
 					}
@@ -133,24 +134,32 @@
 					span {
 						font-family: 'FreigBook';
 						font-size: 14px;
-						margin-right: 15px;
-					}
+/*						margin-right: 15px;
+*/					}
 
 					.fa-heart-red {
 						color: rgba(255, 52, 52, 0.9);
+						outline: none;
 					}
 
 					.fa-heart-white {
 						color: #999999;
+						outline: none;
 					} 
 				}
 
 				.lcaaheadtb {
-					span {
+					a {
 						font-family: 'FreigBook';
 						font-size: 14px;
 						margin-right: 15px;
+						color: black;
 					}
+					span {
+						font-family: 'FreigBook';
+						font-size: 14px;
+/*						margin-right: 15px;
+*/					}
 				}
 			}
 		}
@@ -183,9 +192,15 @@
 				}
 			}
 
+
+			#latext {
+				margin-top: 15px;
+			}
+
 			.lcaadoctext {
 				height: 195px;
 				overflow-y: hidden;
+				margin-top: 10px;
 				margin-bottom: 15px;
 
 				p {
@@ -276,14 +291,17 @@
 
 					.fa-heart-red {
 						color: rgba(255, 52, 52, 0.9);
+						outline: none;
 					}
 
 					.fa-heart-white {
 						color: #999999;
+						outline: none;
 					}
 				}
 
 				.lcaainfot {
+					width: 200px;
 					ul {
 						li {
 							display: inline-block;
@@ -318,8 +336,28 @@
 			.learn-article-header {
 				margin-bottom: 45px;
 
+				button {
+					background-color: transparent;
+					border: 1px solid black;
+					color: black;
+					margin-left: 10px;
+				}
+
+				a {
+					img {
+						vertical-align: initial;
+					} 
+				}
+
+				button:hover {
+					background-color: black;
+					border: 1px solid white;
+					color: white;
+				}
+
 				h2 {
 					display: inline-block;
+					margin-left: 10px;
 				}
 
 				ul {
@@ -399,6 +437,59 @@
 					font-family: 'FreigSem';
 				}
 
+				.learn-corp-article-event {
+					text-align: center;
+					margin-bottom: 60px;
+
+					h3 {
+						display: inline-block;
+						font-family: 'FreigSem';
+						font-size: 21px;
+						color: black;
+						width: 58%;
+						text-align: left;
+						vertical-align: middle;
+					}
+
+					img {
+						display: inline-block;
+						width: 15%;
+						border-radius: 50%;
+						margin-right: 15px;
+					}
+
+					button {
+						display: block;
+						margin: 0 auto;
+						margin-top: 15px;
+					}
+
+					i {
+						margin-right: 10px;
+					}
+
+					p {
+						font-family: 'FreigBook';
+						font-size: 18px;
+						color: black;
+					}
+
+					.lcaefa {
+						background-color: #3B5998;
+						padding: 10px 15px;
+						border: 1px solid #3B5998;
+						font-family: 'FreigMed';
+					}
+
+					.lcaetw {
+						background-color: #4099FF;
+						padding: 10px 20px;
+						border: 1px solid #4099FF;
+						font-family: 'FreigMed';
+						margin-top: 10px;
+					}
+				}
+
 				.learn-article-footer {
 					h4 {
 						display: inline-block;
@@ -411,6 +502,11 @@
 						display: inline-block;
 						font-family: 'FreigBook';
 						float: right;
+
+						img {
+							margin-right: 10px;
+							vertical-align: initial;
+						}
 					}
 
 					.lafcimg {
@@ -523,7 +619,7 @@
 						font-size: 18px;
 						color: black;
 						margin-left: 15px;
-						border: 2px solid black;
+						border: 1px solid black;
 						border-radius: 4px;
 						padding: 3px 10px;
 						-webkit-transition: all 100ms linear;
@@ -699,6 +795,10 @@
 
 			.learn-new-field-button {
 				text-align: right;
+			}
+
+			.learn-new-field-button-remove {
+				text-align: center;
 			}
 		}
 	}

@@ -14,7 +14,7 @@ angular.module('wittyApp')
 
 			redactorOptions.buttons = ['format', 'bold', 'italic', 'deleted', 'lists', 'image', 'video', 'file', 'link', 'horizontalrule'];
 			redactorOptions.plugins = ['imagemanager'];
-			redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1'];
+			redactorOptions.formatting = ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5'];
 		/*
 		**End Redactor configuration
 		*/

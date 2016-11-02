@@ -206,6 +206,7 @@
 				p {
 					word-break: break-all;
 					text-overflow: ellipsis;
+					margin-bottom: 0;
 				}
 
 			}
@@ -790,6 +791,9 @@
 			.learn-new-field-text {
 				.redactor-editor {
 					height: 250px;
+					p {
+						margin-bottom: 0;
+					}
 				}
 			}
 

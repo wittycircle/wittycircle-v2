@@ -65,7 +65,7 @@
 						</div>
 					</section>
 
-					<a ng-href="/learn/article/id/{{article.article_id}}"><article class="lcaadoc">
+					<a ng-href="/learn/article/id/{{article.article_id}}/{{encodeTitle(article.title)}}"><article class="lcaadoc">
 						<h2 ng-bind="article.title"></h2>
 						<div class="lcaadocimg"><img ng-if="article.picture" ng-src="{{article.picture}}"></div>
 						<div class="lcaadoctext" ng-bind-html="article.text"></div>

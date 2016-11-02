@@ -309,11 +309,12 @@ exports.getProfileAllTimeRank = function(req, res) {
 							if (!index)
 								var curdate = "CURDATE()"
 							else 
-								var curdate = "CURDATE() - " + index;
+								var curdate = "CURDATE() - INTERVAL " + index + " DAY";
 							pool.query('SELECT creation_date, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = ' + curdate + ' ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = ' + curdate + ' ORDER BY rank', req.user.id,
 								function(err, result2) {
 									if (err) throw err;
 									else {
+
 										if (result2[0])
 											rankArr.unshift({rank: result2[0].rank, date: result2[0].creation_date});
 										return recursive(index + 1);

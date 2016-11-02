@@ -70,7 +70,7 @@ var wittyCircleApp = angular
 		templateUrl : 'views/presentation/learn.add.article.client.html'
 	})
 	.state('learn_article', {
-		url 		: '/learn/article/id/:article_id',
+		url 		: '/learn/article/id/:article_id/:article_title',
 		templateUrl : 'views/presentation/learn.view.article.client.html',
 		controller 	: 'LearnArticleCtrl'
 	})
@@ -261,6 +261,15 @@ var wittyCircleApp = angular
 			return url_ret;
 		} else
 		return url;
+	};
+
+	$rootScope.encodeTitle = function(title) {
+		if (!title) {
+			return;
+		} else {
+			title = title.replace(/ /g, '-');
+		}
+		return title;
 	};
 
 	$cookieStore.put('resizePic', $rootScope.resizePic);

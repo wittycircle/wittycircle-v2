@@ -96,7 +96,7 @@ angular.module('wittyApp')
 					
                     // Start date of Ranking (easting)
                     context.beginPath();
-                    context.font="14px FreigBook";
+                    context.font = "14px FreigBook";
 					context.fillText(beginDate, 0, canvas.height);
 					context.strokeStyle = "black"
 					context.stroke();
@@ -117,7 +117,7 @@ angular.module('wittyApp')
 					var length = data.length - 1;
 					context.beginPath();
 					context.font="14px FreigBook";
-					context.fillText("Now", length * xScale, 10);
+					context.fillText("Now", length * xScale - 15, 10);
 					context.strokeStyle = "black"
 					context.stroke();
 

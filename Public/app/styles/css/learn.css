@@ -121,6 +121,8 @@
         height: auto; }
     #learn-body-page .learn-corp-article-article .lcaadoc #latext {
       margin-top: 15px; }
+      #learn-body-page .learn-corp-article-article .lcaadoc #latext p {
+        margin-bottom: 0; }
     #learn-body-page .learn-corp-article-article .lcaadoc .lcaadoctext {
       height: 195px;
       overflow-y: hidden;
@@ -128,7 +130,8 @@
       margin-bottom: 15px; }
       #learn-body-page .learn-corp-article-article .lcaadoc .lcaadoctext p {
         word-break: break-all;
-        text-overflow: ellipsis; }
+        text-overflow: ellipsis;
+        margin-bottom: 0; }
     #learn-body-page .learn-corp-article-article .lcaadoc h4 {
       font-family: "FreigMed";
       font-size: 21px;
@@ -498,6 +501,8 @@
               background-color: #e5e5e5; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-text .redactor-editor {
         height: 250px; }
+        #learn-body-page #learn-new-page .learn-new-field .learn-new-field-text .redactor-editor p {
+          margin-bottom: 0; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button {
         text-align: right; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button-remove {

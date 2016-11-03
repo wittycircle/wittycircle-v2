@@ -124,41 +124,46 @@ exports.getSingleArticle = function(req, res) {
 				if (err) throw err;
 				else {
 					var article = result[0];
-					pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result[0].creator_user_id,
-						function(err, result2) {
+					pool.query('SELECT profile_id, username FROM users WHERE id = ?', result[0].creator_user_id,
+						function(err, user) {
 							if (err) throw err;
-							else {
-								article.profile = result2[0];
-								pool.query('SELECT tag_name FROM article_tags WHERE article_id = ?', result[0].id,
-									function(err, result3) {
-										if (err) throw err;
-										else {
-											article.tags = result3;
-											pool.query('SELECT count(*) AS number FROM article_message WHERE article_id = ?', result[0].id,
-												function(err, result4) {
-													if (err) throw err;
-													article.numCom = result4[0].number;
-													convertDate.convertDate(article.creation_date, function(newDate) {
-														article.creation_date = newDate;
-														getArticleLike(result[0].id, function(like) {
-															article.numberOfLike = like;
-															if (req.isAuthenticated()) {
-	 															checkLikeArticle(req, result[0].id, function(check) {
-																	if (check === 'error')
-																		return res.status(403).send("NOT AUTHORIZED");
-																	else {
-																		article.likedArticle = check;
-																		return res.status(200).send({success: true, article: article})
-																	}
+							article.username = user[0].username;
+							pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', user[0].profile_id,
+								function(err, result2) {
+									if (err) throw err;
+									else {
+										article.profile = result2[0];
+										pool.query('SELECT tag_name FROM article_tags WHERE article_id = ?', result[0].id,
+											function(err, result3) {
+												if (err) throw err;
+												else {
+													article.tags = result3;
+													pool.query('SELECT count(*) AS number FROM article_message WHERE article_id = ?', result[0].id,
+														function(err, result4) {
+															if (err) throw err;
+															article.numCom = result4[0].number;
+															convertDate.convertDate(article.creation_date, function(newDate) {
+																article.creation_date = newDate;
+																getArticleLike(result[0].id, function(like) {
+																	article.numberOfLike = like;
+																	if (req.isAuthenticated()) {
+			 															checkLikeArticle(req, result[0].id, function(check) {
+																			if (check === 'error')
+																				return res.status(403).send("NOT AUTHORIZED");
+																			else {
+																				article.likedArticle = check;
+																				return res.status(200).send({success: true, article: article})
+																			}
+																		});
+		 															} else
+		 																return res.status(200).send({success: true, article: article})
 																});
- 															} else
- 																return res.status(200).send({success: true, article: article})
+															});
 														});
-													});
-												});
-										}
-									});
-							}
+												}
+											});
+									}
+								});
 						});
 				}
 			});
@@ -174,44 +179,49 @@ exports.getAllArticle = function(req, res) {
 				function recursive(index) {
 					if (result[index]) {
 						var article = result[index];
-						pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result[index].creator_user_id,
-							function(err, result2) {
+						pool.query('SELECT profile_id, username FROM users WHERE id = ?', result[index].creator_user_id,
+							function(err, user) {
 								if (err) throw err;
-								else {
-									article.profile = result2[0];
-									pool.query('SELECT tag_name FROM article_tags WHERE article_id = ?', result[index].id,
-										function(err, result3) {
-											if (err) throw err;
-											else {
-												article.tags = result3;
-												pool.query('SELECT count(*) AS number FROM article_message WHERE article_id = ?', result[index].id,
-													function(err, result4) {
-														if (err) throw err;
-														article.numCom = result4[0].number;
-														convertDate.convertDate(article.creation_date, function(newDate) {
-															article.creation_date = newDate;															
-															getArticleLike(result[index].id, function(like) {
-															article.numberOfLike = like;
-																if (req.isAuthenticated()) {
-																	checkLikeArticle(req, result[index].id, function(check) {
-																		if (check === 'error')
-																			return res.status(403).send("NOT AUTHORIZED");
-																		else {
-																			article.likedArticle = check;
+								article.username = user[0].username;
+								pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id = ?', user[0].profile_id,
+									function(err, result2) {
+										if (err) throw err;
+										else {
+											article.profile = result2[0];
+											pool.query('SELECT tag_name FROM article_tags WHERE article_id = ?', result[index].id,
+												function(err, result3) {
+													if (err) throw err;
+													else {
+														article.tags = result3;
+														pool.query('SELECT count(*) AS number FROM article_message WHERE article_id = ?', result[index].id,
+															function(err, result4) {
+																if (err) throw err;
+																article.numCom = result4[0].number;
+																convertDate.convertDate(article.creation_date, function(newDate) {
+																	article.creation_date = newDate;															
+																	getArticleLike(result[index].id, function(like) {
+																	article.numberOfLike = like;
+																		if (req.isAuthenticated()) {
+																			checkLikeArticle(req, result[index].id, function(check) {
+																				if (check === 'error')
+																					return res.status(403).send("NOT AUTHORIZED");
+																				else {
+																					article.likedArticle = check;
+																					array.push(article);
+																					return recursive(index + 1);
+																				}
+																			});
+																		} else {
 																			array.push(article);
 																			return recursive(index + 1);
 																		}
 																	});
-																} else {
-																	array.push(article);
-																	return recursive(index + 1);
-																}
+																});
 															});
-														});
-													});
-											}
-										});
-								}
+													}
+												});
+										}
+									});
 							});
 					} else 
 						return res.status(200).send({success: true, articles: array});

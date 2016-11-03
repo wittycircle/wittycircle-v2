@@ -104,6 +104,12 @@
           font-size: 14px;
           /*						margin-right: 15px;
           */ }
+    #learn-body-page .learn-corp-article-article .lcaadoc2 h2 {
+      font-family: 'FreigSem';
+      margin-bottom: 15px;
+      cursor: initial !important; }
+    #learn-body-page .learn-corp-article-article .lcaadoc2 h2:hover {
+      text-decoration: none !important; }
     #learn-body-page .learn-corp-article-article .lcaadoc h2 {
       font-family: 'FreigSem';
       margin-bottom: 15px;

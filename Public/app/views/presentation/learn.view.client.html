@@ -38,11 +38,11 @@
 					<section class="lcaahead">
 						<div class="lcaaheada">
 							<div class="lcaaheadai">
-								<img ng-src="{{article.profile.profile_picture}}" atl="profile-img">
+								<a ng-href="/{{article.username}}"><img ng-src="{{article.profile.profile_picture}}" atl="profile-img"></a>
 							</div>
 
 							<div class="lcaaheadan">
-								<h5>{{article.profile.first_name}} {{article.profile.last_name}}</h5>
+								<a ng-href="/{{article.username}}"><h5>{{article.profile.first_name}} {{article.profile.last_name}}</h5></a>
 								<div class="lcaaheadans">
 									<span ng-bind="article.creation_date"></span>
 									<span style="margin-left: 5px">{{article.read_time}} mins read</span>
@@ -69,7 +69,7 @@
 						<h2 ng-bind="article.title"></h2>
 						<div class="lcaadocimg"><img ng-if="article.picture" ng-src="{{article.picture}}"></div>
 						<div class="lcaadoctext" ng-bind-html="article.text"></div>
-						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/article/id/{{article.article_id}}">Read more...</a>
+						<a style="margin-top: 10px" ng-click="loadArticle($index)" ng-href="/learn/article/id/{{article.article_id}}/{{encodeTitle(article.title)}}">Read more...</a>
 					</article></a>
 				</div>
 			</article>

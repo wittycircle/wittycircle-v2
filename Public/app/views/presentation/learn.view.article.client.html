@@ -31,11 +31,11 @@
 				<section class="lcaahead">
 					<div class="lcaaheada">
 						<div class="lcaaheadai">
-							<img ng-src="{{uArticle.profile.profile_picture}}">
-						</div>
+							<a ng-href="/{{uArticle.username}}"><img ng-src="{{uArticle.profile.profile_picture}}">
+						</div></a>
 
 						<div class="lcaaheadan">
-							<h5>{{uArticle.profile.first_name}} {{uArticle.profile.last_name}}</h5>
+							<a ng-href="/{{uArticle.username}}"><h5>{{uArticle.profile.first_name}} {{uArticle.profile.last_name}}</h5></a>
 							<div class="lcaaheadans">
 								<span ng-bind="uArticle.creation_date"></span>
 								<span style="margin-left: 5px">{{uArticle.read_time}} mins read</span>
@@ -58,7 +58,7 @@
 					</div>
 				</section>
 
-				<article class="lcaadoc">
+				<article class="lcaadoc lcaadoc2">
 					<h2 ng-bind="uArticle.title"></h2>
 					<div class="lcaadocimg"><img ng-src="{{uArticle.picture}}"></div>
 					<div id="latext" ng-bind-html="uArticle.text"></div>

@@ -182,6 +182,10 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
+  #discover-body-page .body-page .home-video-bg {
+    background-image: url("/images/poster/poster_discover.jpg"); }
+    #discover-body-page .body-page .home-video-bg video {
+      background-image: url("/images/poster/poster_discover.jpg"); }
 
 .discover-component .discover-search1 .discover-search1-text {
   display: inline-block;
@@ -431,6 +435,10 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
+  #meet-body-page .body-page .home-video-bg {
+    background-image: url("images/poster/poster_meet.jpg"); }
+    #meet-body-page .body-page .home-video-bg video {
+      background-image: url("images/poster/poster_meet.jpg"); }
 
 .meet-component li {
   padding: 10px 20px 5px 20px;

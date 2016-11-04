@@ -160,7 +160,7 @@
             <ul id="hnmid" class="header-nav-list">
                 <li class="left" ><a href="/discover">Discover</a></li>
                 <li class="normal"><a href="/meet" >Meet</a></li>
-                <li class="normal"><a>Learn<sup>soon</sup></a></li>
+                <li class="normal"><a href="/learn">Learn</a></li>
                 <li class="right" ng-click="goToStart()"><a><strong>Start</strong></a></li>
             </ul>
         </div>
@@ -241,7 +241,7 @@
         }); */
 
 
-        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+        if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
         else
             headerCon.style.position = "absolute";
@@ -582,7 +582,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if (y >= 736) {
                     if ($(window).scrollTop() > 1 && !check) {
                         check = 1;

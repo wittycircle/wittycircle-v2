@@ -9,9 +9,9 @@
 		<div id="hibg" class="home-image-bg"></div>
 
 		<section id="main-discover" ng-show="!main.isstartclicked">
-			<div class="row" ng-if="mobile">
+			<!-- <div class="row" ng-if="mobile">
 				<div class="main-title-market-mobile">
-					<h1>Where the world meets future entrepreneurs</h1>
+					<h1>Meet Nish, first head of marketing & community at Yelp!</h1>
 				</div>
 				<div class="main-title-text-mobile">
 					<h4>Nobody can build great things alone. Share your idea or project to our community, get instant feedback and be connected to the right people, at the right time.</h4>
@@ -28,8 +28,23 @@
 				<div onclick="scrollToBf()" class="main-info">
 					<p>How can we help?</p>
 				</div>
-			</div>
+			</div> -->
 			<slick-main class="main-discover-slick" init-onload=true ng-show="!main.isstartclicked">
+				<div class="main-carousel-slick">
+					<div class="main-title-market">
+						<h1>Meet Nish, first head of marketing & community at Yelp!</h1>
+					</div>
+					<div class="main-title-text-meet-people">
+						<a href=""><img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,h_85,w_85/v1478021343/1098263_10151896325062317_1452756933_n_k52i2w.jpg"></a>
+						<h4>This week, get <b>personal feedback</b> on your project from <b>Nish Nadaraja</b>. He'll talk with you about community building, branding, customer experience and much more.</h4>
+					</div>
+					<div class="main-button-discover">
+						<div class="button-start-project">
+							<a href="/learn/article/id/62993/Introducing-weekly-mentoring-sessions-with--Nish,-1st-brand-and-community-director-at-Yelp"><button>Learn more</button></a>
+						</div>
+					</div>
+				</div> 
+
 				<div class="main-carousel-slick">
 					<div class="main-title-market">
 						<h1>Where the world meets future entrepreneurs</h1>
@@ -38,11 +53,12 @@
 						<h4>Nobody can build great things alone. Share your idea or project to our community, get instant feedback and be connected to the right people, at the right time.</h4>
 					</div>
 					<div class="main-button-discover">
-					<div class="button-start-project">
-						<button ng-click="main.goforstarter()">Post a project</button>
+						<div class="button-start-project">
+							<button ng-click="main.goforstarter()">Post a project</button>
+						</div>
 					</div>
 				</div>
-				</div>
+
 				<div class="main-carousel-slick">
 					<div class="main-title-market">
 						<h1>Need a helping hand?</h1>
@@ -57,6 +73,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="main-carousel-slick">
 					<div class="main-title-market">
 						<h1>Get inspired, find the next big thing</h1>
@@ -70,20 +87,6 @@
 						</div>
 					</div>
 				</div>
-<!--				<div class="main-carousel-slick">
-					<div class="main-title-market">
-						<h1>Meet Nish, first head of marketing & community at Yelp!</h1>
-					</div>
-					<div class="main-title-text-meet-people">
-						<a href=""><img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,h_85,w_85/v1478021343/1098263_10151896325062317_1452756933_n_k52i2w.jpg"></a>
-						<h4>The <b>most upvoted project</b> of this week will have the opportunity to meet Nish Nadaraja to talk about community building, branding, customer experience and much more.</h4>
-					</div>
-					<div class="main-button-discover">
-						<div class="button-start-project">
-							<a href="/learn/article/id/62993/Introducing-weekly-mentoring-sessions-with--Nish,-1st-brand-and-community-director-at-Yelp"><button>Learn more</button></a>
-						</div>
-					</div>
-				</div> -->
 			</slick-main>
 		</section>
 
@@ -523,7 +526,7 @@
 
 		$(document).ready(function() { 
 
-			if (x >= 736) {
+			if (x >= 736) {	
 
 		        var y,
 		            mbdown  = $('#mbdown'),
@@ -542,10 +545,11 @@
 
 		        $('.main-discover-slick').slick({
 		        	dots: true,
+		        	arrows: true,
 		        	infinite: true,
 		        	speed: 500,
 		        	autoplay: true,
-		        	autoplaySpeed: 7000,
+		        	autoplaySpeed: 8000,
 		        	swipeToSlide: false,
 		        	prevArrow:"<img class='a-left control-c prev slick-prev' src='images/arrow-back-w-01.svg'>",
     				nextArrow:"<img class='a-right control-c next slick-next' src='images/arrow-back-w-02.svg'>",
@@ -609,6 +613,18 @@
 		    } else {
 
 		        var val = {};
+
+		        $('.main-discover-slick').slick({
+		        	dots: true,
+		        	arrows: false,
+		        	infinite: true,
+		        	speed: 500,
+		        	autoplay: true,
+		        	autoplaySpeed: 8000,
+		        	swipeToSlide: false,
+		      //   	prevArrow:"<img class='a-left control-c prev slick-prev' src='images/arrow-back-w-01.svg'>",
+    				// nextArrow:"<img class='a-right control-c next slick-next' src='images/arrow-back-w-02.svg'>",
+		        });
 
 		        $("#searchTextField").focus(function() {
 		            if ($(this).val()) {

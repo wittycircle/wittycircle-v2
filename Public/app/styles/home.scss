@@ -109,6 +109,7 @@ overflow: hidden;
 	-o-filter: brightness(0.35);
 	-ms-filter: brightness(0.35);
 	filter: brightness(0.35);
+	background-image: ulr('/images/poster/poster_home_signup.jpg');
 
 
 	video {
@@ -117,6 +118,7 @@ overflow: hidden;
 		background-position: center center;
 		background-size: cover;
 		object-fit: cover;
+		background-image: url('/images/poster/poster_home_signup.jpg');
 	}
 }
 
@@ -987,15 +989,15 @@ a:hover {
 
 @media only screen and (max-width: 736px) {
 
-	.main-discover-slick {
+/*	.main-discover-slick {
 		display: none;
-	}
+	}*/
 
 	.slick-dots {
 		bottom: -50px;
 		li {
 			button:before {
-				font-size: 20px;
+				font-size: 10px;
 			}
 		}
 	}
@@ -1009,7 +1011,7 @@ a:hover {
 	#main-discover {
 		width: 80%;
 		margin: 0 10%;
-		top: 130px;
+		top: 120px;
 		-webkit-transform: translateZ(0);
 		-moz-transform: translateZ(0);
 		-ms-transform: translateZ(0);
@@ -1017,7 +1019,11 @@ a:hover {
 		transform: translateZ(0);
 
 		.main-title-market {
-			display: none;
+			margin-bottom: 30px;
+
+			h1 {
+				font-size: 21px;
+			}
 		}
 
 		.main-button-discover {
@@ -1326,6 +1332,56 @@ a:hover {
 			}
 		}
 
+		.main-title-text {
+			display: block;
+			margin-top: 25px;
+			margin-bottom: 60px;
+
+			h4 {
+				font-size: 18px;
+				color: white;
+				line-height: 22px;
+			}
+		}
+
+		.main-title-text-meet-people {
+
+			h4 {
+				display: none;
+/*				font-size: 18px;
+				width: 100%;
+				text-align: center;
+				color: white;*/
+			}
+
+			a {
+				display: block;
+				width: auto;
+				text-align: center;
+				margin-right: 0;
+
+				img {
+					width: auto;
+					margin: 0 auto;
+					height: 90px;
+					margin-bottom: 40px;
+				}
+			}
+		}
+
+		.main-button-discover {
+			margin: 0;
+
+			.button-start-project {
+				margin-bottom: 0;
+
+				button {
+					font-size: 16px;
+				}
+			}
+		}
+
+
 		.main-title-text-mobile {
 			width: 310px;
 
@@ -1343,16 +1399,60 @@ a:hover {
 @media only screen and (max-width: 375px) {
 
 	#main-discover {
-		top: 130px;
+		top: 120px;
+		width: 90%;
+		margin: 0 auto;
 
-		.main-title-market-mobile {
-			h1 {
-				font-size: 35px;
+		.main-title-text {
+			display: block;
+			margin-top: 25px;
+			margin-bottom: 60px;
+
+			h4 {
+				font-size: 18px;
+				color: white;
+				line-height: 22px;
 			}
 		}
-		.main-button-discover {
-			margin: 15px 20px;
+
+		.main-title-text-meet-people {
+
+			h4 {
+				display: none;
+/*				font-size: 18px;
+				width: 100%;
+				text-align: center;
+				color: white;*/
+			}
+
+			a {
+				display: block;
+				width: auto;
+				text-align: center;
+				margin-right: 0;
+
+				img {
+					width: auto;
+					margin: 0 auto;
+					height: 90px;
+					margin-bottom: 40px;
+				}
+			}
 		}
+
+		.main-button-discover {
+			margin: 0;
+
+			.button-start-project {
+				margin-bottom: 0;
+
+				button {
+					font-size: 16px;
+				}
+			}
+		}
+
+
 		.main-title-text-mobile {
 			display: none;
 			width: 305px;
@@ -1367,19 +1467,70 @@ a:hover {
 @media only screen and (max-width: 320px) {
 
 	#main-discover {
-		top: 130px;
-		.main-title-market-mobile {
+		top: 120px;
+		width: 90%;
+		margin: 0 auto;
+
+		.main-title-market {
 			margin-bottom: 40px;
 
 			h1 {
-				font-family: 'FreigMed';
-				font-size: 36px;
+				font-family: 'FreigSem';
+				font-size: 21px;
 			}
 		}
 
-		.main-title-text-mobile {
-			display: none;
+		.main-title-text {
+			display: block;
+			margin-top: 30px;
+			margin-bottom: 60px;
+
+			h4 {
+				font-size: 16px;
+				color: white;
+			}
 		}
+
+		.main-title-text-meet-people {
+
+			h4 {
+				display: none;
+/*				font-size: 16px;
+				width: 100%;
+				text-align: center;
+				color: white;*/
+			}
+
+			a {
+				display: block;
+				width: auto;
+				text-align: center;
+				margin-right: 0;
+
+				img {
+					width: auto;
+					margin: 0 auto;
+					height: 85px;
+					margin-bottom: 40px;
+				}
+			}
+		}
+
+		.main-button-discover {
+			margin: 0;
+
+			.button-start-project {
+				margin-bottom: 0;
+
+				button {
+					font-size: 16px;
+				}
+			}
+		}
+
+/*		.main-title-text-mobile {
+			display: none;
+		}*/
 		.main-info {
 			margin-top: 50px;
 		}

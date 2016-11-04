@@ -2,8 +2,34 @@
 #learn-body-page {
   height: auto;
   width: 100%; }
+  #learn-body-page .home-video-bg {
+    height: 250px;
+    /*		background-image: url('images/backgrounds/background-learn.jpg');
+    */ }
+    #learn-body-page .home-video-bg video {
+      position: relative;
+      top: -100px;
+      background-image: url("images/backgrounds/background-learn.jpg"); }
+  #learn-body-page .learn-header-title-video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 500px;
+    text-align: center;
+    margin: 0 auto;
+    top: 80px;
+    z-index: 100000000; }
+    #learn-body-page .learn-header-title-video h1 {
+      font-family: 'FreigSem';
+      color: white;
+      font-size: 42px; }
+    #learn-body-page .learn-header-title-video h3 {
+      font-family: 'FreigMed';
+      color: white;
+      font-size: 21px;
+      line-height: 28px; }
   #learn-body-page .learn-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/backgrounds/background-footer1-desktop.jpg");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/backgrounds/background-learn-mobile.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -97,7 +123,6 @@
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb a {
           font-family: 'FreigBook';
           font-size: 14px;
-          margin-right: 15px;
           color: black; }
         #learn-body-page .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb span {
           font-family: 'FreigBook';
@@ -513,5 +538,164 @@
         text-align: right; }
       #learn-body-page #learn-new-page .learn-new-field .learn-new-field-button-remove {
         text-align: center; }
+
+@media only screen and (min-width: 1025px) {
+  #learn-body-page .learn-header-title-video {
+    display: block; }
+  #learn-body-page .learn-header {
+    display: none; } }
+/***** LEARN MOBILE *****/
+@media only screen and (max-width: 736px) {
+  #learn-body-page .learn-header-title-video {
+    display: none; }
+  #learn-body-page .learn-header {
+    display: block; }
+    #learn-body-page .learn-header .learn-header-title {
+      padding-top: 100px; }
+      #learn-body-page .learn-header .learn-header-title h1 {
+        font-size: 28px;
+        margin-bottom: 10px; }
+    #learn-body-page .learn-header .learn-header-text h3 {
+      line-height: 22px;
+      font-size: 21px; }
+  #learn-body-page .learn-corp {
+    width: 100%; }
+    #learn-body-page .learn-corp .learn-corp-article {
+      display: block;
+      width: 100%;
+      padding: 0 25px; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-title .lcatl a {
+        display: none; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheada {
+        display: block;
+        margin-bottom: 10px; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheadt {
+        text-align: left;
+        margin-bottom: 10px;
+        float: none;
+        display: block; }
+        #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt {
+          float: none;
+          /*ul {
+          	margin-right: 0;
+          }*/ }
+          #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt span {
+            float: right; }
+        #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb {
+          display: block;
+          text-align: right; }
+          #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb a {
+            margin: 0; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaadoc h2 {
+        font-size: 21px; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaadoc p {
+        font-size: 16px; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaadoc .lcaadocimg {
+        height: auto; }
+      #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaadoc .lcaadoctext {
+        height: 400px; }
+        #learn-body-page .learn-corp .learn-corp-article .learn-corp-article-article .lcaadoc .lcaadoctext p {
+          word-break: break-word; }
+    #learn-body-page .learn-corp .learn-corp-aside {
+      display: none; }
+  #learn-body-page #learn-article-page {
+    display: block;
+    width: 100%;
+    padding: 0 25px; }
+    #learn-body-page #learn-article-page .learn-aside {
+      display: none; }
+    #learn-body-page #learn-article-page .learn-article {
+      display: block;
+      width: 100%; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-header button {
+        display: none; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-header h2 {
+        font-size: 21px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-header img {
+        height: 12px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-header ul {
+        margin-right: 0; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-header ul li {
+          margin: 0 2px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead {
+        margin-bottom: 15px; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead .lcaaheada {
+          display: block;
+          margin-bottom: 15px; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead .lcaaheadt {
+          display: block;
+          text-align: left;
+          float: none; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt ul {
+            text-align: left;
+            width: auto; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtt span {
+            float: right; }
+          #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaahead .lcaaheadt .lcaaheadtb {
+            text-align: right; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaadoc h2 {
+        font-size: 21px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaadoc .lcaadocimg {
+        height: auto; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaadoc .lcaadoctext {
+        height: 400px; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaadoc .lcaadoctext p {
+          word-break: break-word; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-article .lcaadoc p {
+        font-size: 17px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event img {
+        display: block;
+        width: 80px;
+        margin: 0 auto;
+        margin-bottom: 20px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event h3 {
+        width: 100%;
+        font-size: 21px;
+        margin-bottom: 10px;
+        text-align: center; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .learnPostProject {
+        height: 45px;
+        border: none;
+        border-radius: 3px;
+        background-color: rgba(255, 52, 52, 0.8);
+        color: white;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        padding: 5px 15px 5px 15px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaefa, #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaetw {
+        border-radius: 4px;
+        color: white; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaefa i, #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event .lcaetw i {
+          color: white; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer h4 {
+        font-size: 16px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer h2 {
+        font-size: 21px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer img {
+        height: 12px; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafcimg {
+        display: none; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafta {
+        display: block; }
+        #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafta .laftacss {
+          width: 100%; }
+      #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-article-footer-textarea .lafbutton button {
+        height: 45px;
+        border: none;
+        border-radius: 3px;
+        background-color: rgba(255, 52, 52, 0.8);
+        color: white;
+        font-family: 'FreigSem';
+        font-size: 16px;
+        padding: 5px 15px 5px 15px; } }
+@media only screen and (max-width: 320px) {
+  #learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event h3 {
+    font-size: 17px; }
+
+  #learn-body-page .learn-corp .learn-corp-article {
+    padding: 0 15px; }
+
+  #learn-body-page #learn-article-page {
+    padding: 0 15px; } }
 
 /*# sourceMappingURL=learn.css.map */

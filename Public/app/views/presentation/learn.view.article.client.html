@@ -1,4 +1,15 @@
 <section id="learn-body-page">
+
+<div class="learn-header-title-video">
+	<h1>Learn</h1>
+	<h3>Ressources, stories, interviews & curated content from our community</h3>
+</div>
+<div id="hvbg" class="home-video-bg">
+	<video poster="/images/backgrounds/background-learn.jpg" loop muted autoplay>
+		<source src="/images/videos/Learn.mp4" type="video/mp4" />
+	</video>
+</div>
+
 <div class="learn-header">
 	<div class="learn-header-title">
 		<h1>Learn</h1>
@@ -70,7 +81,7 @@
 				<h3>Want to talk to Nish? Post your project<br /> and spread the word!</h3>
 
 				<div ng-if="!shareProject">
-					<button ng-click="postProject()">Post a project</button>
+					<button class="learnPostProject" ng-click="postProject()">Post a project</button>
 				</div>
 
 				<div ng-if="shareProject">

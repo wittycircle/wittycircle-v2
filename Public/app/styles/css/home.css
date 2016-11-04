@@ -84,13 +84,15 @@ overflow: hidden;
   -moz-filter: brightness(0.35);
   -o-filter: brightness(0.35);
   -ms-filter: brightness(0.35);
-  filter: brightness(0.35); }
+  filter: brightness(0.35);
+  background-image: ulr("/images/poster/poster_home_signup.jpg"); }
   .home-video-bg video {
     width: 100%;
     min-height: 100%;
     background-position: center center;
     background-size: cover;
-    object-fit: cover; }
+    object-fit: cover;
+    background-image: url("/images/poster/poster_home_signup.jpg"); }
 
 .home-image-bg {
   display: none; }
@@ -711,13 +713,13 @@ overflow: hidden;
   #main-body-content .main-body-container .main-body-contents .main-body-cardList .main-body-card {
     top: -70px; } }
 @media only screen and (max-width: 736px) {
-  .main-discover-slick {
-    display: none; }
-
+  /*	.main-discover-slick {
+  		display: none;
+  	}*/
   .slick-dots {
     bottom: -50px; }
     .slick-dots li button:before {
-      font-size: 20px; }
+      font-size: 10px; }
 
   /* Main video background to Main image background */
   .home-video-bg {
@@ -727,14 +729,16 @@ overflow: hidden;
   #main-discover {
     width: 80%;
     margin: 0 10%;
-    top: 130px;
+    top: 120px;
     -webkit-transform: translateZ(0);
     -moz-transform: translateZ(0);
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
     transform: translateZ(0); }
     #main-discover .main-title-market {
-      display: none; }
+      margin-bottom: 30px; }
+      #main-discover .main-title-market h1 {
+        font-size: 21px; }
     #main-discover .main-button-discover {
       padding: 0;
       text-align: center; }
@@ -929,6 +933,36 @@ overflow: hidden;
     #main-discover .main-title-market-mobile h1 {
       font-family: 'FreigSem';
       font-size: 35px; }
+    #main-discover .main-title-text {
+      display: block;
+      margin-top: 25px;
+      margin-bottom: 60px; }
+      #main-discover .main-title-text h4 {
+        font-size: 18px;
+        color: white;
+        line-height: 22px; }
+    #main-discover .main-title-text-meet-people h4 {
+      display: none;
+      /*				font-size: 18px;
+      				width: 100%;
+      				text-align: center;
+      				color: white;*/ }
+    #main-discover .main-title-text-meet-people a {
+      display: block;
+      width: auto;
+      text-align: center;
+      margin-right: 0; }
+      #main-discover .main-title-text-meet-people a img {
+        width: auto;
+        margin: 0 auto;
+        height: 90px;
+        margin-bottom: 40px; }
+    #main-discover .main-button-discover {
+      margin: 0; }
+      #main-discover .main-button-discover .button-start-project {
+        margin-bottom: 0; }
+        #main-discover .main-button-discover .button-start-project button {
+          font-size: 16px; }
     #main-discover .main-title-text-mobile {
       width: 310px; }
       #main-discover .main-title-text-mobile h4 {
@@ -939,11 +973,39 @@ overflow: hidden;
         color: #fafafa; } }
 @media only screen and (max-width: 375px) {
   #main-discover {
-    top: 130px; }
-    #main-discover .main-title-market-mobile h1 {
-      font-size: 35px; }
+    top: 120px;
+    width: 90%;
+    margin: 0 auto; }
+    #main-discover .main-title-text {
+      display: block;
+      margin-top: 25px;
+      margin-bottom: 60px; }
+      #main-discover .main-title-text h4 {
+        font-size: 18px;
+        color: white;
+        line-height: 22px; }
+    #main-discover .main-title-text-meet-people h4 {
+      display: none;
+      /*				font-size: 18px;
+      				width: 100%;
+      				text-align: center;
+      				color: white;*/ }
+    #main-discover .main-title-text-meet-people a {
+      display: block;
+      width: auto;
+      text-align: center;
+      margin-right: 0; }
+      #main-discover .main-title-text-meet-people a img {
+        width: auto;
+        margin: 0 auto;
+        height: 90px;
+        margin-bottom: 40px; }
     #main-discover .main-button-discover {
-      margin: 15px 20px; }
+      margin: 0; }
+      #main-discover .main-button-discover .button-start-project {
+        margin-bottom: 0; }
+        #main-discover .main-button-discover .button-start-project button {
+          font-size: 16px; }
     #main-discover .main-title-text-mobile {
       display: none;
       width: 305px;
@@ -953,14 +1015,46 @@ overflow: hidden;
 /* Width 320px iPhone4 */
 @media only screen and (max-width: 320px) {
   #main-discover {
-    top: 130px; }
-    #main-discover .main-title-market-mobile {
+    top: 120px;
+    width: 90%;
+    margin: 0 auto;
+    /*		.main-title-text-mobile {
+    			display: none;
+    		}*/ }
+    #main-discover .main-title-market {
       margin-bottom: 40px; }
-      #main-discover .main-title-market-mobile h1 {
-        font-family: 'FreigMed';
-        font-size: 36px; }
-    #main-discover .main-title-text-mobile {
-      display: none; }
+      #main-discover .main-title-market h1 {
+        font-family: 'FreigSem';
+        font-size: 21px; }
+    #main-discover .main-title-text {
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 60px; }
+      #main-discover .main-title-text h4 {
+        font-size: 16px;
+        color: white; }
+    #main-discover .main-title-text-meet-people h4 {
+      display: none;
+      /*				font-size: 16px;
+      				width: 100%;
+      				text-align: center;
+      				color: white;*/ }
+    #main-discover .main-title-text-meet-people a {
+      display: block;
+      width: auto;
+      text-align: center;
+      margin-right: 0; }
+      #main-discover .main-title-text-meet-people a img {
+        width: auto;
+        margin: 0 auto;
+        height: 85px;
+        margin-bottom: 40px; }
+    #main-discover .main-button-discover {
+      margin: 0; }
+      #main-discover .main-button-discover .button-start-project {
+        margin-bottom: 0; }
+        #main-discover .main-button-discover .button-start-project button {
+          font-size: 16px; }
     #main-discover .main-info {
       margin-top: 50px; }
 

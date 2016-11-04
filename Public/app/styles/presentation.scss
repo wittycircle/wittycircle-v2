@@ -231,6 +231,14 @@
                 background-repeat: no-repeat;
                 background-position: center center;
                 background-size: cover;
+
+        .home-video-bg {
+        	background-image: url('/images/poster/poster_discover.jpg');
+
+        	video {
+        		background-image: url('/images/poster/poster_discover.jpg');
+        	}
+        }
 	}	
 }
 .discover-component {
@@ -582,6 +590,14 @@
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
+
+		.home-video-bg {
+			background-image: url('images/poster/poster_meet.jpg');
+
+			video {
+				background-image: url('images/poster/poster_meet.jpg');
+			}
+		}
 	}
 }
 

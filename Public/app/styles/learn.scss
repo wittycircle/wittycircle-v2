@@ -4,12 +4,47 @@
 	height: auto;
 	width: 100%;
 
+	.home-video-bg {
+		height: 250px;
+/*		background-image: url('images/backgrounds/background-learn.jpg');
+*/
+		video {
+			position: relative;
+			top: -100px;
+			background-image: url('images/backgrounds/background-learn.jpg');
+		}
+	}
+
+	.learn-header-title-video {
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 500px;
+		text-align: center;
+		margin: 0 auto;
+		top: 80px;
+
+		z-index: 100000000;
+		h1 {
+			font-family: 'FreigSem';
+			color: white;
+			font-size: 42px;
+		}
+
+		h3 {
+			font-family: 'FreigMed';
+			color: white;
+			font-size: 21px;
+			line-height: 28px;
+		}
+	}
+
 	.learn-header {
 		background: linear-gradient(
 				      rgba(0, 0, 0, 0.5), 
 				      rgba(0, 0, 0, 0.5)
 				    ),
-					url('/images/backgrounds/background-footer1-desktop.jpg');
+					url('/images/backgrounds/background-learn-mobile.jpg');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -152,7 +187,6 @@
 					a {
 						font-family: 'FreigBook';
 						font-size: 14px;
-						margin-right: 15px;
 						color: black;
 					}
 					span {
@@ -821,5 +855,321 @@
 				text-align: center;
 			}
 		}
+	}
+}
+@media only screen and (min-width: 1025px) {
+	#learn-body-page {
+
+		.learn-header-title-video {
+			display: block;
+		}
+
+		.learn-header {
+			display: none;
+		}
+	}
+}
+
+
+/***** LEARN MOBILE *****/
+
+@media only screen and (max-width: 736px) {
+
+	#learn-body-page {
+
+		.learn-header-title-video {
+			display: none;
+		}
+
+		.learn-header {
+			display: block;
+			.learn-header-title {
+				padding-top: 100px;
+
+				h1 {
+					font-size: 28px;
+					margin-bottom: 10px;
+				}
+			}
+
+			.learn-header-text {
+				h3 {
+					line-height: 22px;
+					font-size: 21px;
+				}
+			}
+		}
+
+		.learn-corp {
+			width: 100%;
+			.learn-corp-article {
+				display: block;
+				width: 100%;
+				padding: 0 25px;
+
+				.learn-corp-article-title {
+					.lcatl {
+						a {
+							display: none;	
+						}
+					}
+				}
+
+				.learn-corp-article-article {
+					.lcaahead {
+						.lcaaheada {
+							display: block;
+							margin-bottom: 10px;
+						}
+
+						.lcaaheadt {
+							text-align: left;
+							margin-bottom: 10px;
+							float: none;
+							display: block;
+							
+							.lcaaheadtt {
+								float: none;
+
+								/*ul {
+									margin-right: 0;
+								}*/
+
+								span {
+									float: right;
+								}
+							}
+
+							.lcaaheadtb {
+								display: block;
+								text-align: right;
+
+								a {
+									margin: 0;
+								}
+							}
+						}
+					}
+
+					.lcaadoc { 
+						h2 {
+							font-size: 21px;
+						}
+
+						p {
+							font-size: 16px;
+						}
+
+						.lcaadocimg {
+							height: auto;
+						}
+
+						.lcaadoctext {
+							height: 400px;
+
+							p {
+								word-break: break-word;
+							}
+						}
+					}
+				}
+			}
+
+			.learn-corp-aside {
+				display: none;
+			}
+		}
+
+		#learn-article-page {
+			display: block;
+			width: 100%;
+			padding: 0 25px;
+
+			.learn-aside {
+				display: none;
+			}
+
+			.learn-article {
+				display: block;
+				width: 100%;
+
+				.learn-article-header {
+					button {
+						display: none;
+					}
+
+					h2 {
+						font-size: 21px;
+					}
+
+					img {
+						height: 12px;
+					}
+
+					ul {
+						margin-right: 0;
+
+						li {
+							margin: 0 2px;
+						}
+					}
+				}
+
+				.learn-article-text {
+					.learn-corp-article-article {
+						.lcaahead {
+							margin-bottom: 15px;
+
+							.lcaaheada {
+								display: block;
+								margin-bottom: 15px;
+							}
+
+							.lcaaheadt {
+								display: block;
+								text-align: left;
+								float: none;
+
+								.lcaaheadtt {
+									ul {
+										text-align: left;
+										width: auto;
+									}
+
+									span {
+										float: right;
+									}
+								}
+
+								.lcaaheadtb {
+									text-align: right;
+								}
+							}
+						}
+
+						.lcaadoc { 
+							h2 {
+								font-size: 21px;
+							}
+
+							.lcaadocimg {
+								height: auto;
+							}
+
+							.lcaadoctext {
+								height: 400px;
+
+								p {
+									word-break: break-word;
+								}
+							}
+
+							p {
+								font-size: 17px;
+							}
+						}
+					}
+
+					.learn-corp-article-event {
+						img {
+							display: block;
+							width: 80px;
+							margin: 0 auto;
+							margin-bottom: 20px;
+						}
+
+						h3 {
+							width: 100%;
+							font-size: 21px;
+							margin-bottom: 10px;
+							text-align: center;
+						}
+
+						.learnPostProject {
+							height: 45px;
+							border: none;
+							border-radius: 3px;
+							background-color: rgba(255, 52, 52, 0.8);
+							color: white;
+							font-family: 'FreigSem';
+							font-size: 16px;
+							padding: 5px 15px 5px 15px;
+						}
+
+						.lcaefa, .lcaetw {
+							border-radius: 4px;
+							color: white;
+
+							i {
+								color: white;
+							}
+						}
+					}
+
+					.learn-article-footer {
+						h4 {
+							font-size: 16px;
+						}
+
+						h2 {
+							font-size: 21px;
+						}
+
+						img {
+							height: 12px;
+						}
+					}
+
+					.learn-article-footer-textarea {
+						.lafcimg {
+							display: none;
+						}
+						.lafta {
+							display: block;
+
+							.laftacss {
+								width: 100%;
+							}
+						}
+
+						.lafbutton {
+							button {
+								height: 45px;
+								border: none;
+								border-radius: 3px;
+								background-color: rgba(255, 52, 52, 0.8);
+								color: white;
+								font-family: 'FreigSem';
+								font-size: 16px;
+								padding: 5px 15px 5px 15px;
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+}
+
+@media only screen and (max-width: 414px) {
+
+}
+
+@media only screen and (max-width: 375px) {
+
+}
+
+@media only screen and (max-width: 320px) {
+	#learn-body-page #learn-article-page .learn-article .learn-article-text .learn-corp-article-event h3 {
+		font-size: 17px;
+	}
+
+	#learn-body-page .learn-corp .learn-corp-article {
+		padding: 0 15px;
+	}
+
+	#learn-body-page #learn-article-page {
+		padding: 0 15px;
 	}
 }

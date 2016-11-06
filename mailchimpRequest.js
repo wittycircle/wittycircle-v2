@@ -3,7 +3,7 @@ var request = require('request');
 exports.addMember = function(data, callback) {
     if (data) {
 	request({
-            url: 'https://us12.api.mailchimp.com/3.0/lists/de359190ae/members',
+            url: 'https://us12.api.mailchimp.com/3.0/lists/2effdf3243/members',
             json: data,
             method: 'POST',
             headers: {

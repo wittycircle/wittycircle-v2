@@ -82,7 +82,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/admin/mailpanel/profiles', ensureAdmin, function(req, res) {
-		pool.query('SELECT profile_id, email FROM users ORDER BY id ASC', function(err, result) {
+		pool.query('SELECT profile_id, email FROM users WHERE fake = 0 ORDER BY id ASC', function(err, result) {
 			if (err) throw err;
 			else {
 				function recursive(index) {

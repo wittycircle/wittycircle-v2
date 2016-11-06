@@ -227,8 +227,32 @@ function registeAllRank() {
 								});
 						});
 					});
-				} else
-					return ;
+				} else {
+					pool.query('DELETE FROM rank_of_the_day', 
+						function(err, done) {
+							if (err) throw err;
+							else {
+								pool.query('SELECT user_id, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE()) ) AS rank FROM profile_ranking WHERE points >= 1000 && DATE(creation_date) = CURDATE() ORDER BY rank',
+									function(err, result) {
+										if (err) throw err;
+										else {
+											function recursive(index) {
+												if (result[index]) {
+													pool.query('INSERT INTO rank_of_the_day SET ?', result[index],
+														function(err, result2) {
+															if (err) throw err;
+															else
+																recursive(index + 1);
+														})
+												} else 
+													return ;
+											};
+											recursive(0);
+										}
+									});
+							}
+						});
+				}
 			};
 			recursive(0);
 		});

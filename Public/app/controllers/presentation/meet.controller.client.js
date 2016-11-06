@@ -7,8 +7,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	var ww = $(window).width();
 
 	/* global var */
-	$scope.limit = 32;
-	$scope.limitc = 32;
+	$scope.limit = 20;
+	$scope.limitc = 20;
 	meet.mmobile = {};
 	meet.mHelp = "Anything";
 	meet.count = -1;
@@ -41,7 +41,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -93,7 +93,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	};
 
 	function initializeProfile() {
-		Users.getCardProfiles(function(result) {
+		RetrieveData.getData('/user/card/profiles', 'GET').then(function(result) {
 			loaderDisplay(false);
 			meet.cardProfiles = result.data;
 			if ($rootScope.globals.currentUser) {
@@ -393,8 +393,8 @@ function displaySkProfiles(value) {
 			if (!isNaN(meet.cardProfiles[i][n].length))
 				count = count + meet.cardProfiles[i][n].length;
 			if (count > value) {
-				if (value === 32)
-					$scope.limitSk1 = 32;
+				if (value === 20)
+					$scope.limitSk1 = 20;
 				else
 					$scope.limitSk1 = count;
 				$scope.limitSkp = i;
@@ -442,10 +442,10 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					if (res.success) {
 						loaderDisplay(false);
 						$scope.searchSk = true;
-						$scope.limit4 = 24;
+						$scope.limit4 = 20;
 						meet.cardProfiles = res.data;
 
-						displaySkProfiles(32);
+						displaySkProfiles(20);
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
 						// 		meet.followed = res;
@@ -460,10 +460,10 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
 					if (res.success) {
 						loaderDisplay(false);
 						$scope.searchSk = true;
-						$scope.limit4 = 24;
+						$scope.limit4 = 20;
 						meet.cardProfiles = [res.data];
 
-						displaySkProfiles(32);
+						displaySkProfiles(20);
 						// if ($rootScope.globals.currentUser) {
 						// 	Profile.getFollowedUser(res, function(res) {
 						// 		meet.followed = res;
@@ -481,14 +481,14 @@ $scope.$watchGroup(['meet.mHelp', 'meet.skillSearch', 'searchML'], function (val
                 	loaderDisplay(false);
                 	$scope.searchAl = true;
                 	for (var i = 0; i < res.data.length; i++) {
-                		if (res.data[i].length > 32) {
+                		if (res.data[i].length > 20) {
                 			$scope.limitAl = i;
-                			$scope.limitAl1 = 32;
+                			$scope.limitAl1 = 20;
                 			break ;
                 		} else {
-                			if (res.data[i + 1].length + res.data[i].length > 32) {
+                			if (res.data[i + 1].length + res.data[i].length > 20) {
                 				$scope.limitAl = i + 1;
-                				$scope.limitAl1 = res.data[i].length + 32;
+                				$scope.limitAl1 = res.data[i].length + 20;
                 				break ;
                 			}
                 		}
@@ -552,7 +552,7 @@ $(document).ready(function() {
 	            } else {
 	            	$scope.limitSk1 += 12;
 	            	var count = 0;
-	            	if ($scope.limitSk1 > 32)
+	            	if ($scope.limitSk1 > 20)
 	            		displaySkProfiles($scope.limitSk1);
 	            }
       //       	if (meet.cardProfiles.length > 1) {
@@ -562,7 +562,7 @@ $(document).ready(function() {
 	     //        	} else {
 	     //        		if (meet.cardProfiles[$scope.limit2 - 1][$scope.limit3 - 1].length < $scope.limit4) {
 		    //         		$scope.limit3 += 1;
-		    //  				$timeout(function() {$scope.limit4 = 24}, 1000);
+		    //  				$timeout(function() {$scope.limit4 = 20}, 1000);
 		    //         	} else
 		    //         		$scope.limit4 += 12;
 	     //        	}
@@ -570,11 +570,11 @@ $(document).ready(function() {
 	     //        		if (meet.cardProfiles[0][$scope.limit3 - 1]){
 						// if	(meet.cardProfiles[0][$scope.limit3 - 1].length < $scope.limit4) {
 		    //         		$scope.limit3 = $scope.limit3 + 1;
-		    //  				$timeout(function() {$scope.limit4 = 24}, 1000);
+		    //  				$timeout(function() {$scope.limit4 = 20}, 1000);
 		    //  			} else
 	     //        			$scope.limit4 += 12;
 	     //        		} else
-	     //        			$scope.limit4 = 24;
+	     //        			$scope.limit4 = 20;
 	     //        }
         	}
         }
@@ -588,7 +588,7 @@ $scope.$watch('limit', function(value) {
 		} else if (value > meet.cardProfiles[0].length) {
  			$scope.limit1 = 2;
  			$timeout(function() {
- 				$scope.limit1 = 24;
+ 				$scope.limit1 = 20;
  			}, 1000)
     	}// else if (meet.cardProfiles.length === 3) {
     }

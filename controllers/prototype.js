@@ -21,27 +21,29 @@ SearchUP.prototype  = {
 	var firstPart = [], 
             secondPart = [],
             thirdPart = [],
-            lastPart = []
+            lastPart = [],
+            data    = this.data,
+            sLength    = data.length;
 
         var x;
-        for(var i = 0; i < this.data.length; i++) {
-             x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(this.location);
-             if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category && x >= 0)
-                 firstPart.unshift(this.data[i]);
-             else if (this.data[i]["status"] === this.status && x >= 0)
-                 firstPart.push(this.data[i]);
-             else if (this.data[i]["category_name"] === this.category && x >= 0)
-                 secondPart.unshift(this.data[i]);
-             else if (this.data[i]["status"] === this.status && this.data[i]["category_name"] === this.category)
-                 secondPart.push(this.data[i]);
+        for(var i = 0; i < sLength; i++) {
+             x = data[i]["location_city"] && data[i]["location_city"].toLowerCase().indexOf(this.location);
+             if (data[i]["status"] === this.status && data[i]["category_name"] === this.category && x >= 0)
+                 firstPart.unshift(data[i]);
+             else if (data[i]["status"] === this.status && x >= 0)
+                 firstPart.push(data[i]);
+             else if (data[i]["category_name"] === this.category && x >= 0)
+                 secondPart.unshift(data[i]);
+             else if (data[i]["status"] === this.status && data[i]["category_name"] === this.category)
+                 secondPart.push(data[i]);
              else if (x >= 0)
-                 thirdPart.unshift(this.data[i]);
-             else if (this.data[i]["status"] === this.status)
-                 thirdPart.push(this.data[i]);
-             else if (this.data[i]["category_name"] === this.category)
-                 lastPart.unshift(this.data[i]);
+                 thirdPart.unshift(data[i]);
+             else if (data[i]["status"] === this.status)
+                 thirdPart.push(data[i]);
+             else if (data[i]["category_name"] === this.category)
+                 lastPart.unshift(data[i]);
              else
-                 lastPart.push(this.data[i]);
+                 lastPart.push(data[i]);
          };
          firstPart = firstPart.concat(secondPart, thirdPart, lastPart);
          return firstPart;
@@ -54,27 +56,28 @@ SearchUP.prototype  = {
             thirdPart   = [],
             fourthPart  = [],
             fifthPart   = [],
-            lastPart    = []
+            lastPart    = [],
+            data        = this.data;
         
         if ((this.about === null || this.about === "Anything") && this.location !== null) {
             var x,
                 y,
                 ab,
-                mLength = this.data.length,
+                mLength = data.length,
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-		if (this.data[i].profiles) {
-                    x = this.data[i].profiles["location_city"] && this.data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
-                    y = this.data[i].profiles["location_country"] && this.data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);                
+		if (data[i].profiles) {
+                    x = data[i].profiles["location_city"] && data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
+                    y = data[i].profiles["location_country"] && data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);                
                     if (x >= 0 && x !== null)
-			firstPart.push(this.data[i])
+			firstPart.push(data[i])
                     else if (y >= 0 && y !== null)
-			secondPart.push(this.data[i])
+			secondPart.push(data[i])
                     else
-			thirdPart.push(this.data[i]);
+			thirdPart.push(data[i]);
 		}
             };
             return [firstPart, secondPart, thirdPart];
@@ -83,44 +86,44 @@ SearchUP.prototype  = {
             var x,
                 y,
                 ab,
-                mLength = this.data.length,
+                mLength = data.length,
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-                ab = this.data[i].profiles["about"] && this.data[i].profiles["about"].toLowerCase().indexOf(mAbout);
+                ab = data[i].profiles["about"] && data[i].profiles["about"].toLowerCase().indexOf(mAbout);
                 if (ab >= 0 && ab !== null)
-                    firstPart.push(this.data[i]);
+                    firstPart.push(data[i]);
                 else
-                    secondPart.push(this.data[i]);
+                    secondPart.push(data[i]);
             };
             return [firstPart, secondPart];
         } else {
             var x,
                 y,
                 ab,
-                mLength = this.data.length,
+                mLength = data.length,
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-                x = this.data[i].profiles["location_city"] && this.data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
-                y = this.data[i].profiles["location_country"] && this.data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);
-                ab = this.data[i].profiles["about"] && this.data[i].profiles["about"].toLowerCase().indexOf(mAbout);
+                x = data[i].profiles["location_city"] && data[i].profiles["location_city"].toLowerCase().indexOf(mLocation);
+                y = data[i].profiles["location_country"] && data[i].profiles["location_country"].toLowerCase().indexOf(mCountry);
+                ab = data[i].profiles["about"] && data[i].profiles["about"].toLowerCase().indexOf(mAbout);
                 if (ab >= 0 && ab !== null && x >= 0 && x !== null)
-                    firstPart.push(this.data[i]);
+                    firstPart.push(data[i]);
                 else if (ab >= 0 && ab !== null && y >= 0 && y !== null)
-                    secondPart.push(this.data[i]);
+                    secondPart.push(data[i]);
                 else if (ab >= 0 && ab !== null)
-                    thirdPart.push(this.data[i]);
+                    thirdPart.push(data[i]);
                 else if (x >= 0 && x !== null)
-                    fourthPart.push(this.data[i])
+                    fourthPart.push(data[i])
                 else if (y >= 0 && y !== null)
-                    fifthPart.push(this.data[i])
+                    fifthPart.push(data[i])
                 else
-                    lastPart.push(this.data[i]);
+                    lastPart.push(data[i]);
             };
             return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }
@@ -128,27 +131,28 @@ SearchUP.prototype  = {
     getAL: function() {
         var firstPart   = [],
             secondPart  = [],
-            thirdPart   = [];
+            thirdPart   = [],
+            data        = this.data;
 
         if ((this.about === null || this.about === "Anything") && this.location !== null) {
 
             var x,
                 y,
                 ab,
-                mLength = this.data.length;
+                mLength = data.length;
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-                x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(mLocation);
-                y = this.data[i]["location_country"] && this.data[i]["location_country"].toLowerCase().indexOf(mCountry);                
+                x = data[i]["location_city"] && data[i]["location_city"].toLowerCase().indexOf(mLocation);
+                y = data[i]["location_country"] && data[i]["location_country"].toLowerCase().indexOf(mCountry);                
                 if (x >= 0 && x !== null)
-                    firstPart.push(this.data[i])
+                    firstPart.push(data[i])
                 else if (y >= 0 && y !== null)
-                    secondPart.push(this.data[i])
+                    secondPart.push(data[i])
                 else
-                    thirdPart.push(this.data[i]);
+                    thirdPart.push(data[i]);
             };
             return [firstPart, secondPart, thirdPart];
 
@@ -156,17 +160,17 @@ SearchUP.prototype  = {
             var x,
                 y,
                 ab,
-                mLength = this.data.length,
+                mLength = data.length,
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country;
 
             for(var i = 0; i < mLength; i++) {
-                ab = this.data[i]["about"] && this.data[i]["about"].toLowerCase().indexOf(mAbout);
+                ab = data[i]["about"] && data[i]["about"].toLowerCase().indexOf(mAbout);
                 if (ab >= 0 && ab !== null)
-                    firstPart.push(this.data[i]);
+                    firstPart.push(data[i]);
                 else
-                    secondPart.push(this.data[i]);
+                    secondPart.push(data[i]);
             };
             return [firstPart, secondPart];
 
@@ -174,7 +178,7 @@ SearchUP.prototype  = {
             var x,
                 y,
                 ab,
-                mLength = this.data.length,
+                mLength = data.length,
                 mAbout = this.about,
                 mLocation = this.location,
                 mCountry = this.country,
@@ -183,21 +187,21 @@ SearchUP.prototype  = {
             lastPart    = [];
 
             for(var i = 0; i < mLength; i++) {
-                x = this.data[i]["location_city"] && this.data[i]["location_city"].toLowerCase().indexOf(mLocation);
-                y = this.data[i]["location_country"] && this.data[i]["location_country"].toLowerCase().indexOf(mCountry);
-                ab = this.data[i]["about"] && this.data[i]["about"].toLowerCase().indexOf(mAbout);
+                x = data[i]["location_city"] && data[i]["location_city"].toLowerCase().indexOf(mLocation);
+                y = data[i]["location_country"] && data[i]["location_country"].toLowerCase().indexOf(mCountry);
+                ab = data[i]["about"] && data[i]["about"].toLowerCase().indexOf(mAbout);
                 if (ab >= 0 && ab !== null && x >= 0 && x !== null)
-                    firstPart.push(this.data[i]);
+                    firstPart.push(data[i]);
                 else if (ab >= 0 && ab !== null && y >= 0 && y !== null)
-                    secondPart.push(this.data[i]);
+                    secondPart.push(data[i]);
                 else if (ab >= 0 && ab !== null)
-                    thirdPart.push(this.data[i]);
+                    thirdPart.push(data[i]);
                 else if (x >= 0 && x !== null)
-                    fourthPart.push(this.data[i])
+                    fourthPart.push(data[i])
                 else if (y >= 0 && y !== null)
-                    fifthPart.push(this.data[i])
+                    fifthPart.push(data[i])
                 else
-                    lastPart.push(this.data[i]);
+                    lastPart.push(data[i]);
             };
             return [firstPart, secondPart, thirdPart, fourthPart, fifthPart, lastPart];
         }

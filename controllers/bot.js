@@ -219,14 +219,14 @@ function getInformationAndSendMail(data, email, first_name, last_name, callback)
 };
 
 function sendProfileViewMail() {
-	pool.query('SELECT user_id, user_notif_id FROM notification_list WHERE type_notif = "view" AND n_read = 0  GROUP BY user_id',
+	pool.query('SELECT user_id, user_notif_id FROM notification_list WHERE type_notif = "view" AND n_read = 0 AND DATE(date_of_view) = CURDATE() - INTERVAL 1 DAY GROUP BY user_id',
 		function(err, result) {
 			if (err) throw err;
 			else {
 				if (result[0]) {
 					function recursive(index) {
 						if (result[index]) {						
-							pool.query('SELECT user_notif_id FROM notification_list WHERE user_id = ? AND type_notif = "view" AND n_read = 0', result[index].user_id,
+							pool.query('SELECT user_notif_id FROM notification_list WHERE user_id = ? AND type_notif = "view" AND n_read = 0 AND DATE(date_of_view) = CURDATE() - INTERVAL 1 DAY', result[index].user_id,
 								function(err, result2) {
 									if (err) throw err;
 									else {
@@ -254,17 +254,16 @@ function sendProfileViewMail() {
 			}
 		});
 };
-sendProfileViewMail();
 
-// var job = new CronJob({
-// 	cronTime: '00 00 18 * * 0-6',
-// 	onTick: function() {
-// 		sendProfileViewMail();
-// 	},
-// 	start: false,
-// 	timeZone: 'America/Los_Angeles'
-// });
-// job.start();
+var job = new CronJob({
+ 	cronTime: '00 00 18 * * 0-6',
+ 	onTick: function() {
+ 		sendProfileViewMail();
+ 	},
+ 	start: false,
+ 	timeZone: 'America/Los_Angeles'
+});
+job.start();
 
 // function checkLastConnection(timestamp, callback) {
 // 	if (!timestamp)

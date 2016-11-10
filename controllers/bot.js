@@ -244,8 +244,7 @@ function sendProfileViewMail() {
 									}
 								});
 						} else {
-							console.log("DONE!");
-							return ;
+						    return ;
 						}
 					};
 					recursive(0);
@@ -258,7 +257,7 @@ function sendProfileViewMail() {
 var job = new CronJob({
  	cronTime: '00 00 18 * * 0-6',
  	onTick: function() {
- 		sendProfileViewMail();
+ 	    sendProfileViewMail();
  	},
  	start: false,
  	timeZone: 'America/Los_Angeles'

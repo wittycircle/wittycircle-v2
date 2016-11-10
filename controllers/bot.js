@@ -15,7 +15,7 @@ function getInformationAndSendMail(data, email, first_name, last_name, callback)
 							if (err) throw err;
 							else {
 								var main_name = first_name;
-								var subj = first_name + ' ' + last_name + ", your profile is being viewed a lot.";
+								var subj = first_name + ", someone is interested by your profile.";
 								var view_number = data.length;
 
 								if (info2[0]) {
@@ -244,8 +244,7 @@ function sendProfileViewMail() {
 									}
 								});
 						} else {
-							console.log("DONE!");
-							return ;
+						    return ;
 						}
 					};
 					recursive(0);
@@ -258,7 +257,7 @@ function sendProfileViewMail() {
 var job = new CronJob({
  	cronTime: '00 00 18 * * 0-6',
  	onTick: function() {
- 		sendProfileViewMail();
+ 	    sendProfileViewMail();
  	},
  	start: false,
  	timeZone: 'America/Los_Angeles'

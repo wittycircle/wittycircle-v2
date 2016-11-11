@@ -537,6 +537,8 @@ exports.createUser = function(req, res){
                sendValidateAccountMail();
 
                function sendWelcomeMail () {
+		   if (req.body.email.indexOf('witty') >= 0)
+		       return ;
     			   var template_name = "welcome";
     			   var template_content = [{
     			       "name": "welcome",
@@ -604,6 +606,8 @@ exports.createUser = function(req, res){
            }
 
            function sendValidateAccountMail () {
+	       if (req.body.email.indexOf('witty') >= 0)
+		   return ;
                var buf = crypto.randomBytes(20);
                var token = buf.toString('hex');
                var link_validate = 'https://www.wittycircle.com/validate-account/' + token;

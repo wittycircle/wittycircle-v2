@@ -255,7 +255,7 @@ function sendProfileViewMail() {
 };
 
 var job = new CronJob({
- 	cronTime: '00 00 18 * * 0-6',
+ 	cronTime: '00 00 19 * * 0-6',
  	onTick: function() {
  	    sendProfileViewMail();
  	},

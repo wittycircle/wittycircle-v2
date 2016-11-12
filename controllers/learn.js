@@ -383,7 +383,7 @@ exports.getArticleMessages = function(req, res) {
     if (errors) {
     	return res.status(400).send(errors);
     } else {
-    	pool.query('SELECT * FROM article_message WHERE article_id = ? ORDER BY creation_date DESC', req.params.id, 
+    	pool.query('SELECT * FROM article_message WHERE article_id = ? ORDER BY creation_date ASC', req.params.id, 
     		function(err, result) {
     			if (err) throw err;
     			else {

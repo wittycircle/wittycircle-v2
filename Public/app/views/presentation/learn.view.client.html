@@ -96,7 +96,7 @@
 					</div>
 
 					<div class="lcaainfo">
-						<a href="/learn/article/id/{{tArticle.article_id}}"><h5 ng-bind="tArticle.title"></h5></a>
+						<a ng-href="/learn/article/id/{{tArticle.article_id}}/{{encodeTitle(tArticle.title)}}"><h5 ng-bind="tArticle.title"></h5></a>
 						<div class="lcaainfon">
 							<span>{{tArticle.profile.first_name}} {{tArticle.profile.last_name}}</span>
 							<span><i class="fa fa-heart" ng-class="tArticle.likedArticle ? 'fa-heart-red' : 'fa-heart-white'" ng-click="postLikeTrendingArticle($index, tArticle.id)" aria-hidden="true"></i> {{tArticle.numberOfLike}}</span>

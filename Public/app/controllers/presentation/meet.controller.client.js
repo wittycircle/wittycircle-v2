@@ -42,7 +42,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "http://127.0.0.1/meet",
+		url: "https://www.wittycircle.com/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 

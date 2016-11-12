@@ -362,12 +362,13 @@ function increaseUserView() {
 var hack = new CronJob({
     cronTime: '00 00 16 * * 0-6',
         onTick: function() {
-        increaseUserView();;
+        increaseUserView();
     },
     start: false,
     timeZone: 'America/Los_Angeles'
 });
 hack.start();
+
 
 // function checkLastConnection(timestamp, callback) {
 //  if (!timestamp)

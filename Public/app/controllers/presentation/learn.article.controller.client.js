@@ -15,6 +15,7 @@ angular.module('wittyApp')
 		    		if (res.success)
 		    			$scope.nome = res.data.length; 
 		    		$scope.userMessages = res.data;
+		    		console.log($scope.userMessages);
 		    	});
 		    };
 

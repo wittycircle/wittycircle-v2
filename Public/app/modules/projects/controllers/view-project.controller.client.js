@@ -202,9 +202,9 @@
                     vm.config.plugins.poster = vm.project.video_poster;
                 }
             }
-            $http.put('/contributor/project', {project_id: vm.project.id}).success(function(res) {
-                $scope.projectContributor = res.data;
-            });
+            // $http.put('/contributor/project', {project_id: vm.project.id}).success(function(res) {
+            //     $scope.projectContributor = res.data;
+            // });
 
             // Get shorten Url
             $http.post('/url/shortener', {url: vm.currentUrl}).success(function(res) {

@@ -115,14 +115,15 @@ var wittyCircleApp = angular
 		// }
 	})
 	.state('statistics', {
-		url: '/statistics',
-		templateUrl: 'views/rank/rank.statistic.view.client.html',
-		controller: 'RankCtrl'
+		url 		: '/statistics',
+		params      : { firstVisit: false},
+		templateUrl : 'views/rank/rank.statistic.view.client.html',
+		controller 	: 'RankCtrl'
 	})
 	.state('statistic', {
-		url: '/admin/statistic',
-		templateUrl: 'views/backoffice/statistic.view.client.html',
-		controller: 'BackOfficeStatisticCtrl',
+		url 		: '/admin/statistic',
+		templateUrl : 'views/backoffice/statistic.view.client.html',
+		controller 	: 'BackOfficeStatisticCtrl',
 	})
 	.state('messages', {
 		url: '/messages',

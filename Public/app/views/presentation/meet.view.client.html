@@ -1,6 +1,17 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
 
+    <div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!meet.logIn">
+        <div class="presentation-forced-signup">
+            <h5>We'll find the people who could help you. Join us now</h5>
+            <ul>
+                <li class="presentation-forced-signup-mail" ng-controller="PopUpCtrl" ng-click="popSwL()"><img src="/images/mailbox-icon-w.png" alt="mailbox"></li>
+                <a href="/auth/google" target="_self"><li class="presentation-forced-signup-google"><img src="/images/social_media/newgoogle-logo.svg"></li></a>
+                <a href="/auth/facebook" target="_self"><li class="presentation-forced-signup-facebook"><i class="fa fa-facebook" style="color: white"></i></li></a>
+            </ul>   
+        </div>
+    </div>
+
     <div class="body-page">
         <div class="home-video-bg">
             <video preload="none" poster="/images/poster/poster_meet.jpg" loop muted autoplay>
@@ -300,10 +311,20 @@
 
     <script>
 
-    function initPage() {
-        $(window).scrollTop(0);
-    };
-    setTimeout(function(){ initPage() }, 1000);
+    $(document).ready(function() {
+        function initPage() {
+            $(window).scrollTop(0);
+                $(window).scroll(function() {
+                    if ($(window).scrollTop() > 300) {
+                        $('#pffs').css('display', 'block');
+                    }
+                    // if ($(window).scrollTop() === 0 && check === 1) {
+                    //     check = 0;
+                    //     headerMove(false);
+                    // }
+                });
+        }; setTimeout(function(){ initPage() }, 1000);
+    });
 
     var x = $(window).width();
     var val = {};

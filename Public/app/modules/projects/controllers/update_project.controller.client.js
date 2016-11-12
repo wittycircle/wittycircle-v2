@@ -502,7 +502,7 @@ $scope.uploadVideo = function() {
     .on("cloudinaryprogress", function (e, data) {
 	    //console.log(e);
             //console.log(data);
-        if (data.files[0].size > 100000000) {
+        if (data.files[0].size > 500000000) {
             $scope.status = "File too large!";
             return ;
         }

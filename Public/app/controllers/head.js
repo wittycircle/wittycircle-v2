@@ -29,13 +29,6 @@ angular.module('wittyApp').controller('HeadCtrl', function ($scope, $http, $time
 		$scope.viewport = "width=device-width";
 	}
 
-	$timeout(function() {
-		$http.get('/news/statistics').success(function(res) {
-			if (res.done)
-				$scope.displayNews = true;
-		});
-	}, 500);
-
 	$scope.hideNewsModal = function() {
 		$('#modal-news-section').attr('class', 'animated fadeOutRight faOuRi');
 		$('#model-news-section').css('display', 'none');

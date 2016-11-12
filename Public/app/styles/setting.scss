@@ -21,6 +21,75 @@
 		background-color: #d94242;
 	}
 
+	.statistics-suggestion-new {
+		.suggestion-box {
+			position: absolute;
+			padding: 5px 15px;
+			z-index: 5000;
+			text-align: center;
+			background-color: rgba(0, 0, 0, 0.9);
+			margin-top: 60px;
+			border-radius: 4px;
+			
+			.fa-question-circle {
+				color: white;
+			}
+
+			.fa {
+				background-color: black !important;
+			}
+
+			span {
+				font-family: 'FreigBook';
+				font-size: 14px;
+				color: white;
+			}
+		}
+
+		.suggestion-about-profile {
+			right: 0;
+			margin-right: 15px;
+			max-width: 160px;
+			-webkit-animation-delay: 12s;
+			-moz-animation-delay: 12s;
+			animation-delay: 12s;
+		}
+
+		.suggestion-discover-meet {
+			margin-left: 50px;
+			max-width: 190px;
+			-webkit-animation-delay: 2s;
+			-moz-animation-delay: 2s;
+			animation-delay: 2s;
+		}
+
+		.suggestion-post-project {
+			margin-left: 270px;
+			max-width: 240px;
+			-webkit-animation-delay: 7s;
+			-moz-animation-delay: 7s;
+			animation-delay: 7s;
+		}
+
+		.suggestion-post-project-nodelay {
+			margin-left: 270px;
+			max-width: 240px;
+			-webkit-animation-delay: 2s;
+			-moz-animation-delay: 2s;
+			animation-delay: 2s;
+		}
+
+		.suggestion-about-profile-nodelay {
+			right: 0;
+			margin-right: 15px;
+			max-width: 160px;
+			-webkit-animation-delay: 2s;
+			-moz-animation-delay: 2s;
+			animation-delay: 2s;
+		}
+
+	}
+
 	.setting-filter {
 		position: absolute;
 		width: 100%;
@@ -559,11 +628,12 @@
 		text-align: left;
 		padding-left: 80px;
 		padding-right: 80px;
-		margin-bottom: 30px;
+		margin-bottom: 50px;
 		
 		.setting-ranking-psi {
 			display: inline-block;
 			width: 45%;
+			margin-bottom: 20px;
 
 			.tooltipw {
 				display: block;
@@ -632,7 +702,7 @@
 			}
 
 			.setting-ranking-share {
-				margin-bottom: 15px;
+				margin-bottom: 35px;
 
 				.fb-share {
 					display: inline-block;
@@ -776,10 +846,12 @@
 			display: inline-block;
 			width: 50%;
 			text-align: center;
+			margin-left: 30px;
 
 			#myCanvas {
 				position: relative;
 				right: 10px;
+				margin-left: 30px;
 			}
 
 			h2 {

@@ -1,5 +1,5 @@
 angular.module('wittyApp')
-	.controller('RankCtrl', function($http, $location, $scope, $rootScope, $timeout, RetrieveData) {
+	.controller('RankCtrl', function($http, $location, $scope, $rootScope, $timeout, RetrieveData, $state) {
 
 		var currentUser = $rootScope.globals.currentUser || null;
 
@@ -9,6 +9,7 @@ angular.module('wittyApp')
 			$scope.backPic = $rootScope.globals.currentUser.profile_cover;
 			$scope.mailList = [];
 			$scope.inviteW = "Invite";
+			$scope.firstVisit = $state.params.firstVisit;
 
 			$scope.initRanking = function() {
 				RetrieveData.getData('/rank/statistic', 'GET').then(function(res) {
@@ -117,7 +118,7 @@ angular.module('wittyApp')
 					var length = data.length - 1;
 					context.beginPath();
 					context.font="14px FreigBook";
-					context.fillText("Now", length * xScale - 15, 10);
+					context.fillText("Now", length * xScale - 15, canvas.height);
 					context.strokeStyle = "black"
 					context.stroke();
 

@@ -134,13 +134,14 @@
 	</header>
 
 	<div ui-view>
+		<link rel="stylesheet" href="https://vjs.zencdn.net/5.10.7/video-js.css" />
 		<div class="project-post-container">
-		  <div class="project-contributor-show" ng-if="projectContributor.length">
+		  <!-- <div class="project-contributor-show" ng-if="projectContributor.length">
                                 <h4>Contributors: </h4>
                                 <ul>
                                         <li ng-repeat="contribut in projectContributor"><a ng-href="{{contribut.username}}"><img ng-src="{{contribut.profile_picture}}" /></a></li>
                                 </ul>
-                        </div>
+                        </div> -->
 			<div ng-if="!vm.project.post && !vm.config.sources" class="project-post-nodetail">
 				<h2>No more details yet.</h2>
 			</div>
@@ -178,6 +179,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="https://vjs.zencdn.net/5.10.8/video.js"></script>
 	</div>
 <script>
 	   // function changeEditPictoB() {
@@ -210,5 +212,4 @@
 			});
 		});
 </script>
-<script src="https://vjs.zencdn.net/5.10.8/video.js"></script>
 </section>

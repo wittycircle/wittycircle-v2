@@ -5,7 +5,7 @@
 * # LoginCtrl
 * Controller of the wittyApp
 */
-angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStore, Upload, $filter, $stateParams, $location, $scope, $timeout, $rootScope, Authentication, Data_auth, Skills, Interests, Experiences, Locations, RetrieveData, redactorOptions) {
+angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStore, Upload, $filter, $stateParams, $location, $scope, $timeout, $rootScope, Authentication, Data_auth, Skills, Interests, Experiences, Locations, RetrieveData, redactorOptions, $state) {
 
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
@@ -235,11 +235,11 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    profileData.about = $scope.aboutText;
 	    profileData.description = $scope.aboutDescription;
 	    if (profileData.about) {
-		$http.put('/signup/about', profileData).success(function(res) {
-		    if (res.success) {
-				$location.path('/'+ $rootScope.globals.currentUser.username);
-		    }
-		});
+			$http.put('/signup/about', profileData).success(function(res) {
+			    if (res.success) {
+					$state.go('statistics', {firstVisit: true});
+			    }
+			});
 	    } else
 	    	console.log("ERROR!");
 	};

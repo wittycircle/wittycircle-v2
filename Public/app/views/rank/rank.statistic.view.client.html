@@ -1,5 +1,19 @@
 <section id="setting-page" class="animated fadeIn">
 
+	<section class="statistics-suggestion-new" ng-if="firstVisit">
+		<div id="sdm" class="suggestion-box suggestion-about-profile animated fadeInDown">
+			<i class="fa fa-question-circle"></i> <span>... and find all your profile details here</span>
+		</div>
+
+		<div id="sbp" class="suggestion-box suggestion-discover-meet animated fadeInDown">
+			<i class="fa fa-question-circle"></i> <span> Discover people and projects that may need you</span>
+		</div>
+
+		<div id="spp" class="suggestion-box suggestion-post-project animated fadeInDown">
+			<i class="fa fa-question-circle"></i> <span> Share what you have in mind so our community can help you</span>
+		</div>
+	</section>
+	
 	<header id="setting-header" ng-style="{'background-image': 'url({{ resizePic(backPic, 1200, 410, 'fill') }})'}" style="height: 180px">
 		<div class="setting-filter" style="height: 180px"></div>
 		<div class="setting-header-title">
@@ -32,7 +46,7 @@
 	<section id="setting-body">
 
 		<div class="setting-ranking setting-box">
-			<h3>The <b>more</b> you contribute, the more people will <b>connect</b> with you.</h3>
+			<h3>The <b>more</b> you contribute, the <b>more</b> your profile will be showcased to people you might need.</h3>
 			<section class="setting-ranking-up">
 				<aside class="setting-ranking-psi">
 					<div class="setting-ranking-profile">
@@ -86,7 +100,6 @@
 					<h5 ng-if="myRank === '-'">We rank users with more than 1000 pts. Complete your profile now and get connected to 38x more people and projects.</h5>
 				</aside>
 
-				<hr width="80%" />
 			</section>
 
 			<section class="setting-ranking-down">
@@ -127,6 +140,29 @@
 				}
 			}
 		});
+
+		function hideDiscover() {
+			$('#sbp').attr('class', 'suggestion-box suggestion-discover-meet animated fadeOutUp');
+		};
+
+		function hideProject() {
+			$('#spp').attr('class', 'suggestion-box suggestion-post-project-nodelay animated fadeOutUp');
+		};
+
+		function hideProfile() {
+			$('#sdm').attr('class', 'suggestion-box suggestion-about-profile-nodelay animated fadeOutUp');
+		};
+
+		setTimeout(function() {
+			hideDiscover();
+			setTimeout(function() {
+				hideProject();
+				setTimeout(function() {
+					hideProfile();
+				}, 5000);
+			}, 5000);
+		}, 5000);
+
 
 		$("#srpsib")
         .mouseover(function() { 

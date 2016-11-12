@@ -1,5 +1,17 @@
 <div id="discover-body-page">
 	<div data-ng-include="'views/mobiles/discover-mobile-modal.view.client.html'"></div>
+
+	<div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!discover.logIn">
+		<div class="presentation-forced-signup">
+	  		<h5>Let us find the projects looking for you. Join us now</h5>
+	  		<ul>
+	  			<li class="presentation-forced-signup-mail" ng-controller="PopUpCtrl" ng-click="popSwL()"><img src="/images/mailbox-icon-w.png" alt="mailbox"></li>
+	  			<a href="/auth/google" target="_self"><li class="presentation-forced-signup-google"><img src="/images/social_media/newgoogle-logo.svg"></li></a>
+	  			<a href="/auth/facebook" target="_self"><li class="presentation-forced-signup-facebook"><i class="fa fa-facebook" style="color: white"></i></li></a>
+	  		</ul>	
+	  	</div>
+	</div>
+
 	<div class="body-page">
 		<div class="home-video-bg">
 			<video poster="/images/poster/poster_discover.jpg" loop muted autoplay>
@@ -7,6 +19,7 @@
 	  		</video>
 	  	</div>
 	  	<div class="discover-image-bg presentation-image-bg"></div>
+
 
 	  	<div class="discover-component presentation-component">
 	  		<div class="discover-title presentation-title">
@@ -182,9 +195,20 @@
 
 	<script>
 		
-		function initPage() {
-			$(window).scrollTop(0);
-		}; setTimeout(function(){ initPage() }, 1000);
+		$(document).ready(function() {
+			function initPage() {
+				$(window).scrollTop(0);
+					$(window).scroll(function() {
+		                if ($(window).scrollTop() > 300) {
+		                    $('#pffs').css('display', 'block');
+		                }
+		                // if ($(window).scrollTop() === 0 && check === 1) {
+		                //     check = 0;
+		                //     headerMove(false);
+		                // }
+		        	});
+			}; setTimeout(function(){ initPage() }, 1000);
+		});
 
 		var x = $(window).width();
 		var val = {};

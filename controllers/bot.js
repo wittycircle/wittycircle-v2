@@ -15,7 +15,7 @@ function getInformationAndSendMail(data, email, first_name, last_name, callback)
 							if (err) throw err;
 							else {
 								var main_name = first_name;
-								var subj = first_name + ", someone is interested by your profile.";
+								var subj = first_name + ", someone is interested in your profile.";
 								var view_number = data.length;
 
 								if (info2[0]) {

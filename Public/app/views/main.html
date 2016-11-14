@@ -1,7 +1,7 @@
 <div id="main-body-page">
 	<div data-ng-include="'views/mobiles/main-mobile-modal.view.client.html'"></div>
 	<div class="body-page body-main-page">
-		<div id="hvbg" class="home-video-bg">
+		<div id="hvbg" class="home-video-bg" ng-if="!mobile">
 			<video poster="/images/poster/poster_home_signup.jpg" loop muted autoplay>
 				<source src="/images/videos/Home.mp4" type="video/mp4" />
 			</video>
@@ -30,7 +30,7 @@
 				</div>
 			</div> -->
 			<slick-main class="main-discover-slick" init-onload=true ng-show="!main.isstartclicked">
-				<div class="main-carousel-slick">
+<!--				<div class="main-carousel-slick">
 					<div class="main-title-market">
 						<h1>Meet Nish, first head of marketing & community at Yelp!</h1>
 					</div>
@@ -48,7 +48,7 @@
                                                         <a href="/learn/article/id/62993/Introducing-weekly-mentoring-sessions-with--Nish,-1st-brand-and-community-director-at-Yelp"><button>Meet Nish</button></a>
                                                 </div>
                                         </div>
-				</div> 
+				</div> -->
 
 				<div class="main-carousel-slick">
 					<div class="main-title-market">

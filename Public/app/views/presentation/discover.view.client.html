@@ -1,7 +1,7 @@
 <div id="discover-body-page">
 	<div data-ng-include="'views/mobiles/discover-mobile-modal.view.client.html'"></div>
 
-	<div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!discover.logIn">
+	<div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!discover.logIn && !mobile">
 		<div class="presentation-forced-signup">
 	  		<h5>Let us find the projects looking for you. Join us now</h5>
 	  		<ul>
@@ -13,7 +13,7 @@
 	</div>
 
 	<div class="body-page">
-		<div class="home-video-bg">
+		<div class="home-video-bg" ng-if="!mobile">
 			<video poster="/images/poster/poster_discover.jpg" loop muted autoplay>
 	    		  <source src="/images/videos/Discover.mp4" type="video/mp4">
 	  		</video>

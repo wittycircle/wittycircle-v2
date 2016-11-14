@@ -154,7 +154,7 @@
                       </span>
                     <span class="pull-right delete_icon fadein fadeout" data-ng-show="showdelete" data-ng-if="reply.isOwned === true" data-ng-click="vm.deleteAskReply(reply, $parent.$parent.$index)"><i class="fa fa-trash-o"></i></span>
                   </div>
-                  <p class="feedback_reply_text" data-ng-bind="reply.description"></p>
+                  <p class="feedback_reply_text" data-ng-bind-html="prettyText(reply.description)"></p>
                 </div>
               </div>
             </div>

@@ -477,14 +477,19 @@
             data.creator_first_name = currentUser.first_name;
             data.creator_last_name = currentUser.last_name;
             data.url = vm.currentUrl;
+
             $http.post('/ask_reply/add', data).success(function (response) {
                 if (currentUser.id == ask.user_id) {
                     ask.owned = true;
                 }
                 data.created_at = new Date();
                 ask.replies.push(data);
-                vm.reply = [];
             });
+        };
+
+        $scope.prettyText = function(text) {
+            text = text.replace(/\r?\n/g, '<br />');
+            return text;
         };
 
         function deleteAskReply (ask_reply, question_index) {

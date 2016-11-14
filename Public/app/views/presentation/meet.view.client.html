@@ -3,7 +3,7 @@
 
     <div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!meet.logIn">
         <div class="presentation-forced-signup">
-            <h5>We'll find the people who could help you. Join us now</h5>
+            <h5>Let us find the people you might need. Join us now.</h5>
             <ul>
                 <li class="presentation-forced-signup-mail" ng-controller="PopUpCtrl" ng-click="popSwL()"><img src="/images/mailbox-icon-w.png" alt="mailbox"></li>
                 <a href="/auth/google" target="_self"><li class="presentation-forced-signup-google"><img src="/images/social_media/newgoogle-logo.svg"></li></a>
@@ -313,15 +313,16 @@
 
     $(document).ready(function() {
         function initPage() {
+            var check = 0;
             $(window).scrollTop(0);
                 $(window).scroll(function() {
-                    if ($(window).scrollTop() > 300) {
+                    if ($(window).scrollTop() > 300 && check === 0) {
                         $('#pffs').css('display', 'block');
                     }
-                    // if ($(window).scrollTop() === 0 && check === 1) {
-                    //     check = 0;
-                    //     headerMove(false);
-                    // }
+                    if ($(window).scrollTop() <= 300 && check === 1) {
+                        check = 0;
+                        $('#pffs').css('display', 'none');
+                    }
                 });
         }; setTimeout(function(){ initPage() }, 1000);
     });

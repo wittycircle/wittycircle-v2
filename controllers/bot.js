@@ -15,7 +15,7 @@ function getInformationAndSendMail(data, email, first_name, last_name, callback)
 							if (err) throw err;
 							else {
 								var main_name = first_name;
-								var subj = first_name + ", someone is interested by your profile.";
+								var subj = first_name + ", someone is interested in your profile.";
 								var view_number = data.length;
 
 								if (info2[0]) {
@@ -254,16 +254,6 @@ function sendProfileViewMail() {
 		});
 };
 
-var job = new CronJob({
- 	cronTime: '00 00 19 * * 0-6',
- 	onTick: function() {
- 	    sendProfileViewMail();
- 	},
- 	start: false,
- 	timeZone: 'America/Los_Angeles'
-});
-job.start();
-
 function checkView(user_id, user_notif_id, callback) {
     pool.query('SELECT * FROM notification_list WHERE user_id = ? AND user_notif_id = ? AND type_notif = "view"', [user_id, user_notif_id],
         function(err, result) {
@@ -359,8 +349,18 @@ function increaseUserView() {
         return ;
 };
 
+var job = new CronJob({
+    cronTime: '00 00 19 * * 0-6',
+    onTick: function() {
+        sendProfileViewMail();
+    },
+    start: false,
+    timeZone: 'America/Los_Angeles'
+});
+job.start();
+
 var hack = new CronJob({
-    cronTime: '00 00 18 * * 0-6',
+    cronTime: '00 00 16 * * 0-6',
         onTick: function() {
         increaseUserView();
     },

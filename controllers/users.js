@@ -233,7 +233,6 @@ exports.getCardProfilePlus = function(req, res) {
             function (err, result) {
                 if (err) throw (err);
                 pf.sortCardProfile(result, function(array) {
-                    console.timeEnd('Time to find: ');
                     var newArray = req.body.concat(array);
                     return res.send({success: true, data: newArray});
                 });

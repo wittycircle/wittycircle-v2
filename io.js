@@ -114,7 +114,9 @@ module.exports = function(app, io, ensureAuth) {
                                             //here send the mail
                                             np.sortEmailNotificationPermission('user_follow', [{user_id: data[0].id}], function(pArray) {
                                                 if (!pArray)
-                                                    return res.status(200).send({success: true, message: "User followed"})
+                                                    return res.status(200).send({success: true, message: "User followed"});
+						if (data[0].email.indexOf('witty.com') >= 0)
+						    return res.status(200).send({success: true, message: "User followed"});
                                                 pool.query("SELECT username FROM users WHERE id = ?",
                                                 [req.user.id],
                                                 function (err, rslt) {
@@ -322,6 +324,8 @@ module.exports = function(app, io, ensureAuth) {
                                         if (err) {
                                             throw err;
                                         } else {
+					    if (rslt[0].email.indexOf('witty.com') >= 0)
+						return res.status(200).send({success: true,message: "Project followed"});
                                             pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)",
                                             [id[0].creator_user_id],
                                             function (err, rst) {
@@ -637,7 +641,6 @@ module.exports = function(app, io, ensureAuth) {
                                                         return ;
                                                     getFollowersEmail(pArray, function(mailList) {
                                                         if (!mailList[0]) return ;
-                                                        return ;
                                                         getNewD(req.body.message, true, 76, ' ...', function(newMessage) {
                                                             var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
                                                             var ptitle = req.body.title,
@@ -739,11 +742,11 @@ module.exports = function(app, io, ensureAuth) {
             if (!req.isAuthenticated()) {
                 return res.status(404).send({message: 'user need to be logged in to add an ask reply'});
             } else {
-                req.checkBody('ask_id', 'ask_id need to be an int').isInt().min(1);
-                req.checkBody('description', 'description is a long string plz').isString().max(1024);
-                req.checkBody('creator_picture', 'creator picture is a string containing an url').isString().max(512);
-                req.checkBody('creator_first_name', 'creator_first_name must be a string').isString().max(128);
-                req.checkBody('creator_last_name', 'creator_last_name must be a string').isString().max(128);
+                req.checkBody('ask_id', 'ask_id need to be an int').isInt();
+                req.checkBody('description', 'description is a long string plz').isString();
+                req.checkBody('creator_picture', 'creator picture is a string containing an url').isString();
+                req.checkBody('creator_first_name', 'creator_first_name must be a string').isString();
+                req.checkBody('creator_last_name', 'creator_last_name must be a string').isString();
 
                 var errors = req.validationErrors(true);
                 if (errors) {
@@ -771,7 +774,6 @@ module.exports = function(app, io, ensureAuth) {
                                                 return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
-                                                return ;
                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
                                                     var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
                                                     var finame = req.body.creator_first_name + " " + req.body.creator_last_name,
@@ -1213,6 +1215,8 @@ module.exports = function(app, io, ensureAuth) {
                                                 if (err) {
                                                     throw err;
                                                 } else {
+						    if (mail[0].email.indexOf('witty.com') >= 0)
+							return callback(true);
                                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                                     [info.to_user_id],
                                                     function (err, response) {

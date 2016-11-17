@@ -206,7 +206,6 @@ function getInformationAndSendMail(data, email, first_name, last_name, callback)
                                 	return callback();
                                 }, function(e) {
                                     // Mandrill returns the error as an object with name and message keys
-                                    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
                                     throw e;
                                     // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
                                 });
@@ -230,16 +229,20 @@ function sendProfileViewMail() {
 								function(err, result2) {
 									if (err) throw err;
 									else {
-										pool.query('SELECT email, profile_id FROM users WHERE id = ?', result[index].user_id,
+										pool.query('SELECT email, profile_id, fake FROM users WHERE id = ?', result[index].user_id,
 											function(err, result3) {
 												if (err) throw err;
-												pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result3[0].profile_id,
-													function(err, result4) {
-														if (err) throw err;
-														getInformationAndSendMail(result2, result3[0].email, result4[0].first_name, result4[0].last_name, function() {
-															return recursive(index + 1);
-														});
-													});
+                                                if (result3[0].fake === 1)
+                                                    return recursive(index + 1);
+                                                else {
+    												pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result3[0].profile_id,
+    													function(err, result4) {
+    														if (err) throw err;
+    														getInformationAndSendMail(result2, result3[0].email, result4[0].first_name, result4[0].last_name, function() {
+    															return recursive(index + 1);
+    														});
+    													});
+                                                }
 											});
 									}
 								});

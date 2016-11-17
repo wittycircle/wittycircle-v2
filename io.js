@@ -115,6 +115,7 @@ module.exports = function(app, io, ensureAuth) {
                                             np.sortEmailNotificationPermission('user_follow', [{user_id: data[0].id}], function(pArray) {
                                                 if (!pArray)
                                                     return res.status(200).send({success: true, message: "User followed"})
+                                                return ;
                                                 pool.query("SELECT username FROM users WHERE id = ?",
                                                 [req.user.id],
                                                 function (err, rslt) {
@@ -316,6 +317,7 @@ module.exports = function(app, io, ensureAuth) {
                                 np.sortEmailNotificationPermission('follow_project', [{user_id: id[0].creator_user_id}], function(pArray) {
                                     if (!pArray)
                                         return res.status(200).send({success: true, msg: "Project followed"});
+                                    return ;
                                     pool.query("SELECT * FROM users WHERE id = ?",
                                     [id[0].creator_user_id],
                                     function (err, rslt) {
@@ -606,12 +608,12 @@ module.exports = function(app, io, ensureAuth) {
                 return res.status(404).send({message: 'user need to be authenticated'});
             } else {
                 req.checkBody('title', 'title need to be a string').isString().max(128);
-                req.checkBody('message', 'message need to be a string').optional().isString().max(4096);
-                req.checkBody('project_id', 'project_id need to be an int').isInt().min(1);
+                req.checkBody('message', 'message need to be a string').optional().isString();
+                req.checkBody('project_id', 'project_id need to be an int').isInt();
                 req.checkBody('creator_img', 'creator img need to be a string').isString().max(512);
                 req.checkBody('first_name', 'first_name need to be a string').isString().max(128);
                 req.checkBody('last_name', 'last_name need to be a string').isString().max(128);
-                req.checkBody('project_public_id', 'project_public_id need to be an int').isInt().min(1);
+                req.checkBody('project_public_id', 'project_public_id need to be an int').isInt();
 
                 var errors = req.validationErrors(true);
                 if (errors) res.status(400).send(errors);
@@ -635,6 +637,7 @@ module.exports = function(app, io, ensureAuth) {
                                                 np.sortEmailNotificationPermission('ask_project', newArray, function(pArray) {
                                                     if (!pArray)
                                                         return ;
+                                                    return ;
                                                     getFollowersEmail(pArray, function(mailList) {
                                                         if (!mailList[0]) return ;
                                                         return ;
@@ -739,11 +742,11 @@ module.exports = function(app, io, ensureAuth) {
             if (!req.isAuthenticated()) {
                 return res.status(404).send({message: 'user need to be logged in to add an ask reply'});
             } else {
-                req.checkBody('ask_id', 'ask_id need to be an int').isInt().min(1);
-                req.checkBody('description', 'description is a long string plz').isString().max(1024);
-                req.checkBody('creator_picture', 'creator picture is a string containing an url').isString().max(512);
-                req.checkBody('creator_first_name', 'creator_first_name must be a string').isString().max(128);
-                req.checkBody('creator_last_name', 'creator_last_name must be a string').isString().max(128);
+                req.checkBody('ask_id', 'ask_id need to be an int').isInt();
+                req.checkBody('description', 'description is a long string plz').isString();
+                req.checkBody('creator_picture', 'creator picture is a string containing an url').isString();
+                req.checkBody('creator_first_name', 'creator_first_name must be a string').isString();
+                req.checkBody('creator_last_name', 'creator_last_name must be a string').isString();
 
                 var errors = req.validationErrors(true);
                 if (errors) {
@@ -769,6 +772,7 @@ module.exports = function(app, io, ensureAuth) {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
                                             if (!pArray)
                                                 return ;
+                                            return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
                                                 return ;
@@ -889,6 +893,7 @@ module.exports = function(app, io, ensureAuth) {
                                                 np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
                                                     if (!newArray)
                                                         return ;
+                                                    return ;
                                                     getFollowersEmail(newArray, function(mailList) {
                                                         getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
                                                             var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
@@ -1021,6 +1026,7 @@ module.exports = function(app, io, ensureAuth) {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
                                             if (!pArray)
                                                 return ;
+                                            return ;
                                             getFollowersEmail(pArray, function(mailList) {
                                                 if (!mailList[0]) return ;
                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
@@ -1201,6 +1207,7 @@ module.exports = function(app, io, ensureAuth) {
                                 np.sortEmailNotificationPermission('new_message', [{user_id: info.to_user_id}], function(check) {
                                     if (!check)
                                         return callback(true);
+                                    return ;
                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                     [info.from_user_id],
                                     function (err, rslt) {

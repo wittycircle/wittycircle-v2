@@ -27,8 +27,9 @@
 				<h4>Invite friends</h4>
 			</div>
 			
-			<div class="setting-invite-modal-body">
-				<input type="email" placeholder="name@mail.com" ng-model="email" ng-keyup="addEmailToList($event.keyCode, email)"/>
+			<div class="setting-invite-modal-body" ngf-drop="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">
+				<input type="text" placeholder="name@mail.com" ng-model="email" ng-keyup="addEmailToList($event.keyCode, email)"/>
+				<p style="color: #999999">Enter email addresses separated by comma or import your csv file.</p>
 				<p class="simbpress">Press enter to send an invitation</p>
 				<p ng-if="errorMail">Email address not valid</p>
 			</div>
@@ -37,9 +38,8 @@
 				<div class="setting-invite-modal-list-email">
 					<li ng-repeat="mail in mailList track by $index" >{{mail}} <img src="/images/cross-icon.svg" ng-click="removeMailFromList($index)"></li>
 				</div>
-
-				<button type="button" ng-click="sendInvitation()">{{inviteW}} <i class="fa fa-check" ng-if="sended"></i></button>
 			</div>
+			<button ng-if="mailList.length" type="button" ng-click="sendInvitation()">{{inviteW}} <i class="fa fa-check" ng-if="sended"></i></button>
 		</div>
 	</section>
 
@@ -130,7 +130,7 @@
 
 <script>
 	$(document).ready(function() {
-		
+
 		$(this).click(function(e) {
 			if (e.target.id === "srpsib") {
 				$("#sinvitem").fadeIn(200);

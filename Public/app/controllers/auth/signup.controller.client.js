@@ -161,21 +161,24 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $scope.formYear   = year;
 	};
 	
-	$scope.$watchGroup(['sexe', 'basicLocation'], function(newValue, oldValue, scope) {
+	$scope.$watchGroup(['sexe', 'basicLocation', 'displayLocation'], function(newValue, oldValue, scope) {
 	    if (newValue[0] && newValue[1]) {
 			$scope.checked = true;
 			$scope.canPass = true;
+	    } else if (newValue[0] && newValue[2]) {
+	    	$scope.checked = true;
+	    	$scope.canPass = true;
 	    }
 	});
 	
 	$scope.nLocation = {};
 	$scope.saveBasics = function() {
 	    var profileData = {};
-	    if (!$scope.basicLocation || !$scope.sexe) {
-			console.log("ERROR");
-			return ;
-		}
-	    else {
+	 //    if (!$scope.basicLocation || !$scope.sexe) {
+		// 	console.log("ERROR");
+		// 	return ;
+		// }
+	    // else {
 		Locations.setplaces($scope.basicLocation, $scope.nLocation);
 		// var timestamp                 = new Date(($scope.formYear + '.' + $scope.formMonth1 + '.' + $scope.formDay).toString());
 		// if (isNaN(timestamp))
@@ -183,9 +186,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		// else
 		//     profileData.birthdate       = timestamp;
 		profileData.genre             = $scope.sexe;
-		profileData.location_country  = $scope.nLocation.location_country;
-		profileData.location_city     = $scope.nLocation.location_city;
-		profileData.location_state    = $scope.nLocation.location_state;
+		profileData.location_country  = $scope.nLocation.location_country || '';
+		profileData.location_city     = $scope.nLocation.location_city || '';
+		profileData.location_state    = $scope.nLocation.location_state || '';
+		
 		$http.put('/signup/basic/' + currentUser.id, profileData).success(function(res) {
 		    if (res.success) {
 				$scope.canPass = true;
@@ -197,12 +201,12 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 				}, 200);
 		    }
 		});
-	    }
+	    // }
 	};
 	
 	$scope.reloadCredential = function() {
 	    $http.get('/profile').success(function(res){
-		Authentication.SetCredentialsSocial(res.user, res.user_info);
+			Authentication.SetCredentialsSocial(res.user, res.user_info);
 	    });
 	};
 	
@@ -251,14 +255,16 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.sButton         = "Skip";
 	
 	$scope.getSignUpSkill        = function() {
-	    $http.get('/skills/' + $rootScope.globals.currentUser.username).success(function(res) {
-		if (res.success)
-		    $scope.skillCascade    = res.data;
-		if ($scope.skillCascade[0])
-		    $scope.sButton         = "Continue";
-		else
-		    $scope.sButton         = "Skip";
-	    });
+		if ($rootScope.globals.currentUser) {
+		    $http.get('/skills/' + $rootScope.globals.currentUser.username).success(function(res) {
+			if (res.success)
+			    $scope.skillCascade    = res.data;
+			if ($scope.skillCascade[0])
+			    $scope.sButton         = "Continue";
+			else
+			    $scope.sButton         = "Skip";
+		    });
+		}
 	}; $scope.getSignUpSkill();
 	
 	$scope.getSkill    = function(skill) {
@@ -297,14 +303,16 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.iButton          = "Skip";
 	
 	$scope.getSignUpInterest     = function() {
-	    $http.get('/interest/' + $rootScope.globals.currentUser.username).success(function(res) {
-		if (res.success)
-		    $scope.interestList = res.data;
-		if ($scope.interestList[0])
-		    $scope.iButton    = "Continue";
-		else
-		    $scope.iButton    = "Skip";
-	    });
+		if ($rootScope.globals.currentUser) {
+		    $http.get('/interest/' + $rootScope.globals.currentUser.username).success(function(res) {
+			if (res.success)
+			    $scope.interestList = res.data;
+			if ($scope.interestList[0])
+			    $scope.iButton    = "Continue";
+			else
+			    $scope.iButton    = "Skip";
+		    });
+		}
 	}; $scope.getSignUpInterest();
 	
 	$scope.getInterest      = function(interest) {
@@ -401,29 +409,37 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		$scope.aboutDescription = member.summary ? member.summary : null;
 		$scope.$apply();
 
-		function recursive(index) {
-			if (linPositions[index]) {
-				newSavePositions.company 			= linPositions[index].company.name || null;
-				newSavePositions.description 		= linPositions[index].summary || null;
-				newSavePositions.location_city		= linPositions[index].location.name || null;
-				newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
-				newSavePositions.title  			= linPositions[index].title || null;
+		if (linPositions) {
+			function recursive(index) {
+				if (linPositions[index]) {
+					newSavePositions.company 			= linPositions[index].company.name || null;
+					newSavePositions.description 		= linPositions[index].summary || null;
+					newSavePositions.location_city		= linPositions[index].location.name || null;
+					newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
+					newSavePositions.title  			= linPositions[index].title || null;
 
-				if (linPositions[index].isCurrent)
-					newSavePositions.date_to = "Present";
-				newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
+					if (linPositions[index].isCurrent)
+						newSavePositions.date_to = "Present";
+					newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
 
-				$http.post('/experiences', newSavePositions).success(function(res) {
-				    if (res.success)
-						return recursive(index + 1);
-				});			
-			} else {
-				$scope.loadEx();
-				$scope.onImport 		= false;
-				$scope.exButton         = "Continue";
-			}
-		};
-		recursive(0);
+					$http.post('/experiences', newSavePositions).success(function(res) {
+					    if (res.success)
+							return recursive(index + 1);
+					});			
+				} else {
+					$scope.loadEx();
+					$scope.onImport 		= false;
+					$scope.exButton         = "Continue";
+				}
+			};
+			recursive(0);
+		} else {
+			$scope.onImport 		= false;
+			$scope.noCurrentPosition = true;
+			$timeout(function() {
+				$scope.noCurrentPosition;
+			}, 5000)
+		}
 	};
 
 	function retrieveLinkedinPosition() {

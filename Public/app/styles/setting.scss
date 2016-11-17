@@ -164,7 +164,7 @@
 		position: fixed;
 		max-width: 1000px;
 		margin: 0 auto;
-		top: 15%;
+		top: 12%;
 		right: 0;
 		left: 0;
 		text-align: center;
@@ -215,10 +215,12 @@
 			}
 
 			.setting-invite-modal-list {
-				padding: 25px 0px;
+				padding: 25px 0px 0px 0px;
 				margin: 0 20px;
 				border-top: 1px solid #e5e5e5;
 				text-align: center;
+				max-height: 300px;
+				overflow-y: scroll;
 
 				.setting-invite-modal-list-email {
 					text-align: left;
@@ -240,12 +242,13 @@
 						}
 					}
 				}
+			}
 
-				button {
-					margin-top: 10px;
-					font-size: 15px;
-					padding: 5px 12px 6px 12px;
-				}
+			button {
+				margin-top: 15px;
+				margin-bottom: 30px;
+				font-size: 15px;
+				padding: 5px 12px 6px 12px;
 			}
 		}
 	} 

@@ -113,7 +113,7 @@
     position: fixed;
     max-width: 1000px;
     margin: 0 auto;
-    top: 15%;
+    top: 12%;
     right: 0;
     left: 0;
     text-align: center; }
@@ -150,10 +150,12 @@
           font-style: italic;
           color: #999999; }
       #setting-page .setting-invite-modal .setting-invite-modal-block .setting-invite-modal-list {
-        padding: 25px 0px;
+        padding: 25px 0px 0px 0px;
         margin: 0 20px;
         border-top: 1px solid #e5e5e5;
-        text-align: center; }
+        text-align: center;
+        max-height: 300px;
+        overflow-y: scroll; }
         #setting-page .setting-invite-modal .setting-invite-modal-block .setting-invite-modal-list .setting-invite-modal-list-email {
           text-align: left; }
           #setting-page .setting-invite-modal .setting-invite-modal-block .setting-invite-modal-list .setting-invite-modal-list-email li {
@@ -169,10 +171,11 @@
               top: 5px;
               margin-right: 5px;
               width: 12px; }
-        #setting-page .setting-invite-modal .setting-invite-modal-block .setting-invite-modal-list button {
-          margin-top: 10px;
-          font-size: 15px;
-          padding: 5px 12px 6px 12px; }
+      #setting-page .setting-invite-modal .setting-invite-modal-block button {
+        margin-top: 15px;
+        margin-bottom: 30px;
+        font-size: 15px;
+        padding: 5px 12px 6px 12px; }
   #setting-page #setting-body {
     /*background-color: #f5f5f5;*/
     /**** General body *****/
@@ -582,7 +585,8 @@
     margin-left: 30px; }
     .setting-ranking .setting-ranking-up .setting-ranking-graph #myCanvas {
       position: relative;
-      right: 10px; }
+      right: 10px;
+      margin-left: 30px; }
     .setting-ranking .setting-ranking-up .setting-ranking-graph h2 {
       position: relative;
       top: 10px;

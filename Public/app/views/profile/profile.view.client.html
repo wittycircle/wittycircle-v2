@@ -620,7 +620,8 @@
 	} else {
 
 		$(document).ready(function() {
-			document.getElementById('footer-page').style.visibility = "visible";
+			if (document.getElementById('footer-page'))
+				document.getElementById('footer-page').style.visibility = "visible";
 			
 			$('body').click(function(e) {
 

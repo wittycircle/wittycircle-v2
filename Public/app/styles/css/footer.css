@@ -34,7 +34,7 @@
         #footer-page .footer-global .footer-info-section .footer-meet .footer-meet-more {
           float: right; }
       #footer-page .footer-global .footer-info-section .footer-size {
-        position: relative;
+        position: initial;
         margin-top: 20px;
         margin-bottom: 40px;
         vertical-align: top;

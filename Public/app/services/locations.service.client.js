@@ -24,7 +24,7 @@
          function setplaces(string, obj) {
           var specialCity = ['Hong Kong', 'Vatican City'];
           if (!string || !obj) {
-            return;
+            return null;
           }
           if (specialCity.indexOf(string) !== -1){
             obj.location_city = string;

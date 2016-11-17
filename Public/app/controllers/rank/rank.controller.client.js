@@ -1,5 +1,5 @@
 angular.module('wittyApp')
-	.controller('RankCtrl', function($http, $location, $scope, $rootScope, $timeout, RetrieveData, $state) {
+	.controller('RankCtrl', function($http, $location, $scope, $rootScope, $timeout, RetrieveData, $state, Upload) {
 
 		var currentUser = $rootScope.globals.currentUser || null;
 
@@ -46,10 +46,45 @@ angular.module('wittyApp')
 		 			return ;
 		 		}
 		 		if (keycode == 13 && email) {
-		 			$scope.errorMail = false;
-		 			$scope.mailList.push(email);
-		 			$scope.email = [];
+		 			if (email.indexOf(',') > 0) {
+		 				email 			= email.replace(/\s+/g, '');
+            			var mailArray 	= email.split(',');
+            			var mailLength 	= mailArray.length;
+            			var re 			= /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+            			for (var i = 0; i < mailLength; i++) {
+            				if (re.test(mailArray[i])) {
+            					$scope.errorMail = false;
+            					$scope.mailList.push(mailArray[i]);
+            				}
+            			};
+
+            			$scope.email = [];
+		 			} else {
+		 				var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+		 				if (re.test(email)) {
+				 			$scope.errorMail = false;
+				 			$scope.mailList.push(email);
+				 			$scope.email = [];
+				 		} else {
+				 			$scope.errorMail = true;
+		 					return ;
+				 		}
+			 		}
 		 		}
+		 	};
+
+		 	$scope.loadCsvFile = function(file) {
+		 		var r = new FileReader();
+				r.onload = function(e) {
+					var content = e.target.result;
+					content = content.replace(/\r?\n|\r/g, ",");
+					if (typeof content === "string") {
+						$scope.addEmailToList(13, content);
+					}
+				};
+
+				r.readAsText(file); 		
 		 	};
 
 		 	$scope.removeMailFromList = function(index) {

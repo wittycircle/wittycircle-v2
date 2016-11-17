@@ -6,9 +6,9 @@ exports.updateBasic = function(req, res) {
 
     req.checkBody('genre', 'Genre must be between 1 and 64 characters.').optional().isString().min(1).max(64);
     // req.checkBody('birthdate', 'Birthdate must be between 1 and 64 characters.').optional().isString().min(1).max(64);
-    req.checkBody('location_country', 'Location country must be between 1 and 64 characters').optional().max(64);
-    req.checkBody('location_city', 'Location city must be between 1 and 64 characters').optional().min(1).max(64);
-    req.checkBody('location_state', 'Location state must be between 1 and 64 characters').optional();
+    // req.checkBody('location_country', 'Location country must be between 1 and 64 characters').optional().max(64);
+    // req.checkBody('location_city', 'Location city must be between 1 and 64 characters').optional().min(1).max(64);
+    // req.checkBody('location_state', 'Location state must be between 1 and 64 characters').optional();
 
     req.sanitize('genre').Clean(true);
     // req.sanitize('birthday').Clean(true);
@@ -20,14 +20,23 @@ exports.updateBasic = function(req, res) {
 	return res.status(400).send(errors);
 
     if (req.body.genre && req.body.location_city && req.params.id) {
-	pool.query('SELECT profile_id FROM users where id = ?', req.params.id,
-	    function(err, result) {
-		pool.query('UPDATE profiles SET genre = ?, location_country = ?, location_city = ?, location_state = ? WHERE id = ?', [req.body.genre, req.body.location_country, req.body.location_city, req.body.location_state, result[0].profile_id],
-			   function(err, result) {
-			       if (err) throw err;
-			       return res.send({success: true});
-			   });
-	    });
+    	pool.query('SELECT profile_id FROM users where id = ?', req.params.id,
+    	    function(err, result) {
+                pool.query('UPDATE profiles SET genre = ?, location_country = ?, location_city = ?, location_state = ? WHERE id = ?', [req.body.genre, req.body.location_country, req.body.location_city, req.body.location_state, result[0].profile_id],
+    			   function(err, result) {
+    			       if (err) throw err;
+    			       return res.send({success: true});
+    			   });
+    	    });
+    } else if (req.body.genre && req.params.id) {
+        pool.query('SELECT profile_id FROM users where id = ?', req.params.id,
+            function(err, result) {
+                pool.query('UPDATE profiles SET genre = ? WHERE id = ?', [req.body.genre, result[0].profile_id],
+                   function(err, result) {
+                       if (err) throw err;
+                       return res.send({success: true});
+                   });
+            });
     }
 };
 

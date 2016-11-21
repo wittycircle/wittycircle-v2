@@ -13,12 +13,13 @@
       .uc-body .filter-uc .filter-text h2 {
         font-family: 'FreigBook';
         color: white;
-        font-size: 32px;
+        font-size: 42px;
         margin-bottom: 10px; }
       .uc-body .filter-uc .filter-text p {
         font-family: 'FreigBook';
         color: white;
-        font-size: 18px; }
+        font-size: 21px;
+        line-height: 24px; }
       .uc-body .filter-uc .filter-text .popover-button .fb-login, .uc-body .filter-uc .filter-text .popover-button .go-login {
         display: inline-block;
         margin: 5px 5px 5px 5px; }

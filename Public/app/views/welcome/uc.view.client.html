@@ -1,0 +1,36 @@
+<section id="uc-welcome" class="uc-body">
+	<div class="filter-uc">
+		<div id="uwft" class="filter-text">
+			<h2>#welcome{{uc}}</h2>
+			<p>We are scaling the entrepreneurial ecosystem, starting with Babson.<br />Claim your /profile now.</p>
+			<div class="popover-button">
+				<div class="fb-login" >
+					<a href="/auth/facebook" target="_self">
+						<button><i class="fa fa-facebook" style="color: white"></i>Log in with Facebook</button>
+					</a>
+				</div>
+				<div class="go-login">
+					<a href="/auth/google" target="_self">
+						<button class="go-login"><img src="/images/social_media/newgoogle-logo.svg">Log in with Google</button>
+					</a>
+				</div>
+				<div ng-controller="PopUpCtrl" class="email-login" ng-click="popSwL()">
+					<a><img src="/images/mailbox-icon-w.png"> Sign up with email</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	$(document).ready(function() {
+		$('#headerCore').hide();
+		$('#footerCore').hide();
+
+		var divH = $('#uwft').height();
+		var y 	= $(window).height();
+		var margin = (y - divH) / 2 - 50;
+
+		$('#uwft').css({'top': margin.toString() + "px"});
+	});
+</script>

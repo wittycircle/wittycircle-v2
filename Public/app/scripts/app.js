@@ -80,6 +80,11 @@ var wittyCircleApp = angular
 	    templateUrl : 'views/auth/signup.html',
 	    controller  : 'SignupCtrl',
 	})
+	.state('welcomeuc', {
+		url 		: '/welcome/:uc',
+		templateUrl : 'views/welcome/uc.view.client.html',
+		controller 	: 'welcomeUcCtrl'
+	})
 	.state('password_reset', {
 		url: '/password/reset/:token',
 		templateUrl: 'views/core/reset-password.view.client.html',
@@ -120,11 +125,6 @@ var wittyCircleApp = angular
 		templateUrl : 'views/rank/rank.statistic.view.client.html',
 		controller 	: 'RankCtrl'
 	})
-	.state('statistic', {
-		url 		: '/admin/statistic',
-		templateUrl : 'views/backoffice/statistic.view.client.html',
-		controller 	: 'BackOfficeStatisticCtrl',
-	})
 	.state('messages', {
 		url: '/messages',
 		params: {profile: null, user_id: null, username: null, input: null, userOn: null},
@@ -137,11 +137,11 @@ var wittyCircleApp = angular
             //     ]);
             // }],
 		    auth: function($q, $rootScope, $stateParams) {
-			if ($rootScope.globals.currentUser) {
-			    return true;
-			} else {
-			    return $q.reject('not authorized');
-			}
+				if ($rootScope.globals.currentUser) {
+				    return true;
+				} else {
+				    return $q.reject('not authorized');
+				}
 		    }
 		}
 	})
@@ -174,6 +174,11 @@ var wittyCircleApp = angular
 			    return Authentication.checkAdmin();
 			}
 		}
+	})
+	.state('statistic', {
+		url 		: '/admin/statistic',
+		templateUrl : 'views/backoffice/statistic.view.client.html',
+		controller 	: 'BackOfficeStatisticCtrl',
 	})
 	.state('terms', {
 	    url: '/terms',

@@ -1,0 +1,221 @@
+#backoffice-main-page {
+  padding-top: 61px;
+  background-color: #fafafa;
+  height: 100vh; }
+  #backoffice-main-page .inline {
+    display: inline-block; }
+  #backoffice-main-page .active {
+    background-color: rgba(255, 255, 255, 0.1); }
+  #backoffice-main-page .bo-users, #backoffice-main-page .bo-suggestion-to-projects {
+    -webkit-animation-duration: 200ms;
+    -o-animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    -ms-animation-duration: 200ms;
+    -kthtml-animation-duration: 200ms;
+    animation-duration: 200ms;
+    -webkit-animation-delay: 400ms;
+    -o-animation-delay: 400ms;
+    -moz-animation-delay: 400ms;
+    -ms-animation-delay: 400ms;
+    -kthtml-animation-delay: 400ms;
+    animation-delay: 400ms; }
+  #backoffice-main-page .bo-projects, #backoffice-main-page .bo-suggestion-to-people {
+    -webkit-animation-duration: 200ms;
+    -o-animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    -ms-animation-duration: 200ms;
+    -kthtml-animation-duration: 200ms;
+    animation-duration: 200ms;
+    -webkit-animation-delay: 600ms;
+    -o-animation-delay: 600ms;
+    -moz-animation-delay: 600ms;
+    -ms-animation-delay: 600ms;
+    -kthtml-animation-delay: 600ms;
+    animation-delay: 600ms; }
+  #backoffice-main-page .bo-suggestion-confirmation {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 200px;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px 50px 30px 50px;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 100; }
+    #backoffice-main-page .bo-suggestion-confirmation p {
+      margin-top: 10px;
+      font-family: 'FreigBook';
+      color: red;
+      margin-bottom: 0px; }
+    #backoffice-main-page .bo-suggestion-confirmation .bosc-head {
+      padding: 10px;
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 15px; }
+      #backoffice-main-page .bo-suggestion-confirmation .bosc-head h4 {
+        font-family: 'FreigSem';
+        color: #999999; }
+    #backoffice-main-page .bo-suggestion-confirmation .bosc-body p {
+      font-family: 'FreigMed';
+      font-size: 16px;
+      color: black;
+      margin-bottom: 10px; }
+    #backoffice-main-page .bo-suggestion-confirmation .bosc-body input {
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 6px 18px 8px 18px;
+      margin-right: 15px; }
+  #backoffice-main-page .bo-left-menu {
+    height: 100%;
+    padding-top: 15px;
+    border-right: 1px solid #e5e5e5;
+    background-color: #292C33; }
+    #backoffice-main-page .bo-left-menu li {
+      padding: 10px 30px;
+      font-family: 'FreigMed';
+      font-size: 16px;
+      color: white;
+      text-transform: uppercase;
+      cursor: pointer; }
+      #backoffice-main-page .bo-left-menu li .fa {
+        width: 25px;
+        text-align: center; }
+    #backoffice-main-page .bo-left-menu li:hover {
+      background-color: rgba(255, 255, 255, 0.1); }
+  #backoffice-main-page .bo-right-section1 {
+    vertical-align: top; }
+    #backoffice-main-page .bo-right-section1 h1, #backoffice-main-page .bo-right-section1 h2 {
+      font-family: 'FreigMed';
+      color: black; }
+    #backoffice-main-page .bo-right-section1 .bo-info-witty {
+      padding: 20px 20px; }
+      #backoffice-main-page .bo-right-section1 .bo-info-witty .flot-box {
+        padding: 20px 50px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        margin: 0 10px;
+        text-align: center;
+        box-shadow: 1px 1px 1px 1px #e5e5e5; }
+  #backoffice-main-page .bo-right-section3 {
+    display: none;
+    vertical-align: top; }
+    #backoffice-main-page .bo-right-section3 .bo-suggestion {
+      padding: 50px 60px; }
+      #backoffice-main-page .bo-right-section3 .bo-suggestion h4 {
+        font-family: 'FreigBook';
+        color: black;
+        margin-bottom: 15px;
+        text-transform: uppercase; }
+      #backoffice-main-page .bo-right-section3 .bo-suggestion .flot-box3 {
+        padding: 20px 50px;
+        background-color: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        margin: 0 20px;
+        text-align: center;
+        box-shadow: 1px 1px 1px 1px #e5e5e5; }
+        #backoffice-main-page .bo-right-section3 .bo-suggestion .flot-box3 .fa {
+          margin-bottom: 15px; }
+        #backoffice-main-page .bo-right-section3 .bo-suggestion .flot-box3 .fa-hand-o-down {
+          font-size: 60px; }
+        #backoffice-main-page .bo-right-section3 .bo-suggestion .flot-box3 button {
+          display: block;
+          margin: 0 auto; }
+          #backoffice-main-page .bo-right-section3 .bo-suggestion .flot-box3 button .spinner-load {
+            position: initial;
+            background-color: transparent; }
+  #backoffice-main-page .bo-right-section4 {
+    display: none;
+    vertical-align: top; }
+    #backoffice-main-page .bo-right-section4 .bo-uc-campaign input {
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 7px 10px 8px 10px;
+      margin-left: 10px;
+      width: 250px; }
+    #backoffice-main-page .bo-right-section4 .bo-uc-campaign button {
+      padding: 5px 15px 5px 15px !important;
+      margin-left: 15px; }
+    #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone {
+      text-align: right; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone p {
+        display: inline-block;
+        padding: 4px 10px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        box-shadow: 1px 1px 1px 0px #e5e5e5;
+        cursor: pointer;
+        font-family: 'FreigMed';
+        margin-right: 106px; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone h5 {
+        display: inline-block;
+        font-family: 'FreigBook';
+        color: black; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone p:hover {
+        box-shadow: 1px 1px 1px 1px #e5e5e5; }
+    #backoffice-main-page .bo-right-section4 .bo-uc-list {
+      vertical-align: top;
+      min-width: 400px; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-list h5 {
+        font-family: 'FreigSem';
+        color: black;
+        font-size: 18px;
+        padding: 0px 10px 10px 10px;
+        border-bottom: 1px solid #e5e5e5; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display {
+        padding: 10px 10px;
+        text-align: left; }
+        #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li {
+          padding: 5px 0px;
+          font-family: 'FreigMed';
+          font-size: 16px;
+          text-transform: uppercase;
+          cursor: pointer; }
+          #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info {
+            background-color: #fafafa;
+            padding: 10px 15px;
+            box-shadow: 1px 1px 1px 1px #e5e5e5;
+            border-radius: 3px; }
+            #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button {
+              text-align: right; }
+              #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button {
+                padding: 5px 15px 5px 15px !important; }
+                #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button span {
+                  font-family: 'FreigSem'; }
+                #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button .spinner-load {
+                  position: initial;
+                  background-color: transparent; }
+            #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info span {
+              display: block;
+              text-transform: none;
+              margin-bottom: 5px;
+              font-family: 'FreigBook'; }
+    #backoffice-main-page .bo-right-section4 .flot-box4 {
+      padding: 20px 30px;
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      margin: 20px 10px 10px 10px;
+      text-align: center;
+      box-shadow: 1px 1px 1px 1px #e5e5e5; }
+
+/*
+h1 {
+	margin-bottom: 20px;
+}
+
+.mail-profile {
+	label, button {
+		margin-bottom: 10px;
+		min-width: 400px;
+	}
+}
+*/
+
+/*# sourceMappingURL=backoffice.css.map */

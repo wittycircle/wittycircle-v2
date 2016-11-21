@@ -1,21 +1,4 @@
-<style>
-	#backoffice-mailpanel {
-		padding: 100px 60px 60px 60px;
-		height: 1000px;
-		background-color: #999999;
-	}
-
-	h1 {
-		margin-bottom: 20px;
-	}
-
-	label, button {
-		margin-bottom: 10px;
-		min-width: 400px;
-	}
-
-</style>
-<section id="backoffice-mailpanel">
+<!-- <section id="backoffice-mailpanel">
 
 	<h1>CHAMPAGNE!</h1>
 	<h2>You must removed at first all subscribers in the list before updating a new member list.</h2>
@@ -62,4 +45,141 @@
 		<label>List profiles completed</label>
 		<a href="/admin/panel/profiles"><button>Access List</button></a>
 	</div>
+</section> -->
+
+<section id="backoffice-main-page" ng-init="tab = 1">
+	<aside class="bo-left-menu inline">
+		<ul>
+			<li id="bo-da" ng-click="tab = 1" ng-class="{ active:tab === 1 }"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</li>
+			<li ng-click="tab = 2" ng-class="{ active:tab === 2 }"><i class="fa fa-envelope" aria-hidden="true"></i> Mail/Campaign</li>
+			<li id="bo-suggest" ng-click="tab = 3" ng-class="{ active:tab === 3 }"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Suggestion Campaign</li>
+			<li id="bo-uc" ng-click="tab = 4; initUniversityCampaign()" ng-class="{ active:tab === 4 }"><i class="fa fa-university" aria-hidden="true"></i> University Campaign</li>
+			<li ng-click="tab = 5" ng-class="{ active:tab === 5 }"><i class="fa fa-users" aria-hidden="true"></i> Users Profile</li>
+			<li ng-click="tab = 6" ng-class="{ active:tab === 6 }"><i class="fa fa-globe" aria-hidden="true"></i> Project Network</li>
+		</ul>
+	</aside>
+
+	<div id="brs1" class="bo-right-section1 inline">
+		<div class="bo-info-witty">
+			<div id="bo-users-box" class="bo-users inline flot-box animated zoomIn">
+				<h1>1698</h1>
+				<h2>Users</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-projects inline flot-box animated zoomIn">
+				<h1>256</h1>
+				<h2>Projects</h2>
+			</div>
+		</div>
+	</div>
+	<div id="bsc" class="bo-suggestion-confirmation">
+		<div class="bosc-head">
+			<h4>Confirmation</h4>
+		</div>
+		<div class="bosc-body">
+			<p>Type ADMIN CONFIRM to confirm</p>
+			<input class="inline-block" type="text" ng-model="confirmSuggestion">
+			<button id="boscb" class="inline-block" ng-click="confirmSug()">Confirm</button>
+		</div>
+		<p ng-if="error">Error !</p>
+	</div>
+
+	<div id="brs3" class="bo-right-section3 inline">
+		<div class="bo-suggestion">
+			<div class="bo-suggestion-to-projects inline flot-box3 animated zoomIn">
+				<h4>Suggestion people to projects</h4>
+				<i class="fa fa-hand-o-down" aria-hidden="true"></i>
+				<button id="bstpb" ng-click="suggestion(1)"><span ng-if="!onCharge1">{{suggest1}}</span>
+					<div ng-if="onCharge1" class="spinner-load">
+					<div class="spinner__item1 spinner-item"></div>
+					<div class="spinner__item2 spinner-item"></div>
+					<div class="spinner__item3 spinner-item"></div> 
+				</button>
+			</div>
+
+			<div class="bo-suggestion-to-people inline flot-box3 animated zoomIn">
+				<h4>Suggestion projects to people</h4>
+				<i class="fa fa-hand-o-down" aria-hidden="true"></i>
+				<button id="bstpplb" ng-click="suggestion(2)"><span ng-if="!onCharge2">{{suggest2}}</span>
+					<div ng-if="onCharge2" class="spinner-load">
+					<div class="spinner__item1 spinner-item"></div>
+					<div class="spinner__item2 spinner-item"></div>
+					<div class="spinner__item3 spinner-item"></div>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="brs4" class="bo-right-section4 inline">
+		<div class="bo-uc-campaign flot-box4 inline animated fadeInDown">
+			<label>UC Name</label>
+			<input type="text" placeholder="Enter university name..." ng-model="ucName" />
+			<button ng-click="addUniversity()">Add Csv</button>
+			<div class="import-zone" >
+				<h5>{{csvName}}</h5>
+				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
+			</div>
+		</div>
+		<div class="bo-uc-list flot-box4 inline animated fadeInRight">
+			<h5>University List</h5>
+			<div class="bo-uc-list-display">
+				<ul>
+					<li ng-repeat="ucData in ucDatas">{{ucData.university}}
+						<div class="bo-uc-info">
+							<span>Last Update : {{ucData.creation_date | wittyDateFilter}}</span>
+							<span ng-if="ucData.send_date">Last Send : {{ucData.send_date | wittyDateFilter}}</span>
+							<span ng-if="!ucData.send_date">Last Send : Never</span>
+							<div class="bo-uc-info-button">
+								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university)"><span ng-if="!onCharge3">Shoot!</span>
+									<div ng-if="onCharge3" class="spinner-load">
+									<div class="spinner__item1 spinner-item"></div>
+									<div class="spinner__item2 spinner-item"></div>
+									<div class="spinner__item3 spinner-item"></div> 
+								</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
+<script>
+	$(document).ready(function() {
+	    $('#header-content').css("backgroundColor", "white");
+	    $('#header-content').css("borderBottom", "1px solid #e5e5e5");
+	    $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
+	    $('#hnl').attr("class", "header-nav-list2");
+	    $('#hsb').css("height", "48px");
+	    $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png");
+	    $('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg");
+	    $('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg");
+	    $('.header-log-dropdown').first().css("color", "#999999");
+	    $('#hnlog').attr("class", "header-nav-log2");
+
+	    $('#footerCore').css("display", "none");
+
+	    $(this).click(function(e) {
+	    	if (($('#bstpb').is(e.target) || $('#bstpb').has(e.target).length) || ($('#bstpplb').is(e.target) || $('#bstpplb').has(e.target).length) || ($('#bsc').is(e.target) || $('#bsc').has(e.target).length) || ($('#boucinfo0').is(e.target) || $('#boucinfo0').has(e.target).length) || ($('#boucinfo1').is(e.target) || $('#boucinfo1').has(e.target).length) ) {
+	    		$('#bsc').fadeIn(200);	
+	    	} else
+	    		$('#bsc').fadeOut(200);
+
+	    	if ($('#boscb').is(e.target) || $('#boscb').has(e.target).length)
+	    		$('#bsc').fadeOut(200);
+
+	    	if (e.target.id === "bo-da") {
+	    		$('#brs3').hide();
+	    		$('#brs4').hide();
+	    		$('#brs1').show();
+	    	} else if (e.target.id === "bo-suggest") {
+	    		$('#brs1').hide();
+	    		$('#brs4').hide();
+	    		$('#brs3').css('display', 'inline-block');
+	    	} else if (e.target.id === "bo-uc") {
+	    		$('#brs1').hide();
+	    		$('#brs3').hide();
+	    		$('#brs4').css('display', 'inline-block');
+	    	}
+	    });
+	});
+</script>

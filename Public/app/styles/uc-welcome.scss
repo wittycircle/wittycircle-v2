@@ -1,0 +1,57 @@
+
+.uc-body {
+	height: 100vh;
+	background-image: url('/images/backgrounds/bg-welcome-uc.png');
+	background-position: center center;
+	background-size: cover;
+	overflow: hidden;
+
+	.filter-uc {
+		height: 100vh;
+		background-color: rgba(0, 0, 0, 0.8);
+		text-align: center;
+
+		.filter-text {
+			position: relative;
+
+			h2 {
+				font-family: 'FreigBook';
+				color: white;
+				font-size: 32px;
+				margin-bottom: 10px;
+			}
+
+			p {
+				font-family: 'FreigBook';
+				color: white;
+				font-size: 18px;
+			}
+
+			.popover-button {
+				.fb-login, .go-login {
+					display: inline-block;
+					margin: 5px 5px 5px 5px;
+
+					a {
+						button {
+							padding: 8px 18px 10px 10px !important;
+							font-size: 16px;
+						}
+					}
+				}
+
+				.email-login {
+					font-family: 'FreigBook';
+					font-size: 16px;
+
+					img {
+						height: 15px;
+						margin-right: 5px;
+					}
+				}
+
+			}
+		}
+	}
+
+}

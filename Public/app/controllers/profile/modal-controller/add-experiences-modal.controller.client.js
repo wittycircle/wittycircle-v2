@@ -50,28 +50,36 @@ angular.module('wittyApp').controller('AddExperiencesModalCtrl', function ($time
 		$scope.aboutDescription = member.summary ? member.summary : null;
 		$scope.$apply();
 
-		function recursive(index) {
-			if (linPositions[index]) {
-				newSavePositions.company 			= linPositions[index].company.name || null;
-				newSavePositions.description 		= linPositions[index].summary || null;
-				newSavePositions.location_city		= linPositions[index].location.name || null;
-				newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
-				newSavePositions.title  			= linPositions[index].title || null;
+		if (linPositions) {
+			function recursive(index) {
+				if (linPositions[index]) {
+					newSavePositions.company 			= linPositions[index].company.name || null;
+					newSavePositions.description 		= linPositions[index].summary || null;
+					newSavePositions.location_city		= linPositions[index].location.name || null;
+					newSavePositions.location_country 	= linPositions[index].location.country ? linPositions[index].location.country.name : null;
+					newSavePositions.title  			= linPositions[index].title || null;
 
-				if (linPositions[index].isCurrent)
-					newSavePositions.date_to = "Present";
-				newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
+					if (linPositions[index].isCurrent)
+						newSavePositions.date_to = "Present";
+					newSavePositions.date_from 	= new Date(linPositions[index].startDate.month + "-01-" + linPositions[index].startDate.year);
 
-				$http.post('/experiences', newSavePositions).success(function(res) {
-				    if (res.success)
-						return recursive(index + 1);
-				});			
-			} else {
-				$scope.profileVm.getProfileExp();
-				$modalInstance.dismiss();
-			}
-		};
-		recursive(0);
+					$http.post('/experiences', newSavePositions).success(function(res) {
+					    if (res.success)
+							return recursive(index + 1);
+					});			
+				} else {
+					$scope.profileVm.getProfileExp();
+					$modalInstance.dismiss();
+				}
+			};
+			recursive(0);
+		} else {
+			$scope.onImport 		= false;
+			$scope.noCurrentPosition = true;
+			$timeout(function() {
+				$scope.noCurrentPosition;
+			}, 5000)
+		}
 	};
 
 	function retrieveLinkedinPosition() {

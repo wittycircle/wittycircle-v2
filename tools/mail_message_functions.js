@@ -734,7 +734,7 @@ function sendSuggestionPeopleMailByMandrill(data, project_title, email, first_na
                                         }
                                     ]
                                 };
-
+				
                                 mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result_send) {
                                     return callback(true);
                                 }, function(e) {

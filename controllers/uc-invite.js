@@ -11,7 +11,7 @@ function inviteMailToUc(university, callback) {
 					if (err) throw err;
 					if (list[0]) {
 						function recursive(index) {
-							if (list[index]) {
+							if (list[index] && index < 200) {
 								/* FROM PROFILE SETTING */
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
@@ -58,11 +58,11 @@ function inviteMailToUc(university, callback) {
 
 								/* SEND MAIL */
 								sg.API(request, function(error, response) {
-									if (response.statusCode === 202) {
-										return recursive(index + 1);
-									} else {
-										console.log(error);
-										return recursive(index + 1);
+									if (response.statusCode === 202)
+									    return recursive(index + 1);
+									else {
+									    console.log(error);
+									    return recursive(index + 1);
 									}
 								});
 							} else {

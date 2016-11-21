@@ -12,6 +12,11 @@ angular.module('wittyApp')
 			$scope.suggest1 	= "Don't Panic !";
 			$scope.suggest2 	= "Take it easy ...";
 
+			// function initDashboard() {
+			// 	Retr
+			// };	
+			// initDashboard();
+
 			$scope.getUpdateMail = function(value) {
 				var url;
 
@@ -168,6 +173,7 @@ angular.module('wittyApp')
 
 			$scope.addUniversity = function() {
 				if ($scope.ucName && $scope.ucList) {
+					$scope.onCharge4 = true;
 					var object = {
 						university_name 		: $scope.ucName.capitalizeFirstLetter(),
 						university_mail_list	: $scope.ucList,
@@ -178,6 +184,7 @@ angular.module('wittyApp')
 							$scope.ucName = null;
 							$scope.ucList = [];
 							object = {};
+							$scope.onCharge4 = false;
 						}
 					});
 				} else

@@ -113,7 +113,12 @@
 		<div class="bo-uc-campaign flot-box4 inline animated fadeInDown">
 			<label>UC Name</label>
 			<input type="text" placeholder="Enter university name..." ng-model="ucName" />
-			<button ng-click="addUniversity()">Add Csv</button>
+			<button ng-click="addUniversity()"><span ng-if="!onCharge4">Add Csv</span>
+				<div ng-if="onCharge4" class="spinner-load">
+				<div class="spinner__item1 spinner-item"></div>
+				<div class="spinner__item2 spinner-item"></div>
+				<div class="spinner__item3 spinner-item"></div>
+			</button>
 			<div class="import-zone" >
 				<h5>{{csvName}}</h5>
 				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>

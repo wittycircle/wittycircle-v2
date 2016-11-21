@@ -42,7 +42,9 @@ function inviteMailToUc(university, callback) {
 								mail.personalizations[0].addSubstitution(
 									new helper.Substitution('-fpicture-', result[0].profile_picture));
 								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-ucName-', urlUc));
+									new helper.Substitution('-ucName-', university));
+								mail.personalizations[0].addSubstitution(
+									new helper.Substitution('-ucUrl-', urlUc));
 
 								mail.setTemplateId('9ed77865-aba3-401f-b1c8-2aa4ce7934ee');
 

@@ -140,6 +140,9 @@
     #backoffice-main-page .bo-right-section4 .bo-uc-campaign button {
       padding: 5px 15px 5px 15px !important;
       margin-left: 15px; }
+      #backoffice-main-page .bo-right-section4 .bo-uc-campaign button .spinner-load {
+        position: initial;
+        background-color: transparent; }
     #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone {
       text-align: right; }
       #backoffice-main-page .bo-right-section4 .bo-uc-campaign .import-zone p {
@@ -187,7 +190,8 @@
               #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button {
                 padding: 5px 15px 5px 15px !important; }
                 #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button span {
-                  font-family: 'FreigSem'; }
+                  font-family: 'FreigSem';
+                  margin-bottom: 0; }
                 #backoffice-main-page .bo-right-section4 .bo-uc-list .bo-uc-list-display li .bo-uc-info .bo-uc-info-button button .spinner-load {
                   position: initial;
                   background-color: transparent; }

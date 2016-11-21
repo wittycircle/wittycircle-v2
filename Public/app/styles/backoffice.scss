@@ -199,6 +199,11 @@
 			button {
 				padding: 5px 15px 5px 15px !important;
 				margin-left: 15px;
+
+				.spinner-load {
+					position: initial;
+					background-color: transparent;
+				}
 			}
 
 			.import-zone {
@@ -264,6 +269,7 @@
 								padding: 5px 15px 5px 15px !important;
 								span {
 									font-family: 'FreigSem';
+									margin-bottom: 0;
 								}
 
 								.spinner-load {

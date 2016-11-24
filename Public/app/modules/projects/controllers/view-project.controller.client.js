@@ -42,8 +42,8 @@
         }
     });
 
-    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_NeedsResolve', 'project_FeedbacksResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', 'Project_History', '$location', 'Feedbacks', '$stateParams'];
-    function viewProjectCtrl (project_InvolvmentResolve, project_NeedsResolve, project_FeedbacksResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, Project_History, $location, Feedbacks, $stateParams) {
+    viewProjectCtrl.$inject = ['project_InvolvmentResolve', 'project_NeedsResolve', 'project_creatorUserResolve', 'project_categoryResolve', 'project_followersResolve', 'projectResolve', '$scope', '$rootScope', 'Beauty_encode', 'showbottomAlert', '$sce', 'Projects', '$http', 'emptyBg', 'Users', '$state', '$timeout', 'Project_Follow', 'Project_History', '$location', 'Feedbacks', '$stateParams', 'RetrieveData'];
+    function viewProjectCtrl (project_InvolvmentResolve, project_NeedsResolve, project_creatorUserResolve, project_categoryResolve, project_followersResolve, projectResolve, $scope, $rootScope, Beauty_encode, showbottomAlert, $sce, Projects, $http, emptyBg, Users, $state, $timeout, Project_Follow, Project_History, $location, Feedbacks, $stateParams, RetrieveData) {
 
         var vm = this;
 
@@ -63,28 +63,41 @@
         vm.newAsk = {};
         vm.followNumber;
         vm.currentShortUrl;
+        vm.askTitle;
+        vm.askComment;
+        vm.commentInAsk;
 
 
         // function
         // link function to vm(this constructor in fact)
         // about functions
-        vm.encodeUrl = encodeUrl;
-        vm.showbottomAl = showbottomAl;
-        vm.goToMessage = goToMessage;
-        vm.goToProfile = goToProfile;
-        vm.voteProjectCard = voteProjectCard;
+        vm.encodeUrl        = encodeUrl;
+        vm.showbottomAl     = showbottomAl;
+        vm.goToMessage      = goToMessage;
+        vm.goToProfile      = goToProfile;
+        vm.voteProjectCard  = voteProjectCard;
         // vm.followProject = followProject;
-        // feedbacks functions
-        vm.isOwnedReply = isOwnedReply;
-        vm.deleteReply = deleteReply;
-        vm.pushReply = pushReply;
+        // DISCUSSION FUNCTION
+        vm.initDiscussion       = initDiscussion;
+        vm.publishQuestion      = publishQuestion;
+        vm.deleteDiscussion     = deleteDiscussion;
+        vm.publishReply         = publishReply;
+        vm.deleteReply          = deleteReply;
+        vm.updateDiscussion     = updateDiscussion;
+        vm.updateReply          = updateReply;
+        vm.initReplyValue       = initReplyValue;
+        vm.initDiscussionValue  = initDiscussionValue;
+        vm.displayEdit          = displayEdit;
+        // vm.isOwnedReply = isOwnedReply;
+        // vm.deleteReply = deleteReply;
+        // vm.pushReply = pushReply;
         // asks functions
-        vm.showorhideAskForm = showorhideAskForm;
-        vm.initAsks = initAsks;
-        vm.addAsk = addAsk;
-        vm.deployAskReplies = deployAskReplies;
-        vm.pushAskReply = pushAskReply;
-        vm.deleteAskReply = deleteAskReply;
+        // vm.showorhideAskForm = showorhideAskForm;
+        // vm.initAsks = initAsks;
+        // vm.addAsk = addAsk;
+        // vm.deployAskReplies = deployAskReplies;
+        // vm.pushAskReply = pushAskReply;
+        // vm.deleteAskReply = deleteAskReply;
 
         // $scope value
         $scope.showdelete = false;
@@ -92,8 +105,8 @@
 
         init();
         isEditable();
-        initFeedbacks();
-        initAsks();
+        initDiscussion();
+        // initAsks();
         initNeeds();
 
         // function
@@ -331,175 +344,318 @@
             }
         };
 
+        // ///////////////////////////////////////
+        // ////////////// DISCUSSION //////////////
+        // ///////////////////////////////////////
 
-        ///////////////////////////////////////
-        ////////////// FEEDBACKS //////////////
-        ///////////////////////////////////////
+        function initDiscussion() {
+            RetrieveData.ppdData('/discussion/', 'POST', null, vm.project.id, null).then(function(res) {
+                if (res.success)
+                    vm.discussions = res.data;
+            });
+        };
 
-        // function
-        // init Feedbacks
-        function initFeedbacks () {
-            vm.questions = project_FeedbacksResolve.data;
-            vm.totalNumber = vm.totalNumber + vm.questions.length;
-        }
+        function publishQuestion() {
+            if (currentUser) {
+                var object = {
+                    user_id         : currentUser.id,
+                    project_id      : vm.project.id,
+                    title           : vm.askTitle,
+                    message         : vm.askComment,
+                };
+                RetrieveData.ppdData('/discussion/add/discussion', 'POST', object, null, null).then(function(res) {
+                    if (res.success) {
+                        vm.askTitle = null;
+                        vm.askComment = null;
+                        object.id = res.insertId;
+                        object.user_info = {
+                            picture : currentUser.profile_picture_icon,
+                            username : currentUser.username,
+                            first_name : currentUser.first_name,
+                            last_name : currentUser.last_name,
+                        };
+                        vm.discussions.push(object);
+                        $('#pfa').slideUp(200);
+                    } else
+                        vm.error = true;
+                });
+            } else
+                console.log("ERROR");
+        };
 
-        // function deployReplies (question) {
-        //     if (question.isCollapse == false || !question.isCollapse) {
-        //         question.isCollapse = true;
-        //         vm.isCollapse = true;
+        function updateDiscussion(discuss_id, user_id, index) {
+            if (currentUser.id === user_id) {
+                var object = {
+                    discuss_id  : discuss_id,
+                    title       : vm.updateAskTitle,
+                    message     : vm.updateAskComment,
+                };
+                RetrieveData.ppdData('/discussion/put/discussion', 'PUT', object, null, null).then(function(res) {
+                    if (res.success) {
+                        vm.discussions[index].title     = vm.updateAskTitle;
+                        vm.discussions[index].message   = vm.updateAskComment; 
+                        vm.updateAskTitle = null;
+                        vm.updateAskComment = null;
+                        $($scope.classt).slideUp(200);
+                    }
+                });
+            }
+        };
+
+        function deleteDiscussion(user_id, discuss_id, index) {
+            if (currentUser.id === user_id) {
+                RetrieveData.ppdData('/discussion/delete/', 'DELETE', null, discuss_id, null).then(function(res) {
+                    if (res.success)
+                        vm.discussions.splice(index, 1);
+                });
+            }
+        };
+
+        function publishReply(pd_id, discuss_index) {
+            if (currentUser) {
+                var object = {
+                    user_id                 : currentUser.id,
+                    project_discussion_id   : pd_id,
+                    message                 : vm.commentInAsk,
+                };
+
+                RetrieveData.ppdData('/discussion/add/reply', 'POST', object, null, null).then(function(res) {
+                    if (res.success) {
+                        vm.commentInAsk = null;
+                        object.id = res.insertId;
+                        object.user_info2 = {
+                            picture : currentUser.profile_picture_icon,
+                            username : currentUser.username,
+                            first_name : currentUser.first_name,
+                            last_name : currentUser.last_name,
+                        };
+                        if (!vm.discussions[discuss_index].comments)
+                            vm.discussions[discuss_index].comments = [];
+                        vm.discussions[discuss_index].comments.push(object);
+                        $($scope.classt).slideUp(200);
+                    }
+                });
+            } else
+                console.log("ERROR");
+        };
+
+        function updateReply(comment_id, user_id, index, parent_index) {
+            if (currentUser.id === user_id) {
+                 var object = {
+                    pdr_id      : comment_id,
+                    message     : vm.updateCommentInAsk,
+                };
+                console.log(index, parent_index);
+                RetrieveData.ppdData('/discussion/put/reply', 'PUT', object, null, null).then(function(res) {
+                    if (res.success) {
+                        vm.discussions[parent_index].comments[index].message = vm.updateCommentInAsk;
+                        vm.updateCommentInAsk = null;
+                        $($scope.classt).slideUp(200);
+                    }
+                });
+            }
+        };
+
+        function deleteReply(user_id, comment_id, index, parent_index) {
+            if (currentUser.id === user_id) {
+                RetrieveData.ppdData('/discussion/delete/reply/', 'DELETE', null, comment_id, null).then(function(res) {
+                    if (res.success)
+                        vm.discussions[parent_index].comments.splice(index, 1);
+                });
+            }
+        };
+
+        function initDiscussionValue(title, message) {
+            vm.updateAskTitle   = title;
+            vm.updateAskComment = message;
+        };
+
+        function initReplyValue(message) {
+            vm.updateCommentInAsk = message;
+        };
+
+        function displayEdit(class_name, index, parent_index) {
+            $($scope.classt).slideUp(200);
+            if (parent_index >= 0)
+                $scope.classt = class_name + index.toString() + '-' + parent_index.toString();
+            else
+                $scope.classt = class_name + index.toString();
+            if ($($scope.classt).css('display') === "none") {
+                $($scope.classt).slideDown(200);
+            } else {
+                $($scope.classt).slideUp(200);
+            }
+        };
+
+
+        // ///////////////////////////////////////
+        // ////////////// FEEDBACKS //////////////
+        // ///////////////////////////////////////
+
+        // // function
+        // // init Feedbacks
+        // function initFeedbacks () {
+        //     vm.questions = project_FeedbacksResolve.data;
+        //     vm.totalNumber = vm.totalNumber + vm.questions.length;
+        // }
+
+        // // function deployReplies (question) {
+        // //     if (question.isCollapse == false || !question.isCollapse) {
+        // //         question.isCollapse = true;
+        // //         vm.isCollapse = true;
+        // //     } else {
+        // //         question.isCollapse = false;
+        // //         vm.isCollapse = false;
+        // //     }
+        // // }
+
+        // function isOwnedReply (reply, creator_user_id) {
+
+        //     if (reply.user_id === creator_user_id) {
+        //         reply.owned = true;
         //     } else {
-        //         question.isCollapse = false;
-        //         vm.isCollapse = false;
+        //         reply.owned = false;
         //     }
         // }
 
-        function isOwnedReply (reply, creator_user_id) {
+        // function deleteReply (reply, question_index) {
+        //     Feedbacks.deleteFeedbackReply(reply.id, function (response) {
+        //         if (response.serverStatus === 2) {
+        //             var index = vm.questions[question_index].replies.indexOf(reply);
+        //             vm.questions[question_index].replies.splice(index, 1);
+        //         } else {
+        //             console.log('error');
+        //         }
+        //     });
+        // }
 
-            if (reply.user_id === creator_user_id) {
-                reply.owned = true;
-            } else {
-                reply.owned = false;
-            }
-        }
+        // function pushReply (message, feedback_id, question) {
+        //     var data = {};
 
-        function deleteReply (reply, question_index) {
-            Feedbacks.deleteFeedbackReply(reply.id, function (response) {
-                if (response.serverStatus === 2) {
-                    var index = vm.questions[question_index].replies.indexOf(reply);
-                    vm.questions[question_index].replies.splice(index, 1);
-                } else {
-                    console.log('error');
-                }
-            });
-        }
-
-        function pushReply (message, feedback_id, question) {
-            var data = {};
-
-            data.feedback_id = feedback_id;
-            data.description = message;
-            data.creator_picture = currentUser.profile_picture_icon;
-            data.creator_first_name = currentUser.first_name;
-            data.creator_last_name = currentUser.last_name;
-            data.url = vm.currentUrl;
+        //     data.feedback_id = feedback_id;
+        //     data.description = message;
+        //     data.creator_picture = currentUser.profile_picture_icon;
+        //     data.creator_first_name = currentUser.first_name;
+        //     data.creator_last_name = currentUser.last_name;
+        //     data.url = vm.currentUrl;
             
-            Feedbacks.addFeedbackReply(data, function (response) {
-                if (response.success) {
-                    var reply = {};
-                    reply.id = response.insertId;
-                    reply.feedback_id = feedback_id;
-                    reply.description = message;
-                    reply.created_at = new Date();
-                    reply.isOwned = true;
-                    reply.user_profile = {};
-                    reply.user_profile.profile_picture_icon = currentUser.profile_picture_icon;
-                    reply.user_profile.first_name = currentUser.first_name;
-                    reply.user_profile.last_name = currentUser.last_name;
-                    if (question.replies) {
-                        question.replies.push(reply);
-                    } else {
-                        question.replies = [];
-                        question.replies.push(reply);
-                    }
-                } else {
-                    console.error('cant push reply', data);
-                }
-            });
-        };
+        //     Feedbacks.addFeedbackReply(data, function (response) {
+        //         if (response.success) {
+        //             var reply = {};
+        //             reply.id = response.insertId;
+        //             reply.feedback_id = feedback_id;
+        //             reply.description = message;
+        //             reply.created_at = new Date();
+        //             reply.isOwned = true;
+        //             reply.user_profile = {};
+        //             reply.user_profile.profile_picture_icon = currentUser.profile_picture_icon;
+        //             reply.user_profile.first_name = currentUser.first_name;
+        //             reply.user_profile.last_name = currentUser.last_name;
+        //             if (question.replies) {
+        //                 question.replies.push(reply);
+        //             } else {
+        //                 question.replies = [];
+        //                 question.replies.push(reply);
+        //             }
+        //         } else {
+        //             console.error('cant push reply', data);
+        //         }
+        //     });
+        // };
 
-        ///////////////////////////////////////
-        //////////////// ASKS /////////////////
-        ///////////////////////////////////////
+        // ///////////////////////////////////////
+        // //////////////// ASKS /////////////////
+        // ///////////////////////////////////////
 
-        function showorhideAskForm (event) {
-            if (!currentUser) {
-                showbottomAlert.pop_it(event);
-            } else {
-                if (vm.showAskForm == true) {
-                    vm.showAskForm = false;
-                    return;
-                }
-                if (vm.showAskForm == false) {
-                    vm.showAskForm = true;
-                }
-            }
-        }
+        // function showorhideAskForm (event) {
+        //     if (!currentUser) {
+        //         showbottomAlert.pop_it(event);
+        //     } else {
+        //         if (vm.showAskForm == true) {
+        //             vm.showAskForm = false;
+        //             return;
+        //         }
+        //         if (vm.showAskForm == false) {
+        //             vm.showAskForm = true;
+        //         }
+        //     }
+        // }
 
-        function initAsks () {
-            $http.get('/ask/public_id/' + $stateParams.public_id).success(function (response) {
-                vm.asks = response;
-                vm.totalNumber += vm.asks.length;
-            });
-        };
+        // function initAsks () {
+        //     $http.get('/ask/public_id/' + $stateParams.public_id).success(function (response) {
+        //         vm.asks = response;
+        //         vm.totalNumber += vm.asks.length;
+        //     });
+        // };
 
-        function addAsk (newAsk) {
-            newAsk.project_id = vm.project.id;
-            newAsk.creator_img = currentUser.profile_picture_icon;
-            newAsk.first_name = currentUser.first_name;
-            newAsk.last_name = currentUser.last_name;
-            newAsk.project_public_id = vm.project.public_id;
-            newAsk.url  = vm.currentUrl;
-            $http.post('/asks', newAsk).success(function (response) {
-                // ok now gonna need to push it etc ...
-                $timeout(function () {
-                    newAsk.created_at = new Date();
-                    vm.asks.push(newAsk);
-                    vm.newAsk = {};
-                    vm.totalNumber = vm.totalNumber + 1;
-                }, 500);
-                if (vm.showAskForm == true) {
-                    vm.showAskForm = false;
-                    return;
-                }
-                if (vm.showAskForm == false) {
-                    vm.showAskForm = true;
-                    return;
-                }
-            })
-        };
+        // function addAsk (newAsk) {
+        //     newAsk.project_id = vm.project.id;
+        //     newAsk.creator_img = currentUser.profile_picture_icon;
+        //     newAsk.first_name = currentUser.first_name;
+        //     newAsk.last_name = currentUser.last_name;
+        //     newAsk.project_public_id = vm.project.public_id;
+        //     newAsk.url  = vm.currentUrl;
+        //     $http.post('/asks', newAsk).success(function (response) {
+        //         // ok now gonna need to push it etc ...
+        //         $timeout(function () {
+        //             newAsk.created_at = new Date();
+        //             vm.asks.push(newAsk);
+        //             vm.newAsk = {};
+        //             vm.totalNumber = vm.totalNumber + 1;
+        //         }, 500);
+        //         if (vm.showAskForm == true) {
+        //             vm.showAskForm = false;
+        //             return;
+        //         }
+        //         if (vm.showAskForm == false) {
+        //             vm.showAskForm = true;
+        //             return;
+        //         }
+        //     })
+        // };
 
-        function deployAskReplies (ask) {
-            if (ask.isCollapse == false || !ask.isCollapse) {
-                ask.isCollapse = true;
-                vm.isCollapse = true;
-            } else {
-                ask.isCollapse = false;
-                vm.isCollapse = false;
-            }
-        };
+        // function deployAskReplies (ask) {
+        //     if (ask.isCollapse == false || !ask.isCollapse) {
+        //         ask.isCollapse = true;
+        //         vm.isCollapse = true;
+        //     } else {
+        //         ask.isCollapse = false;
+        //         vm.isCollapse = false;
+        //     }
+        // };
 
-        function pushAskReply (message, ask_id, ask) {
-            var data = {};
+        // function pushAskReply (message, ask_id, ask) {
+        //     var data = {};
 
-            data.ask_id = ask_id;
-            data.description = message;
-            data.creator_picture = currentUser.profile_picture_icon;
-            data.creator_first_name = currentUser.first_name;
-            data.creator_last_name = currentUser.last_name;
-            data.url = vm.currentUrl;
+        //     data.ask_id = ask_id;
+        //     data.description = message;
+        //     data.creator_picture = currentUser.profile_picture_icon;
+        //     data.creator_first_name = currentUser.first_name;
+        //     data.creator_last_name = currentUser.last_name;
+        //     data.url = vm.currentUrl;
 
-            $http.post('/ask_reply/add', data).success(function (response) {
-                if (currentUser.id == ask.user_id) {
-                    ask.owned = true;
-                }
-                data.created_at = new Date();
-                ask.replies.push(data);
-            });
-        };
+        //     $http.post('/ask_reply/add', data).success(function (response) {
+        //         if (currentUser.id == ask.user_id) {
+        //             ask.owned = true;
+        //         }
+        //         data.created_at = new Date();
+        //         ask.replies.push(data);
+        //     });
+        // };
 
-        $scope.prettyText = function(text) {
-            text = text.replace(/\r?\n/g, '<br />');
-            return text;
-        };
+        // $scope.prettyText = function(text) {
+        //     text = text.replace(/\r?\n/g, '<br />');
+        //     return text;
+        // };
 
-        function deleteAskReply (ask_reply, question_index) {
-            $http.delete('/ask_reply/delete/' + ask_reply.id).success(function (response) {
-                if (response.serverStatus == 2) {
-                    var index = vm.asks[question_index].replies.indexOf(ask_reply);
-                    vm.asks[question_index].replies.splice(index, 1);
-                }
-            });
-        };
+        // function deleteAskReply (ask_reply, question_index) {
+        //     $http.delete('/ask_reply/delete/' + ask_reply.id).success(function (response) {
+        //         if (response.serverStatus == 2) {
+        //             var index = vm.asks[question_index].replies.indexOf(ask_reply);
+        //             vm.asks[question_index].replies.splice(index, 1);
+        //         }
+        //     });
+        // };
 
         ///////////////////////////////////////
         /////////////// NEEDS /////////////////

@@ -11,11 +11,16 @@ angular.module('wittyApp')
 			$scope.numProjects 	= 0;
 			$scope.suggest1 	= "Don't Panic !";
 			$scope.suggest2 	= "Take it easy ...";
+			$scope.numberSend 	= [];
 
-			// function initDashboard() {
-			// 	Retr
-			// };	
-			// initDashboard();
+			function initDashboard() {
+				RetrieveData.getData('/statistics/mainstat', 'GET').then(function(res) {
+					if (res.success) {
+						$scope.stats = res.data;
+					}
+				});
+			};	
+			initDashboard();
 
 			$scope.getUpdateMail = function(value) {
 				var url;
@@ -97,12 +102,17 @@ angular.module('wittyApp')
 					});
 				} else if (value === 3) {
 					$scope.onCharge3 = true;
-					RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend}, '', false).then(function(res) {
-						if (res.success) {
-							$scope.onCharge3 = false;
-							$scope.ucDatas = res.data;
-						}
-					});
+					if ($scope.numberSend[$scope.ucIndex] && $scope.numberSend[$scope.ucIndex].num) {
+						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend, number: $scope.numberSend[$scope.ucIndex].num}, '', false).then(function(res) {
+							if (res.success) {
+								$scope.onCharge3 = false;
+								$scope.numberSend = null;
+								$scope.ucDatas = res.data;
+								$scope.numberSend 	= [];
+							}
+						});
+					} else
+						$scope.error = true;
 				} else
 					$scope.error = true;
 			};
@@ -191,9 +201,10 @@ angular.module('wittyApp')
 					$scope.errorUc = true;
 			};
 
-			$scope.sendUcCampaign = function(uc) {
+			$scope.sendUcCampaign = function(uc, index) {
 				$scope.suggestValue = 3;
 				$scope.ucSend 		= uc;
+				$scope.ucIndex 		= index;
 			};
 		}
 	});

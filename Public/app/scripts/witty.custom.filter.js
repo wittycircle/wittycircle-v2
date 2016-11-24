@@ -206,7 +206,8 @@ angular.module('wittyApp')
 		return function(input) { // convert default format date to display date's format
 
 			var date, WDay, gdate, gmonth, dateNow, dateNowParse, gPS, gPMin, gPH, gPD, gPM, gPY, d;
-
+			if (!input)
+				input = new Date();
 			date 		= new Date(input);
 			dateNow     = new Date();
 			// get day of the week, month and year
@@ -363,6 +364,11 @@ angular.module('wittyApp')
 	   return filtered;
        }
    };
+})
+.filter('htmlToPlaintext', function() {
+    return function(text) {
+    	return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
 })
 .filter( 'domain', function () {
   return function ( input ) {

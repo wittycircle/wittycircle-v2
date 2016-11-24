@@ -1,0 +1,277 @@
+#project_feedback {
+	max-width: 800px;
+	padding: 30px 60px;
+	margin: 0 auto;
+
+	.inline {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	img {
+		height: 36px;
+		width: 36px;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
+
+	span {
+		font-family: 'freigBook';
+		font-size: 14px;
+		outline: none;
+	}
+
+	.freigBook {
+		font-family: 'freigBook';
+		font-size: 16px;
+		color: black;
+	}
+
+	.freigMed {
+		font-family: 'freigMed';
+		font-size: 16px;
+		color: black;
+	}
+
+	.freigSem {
+		font-family: 'freigSem';
+		font-size: 18px;
+		color: black;
+	}
+
+	.freigLight {
+		font-family: 'freigLight';
+		font-size: 32px;
+		color: #999999;
+	}
+
+	label {
+		margin-right: 10px;
+	}
+
+	input {
+		border: 1px solid #e5e5e5;
+		padding: 6px 15px;
+		border-radius: 3px;
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
+	textarea {
+		border-radius: 4px;
+	}
+
+	.project_feedback_ask {
+		display: none;
+		margin-top: 20px;
+
+		.redactor-editor {
+			min-height: 80px !important;
+			padding: 10px 15px;
+			font-family: 'freigBook';
+			border: 1px solid #e5e5e5;
+			border-radius: 4px;
+
+			p {
+				margin-bottom: 0;
+				font-size: 16px;
+			}
+		}
+
+		.redactor-placeholder {
+			font-family: 'freigBook';
+			font-size: 16px;
+		}
+
+		.pfa-button {
+			margin-top: 15px;
+			text-align: right;
+			button {
+				padding: 4px 15px 4px 15px;
+			}
+		}
+	}
+
+	.project_feedback_header {
+		margin-bottom: 35px;
+
+		h1 {
+			color: #6C6969;
+			font-family: 'freigBook';
+		}
+
+		.pfh_add {
+			position: relative;
+			top: 2px;
+			float: right;
+			padding: 5px 20px;
+			border: 1px solid black;
+			border-radius: 4px;
+			-webkit-transition: all 200ms linear;
+			-o-transition: all 200ms linear;
+			-moz-transition: all 200ms linear;
+			-ms-transition: all 200ms linear;
+			-kthtml-transition: all 200ms linear;
+			transition: all 200ms linear;
+			cursor: pointer;
+
+			span {
+				text-transform: uppercase;
+				font-size: 14px;
+
+				i {
+					position: relative;
+					top: 1px;
+					margin-right: 5px;
+				}
+			}
+		}
+
+		.pfh_add:hover {
+			background-color: rgba(0, 0, 0, 0.8);
+
+			span {
+				color: white;
+			}
+		}
+	}
+
+	.project_feedback_body {
+		padding: 25px 0;
+
+		h4 {
+			font-size: 18px;
+			margin-bottom: 2px;
+		}
+
+		.p-info {
+			margin-right: 10px;
+			color: #999999;
+			text-decoration: underline;
+		}
+
+		.p-info:hover {
+			text-decoration: none;
+		}
+
+		.p-text {
+			color: black;
+		}
+
+		.project_feedback_comments {
+			.project_feedback_main {
+				.pfmt_info {
+					max-width: 550px;
+				}
+				.pfm_title {
+
+					.pfmt_list {
+						width: 100%;
+						margin-bottom: 35px;
+
+						.pfmt_setting {
+							float: right;
+
+							span {
+								img {
+									position: relative;
+									border-radius: 0;
+									width: 16px;
+									height: auto;
+									bottom: 3px;
+									margin: 3px;
+								}
+
+								.fa-trash {
+									color: #999999;
+									font-size: 18px;
+								}
+							}
+						}
+
+						.pfm-comments {
+							padding-left: 50px;
+							margin-top: 10px;
+						}
+
+						.pfm-comments2 {
+							margin-top: 0;
+						}
+
+						.pfm-action {
+							margin-bottom: 15px;
+							
+							.pfm-vote-image {
+								position: relative;
+								bottom: 1px;
+								height: 10px;
+								width: auto;
+								border-radius: 0;
+								margin-right: 5px;
+							}
+
+							span {
+								font-family: 'freigMed';
+								text-transform: uppercase;
+								color: #999999;
+								margin-right: 15px;
+								cursor: pointer;
+
+								i {
+									font-size: 14px;
+									margin-right: 4px;
+								}
+							}
+
+							span:hover {
+								color: #6C6969;
+							}
+
+						}
+
+						.pfm-reply-ask {
+							display: none;
+							margin-bottom: 25px;
+
+							.redactor-editor {
+								min-height: 80px !important;
+								padding: 10px 15px;
+								font-family: 'freigBook';
+								border: 1px solid #e5e5e5;
+								border-radius: 4px;
+
+								p {
+									margin-bottom: 0;
+									font-size: 16px;
+								}
+							}
+
+							.pfmrs-button {
+								text-align: right;
+								margin-top: 10px;
+
+								button {
+									padding: 4px 15px;
+								}
+							}
+						}
+					}
+
+					.pfm-updateReply {
+						display: none;
+						padding-left: 50px;
+					}
+
+					/*.pfc_img {
+						width: 46px;
+						float: left;
+					}*/
+
+					.pfc_info {
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}

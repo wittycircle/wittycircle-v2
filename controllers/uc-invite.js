@@ -1,17 +1,17 @@
 /**** UC INVITE ****/
 
 /* BABSON UNIVERSITY INVITATION MAILS */
-function inviteMailToUc(university, callback) {
+function inviteMailToUc(university, number, callback) {
 	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1864',
 		function(err, result) {
 			if (err) throw err;
 
-			pool.query('SELECT first_name, email FROM invite_university WHERE university = ?', university,
+			pool.query('SELECT id, first_name, email FROM invite_university WHERE university = ? AND send_date IS NULL LIMIT ?', [university, number],
 				function(err, list) {
 					if (err) throw err;
 					if (list[0]) {
 						function recursive(index) {
-							if (list[index] && index < 200) {
+							if (list[index]) {
 								/* FROM PROFILE SETTING */
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
@@ -58,9 +58,12 @@ function inviteMailToUc(university, callback) {
 
 								/* SEND MAIL */
 								sg.API(request, function(error, response) {
-									if (response.statusCode === 202)
-									    return recursive(index + 1);
-									else {
+									if (response.statusCode === 202) {
+										pool.query('UPDATE invite_university SET send_date = NOW() WHERE id = ?', list[index].id,
+											function(err, done) {
+												return recursive(index + 1);
+											});
+									} else {
 									    console.log(error);
 									    return recursive(index + 1);
 									}
@@ -81,8 +84,20 @@ exports.getUniversityList = function(req, res) {
 	pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 		function(err, result) {
 			if (err) throw err;
-			else
-				return res.status(200).send({success: true, data: result});
+			else {
+				function recursive(index) {
+					if (result[index]) {
+						pool.query('SELECT count(*) as number FROM invite_university WHERE university = ? AND send_date is null', result[index].university,
+							function(err, result2) {
+								if (err) throw err;
+								result[index].rest = result2[0].number;
+								return recursive(index + 1);
+							});
+					} else
+						return res.status(200).send({success: true, data: result});
+				};
+				recursive(0);
+			}
 		});
 };
 
@@ -113,18 +128,15 @@ exports.addUniversityMailList = function(req, res) {
 };
 
 exports.sendUcCampaignMail = function(req, res) {
-	if (req.body.uc) {
-		inviteMailToUc(req.body.uc, function(done) {
+	if (req.body.uc && req.body.number) {
+		var number = parseInt(req.body.number);
+		inviteMailToUc(req.body.uc, number, function(done) {
 			if (done) {
-				pool.query('UPDATE invite_university SET send_date = NOW() WHERE university = ?', req.body.uc,
-					function(err, result) {
-						if (err) throw err
-						pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
-							function(err, data) {
-								if (err) throw err;
-								else
-									return res.status(200).send({success: true, data: data});
-							});
+				pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+					function(err, data) {
+						if (err) throw err;
+						else
+							return res.status(200).send({success: true, data: data});
 					});
 			} else
 				return res.status(400).send("FORBIDDEN !")

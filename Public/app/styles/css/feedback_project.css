@@ -1,0 +1,176 @@
+#project_feedback {
+  max-width: 800px;
+  padding: 30px 60px;
+  margin: 0 auto; }
+  #project_feedback .inline {
+    display: inline-block;
+    vertical-align: top; }
+  #project_feedback img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    margin-right: 10px; }
+  #project_feedback span {
+    font-family: 'freigBook';
+    font-size: 14px;
+    outline: none; }
+  #project_feedback .freigBook {
+    font-family: 'freigBook';
+    font-size: 16px;
+    color: black; }
+  #project_feedback .freigMed {
+    font-family: 'freigMed';
+    font-size: 16px;
+    color: black; }
+  #project_feedback .freigSem {
+    font-family: 'freigSem';
+    font-size: 18px;
+    color: black; }
+  #project_feedback .freigLight {
+    font-family: 'freigLight';
+    font-size: 32px;
+    color: #999999; }
+  #project_feedback label {
+    margin-right: 10px; }
+  #project_feedback input {
+    border: 1px solid #e5e5e5;
+    padding: 6px 15px;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 10px; }
+  #project_feedback textarea {
+    border-radius: 4px; }
+  #project_feedback .project_feedback_ask {
+    display: none;
+    margin-top: 20px; }
+    #project_feedback .project_feedback_ask .redactor-editor {
+      min-height: 80px !important;
+      padding: 10px 15px;
+      font-family: 'freigBook';
+      border: 1px solid #e5e5e5;
+      border-radius: 4px; }
+      #project_feedback .project_feedback_ask .redactor-editor p {
+        margin-bottom: 0;
+        font-size: 16px; }
+    #project_feedback .project_feedback_ask .redactor-placeholder {
+      font-family: 'freigBook';
+      font-size: 16px; }
+    #project_feedback .project_feedback_ask .pfa-button {
+      margin-top: 15px;
+      text-align: right; }
+      #project_feedback .project_feedback_ask .pfa-button button {
+        padding: 4px 15px 4px 15px; }
+  #project_feedback .project_feedback_header {
+    margin-bottom: 35px; }
+    #project_feedback .project_feedback_header h1 {
+      color: #6C6969;
+      font-family: 'freigBook'; }
+    #project_feedback .project_feedback_header .pfh_add {
+      position: relative;
+      top: 2px;
+      float: right;
+      padding: 5px 20px;
+      border: 1px solid black;
+      border-radius: 4px;
+      -webkit-transition: all 200ms linear;
+      -o-transition: all 200ms linear;
+      -moz-transition: all 200ms linear;
+      -ms-transition: all 200ms linear;
+      -kthtml-transition: all 200ms linear;
+      transition: all 200ms linear;
+      cursor: pointer; }
+      #project_feedback .project_feedback_header .pfh_add span {
+        text-transform: uppercase;
+        font-size: 14px; }
+        #project_feedback .project_feedback_header .pfh_add span i {
+          position: relative;
+          top: 1px;
+          margin-right: 5px; }
+    #project_feedback .project_feedback_header .pfh_add:hover {
+      background-color: rgba(0, 0, 0, 0.8); }
+      #project_feedback .project_feedback_header .pfh_add:hover span {
+        color: white; }
+  #project_feedback .project_feedback_body {
+    padding: 25px 0; }
+    #project_feedback .project_feedback_body h4 {
+      font-size: 18px;
+      margin-bottom: 2px; }
+    #project_feedback .project_feedback_body .p-info {
+      margin-right: 10px;
+      color: #999999;
+      text-decoration: underline; }
+    #project_feedback .project_feedback_body .p-info:hover {
+      text-decoration: none; }
+    #project_feedback .project_feedback_body .p-text {
+      color: black; }
+    #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfmt_info {
+      max-width: 550px; }
+    #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title {
+      /*.pfc_img {
+      	width: 46px;
+      	float: left;
+      }*/ }
+      #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list {
+        width: 100%;
+        margin-bottom: 35px; }
+        #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfmt_setting {
+          float: right; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfmt_setting span img {
+            position: relative;
+            border-radius: 0;
+            width: 16px;
+            height: auto;
+            bottom: 3px;
+            margin: 3px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfmt_setting span .fa-trash {
+            color: #999999;
+            font-size: 18px; }
+        #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-comments {
+          padding-left: 50px;
+          margin-top: 10px; }
+        #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-comments2 {
+          margin-top: 0; }
+        #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action {
+          margin-bottom: 15px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action .pfm-vote-image {
+            position: relative;
+            bottom: 1px;
+            height: 10px;
+            width: auto;
+            border-radius: 0;
+            margin-right: 5px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action span {
+            font-family: 'freigMed';
+            text-transform: uppercase;
+            color: #999999;
+            margin-right: 15px;
+            cursor: pointer; }
+            #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action span i {
+              font-size: 14px;
+              margin-right: 4px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action span:hover {
+            color: #6C6969; }
+        #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-reply-ask {
+          display: none;
+          margin-bottom: 25px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-reply-ask .redactor-editor {
+            min-height: 80px !important;
+            padding: 10px 15px;
+            font-family: 'freigBook';
+            border: 1px solid #e5e5e5;
+            border-radius: 4px; }
+            #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-reply-ask .redactor-editor p {
+              margin-bottom: 0;
+              font-size: 16px; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-reply-ask .pfmrs-button {
+            text-align: right;
+            margin-top: 10px; }
+            #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-reply-ask .pfmrs-button button {
+              padding: 4px 15px; }
+      #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfm-updateReply {
+        display: none;
+        padding-left: 50px; }
+      #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfc_info {
+        width: 100%; }
+
+/*# sourceMappingURL=feedback_project.css.map */

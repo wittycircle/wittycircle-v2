@@ -1,0 +1,203 @@
+<section id="feedback_project">
+  <div class="pdt-tp-bt-75">
+    <div class="container-custom-project feedback_container mgr-bt-40">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="subtitle-feedbacks">Help the team</h3>
+        </div>
+        <div class="col-md-6">
+          <a class="link_top pull-right" data-ng-if="vm.editable" data-ui-sref="updateproject.community({public_id: vm.project.public_id})"><i class="fa fa-plus"></i> Add/Delete a question</a>
+        </div>
+      </div>
+      <div class="cards-feedbacks-two" data-ng-repeat="question in vm.questions">
+        <div id="cards" class="row feedback_description">
+          <div class="img-feedback">
+            <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{::question.creator_img}}" alt="creator-img">
+          </div>
+          <div class="text-feedback">
+            <h5 data-ng-bind="::question.title"></h5>
+            <p class="from_text">
+	      <a ng-href="{{question.username}}" class="underline_user">{{::question.first_name}} {{::question.last_name}}</a>
+              <span am-time-ago="::question.date_added"></span>
+              <span class="feedback_badge">CREATOR</span>
+            </p>
+          </div>
+        </div>
+        <div id="replies" class="row-custom-feed animate-if" >
+          <div class="row feedback_description" data-ng-if="question.description">
+            <div class="col-md-11 text_description_feed">
+              <p data-ng-bind="question.description" style="margin-left: 15px;"></p>
+            </div>
+          </div>
+          <div class="row feedback_description" >
+            <!--<div class="row feedback_description mgr-bt-20" data-ng-repeat="reply in question.replies" data-ng-init="vm.isOwnedReply(reply, project.creator_user_id)">-->
+            <div class="row feedback_description" data-ng-repeat="reply in question.replies">
+              <div class="col-md-1">
+              </div>
+              <div class="feedback-reply-field nomargin pd-20" data-ng-class="{ 'nested_replies_2': reply.owned }">
+                <div class="tempo-class">
+                  <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{::reply.user_profile.profile_picture_icon}}">
+                </div>
+                <div class="tempo2-class" data-ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
+                  <div class="title">
+		    <a ng-href="/{{reply.username}}" class="underline_user" data-ng-bind="reply.user_profile.first_name + ' ' + reply.user_profile.last_name"></a>
+                    <span class="time_reply" am-time-ago="reply.created_at"></span>
+                      <span data-ng-init="isInTheTeam(project, reply)">
+                        <span class="feedback_badge" data-ng-if="vm.editable === true">CREATOR</span>
+                      </span>
+                    <span class="pull-right delete_icon fadein fadeout" data-ng-show="showdelete" data-ng-if="reply.isOwned === true" data-ng-click="vm.deleteReply(reply, $parent.$parent.$index)"><i class="fa fa-trash-o"></i></span>
+                  </div>
+                  <p class="feedback_reply_text" data-ng-bind="reply.description"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row feedback_textarea" ng-if="vm.loggedUser">
+            <div class="tempo3-class">
+              <img class="img-responsive img-circle" height="36px" width="36px" data-ng-src="{{vm.loggedUser.profile_picture_icon}}">
+            </div>
+            <div class="tempo4-class">
+              <form id="textareaQuestionReply">
+                <textarea class="textarea_new_reply" data-ng-model="reply" placeholder="Enter your comment..."></textarea>
+              </form>
+              <button class="post_comment_reply pull-right" onclick="ClearValueQuestion()" data-ng-click="vm.pushReply(reply, question.id, question)">Post comment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Placeholder for admin -->
+      <div ng-if="vm.questions.length === 0 && vm.editable === true">
+        <div class="no_feedbacks center-block">
+          <h4 class="text-center title_no_comments">Haven't asked a question yet?</h4>
+          <p class="text-center text_no_comments">
+            Questions and comments will be displayed here.
+          </p>
+          <button data-ng-if="vm.editable" class="text-center button_post_comment center-block" data-ui-sref="updateproject.community({public_id: vm.project.public_id})">Ask a question</button>
+        </div>
+      </div>
+      <!-- end Placeholder for admin -->
+      <!-- Placeholder for random -->
+      <div ng-if="vm.questions.length == 0 && (vm.editable === false || !vm.editable)">
+        <div class="no_feedbacks center-block">
+          <h4 class="text-center title_no_comments">No questions from the team yet.</h4>
+          <p class="text-center text_no_comments">
+            <span data-ng-click="vm.followProject(vm.project.public_id)" class="text-underline">{{vm.followText}}</span> the project <span data-ng-if="vm.followText === 'Follow'">and be notified by the project activity.</span>
+          </p>
+        </div>
+      </div>
+      <!-- end Placeholder for random -->
+    </div>
+
+    <!-- SECOND PART -->
+    <div id="asks" class="container-custom-project feedback_container">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="subtitle-feedbacks">Ask the creators</h3>
+        </div>
+        <div class="col-md-6">
+          <a class="link_top pull-right" data-ng-if="vm.editable === false || !vm.editable" data-ng-click="vm.showorhideAskForm($event)"><i class="fa fa-plus"></i>Add a question</a>
+        </div>
+      </div>
+      <div class="row feedback_description cards-feedbacks-two" data-ng-if="vm.loggedUser && vm.showAskForm">
+        <div class="row feedback_description mgr-bt-20">
+          <div class="col-md-1">
+            <img class="img-responsive img-circle" height="36px" width="36px" ng-src="{{vm.loggedUser.profile_picture_icon}}" alt="profile-picture">
+          </div>
+          <div class="col-md-11 no-padding">
+            <form id="formNewAskInput">
+              <input class="input_new_ask" placeholder="Title" data-ng-model="vm.newAsk.title"></input>
+            </form>
+          </div>
+        </div>
+        <div class="row feedback_textarea_question">
+          <div class="col-md-11 col-md-offset-1">
+            <form style="margin-left: 15px" id="formNewAskTextarea">
+              <textarea class="textarea_new_reply" data-ng-model="vm.newAsk.message" placeholder="Add some details..."></textarea>
+            </form>
+            <button class="button_post_comment button_ask pull-right" data-ng-click="vm.addAsk(vm.newAsk)">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="cards-feedbacks-two" data-ng-repeat="ask in vm.asks">
+        <div id="cards" class="row feedback_description">
+          <div class="img-feedback">
+            <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{ask.creator_img}}" alt="creator-img">
+          </div>
+          <div class="view-project-feedback-ask">
+            <h5 data-ng-bind="ask.title"></h5>
+            <p class="from_text">
+              <a ng-href="/{{ask.username}}" class="underline_user">{{ask.first_name}} {{ask.last_name}}</a>
+              <span am-time-ago="ask.created_at"></span>
+            </p>
+          </div>
+        </div>
+        <div id="replies" class="row-custom-feed animate-if">
+          <div class="row feedback_description" data-ng-if="ask.message">
+            <div class="col-md-11 text_description_feed">
+              <p data-ng-bind="ask.message" style="margin-left: 15px;"></p>
+            </div>
+          </div>
+          <div class="row feedback_description" >
+            <div class="row feedback_description feedback_description_asks" data-ng-repeat="reply in ask.replies" ng-init="isOwnedReply(reply, project.creator_user_id)">
+              <div class="col-md-1">
+              </div>
+              <div class="feedback-reply-field nomargin" data-ng-class="{ 'nested_replies_2': reply.owned }">
+                <div class="tempo-class">
+                  <img class="img-circle img-responsive" height="36px" width="36px" data-ng-src="{{reply.creator_picture}}">
+                </div>
+                <div class="tempo2-class" ng-mouseenter="showdelete = true" data-ng-mouseleave="showdelete = false">
+                  <div class="title">
+                    <a ng-href="/{{reply.username}}" class="underline_user">{{reply.creator_first_name}} {{reply.creator_last_name}}</a>
+                    <span class="time_reply" am-time-ago="reply.created_at">
+                      <span ng-init="isInTheTeam(project, reply)">
+                        <span class="feedback_badge" data-ng-if="reply.inTeam">CREATOR</span>
+                      </span>
+                    <span class="pull-right delete_icon fadein fadeout" data-ng-show="showdelete" data-ng-if="reply.isOwned === true" data-ng-click="vm.deleteAskReply(reply, $parent.$parent.$index)"><i class="fa fa-trash-o"></i></span>
+                  </div>
+                  <p class="feedback_reply_text" data-ng-bind-html="prettyText(reply.description)"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row feedback_textarea" data-ng-if="vm.loggedUser">
+            <div class="tempo3-class">
+              <img class="img-responsive img-circle" height="36px" width="36px" data-ng-src="{{::vm.loggedUser.profile_picture_icon}}">
+            </div>
+            <div class="tempo4-class">
+              <form id="textareaAskReply">
+                <textarea class="textarea_new_reply" data-ng-model="reply" placeholder="Enter your comment..."></textarea>
+              </form>
+              <button class="post_comment_reply pull-right" onclick="ClearValueAsk()" data-ng-click="vm.pushAskReply(reply, ask.id, ask)">Post comment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="vm.asks.length === 0 && vm.editable === true">
+        <div class="no_feedbacks center-block">
+          <h4 class="text-center title_no_comments">No one has asked a question yet.</h4>
+          <p class="text-center text_no_comments">
+            Comments and questions from the community will be listed here.
+          </p>
+        </div>
+      </div>
+      <div ng-if="vm.asks.length === 0 && (vm.editable === false || !vm.editable)">
+        <div class="no_feedbacks center-block">
+          <h4 class="text-center title_no_comments">No one has asked a question yet.</h4>
+          <p class="text-center text_no_comments">
+            Comments and questions from the community will be listed here.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+function ClearValueAsk() {
+    document.getElementById("textareaAskReply").reset();
+}
+function ClearValueQuestion() {
+    document.getElementById("textareaQuestionReply").reset();
+}
+</script>
+</section>

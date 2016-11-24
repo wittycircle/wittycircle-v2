@@ -3,6 +3,7 @@
 	background-color: #fafafa;
 	
 	height: 100vh;
+	overflow-x: hidden;
 
 	.inline {
 		display: inline-block;
@@ -40,6 +41,79 @@
 		-ms-animation-delay: 600ms;
 		-kthtml-animation-delay: 600ms;
 		animation-delay: 600ms;
+	}
+
+	.bo-messages {
+		-webkit-animation-duration: 200ms;
+		-o-animation-duration: 200ms;
+		-moz-animation-duration: 200ms;
+		-ms-animation-duration: 200ms;
+		-kthtml-animation-duration: 200ms;
+		animation-duration: 200ms;
+		-webkit-animation-delay: 800ms;
+		-o-animation-delay: 800ms;
+		-moz-animation-delay: 800ms;
+		-ms-animation-delay: 800ms;
+		-kthtml-animation-delay: 800ms;
+		animation-delay: 800ms;
+	}
+	.bo-upvote {
+		-webkit-animation-duration: 200ms;
+		-o-animation-duration: 200ms;
+		-moz-animation-duration: 200ms;
+		-ms-animation-duration: 200ms;
+		-kthtml-animation-duration: 200ms;
+		animation-duration: 200ms;
+		-webkit-animation-delay: 1000ms;
+		-o-animation-delay: 1000ms;
+		-moz-animation-delay: 1000ms;
+		-ms-animation-delay: 1000ms;
+		-kthtml-animation-delay: 1000ms;
+		animation-delay: 1000ms;
+	}
+	.bo-follows {
+		-webkit-animation-duration: 200ms;
+		-o-animation-duration: 200ms;
+		-moz-animation-duration: 200ms;
+		-ms-animation-duration: 200ms;
+		-kthtml-animation-duration: 200ms;
+		animation-duration: 200ms;
+		-webkit-animation-delay: 1200ms;
+		-o-animation-delay: 1200ms;
+		-moz-animation-delay: 1200ms;
+		-ms-animation-delay: 1200ms;
+		-kthtml-animation-delay: 1200ms;
+		animation-delay: 1200ms;
+	}
+
+	.bo-views {
+		-webkit-animation-duration: 200ms;
+		-o-animation-duration: 200ms;
+		-moz-animation-duration: 200ms;
+		-ms-animation-duration: 200ms;
+		-kthtml-animation-duration: 200ms;
+		animation-duration: 200ms;
+		-webkit-animation-delay: 1400ms;
+		-o-animation-delay: 1400ms;
+		-moz-animation-delay: 1400ms;
+		-ms-animation-delay: 1400ms;
+		-kthtml-animation-delay: 1400ms;
+		animation-delay: 1400ms;
+	}
+
+	.bo-todayActive {
+		-webkit-animation-duration: 200ms;
+		-o-animation-duration: 200ms;
+		-moz-animation-duration: 200ms;
+		-ms-animation-duration: 200ms;
+		-kthtml-animation-duration: 200ms;
+		animation-duration: 200ms;
+		-webkit-animation-delay: 1600ms;
+		-o-animation-delay: 1600ms;
+		-moz-animation-delay: 1600ms;
+		-ms-animation-delay: 1600ms;
+		-kthtml-animation-delay: 1600ms;
+		animation-delay: 1600ms;
 	}
 
 	.bo-suggestion-confirmation {
@@ -97,6 +171,7 @@
 		padding-top: 15px;
 		border-right: 1px solid #e5e5e5;
 		background-color: #292C33;
+		width: 22%;
 
 		li {
 			padding: 10px 30px;
@@ -119,9 +194,16 @@
 
 	.bo-right-section1 {
 		vertical-align: top;
+		width: 75%;
 
-		h1, h2 {
-			font-family: 'FreigMed';
+		h1 {
+			font-family: 'FreigBook';
+			color: black;
+			font-size: 32px;
+		}
+
+		h2 {
+		 	font-family: 'FreigMed';
 			color: black;
 		}
 
@@ -133,6 +215,7 @@
 				border: 1px solid #e5e5e5;
 				border-radius: 10px;
 				margin: 0 10px;
+				margin-bottom: 20px;
 				text-align: center;
 				box-shadow: 1px 1px 1px 1px #e5e5e5;
 			}
@@ -194,6 +277,8 @@
 				padding: 7px 10px 8px 10px;
 				margin-left: 10px;
 				width: 250px;
+				font-size: 16px;
+				font-family: 'FreigBook';
 			}
 
 			button {
@@ -262,6 +347,16 @@
 						padding: 10px 15px;
 						box-shadow: 1px 1px 1px 1px #e5e5e5;
 						border-radius: 3px;
+
+						input {
+							border: 1px solid #e5e5e5;
+							border-radius: 4px;
+							padding: 7px 10px 8px 10px;
+							width: 250px;
+							font-size: 16px;
+							font-family: 'FreigBook';
+							margin-bottom: 10px;
+						}
 
 						.bo-uc-info-button {
 							text-align: right;

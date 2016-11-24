@@ -12,7 +12,6 @@
         service.createFeedbacks = createFeedbacks;
         service.getFeedbacksbyProjectId = getFeedbacksbyProjectId;
         service.getFeedbacksbyProjectPublicId = getFeedbacksbyProjectPublicId;
-        service.getFeedbacksbyProjectPublicIdUnresolved = getFeedbacksbyProjectPublicIdUnresolved;
         service.deleteFeedbacks = deleteFeedbacks;
         service.deleteFeedbackReply = deleteFeedbackReply;
         service.addFeedbackReply = addFeedbackReply;
@@ -39,14 +38,6 @@
                 callback(error_response);
             });
         };
-
-        function getFeedbacksbyProjectPublicIdUnresolved (public_id) {
-            if (public_id) {
-                return $http.get('/project/' + public_id + '/feedbacks/public');
-            } else {
-                return null;
-            }
-        }
 
         function deleteFeedbacks (feedbacks_id, callback) {
             $http.delete('/feedback/' + feedbacks_id).success(function (response) {

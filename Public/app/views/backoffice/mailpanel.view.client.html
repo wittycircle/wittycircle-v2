@@ -62,12 +62,32 @@
 	<div id="brs1" class="bo-right-section1 inline">
 		<div class="bo-info-witty">
 			<div id="bo-users-box" class="bo-users inline flot-box animated zoomIn">
-				<h1>1698</h1>
+				<h1>{{stats.numUsers}}</h1>
 				<h2>Users</h2>
 			</div>
 			<div id="bo-projects-box" class="bo-projects inline flot-box animated zoomIn">
-				<h1>256</h1>
+				<h1>{{stats.numProjects}}</h1>
 				<h2>Projects</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-messages inline flot-box animated zoomIn">
+				<h1>{{stats.numMessages}}</h1>
+				<h2>Messages</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-upvote inline flot-box animated zoomIn">
+				<h1>{{stats.numUpvote}}</h1>
+				<h2>Upvotes</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-follows inline flot-box animated zoomIn">
+				<h1>{{stats.numFollows}}</h1>
+				<h2>Users Follow</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-views inline flot-box animated zoomIn">
+				<h1>{{stats.numViews}}</h1>
+				<h2>Views</h2>
+			</div>
+			<div id="bo-projects-box" class="bo-todayActive inline flot-box animated zoomIn">
+				<h1>{{stats.numTodayActive}}</h1>
+				<h2>Active Users</h2>
 			</div>
 		</div>
 	</div>
@@ -133,8 +153,11 @@
 							<span>Last Update : {{ucData.creation_date | wittyDateFilter}}</span>
 							<span ng-if="ucData.send_date">Last Send : {{ucData.send_date | wittyDateFilter}}</span>
 							<span ng-if="!ucData.send_date">Last Send : Never</span>
+							<span ng-if="ucData.rest">Stand: {{ucData.rest}} to shoot</span>
+							<span ng-if="!ucData.rest">Stand: All mail are sended</span>
+							<input type="text" placeholder="Enter number to send..." ng-model="numberSend[$index].num">
 							<div class="bo-uc-info-button">
-								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university)"><span ng-if="!onCharge3">Shoot!</span>
+								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
 									<div ng-if="onCharge3" class="spinner-load">
 									<div class="spinner__item1 spinner-item"></div>
 									<div class="spinner__item2 spinner-item"></div>

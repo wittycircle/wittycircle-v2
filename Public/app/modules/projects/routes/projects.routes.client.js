@@ -105,9 +105,6 @@
             project_InvolvmentResolve: function ($stateParams, Project_Involvment) {
               return Project_Involvment.getAllUsersInvolvedByPublicId($stateParams.public_id);
             },
-            project_FeedbacksResolve: function ($stateParams, Feedbacks) {
-              return Feedbacks.getFeedbacksbyProjectPublicIdUnresolved($stateParams.public_id);
-            },
             project_NeedsResolve: function ($stateParams, Needs) {
                 return Needs.getNeedsByProjectPublicIdUnresolved($stateParams.public_id);
             }

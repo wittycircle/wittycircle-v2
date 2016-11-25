@@ -272,7 +272,7 @@ exports.getCardProfileHome = function(req, res) {
                                                                     return res.status(200).send({success: true, data: array});
                                                                 });
                                                             } else {
-                                                                var newResult = result.slice(0, 5);
+                                                                var newResult = result.slice(0, 4);
                                                                 pf.sortCardProfile(newResult, function(array) {
                                                                     return res.status(200).send({success: true, data: array});
                                                                 });
@@ -280,7 +280,7 @@ exports.getCardProfileHome = function(req, res) {
                                                         }
                                                     });
                                             } else {
-                                                var newResult = result.slice(0, 5);
+                                                var newResult = result.slice(0, 4);
                                                 pf.sortCardProfile(newResult, function(array) {
                                                     return res.status(200).send({success: true, data: array});
                                                 });

@@ -42,7 +42,7 @@
 			<div class="viewProject-nav">
 				<ul class="viewProject-category">
 					<li data-ui-sref="viewproject({public_id: vm.project.public_id, title: vm.encodeUrl(vm.project.title)})">About</li>
-					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="vm.totalNumber" data-ng-if="vm.totalNumber"></div></li>
+					<li data-ui-sref=".feedback">Feedback <div class="circle_number" data-ng-bind="vm.discussions.length" data-ng-if="vm.discussions.length"></div></li>
 					<li class="last-li" data-ui-sref=".openings">Get involved <div class="circle_number" data-ng-bind="vm.openings.length" data-ng-if="vm.openings.length > 0"></div></li>
 				</ul>
 

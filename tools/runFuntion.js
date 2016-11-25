@@ -101,5 +101,5 @@ function moveAsk() {
 		});
 };
 
-// moveFeedbacks();
-// moveAsk();
+moveFeedbacks();
+moveAsk();

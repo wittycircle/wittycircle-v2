@@ -156,6 +156,7 @@
 							<span ng-if="ucData.rest">Stand: {{ucData.rest}} to shoot</span>
 							<span ng-if="!ucData.rest">Stand: All mail are sended</span>
 							<input type="text" placeholder="Enter number to send..." ng-model="numberSend[$index].num">
+							<input style="display: block" type="text" placeholder="Enter number of students..." ng-model="numberSend[$index].students">
 							<div class="bo-uc-info-button">
 								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
 									<div ng-if="onCharge3" class="spinner-load">

@@ -22,6 +22,45 @@ function getUsersInformation(user_id, callback) {
 		});
 };
 
+/*** GET PROJECT DISCUSSION LIKE ***/
+function getProjectDiscussionLike(req, pd_id, callback) {
+    pool.query('SELECT count(*) AS number FROM project_discussion_likes WHERE project_discussion_id = ?', pd_id,
+        function(err, result) {
+            if (err) throw err;
+            else {
+                if (req.isAuthenticated()) {
+                    pool.query('SELECT count(*) AS number FROM project_discussion_likes WHERE project_discussion_id = ? AND user_id = ?', [pd_id, req.user.id],
+                        function(err, result2) {
+                            if (err) throw err;
+                            else
+                                return callback(result[0].number, result2[0].number);
+                        })
+                } else
+                    return callback(result[0].number, 0);
+            }
+        });
+};
+
+/*** GET PROJECT REPLY LIKE ***/
+function getProjectReplyLike(req, pdr_id, callback) {
+    pool.query('SELECT count(*) AS number FROM project_reply_likes WHERE project_reply_id = ?', pdr_id,
+        function(err, result) {
+            if (err) throw err;
+            else {
+                if (req.isAuthenticated()) {
+                    pool.query('SELECT count(*) AS number FROM project_reply_likes WHERE project_reply_id = ? AND user_id = ?', [pdr_id, req.user.id],
+                        function(err, result2) {
+                            if (err) throw err;
+                            else
+                                return callback(result[0].number, result2[0].number);
+                        });
+                } else
+                    return callback(result[0].number, 0);
+            }
+        });
+};
+
+
 /*** GET PROJECT DISCUSSIONS ***/
 exports.getProjectsDiscussion = function(req, res) {
 	/* Validation */
@@ -38,24 +77,32 @@ exports.getProjectsDiscussion = function(req, res) {
     				if (result[index]) {
     					getUsersInformation(result[index].user_id, function(user_info) {
     						result[index].user_info = user_info;
-	    					pool.query('SELECT * FROM project_discussion_replies WHERE project_discussion_id = ?', result[index].id,
-	    						function(err, result2) {
-	    							if (err) throw err;
-	    							var new_array = [];
-	    							function recursive2(index2) {
-	    								if (result2[index2]) {
-	    									getUsersInformation(result2[index2].user_id, function(user_info2) {
-	    										result2[index2].user_info2 = user_info2;
-	    										new_array.push(result2[index2]);
-	    										return recursive2(index2 + 1);
-	    									});
-	    								} else {
-	    									result[index].comments = new_array;
-	    									return recursive(index + 1);
-	    								}
-	    							};
-	    							recursive2(0);
-	    						});
+                            getProjectDiscussionLike(req, result[index].id, function(likes, myLike) {
+                                result[index].numLike = likes; 
+                                result[index].myLike = myLike;
+    	    					pool.query('SELECT * FROM project_discussion_replies WHERE project_discussion_id = ?', result[index].id,
+    	    						function(err, result2) {
+    	    							if (err) throw err;
+    	    							var new_array = [];
+    	    							function recursive2(index2) {
+    	    								if (result2[index2]) {
+    	    									getUsersInformation(result2[index2].user_id, function(user_info2) {
+                                                    getProjectReplyLike(req, result2[index2].id, function(rLikes, myRLike) {
+        	    										result2[index2].user_info2 = user_info2;
+                                                        result2[index2].numRLike = rLikes;
+                                                        result2[index2].myRLike = myRLike;
+        	    										new_array.push(result2[index2]);
+        	    										return recursive2(index2 + 1);
+                                                    });
+    	    									});
+    	    								} else {
+    	    									result[index].comments = new_array;
+    	    									return recursive(index + 1);
+    	    								}
+    	    							};
+    	    							recursive2(0);
+    	    						});
+                            });
 	    				});
     				} else
     					return res.status(200).send({success: true, data: result});
@@ -218,6 +265,77 @@ exports.deleteProjectDiscussionReply = function(req, res) {
     		});
     }
 };
+
+/*** POST PROJECT DISCUSSION LIKE ***/
+exports.postProjectDiscussionLike = function(req, res) {
+    /* Validation */
+    req.checkBody('user_id', 'Error Message').isInt();
+    req.checkBody('project_discussion_id', 'Error Message').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+        return res.status(400).send(errors);
+    } else {
+        pool.query('SELECT count(*) AS number FROM project_discussion_likes WHERE user_id = ? AND project_discussion_id = ?', [req.body.user_id, req.body.project_discussion_id],
+            function(err, check) {
+                if (err) throw err;
+                else {
+                    if (!check[0].number) {
+                        pool.query('INSERT INTO project_discussion_likes SET ?', req.body,
+                            function(err, result) {
+                                if (err) throw err;
+                                return res.status(200).send({success: true, message: "Like"});
+                            });
+                    } else {
+                        pool.query('DELETE FROM project_discussion_likes WHERE user_id = ? AND project_discussion_id = ?', [req.body.user_id, req.body.project_discussion_id],
+                            function(err, result2) {
+                                if (err) throw err;
+                                return res.status(200).send({success: true, message: "Unlike"});
+                            });
+                    }
+                }
+            });
+    }
+};
+
+/*** POST PROJECT REPLY LIKE ***/
+exports.postProjectReplyLike = function(req, res) {
+    req.checkBody('user_id', 'Error Message').isInt();
+    req.checkBody('project_reply_id', 'Error Message').isInt();
+
+    var errors = req.validationErrors(true);
+    if (errors) {
+        return res.status(400).send(errors);
+    } else {
+        pool.query('SELECT count(*) AS number FROM project_reply_likes WHERE user_id = ? AND project_reply_id = ?', [req.body.user_id, req.body.project_reply_id],
+            function(err, check) {
+                if (err) throw err;
+                else {
+                    if (!check[0].number) {
+                        pool.query('INSERT INTO project_reply_likes SET ?', req.body,
+                            function(err, result) {
+                                if (err) throw err;
+                                return res.status(200).send({success: true, message: "Like"});
+                            });
+                    } else {
+                        pool.query('DELETE FROM project_reply_likes WHERE user_id = ? AND project_reply_id = ?', [req.body.user_id, req.body.project_reply_id],
+                            function(err, result2) {
+                                if (err) throw err;
+                                return res.status(200).send({success: true, message: "Unlike"});
+                            });
+                    }
+                }
+            });
+    }
+};
+
+
+
+
+
+
+
+
 
 
 

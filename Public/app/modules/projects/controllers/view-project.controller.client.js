@@ -87,6 +87,8 @@
         vm.updateReply          = updateReply;
         vm.initReplyValue       = initReplyValue;
         vm.initDiscussionValue  = initDiscussionValue;
+        vm.getVoteDiscussion    = getVoteDiscussion;
+        vm.getVoteReply         = getVoteReply;
         vm.displayEdit          = displayEdit;
         // vm.isOwnedReply = isOwnedReply;
         // vm.deleteReply = deleteReply;
@@ -374,6 +376,7 @@
                             first_name : currentUser.first_name,
                             last_name : currentUser.last_name,
                         };
+                        object.numLike = 0;
                         vm.discussions.push(object);
                         $('#pfa').slideUp(200);
                     } else
@@ -429,6 +432,7 @@
                             first_name : currentUser.first_name,
                             last_name : currentUser.last_name,
                         };
+                        object.numRLike = 0;
                         if (!vm.discussions[discuss_index].comments)
                             vm.discussions[discuss_index].comments = [];
                         vm.discussions[discuss_index].comments.push(object);
@@ -472,6 +476,47 @@
 
         function initReplyValue(message) {
             vm.updateCommentInAsk = message;
+        };
+
+        function getVoteDiscussion(pd_id, index) {
+            if (currentUser) {
+                var object = {
+                    user_id                 : currentUser.id,
+                    project_discussion_id   : pd_id
+                }
+                RetrieveData.ppdData('/discussion/add/like', 'POST', object, null, null).then(function(res) {
+                    if (res.success) {
+                        if (res.message === "Like") {
+                            vm.discussions[index].numLike++;
+                            vm.discussions[index].myLike = 1;
+                        } else {
+                            vm.discussions[index].numLike--;
+                            vm.discussions[index].myLike = 0;
+                        }
+                    }
+                });
+            }
+        };
+
+        function getVoteReply(pdr_id, index, parent_index) {
+            console.log(index, parent_index);
+            if (currentUser) {
+                var object = {
+                    user_id             : currentUser.id,
+                    project_reply_id    : pdr_id
+                }
+                RetrieveData.ppdData('/discussion/add/reply/like', 'POST', object, null, null).then(function(res) {
+                    if (res.success) {
+                        if (res.message === "Like") {
+                            vm.discussions[parent_index].comments[index].numRLike++;
+                            vm.discussions[parent_index].comments[index].myRLike = 1;
+                        } else {
+                            vm.discussions[parent_index].comments[index].numRLike--;
+                            vm.discussions[parent_index].comments[index].myRLike = 0;
+                        }
+                    }
+                });
+            }
         };
 
         function displayEdit(class_name, index, parent_index) {

@@ -128,19 +128,49 @@ exports.addUniversityMailList = function(req, res) {
 };
 
 exports.sendUcCampaignMail = function(req, res) {
-	if (req.body.uc && req.body.number) {
+	if (req.body.uc && req.body.number && req.body.students) {
 		var number = parseInt(req.body.number);
-		inviteMailToUc(req.body.uc, number, function(done) {
-			if (done) {
-				pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
-					function(err, data) {
-						if (err) throw err;
-						else
-							return res.status(200).send({success: true, data: data});
-					});
-			} else
-				return res.status(400).send("FORBIDDEN !")
-		});
+		pool.query('UPDATE invite_university SET number_students = ? WHERE university = ?', [req.body.students, req.body.uc],
+			function(err, update) {
+				if (err) throw err;
+				inviteMailToUc(req.body.uc, number, function(done) {
+					if (done) {
+						pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+							function(err, data) {
+								if (err) throw err;
+								else
+									return res.status(200).send({success: true, data: data});
+							});
+					} else
+						return res.status(400).send("FORBIDDEN !")
+				});
+			});
 	} else
 		return res.status(404).send("ERROR !");
+};
+
+exports.getUcStudentsNumber = function(req, res) {
+	pool.query('SELECT * FROM invite_university WHERE university = ?', req.params.university, 
+		function(err, check) {
+			if (err) throw err;
+			if (check[0]) {
+				// if (check[0].number_students)
+				// 	var new_number = check[0].number_students + 3;
+				// else 
+				// 	var new_number = 3;
+				pool.query('UPDATE invite_university SET number_students = number_students + 5 WHERE university = ?', req.params.university,
+					function(err, update) {
+						if (err) throw err;
+						pool.query('SELECT number_students FROM invite_university WHERE university = ? GROUP BY university', req.params.university,
+							function(err, result) {
+								if (err) throw err;
+								if (!result[0])
+									return res.status(200).send({success: false});
+								else
+									return res.status(200).send({success: true, students: result[0].number_students});
+							});
+					});
+			} else
+				return res.status(200).send({success: false});
+		});
 };

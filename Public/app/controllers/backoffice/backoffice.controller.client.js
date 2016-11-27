@@ -12,6 +12,7 @@ angular.module('wittyApp')
 			$scope.suggest1 	= "Don't Panic !";
 			$scope.suggest2 	= "Take it easy ...";
 			$scope.numberSend 	= [];
+			$scope.number
 
 			function initDashboard() {
 				RetrieveData.getData('/statistics/mainstat', 'GET').then(function(res) {
@@ -102,8 +103,8 @@ angular.module('wittyApp')
 					});
 				} else if (value === 3) {
 					$scope.onCharge3 = true;
-					if ($scope.numberSend[$scope.ucIndex] && $scope.numberSend[$scope.ucIndex].num) {
-						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend, number: $scope.numberSend[$scope.ucIndex].num}, '', false).then(function(res) {
+					if ($scope.numberSend[$scope.ucIndex] && $scope.numberSend[$scope.ucIndex].num && $scope.numberSend[$scope.ucIndex].students) {
+						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend, number: $scope.numberSend[$scope.ucIndex].num, students: $scope.numberSend[$scope.ucIndex].students}, '', false).then(function(res) {
 							if (res.success) {
 								$scope.onCharge3 = false;
 								$scope.numberSend = null;

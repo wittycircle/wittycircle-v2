@@ -48,7 +48,8 @@
 								</div>
 							</div>
 							<div class="pfm-action">
-								<!-- <span style="font-family: Arial"><img class="pfm-vote-image" src="/images/Upvote_Icon_bw.svg" alt="up"> 0</span> -->
+								<span ng-if="!discussion.myLike" ng-click="vm.getVoteDiscussion(discussion.id, $index)" style="font-family: Arial"><img class="pfm-vote-image" src="/images/arrow-up-icon-g.svg" alt="up"> {{discussion.numLike}}</span>
+								<span ng-if="discussion.myLike" ng-click="vm.getVoteDiscussion(discussion.id, $index)" style="font-family: Arial; color: #504F4F"><img class="pfm-vote-image" src="/images/arrow-up-icon-moreg.svg" alt="up"> {{discussion.numLike}}</span>
 								<span id="pfmare" ng-click="vm.displayEdit('#pfmarea-', $index)"><i class="fa fa-reply" aria-hidden="true"></i> Reply</span>
 							</div>
 							<div id="{{ 'pfmarea-' + $index }}" class="pfm-reply-ask">
@@ -73,9 +74,10 @@
 											<p class="p-text freigBook" ng-bind-html="comment.message"></p>
 										</div>
 
-										<!-- <div class="pfm-action">
-											<span style="font-family: Arial"><img class="pfm-vote-image" src="/images/Upvote_Icon_bw.svg" alt="up"> 0</span>
-										</div> -->
+										<div class="pfm-action">
+											<span ng-show="!comment.myRLike" ng-click="vm.getVoteReply(comment.id, $index, $parent.$index)" style="font-family: Arial"><img class="pfm-vote-image" src="/images/arrow-up-icon-g.svg" alt="up"> {{comment.numRLike}}</span>
+											<span ng-show="comment.myRLike" ng-click="vm.getVoteReply(comment.id, $index, $parent.$index)" style="font-family: Arial; color: #504F4F"><img class="pfm-vote-image" src="/images/arrow-up-icon-moreg.svg" alt="up"> {{comment.numRLike}}</span>
+										</div>
 									</div>
 								</div>
 								<div id="{{ 'pfmup-' + $index + '-' + $parent.$index }}" class="pfm-updateReply pfm-reply-ask">

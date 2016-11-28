@@ -16,7 +16,7 @@ function inviteMailToUc(university, number, callback) {
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
 								/* SET INFO UNIVERSITY */
-								var uc 		= university + " University";
+								var uc 		= university + " University 3";
 								var ucC 	= university + " community";
 								var urlUc 	= "https://www.wittycircle.com/welcome/" + university; 
 								
@@ -24,7 +24,7 @@ function inviteMailToUc(university, number, callback) {
 								var helper = require('sendgrid').mail;
 								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
 								var to_email = new helper.Email(list[index].email);
-								var subject = 'Wittycircle is now open for the ' + ucC;
+								var subject = 'Wittycircle is now open to the ' + ucC;
 								var category = new helper.Category(uc);
 								var content = new helper.Content(
 									'text/html', 'Hello, Mail');

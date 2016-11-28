@@ -47,7 +47,7 @@
 	</div>
 </section> -->
 
-<section id="backoffice-main-page" ng-init="tab = 1">
+<section id="backoffice-main-page" style="overflow-y: hidden" ng-init="tab = 1">
 	<aside class="bo-left-menu inline">
 		<ul>
 			<li id="bo-da" ng-click="tab = 1" ng-class="{ active:tab === 1 }"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</li>
@@ -144,7 +144,7 @@
 				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
 			</div>
 		</div>
-		<div class="bo-uc-list flot-box4 inline animated fadeInRight">
+		<div class="bo-uc-list flot-box4 inline animated fadeInRight" style="height: 100%; overflow: scroll">
 			<h5>University List</h5>
 			<div class="bo-uc-list-display">
 				<ul>
@@ -188,7 +188,7 @@
 	    $('#footerCore').css("display", "none");
 
 	    $(this).click(function(e) {
-	    	if (($('#bstpb').is(e.target) || $('#bstpb').has(e.target).length) || ($('#bstpplb').is(e.target) || $('#bstpplb').has(e.target).length) || ($('#bsc').is(e.target) || $('#bsc').has(e.target).length) || ($('#boucinfo0').is(e.target) || $('#boucinfo0').has(e.target).length) || ($('#boucinfo1').is(e.target) || $('#boucinfo1').has(e.target).length) || ($('#boucinfo2').is(e.target) || $('#boucinfo2').has(e.target).length) || ($('#boucinfo3').is(e.target) || $('#boucinfo3').has(e.target).length) || ($('#boucinfo4').is(e.target) || $('#boucinfo4').has(e.target).length)) {
+	    	if (($('#bstpb').is(e.target) || $('#bstpb').has(e.target).length) || ($('#bstpplb').is(e.target) || $('#bstpplb').has(e.target).length) || ($('#bsc').is(e.target) || $('#bsc').has(e.target).length) || ($('#boucinfo0').is(e.target) || $('#boucinfo0').has(e.target).length) || ($('#boucinfo1').is(e.target) || $('#boucinfo1').has(e.target).length) || ($('#boucinfo2').is(e.target) || $('#boucinfo2').has(e.target).length) || ($('#boucinfo3').is(e.target) || $('#boucinfo3').has(e.target).length) || ($('#boucinfo4').is(e.target) || $('#boucinfo4').has(e.target).length) || ($('#boucinfo5').is(e.target) || $('#boucinfo5').has(e.target).length) || ($('#boucinfo6').is(e.target) || $('#boucinfo6').has(e.target).length) || ($('#boucinfo7').is(e.target) || $('#boucinfo7').has(e.target).length) || ($('#boucinfo8').is(e.target) || $('#boucinfo8').has(e.target).length) || ($('#boucinfo9').is(e.target) || $('#boucinfo9').has(e.target).length) || ($('#boucinfo10').is(e.target) || $('#boucinfo10').has(e.target).length) || ($('#boucinfo11').is(e.target) || $('#boucinfo11').has(e.target).length) || ($('#boucinfo12').is(e.target) || $('#boucinfo12').has(e.target).length) || ($('#boucinfo13').is(e.target) || $('#boucinfo13').has(e.target).length) || ($('#boucinfo14').is(e.target) || $('#boucinfo14').has(e.target).length) || ($('#boucinfo15').is(e.target) || $('#boucinfo15').has(e.target).length) || ($('#boucinfo16').is(e.target) || $('#boucinfo16').has(e.target).length) || ($('#boucinfo17').is(e.target) || $('#boucinfo17').has(e.target).length) || ($('#boucinfo18').is(e.target) || $('#boucinfo18').has(e.target).length) || ($('#boucinfo19').is(e.target) || $('#boucinfo19').has(e.target).length)) {
 	    		$('#bsc').fadeIn(200);	
 	    	} else
 	    		$('#bsc').fadeOut(200);

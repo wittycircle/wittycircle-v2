@@ -119,8 +119,7 @@
             var a;
 
             res = str.split(' ');
-            console.log(res);
-            if (!res[1])
+	    if (!res[1])
                 res[1] = "100%";
             a = res[1].indexOf('%');
             if (a === -1) {

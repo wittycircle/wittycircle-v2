@@ -140,7 +140,6 @@ angular.module('wittyApp').controller('ProfileCtrl', function (Beauty_encode ,$m
 		else {
 			if (profileVm.paramUsername !== profileVm.currentUser.username) {
 				Profile.followUser(profileVm.paramUsername, function(res) {
-					console.log(res);
 					if (res.success) {
 						if (res.msg === "User unfollowed") {
 							profileVm.followText = "Follow";

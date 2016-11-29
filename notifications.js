@@ -246,18 +246,18 @@ function getAllNotificationList(req, res, callback) {
 										ask.getProjectAskForCreator(req, res, function(data9) {
 											ask.getProjectReplyAskForCreator(req, res, function(data10) {
 												ask.getProjectReplyAskForCommentUsers(req, res, function(data11) {
-													help.getProjectHelp(req, res, function(data12) {
-														help.getProjectReplyHelpForCreator(req, res, function(data13) {
-															help.getProjectReplyHelpForInvolvedUser(req, res, function(data14) {
-																help.getProjectReplyHelp(req, res, function(data15) {
-																	var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15);
+													// help.getProjectHelp(req, res, function(data12) {
+														// help.getProjectReplyHelpForCreator(req, res, function(data13) {
+															// help.getProjectReplyHelpForInvolvedUser(req, res, function(data14) {
+																// help.getProjectReplyHelp(req, res, function(data15) {
+																	var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10, data11);
 																	saveNotificationList(req, res, allList, function(res) {
 																		callback(res);
 																	});
-																});
-															});
-														});
-													});
+																// });
+															// });
+														// });
+													// });
 												});
 											});
 										});

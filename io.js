@@ -88,6 +88,7 @@ module.exports = function(app, io, ensureAuth) {
 
         /*** Follow User Notification ***/
         app.post('/follow/user/:username', function(req, res){
+            console.log(req);
             req.checkParams('username', 'id parameter must be an integer.').isString().min(1);
             var errors = req.validationErrors(true);
             if (errors) {
@@ -108,16 +109,16 @@ module.exports = function(app, io, ensureAuth) {
                                         [req.user.id, name, data[0].id],
                                         function (err, results, fields) {
                                             if(err) throw err;
+                                            res.status(200).send({success: true, msg: "User followed"})
                                             socket.broadcast.emit('follow-notification', "get notif");
                                             socket.broadcast.emit('my-follow-users', req.user.id);
 
                                             //here send the mail
                                             np.sortEmailNotificationPermission('user_follow', [{user_id: data[0].id}], function(pArray) {
-                                                return ;
                                                 if (!pArray)
-                                                    return res.status(200).send({success: true, message: "User followed"});
+                                                    return ;
                         						if (data[0].email.indexOf('witty.com') >= 0)
-                        						    return res.status(200).send({success: true, message: "User followed"});
+                        						    return ;
                                                 pool.query("SELECT username FROM users WHERE id = ?",
                                                 [req.user.id],
                                                 function (err, rslt) {
@@ -234,7 +235,7 @@ module.exports = function(app, io, ensureAuth) {
 
                                                                 var async = false;
                                                                 mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                                    return res.send({success: true, msg: "User followed"});
+                                                                    return ;
                                                                 }, function(e) {
                                                                     // Mandrill returns the error as an object with name and message keys
                                                                     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -314,12 +315,11 @@ module.exports = function(app, io, ensureAuth) {
                                 [req.user.id, id[0].id, fullName, id[0].title, req.params.id,],
                                 function (err, results, fields) {
                                     if(err) throw err;
-                                    //res.send({success: true, msg: "Project followed"});
+                                    res.status(200).send({success: true, msg: "Project followed"});
 
                                 np.sortEmailNotificationPermission('follow_project', [{user_id: id[0].creator_user_id}], function(pArray) {
-                                    return ;
                                     if (!pArray)
-                                        return res.status(200).send({success: true, msg: "Project followed"});
+                                        return ;
                                     pool.query("SELECT * FROM users WHERE id = ?",
                                     [id[0].creator_user_id],
                                     function (err, rslt) {
@@ -327,7 +327,7 @@ module.exports = function(app, io, ensureAuth) {
                                             throw err;
                                         } else {
 					    if (rslt[0].email.indexOf('witty.com') >= 0)
-						return res.status(200).send({success: true,message: "Project followed"});
+						return ;
                                             pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)",
                                             [id[0].creator_user_id],
                                             function (err, rst) {
@@ -460,7 +460,7 @@ module.exports = function(app, io, ensureAuth) {
                                         
                                         var async = false;
                                         mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                        return res.send({success: true, msg: "Project followed"});
+                                        return ;
                                         }, function(e) {
                                         // Mandrill returns the error as an object with name and message keys
                                         console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -607,125 +607,124 @@ module.exports = function(app, io, ensureAuth) {
                 });                
         };
 
-        app.post('/asks', function(req, res) {
-            if (!req.isAuthenticated()) {
-                return res.status(404).send({message: 'user need to be authenticated'});
-            } else {
-                req.checkBody('title', 'title need to be a string').isString().max(128);
-                req.checkBody('message', 'message need to be a string').optional().isString();
-                req.checkBody('project_id', 'project_id need to be an int').isInt();
-                req.checkBody('creator_img', 'creator img need to be a string').isString().max(512);
-                req.checkBody('first_name', 'first_name need to be a string').isString().max(128);
-                req.checkBody('last_name', 'last_name need to be a string').isString().max(128);
-                req.checkBody('project_public_id', 'project_public_id need to be an int').isInt();
+        // app.post('/asks', function(req, res) {
+        //     if (!req.isAuthenticated()) {
+        //         return res.status(404).send({message: 'user need to be authenticated'});
+        //     } else {
+        //         req.checkBody('title', 'title need to be a string').isString().max(128);
+        //         req.checkBody('message', 'message need to be a string').optional().isString();
+        //         req.checkBody('project_id', 'project_id need to be an int').isInt();
+        //         req.checkBody('creator_img', 'creator img need to be a string').isString().max(512);
+        //         req.checkBody('first_name', 'first_name need to be a string').isString().max(128);
+        //         req.checkBody('last_name', 'last_name need to be a string').isString().max(128);
+        //         req.checkBody('project_public_id', 'project_public_id need to be an int').isInt();
 
-                var errors = req.validationErrors(true);
-                if (errors) res.status(400).send(errors);
-                else {
-                    req.body.user_id = req.user.id;
-                    var url = req.body.url;
-                    delete req.body.url;
-                    pool.query("INSERT INTO project_asks SET ?", req.body,
-                        function(err, result) {
-                            if (err) throw err;
-                            socket.broadcast.emit('ask-project-notification', 'hello world!');
-                            res.send({success: true, msg: "Project followed"});
+        //         var errors = req.validationErrors(true);
+        //         if (errors) res.status(400).send(errors);
+        //         else {
+        //             req.body.user_id = req.user.id;
+        //             var url = req.body.url;
+        //             delete req.body.url;
+        //             pool.query("INSERT INTO project_asks SET ?", req.body,
+        //                 function(err, result) {
+        //                     if (err) throw err;
+        //                     socket.broadcast.emit('ask-project-notification', 'hello world!');
+        //                     res.send({success: true, msg: "Project followed"});
 
-                            pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
-                                function(err, result2) {
-                                    if (err) throw err;
-                                    else {
-                                        getAllUserId(req.user.id, req.body.project_id, function(newArray) {
-                                            if (!newArray[0]) return ;
-                                            else {
-                                                np.sortEmailNotificationPermission('ask_project', newArray, function(pArray) {
-                                                    return ;
-                                                    if (!pArray)
-                                                        return ;
-                                                    getFollowersEmail(pArray, function(mailList) {
-                                                        if (!mailList[0]) return ;
-                                                        getNewD(req.body.message, true, 76, ' ...', function(newMessage) {
-                                                            var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
-                                                            var ptitle = req.body.title,
-                                                                finame = req.body.first_name + " " + req.body.last_name,
-                                                                picture = req.body.creator_img;
+        //                     pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
+        //                         function(err, result2) {
+        //                             if (err) throw err;
+        //                             else {
+        //                                 getAllUserId(req.user.id, req.body.project_id, function(newArray) {
+        //                                     if (!newArray[0]) return ;
+        //                                     else {
+        //                                         np.sortEmailNotificationPermission('ask_project', newArray, function(pArray) {
+        //                                             if (!pArray)
+        //                                                 return ;
+        //                                             getFollowersEmail(pArray, function(mailList) {
+        //                                                 if (!mailList[0]) return ;
+        //                                                 getNewD(req.body.message, true, 76, ' ...', function(newMessage) {
+        //                                                     var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
+        //                                                     var ptitle = req.body.title,
+        //                                                         finame = req.body.first_name + " " + req.body.last_name,
+        //                                                         picture = req.body.creator_img;
 
-                                                            var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+        //                                                     var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                            var template_name = "ask-project";
-                                                            var template_content = [{
-                                                                "name": "ask-project",
-                                                                "content": "content",
-                                                            }];
+        //                                                     var template_name = "ask-project";
+        //                                                     var template_content = [{
+        //                                                         "name": "ask-project",
+        //                                                         "content": "content",
+        //                                                     }];
 
-                                                            var message = {
-                                                                "html": "<p>HTML content</p>",
-                                                                "subject": subj,
-                                                                "from_email": "noreply@wittycircle.com",
-                                                                "from_name": "Wittycircle",
-                                                                "to": mailList,
-                                                                "headers": {
-                                                                    "Reply-To": "noreply@wittycircle.com"
-                                                                },
-                                                                "important": false,
-                                                                "inline_css": null,
-                                                                "preserve_recipients": null,
-                                                                "view_content_link": null,
-                                                                "tracking_domain": null,
-                                                                "signing_domain": null,
-                                                                "return_path_domain": null,
-                                                                "merge": true,
-                                                                "merge_language": "mailchimp",
-                                                                "global_merge_vars": [{
-                                                                    "name": "merge1",
-                                                                    "content": "merge1 content"
-                                                                }],
-                                                                "global_merge_vars": [
-                                                                        {
-                                                                            "name": "fname",
-                                                                            "content": finame,
-                                                                        },
-                                                                        {
-                                                                            "name": "fmtitle",
-                                                                            "content": ptitle,
-                                                                        },
-                                                                        {
-                                                                            "name": "fdesc",
-                                                                            "content": newMessage,
-                                                                        },
-                                                                        {
-                                                                            "name": "fimg",
-                                                                            "content": picture,
-                                                                        },
-                                                                        {
-                                                                            "name": "furl",
-                                                                            "content": url
-                                                                        },
-                                                                        {
-                                                                            "name": "fproject",
-                                                                            "content": result2[0].title
-                                                                        }                                                                    
-                                                                ]
-                                                            };
+        //                                                     var message = {
+        //                                                         "html": "<p>HTML content</p>",
+        //                                                         "subject": subj,
+        //                                                         "from_email": "noreply@wittycircle.com",
+        //                                                         "from_name": "Wittycircle",
+        //                                                         "to": mailList,
+        //                                                         "headers": {
+        //                                                             "Reply-To": "noreply@wittycircle.com"
+        //                                                         },
+        //                                                         "important": false,
+        //                                                         "inline_css": null,
+        //                                                         "preserve_recipients": null,
+        //                                                         "view_content_link": null,
+        //                                                         "tracking_domain": null,
+        //                                                         "signing_domain": null,
+        //                                                         "return_path_domain": null,
+        //                                                         "merge": true,
+        //                                                         "merge_language": "mailchimp",
+        //                                                         "global_merge_vars": [{
+        //                                                             "name": "merge1",
+        //                                                             "content": "merge1 content"
+        //                                                         }],
+        //                                                         "global_merge_vars": [
+        //                                                                 {
+        //                                                                     "name": "fname",
+        //                                                                     "content": finame,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fmtitle",
+        //                                                                     "content": ptitle,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fdesc",
+        //                                                                     "content": newMessage,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fimg",
+        //                                                                     "content": picture,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "furl",
+        //                                                                     "content": url
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fproject",
+        //                                                                     "content": result2[0].title
+        //                                                                 }                                                                    
+        //                                                         ]
+        //                                                     };
 
-                                                            mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
-                                                            }, function(e) {
-                                                                // Mandrill returns the error as an object with name and message keys
-                                                                console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                                throw e;
-                                                                // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            }
-                                        });
-                                    }
-                                });                            
-                        });
-                }
-            }
-        });
+        //                                                     mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+        //                                                     }, function(e) {
+        //                                                         // Mandrill returns the error as an object with name and message keys
+        //                                                         console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        //                                                         throw e;
+        //                                                         // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+        //                                                     });
+        //                                                 });
+        //                                             });
+        //                                         });
+        //                                     }
+        //                                 });
+        //                             }
+        //                         });                            
+        //                 });
+        //         }
+        //     }
+        // });
 
         /*** Replies Ask Project Notification ***/
         function getAllAskReplyUserId(ask_id, id, callback) {
@@ -741,243 +740,242 @@ module.exports = function(app, io, ensureAuth) {
                 }); 
         };
 
-        app.post('/ask_reply/add', function(req, res) {
-            if (!req.isAuthenticated()) {
-                return res.status(404).send({message: 'user need to be logged in to add an ask reply'});
-            } else {
-                req.checkBody('ask_id', 'ask_id need to be an int').isInt();
-                req.checkBody('description', 'description is a long string plz').isString();
-                req.checkBody('creator_picture', 'creator picture is a string containing an url').isString();
-                req.checkBody('creator_first_name', 'creator_first_name must be a string').isString();
-                req.checkBody('creator_last_name', 'creator_last_name must be a string').isString();
+        // app.post('/ask_reply/add', function(req, res) {
+        //     if (!req.isAuthenticated()) {
+        //         return res.status(404).send({message: 'user need to be logged in to add an ask reply'});
+        //     } else {
+        //         req.checkBody('ask_id', 'ask_id need to be an int').isInt();
+        //         req.checkBody('description', 'description is a long string plz').isString();
+        //         req.checkBody('creator_picture', 'creator picture is a string containing an url').isString();
+        //         req.checkBody('creator_first_name', 'creator_first_name must be a string').isString();
+        //         req.checkBody('creator_last_name', 'creator_last_name must be a string').isString();
 
-                var errors = req.validationErrors(true);
-                if (errors) {
-                    return res.status(400).send(errors);
-                } else {
-                    req.body.user_id = req.user.id;
-                    var url = req.body.url;
-                    delete req.body.url;
-                    pool.query("INSERT INTO ask_replies SET ?", req.body,
-                    function (err, result) {
-                        if (err) {
-                            throw err;
-                        }
-                        socket.broadcast.emit('ask-project-notification', 'hello world!');
-                        res.send({success: true});
+        //         var errors = req.validationErrors(true);
+        //         if (errors) {
+        //             return res.status(400).send(errors);
+        //         } else {
+        //             req.body.user_id = req.user.id;
+        //             var url = req.body.url;
+        //             delete req.body.url;
+        //             pool.query("INSERT INTO ask_replies SET ?", req.body,
+        //             function (err, result) {
+        //                 if (err) {
+        //                     throw err;
+        //                 }
+        //                 socket.broadcast.emit('ask-project-notification', 'hello world!');
+        //                 res.send({success: true});
 
-                        pool.query('SELECT title FROM projects WHERE id IN (SELECT project_id FROM project_asks WHERE id = ?)', req.body.ask_id,
-                            function(err, result2) {
-                                if (err) throw err;
-                                getAllAskReplyUserId(req.body.ask_id, req.user.id, function(newArray) {
-                                    if (!newArray[0]) return ;
-                                    else {
-                                        np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
-                                            return ;
-                                            if (!pArray)
-                                                return ;
-                                            getFollowersEmail(pArray, function(mailList) {
-                                                if (!mailList[0]) return ;
-                                                getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
-                                                    var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
-                                                    var finame = req.body.creator_first_name + " " + req.body.creator_last_name,
-                                                        picture = req.body.creator_picture;
+        //                 pool.query('SELECT title FROM projects WHERE id IN (SELECT project_id FROM project_asks WHERE id = ?)', req.body.ask_id,
+        //                     function(err, result2) {
+        //                         if (err) throw err;
+        //                         getAllAskReplyUserId(req.body.ask_id, req.user.id, function(newArray) {
+        //                             if (!newArray[0]) return ;
+        //                             else {
+        //                                 np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
+        //                                     if (!pArray)
+        //                                         return ;
+        //                                     getFollowersEmail(pArray, function(mailList) {
+        //                                         if (!mailList[0]) return ;
+        //                                         getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
+        //                                             var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
+        //                                             var finame = req.body.creator_first_name + " " + req.body.creator_last_name,
+        //                                                 picture = req.body.creator_picture;
 
-                                                    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+        //                                             var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                    var template_name = "reply-project";
-                                                    var template_content = [{
-                                                        "name": "reply-project",
-                                                        "content": "content",
-                                                    }];
+        //                                             var template_name = "reply-project";
+        //                                             var template_content = [{
+        //                                                 "name": "reply-project",
+        //                                                 "content": "content",
+        //                                             }];
 
-                                                    var message = {
-                                                        "html": "<p>HTML content</p>",
-                                                        "subject": subj,
-                                                        "from_email": "noreply@wittycircle.com",
-                                                        "from_name": "Wittycircle",
-                                                        "to": mailList,
-                                                        "headers": {
-                                                            "Reply-To": "noreply@wittycircle.com"
-                                                        },
-                                                        "important": false,
-                                                        "inline_css": null,
-                                                        "preserve_recipients": null,
-                                                        "view_content_link": null,
-                                                        "tracking_domain": null,
-                                                        "signing_domain": null,
-                                                        "return_path_domain": null,
-                                                        "merge": true,
-                                                        "merge_language": "mailchimp",
-                                                        "global_merge_vars": [{
-                                                            "name": "merge1",
-                                                            "content": "merge1 content"
-                                                        }],
-                                                        "global_merge_vars": [
-                                                                {
-                                                                    "name": "fname",
-                                                                    "content": finame,
-                                                                },
-                                                                {
-                                                                    "name": "fdesc",
-                                                                    "content": newMessage,
-                                                                },
-                                                                {
-                                                                    "name": "fimg",
-                                                                    "content": picture,
-                                                                },
-                                                                {
-                                                                    "name": "furl",
-                                                                    "content": url
-                                                                },
-                                                                {
-                                                                    "name": "fproject",
-                                                                    "content": result2[0].title
-                                                                }                                                                    
-                                                        ]
-                                                    };
+        //                                             var message = {
+        //                                                 "html": "<p>HTML content</p>",
+        //                                                 "subject": subj,
+        //                                                 "from_email": "noreply@wittycircle.com",
+        //                                                 "from_name": "Wittycircle",
+        //                                                 "to": mailList,
+        //                                                 "headers": {
+        //                                                     "Reply-To": "noreply@wittycircle.com"
+        //                                                 },
+        //                                                 "important": false,
+        //                                                 "inline_css": null,
+        //                                                 "preserve_recipients": null,
+        //                                                 "view_content_link": null,
+        //                                                 "tracking_domain": null,
+        //                                                 "signing_domain": null,
+        //                                                 "return_path_domain": null,
+        //                                                 "merge": true,
+        //                                                 "merge_language": "mailchimp",
+        //                                                 "global_merge_vars": [{
+        //                                                     "name": "merge1",
+        //                                                     "content": "merge1 content"
+        //                                                 }],
+        //                                                 "global_merge_vars": [
+        //                                                         {
+        //                                                             "name": "fname",
+        //                                                             "content": finame,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fdesc",
+        //                                                             "content": newMessage,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fimg",
+        //                                                             "content": picture,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "furl",
+        //                                                             "content": url
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fproject",
+        //                                                             "content": result2[0].title
+        //                                                         }                                                                    
+        //                                                 ]
+        //                                             };
 
-                                                    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
-                                                    }, function(e) {
-                                                        // Mandrill returns the error as an object with name and message keys
-                                                        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                        throw e;
-                                                        // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    }
-                                });
-                        });
-                    });
-                }
-            }
-        });
+        //                                             mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+        //                                             }, function(e) {
+        //                                                 // Mandrill returns the error as an object with name and message keys
+        //                                                 console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        //                                                 throw e;
+        //                                                 // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+        //                                             });
+        //                                         });
+        //                                     });
+        //                                 });
+        //                             }
+        //                         });
+        //                 });
+        //             });
+        //         }
+        //     }
+        // });
 
         /*** Feedback Project Notification ***/
-        app.post('/feedbacks', function(req, res) {
-            req.checkBody('project_id', 'Error Message').isInt();
-            req.checkBody('public_id', 'Error Message').isInt();
-            //req.checkBody('type', 'Error Message').isString().max(10);
-            req.checkBody('creator_img', 'Error Message').isString().max(512);
-            req.checkBody('title', 'Error Message').isString().max(512);
-            req.checkBody('description', 'Error Message').optional().isString().max(512);
-            req.checkBody('badge', 'Error Message').isString().max(128);
-            req.checkBody('first_name', 'first_name must be a string').isString().max(128);
-            req.checkBody('last_name', 'last_name must be a string').isString().max(128);
+        // app.post('/feedbacks', function(req, res) {
+        //     req.checkBody('project_id', 'Error Message').isInt();
+        //     req.checkBody('public_id', 'Error Message').isInt();
+        //     //req.checkBody('type', 'Error Message').isString().max(10);
+        //     req.checkBody('creator_img', 'Error Message').isString().max(512);
+        //     req.checkBody('title', 'Error Message').isString().max(512);
+        //     req.checkBody('description', 'Error Message').optional().isString().max(512);
+        //     req.checkBody('badge', 'Error Message').isString().max(128);
+        //     req.checkBody('first_name', 'first_name must be a string').isString().max(128);
+        //     req.checkBody('last_name', 'last_name must be a string').isString().max(128);
 
-            var errors = req.validationErrors(true);
-            if (errors) {
-            return res.status(400).send(errors);
-            } if (!req.isAuthenticated()){
-            return res.status(404).send({message: 'not connected'});
-            } else {
-                    req.body.user_id = req.user.id;
-                    var url = req.body.url;
-                    delete req.body.url;
-                    pool.query('INSERT INTO `project_feedbacks` SET ?', req.body, function(err, result) {
-                        if (err){
-                            throw err;
-                        }
-                        socket.broadcast.emit('ask-project-notification', 'hello world!');
-                        res.send({success: true});
+        //     var errors = req.validationErrors(true);
+        //     if (errors) {
+        //     return res.status(400).send(errors);
+        //     } if (!req.isAuthenticated()){
+        //     return res.status(404).send({message: 'not connected'});
+        //     } else {
+        //             req.body.user_id = req.user.id;
+        //             var url = req.body.url;
+        //             delete req.body.url;
+        //             pool.query('INSERT INTO `project_feedbacks` SET ?', req.body, function(err, result) {
+        //                 if (err){
+        //                     throw err;
+        //                 }
+        //                 socket.broadcast.emit('ask-project-notification', 'hello world!');
+        //                 res.send({success: true});
 
-                        pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
-                            function(err, result2) {
-                                if (err) throw err;
-                                else {
-                                    pool.query('SELECT user_id FROM project_followers WHERE follow_project_id = ? AND user_id != ?', [req.body.project_id, req.user.id],
-                                        function(err, result3) {
-                                            if (err) throw err;
-                                            if (!result3[0]) return ;
-                                            else {
-                                                np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
-                                                    return ;
-                                                    if (!newArray)
-                                                        return ;
-                                                    getFollowersEmail(newArray, function(mailList) {
-                                                        getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
-                                                            var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
-                                                            var ptitle = req.body.title,
-                                                                finame = req.body.first_name + " " + req.body.last_name,
-                                                                picture = req.body.creator_img;
+        //                 pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
+        //                     function(err, result2) {
+        //                         if (err) throw err;
+        //                         else {
+        //                             pool.query('SELECT user_id FROM project_followers WHERE follow_project_id = ? AND user_id != ?', [req.body.project_id, req.user.id],
+        //                                 function(err, result3) {
+        //                                     if (err) throw err;
+        //                                     if (!result3[0]) return ;
+        //                                     else {
+        //                                         np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
+        //                                             return ;
+        //                                             if (!newArray)
+        //                                                 return ;
+        //                                             getFollowersEmail(newArray, function(mailList) {
+        //                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
+        //                                                     var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
+        //                                                     var ptitle = req.body.title,
+        //                                                         finame = req.body.first_name + " " + req.body.last_name,
+        //                                                         picture = req.body.creator_img;
 
-                                                            var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+        //                                                     var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                            var template_name = "ask-project";
-                                                            var template_content = [{
-                                                                "name": "ask-project",
-                                                                "content": "content",
-                                                            }];
+        //                                                     var template_name = "ask-project";
+        //                                                     var template_content = [{
+        //                                                         "name": "ask-project",
+        //                                                         "content": "content",
+        //                                                     }];
 
-                                                            var message = {
-                                                                "html": "<p>HTML content</p>",
-                                                                "subject": subj,
-                                                                "from_email": "noreply@wittycircle.com",
-                                                                "from_name": "Wittycircle",
-                                                                "to": mailList,
-                                                                "headers": {
-                                                                    "Reply-To": "noreply@wittycircle.com"
-                                                                },
-                                                                "important": false,
-                                                                "inline_css": null,
-                                                                "preserve_recipients": null,
-                                                                "view_content_link": null,
-                                                                "tracking_domain": null,
-                                                                "signing_domain": null,
-                                                                "return_path_domain": null,
-                                                                "merge": true,
-                                                                "merge_language": "mailchimp",
-                                                                "global_merge_vars": [{
-                                                                    "name": "merge1",
-                                                                    "content": "merge1 content"
-                                                                }],
-                                                                "global_merge_vars": [
-                                                                        {
-                                                                            "name": "fname",
-                                                                            "content": finame,
-                                                                        },
-                                                                        {
-                                                                            "name": "fmtitle",
-                                                                            "content": ptitle,
-                                                                        },
-                                                                        {
-                                                                            "name": "fdesc",
-                                                                            "content": newMessage,
-                                                                        },
-                                                                        {
-                                                                            "name": "fimg",
-                                                                            "content": picture,
-                                                                        },
-                                                                        {
-                                                                            "name": "furl",
-                                                                            "content": url
-                                                                        },
-                                                                        {
-                                                                            "name": "fproject",
-                                                                            "content": result2[0].title
-                                                                        }                                                                    
-                                                                ]
-                                                            };
+        //                                                     var message = {
+        //                                                         "html": "<p>HTML content</p>",
+        //                                                         "subject": subj,
+        //                                                         "from_email": "noreply@wittycircle.com",
+        //                                                         "from_name": "Wittycircle",
+        //                                                         "to": mailList,
+        //                                                         "headers": {
+        //                                                             "Reply-To": "noreply@wittycircle.com"
+        //                                                         },
+        //                                                         "important": false,
+        //                                                         "inline_css": null,
+        //                                                         "preserve_recipients": null,
+        //                                                         "view_content_link": null,
+        //                                                         "tracking_domain": null,
+        //                                                         "signing_domain": null,
+        //                                                         "return_path_domain": null,
+        //                                                         "merge": true,
+        //                                                         "merge_language": "mailchimp",
+        //                                                         "global_merge_vars": [{
+        //                                                             "name": "merge1",
+        //                                                             "content": "merge1 content"
+        //                                                         }],
+        //                                                         "global_merge_vars": [
+        //                                                                 {
+        //                                                                     "name": "fname",
+        //                                                                     "content": finame,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fmtitle",
+        //                                                                     "content": ptitle,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fdesc",
+        //                                                                     "content": newMessage,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fimg",
+        //                                                                     "content": picture,
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "furl",
+        //                                                                     "content": url
+        //                                                                 },
+        //                                                                 {
+        //                                                                     "name": "fproject",
+        //                                                                     "content": result2[0].title
+        //                                                                 }                                                                    
+        //                                                         ]
+        //                                                     };
 
-                                                            mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
-                                                            }, function(e) {
-                                                                // Mandrill returns the error as an object with name and message keys
-                                                                console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                                throw e;
-                                                                // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            }
-                                        });
-                                }
-                            });
-                    });
-                }
-        });
+        //                                                     mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+        //                                                     }, function(e) {
+        //                                                         // Mandrill returns the error as an object with name and message keys
+        //                                                         console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        //                                                         throw e;
+        //                                                         // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+        //                                                     });
+        //                                                 });
+        //                                             });
+        //                                         });
+        //                                     }
+        //                                 });
+        //                         }
+        //                     });
+        //             });
+        //         }
+        // });
 
         /*** Replies Feedback Project Notification ***/
         function getAllHelpReplyUserId(feedback_id, id, callback) {
@@ -993,120 +991,120 @@ module.exports = function(app, io, ensureAuth) {
                 }); 
         };
 
-        app.post('/feedback_replies', function(req, res) {
-            if (!req.isAuthenticated()) {
-            return res.status(404).send({message: 'User must be logged in to post a reply'});
-            } else {
-            req.checkBody('feedback_id', 'Must be an integrer').isInt();
-            req.checkBody('description', 'Must be a string text').isString().max(1024);
-            req.checkBody('creator_picture', 'Must be an url for picture').isString().max(512);
-            req.checkBody('creator_first_name', 'Must be a string').isString().max(128);
-            req.checkBody('creator_last_name', 'Must be a string').isString().max(128);
+        // app.post('/feedback_replies', function(req, res) {
+        //     if (!req.isAuthenticated()) {
+        //     return res.status(404).send({message: 'User must be logged in to post a reply'});
+        //     } else {
+        //     req.checkBody('feedback_id', 'Must be an integrer').isInt();
+        //     req.checkBody('description', 'Must be a string text').isString().max(1024);
+        //     req.checkBody('creator_picture', 'Must be an url for picture').isString().max(512);
+        //     req.checkBody('creator_first_name', 'Must be a string').isString().max(128);
+        //     req.checkBody('creator_last_name', 'Must be a string').isString().max(128);
 
-            var errors = req.validationErrors(true);
-            if (errors) {
-                return res.status(400).send(errors);
-            } else {
-                req.body.user_id = req.user.id;
-                var url = req.body.url;
-                delete req.body.url;
-                pool.query('INSERT INTO feedback_replies SET ?',
-                req.body,
-                function (err, result) {
-                if (err) {
-                    throw err;
-                }
-                    socket.broadcast.emit('ask-project-notification', 'hello world!');
-                    res.send({success: true});
+        //     var errors = req.validationErrors(true);
+        //     if (errors) {
+        //         return res.status(400).send(errors);
+        //     } else {
+        //         req.body.user_id = req.user.id;
+        //         var url = req.body.url;
+        //         delete req.body.url;
+        //         pool.query('INSERT INTO feedback_replies SET ?',
+        //         req.body,
+        //         function (err, result) {
+        //         if (err) {
+        //             throw err;
+        //         }
+        //             socket.broadcast.emit('ask-project-notification', 'hello world!');
+        //             res.send({success: true});
                 
-                    pool.query('SELECT title FROM projects WHERE id IN (SELECT project_id FROM project_feedbacks WHERE id = ?)', req.body.feedback_id,
-                            function(err, result2) {
-                                if (err) throw err;
-                                getAllHelpReplyUserId(req.body.feedback_id, req.user.id, function(newArray) {
-                                    if (!newArray[0]) return ;
-                                    else {
-                                        np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
-                                            return ;
-                                            if (!pArray)
-                                                return ;
-                                            getFollowersEmail(pArray, function(mailList) {
-                                                if (!mailList[0]) return ;
-                                                getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
-                                                    var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
-                                                    var finame = req.body.creator_first_name + " " + req.body.creator_last_name,
-                                                        picture = req.body.creator_picture;
+        //             pool.query('SELECT title FROM projects WHERE id IN (SELECT project_id FROM project_feedbacks WHERE id = ?)', req.body.feedback_id,
+        //                     function(err, result2) {
+        //                         if (err) throw err;
+        //                         getAllHelpReplyUserId(req.body.feedback_id, req.user.id, function(newArray) {
+        //                             if (!newArray[0]) return ;
+        //                             else {
+        //                                 np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
+        //                                     return ;
+        //                                     if (!pArray)
+        //                                         return ;
+        //                                     getFollowersEmail(pArray, function(mailList) {
+        //                                         if (!mailList[0]) return ;
+        //                                         getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
+        //                                             var subj = req.body.creator_first_name + " " + req.body.creator_last_name + " commented on " + result2[0].title + " question";
+        //                                             var finame = req.body.creator_first_name + " " + req.body.creator_last_name,
+        //                                                 picture = req.body.creator_picture;
 
-                                                    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+        //                                             var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-                                                    var template_name = "reply-project";
-                                                    var template_content = [{
-                                                        "name": "reply-project",
-                                                        "content": "content",
-                                                    }];
+        //                                             var template_name = "reply-project";
+        //                                             var template_content = [{
+        //                                                 "name": "reply-project",
+        //                                                 "content": "content",
+        //                                             }];
 
-                                                    var message = {
-                                                        "html": "<p>HTML content</p>",
-                                                        "subject": subj,
-                                                        "from_email": "noreply@wittycircle.com",
-                                                        "from_name": "Wittycircle",
-                                                        "to": mailList,
-                                                        "headers": {
-                                                            "Reply-To": "noreply@wittycircle.com"
-                                                        },
-                                                        "important": false,
-                                                        "inline_css": null,
-                                                        "preserve_recipients": null,
-                                                        "view_content_link": null,
-                                                        "tracking_domain": null,
-                                                        "signing_domain": null,
-                                                        "return_path_domain": null,
-                                                        "merge": true,
-                                                        "merge_language": "mailchimp",
-                                                        "global_merge_vars": [{
-                                                            "name": "merge1",
-                                                            "content": "merge1 content"
-                                                        }],
-                                                        "global_merge_vars": [
-                                                                {
-                                                                    "name": "fname",
-                                                                    "content": finame,
-                                                                },
-                                                                {
-                                                                    "name": "fdesc",
-                                                                    "content": newMessage,
-                                                                },
-                                                                {
-                                                                    "name": "fimg",
-                                                                    "content": picture,
-                                                                },
-                                                                {
-                                                                    "name": "furl",
-                                                                    "content": url
-                                                                },
-                                                                {
-                                                                    "name": "fproject",
-                                                                    "content": result2[0].title
-                                                                }                                                                    
-                                                        ]
-                                                    };
+        //                                             var message = {
+        //                                                 "html": "<p>HTML content</p>",
+        //                                                 "subject": subj,
+        //                                                 "from_email": "noreply@wittycircle.com",
+        //                                                 "from_name": "Wittycircle",
+        //                                                 "to": mailList,
+        //                                                 "headers": {
+        //                                                     "Reply-To": "noreply@wittycircle.com"
+        //                                                 },
+        //                                                 "important": false,
+        //                                                 "inline_css": null,
+        //                                                 "preserve_recipients": null,
+        //                                                 "view_content_link": null,
+        //                                                 "tracking_domain": null,
+        //                                                 "signing_domain": null,
+        //                                                 "return_path_domain": null,
+        //                                                 "merge": true,
+        //                                                 "merge_language": "mailchimp",
+        //                                                 "global_merge_vars": [{
+        //                                                     "name": "merge1",
+        //                                                     "content": "merge1 content"
+        //                                                 }],
+        //                                                 "global_merge_vars": [
+        //                                                         {
+        //                                                             "name": "fname",
+        //                                                             "content": finame,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fdesc",
+        //                                                             "content": newMessage,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fimg",
+        //                                                             "content": picture,
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "furl",
+        //                                                             "content": url
+        //                                                         },
+        //                                                         {
+        //                                                             "name": "fproject",
+        //                                                             "content": result2[0].title
+        //                                                         }                                                                    
+        //                                                 ]
+        //                                             };
 
-                                                    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
-                                                    }, function(e) {
-                                                        // Mandrill returns the error as an object with name and message keys
-                                                        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-                                                        throw e;
-                                                        // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-                                                    });
-                                                });
-                                            });
-                                        });
-                                    }
-                                });
-                            });
-                });
-            }
-            }
-        });
+        //                                             mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": false}, function(result) {
+        //                                             }, function(e) {
+        //                                                 // Mandrill returns the error as an object with name and message keys
+        //                                                 console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+        //                                                 throw e;
+        //                                                 // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+        //                                             });
+        //                                         });
+        //                                     });
+        //                                 });
+        //                             }
+        //                         });
+        //                     });
+        //         });
+        //     }
+        //     }
+        // });
 
         /*** Send Private Message ***/
         socket.on('private message',  function (data) { // private message between users
@@ -1203,11 +1201,8 @@ module.exports = function(app, io, ensureAuth) {
                                 // relation exist already, now i must check the last connect of user
                                 return callback(false);
                             } else {
-                                        console.log("OKKLDJFKLJSDKLFJKSD")
-
                                 // send mail because no relations exist
                                 np.sortEmailNotificationPermission('new_message', [{user_id: info.to_user_id}], function(check) {
-                                    return ;
                                     if (!check)
                                         return callback(true);
                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
@@ -1222,8 +1217,8 @@ module.exports = function(app, io, ensureAuth) {
                                                 if (err) {
                                                     throw err;
                                                 } else {
-						    if (mail[0].email.indexOf('witty.com') >= 0)
-							return callback(true);
+                    						    if (mail[0].email.indexOf('witty.com') >= 0)
+                    							     return callback(true);
                                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",
                                                     [info.to_user_id],
                                                     function (err, response) {

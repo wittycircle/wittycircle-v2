@@ -7,21 +7,25 @@ function getNotifProjectHelp(data, req, callback) {
         function recursive(index) {
             elem = data[index];
             if (elem) {
-                pool.query('SELECT title FROM projects WHERE id = ?', elem.project_id, 
-                    function(err, result) {
+                pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', elem.user_id,
+                    function(err, name) {
                         if (err) throw err;
-                        else {
-                            list.push({
-                                date_of_view        : elem.date_added,
-                                user_id             : req.user.id,
-                                user_notif_id       : elem.user_id,
-                                user_notif_username : elem.first_name + ' ' + elem.last_name,
-                                project_title       : result[0].title,
-                                project_id          : elem.project_id,
-                                type_notif          : "p_help"
+                        pool.query('SELECT title FROM projects WHERE id = ?', elem.project_id, 
+                            function(err, result) {
+                                if (err) throw err;
+                                else {
+                                    list.push({
+                                        date_of_view        : elem.creation_date,
+                                        user_id             : req.user.id,
+                                        user_notif_id       : elem.user_id,
+                                        user_notif_username : name[0].first_name + ' ' + name[0].last_name,
+                                        project_title       : result[0].title,
+                                        project_id          : elem.project_id,
+                                        type_notif          : "p_ask"
+                                    });
+                                    return recursive(index + 1);
+                                }
                             });
-                            return recursive(index + 1);
-                        }
                     });
             } else {
                 return callback(list);
@@ -45,7 +49,7 @@ exports.getProjectHelp = function(req, res, callback) {
                         var array = [];
                         function recursive(index) {
                             if (result[index]) {
-                                pool.query('SELECT * FROM project_feedbacks WHERE project_id = ? && date_added >= ? && user_id != ?',
+                                pool.query('SELECT * FROM project_discussion WHERE project_id = ? && creation_date >= ? && user_id != ?',
                                     [result[index].follow_project_id, result[index].creation_date, req.user.id],
                                     function(err, result2) {
                                         if (err) throw err;
@@ -78,21 +82,25 @@ function getNotifProjectReplyHelp(array, req, callback) {
         function recursive(index) {
             elem = array[index];
             if (elem) {
-                pool.query('SELECT title FROM projects WHERE id = ?', elem.project_id, 
-                    function(err, result) {
+                pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', elem.user_id,
+                    function(err, name) {
                         if (err) throw err;
-                        else {
-                            list.push({
-                                date_of_view        : elem.created_at,
-                                user_id             : req.user.id,
-                                user_notif_id       : elem.user_id,
-                                user_notif_username : elem.creator_first_name + ' ' + elem.creator_last_name,
-                                project_title       : result[0].title,
-                                project_id          : elem.project_id,
-                                type_notif          : "p_reply_help"
+                        pool.query('SELECT title FROM projects WHERE id = ?', elem.project_id, 
+                            function(err, result) {
+                                if (err) throw err;
+                                else {
+                                    list.push({
+                                        date_of_view        : elem.creation_date,
+                                        user_id             : req.user.id,
+                                        user_notif_id       : elem.user_id,
+                                        user_notif_username : name[0].first_name + ' ' + name[0].last_name,
+                                        project_title       : result[0].title,
+                                        project_id          : elem.project_id,
+                                        type_notif          : "p_reply_ask"
+                                    });
+                                    return recursive(index + 1);
+                                }
                             });
-                            return recursive(index + 1);
-                        }
                     });
             } else {
                 return callback(list);
@@ -115,7 +123,7 @@ function removeSameElementInArray(array, callback) {
                 else {
                     function recursive2(index2) {
                         if (newArray[index2]) {
-                            if (newArray[index2].feedback_id === array[index].feedback_id)
+                            if (newArray[index2].project_discussion_id === array[index].project_discussion_id)
                                 recursive(index + 1);
                             else
                                 recursive2(index2 + 1)
@@ -129,7 +137,7 @@ function removeSameElementInArray(array, callback) {
             } else {
                 function recursive3(index3) {
                     if (newArray[index3]) {
-                        pool.query('SELECT project_id FROM project_feedbacks WHERE id = ?', newArray[index3].feedback_id,
+                        pool.query('SELECT project_id FROM project_discussion WHERE id = ?', newArray[index3].project_discussion_id,
                             function(err, result) {
                                 if (err) throw err;
                                 if (!result[0])
@@ -155,7 +163,7 @@ exports.getProjectReplyHelp = function(req, res, callback) {
     if (!req.isAuthenticated()) {
         return res.status(404).send({message: 'user need to be authenticated'});
     } else {
-        pool.query('SELECT * FROM feedback_replies WHERE user_id = ? order by feedback_id, created_at desc', req.user.id,
+        pool.query('SELECT * FROM project_discussion_replies WHERE user_id = ? order by feedback_id, created_at desc', req.user.id,
             function(err, result) {
                 if (err) throw err;
                 if (result[0]) {
@@ -164,7 +172,7 @@ exports.getProjectReplyHelp = function(req, res, callback) {
                             var array = [];
                             function recursive(index) {
                                 if (result2[index]) {
-                                    pool.query('SELECT * FROM feedback_replies WHERE feedback_id = ? && created_at > ? && user_id != ?',
+                                    pool.query('SELECT * FROM project_discussion_replies WHERE feedback_id = ? && created_at > ? && user_id != ?',
                                         [result2[index].feedback_id, result2[index].created_at, req.user.id],
                                         function(err, result3) {
                                             if (err) throw result3;

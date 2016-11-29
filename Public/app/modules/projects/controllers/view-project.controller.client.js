@@ -366,6 +366,7 @@
                     project_id      : vm.project.id,
                     title           : vm.askTitle,
                     message         : vm.askComment,
+                    url             : 'https://www.wittycircle.com' + $location.path()
                 };
                 RetrieveData.ppdData('/discussion/add/discussion', 'POST', object, null, null).then(function(res) {
                     if (res.success) {
@@ -394,6 +395,7 @@
                     discuss_id  : discuss_id,
                     title       : vm.updateAskTitle,
                     message     : vm.updateAskComment,
+                    url         : 'https://www.wittycircle.com' + $location.path()
                 };
                 RetrieveData.ppdData('/discussion/put/discussion', 'PUT', object, null, null).then(function(res) {
                     if (res.success) {
@@ -418,6 +420,7 @@
 
         function publishReply(pd_id, discuss_index) {
             if (currentUser) {
+
                 var object = {
                     user_id                 : currentUser.id,
                     project_discussion_id   : pd_id,

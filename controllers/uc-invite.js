@@ -16,7 +16,7 @@ function inviteMailToUc(university, number, callback) {
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
 								/* SET INFO UNIVERSITY */
-								var uc 		= university + " University 3";
+								var uc 		= university + " University";
 								var ucC 	= university + " community";
 								var urlUc 	= "https://www.wittycircle.com/welcome/" + university; 
 								

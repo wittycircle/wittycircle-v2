@@ -19,7 +19,12 @@
         font-family: 'FreigBook';
         color: white;
         font-size: 21px;
-        line-height: 24px; }
+        line-height: 24px;
+        padding: 0 10px; }
+      .uc-body .filter-uc .filter-text .uc-welcome-text1 {
+        font-size: 24px; }
+      .uc-body .filter-uc .filter-text .uc-welcome-text2 {
+        font-size: 18px; }
       .uc-body .filter-uc .filter-text .popover-button .fb-login, .uc-body .filter-uc .filter-text .popover-button .go-login {
         display: inline-block;
         margin: 5px 5px 5px 5px; }
@@ -32,5 +37,12 @@
         .uc-body .filter-uc .filter-text .popover-button .email-login img {
           height: 15px;
           margin-right: 5px; }
+
+@media only screen and (max-width: 736px) {
+  .uc-body .uc-welcome-text1 {
+    font-size: 24px; }
+  .uc-body .filter-uc .filter-text .uc-welcome-text2 {
+    margin-top: 30px;
+    font-size: 18px; } }
 
 /*# sourceMappingURL=uc-welcome.css.map */

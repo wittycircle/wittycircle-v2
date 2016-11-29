@@ -26,8 +26,8 @@ function inviteMailToUc(university, number, category, callback) {
 
 								/* HELPER SETTING */
 								var helper = require('sendgrid').mail;
-								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
-								var to_email = new helper.Email(list[index].email);
+								var from_email = new helper.Email('campuses@wittycircle.info', 'Jay Ho via Wittycircle');
+								var to_email = new helper.Email('friends@wittycircle.com');
 								var subject = 'Wittycircle is now open to the ' + ucC;
 								var category = new helper.Category(uc);
 								var content = new helper.Content(
@@ -63,11 +63,13 @@ function inviteMailToUc(university, number, category, callback) {
 								/* SEND MAIL */
 								sg.API(request, function(error, response) {
 									if (response.statusCode === 202) {
+									    return ;
 										pool.query('UPDATE invite_university SET send_date = NOW() WHERE id = ?', list[index].id,
 											function(err, done) {
 												return recursive(index + 1);
 											});
 									} else {
+									    return ;
 									    console.log(error);
 									    return recursive(index + 1);
 									}

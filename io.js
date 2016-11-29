@@ -88,7 +88,6 @@ module.exports = function(app, io, ensureAuth) {
 
         /*** Follow User Notification ***/
         app.post('/follow/user/:username', function(req, res){
-            console.log(req);
             req.checkParams('username', 'id parameter must be an integer.').isString().min(1);
             var errors = req.validationErrors(true);
             if (errors) {
@@ -109,7 +108,7 @@ module.exports = function(app, io, ensureAuth) {
                                         [req.user.id, name, data[0].id],
                                         function (err, results, fields) {
                                             if(err) throw err;
-                                            res.status(200).send({success: true, msg: "User followed"})
+					    res.status(200).send({success: true, msg: "User followed"});
                                             socket.broadcast.emit('follow-notification', "get notif");
                                             socket.broadcast.emit('my-follow-users', req.user.id);
 
@@ -881,25 +880,24 @@ module.exports = function(app, io, ensureAuth) {
         //                 socket.broadcast.emit('ask-project-notification', 'hello world!');
         //                 res.send({success: true});
 
-        //                 pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
-        //                     function(err, result2) {
-        //                         if (err) throw err;
-        //                         else {
-        //                             pool.query('SELECT user_id FROM project_followers WHERE follow_project_id = ? AND user_id != ?', [req.body.project_id, req.user.id],
-        //                                 function(err, result3) {
-        //                                     if (err) throw err;
-        //                                     if (!result3[0]) return ;
-        //                                     else {
-        //                                         np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
-        //                                             return ;
-        //                                             if (!newArray)
-        //                                                 return ;
-        //                                             getFollowersEmail(newArray, function(mailList) {
-        //                                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
-        //                                                     var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
-        //                                                     var ptitle = req.body.title,
-        //                                                         finame = req.body.first_name + " " + req.body.last_name,
-        //                                                         picture = req.body.creator_img;
+                        // pool.query('SELECT title FROM projects WHERE id = ?', req.body.project_id,
+                        //     function(err, result2) {
+                        //         if (err) throw err;
+                        //         else {
+                        //             pool.query('SELECT user_id FROM project_followers WHERE follow_project_id = ? AND user_id != ?', [req.body.project_id, req.user.id],
+                        //                 function(err, result3) {
+                        //                     if (err) throw err;
+                        //                     if (!result3[0]) return ;
+                        //                     else {
+                        //                         np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
+                        //                             if (!newArray)
+                        //                                 return ;
+                        //                             getFollowersEmail(newArray, function(mailList) {
+                        //                                 getNewD(req.body.description, true, 76, ' ...', function(newMessage) {
+                        //                                     var subj = req.body.first_name + " " + req.body.last_name + " asked a question about " + result2[0].title;
+                        //                                     var ptitle = req.body.title,
+                        //                                         finame = req.body.first_name + " " + req.body.last_name,
+                        //                                         picture = req.body.creator_img;
 
         //                                                     var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 

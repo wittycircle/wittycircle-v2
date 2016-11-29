@@ -144,7 +144,7 @@
 				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
 			</div>
 		</div>
-		<div class="bo-uc-list flot-box4 inline animated fadeInRight" style="height: 100%; overflow: scroll">
+		<div class="bo-uc-list flot-box4 inline animated fadeInRight" style="height: 600px; overflow: scroll">
 			<h5>University List</h5>
 			<div class="bo-uc-list-display">
 				<ul>
@@ -157,6 +157,7 @@
 							<span ng-if="!ucData.rest">Stand: All mail are sended</span>
 							<input type="text" placeholder="Enter number to send..." ng-model="numberSend[$index].num">
 							<input style="display: block" type="text" placeholder="Enter number of students..." ng-model="numberSend[$index].students">
+							<input style="display: block" type="text" placeholder="Enter Category" ng-model="numberSend[$index].category">
 							<div class="bo-uc-info-button">
 								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
 									<div ng-if="onCharge3" class="spinner-load">

@@ -1,8 +1,8 @@
 /**** UC INVITE ****/
 
 /* BABSON UNIVERSITY INVITATION MAILS */
-function inviteMailToUc(university, number, callback) {
-	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1864',
+function inviteMailToUc(university, number, category, callback) {
+	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 8',
 		function(err, result) {
 			if (err) throw err;
 
@@ -16,10 +16,14 @@ function inviteMailToUc(university, number, callback) {
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
 								/* SET INFO UNIVERSITY */
-								var uc 		= university + " University";
+
+								if (category)
+									var uc 	= category; 
+								else
+									var uc 	= university + " University";
 								var ucC 	= university + " community";
 								var urlUc 	= "https://www.wittycircle.com/welcome/" + university; 
-								
+
 								/* HELPER SETTING */
 								var helper = require('sendgrid').mail;
 								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
@@ -133,7 +137,7 @@ exports.sendUcCampaignMail = function(req, res) {
 		pool.query('UPDATE invite_university SET number_students = ? WHERE university = ?', [req.body.students, req.body.uc],
 			function(err, update) {
 				if (err) throw err;
-				inviteMailToUc(req.body.uc, number, function(done) {
+				inviteMailToUc(req.body.uc, number, req.body.category, function(done) {
 					if (done) {
 						pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 							function(err, data) {
@@ -158,7 +162,7 @@ exports.getUcStudentsNumber = function(req, res) {
 				// 	var new_number = check[0].number_students + 3;
 				// else 
 				// 	var new_number = 3;
-				pool.query('UPDATE invite_university SET number_students = number_students + 5 WHERE university = ?', req.params.university,
+				pool.query('UPDATE invite_university SET number_students = number_students + 2 WHERE university = ?', req.params.university,
 					function(err, update) {
 						if (err) throw err;
 						pool.query('SELECT number_students FROM invite_university WHERE university = ? GROUP BY university', req.params.university,

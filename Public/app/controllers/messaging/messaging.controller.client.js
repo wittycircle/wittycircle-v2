@@ -246,7 +246,6 @@
 		};
 
 		$scope.createNewMessage = function(modal) {
-
 			if (!$scope.newMessageArea.message && !$scope.sendNeed)
 				return ;
 			if ($scope.sendNeed) {
@@ -299,6 +298,10 @@
 				            	Users.count();
 				            	$scope.refreshDialogue(modal);
 				            	$timeout(function() {
+				            		if ($('.main-discover-slick')) {
+										$('.main-discover-slick').slick("unslick");
+		            					$('.main-discover-slick').find('.slick-list').remove();
+	            					}
 								    $state.reload()
 								}, 1000);
 				            	return ;
@@ -306,6 +309,10 @@
 							Users.count();
 						    $scope.refreshDialogue(true);
 							$timeout(function() {
+								if ($('.main-discover-slick')) {
+									$('.main-discover-slick').slick("unslick");
+	            					$('.main-discover-slick').find('.slick-list').remove();
+	            				}
 							    $state.reload()
 							}, 1500);
 						}

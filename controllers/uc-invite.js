@@ -16,7 +16,7 @@ function inviteMailToUc(university, number, callback) {
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
 								/* SET INFO UNIVERSITY */
-								var uc 		= university + " University 3";
+								var uc 		= university + " University";
 								var ucC 	= university + " community";
 								var urlUc 	= "https://www.wittycircle.com/welcome/" + university; 
 								
@@ -158,7 +158,7 @@ exports.getUcStudentsNumber = function(req, res) {
 				// 	var new_number = check[0].number_students + 3;
 				// else 
 				// 	var new_number = 3;
-				pool.query('UPDATE invite_university SET number_students = number_students + 5 WHERE university = ?', req.params.university,
+				pool.query('UPDATE invite_university SET number_students = number_students + 2 WHERE university = ?', req.params.university,
 					function(err, update) {
 						if (err) throw err;
 						pool.query('SELECT number_students FROM invite_university WHERE university = ? GROUP BY university', req.params.university,

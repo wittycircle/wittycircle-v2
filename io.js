@@ -108,16 +108,16 @@ module.exports = function(app, io, ensureAuth) {
                                         [req.user.id, name, data[0].id],
                                         function (err, results, fields) {
                                             if(err) throw err;
+					    res.status(200).send({success: true, msg: "User followed"});
                                             socket.broadcast.emit('follow-notification', "get notif");
                                             socket.broadcast.emit('my-follow-users', req.user.id);
 
                                             //here send the mail
                                             np.sortEmailNotificationPermission('user_follow', [{user_id: data[0].id}], function(pArray) {
-                                                return ;
                                                 if (!pArray)
-                                                    return res.status(200).send({success: true, message: "User followed"});
+                                                    return ;
                         						if (data[0].email.indexOf('witty.com') >= 0)
-                        						    return res.status(200).send({success: true, message: "User followed"});
+                        						    return ;
                                                 pool.query("SELECT username FROM users WHERE id = ?",
                                                 [req.user.id],
                                                 function (err, rslt) {
@@ -234,7 +234,7 @@ module.exports = function(app, io, ensureAuth) {
 
                                                                 var async = false;
                                                                 mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-                                                                    return res.send({success: true, msg: "User followed"});
+                                                                    return ;
                                                                 }, function(e) {
                                                                     // Mandrill returns the error as an object with name and message keys
                                                                     console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
@@ -317,7 +317,6 @@ module.exports = function(app, io, ensureAuth) {
                                     //res.send({success: true, msg: "Project followed"});
 
                                 np.sortEmailNotificationPermission('follow_project', [{user_id: id[0].creator_user_id}], function(pArray) {
-                                    return ;
                                     if (!pArray)
                                         return res.status(200).send({success: true, msg: "Project followed"});
                                     pool.query("SELECT * FROM users WHERE id = ?",
@@ -639,7 +638,6 @@ module.exports = function(app, io, ensureAuth) {
                                             if (!newArray[0]) return ;
                                             else {
                                                 np.sortEmailNotificationPermission('ask_project', newArray, function(pArray) {
-                                                    return ;
                                                     if (!pArray)
                                                         return ;
                                                     getFollowersEmail(pArray, function(mailList) {
@@ -773,7 +771,6 @@ module.exports = function(app, io, ensureAuth) {
                                     if (!newArray[0]) return ;
                                     else {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
-                                            return ;
                                             if (!pArray)
                                                 return ;
                                             getFollowersEmail(pArray, function(mailList) {
@@ -893,7 +890,6 @@ module.exports = function(app, io, ensureAuth) {
                                             if (!result3[0]) return ;
                                             else {
                                                 np.sortEmailNotificationPermission('feedback', result3, function(newArray) {
-                                                    return ;
                                                     if (!newArray)
                                                         return ;
                                                     getFollowersEmail(newArray, function(mailList) {
@@ -1026,7 +1022,6 @@ module.exports = function(app, io, ensureAuth) {
                                     if (!newArray[0]) return ;
                                     else {
                                         np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
-                                            return ;
                                             if (!pArray)
                                                 return ;
                                             getFollowersEmail(pArray, function(mailList) {
@@ -1207,7 +1202,6 @@ module.exports = function(app, io, ensureAuth) {
 
                                 // send mail because no relations exist
                                 np.sortEmailNotificationPermission('new_message', [{user_id: info.to_user_id}], function(check) {
-                                    return ;
                                     if (!check)
                                         return callback(true);
                                     pool.query("SELECT * FROM profiles WHERE id IN (SELECT profile_id FROM users where id = ?)",

@@ -10,7 +10,7 @@ exports.getAllStatistics = function(req, res) {
 					pool.query('SELECT count(*) AS number FROM projects',
 						function(err, result3) {
 							if (err) throw err;
-							pool.query('SELECT count(*) AS number FROM users WHERE date(last_activity) is not null', 
+							pool.query('SELECT count(*) AS number FROM users WHERE date(last_activity) is not null && date(last_activity) = curdate()', 
 								function(err, result4) {
 									if (err) throw err;
 									pool.query('SELECT count(*) AS number FROM messages',

@@ -207,7 +207,7 @@ function getNotifProjectReplyAsk(array, req, callback) {
                                         user_notif_username : name[0].first_name + ' ' + name[0].last_name,
                                         project_title       : result[0].title,
                                         project_id          : elem.project_id,
-                                        type_notif          : "p_reply_ask"
+                                        type_notif          : "p_discuss_reply"
                                     });
                                     return recursive(index + 1);
                                 }

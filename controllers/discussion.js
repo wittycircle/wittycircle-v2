@@ -377,7 +377,7 @@ exports.getProjectsDiscussion = function(req, res) {
 };
 
 /*** ADD PROJECT DISCUSSION ***/
-exports.postNewProjectDiscussion = function(req, res) {
+exports.postNewProjectDiscussion = function(req, res, socket) {
 	/* Validation */
     req.checkBody('user_id', 'Error Message').isInt();
     req.checkBody('project_id', 'Error Message').isInt();
@@ -392,6 +392,7 @@ exports.postNewProjectDiscussion = function(req, res) {
     	pool.query('INSERT INTO project_discussion SET ?', req.body,
     		function(err, result) {
     			if (err) throw err;
+                socket.broadcast.emit('discussion-notification', 'hello world!');
     			res.status(200).send({success: true, insertId: result.insertId})
                 sendMailAfterFeedback(req.body.project_id, req.body.user_id, req.body.title, req.body.message, url, function() {
                     return ;
@@ -462,7 +463,7 @@ exports.deleteProjectDiscussion = function(req, res) {
 };
 
 /*** ADD PROJECT DISCUSSION REPLY ***/
-exports.postNewProjectDiscussionReply = function(req, res) {
+exports.postNewProjectDiscussionReply = function(req, res, socket) {
 	/* Validation */
     req.checkBody('user_id', 'Error Message').isInt();
     req.checkBody('project_discussion_id', 'Error Message').isInt();
@@ -477,6 +478,7 @@ exports.postNewProjectDiscussionReply = function(req, res) {
     	pool.query('INSERT INTO project_discussion_replies SET ?', req.body,
     		function(err, result) {
     			if (err) throw err;
+                socket.broadcast.emit('discussion-notification', 'hello world!');
     			res.status(200).send({success: true, insertId: result.insertId});
                 sendMailAfterFeedbackAnswer(req.body.project_discussion_id, req.body.user_id, req.body.message, url, function() {
                     return ;
@@ -602,6 +604,29 @@ exports.postProjectReplyLike = function(req, res) {
             });
     }
 };
+
+/**** NOTIFICATION DISCUSSION LIKES *****/
+// exports.getDiscussionLike = function(req ,res, callback) {
+//     pool.query('SELECT * FROM project_discussion WHERE user_id = ?', req.user.id,
+//         function(err, result) {
+//             if (err) throw err;
+//             if (result[0]) {
+//                 function recursive(index) {
+//                     if (result[index]) {
+//                         pool.query('SELECT * FROM project_discussion_likes WHERE project_discussion_id = ?', result[index].id,
+//                             function(err, result2) {
+//                                 if (err) throw err;
+//                                 if (result2[0]) {
+//                                 } else
+//                                     callback();
+//                             });
+//                     else
+//                         callback();
+//                 }
+//             } else
+//                 callback();
+//         });
+// };
 
 
 

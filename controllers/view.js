@@ -7,12 +7,10 @@ function getNotifViewList(data, callback) {
     for(var i = 0; i < view.length; i++) {
 	var d = view[i].creation_date;
 	list.push({
-	    creation_date	: d,
-	    timestamp		: d.getTime(),
-	    read		: view[i].m_read,
-	    name		: view[i].user_viewed_username,
-	    user_notif_id	: view[i].user_viewed_id,
-	    type: "view"
+	    date_of_view         : d,
+	    user_notif_username	 : view[i].user_viewed_username,
+	    user_notif_id	       : view[i].user_viewed_id,
+	    type_notif: "view"
 	});
     }
     callback(list);

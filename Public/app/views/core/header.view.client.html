@@ -132,7 +132,7 @@
                     <div ng-if="!listNotifs.length" class="header-noNotif-text">
                         <p>Nothing happened yet</p>
                     </div>
-                    <div class="header-dropdown-list" href ng-click="showUserProfile(listNotif.user_notif_id, listNotif.user_followed_id, listNotif.type_notif, listNotif.project_id, listNotif.id, listNotif.n_read)" ng-repeat="listNotif in listNotifs" ng-class="{ 'unread-active' : !listNotif.n_read }">
+                    <div class="header-dropdown-list" href ng-click="showUserProfile(listNotif.user_notif_id, listNotif.user_followed_id, listNotif.type_notif, listNotif.project_id, listNotif.id, listNotif.n_read, $index)" ng-repeat="listNotif in listNotifs" ng-class="{ 'unread-active' : !listNotif.n_read }">
                         <div class="header-list-picture">
                             <img ng-src="{{ resizePic(listNotif.pic, 48, 48, 'fill') }}" alt="header-notif-avatar">
                         </div>
@@ -144,10 +144,8 @@
                             <span class="hlmspan" ng-if="listNotif.type_notif === 'p_user_follow'">upvoted <strong>{{listNotif.project_title}}</strong> </span>
                             <span class="hlmspan" ng-if="listNotif.type_notif === 'u_user_follow'">is now following <strong>{{listNotif.user_followed_name}}</strong></span>
                             <span class="hlmspan" ng-if="listNotif.type_notif === 'p_involve'">invited you to join <strong>{{listNotif.project_title}}</strong></span>
-                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_ask'">asked a question about <strong>{{listNotif.project_title}}</strong></span>
-                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_reply_ask'">commented on <strong>{{listNotif.project_title}}</strong> question</span>
-                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_help'">asked a question about <strong>{{listNotif.project_title}}</strong></span>
-                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_reply_help'">commented on <strong>{{listNotif.project_title}}</strong> question</span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_discuss'">asked a question about <strong>{{listNotif.project_title}}</strong></span>
+                            <span class="hlmspan" ng-if="listNotif.type_notif === 'p_discuss_reply'">commented on <strong>{{listNotif.project_title}}</strong> question</span>
                             </h4>
                             <p>{{listNotif.date_of_view}}<p>
                         </div>
@@ -241,7 +239,7 @@
         }); */
 
 
-        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+        if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
         else
             headerCon.style.position = "absolute";
@@ -582,7 +580,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if (y >= 736) {
                     if ($(window).scrollTop() > 1 && !check) {
                         check = 1;

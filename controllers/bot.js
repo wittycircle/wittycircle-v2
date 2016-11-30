@@ -1,6 +1,23 @@
 var mandrill = require('mandrill-api/mandrill');
 var CronJob = require('cron').CronJob;
 
+function checkPermission(user_id, callback) {
+    if (user_id) {
+        pool.query('SELECT permission FROM notification_permission WHERE user_id = ? AND notif_type = "profile_view"', user_id,
+        function(err, result) {
+            if (err) throw err;
+            else  {
+                if (!result[0])
+                    callback(true);
+                else if (!result[0].permission)
+                    callback(false);
+                else
+                    callback(true);
+            }
+        });
+    } else
+        return callback(false);
+};
 
 function getInformationAndSendMail(data, email, first_name, last_name, callback) {
 	if (data[0]) {
@@ -229,21 +246,26 @@ function sendProfileViewMail() {
 								function(err, result2) {
 									if (err) throw err;
 									else {
-										pool.query('SELECT email, profile_id, fake FROM users WHERE id = ?', result[index].user_id,
-											function(err, result3) {
-												if (err) throw err;
-                                                if (result3[0].fake === 1)
-                                                    return recursive(index + 1);
-                                                else {
-    												pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result3[0].profile_id,
-    													function(err, result4) {
-    														if (err) throw err;
-    														getInformationAndSendMail(result2, result3[0].email, result4[0].first_name, result4[0].last_name, function() {
-    															return recursive(index + 1);
-    														});
-    													});
-                                                }
-											});
+                                        checkPermission(result[index].user_id, function(check) {
+                                            if (check) {
+        										pool.query('SELECT email, profile_id, fake FROM users WHERE id = ?', result[index].user_id,
+        											function(err, result3) {
+        												if (err) throw err;
+                                                        if (result3[0].fake === 1)
+                                                            return recursive(index + 1);
+                                                        else {
+            												pool.query('SELECT first_name, last_name FROM profiles WHERE id = ?', result3[0].profile_id,
+            													function(err, result4) {
+            														if (err) throw err;
+            														getInformationAndSendMail(result2, result3[0].email, result4[0].first_name, result4[0].last_name, function() {
+            															return recursive(index + 1);
+            														});
+            													});
+                                                        }
+        											});
+                                            } else
+                                                return recursive(index + 1);
+                                        });
 									}
 								});
 						} else {
@@ -288,6 +310,7 @@ function addUserView(user_id, numView, numberProfiles, callback) {
                                 pool.query('INSERT INTO notification_list SET user_id = ?, user_notif_id = ?, user_notif_username = ?, type_notif = "view"', [user_id, randomId, fullName],
                                     function(err, result2) {
                                         if (err) throw err;
+                                        console.log(index + ' Users Added !');
                                         return recursive(index + 1);
                                     });
                             }
@@ -351,6 +374,7 @@ function increaseUserView() {
     } else
         return ;
 };
+
 
 var job = new CronJob({
     cronTime: '00 00 19 * * 6',

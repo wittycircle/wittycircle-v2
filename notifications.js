@@ -6,6 +6,7 @@ var view	   = require('./controllers/view'),
 follow	 = require('./controllers/follow'),
 project  = require('./controllers/projects'),
 ask 	 = require('./controllers/asks'),
+discuss  = require('./controllers/discussion'),
 help 	 = require('./controllers/feedbacks'),
 cd       = require('./dateConvert')
 
@@ -58,177 +59,35 @@ function saveNotificationList(req, res, list, callback) {
 		if (!row[0]) { // if the table is empty
 			function recursive(index) {
 				if (list[index]) {
-					if (list[index].type === "view") { // insert notification's list about users who view currentUser into notification_list database
-						pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?)',
-							[req.user.id, list[index].user_notif_id, list[index].name, list[index].type, list[index].creation_date],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else if (list[index].type === "u_follow") { // insert notification's list about users who follow currentUser into notification_list database
-						pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?)',
-							[req.user.id, list[index].user_notif_id, list[index].name, list[index].type, list[index].creation_date],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else if (list[index].type === "p_follow") { // insert notification's list about users who follow currentUser's project into notification_list database
-						pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, project_title, project_id, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-							[req.user.id, list[index].user_notif_id, list[index].name, list[index].project_title, list[index].project_id, list[index].type, list[index]. creation_date],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else if (list[index].type === "p_user_follow") { // insert notification's list about all users followed by currentUser following projects into notification_list database
-						pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, project_title, project_id, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-							[req.user.id, list[index].user_notif_id, list[index].name, list[index].project_title, list[index].project_id, list[index].type, list[index]. creation_date],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else if (list[index].type === "u_user_follow") {
-						pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, user_followed_id, user_followed_name, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-							[req.user.id, list[index].user_notif_id, list[index].name, list[index].user_followed_id, list[index].user_f_name, list[index].type, list[index].creation_date],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help" || list[index].type_notif === "p_reply_ask") {
-						pool.query('INSERT INTO notification_list SET ?', list[index],
-							function(err, result) {
-								if (err) throw err;
-								recursive(index + 1);
-							});
-					}
-					else
-						recursive(index + 1);
+					pool.query('INSERT INTO notification_list SET ?', list[index],
+						function(err, result) {
+							if (err) throw err;
+							recursive(index + 1);
+						});
 				} else
 					callback({done: true});
 			};
 			recursive(0);
 		} else {
-			function recursive2(index) {
+			function recursive(index) {
 				if (list[index]) {
-					if (list[index].type === "view") { // insert only all news elements in notification's list about users who view currentUser following projects into notification_list database
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && type_notif = ?',
-							[req.user.id, list[index].user_notif_id, list[index].type],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?)',
-										[req.user.id, list[index].user_notif_id, list[index].name, list[index].type, list[index].creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-								recursive2(index + 1);
-							});
-					}
-					else if (list[index].type === "u_follow") { // insert only all news elements in notification's list about users who follow currentUser following projects into notification_list database
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && type_notif = ?',
-							[req.user.id, list[index].user_notif_id, list[index].type],
-							function (err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?)',
-										[req.user.id, list[index].user_notif_id, list[index].name, list[index].type, list[index].creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-								recursive2(index + 1);
-							});
-					}
-					else if (list[index].type === "p_follow") { // insert only all news elements in notification's list about users who follow currentUser's projects following projects into notification_list database
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && project_title = ? && type_notif = ?', [req.user.id, list[index].user_notif_id, list[index].project_title, list[index].type],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, project_title, project_id, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-										[req.user.id, list[index].user_notif_id, list[index].name, list[index].project_title, list[index].project_id, list[index].type, list[index]. creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-								recursive2(index + 1);
-							});
-					}
-					else if (list[index].type === "p_user_follow") { // insert only all news elements in notification's list about all users followed by currentUser following projects into notification_list database
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && project_title = ? && type_notif = ?', [req.user.id, list[index].user_notif_id, list[index].project_title, list[index].type],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, project_title, project_id, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-										[req.user.id, list[index].user_notif_id, list[index].name, list[index].project_title, list[index].project_id, list[index].type, list[index].creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-								recursive2(index + 1);
-							});
-					}
-					else if (list[index].type === "u_user_follow") {
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && user_followed_id = ? && type_notif = ?', 
-							[req.user.id, list[index].user_notif_id, list[index].user_followed_id, list[index].type],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, user_followed_id, user_followed_name, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-										[req.user.id, list[index].user_notif_id, list[index].name, list[index].user_followed_id, list[index].user_f_name, list[index].type, list[index].creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-								recursive2(index + 1);
-							});
-					}
-					else if (list[index].type === "p_involve") {
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && project_id = ? && user_notif_id = ? && type_notif = ?',
-							[list[index].user_id, list[index].project_id, list[index].user_notif_id, list[index].type],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0]) {
-									pool.query('INSERT INTO notification_list (user_id, user_notif_id, user_notif_username, project_id, project_title, type_notif, date_of_view) VALUES (?, ?, ?, ?, ?, ?, ?)',
-										[list[index].user_id, list[index].user_notif_id, list[index].user_notif_username, list[index].project_id, list[index].project_title, list[index].type, list[index].creation_date],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-									recursive2(index + 1);
-							});
-					}
-					else if (list[index].type_notif === "p_ask" || list[index].type_notif === "p_help" || list[index].type_notif === "p_reply_ask" || list[index].type_notif === "p_reply_help") {
-						pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && project_id = ? && date_of_view = ? && type_notif = ?',
-							[list[index].user_id, list[index].project_id, list[index].date_of_view, list[index].type_notif],
-							function(err, row) {
-								if (err) throw err;
-								if (!row[0] || typeof row[0] === "undefined") {
-									pool.query('INSERT INTO notification_list SET ?', list[index],
-										function(err, result) {
-											if (err) throw err;
-											recursive2(index + 1);
-										});
-								} else
-									recursive2(index + 1);
-							});
-					} else {
-						recursive2(index + 1);
-					}
+					pool.query('SELECT 1 FROM notification_list WHERE user_id = ? && user_notif_id = ? && date_of_view = ? && type_notif = ?', [req.user.id, list[index].user_notif_id, list[index].date_of_view, list[index].type_notif],
+						function(err, row) {
+							if (err) throw err;
+							if (!row[0]) {
+								list[index].user_id = req.user.id;
+								pool.query('INSERT INTO notification_list SET ?', list[index],
+									function(err, result) {
+										if (err) throw err;
+										return recursive(index + 1);
+									});
+							} else
+								return recursive(index + 1);
+						});
 				} else
-					callback({done: true});
+					return callback({done: true});
 			};
-			recursive2(0);
+			recursive(0);
 		}
 	});
 }
@@ -246,17 +105,11 @@ function getAllNotificationList(req, res, callback) {
 										ask.getProjectAskForCreator(req, res, function(data9) {
 											ask.getProjectReplyAskForCreator(req, res, function(data10) {
 												ask.getProjectReplyAskForCommentUsers(req, res, function(data11) {
-													// help.getProjectHelp(req, res, function(data12) {
-														// help.getProjectReplyHelpForCreator(req, res, function(data13) {
-															// help.getProjectReplyHelpForInvolvedUser(req, res, function(data14) {
-																// help.getProjectReplyHelp(req, res, function(data15) {
-																	var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10, data11);
-																	saveNotificationList(req, res, allList, function(res) {
-																		callback(res);
-																	});
-																// });
-															// });
-														// });
+													// discuss.getDiscussionLike(req, res, function(data12) {
+														var allList = data.concat(data2, data3, data4, data5, data6, data7, data8, data9, data10, data11);
+														saveNotificationList(req, res, allList, function(res) {
+															callback(res);
+														});
 													// });
 												});
 											});
@@ -364,79 +217,6 @@ exports.updateNotifPermissions = function(req, res) {
 };
 
 /*** NOTIFICATION UPDATE READ ***/
-
-// exports.updateViewNotification = function(req, res) { // update n_read of view
-// 	if (req.body.type === "view") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateUserFollowNotif = function(req, res) { // update n_read of user follow
-// 	if (req.body.type === "u_follow") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && type_notif = ?', [req.user.id, req.body.notifId, req.body.type],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateProjectFollowNotif = function(req, res) {
-// 	if (req.body.type === "p_follow") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?', 
-// 			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateProjectFollowBy = function(req, res) {
-// 	if (req.body.type === "p_user_follow") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && project_id = ? && type_notif = ?',
-// 			[req.user.id, req.body.notifId, req.body.projectId, req.body.type],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateUserFollowBy = function(req, res) {
-// 	if (req.body.type === "u_user_follow") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE user_id = ? && user_notif_id = ? && user_followed_id = ? && type_notif = ?',
-// 			[req.user.id, req.body.notifId, req.body.userFollowId, req.body.type],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateProjectInvolve = function(req, res) { // update n_read of view
-// 	if (typeof req.body.id === "number") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
-
-// exports.updateProjectAsk = function(req, res) {
-// 	if (typeof req.body.id === "number") {
-// 		pool.query('UPDATE notification_list SET n_read = 1 WHERE id = ?', [req.body.id],
-// 			function(err, result) {
-// 				if (err) throw err;
-// 				res.send({success: true});
-// 			});
-// 	}
-// };
 
 exports.updateSingleNotif = function(req, res) {
 	/* Validation */

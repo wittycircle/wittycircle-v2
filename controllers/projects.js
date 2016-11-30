@@ -76,14 +76,13 @@ function sortListProject(list, callback) {
                     getProjectTitle(list[index].project_id, function(pName) {
                         if (name && pName) {
                             newList.push({
-                                user_id: list[index].user_id,
-                                user_notif_id: list[index].invited_by,
-                                user_notif_username: name,
-                                project_id: list[index].project_id,
-                                project_title: pName,
-                                type: 'p_involve',
-                                creation_date: list[index].creation_date,
-                                timestamp: list[index].creation_date.getTime()
+                                user_id                 : list[index].user_id,
+                                user_notif_id           : list[index].invited_by,
+                                user_notif_username     : name,
+                                project_id              : list[index].project_id,
+                                project_title           : pName,
+                                type_notif              : 'p_involve',
+                                date_of_view            : list[index].creation_date,
                             });
                             recursive(index + 1);
                         }

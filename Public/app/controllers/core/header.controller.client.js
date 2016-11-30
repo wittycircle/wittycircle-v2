@@ -8,8 +8,8 @@
 * Controller of the wittyApp
 **/
 angular.module('wittyApp')
-.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Notification', 'Projects', 'Beauty_encode', 'algolia', '$mdBottomSheet',
-function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Notification, Projects, Beauty_encode, algolia, $mdBottomSheet) {
+.controller('HeaderCtrl', ['$http', '$interval', '$timeout', '$location', '$scope', 'Authentication', 'Profile', '$cookies', '$rootScope', '$state', 'Users', 'Projects', 'Beauty_encode', 'algolia', '$mdBottomSheet', 'RetrieveData',
+function($http, $interval, $timeout, $location, $scope, Authentication, Profile, $cookies, $rootScope, $state, Users, Projects, Beauty_encode, algolia, $mdBottomSheet, RetrieveData) {
 
     /*** CHECK LOG ***/
     function checkCredential() {
@@ -63,7 +63,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -88,9 +88,9 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     $rootScope.$watch('globals', function(value) {
         $scope.log = islogged();
-        //    if ($scope.log) {
-        // $("#hlon").css('display', 'block');
-        //    }
+           if ($scope.log) {
+        $("#hlon").css('display', 'block');
+           }
         if (value.currentUser) {
             Profile.getUserbyUsername(value.currentUser.username).then(function(res) {
                 $scope.user = {
@@ -119,6 +119,36 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         $scope.searchNameHeader = [];
     });
 
+    if (y < 736) {
+        $scope.onSwipeRight = function(ev) {
+
+            var bodyJq          = $( 'body' ),
+            classTog        = classie.toggle,
+            thiss            = document.getElementById('header-section'),
+            menuRight       = document.getElementById( 'cbp-spmenu-s2' ),
+            showRightPush   = document.getElementById( 'showRightPush' ),
+            body            = document.body;
+
+            function disableOther( button ) {
+                if( button !== 'showRightPush' ) {
+                    classTog( showRightPush, 'disabled' );
+                }
+            };
+            classTog( thiss, 'active' );
+            classTog( body, 'cbp-spmenu-push-toleft' );
+            classTog( menuRight, 'cbp-spmenu-open' );
+            if (bodyJq.hasClass("cbp-spmenu-push-toleft"))
+            bodyJq.css('overflow-y', 'hidden');
+            else
+            bodyJq.css('overflow-y', 'auto');
+            disableOther( 'showRightPush' );
+        };
+
+        $scope.showMessagePageMobile = function() {
+            window.location.href = "http://127.0.0.1/messages";
+        };
+    }
+
     // var check = false;
     // var firstTime = 1;
     // $(window).scroll(function() {
@@ -137,34 +167,6 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     //     }
     // });
 
-    $scope.onSwipeRight = function(ev) {
-
-        var bodyJq          = $( 'body' ),
-        classTog        = classie.toggle,
-        thiss            = document.getElementById('header-section'),
-        menuRight       = document.getElementById( 'cbp-spmenu-s2' ),
-        showRightPush   = document.getElementById( 'showRightPush' ),
-        body            = document.body;
-
-        function disableOther( button ) {
-            if( button !== 'showRightPush' ) {
-                classTog( showRightPush, 'disabled' );
-            }
-        };
-        classTog( thiss, 'active' );
-        classTog( body, 'cbp-spmenu-push-toleft' );
-        classTog( menuRight, 'cbp-spmenu-open' );
-        if (bodyJq.hasClass("cbp-spmenu-push-toleft"))
-        bodyJq.css('overflow-y', 'hidden');
-        else
-        bodyJq.css('overflow-y', 'auto');
-        disableOther( 'showRightPush' );
-    };
-
-    $scope.showMessagePageMobile = function() {
-        window.location.href = "https://www.wittycircle.com/messages";
-    };
-
     // $rootScope.$watch('notifBubble', function(value, old) {
     //   console.log(value);
     //   if (value)
@@ -181,177 +183,12 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {
             console.log('error: cannot logout the user');
         });
-    };
-
-    /*** Get mail list notification ***/
-    var loadHeaderNotification = function() {
-        if ($rootScope.globals.currentUser)
-        Users.count();
-    };
-
-    $timeout(loadHeaderNotification, 1200);
-
-    $scope.getMessageList = function() {
-        if ($rootScope.globals.currentUser) {
-            Users.getLastMessage().then(function(data) {
-                $scope.currentUsername = $rootScope.globals.currentUser.username;
-                $scope.dialogues = data.topic;
-            });
-        }
-    }; $timeout($scope.getMessageList, 2000);
-
-    $scope.showMessagePage = function(data) {
-        if ($rootScope.globals.currentUser) {
-            $http.put('/messages/', {id : data.id});
-            $state.go('messages', {input: data});
-        }
-    };
-
-    $scope.showMessageMobile = function(dialogue) {
-        $rootScope.dialogueMM = dialogue;
-    };
-
-    // $scope.getMesssageListOnClick = function() {
-    //   if (!$scope.listNotifs && !$scope.dialogues[0])
-    //     $scope.getMessageList();
-    // };
-
-    socket.on('notification', function(data){
-        loadHeaderNotification();
-        $scope.getMessageList();
-    });
-
-    $rootScope.$on('message-send', function(event, data) {
-        if (data)
-            $scope.getMessageList();
-    });
-
-    /*** All notifications ***/
-    function getNotifList() {
-        $scope.notifLists = [];
-        if ($rootScope.globals.currentUser) {
-            Notification.getNotificationList(function(res) {
-                $scope.listNotifs = res.data;
-                $scope.notifBubble = res.number;
-                if (!res.number)
-                    $scope.checkRead = true;
-                else
-                    $scope.checkRead = false;
-            });
-        }
-    }; $timeout(getNotifList(), 2000);
-
-    $scope.hideNotifBubble = function() {
-        $scope.hideNBubble = true;
-    };
-
-    function updateNotificationRead(id) {
-        $http.put("/notification/update/single", id).success(function(res) {
-            if (res.success) {
-                getNotifList();
-            }
-        });
-    };
-
-    function getNotifUser(username) {
-        $scope.notifBubble -= 1;
-        $timeout(function() {
-            $location.path(username);
-        }, 1000)
-    };
-
-    function getNotifProject(titleUrl, public_id, state) {
-        $timeout(function() {
-            if (!state)
-                $location.path("project/" + public_id + "/" + titleUrl);
-            else
-                $location.path("project/" + public_id + "/" + titleUrl + state);
-        }, 1500);
-    };
-
-    $scope.getAllRead = function() {
-        if ($rootScope.globals.currentUser) {
-            $http.put('/notification/update/all').success(function(res) {
-                if (res.success) {
-                    getNotifList();
-                    $scope.checkRead = true;
-                }
-            });
-        }
-    };
-
-    $scope.showUserProfile = function(user_notif_id, user_followed_id, type, project_id, n_id, check_read) {
-
-        var value = {
-            notifId       : user_notif_id,
-            type          : type,
-            projectId     : project_id,
-            userFollowId  : user_followed_id
-        }
-        var id = {
-            id: n_id
-        }
-
-        if (type === "view") {
-            Users.getUserbyId(user_notif_id, function(res) {
-                if (res.success) {
-                    if (!check_read)
-                        updateNotificationRead(id);
-                    getNotifUser(res.data.username);
-                }
-            });
-        }
-        if (type === "u_follow") {
-            Users.getUserbyId(user_notif_id, function(res) {
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifUser(res.data.username);
-            });
-        }
-        if (type === "p_follow") {
-            Users.getUserbyId(user_notif_id, function(res) {
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifUser(res.data.username);
-            });
-        }
-        if (type === "p_user_follow") {
-            Projects.getProjectbyId(project_id, function(res) {
-                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifProject(titleUrl, res[0].public_id, false);
-            });
-        }
-        if (type === "u_user_follow") {
-            Users.getUserbyId(user_followed_id, function(res) {
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifUser(res.data.username);
-            });
-        }
-        if (type === "p_involve") {
-            Projects.getProjectbyId(project_id, function(res) {
-                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifProject(titleUrl, res[0].public_id, false);
-            });
-        }
-        if (type === "p_ask" || type === "p_help" || type === "p_reply_ask" || type === "p_reply_help") {
-            Projects.getProjectbyId(project_id, function(res) {
-                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
-                if (!check_read)
-                    updateNotificationRead(id);
-                getNotifProject(titleUrl, res[0].public_id, "/feedback")
-            });
-        }
     };
 
     $scope.encodeUrl = function(url) {
@@ -360,27 +197,27 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /* follow notification */
     socket.on('follow-notification', function(data) {
-        getNotifList();
+        getNotifList(true);
     });
 
     /* view notification */
     socket.on('view-notification', function(data) {
-        getNotifList();
+        getNotifList(true);
     });
 
     /* project follow notification */
     socket.on('follow-project-notification', function(data) {
-        getNotifList();
+        getNotifList(true);
     });
 
     /* project involve notification */
     socket.on('involve-notification', function(data) {
-        getNotifList();
+        getNotifList(true);
     }); 
 
     /* ask project notification */
-    socket.on('ask-project-notification', function(data) {
-        getNotifList();
+    socket.on('discussion-notification', function(data) {
+        getNotifList(true);
     });
 
     socket.on('my-follow-users', function(data) {
@@ -397,7 +234,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("JD72FA5WG6", "924bac052bc10e15f834ee7324b0d7e6");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');
@@ -493,6 +330,155 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     $scope.limitM = 5;
     $scope.moreMobile = function() {
         $scope.limitM += 5;
+    };
+
+    /*** Get mail list notification ***/
+    var loadHeaderNotification = function() {
+        if ($rootScope.globals.currentUser)
+        Users.count();
+    };
+
+    $timeout(loadHeaderNotification, 1200);
+
+    $scope.getMessageList = function() {
+        if ($rootScope.globals.currentUser) {
+            Users.getLastMessage().then(function(data) {
+                $scope.currentUsername = $rootScope.globals.currentUser.username;
+                $scope.dialogues = data.topic;
+            });
+        }
+    }; $timeout($scope.getMessageList, 2000);
+
+    $scope.showMessagePage = function(data) {
+        if ($rootScope.globals.currentUser) {
+            $http.put('/messages/', {id : data.id});
+            $state.go('messages', {input: data});
+        }
+    };
+
+    $scope.showMessageMobile = function(dialogue) {
+        $rootScope.dialogueMM = dialogue;
+    };
+
+    // $scope.getMesssageListOnClick = function() {
+    //   if (!$scope.listNotifs && !$scope.dialogues[0])
+    //     $scope.getMessageList();
+    // };
+
+    socket.on('notification', function(data){
+        loadHeaderNotification();
+        $scope.getMessageList();
+    });
+
+    $rootScope.$on('message-send', function(event, data) {
+        if (data)
+            $scope.getMessageList();
+    });
+
+    /*** All notifications ***/
+    function getNotifList(notif) {
+        $scope.notifLists = [];
+        if (notif)
+            $scope.notifBubble = $scope.notifBubble++;
+        if ($rootScope.globals.currentUser) {
+            RetrieveData.getData('/notification', 'GET').then(function(res) {
+                var array = res.data;
+                var n = 0;
+                for (var i = 0; i < res.data.length; i++) {
+                    if (!array[i].n_read)
+                        n++;
+                }
+                $timeout(function() {
+                $scope.listNotifs = res.data;
+                $scope.notifBubble = n;
+                }, 0);
+                if (!n)
+                    $scope.checkRead = true;
+                else
+                    $scope.checkRead = false;
+            });
+        }
+    }; getNotifList();
+    
+    $scope.hideNotifBubble = function() {
+        $scope.hideNBubble = true;
+    };
+
+    function updateNotificationRead(id) {
+        $http.put("/notification/update/single", id).success(function(res) {
+            if (res.success) {
+                getNotifList();
+            }
+        });
+    };
+
+    function getNotifProject(titleUrl, public_id, state) {
+        $timeout(function() {
+            if (!state)
+                $location.path("project/" + public_id + "/" + titleUrl);
+            else
+                $location.path("project/" + public_id + "/" + titleUrl + state);
+        }, 1500);
+    };
+
+    $scope.getAllRead = function() {
+        if ($rootScope.globals.currentUser) {
+            $http.put('/notification/update/all').success(function(res) {
+                if (res.success) {
+                    getNotifList();
+                    $scope.checkRead = true;
+                }
+            });
+        }
+    };
+
+    $scope.showUserProfile = function(user_notif_id, user_followed_id, type, project_id, n_id, check_read, index) {
+
+        var id = {
+            id: n_id
+        }
+
+        $scope.listNotifs[index].n_read = 1;
+        if (type === "view") {
+            Users.getUserbyId(user_notif_id, function(res) {
+                $location.path(res.data.username);
+            });
+        }
+        else if (type === "u_follow") {
+            Users.getUserbyId(user_notif_id, function(res) {
+                $location.path(res.data.username);
+            });
+        }
+        else if (type === "p_follow") {
+            Users.getUserbyId(user_notif_id, function(res) {
+                $location.path(res.data.username);
+            });
+        }
+        else if (type === "p_user_follow") {
+            Projects.getProjectbyId(project_id, function(res) {
+                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+                getNotifProject(titleUrl, res[0].public_id, false);
+            });
+        }
+        else if (type === "u_user_follow") {
+            Users.getUserbyId(user_followed_id, function(res) {
+                $location.path(res.data.username);
+            });
+        }
+        else if (type === "p_involve") {
+            Projects.getProjectbyId(project_id, function(res) {
+                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+                getNotifProject(titleUrl, res[0].public_id, false);
+            });
+        }
+        else if (type === "p_discuss" || type === "p_discuss_reply") {
+            Projects.getProjectbyId(project_id, function(res) {
+                var titleUrl = Beauty_encode.encodeUrl(res[0].title);
+                getNotifProject(titleUrl, res[0].public_id, "/feedback")
+            });
+        }
+        if (!check_read)
+            updateNotificationRead(id);
     };
 
     /*** All watch function ***/

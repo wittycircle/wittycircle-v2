@@ -46,11 +46,10 @@ function getNotifUserFollowList(data, callback) {
     for(var n = 0; n < follow.length; n++) {
         var d = follow[n].creation_date;
         list.push({
-            creation_date   : d,
-            timestamp       : d.getTime(),
-            name        : follow[n].user_username,
+            date_of_view    : d,
+            user_notif_username            : follow[n].user_username,
             user_notif_id   : follow[n].user_id,
-            type        : "u_follow"
+            type_notif            : "u_follow"
         });
     }
     callback(list);
@@ -77,13 +76,12 @@ function getNotifProjectFollowList(data, callback) {
     for (var n = 0; n < projectFollow.length; n++) {
         var d = projectFollow[n].creation_date;
         list.push({
-            creation_date   : d,
-            timestamp       : d.getTime(),
-            name        : projectFollow[n].user_name,
+            date_of_view    : d,
+            user_notif_username            : projectFollow[n].user_name,
             user_notif_id   : projectFollow[n].user_id,
             project_title   : projectFollow[n].follow_project_title,
             project_id      : projectFollow[n].follow_project_id,
-            type        : "p_follow"
+            type_notif            : "p_follow"
         });
     }
     callback(list);
@@ -259,13 +257,12 @@ function getNotifUserFollowProject(data, callback) {
     for (var n = 0; n < followUserProject.length; n++) {
         var d = followUserProject[n].creation_date;
         list.push({
-            creation_date   : d,
-            timestamp       : d.getTime(),
-            name        : followUserProject[n].user_name,
+            date_of_view    : d,
+            user_notif_username            : followUserProject[n].user_name,
             user_notif_id   : followUserProject[n].user_id,
             project_title   : followUserProject[n].follow_project_title,
             project_id      : followUserProject[n].follow_project_id,
-            type        : "p_user_follow"
+            type_notif            : "p_user_follow"
         });
     }
     callback(list);
@@ -325,13 +322,12 @@ function getNotifUserFollowUser(data, callback) {
                 if (err) throw err;
                 var fName = data[0].first_name + " " + data[0].last_name;
                 list.push({
-                    creation_date   : d,
-                    timestamp   : d.getTime(),
-                    name        : userFollowUser[index].user_username,
+                    date_of_view    : d,
+                    user_notif_username            : userFollowUser[index].user_username,
                     user_notif_id   : userFollowUser[index].user_id,
                     user_followed_id    : userFollowUser[index].follow_user_id,
-                    user_f_name : fName,
-                    type        : "u_user_follow"
+                    user_followed_name     : fName,
+                    type_notif            : "u_user_follow"
                 });
                 recursive(index + 1);
             });

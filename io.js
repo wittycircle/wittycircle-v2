@@ -2,6 +2,7 @@
 var cd          = require('./dateConvert');
 var tf          = require('./tools/project_functions');
 var np          = require('./tools/notification_permission');
+var discuss     = require('./controllers/discussion')
 const mandrill  = require('mandrill-api/mandrill');
 
 
@@ -85,6 +86,16 @@ module.exports = function(app, io, ensureAuth) {
                 });
             }
         });
+
+        /*** Project Discussion Notification ***/
+        app.post('/discussion/add/discussion', ensureAuth, function(req, res) {
+            discuss.postNewProjectDiscussion(req, res, socket);
+        });
+
+        app.post('/discussion/add/reply', ensureAuth, function(req, res) {
+            discuss.postNewProjectDiscussionReply(req, res, socket);
+        });
+
 
         /*** Follow User Notification ***/
         app.post('/follow/user/:username', function(req, res){

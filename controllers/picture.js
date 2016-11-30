@@ -63,17 +63,18 @@ exports.getRandomCoverPicture = function(req, res) {
 			   var cover_card = transformUrlForCard(data[0].url);
 			   pool.query('UPDATE profiles SET cover_picture = ?, cover_picture_cards = ?  WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', [data[0].url, cover_card, req.user.id],
 				      function(err, result) {
-			       		  algoliaClient.deleteIndex('Users', function(error) {
-					      if (!err) {
-						  pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE fake = 0', function(err, profile_data) {
-					 	      if (err) throw err;
-					 	      People.addObjects(profile_data, function(err, content) {
-							  if (err) throw err;
-							  return res.send({success: true, data: data[0].url});
-					 	      });
-						  });
-					      }
-					  });
+					  return res.status(200).send({success: true, data: data[0].url});
+//			       		  algoliaClient.deleteIndex('Users', function(error) {
+//					      if (!err) {
+//						  pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE fake = 0', function(err, profile_data) {
+//					 	      if (err) throw err;
+//					 	      People.addObjects(profile_data, function(err, content) {
+//							  if (err) throw err;
+//							  return res.send({success: true, data: data[0].url});
+//					 	      });
+//						  });
+//					      }
+//					  });
 				      });
 		       };
 		   });

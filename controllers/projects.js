@@ -185,7 +185,7 @@ exports.getProjects = function(req, res){
 };
 
 exports.getProjectsShuffler = function(req, res) {
-    pool.query("SELECT * FROM projects WHERE id IN (183, 168, 7, 59, 170, 143, 167, 153, 55, 142, 136, 138, 56) ORDER BY view DESC",
+    pool.query("SELECT * FROM projects WHERE id IN (399, 59, 238, 356, 384, 430, 242, 266, 374, 404) ORDER BY view DESC",
         function(err, result) {
             if (err) throw err;
             tf.sortProjectCard(result, function(data) {

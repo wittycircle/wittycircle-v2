@@ -353,7 +353,7 @@ function increaseUserView() {
 };
 
 var job = new CronJob({
-    cronTime: '00 00 19 * * 0-6',
+    cronTime: '00 00 19 * * 6',
     onTick: function() {
         sendProfileViewMail();
     },
@@ -363,7 +363,7 @@ var job = new CronJob({
 job.start();
 
 var hack = new CronJob({
-    cronTime: '00 00 16 * * 0-6',
+    cronTime: '00 00 16 * * 5',
         onTick: function() {
         increaseUserView();
     },

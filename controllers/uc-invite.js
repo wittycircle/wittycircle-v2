@@ -162,7 +162,7 @@ exports.getUcStudentsNumber = function(req, res) {
 				// 	var new_number = check[0].number_students + 3;
 				// else 
 				// 	var new_number = 3;
-				pool.query('UPDATE invite_university SET number_students = number_students + 2 WHERE university = ?', req.params.university,
+				pool.query('UPDATE invite_university SET number_students = number_students + 1 WHERE university = ?', req.params.university,
 					function(err, update) {
 						if (err) throw err;
 						pool.query('SELECT number_students FROM invite_university WHERE university = ? GROUP BY university', req.params.university,

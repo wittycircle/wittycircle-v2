@@ -1,5 +1,7 @@
 /**** DISCUSSION ****/
 var np          = require('../tools/notification_permission');
+const mandrill  = require('mandrill-api/mandrill');
+
 
 function sortMailList(list, callback) {
     if (list[0]) {

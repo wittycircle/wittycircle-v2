@@ -62,7 +62,7 @@
         }
 
         // Setting Credentials and user object to $cookieStore
-        function SetCredentials(email, id, profile_id, username, moderator, callback) {
+        function SetCredentials(email, id, profile_id, username, moderator, ambassador, callback) {
 
             getUserByEmail(email).then(function (result) {
                 $rootScope.globals = {
@@ -74,7 +74,8 @@
                         first_name: result.first_name,
                         last_name: result.last_name,
                         username: username,
-                        moderator: moderator
+                        moderator: moderator,
+                        ambassador: ambassador
                     }
                 };
                 if (result.cover_picture)
@@ -99,7 +100,8 @@
                         first_name: profile.first_name,
                         last_name: profile.last_name,
                         username: user.username,
-			moderator: user.moderator
+			            moderator: user.moderator,
+                        ambassador: user.ambassador
                     }
                 };
                 if (profile.cover_picture)

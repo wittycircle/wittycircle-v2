@@ -28,7 +28,7 @@
 	<div class="learn-article">
 		<div class="learn-article-header">
 			<a href="learn"><img src="images/arrow-back-01.svg" alt="arrow" /><h2>Back to all stories</h2></a>
-			<button ng-click="modifyArticle()" ng-if="logUser.moderator">Modify article</button>
+			<button ng-click="modifyArticle()" ng-if="logUser.moderator || logUser.ambassador">Modify article</button>
 
 			<ul data-ng-controller="PopUpCtrl">
 				<li><a href="https://twitter.com/intent/tweet?text=Need help to develop your project? Want to discover cool ideas? Join now &url=https://www.wittycircle.com"><i class="fa fa-twitter" ></i></a></li>
@@ -76,7 +76,7 @@
 				</article>
 			</div>
 
-			<section class="learn-corp-article-event">
+			<section class="learn-corp-article-event" ng-if="event">
 				<img src="https://res.cloudinary.com/dqpkpmrgk/image/upload/c_scale,h_85,w_85/v1478021343/1098263_10151896325062317_1452756933_n_k52i2w.jpg">
 				<h3>Want to talk to Nish? Post your project<br /> and spread the word!</h3>
 

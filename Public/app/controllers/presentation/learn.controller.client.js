@@ -21,6 +21,7 @@ angular.module('wittyApp')
 		var currentUser = $rootScope.globals.currentUser || false;
 		var recentArticles;
 		$scope.logUser = currentUser;
+		$scope.searchAuthor;
 
 	    // if (!currentUser.moderator)
 	    //    $location.path('/').replace();
@@ -43,7 +44,7 @@ angular.module('wittyApp')
 	    			$scope.learn.id 		= article.id;
 	    			$scope.learn.title 		= article.title;
 	    			$scope.learn.picture 	= article.picture;
-	    			$scope.searchAuthor 	= article.profile.first_name + " " + article.profile.last_name;
+	    			$scope.learn.searchAuthor 	= article.profile.first_name + " " + article.profile.last_name;
 	    			$scope.learn.creator_user_id = article.creator_user_id;
 	    			$scope.learn.read_time	= article.read_time;
 	    			$scope.learn.text 		= article.text;
@@ -136,18 +137,17 @@ angular.module('wittyApp')
 		}; $scope.getAuthors();
 
 		$scope.getAuthorId = function(user_id, first_name, last_name) {
-			console.log(user_id);
-			$scope.searchAuthor = first_name + " " + last_name;
+			$scope.learn.searchAuthor = first_name + " " + last_name;
 			$scope.learn.creator_user_id = user_id;
-			console.log($scope.searchAuthor);
 		};
 
 		$scope.publishArticle = function() {
-			if (currentUser.moderator) {
+			if (currentUser.moderator || currentUser.ambassador) {
 
 				if ($scope.learn.tags)
 					$scope.learn.tags = $scope.learn.tags.split(',');
 
+				delete $scope.learn.searchAuthor;
 				var data = { url: $scope.learn.picture };
 				$http.post('/upload/article/picture', data).success(function(res1) {
 					$scope.learn.picture = res1.secure_url;

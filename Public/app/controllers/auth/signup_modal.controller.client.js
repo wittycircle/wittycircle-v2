@@ -90,7 +90,7 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
           Authentication.Login($scope.formData.email, $scope.formData.password, function (response) {
             if (response.success) {
               $scope.closeModal = true;
-              Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, response.user.moderator, function(done) {
+              Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, response.user.moderator, response.user.ambassador, function(done) {
                 $scope.formData = [];
                 $state.go('signup', {tagCheckFirst: true});
               });

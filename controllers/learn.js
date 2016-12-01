@@ -287,48 +287,45 @@ exports.postNewArticle = function(req, res) {
     if (errors) {
     	return res.status(400).send(errors);
     } else {
-    	if (req.isAuthenticated) {
-    		pool.query('SELECT count(*) as number FROM articles', 
-    			function(err, result) {
-    				if (err) throw err;
-    				else {
-    					getArticleId(result[0].number, function(aId) {
-    						req.body.article_id = aId;
-    						var tags = req.body.tags;
-    						delete req.body.tags;
+		pool.query('SELECT count(*) as number FROM articles', 
+			function(err, result) {
+				if (err) throw err;
+				else {
+					getArticleId(result[0].number, function(aId) {
+						req.body.article_id = aId;
+						var tags = req.body.tags;
+						delete req.body.tags;
 
-    						pool.query('INSERT INTO articles SET ?', req.body, 
-    							function(err, result2) {
-    								if (err) throw err;
-    								if (tags[0]) {
-    									pool.query('SELECT id FROM articles WHERE article_id = ?', aId,
-    										function(err, result3) {
-    											if (err) throw err;
-    											if (result3[0].id) {
-    												var article_id = result3[0].id;
-			    									function recursive(index) {
-			    										if (tags[index]) {
-			    											pool.query('INSERT INTO article_tags (tag_name, article_id) VALUES (?, ?)', [tags[index].trim(), article_id],
-			    												function(err, result4) {
-			    													if (err) throw err;
-			    													return recursive(index + 1);
-			    												});
-			    										} else
-			    											return res.status(200).send({success: true}); 
-			    									};
-			    									recursive(0);
-			    								} else
-			    									return res.status(200).send({success: true});
-		    								});
-    								} else {
-    									return res.status(200).send({success: true});
-    								}
-    							});
-    					});
-    				}
-    			});
-    	} else
-    		return res.status(401).send("Request Unauthorized");
+						pool.query('INSERT INTO articles SET ?', req.body, 
+							function(err, result2) {
+								if (err) throw err;
+								if (tags[0]) {
+									pool.query('SELECT id FROM articles WHERE article_id = ?', aId,
+										function(err, result3) {
+											if (err) throw err;
+											if (result3[0].id) {
+												var article_id = result3[0].id;
+		    									function recursive(index) {
+		    										if (tags[index]) {
+		    											pool.query('INSERT INTO article_tags (tag_name, article_id) VALUES (?, ?)', [tags[index].trim(), article_id],
+		    												function(err, result4) {
+		    													if (err) throw err;
+		    													return recursive(index + 1);
+		    												});
+		    										} else
+		    											return res.status(200).send({success: true}); 
+		    									};
+		    									recursive(0);
+		    								} else
+		    									return res.status(200).send({success: true});
+	    								});
+								} else {
+									return res.status(200).send({success: true});
+								}
+							});
+					});
+				}
+			});
     }
 };
 
@@ -343,7 +340,7 @@ exports.updateNewArticle = function(req, res) {
     if (errors) {
     	return res.status(400).send(errors);
     } else {
-    	if (req.user && req.user.moderator) {
+    	if (req.user && (req.user.moderator || req.user.ambassador)) {
     		var tags = req.body.tags;
     		delete req.body.tags;
     		

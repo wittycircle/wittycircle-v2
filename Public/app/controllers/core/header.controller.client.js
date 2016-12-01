@@ -63,7 +63,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
     **Update in time sidebar after login
     */
     //TODO: change to the server url
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
@@ -145,7 +145,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
         };
 
         $scope.showMessagePageMobile = function() {
-            window.location.href = "https://www.wittycircle.com/messages";
+            window.location.href = "http://127.0.0.1/messages";
         };
     }
 
@@ -183,7 +183,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
             if (response.success) {
                 Authentication.ClearCredentials(function(res) {
                     if (res)
-                    window.location.replace('https://www.wittycircle.com');
+                    window.location.replace('http://127.0.0.1');
                 });
             }
         }).error(function (response) {
@@ -234,7 +234,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     /*** Search Bar ***/
     /* API Key */
-    var client  = algolia.Client("XQX5JQG4ZD", "8be065c7ce07e14525c377668a190cf8");
+    var client  = algolia.Client("JD72FA5WG6", "924bac052bc10e15f834ee7324b0d7e6");
 
     var People  = client.initIndex('Users');
     var Project = client.initIndex('Projects');

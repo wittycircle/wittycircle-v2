@@ -2,7 +2,7 @@
 
 /* BABSON UNIVERSITY INVITATION MAILS */
 function inviteMailToUc(university, number, category, callback) {
-	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 8',
+	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1829',
 		function(err, result) {
 			if (err) throw err;
 

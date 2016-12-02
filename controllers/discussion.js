@@ -77,12 +77,15 @@ function getAllDiscussionReplyUserId(pd_id, user_id, callback) {
 };
 
 function sendMailAfterFeedbackAnswer(pd_id, user_id, message, url, callback) {
-    pool.query('SELECT title FROM projects WHERE id IN (SELECT project_id FROM project_discussion WHERE id = ?)', pd_id,
+    pool.query('SELECT title, creator_user_id FROM projects WHERE id IN (SELECT project_id FROM project_discussion WHERE id = ?)', pd_id,
         function(err, result2) {
             if (err) throw err;
+            if (result2[0])
+                var creator = {user_id: result2[0].creator_user_id};
             getAllDiscussionReplyUserId(pd_id, user_id, function(newArray) {
                 if (!newArray[0]) return ;
                 else {
+                    newArray.push(creator);
                     np.sortEmailNotificationPermission('reply_project', newArray, function(pArray) {
                         if (!pArray)
                             return ;
@@ -167,13 +170,16 @@ function sendMailAfterFeedbackAnswer(pd_id, user_id, message, url, callback) {
 };
 
 function sendMailAfterFeedback(project_id, user_id, title, message, url, callback) {
-    pool.query('SELECT title FROM projects WHERE id = ?', project_id,
+    pool.query('SELECT title, creator_user_id FROM projects WHERE id = ?', project_id,
         function(err, result2) {
             if (err) throw err;
             else {
+                if (result2[0])
+                    var creator = {user_id: result2[0].creator_user_id};
                 pool.query('SELECT user_id FROM project_followers WHERE follow_project_id = ? AND user_id != ?', [project_id, user_id],
                     function(err, result3) {
                         if (err) throw err;
+                        result3.push(creator);
                         if (!result3[0]) return ;
                         else {
                             np.sortEmailNotificationPermission('feedback', result3, function(newArray) {

@@ -669,6 +669,7 @@ exports.deleteUserInvolved = function(req, res) {
                 if (err) {
                     throw err;
                 }
+		return res.status(200).send(result);
                 algoliaClient.deleteIndex('Projects', function(error) {
                     pool.query('SELECT * FROM projects', function(err, data) {
                         if (err) throw err;
@@ -932,17 +933,16 @@ exports.updateProject = function(req, res){
         pool.query("UPDATE projects SET ? WHERE id = ?", [req.body, req.body.id], 
 		   function(err, result) {
 		       if (err) throw err;
-		       algoliaClient.deleteIndex('Projects', function(error) {
-			   pool.query('SELECT * FROM projects', function(err, data) {
-			       if (err) throw err;
-			       Project.addObjects(data, function(err, content) {
-				   if (err) throw err;
-				   getProjectNetworkToken(req, req.body.public_id, req.body.network, function(done) {
-				       return res.status(200).send(result);
-				   });
-			       });
-			   });
-		       });
+		       pool.query('SELECT * FROM projects WHERE id = ?', req.body.id,
+				  function(err, data) {
+				      if (err) throw err;
+				      Project.addObjects(data, function(err, content) {
+					  if (err) throw err;
+					  getProjectNetworkToken(req, req.body.public_id, req.body.network, function(done) {
+					      return res.status(200).send(result);
+					  });
+				      });
+				  });
 		   });
     }
 };
@@ -1076,6 +1076,7 @@ exports.deleteProject = function(req, res){
                     if(err){
                         throw err;
                     }
+		    return res.status(200).send(content);
                     algoliaClient.deleteIndex('Projects', function(error) {
                         pool.query('SELECT * FROM projects', function(err, data) {
                             if (err) throw err;

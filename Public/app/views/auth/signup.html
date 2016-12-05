@@ -1,4 +1,4 @@
-<section id="signup-page" signup-page-dom=""onbeforeunload="return myFunction()">
+<section id="signup-page" style="position: relative; z-index: 10000" signup-page-dom=""onbeforeunload="return myFunction()">
 
 	<div class="filter"></div>
 
@@ -370,6 +370,8 @@
 		var mobileSize = $(window).width();
 
 		$(document).ready(function() {
+		if (mobileSize < 736)
+				 $('#body-section').show();
 			// $('.signup-info-gender').click(function(e) {
 			// 	var container1 	= $('#srma');
 			// 	var container2 	= $('#srfe');

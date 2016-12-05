@@ -155,7 +155,7 @@
 
         // function
         // used to init the app and pass all the resolve ot it
-        function init () {
+        function init() {
             var err;
 
             vm.project = projectResolve.data[0];

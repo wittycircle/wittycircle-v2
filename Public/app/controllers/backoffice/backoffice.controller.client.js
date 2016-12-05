@@ -1,5 +1,5 @@
 angular.module('wittyApp')
-	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData) {
+	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData, $sce, $templateRequest, $compile) {
 		if (!access.data) {
 			$location.path('/');
 		} else {

@@ -14,9 +14,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
     
-    if (!currentUser || !$stateParams.tagCheckFirst)
-		$location.path('/');
-    else {
+  //   if (!currentUser || !$stateParams.tagCheckFirst)
+		// $location.path('/');
+  //   else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
 	    $rootScope.globals.currentUser.profile_cover = response.data.data;
@@ -596,7 +596,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*
 	**End Redactor configuration
 	*/
-    }
+    // }
 })
 .directive('locationSearch', function() {
 	return {

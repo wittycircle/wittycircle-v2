@@ -247,7 +247,7 @@ angular.module('wittyApp')
 					                                if (WDay == 5) {d = "Saturday"; return (d);}
 					                                if (WDay == 6) {d = "Sunday"; return (d);} 
 				                             	}
-			else if (gPD > 7 && gPD <= 31)      {d = gdate + "/" + gmonth; return (d);}
+			else if (gPD > 7 && gPD <= 31)      {d = gmonth + "/" + gdate; return (d);}
 			else if (gPM >= 1 && gPM < 2)      	{d = Math.floor(gPM) + " month ago"; return (d);}
 			else if (gPM >= 2 && gPM <= 12)     {d = Math.floor(gPM) + " months ago"; return (d);}
 			else if (gPY >= 1 && gPY < 2)      	{d = Math.floor(gPY) + " year ago"; return (d);}

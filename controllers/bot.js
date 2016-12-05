@@ -310,7 +310,6 @@ function addUserView(user_id, numView, numberProfiles, callback) {
                                 pool.query('INSERT INTO notification_list SET user_id = ?, user_notif_id = ?, user_notif_username = ?, type_notif = "view"', [user_id, randomId, fullName],
                                     function(err, result2) {
                                         if (err) throw err;
-                                        console.log(index + ' Users Added !');
                                         return recursive(index + 1);
                                     });
                             }

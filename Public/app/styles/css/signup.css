@@ -1,5 +1,7 @@
 /*** SIGN UP PAGE ***/
 #signup-page {
+  position: relative;
+  z-index: 10000;
   height: 795px;
   background-image: url("/images/poster/poster_home_signup.jpg");
   background-repeat: no-repeat;

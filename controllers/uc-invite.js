@@ -1,13 +1,13 @@
 /**** UC INVITE ****/
 
 /* BABSON UNIVERSITY INVITATION MAILS */
-function inviteMailToUc(university, number, category, callback) {
+function inviteMailToUc(university, number, category_name, callback) {
 	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1829',
 		function(err, result) {
 			if (err) throw err;
-
+	
 			pool.query('SELECT id, first_name, email FROM invite_university WHERE university = ? AND send_date IS NULL LIMIT ?', [university, number],
-				function(err, list) {
+				function(err, list) {	
 					if (err) throw err;
 					if (list[0]) {
 						function recursive(index) {
@@ -16,9 +16,8 @@ function inviteMailToUc(university, number, category, callback) {
 								var ffname = result[0].first_name + " " + result[0].last_name;
 
 								/* SET INFO UNIVERSITY */
-
-								if (category)
-									var uc 	= category; 
+								if (category_name)
+									var uc 	= category_name; 
 								else
 									var uc 	= university + " University";
 								var ucC 	= university + " community";
@@ -85,7 +84,7 @@ function inviteMailToUc(university, number, category, callback) {
 };
 
 exports.getUniversityList = function(req, res) {
-	pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+	pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -139,7 +138,7 @@ exports.sendUcCampaignMail = function(req, res) {
 				if (err) throw err;
 				inviteMailToUc(req.body.uc, number, req.body.category, function(done) {
 					if (done) {
-						pool.query('SELECT university, creation_date, send_date FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+						pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 							function(err, data) {
 								if (err) throw err;
 								else

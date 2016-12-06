@@ -25,7 +25,7 @@ function inviteMailToUc(university, number, category_name, callback) {
 
 								/* HELPER SETTING */
 								var helper = require('sendgrid').mail;
-								var from_email = new helper.Email('campuses@wittycircle.info', 'Jay Ho via Wittycircle');
+								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
 								var to_email = new helper.Email(list[index].email);
 								var subject = 'Wittycircle is now open to the ' + ucC;
 								var category = new helper.Category(uc);

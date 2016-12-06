@@ -2,7 +2,7 @@
 
 /* BABSON UNIVERSITY INVITATION MAILS */
 function inviteMailToUc(university, number, category, callback) {
-	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1829',
+	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1864',
 		function(err, result) {
 			if (err) throw err;
 
@@ -26,7 +26,7 @@ function inviteMailToUc(university, number, category, callback) {
 
 								/* HELPER SETTING */
 								var helper = require('sendgrid').mail;
-								var from_email = new helper.Email('campuses@wittycircle.info', 'Jay Ho via Wittycircle');
+								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
 								var to_email = new helper.Email(list[index].email);
 								var subject = 'Wittycircle is now open to the ' + ucC;
 								var category = new helper.Category(uc);

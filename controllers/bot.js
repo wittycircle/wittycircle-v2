@@ -1,6 +1,29 @@
 var mandrill = require('mandrill-api/mandrill');
 var CronJob = require('cron').CronJob;
 
+function resetUserFollowers() {
+    pool.query('SELECT user_id FROM user_followers', function(err, result) {
+	if (err) throw err;
+	function recursive(index) {
+            if (result[index]) {
+		pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result[index].user_id,
+			   function(err, result2) {
+			       if (err) throw err;
+			       var name = result2[0].first_name + " " + result2[0].last_name;
+			       pool.query('UPDATE user_followers SET user_username = ? WHERE user_id = ?', [name, result[index].user_id],
+					  function(err, result3) {
+					      if (err) throw err;
+					      return recursive(index + 1);
+					  });
+			   });
+            } else
+		console.log("DONE");
+	};
+	recursive(0);
+    });
+};
+//resetUserFollowers();
+
 function checkPermission(user_id, callback) {
     if (user_id) {
         pool.query('SELECT permission FROM notification_permission WHERE user_id = ? AND notif_type = "profile_view"', user_id,

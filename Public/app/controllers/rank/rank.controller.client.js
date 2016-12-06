@@ -6,6 +6,11 @@ angular.module('wittyApp')
 		if (currentUser) {
 			
 			/*** BACKGROUND ***/
+			var width = $(window).width();
+			if (width < 350)
+				$scope.wwidth = '280';
+			else
+				$scope.wwidth = '350';
 			$scope.backPic = $rootScope.globals.currentUser.profile_cover;
 			$scope.mailList = [];
 			$scope.inviteW = "Invite";
@@ -26,6 +31,8 @@ angular.module('wittyApp')
 
 				RetrieveData.getData('/rank/statistic/alltime', 'GET').then(function(res) {
 					if (res.success) {
+						if (!res.data[0])
+							return ;
 						initGraph(res.min, res.max, res.data);
 					}
 				});

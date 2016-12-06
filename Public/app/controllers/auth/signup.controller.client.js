@@ -14,9 +14,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
     
-  //   if (!currentUser || !$stateParams.tagCheckFirst)
-		// $location.path('/');
-  //   else {
+    if (!currentUser || !$stateParams.tagCheckFirst)
+		$location.path('/');
+    else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
 	    $rootScope.globals.currentUser.profile_cover = response.data.data;
@@ -117,6 +117,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.formData.skills = $scope.selectedskills;
 	$scope.formData.interests = $scope.selectedinterests;
 	$scope.searchText = [];
+	$scope.skillCascade = [];
+	$scope.interestList = [];
 	
 	/*
 	** Glabal function for signup
@@ -269,22 +271,25 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	
 	$scope.getSkill    = function(skill) {
 	    var object = {
-		skill_id    : skill.id,
-		skill_name  : skill.name,
+			skill_id    : skill.id,
+			skill_name  : skill.name,
 	    };
+	    var length = $scope.skillCascade.length;
+	    for (var i = 0; i < length; i++) {
+	    	if ($scope.skillCascade[i].skill_id === object.skill_id)
+	    		return ;
+	    }
+	    $scope.skillCascade.push(object);
+	    $scope.sButton         = "Continue";
 	    $http.post('/skills/add', object).success(function(res) {
-		if (res.success) {
-
-		    $scope.getSignUpSkill();
-		}
 	    });
 	};
 	
-	$scope.removeSkill = function(index) {
-	    $http.delete('/skills/delete/' + index).success(function(res) {
-		if (res.success)
-		    $scope.getSignUpSkill();
-	    });
+	$scope.removeSkill = function(index, index2) {
+		$scope.skillCascade.splice(index2, 1);
+		if (!$scope.skillCascade[0])
+			$scope.sButton         = "Skip";
+	    $http.delete('/skills/delete/' + index).success(function(res) {});
 	};
 	
 	$scope.saveSkill   = function() {
@@ -300,7 +305,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$http.get('/interests').success(function(res) {
 	    $scope.cInterests     = res.interests;
 	});
-	$scope.iButton          = "Skip";
+	// $scope.iButton          = "Skip";
 	
 	$scope.getSignUpInterest     = function() {
 		if ($rootScope.globals.currentUser) {
@@ -317,20 +322,25 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	
 	$scope.getInterest      = function(interest) {
 	    var object            = {
-		interest_id     : interest.id,
-		interest_name   : interest.name,
+			interest_id     : interest.id,
+			interest_name   : interest.name,
 	    };
-	    
+	    var length = $scope.interestList.length;
+    	for (var i = 0; i < length; i++) {
+    		if ($scope.interestList[i].interest_id === object.interest_id)
+    			return ;
+    	}
+	    $scope.interestList.push(object);
+	    $scope.iButton    = "Continue";
 	    $http.post('/interests/add', object).success(function(res) {
-		if (res.success)
-		    $scope.getSignUpInterest();
 	    });
 	};
 	
-	$scope.removeInterest = function(index) {
+	$scope.removeInterest = function(index, index2) {
+		$scope.interestList.splice(index2, 1);
+		if (!$scope.interestList[0])
+			$scope.iButton         = "Skip";
 	    $http.delete('/interest/delete/' + index).success(function(res) {
-		if (res.success)
-		    $scope.getSignUpInterest();
 	    });
 	};
 	
@@ -596,7 +606,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*
 	**End Redactor configuration
 	*/
-    // }
+    }
 })
 .directive('locationSearch', function() {
 	return {

@@ -504,94 +504,6 @@
 	text-align: center;
 }
 
-@media screen and (max-width: 739px) {
-	#setting-page {
-
-		button {
-			margin-top: 20px;
-			margin-bottom: 10px;
-		}
-
-		.setting-filter {
-			height: 160px;
-		}
-
-		#setting-header {
-			height: 160px;
-
-			.setting-header-title {
-				display: none;
-			}
-
-			.setting-navbar {
-				position: relative;
-				top: 115px;
-
-				.setting-navbar-list {
-					text-align: center;
-
-					.setting-navbar-notif {
-						display: none;
-					}
-
-					li {
-						padding: 10px 30px;
-					}
-				}
-			}
-		}
-
-		#setting-body {
-			.setting-box {
-				padding: 15px 20px;
-			}
-
-			.sg-field {
-				padding: 5px 0;
-				input {
-					width: 100%;
-				}
-			}
-
-			.setting-general-username {
-				span {
-					margin-left: 0;
-				}
-			}
-
-			.setting-general {
-
-				.setting-general-firstname,
-				.setting-general-lastname,
-				.setting-general-email,
-				.setting-general-username {
-					p {
-						position: relative;
-						left: 0px;
-						font-family: 'FreigBook';
-						color: red;
-						margin-bottom: 0;
-					}
-				}
-			}
-			
-			.setting-password {
-
-				.setting-password-current,
-				.setting-password-new,
-				.setting-password-confirm {
-					h5 {
-						position: relative;
-						left: 0px;
-						font-family: 'FreigBook';
-						color: red;
-					}
-				}
-			}
-		}
-	}
-}
-
 /**** Ranking body *****/
 .setting-ranking {
 
@@ -633,6 +545,10 @@
 		padding-right: 80px;
 		margin-bottom: 50px;
 		
+		.setting-ranking-graph-mobile {
+			display: none;
+		}
+
 		.setting-ranking-psi {
 			display: inline-block;
 			width: 45%;
@@ -976,6 +892,147 @@
 				margin-right: 20px;
 			}
 
+		}
+	}
+}
+
+@media screen and (max-width: 736px) {
+	#setting-page {
+
+		button {
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+
+		.setting-filter {
+			height: 160px;
+		}
+
+		#setting-header {
+			height: 160px;
+
+			.setting-header-title {
+				display: none;
+			}
+
+			.setting-navbar {
+				position: relative;
+				top: 115px;
+
+				.setting-navbar-list {
+					text-align: center;
+
+					.setting-navbar-notif {
+						display: none;
+					}
+
+					li {
+						padding: 10px 30px;
+					}
+				}
+			}
+		}
+
+		#setting-body {
+			.setting-box {
+				padding: 15px 20px;
+			}
+
+			.sg-field {
+				padding: 5px 0;
+				input {
+					width: 100%;
+				}
+			}
+
+			.setting-general-username {
+				span {
+					margin-left: 0;
+				}
+			}
+
+			.setting-general {
+
+				.setting-general-firstname,
+				.setting-general-lastname,
+				.setting-general-email,
+				.setting-general-username {
+					p {
+						position: relative;
+						left: 0px;
+						font-family: 'FreigBook';
+						color: red;
+						margin-bottom: 0;
+					}
+				}
+			}
+			
+			.setting-password {
+
+				.setting-password-current,
+				.setting-password-new,
+				.setting-password-confirm {
+					h5 {
+						position: relative;
+						left: 0px;
+						font-family: 'FreigBook';
+						color: red;
+					}
+				}
+			}
+		}
+	}
+
+	.setting-ranking {
+		h3 {
+			line-height: 24px;
+			margin-bottom: 25px;
+		}
+
+		.setting-ranking-down {
+			padding-left: 0;
+
+			.srd-ul {
+				display: block;
+				padding: 0;
+				width: 260px;
+				margin: 0 auto;
+			}
+
+			.srpsi-number {
+				float: right;
+			}
+		}
+
+		.setting-ranking-up {
+			padding: 0;
+
+			.setting-ranking-graph-mobile {
+				display: block;
+				text-align: center;
+
+				h2 {
+					font-family: 'FreigBook';
+					color: black;
+					font-size: 24px;
+				}
+			}
+
+			.setting-ranking-graph {
+				display: none;
+			}
+			.setting-ranking-psi {
+				display: block;
+				width: 100%;
+
+				.setting-ranking-share {
+					margin-bottom: 0;
+
+					.fb-share {
+						margin-bottom: 0;
+					}
+				}
+			}
 		}
 	}
 }

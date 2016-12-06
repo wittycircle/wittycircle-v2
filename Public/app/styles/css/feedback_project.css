@@ -130,6 +130,8 @@
           margin-top: 10px; }
         #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-comments2 {
           margin-top: 0; }
+          #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-comments2 a {
+            color: blue; }
         #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action {
           margin-bottom: 15px; }
           #project_feedback .project_feedback_body .project_feedback_comments .project_feedback_main .pfm_title .pfmt_list .pfm-action .pfm-vote-image {

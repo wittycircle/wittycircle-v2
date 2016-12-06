@@ -48,7 +48,7 @@
 
 				<ul class="viewProject-option">
 					<li id="shareSocial" class="shareSocialProject">Share
-						<div id="iconSS" class="icon-share-social" ng-controller="PopUpCtrl" style="display:none">
+						<div id="iconSS" style="z-index: 1; display: none" class="icon-share-social" ng-controller="PopUpCtrl">
 							<ul>
 								<li ng-click="facebookShare(vm.project.title, vm.currentUrl, vm.project.picture, vm.project.description)"><i class="fa fa-facebook"></i><span>Share on Facebook</span></li>
 								<a ng-href="https://twitter.com/intent/tweet?text={{vm.project.title}} is now live on @wittycircle, where the world meets entrepreneurs&hashtags={{vm.project.title}} {{vm.currentShortUrl}}"><li>

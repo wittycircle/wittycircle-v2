@@ -669,6 +669,7 @@ exports.deleteUserInvolved = function(req, res) {
                 if (err) {
                     throw err;
                 }
+		return res.status(200).send(result);
                 algoliaClient.deleteIndex('Projects', function(error) {
                     pool.query('SELECT * FROM projects', function(err, data) {
                         if (err) throw err;
@@ -815,86 +816,84 @@ exports.createProject = function(req, res){
 			   if (check[0].count >= 5)
 			       return ;
 			   pool.query('INSERT INTO `projects` SET ?', req.body, function(err, result) {
-			       if (err){
-				   var date = new Date();
-				   console.log(date);
-				   console.log("Error getting projects in projects.js/createProject");
-				   console.log(err);
-				   console.log("\n");
-				   throw err;
-			       } else {
-                        getProjectNetworkToken(req.user.id, req.body.public_id, req.body.network, function(done) {
-        				        pool.query("SELECT first_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", req.user.id, 
-        					      function(err, data) {
-        						  if (err) throw err;
-        						  else {
-        						      console.log("New Project !!!");
-        						      var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
-        						      
-        						      var template_name = "new project";
-        						      var template_content = [{
-        							  "name": "new project",
-        							  "content": "content",
-        						      }];
-        						      
-        						      var message = {
-        							  "html": "<p>HTML content</p>",
-        							  "subject": "Your project on Wittycircle",
-        							  "from_email": "quentin@wittycircle.com",
-        							  "from_name": "Quentin Verriere",
-        							  "to": [{
-        							      "email": req.user.email,
-        							      "name": data[0].first_name,
-        							      "type": "to"
-        							  }],
-        							  "headers": {
-        							      "Reply-To": "quentin@wittycircle.com"
-        							  },
-        							  "important": false,
-        							  "track_opens": null,
-        							  "track_clicks": null,
-        							  "auto_text": null,
-        							  "auto_html": null,
-        							  "inline_css": null,
-        							  "url_strip_qs": null,
-        							  "preserve_recipients": null,
-        							  "view_content_link": null,
-        							  "tracking_domain": null,
-        							  "signing_domain": null,
-        							  "return_path_domain": null,
-        							  "merge": true,
-        							  "merge_language": "mailchimp",
-        							  "global_merge_vars": [{
-        							      "name": "merge1",
-        							      "content": "merge1 content"
-        							  }],
-        							  "merge_vars": [
-        							      {
-        								  "vars": [
-        								      {
-        									  "name": "fname",
-        									  "content": data[0].first_name
-        								      },
-        								      {
-        									  "name": "lname",
-        									  "content": "Smith"
-        								      }
-        								  ]
-        							      }
-        							  ]
-        						      };
-        						      var async = false;
-        						      mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
-        							  var date = new Date();
-        							  console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.user.email);
-        						      }, function(e) {
-        							  console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-        						      });
-        						      return res.send(result);
-        						  }
-        					      });
+                    if (err) throw err;
+                    else {
+                        pool.query('SELECT * FROM projects WHERE id = ?', result.insertId, function(err, data1) {
+                            Project.addObjects(data1, function(err, content) {
+                                getProjectNetworkToken(req.user.id, req.body.public_id, req.body.network, function(done) {
+                				        pool.query("SELECT first_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", req.user.id, 
+                					      function(err, data) {
+                						  if (err) throw err;
+                						  else {
+                						      console.log("New Project !!!");
+                						      var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+                						      
+                						      var template_name = "new project";
+                						      var template_content = [{
+                							  "name": "new project",
+                							  "content": "content",
+                						      }];
+                						      
+                						      var message = {
+                							  "html": "<p>HTML content</p>",
+                							  "subject": "Your project on Wittycircle",
+                							  "from_email": "quentin@wittycircle.com",
+                							  "from_name": "Quentin Verriere",
+                							  "to": [{
+                							      "email": req.user.email,
+                							      "name": data[0].first_name,
+                							      "type": "to"
+                							  }],
+                							  "headers": {
+                							      "Reply-To": "quentin@wittycircle.com"
+                							  },
+                							  "important": false,
+                							  "track_opens": null,
+                							  "track_clicks": null,
+                							  "auto_text": null,
+                							  "auto_html": null,
+                							  "inline_css": null,
+                							  "url_strip_qs": null,
+                							  "preserve_recipients": null,
+                							  "view_content_link": null,
+                							  "tracking_domain": null,
+                							  "signing_domain": null,
+                							  "return_path_domain": null,
+                							  "merge": true,
+                							  "merge_language": "mailchimp",
+                							  "global_merge_vars": [{
+                							      "name": "merge1",
+                							      "content": "merge1 content"
+                							  }],
+                							  "merge_vars": [
+                							      {
+                								  "vars": [
+                								      {
+                									  "name": "fname",
+                									  "content": data[0].first_name
+                								      },
+                								      {
+                									  "name": "lname",
+                									  "content": "Smith"
+                								      }
+                								  ]
+                							      }
+                							  ]
+                						      };
+                						      var async = false;
+                						      mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                							  var date = new Date();
+                							  console.log("MAIL at " + date + ":" + "\n" + "A new mail was sent to " + req.user.email);
+                						      }, function(e) {
+                							  console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                						      });
+                						      return res.send(result);
+                						  }
+                					      });
+                                });
+                            });
                         });
-			       }
+                    }
 			   });
 		       });
         } else {
@@ -932,17 +931,13 @@ exports.updateProject = function(req, res){
         pool.query("UPDATE projects SET ? WHERE id = ?", [req.body, req.body.id], 
 		   function(err, result) {
 		       if (err) throw err;
-		       algoliaClient.deleteIndex('Projects', function(error) {
-			   pool.query('SELECT * FROM projects', function(err, data) {
-			       if (err) throw err;
-			       Project.addObjects(data, function(err, content) {
-				   if (err) throw err;
-				   getProjectNetworkToken(req, req.body.public_id, req.body.network, function(done) {
-				       return res.status(200).send(result);
-				   });
-			       });
-			   });
-		       });
+		       pool.query('SELECT * FROM projects WHERE id = ?', req.body.id,
+				  function(err, data) {
+				      if (err) throw err;
+					  getProjectNetworkToken(req, req.body.public_id, req.body.network, function(done) {
+					      return res.status(200).send(result);
+				      });
+				  });
 		   });
     }
 };
@@ -1076,6 +1071,7 @@ exports.deleteProject = function(req, res){
                     if(err){
                         throw err;
                     }
+		    return res.status(200).send(content);
                     algoliaClient.deleteIndex('Projects', function(error) {
                         pool.query('SELECT * FROM projects', function(err, data) {
                             if (err) throw err;

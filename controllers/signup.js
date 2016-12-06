@@ -19,7 +19,7 @@ exports.updateBasic = function(req, res) {
     if (errors)
 	return res.status(400).send(errors);
 
-    if (req.body.genre && req.body.location_city && req.params.id) {
+    if (req.body.genre && req.params.id) {
     	pool.query('SELECT profile_id FROM users where id = ?', req.params.id,
     	    function(err, result) {
                 pool.query('UPDATE profiles SET genre = ?, location_country = ?, location_city = ?, location_state = ? WHERE id = ?', [req.body.genre, req.body.location_country, req.body.location_city, req.body.location_state, result[0].profile_id],

@@ -350,49 +350,6 @@
 .password-body-setting .password-button {
   text-align: center; }
 
-@media screen and (max-width: 739px) {
-  #setting-page button {
-    margin-top: 20px;
-    margin-bottom: 10px; }
-  #setting-page .setting-filter {
-    height: 160px; }
-  #setting-page #setting-header {
-    height: 160px; }
-    #setting-page #setting-header .setting-header-title {
-      display: none; }
-    #setting-page #setting-header .setting-navbar {
-      position: relative;
-      top: 115px; }
-      #setting-page #setting-header .setting-navbar .setting-navbar-list {
-        text-align: center; }
-        #setting-page #setting-header .setting-navbar .setting-navbar-list .setting-navbar-notif {
-          display: none; }
-        #setting-page #setting-header .setting-navbar .setting-navbar-list li {
-          padding: 10px 30px; }
-  #setting-page #setting-body .setting-box {
-    padding: 15px 20px; }
-  #setting-page #setting-body .sg-field {
-    padding: 5px 0; }
-    #setting-page #setting-body .sg-field input {
-      width: 100%; }
-  #setting-page #setting-body .setting-general-username span {
-    margin-left: 0; }
-  #setting-page #setting-body .setting-general .setting-general-firstname p,
-  #setting-page #setting-body .setting-general .setting-general-lastname p,
-  #setting-page #setting-body .setting-general .setting-general-email p,
-  #setting-page #setting-body .setting-general .setting-general-username p {
-    position: relative;
-    left: 0px;
-    font-family: 'FreigBook';
-    color: red;
-    margin-bottom: 0; }
-  #setting-page #setting-body .setting-password .setting-password-current h5,
-  #setting-page #setting-body .setting-password .setting-password-new h5,
-  #setting-page #setting-body .setting-password .setting-password-confirm h5 {
-    position: relative;
-    left: 0px;
-    font-family: 'FreigBook';
-    color: red; } }
 /**** Ranking body *****/
 .setting-ranking hr {
   margin-top: 50px; }
@@ -420,6 +377,8 @@
   padding-left: 80px;
   padding-right: 80px;
   margin-bottom: 50px; }
+  .setting-ranking .setting-ranking-up .setting-ranking-graph-mobile {
+    display: none; }
   .setting-ranking .setting-ranking-up .setting-ranking-psi {
     display: inline-block;
     width: 45%;
@@ -678,5 +637,80 @@
       transform: translateY(30px); }
     .setting-ranking .setting-ranking-down ul span {
       margin-right: 20px; }
+
+@media screen and (max-width: 736px) {
+  #setting-page button {
+    margin-top: 20px;
+    margin-bottom: 10px; }
+  #setting-page .setting-filter {
+    height: 160px; }
+  #setting-page #setting-header {
+    height: 160px; }
+    #setting-page #setting-header .setting-header-title {
+      display: none; }
+    #setting-page #setting-header .setting-navbar {
+      position: relative;
+      top: 115px; }
+      #setting-page #setting-header .setting-navbar .setting-navbar-list {
+        text-align: center; }
+        #setting-page #setting-header .setting-navbar .setting-navbar-list .setting-navbar-notif {
+          display: none; }
+        #setting-page #setting-header .setting-navbar .setting-navbar-list li {
+          padding: 10px 30px; }
+  #setting-page #setting-body .setting-box {
+    padding: 15px 20px; }
+  #setting-page #setting-body .sg-field {
+    padding: 5px 0; }
+    #setting-page #setting-body .sg-field input {
+      width: 100%; }
+  #setting-page #setting-body .setting-general-username span {
+    margin-left: 0; }
+  #setting-page #setting-body .setting-general .setting-general-firstname p,
+  #setting-page #setting-body .setting-general .setting-general-lastname p,
+  #setting-page #setting-body .setting-general .setting-general-email p,
+  #setting-page #setting-body .setting-general .setting-general-username p {
+    position: relative;
+    left: 0px;
+    font-family: 'FreigBook';
+    color: red;
+    margin-bottom: 0; }
+  #setting-page #setting-body .setting-password .setting-password-current h5,
+  #setting-page #setting-body .setting-password .setting-password-new h5,
+  #setting-page #setting-body .setting-password .setting-password-confirm h5 {
+    position: relative;
+    left: 0px;
+    font-family: 'FreigBook';
+    color: red; }
+
+  .setting-ranking h3 {
+    line-height: 24px;
+    margin-bottom: 25px; }
+  .setting-ranking .setting-ranking-down {
+    padding-left: 0; }
+    .setting-ranking .setting-ranking-down .srd-ul {
+      display: block;
+      padding: 0;
+      width: 260px;
+      margin: 0 auto; }
+    .setting-ranking .setting-ranking-down .srpsi-number {
+      float: right; }
+  .setting-ranking .setting-ranking-up {
+    padding: 0; }
+    .setting-ranking .setting-ranking-up .setting-ranking-graph-mobile {
+      display: block;
+      text-align: center; }
+      .setting-ranking .setting-ranking-up .setting-ranking-graph-mobile h2 {
+        font-family: 'FreigBook';
+        color: black;
+        font-size: 24px; }
+    .setting-ranking .setting-ranking-up .setting-ranking-graph {
+      display: none; }
+    .setting-ranking .setting-ranking-up .setting-ranking-psi {
+      display: block;
+      width: 100%; }
+      .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-share {
+        margin-bottom: 0; }
+        .setting-ranking .setting-ranking-up .setting-ranking-psi .setting-ranking-share .fb-share {
+          margin-bottom: 0; } }
 
 /*# sourceMappingURL=setting.css.map */

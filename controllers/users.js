@@ -483,7 +483,10 @@ exports.createUser = function(req, res){
 						       password: bcrypt.hashSync(req.body.password)
 						       //password: shasum.digest('hex')
 						   }, function(err, result) {
-						       if (err) throw err;
+						       if (err) {
+                                console.log(err);
+                                return res.status(400).send({success: false});
+                               }
 						       var mailObject = {
 							   'email_address': req.body.email,
 							   'status': 'subscribed',

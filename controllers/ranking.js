@@ -311,14 +311,13 @@ exports.getProfileStatisticRank = function(req, res) {
 
 exports.getProfileRank = function(req, res) {
 	if (req.isAuthenticated()) {
-		var	user_id = req.user.id;
-			
-			getAllProfileRank(user_id, function(object) {
-				return res.status(200).send({success: true, data: object});
-			});
+		var	user_id = req.user.id;	
+		getAllProfileRank(user_id, function(object) {
+			return res.status(200).send({success: true, data: object});
+		});
 
 	} else
-		return res.status(403).send("FORBIDDEN");	
+		return res.status(403).send("FORBIDDEN");
 };
 
 exports.getProfileAllTimeRank = function(req, res) {

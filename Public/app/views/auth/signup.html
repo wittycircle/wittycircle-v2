@@ -1,4 +1,4 @@
-<section id="signup-page" signup-page-dom=""onbeforeunload="return myFunction()">
+<section id="signup-page" style="position: relative; z-index: 10000" signup-page-dom=""onbeforeunload="return myFunction()">
 
 	<div class="filter"></div>
 
@@ -113,7 +113,7 @@
 			</div>
 			<div class="signup-skill-select sss">
 				<li ng-repeat="skillC in skillCascade track by $index">
-					<h4>{{skillC.skill_name}} <i class="fa fa-times" ng-click="removeSkill(skillC.skill_id)"></i></h4>
+					<h4>{{skillC.skill_name}} <i class="fa fa-times" ng-click="removeSkill(skillC.skill_id, $index)"></i></h4>
 				</li>
 			</div>
 			<div class="signup-skill-inSearch">
@@ -148,7 +148,7 @@
 			</div>
 			<div class="signup-interest-select sss">
 				<li ng-repeat="interest in interestList track by $index">
-					<h4>{{interest.interest_name}} <i class="fa fa-times" ng-click="removeInterest(interest.interest_id)"></i></h4>
+					<h4>{{interest.interest_name}} <i class="fa fa-times" ng-click="removeInterest(interest.interest_id, $index)"></i></h4>
 				</li>
 			</div>
 			<div class="signup-interest-inSearch">
@@ -370,8 +370,8 @@
 		var mobileSize = $(window).width();
 
 		$(document).ready(function() {
-			if (mobileSize < 736)
-				$('#body-section').show();
+		if (mobileSize < 736)
+				 $('#body-section').show();
 			// $('.signup-info-gender').click(function(e) {
 			// 	var container1 	= $('#srma');
 			// 	var container2 	= $('#srfe');

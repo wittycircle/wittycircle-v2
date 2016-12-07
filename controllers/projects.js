@@ -1071,7 +1071,6 @@ exports.deleteProject = function(req, res){
                     if(err){
                         throw err;
                     }
-		    return res.status(200).send(content);
                     algoliaClient.deleteIndex('Projects', function(error) {
                         pool.query('SELECT * FROM projects', function(err, data) {
                             if (err) throw err;

@@ -7,7 +7,7 @@ module.exports = function(app, algoliaClient) {
     var Project = algoliaClient.initIndex('Projects');
     var PAndP 	= algoliaClient.initIndex('PAndP');
     
-    algoliaClient.deleteIndex('Users', function(error) {
+/*    algoliaClient.deleteIndex('Users', function(error) {
 	pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE fake = 0', function(err1, data) {
 	    if (err1) throw err;
 	    People.addObjects(data, function(err2, content) {
@@ -15,7 +15,7 @@ module.exports = function(app, algoliaClient) {
 		    console.log(err2);
 	    });
 	});
-    });
+    });*/
     algoliaClient.deleteIndex('Projects', function(error) {
 	pool.query('SELECT * FROM projects', function(err, data) {
 	    if (err) throw err;
@@ -25,7 +25,7 @@ module.exports = function(app, algoliaClient) {
 	    });
 	});
     });
-    algoliaClient.deleteIndex('PAndP', function(error) {
+/*    algoliaClient.deleteIndex('PAndP', function(error) {
 	pool.query('SELECT * FROM projects', function(err, data) {
 	    if (err) throw err;
 	    if (data[0]) {
@@ -48,7 +48,7 @@ module.exports = function(app, algoliaClient) {
 		});
 	    }
 	});
-    });
+    });*/
     
     // pool.query('SELECT public_id FROM projects',
     // 	function (err, result) {

@@ -7,7 +7,7 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
         Authentication.SetCredentialsSocial(res.user, res.user_info);
     });
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var main    = this,
     n       = 0;
@@ -262,11 +262,19 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
 
 
             if ($scope.selectedlocation) {
-                var location              = $scope.selectedlocation.split(","),
-                location_city         = location[0],
-                location_country      = location[1].trim();
-                data.location_city        = location_city;
-                data.location_country     = location_country;
+                var location              = $scope.selectedlocation.split(",");
+                if (!location[1]) {
+                    var location              = $scope.selectedlocation.split(","),
+                    location_country         = location[0].trim();
+                    data.location_city        = location_country;
+                    data.location_country     = location_country;
+                } else {
+                    var location              = $scope.selectedlocation.split(","),
+                    location_city         = location[0],
+                    location_country      = location[1].trim();
+                    data.location_city        = location_city;
+                    data.location_country     = location_country;
+                }
             }
 
 

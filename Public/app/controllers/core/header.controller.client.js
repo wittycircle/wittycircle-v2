@@ -67,7 +67,7 @@ function($http, $interval, $timeout, $location, $scope, Authentication, Profile,
 
     function islogged() {
         if ($rootScope.globals.currentUser) {
-            return true;
+	    return true;
         } else
         return false;
     }

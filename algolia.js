@@ -15,7 +15,7 @@ module.exports = function(app, algoliaClient) {
 		    console.log(err2);
 	    });
 	});
-    });*/
+    });
     algoliaClient.deleteIndex('Projects', function(error) {
 	pool.query('SELECT * FROM projects', function(err, data) {
 	    if (err) throw err;
@@ -25,7 +25,7 @@ module.exports = function(app, algoliaClient) {
 	    });
 	});
     });
-/*    algoliaClient.deleteIndex('PAndP', function(error) {
+    algoliaClient.deleteIndex('PAndP', function(error) {
 	pool.query('SELECT * FROM projects', function(err, data) {
 	    if (err) throw err;
 	    if (data[0]) {

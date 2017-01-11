@@ -1,4 +1,5 @@
-pool.query('SELECT id, profile_id, email, username FROM users WHERE email like "%@witty.com%"',
+
+/*pool.query('SELECT id, profile_id, email, username FROM users WHERE email like "%@witty.com%"',
 	function(err, result) {
 		if (err) throw err;
 		function recursive(index) {
@@ -28,4 +29,4 @@ pool.query('SELECT id, profile_id, email, username FROM users WHERE email like "
 			}
 		};
 		recursive(0);
-	});
+	});*/

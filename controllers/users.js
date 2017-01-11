@@ -242,7 +242,6 @@ exports.getCardProfilePlus = function(req, res) {
 };
 
 exports.getCardProfileHome = function(req, res) {
-
     req.checkBody('ip', "error").isString();
 
     var errors = req.validationErrors(true);

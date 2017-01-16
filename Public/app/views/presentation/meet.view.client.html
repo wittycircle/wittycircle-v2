@@ -98,6 +98,30 @@
                         <input id="msai" type="text" pre-go-location="" types="['geocode']" placeholder="Any location" ng-model="meetLocation">
                     </div>
                 </div>
+
+                <div id="meet-search2">
+                    <div id="ms2left" class="meet-search2-left inline">
+                        <h3 class="inline">Ranked by: </h3>
+                        <div class="inline">
+                            <h3 class="inline">{{meet.propertyName}}</h3>
+                            <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
+                            <ul id="ms2lbox" class="meet-search2-left-box">
+                                <li ng-click="meet.changeRankBy()">{{meet.propertyName2}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="meet-search2-right inline">
+                        <div id="ms2rinput" class="meet-search2-right-input inline">
+                            <h3 class="inline">networks:</h3>
+                            <input class="inline" type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
+                        </div>
+                        <div id="ms2right" class="meet-search2-right-box inline">
+                            <h3 class="inline">more criteria</h3>
+                            <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <section id="meet-body-content">
@@ -107,7 +131,7 @@
                         <h4>Browse <span>the users below</span> or filter them using our magic tool above.</h4>
                     </div>
                     <div class="meet-body-cards" ng-if="meet.cardProfiles && !searchSk && !searchAl">
-                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
+                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | meetNetwork: searchNetwork | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
                             <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">
                                 <div class="card-rank" ng-if="cardProfile.myRank">
                                     <span>#{{cardProfile.myRank}}</span>
@@ -411,6 +435,28 @@
             } else {
                 if (document.getElementById('msabox1'))
                 document.getElementById('msabox1').style.display = "none";
+            }
+
+            if ($('#ms2left').is(e.target) || $('#ms2left').has(e.target).length && $('#ms2lbox').css('display') === 'none') {
+                $('#ms2left img').css('transform', 'rotate(-180deg)');
+                $('#ms2lbox').css('display', 'block');
+            } else {
+                $('#ms2left img').css('transform', 'rotate(0)');
+                $('#ms2lbox').css('display', 'none');
+            }
+
+            if ($('#ms2right').is(e.target) || $('#ms2right').has(e.target).length && $('#ms2rinput').css('display') === 'none') {
+                console.log($('#ms2right h3').text())
+                $('#ms2right h3').text('less criteria');
+                $('#ms2right img').css('transform', 'rotate(-180deg)');
+                $('#ms2rinput').fadeIn().css("display","inline-block");
+
+            } else {
+                if (!$('#ms2rinput').is(e.target) && !$('#ms2rinput').has(e.target).length) {
+                    $('#ms2right h3').text('more criteria');
+                    $('#ms2right img').css('transform', 'rotate(0)');
+                    $('#ms2rinput').fadeOut();
+                }
             }
         };
 

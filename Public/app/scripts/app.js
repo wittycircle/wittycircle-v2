@@ -81,7 +81,7 @@ var wittyCircleApp = angular
 	    controller  : 'SignupCtrl',
 	})
 	.state('welcomeuc', {
-		url 		: '/welcome/:uc',
+		url 		: '/welcome/:uc/:token',
 		templateUrl : 'views/welcome/uc.view.client.html',
 		controller 	: 'welcomeUcCtrl'
 	})

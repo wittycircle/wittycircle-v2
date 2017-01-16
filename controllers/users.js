@@ -135,7 +135,7 @@ exports.getUsers = function(req, res){
         }
         function recursive(index){
             if (results[index]) {
-                pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?', [results[index].profile_id],
+                pool.query('SELECT id, first_name, last_name, profession, network, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?', [results[index].profile_id],
                 function (err, result, field) {
                     if(err){
                         throw err;
@@ -175,7 +175,7 @@ exports.getUser = function(req, res){
             if (results[0]) {
 	            function recursive(index){
 	                if(index !== results.length){
-	                    pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?',
+	                    pool.query('SELECT id, first_name, last_name, profession, network, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE `id` = ?',
 	                    [results[index].profile_id],
 	                    function (err, result, field) {
 	                        if(err){
@@ -209,7 +209,7 @@ exports.getCardProfile = function(req, res) {
                     function(err, result2) {
                         if (err) throw err;
                         var arr2 = result2.map( function(el) { return el.id});
-                        pool.query('SELECT id, first_name, last_name, description, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null && fake = 0 ORDER BY rand()', 
+                        pool.query('SELECT id, first_name, last_name, description, network, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null && fake = 0 ORDER BY rand()', 
                             function (err, result3) {                                
                                 if (err) throw (err);
                                 pf.sortCardProfile(result3, function(array1) {
@@ -229,7 +229,7 @@ exports.getCardProfilePlus = function(req, res) {
 
     if (req.body[0]) {
         var arr = req.body.map(function(el) { return el.id});
-        pool.query('SELECT id, first_name, last_name, description, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null && fake = 0 ORDER BY rand() LIMIT 100', 
+        pool.query('SELECT id, first_name, last_name, description, location_city, network, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id NOT IN (' + arr + ') && profile_picture is not null && fake = 0 ORDER BY rand() LIMIT 100', 
             function (err, result) {
                 if (err) throw (err);
                 pf.sortCardProfile(result, function(array) {
@@ -250,18 +250,18 @@ exports.getCardProfileHome = function(req, res) {
     else {
         geo.getLocation(req.body, function(city, state, country) {
             if (city) {
-                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_city LIKE '%" + city + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                pool.query("SELECT id, first_name, last_name, profession, description, network, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_city LIKE '%" + city + "%' && fake = 0 ORDER BY rand() LIMIT 4",
                     function(err, result) {
                         if (err) throw err;
                         else {
                             if (result.length < 4) {
-                                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_state LIKE '%" + state + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                                pool.query("SELECT id, first_name, last_name, profession, network, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_state LIKE '%" + state + "%' && fake = 0 ORDER BY rand() LIMIT 4",
                                     function(err, result2) {
                                         if (err) throw err;
                                         else {
                                             result = result.concat(result2);
                                             if (result.length < 4) {
-                                                pool.query("SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_country LIKE '%" + country + "%' && fake = 0 ORDER BY rand() LIMIT 4",
+                                                pool.query("SELECT id, first_name, last_name, network, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_picture, views, profile_picture_icon, cover_picture_cards FROM `profiles` WHERE location_country LIKE '%" + country + "%' && fake = 0 ORDER BY rand() LIMIT 4",
                                                     function(err, result3) {
                                                         if (err) throw err;
                                                         else {

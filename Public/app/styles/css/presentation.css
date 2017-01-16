@@ -592,6 +592,56 @@
 .meet-component #meet-search1 .meet-search2-text2 {
   display: inline-block;
   margin: 0px 10px 0px 0px; }
+.meet-component #meet-search2 {
+  padding: 20px 0;
+  margin-top: 30px; }
+  .meet-component #meet-search2 h3 {
+    font-family: 'FreigLight';
+    font-size: 26px; }
+  .meet-component #meet-search2 img {
+    margin: 5px 5px 13px 5px; }
+  .meet-component #meet-search2 .inline {
+    display: inline-block; }
+  .meet-component #meet-search2 .meet-search2-left {
+    cursor: pointer; }
+    .meet-component #meet-search2 .meet-search2-left .meet-search2-left-box {
+      position: absolute;
+      background-color: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 5px 10px;
+      display: none; }
+      .meet-component #meet-search2 .meet-search2-left .meet-search2-left-box li {
+        padding: 2px 10px; }
+  .meet-component #meet-search2 .meet-search2-right {
+    float: right;
+    position: relative;
+    bottom: 6px;
+    width: 600px;
+    text-align: center;
+    margin-right: 50px; }
+    .meet-component #meet-search2 .meet-search2-right .meet-search2-right-input {
+      display: none;
+      margin-right: 30px; }
+      .meet-component #meet-search2 .meet-search2-right .meet-search2-right-input input {
+        border: none;
+        font-family: 'FreigLight';
+        font-size: 26px;
+        color: white;
+        background-color: transparent;
+        border-bottom: 1px solid #999999;
+        min-width: 300px;
+        max-width: 300px; }
+    .meet-component #meet-search2 .meet-search2-right .meet-search2-right-box {
+      cursor: pointer;
+      -webkit-transition: all 200ms linear;
+      -o-transition: all 200ms linear;
+      -moz-transition: all 200ms linear;
+      -ms-transition: all 200ms linear;
+      -kthtml-transition: all 200ms linear;
+      transition: all 200ms linear;
+      /*				margin-right: 30px;
+      */ }
 .meet-component .meet-search2 {
   margin: 5px 0; }
   .meet-component .meet-search2 .meet-search2-text1 {

@@ -83,6 +83,25 @@ function inviteMailToUc(university, number, category_name, callback) {
 	});
 };
 
+exports.verifyNetworks = function(req, res) {
+	req.checkBody('token', 'Error occurs!').isString();
+	req.checkBody('uc', 'Error occurs!').isString();
+
+	var errors = req.validationErrors(true);
+    if (errors) return res.status(400).send(errors);
+    else {
+    	pool.query('SELECT id FROM networks WHERE name = ? AND token = ?', [req.body.uc, req.body.token],
+    		function(err, result) {
+    			if (err) throw err;
+    			else {
+    				if (!result[0]) return res.status(200).send(false);
+    				else
+    					return res.status(200).send(true);
+    			}
+    		});
+    }
+};
+
 exports.getUniversityList = function(req, res) {
 	pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 		function(err, result) {

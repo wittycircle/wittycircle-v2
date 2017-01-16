@@ -89,6 +89,28 @@
 					<input type="text" location-search="" ng-model="displayLocation" placeholder="Search your city" />
 				</div>
 
+				<div class="signup-info-network">
+					<label>Your network</label><br />
+					<input ng-disabled="loadNetwork" ng-class="{ 'disabled-input' : loadNetwork }" id="sininput" type="text" ng-model="profileNetwork" placeholder="Boston College, Harvard University, etc..." />
+					<div id="sinlist" class="signup-info-network-list">
+						<ul>
+							<li ng-repeat="network in allList | filter: profileNetwork | limitTo: 11" ng-click="getNetwork(network)">{{network}}</li>
+						</ul>
+					</div>
+					<p class="signup-info-network-text">Network help us to connect you to more people you may know</p>
+					<p ng-if="societyNetwork"><i>You'll be notified by email when we've checked you're part of this network</i></p>
+					<div ng-if="universityNetwork" class="signup-info-network-university">
+						<input class="signup-info-network-mail" type="email" ng-model="emailNetwork" placeholder="email@network.edu" />
+						<button class="signup-info-network-button" ng-click="saveUniversityNetwork(emailNetwork)">
+							<span ng-if="!loadAddUniversity">Send</span>
+							<div ng-if="loadAddUniversity" class="spinner-load">
+							<div class="spinner__item1 spinner-item"></div>
+							<div class="spinner__item2 spinner-item"></div>
+							<div class="spinner__item3 spinner-item"></div> 
+						</button>
+					</div>
+				</div>
+
 				<div class="signup-info-button">
 					<button ng-click="saveBasics()" ng-class="{ 'disabled-button' : !checked }">Continue</button>
 				</div>
@@ -370,8 +392,9 @@
 		var mobileSize = $(window).width();
 
 		$(document).ready(function() {
-		if (mobileSize < 736)
-				 $('#body-section').show();
+
+			if (mobileSize < 736)
+				$('#body-section').show();
 			// $('.signup-info-gender').click(function(e) {
 			// 	var container1 	= $('#srma');
 			// 	var container2 	= $('#srfe');
@@ -420,6 +443,12 @@
 				var container1 = $('#sbdbox1');
 				var container2 = $('#sbdbox2');
 				var container3 = $('#sbdbox3');
+
+				/*** Section Network ***/
+				if ($('#sininput').is(e.target))
+					$('#sinlist').slideDown(200);
+				else
+					$('#sinlist').slideUp(200);
 
 				/*** Section date of birth ***/
 				if (container1.is(e.target) || container1.has(e.target).length || $('#sbdd').css('display') === "block")

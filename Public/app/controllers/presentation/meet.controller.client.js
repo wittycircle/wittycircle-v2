@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData, $mdBottomSheet, $state) {
+angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData, $mdBottomSheet, $state) {
 
 
 	var meet = this;
@@ -15,6 +15,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.skillList = [];
 	meet.skillListM = [];
 	meet.logIn = $rootScope.globals.currentUser ? true : false;
+	meet.propertyName = 'default';
+	meet.propertyName2 = 'Popularity';
 	/* functions */
 	meet.openmmodal = openmmodal;
 	meet.closemmodal = closemmodal;
@@ -24,6 +26,7 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.removeSkill = removeSkill;
 	meet.goToProfile = goToProfile;
 	meet.followUserFromCard = followUserFromCard;
+	meet.changeRankBy = changeRankBy;
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -56,6 +59,16 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
              document.execCommand("Stop", false);
         }
 	});
+
+	function changeRankBy() {
+		if (meet.propertyName === 'default') {
+			meet.propertyName = 'popularity';
+			meet.propertyName2 = 'Default';
+		} else {
+			meet.propertyName = 'default';
+			meet.propertyName2 = 'Popularity';
+		}
+	};
 
 	/*** Discover Mobile ***/
 	function openmmodal (value) {

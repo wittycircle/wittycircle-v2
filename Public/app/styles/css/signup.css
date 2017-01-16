@@ -51,6 +51,10 @@
   #signup-page .disabled-button {
     opacity: 0.3;
     cursor: default; }
+  #signup-page .disabled-input {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none; }
   #signup-page #signup-basic-body {
     position: absolute;
     background-color: white;
@@ -255,8 +259,66 @@
             margin-right: 5px; }
           #signup-page #signup-basic-body .signup-body-info .signup-info-bd .signup-bd-box .signup-bd-year {
             width: 100px; }
+      #signup-page #signup-basic-body .signup-body-info .signup-info-network {
+        margin-bottom: 30px; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network input {
+          width: 100%;
+          padding: 8px 15px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          font-family: 'FreigBook';
+          font-size: 16px;
+          color: #222222; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-list {
+          display: none;
+          background-color: white;
+          padding: 10px 15px 10px 15px;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          /*					min-height: 40px;
+          */ }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-list li {
+            display: inline-block;
+            font-family: 'FreigSem';
+            text-transform: uppercase;
+            padding: 2px 4px;
+            font-size: 14px;
+            background-color: #999999;
+            margin-right: 8px;
+            margin-bottom: 4px;
+            margin-top: 4px;
+            color: white;
+            border-radius: 4px;
+            -webkit-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -ms-transition-duration: 0.3s;
+            -kthtml-transition-duration: 0.3s;
+            transition-duration: 0.3s; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-list li:hover {
+            background-color: #222; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-mail {
+          display: inline-block;
+          width: 70%; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-button {
+          position: relative;
+          bottom: 1px;
+          padding: 5px 12px 7px 12px;
+          margin-left: 5px; }
+          #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-button .spinner-load {
+            position: relative;
+            background-color: transparent; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network p {
+          font-family: 'FreigBook';
+          font-size: 16px;
+          color: #999999;
+          padding-left: 2px; }
+        #signup-page #signup-basic-body .signup-body-info .signup-info-network .signup-info-network-text {
+          font-family: 'FreigMed';
+          font-size: 14px;
+          margin-bottom: 15px; }
       #signup-page #signup-basic-body .signup-body-info .signup-info-location {
-        margin-bottom: 40px; }
+        margin-bottom: 20px; }
         #signup-page #signup-basic-body .signup-body-info .signup-info-location input {
           padding: 10px 40px;
           width: 100%;

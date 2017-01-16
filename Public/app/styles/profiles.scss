@@ -478,6 +478,23 @@ a:hover {
 				vertical-align: top;
 				margin: 0 10px;
 
+				.profile-info-network {
+					margin-top: 5px;
+					.fa-globe {
+						color: white;
+					}
+
+					h4 {
+						display: inline-block;
+						margin-left: 5px;
+						font-family: 'FreigBook';
+					}
+
+					i {
+						display: inline-block;
+					}
+				}
+
 				.info-line {
 /*					margin-bottom: 5px;
 */				}
@@ -613,23 +630,6 @@ a:hover {
 							-ms-transform: translateY(0px);
 							-o-transform: translateY(0px);
 							transform: translateY(0px);
-						}
-					}
-
-					.profile-info-network {
-						margin-top: 5px;
-						.fa-globe {
-							color: white;
-						}
-
-						h4 {
-							display: inline-block;
-							margin-left: 5px;
-							font-family: 'FreigBook';
-						}
-
-						i {
-							display: inline-block;
 						}
 					}
 

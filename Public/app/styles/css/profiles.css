@@ -454,6 +454,16 @@ a:hover {
           -ms-transform: translateY(0px);
           -o-transform: translateY(0px);
           transform: translateY(0px); }
+        #profile-header .profile-contents .profile-info .profile-info-cv .location .profile-info-network {
+          margin-top: 5px; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .profile-info-network .fa-globe {
+            color: white; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .profile-info-network h4 {
+            display: inline-block;
+            margin-left: 5px;
+            font-family: 'FreigBook'; }
+          #profile-header .profile-contents .profile-info .profile-info-cv .location .profile-info-network i {
+            display: inline-block; }
         #profile-header .profile-contents .profile-info .profile-info-cv .location .location-social {
           display: inline-block;
           float: right;

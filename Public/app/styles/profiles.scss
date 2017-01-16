@@ -616,6 +616,23 @@ a:hover {
 						}
 					}
 
+					.profile-info-network {
+						margin-top: 5px;
+						.fa-globe {
+							color: white;
+						}
+
+						h4 {
+							display: inline-block;
+							margin-left: 5px;
+							font-family: 'FreigBook';
+						}
+
+						i {
+							display: inline-block;
+						}
+					}
+
 					.location-social {
 						display: inline-block;
 						float: right;

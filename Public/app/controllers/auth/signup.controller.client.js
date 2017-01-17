@@ -207,6 +207,18 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 			$scope.societyNetwork = true;
 		}	
 	};
+
+	function saveUniversityNetwork(email) {
+		if (email && email.indexOf($scope.profileNetwork) >= 0) {
+			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.profileNetwork, email: email}, '', false).then(function(res) {
+				// *Condition of reponse.
+				if (!res)
+					return ;
+			});
+		} else {
+			// *Condition;
+		}
+	};
 	
 	$scope.nLocation = {};
 	$scope.saveBasics = function() {
@@ -230,7 +242,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 			profileData.network 	  = $scope.profileNetwork;
 		else if ($scope.societyNetwork) {
 			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.societyNetwork});
-		}
+		} else if ($scope.universityNetwork)
+			saveUniversityNetwork($scope.emailNetwork);
 
 		if (!$scope.profileNetwork)
 			profileData.network = '';
@@ -249,17 +262,12 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    // }
 	};
 
-	$scope.saveUniversityNetwork = function(email) {
-		if (email) {
-			$scope.loadAddUniversity = true;
-			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.profileNetwork, email: email}, '', false).then(function(res) {
-				// *Condition of reponse.
-				$scope.loadAddUniversity = false;
-			});
-		} else {
-			// *Condition;
+	$scope.$watch('profileNetwork', function(value) {
+		if (!value) {
+			$scope.universityNetwork = false;
+			$scope.societyNetwork = false;
 		}
-	};
+	});
 	
 	$scope.reloadCredential = function() {
 	    $http.get('/profile').success(function(res){

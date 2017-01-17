@@ -121,55 +121,55 @@ angular.module('wittyApp')
 		}
 	}
 })
-.filter('meetPopularity', function() {
+// .filter('meetPopularity', function() {
 	
-	function compare(a, b) {
-		if (a.myRank < b.myRank)
-			return -1;
-		else if (a.myRank > b.myRank)
-			return 1;
-		else
-			return 0;
-	};
+// 	function compare(a, b) {
+// 		if (a.myRank < b.myRank)
+// 			return -1;
+// 		else if (a.myRank > b.myRank)
+// 			return 1;
+// 		else
+// 			return 0;
+// 	};
 
-	return function(input) {
-		var length = input.length;
-		var array = [];
-		var array2 = [];
+// 	return function(input) {
+// 		var length = input.length;
+// 		var array = [];
+// 		var array2 = [];
 
-		for (var x = 0; x < length; x++) {
-			for (var key in input[x]) {
-				if (key === 'myRank' && input[x][key])
-					array.push(input[x]);
-				else
-					array2.push(input[x]);
-			}
-		}
-		array = array.sort(compare);
-		array = array.concat(array2);
-		return array;
-	}
-})
-.filter('meetNetwork', function() {
-	return function(input, arg) {
-		if (!arg || (arg.length < 2)) return input;
+// 		for (var x = 0; x < length; x++) {
+// 			for (var key in input[x]) {
+// 				if (key === 'myRank' && input[x][key])
+// 					array.push(input[x]);
+// 				else
+// 					array2.push(input[x]);
+// 			}
+// 		}
+// 		array = array.sort(compare);
+// 		array = array.concat(array2);
+// 		return array;
+// 	}
+// })
+// .filter('meetNetwork', function() {
+// 	return function(input, arg) {
+// 		if (!arg || (arg.length < 2)) return input;
 
-		var length = input.length;
-		var array = [];
-		var array2 = [];
+// 		var length = input.length;
+// 		var array = [];
+// 		var array2 = [];
 
-		for (var x = 0; x < length; x++) {
-			for (var key in input[x]) {
-				if (key === 'network' && input[x][key] === arg)
-					array.push(input[x]);
-				else
-					array2.push(input[x]);
-			}
-		}
-		array = array.concat(array2);
-		return array;
-	}
-})
+// 		for (var x = 0; x < length; x++) {
+// 			for (var key in input[x]) {
+// 				if (key === 'network' && input[x][key] === arg)
+// 					array.push(input[x]);
+// 				else
+// 					array2.push(input[x]);
+// 			}
+// 		}
+// 		array = array.concat(array2);
+// 		return array;
+// 	}
+// })
 // .filter('wittyFilterM', function($timeout) {
 
 // 		var x = 0;

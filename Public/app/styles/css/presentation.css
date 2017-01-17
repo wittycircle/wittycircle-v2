@@ -596,14 +596,15 @@
   padding: 20px 0;
   margin-top: 50px; }
   .meet-component #meet-search2 h3 {
-    font-family: 'FreigLight';
-    font-size: 26px; }
+    font-family: 'FreigBook';
+    font-size: 21px; }
   .meet-component #meet-search2 img {
-    margin: 5px 5px 13px 5px; }
+    margin: 5px 5px 7px 5px; }
   .meet-component #meet-search2 .inline {
     display: inline-block; }
   .meet-component #meet-search2 .meet-search2-left {
-    cursor: pointer; }
+    cursor: pointer;
+    width: 250px; }
     .meet-component #meet-search2 .meet-search2-left .meet-search2-left-box {
       position: absolute;
       background-color: white;
@@ -614,23 +615,29 @@
       .meet-component #meet-search2 .meet-search2-left .meet-search2-left-box li {
         padding: 2px 10px; }
   .meet-component #meet-search2 .meet-search2-right {
-    float: right;
-    width: 600px;
-    text-align: center;
-    margin-right: 50px; }
+    /*			float: right;
+    */
+    width: 800px;
+    text-align: left;
+    /*			margin-right: 50px;
+    */ }
     .meet-component #meet-search2 .meet-search2-right .meet-search2-right-input {
       display: none;
-      margin-right: 30px; }
+      /*				margin-right: 20px;
+      */ }
       .meet-component #meet-search2 .meet-search2-right .meet-search2-right-input input {
         border: none;
-        font-family: 'FreigLight';
-        font-size: 26px;
+        font-family: 'FreigBook';
+        font-size: 21px;
         color: white;
         background-color: transparent;
         border-bottom: 1px solid #999999;
         min-width: 300px;
         max-width: 300px; }
     .meet-component #meet-search2 .meet-search2-right .meet-search2-right-box {
+      float: right;
+      position: relative;
+      top: 5px;
       cursor: pointer;
       -webkit-transition: all 200ms linear;
       -o-transition: all 200ms linear;

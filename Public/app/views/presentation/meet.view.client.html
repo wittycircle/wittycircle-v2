@@ -99,23 +99,35 @@
                     </div>
                 </div>
 
-                <div id="meet-search2">
-                    <div class="meet-search2-right inline">
-                        <div id="ms2rinput" class="meet-search2-right-input inline">
-                            <div id="ms2left" class="meet-search2-left inline">
+                <div id="presentation-search2">
+                    <div class="presentation-search2-right inline">
+                        <div id="ms2rinput" class="presentation-search2-right-input inline">
+                            <div id="ms2left" class="presentation-search2-left inline">
                                 <h3 class="inline">Rank by: </h3>
                                 <div class="inline">
                                     <h3 class="inline">{{meet.propertyName}}</h3>
                                     <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
-                                    <ul id="ms2lbox" class="meet-search2-left-box">
+                                    <ul id="ms2lbox" class="presentation-search2-left-box">
                                         <li ng-click="meet.changeRankBy()">{{meet.propertyName2}}</li>
                                     </ul>
                                 </div>
                             </div>
                             <h3 class="inline">networks:</h3>
-                            <input class="inline" type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
+                            <div id="netbox" class="network-box inline" >
+                                <h3 class="inline">{{searchNetwork}}</h3>
+                                <img ng-click="meet.removeNetwork()" class="inline" src="/images/cross-icon.svg">
+                            </div>
+                            <div id="nsnetwork" class="network-search inline">
+                                <input type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
+                                <div id="netdrop" class="network-dropdown downbox">
+                                    <h3>Popular network: </h3>
+                                    <li ng-click="meet.getSearchNetwork('Harvard University')">Harvard University</li>
+                                    <li ng-click="meet.getSearchNetwork('42 School')">42 School</li>
+                                    <li>Stanford University</li>
+                                </div>
+                            </div>
                         </div>
-                        <div id="ms2right" class="meet-search2-right-box inline">
+                        <div id="ms2right" class="presentation-search2-right-box inline">
                             <h3 class="inline">more criteria</h3>
                             <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
                         </div>
@@ -444,18 +456,22 @@
                 $('#ms2lbox').css('display', 'none');
             }
 
-            if ($('#ms2right').is(e.target) || $('#ms2right').has(e.target).length && $('#ms2rinput').css('display') === 'none') {
-                $('#ms2right h3').text('less criteria');
-                $('#ms2right img').css('transform', 'rotate(-180deg)');
-                $('#ms2rinput').fadeIn().css("display","inline-block");
-
-            } else {
-                if (!$('#ms2rinput').is(e.target) && !$('#ms2rinput').has(e.target).length) {
+            if ($('#ms2right').is(e.target) || $('#ms2right').has(e.target).length) {
+                if ($('#ms2rinput').css('display') === 'none') {
+                    $('#ms2right h3').text('less criteria');
+                    $('#ms2right img').css('transform', 'rotate(-180deg)');
+                    $('#ms2rinput').fadeToggle().css("display","inline-block");
+                } else {
                     $('#ms2right h3').text('more criteria');
                     $('#ms2right img').css('transform', 'rotate(0)');
                     $('#ms2rinput').fadeOut().css('display', 'none');
                 }
-            }
+            };
+
+            if ($('#nsnetwork').is(e.target) || $('#nsnetwork').has(e.target).length)
+                $('#netdrop').css('display', 'block');
+            else
+                $('#netdrop').css('display', 'none');
         };
 
         function changePlh() {

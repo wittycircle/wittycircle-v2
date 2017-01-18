@@ -27,6 +27,8 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	meet.goToProfile = goToProfile;
 	meet.followUserFromCard = followUserFromCard;
 	meet.changeRankBy = changeRankBy;
+	meet.getSearchNetwork = getSearchNetwork;
+	meet.removeNetwork 	= removeNetwork;
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -68,6 +70,18 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 			meet.propertyName = 'default';
 			meet.propertyName2 = 'Popularity';
 		}
+	};
+
+	function getSearchNetwork(network) {
+		$('#nsnetwork').css('display', 'none');
+		$('#netbox').css('display', 'inline-block');
+		$scope.searchNetwork = network;
+	};
+
+	function removeNetwork() {
+		$scope.searchNetwork = '';
+		$('#netbox').css('display', 'none');
+		$('#nsnetwork').css('display', 'inline-block');
 	};
 
 	/*** Discover Mobile ***/

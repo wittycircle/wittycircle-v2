@@ -28,6 +28,9 @@ angular.module('wittyApp')
     discover.searchSkill    = searchSkill;
     discover.removeSkill    = removeSkill;
     discover.voteProjectCard= voteProjectCard;
+    discover.changeRankBy   = changeRankBy;
+    discover.getSearchNetwork= getSearchNetwork;
+    discover.removeNetwork  = removeNetwork;
 
     // discover.goToProfile     = goToProfile;
 
@@ -36,6 +39,8 @@ angular.module('wittyApp')
     discover.cProject = 'All Projects';
     discover.cHelp = 'Any help';
     discover.limit = 9;
+    discover.propertyName = 'default';
+    discover.propertyName2 = 'Popularity';
 
    // var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
    // var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
@@ -80,6 +85,28 @@ angular.module('wittyApp')
              document.execCommand("Stop", false);
         }
     });
+
+    function changeRankBy() {
+        if (discover.propertyName === 'default') {
+            discover.propertyName = 'popularity';
+            discover.propertyName2 = 'Default';
+        } else {
+            discover.propertyName = 'default';
+            discover.propertyName2 = 'Popularity';
+        }
+    };
+
+    function getSearchNetwork(network) {
+        $('#nsnetwork').css('display', 'none');
+        $('#netbox').css('display', 'inline-block');
+        $scope.searchNetwork = network;
+    };
+
+    function removeNetwork() {
+        $scope.searchNetwork = '';
+        $('#netbox').css('display', 'none');
+        $('#nsnetwork').css('display', 'inline-block');
+    };
 
     /***** MOBILE *****/
     /*** Discover Mobile ***/

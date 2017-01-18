@@ -142,7 +142,7 @@
                         <h4>Browse <span>the users below</span> or filter them using our magic tool above.</h4>
                     </div>
                     <div class="meet-body-cards" ng-if="meet.cardProfiles && !searchSk && !searchAl">
-                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
+                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | meetPopularity: meet.propertyName | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
                             <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">
                                 <div class="card-rank" ng-if="cardProfile.myRank">
                                     <span>#{{cardProfile.myRank}}</span>
@@ -218,7 +218,7 @@
                             <h2 ng-if="cardProfiles.length && $index === 5">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCountry}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 6">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in the rest of the world</h2>
                         </div>
-                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | limitTo: limitSk1 track by $index">
+                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | meetPopularity: meet.propertyName:true | limitTo: limitSk1 track by $index">
                             <div class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
                                 <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">
                                     <div class="card-rank" ng-if="cardProfile.myRank">

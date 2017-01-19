@@ -2,6 +2,7 @@
 
 /*** Sign Up ***/
 const crypto      = require('crypto');
+const mandrill  = require('mandrill-api/mandrill');
 
 exports.loadNetworkByIp = function(req, res) {
     req.checkBody('ip', 'Error occurs!').isString();
@@ -32,7 +33,6 @@ exports.loadNetworkByIp = function(req, res) {
 
 exports.updateBasic = function(req, res) {
 
-    console.log(req.body);
     req.checkBody('genre', 'Genre must be between 1 and 64 characters.').optional().isString().min(1).max(64);
     // req.checkBody('birthdate', 'Birthdate must be between 1 and 64 characters.').optional().isString().min(1).max(64);
     // req.checkBody('location_country', 'Location country must be between 1 and 64 characters').optional().max(64);
@@ -107,6 +107,7 @@ exports.addUniversityNetworkForVerification = function(req, res) {
     req.checkBody('network', "Error occurs!").isString();
     req.checkBody('email', "Error occurs!").isString().isEmail();
 
+    console.log("OK");
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);
     else {
@@ -125,8 +126,78 @@ exports.addUniversityNetworkForVerification = function(req, res) {
                     function(err, result) {
                         if (err) throw err;
                         else {
-                            // *Send an email with verification link to user
-                            return res.status(200).send(true);
+                            pool.query('SELECT first_name, last_name FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', req.user.id,
+                                function(err, result) {
+                                    if (err) throw err;
+
+                                    var link = 'http://www.wittycircle.com/network/validation/' + token;
+                                    var subj = "Please confirm you're part of the " + req.body.network + " network";
+                                    var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
+
+                                    var template_name = "verification-network";
+                                    var template_content = [{
+                                        "name": "verification-network",
+                                        "content": "content",
+                                    }];
+
+                                    var message = {
+                                        "html": "<p>HTML content</p>",
+                                        "subject": subj,
+                                        "from_email": "noreply@wittycircle.com",
+                                        "from_name": "Wittycircle",
+                                        "to": [{
+                                            "email": req.body.email,
+                                            "name": 'Recipient',
+                                            "type": "to"
+                                        }],
+                                        "headers": {
+                                            "Reply-To": "noreply@wittycircle.com"
+                                        },
+                                        "important": false,
+                                        "inline_css": null,
+                                        "preserve_recipients": null,
+                                        "view_content_link": null,
+                                        "tracking_domain": null,
+                                        "signing_domain": null,
+                                        "return_path_domain": null,
+                                        "merge": true,
+                                        "merge_language": "mailchimp",
+                                        "global_merge_vars": [{
+                                            "name": "merge1",
+                                            "content": "merge1 content"
+                                        }],
+                                        "merge_vars": [
+                                            {
+                                                "rcpt": req.body.email,
+                                                "vars": [
+                                                    {
+                                                        "name": "ffname",
+                                                        "content": result[0].first_name
+                                                    },
+                                                    {
+                                                        "name": "link",
+                                                        "content": link
+                                                    },
+                                                    {
+                                                        "name": "network",
+                                                        "content": req.body.network
+                                                    },
+                                                ]
+                                            }
+                                        ]
+                                    };
+
+                                    var async = false;
+                                    mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+                                        return ;
+                                    }, function(e) {
+                                        // Mandrill returns the error as an object with name and message keys
+                                        console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+                                        throw e;
+                                        // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+                                    });
+                                    return res.status(200).send(true);
+                                });
                         }
                     });
             } else

@@ -58,6 +58,13 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    $scope.months               = res.months;
 	    $scope.years                = res.years;
 	});
+
+	function loadNetworks() {
+		RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+			$scope.uclist = res;
+		});
+	};
+	loadNetworks();
 	
 	function loadInfoProfile() {
 	    if (currentUser) {
@@ -122,6 +129,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.searchText = [];
 	$scope.skillCascade = [];
 	$scope.interestList = [];
+	$scope.invite = {};
 	
 	/*
 	** Glabal function for signup
@@ -191,25 +199,28 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
 	$scope.getNetwork = function(network) {
 		$scope.profileNetwork = network;
-		var list   = $scope.ucList;
-		var length = $scope.ucList.length;
-		var n = 0
-		for (var i = 0; i < length; i++) {
-			if (list[i].indexOf(network) >= 0) {
-				$scope.universityNetwork = true;
-				$scope.societyNetwork = false;
-				break ;
-			}
-			n++;
-		};
-		if (n === length) {
-			$scope.universityNetwork = false;
-			$scope.societyNetwork = true;
-		}	
+		$scope.universityNetwork = true;
+		// var list   = $scope.ucList;
+		// var length = $scope.ucList.length;
+		// var n = 0
+		// for (var i = 0; i < length; i++) {
+		// 	if (list[i].indexOf(network) >= 0) {
+		// 		$scope.universityNetwork = true;
+		// 		$scope.societyNetwork = false;
+		// 		break ;
+		// 	}
+		// 	n++;
+		// };
+		// if (n === length) {
+		// 	$scope.universityNetwork = false;
+		// 	$scope.societyNetwork = true;
+		// }	
 	};
 
 	function saveUniversityNetwork(email) {
-		if (email && email.indexOf($scope.profileNetwork) >= 0) {
+		console.log(email);
+		if (email) {
+			console.log("OK");
 			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.profileNetwork, email: email}, '', false).then(function(res) {
 				// *Condition of reponse.
 				if (!res)
@@ -243,7 +254,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		else if ($scope.societyNetwork) {
 			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.societyNetwork});
 		} else if ($scope.universityNetwork)
-			saveUniversityNetwork($scope.emailNetwork);
+			saveUniversityNetwork($scope.invite.emailNetwork);
 
 		if (!$scope.profileNetwork)
 			profileData.network = '';

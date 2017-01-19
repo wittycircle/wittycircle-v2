@@ -134,46 +134,100 @@ angular.module('wittyApp')
 
 	return function(input, check, model) {
 
-		console.log(model);
 		if (check !== 'popularity') return input;
 
+		var temfile = input;
 		var length = input.length;
 		var array = [];
 		var array2 = [];
 
 		if (!model) {
-
-			array = input.sort(compare);
-			console.log(array);
+			for (var x = 0; x < length; x++) {
+				if (!input[x]['myRank'])
+					array2.push(input[x]);
+				else {
+					array.push(input[x]);
+				}
+			};
+			array = array.sort(compare);
+			array = array.concat(array2);
 			return array;
+		} else if (model === 'all') {
+			for (var n = 0; n < length; n++) {
+				if (typeof temfile[n] !== 'object')
+					console.log(temfile[n]);
+				else if (!temfile[n]['myRank'])
+					array2.push(temfile[n]);
+				else 
+					array.push(temfile[n]);
+			}
+			if (!array) {
+				array2.unshift(temfile[0]);
+				return array2;
+			} else {
+				array = array.sort(compare);
+				array.unshift(temfile[0]);
+				array = array.concat(array2);
+				return array;
+			}
 		} else {
-			
-			array = input.sort(compare);
-			console.log(array);
-			return ;
+			for (var n = 0; n < length; n++) {
+				if (!temfile[n]['myRank'])
+					array2.push(temfile[n]);
+				else 
+					array.push(temfile[n]);
+			}
+			if (!array) {
+				return array2;
+			} else {
+				array = array.sort(compare);
+				array = array.concat(array2);
+				return array;
+			}
 		}
 	}
 })
-// .filter('meetNetwork', function() {
-// 	return function(input, arg) {
-// 		if (!arg || (arg.length < 2)) return input;
+.filter('meetNetwork', function() {
+	return function(input, arg, check, mode) {
+		if (!check) return input;
 
-// 		var length = input.length;
-// 		var array = [];
-// 		var array2 = [];
+		var temfile = input
+		var length = input.length;
+		var array = [];
+		var array2 = [];
 
-// 		for (var x = 0; x < length; x++) {
-// 			for (var key in input[x]) {
-// 				if (key === 'network' && input[x][key] === arg)
-// 					array.push(input[x]);
-// 				else
-// 					array2.push(input[x]);
-// 			}
-// 		}
-// 		array = array.concat(array2);
-// 		return array;
-// 	}
-// })
+		if (mode === 'all') {
+			for (var x = 0; x < length; x++) {
+				if (temfile[x][0]) 
+					console.log(temfile[x]);
+				else if (temfile[x].profiles['network'] === arg) 
+					array.push(temfile[x]);
+				else
+					array2.push(temfile[x]);
+			}
+			if (!array) {
+				array2.unshift(temfile[0]);
+				return array2;
+			} else {
+				array.unshift(temfile[0]);
+				array = array.concat(array2);
+				return array;
+			}
+		} else {
+			for (var x = 0; x < length; x++) {
+				if (temfile[x]['network'] === arg) 
+					array.push(temfile[x]);
+				else
+					array2.push(temfile[x]);
+			}
+			if (!array)
+				return array2;
+			else
+				array = array.concat(array2);
+			return array;
+		}
+	}
+})
 // .filter('wittyFilterM', function($timeout) {
 
 // 		var x = 0;

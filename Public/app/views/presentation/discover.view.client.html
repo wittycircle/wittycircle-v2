@@ -153,9 +153,7 @@
                             <input type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
                             <div id="netdrop" class="network-dropdown downbox">
                                 <h3>Popular network: </h3>
-                                <li ng-click="discover.getSearchNetwork('Harvard University')">Harvard University</li>
-                                <li ng-click="discover.getSearchNetwork('42 School')">42 School</li>
-                                <li>Stanford University</li>
+                                <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="discover.getSearchNetwork(uc.country)">{{uc.country}}</li>
                             </div>
                         </div>
                     </div>

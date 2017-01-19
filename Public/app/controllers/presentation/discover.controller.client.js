@@ -108,6 +108,13 @@ angular.module('wittyApp')
         $('#nsnetwork').css('display', 'inline-block');
     };
 
+    function retrieveUC() {
+        RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+            $scope.uclist = res;
+        });
+    };
+    retrieveUC();
+
     /***** MOBILE *****/
     /*** Discover Mobile ***/
     discover.dmobile = {};

@@ -37,6 +37,14 @@ function getProjectInfo(id, callback) {
 
 module.exports = function(app) {
 
+	app.get('/data/uc/list', function(req, res) {
+		pool.query('SELECT * FROM university_list',
+			function(err, result) {
+				if (err) throw err;
+				return res.status(200).send(result);
+			});
+	});
+
 	app.get('/admin/check', function(req, res) {
 		if (req.isAuthenticated() && req.user.moderator) {
 			return res.send(true);

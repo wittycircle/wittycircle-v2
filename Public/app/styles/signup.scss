@@ -355,9 +355,18 @@
 			.signup-info-network {
 				margin-bottom: 30px;
 
+				i {
+					position: absolute;
+					margin-top: 13px;
+					margin-left: 14px; 
+					font-size: 18px;
+					color: #999999;
+
+				}
+
 				input {
 					width: 100%;
-					padding: 8px 15px;
+					padding: 8px 15px 8px 40px;
 					border: 1px solid #e5e5e5;
 					border-radius: 4px;
 					font-family: 'FreigBook';
@@ -401,6 +410,7 @@
 				.signup-info-network-mail {
 					display: inline-block;
 					width: 70%;
+					padding-left: 15px;
 				}
 
 				.signup-info-network-button {

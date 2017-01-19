@@ -73,12 +73,14 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	};
 
 	function getSearchNetwork(network) {
+		$scope.checkNetwork = true;
 		$('#nsnetwork').css('display', 'none');
 		$('#netbox').css('display', 'inline-block');
 		$scope.searchNetwork = network;
 	};
 
 	function removeNetwork() {
+		$scope.checkNetwork = false;
 		$scope.searchNetwork = '';
 		$('#netbox').css('display', 'none');
 		$('#nsnetwork').css('display', 'inline-block');
@@ -139,6 +141,13 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 			meet.cardProfiles = res.data;
 		});
 	};
+	
+	function retrieveUC() {
+		RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+			$scope.uclist = res;
+		});
+	};
+	retrieveUC();
 
 	RetrieveData.getData('/skills', 'GET').then(function(res) {
 		meet.skills = res.skills;

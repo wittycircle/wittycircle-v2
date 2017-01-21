@@ -15,7 +15,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	meet.skillList = [];
 	meet.skillListM = [];
 	meet.logIn = $rootScope.globals.currentUser ? true : false;
-	meet.propertyName = 'default';
+	meet.propertyName = 'magic';
 	meet.propertyName2 = 'Popularity';
 	/* functions */
 	meet.openmmodal = openmmodal;
@@ -63,11 +63,11 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	});
 
 	function changeRankBy() {
-		if (meet.propertyName === 'default') {
+		if (meet.propertyName === 'magic') {
 			meet.propertyName = 'popularity';
-			meet.propertyName2 = 'Default';
+			meet.propertyName2 = 'Magic';
 		} else {
-			meet.propertyName = 'default';
+			meet.propertyName = 'magic';
 			meet.propertyName2 = 'Popularity';
 		}
 	};

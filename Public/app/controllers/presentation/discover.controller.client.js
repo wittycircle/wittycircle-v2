@@ -9,7 +9,7 @@
 **/
 
 angular.module('wittyApp')
-.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow, showbottomAlert) {
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow, showbottomAlert, $filter) {
 
     var socket = io.connect('http://127.0.0.1');
 
@@ -39,7 +39,7 @@ angular.module('wittyApp')
     discover.cProject = 'All Projects';
     discover.cHelp = 'Any help';
     discover.limit = 9;
-    discover.propertyName = 'default';
+    discover.propertyName = 'magic';
     discover.propertyName2 = 'Popularity';
 
    // var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -80,23 +80,25 @@ angular.module('wittyApp')
         {
              window.stop();
         }
-        else if(document.execCommand !== undefined)
-        {
+        else if(document.execCommand !== undefined) {
              document.execCommand("Stop", false);
         }
     });
 
     function changeRankBy() {
-        if (discover.propertyName === 'default') {
+        if (discover.propertyName === 'magic') {
+            discover.cards = $filter('discoverPopularity')(discover.cards, 'popularity');
             discover.propertyName = 'popularity';
-            discover.propertyName2 = 'Default';
+            discover.propertyName2 = 'Magic';
         } else {
-            discover.propertyName = 'default';
+            getDiscoverCard();
+            discover.propertyName = 'magic';
             discover.propertyName2 = 'Popularity';
         }
     };
 
     function getSearchNetwork(network) {
+        discover.cards = $filter('discoverNetwork')(discover.cards, network);
         $('#nsnetwork').css('display', 'none');
         $('#netbox').css('display', 'inline-block');
         $scope.searchNetwork = network;

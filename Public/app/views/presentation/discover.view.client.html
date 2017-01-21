@@ -150,10 +150,10 @@
                             <img ng-click="discover.removeNetwork()" class="inline" src="/images/cross-icon.svg">
                         </div>
                         <div id="nsnetwork" class="network-search inline">
-                            <input type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
+                            <input type="text" ng-model="searchNetwork" placeholder="Berkeley, Numa, 500 Startups...">
                             <div id="netdrop" class="network-dropdown downbox">
                                 <h3>Popular network: </h3>
-                                <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="discover.getSearchNetwork(uc.country)">{{uc.country}}</li>
+                                <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="discover.getSearchNetwork(uc.name)">{{uc.name}}</li>
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
 			</div>
 			<div class="discover-body-list">
 				
-				<div class="discover-body-card project-card animated fadeIn" ng-repeat="card in discover.cards | limitTo: discover.limit track by $index"  ng-if="card.picture_card">
+				<div class="discover-body-card project-card animated fadeIn" ng-repeat="card in discover.cards | limitTo: discover.limit"  ng-if="card.picture_card">
 					<div class="card-tag" ng-click="discover.getTagCag(card.category_name)">
 						<div class="card-tag-content">
 							<div class="card-tag-bg"></div>

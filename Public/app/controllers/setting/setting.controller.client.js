@@ -8,7 +8,7 @@
  **/
 
 angular.module('wittyApp')
-	.controller('SettingCtrl', function($http, $timeout, $location, $scope, $rootScope, $state, Authentication, $stateParams) {
+	.controller('SettingCtrl', function($http, $timeout, $location, $scope, $rootScope, $state, Authentication, $stateParams, RetrieveData) {
 
 	var currentUser = $rootScope.globals.currentUser || null;
 
@@ -65,6 +65,7 @@ angular.module('wittyApp')
 	$scope.checkLastName 	= true;
 	$scope.checkEmail 		= true;
 	$scope.checkUsername 	= true;
+	$scope.invite 			= {};
 
 	var id = $rootScope.globals.currentUser.id;
 	var Url = '/user/' + id;
@@ -77,15 +78,45 @@ angular.module('wittyApp')
 			$scope.data.last_name	= res.profile.last_name;
 			$scope.data.email 		= res.data.email;
 			$scope.data.username	= res.data.username;
-			$scope.password 	= res.data.password;
+			$scope.data.network  	= res.profile.network;
+			$scope.password 		= res.data.password;
 		});
 	}
 	refresh();
+
+	function loadNetworks() {
+		RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+			$scope.networks = res;
+		});
+	};
+	loadNetworks();
+
 	$scope.data = {};
 
 	function getChange() {
 		$scope.changeText 		= "Saved";
 		$scope.settingChanged 	= true;
+	};
+
+	$scope.getNetwork = function(network) {
+		$scope.data.network = network.name;
+		$scope.universityNetwork = true;
+
+		var position1 = network.website.indexOf('.') + 1;
+		var position2 = network.website.lastIndexOf('.');
+		$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
+	}
+
+	function saveUniversityNetwork(email) {
+		if (email) {
+			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.data.network, email: email}, '', false).then(function(res) {
+				// *Condition of reponse.
+				if (!res)
+					return ;
+			});
+		} else {
+			// *Condition;
+		}
 	};
 
 	$scope.generalUpdate = function() {
@@ -107,9 +138,15 @@ angular.module('wittyApp')
 			$scope.checkEmail 		= true;
 		if (!$scope.checkFirstName || !$scope.checkLastName || !$scope.checkEmail || !$scope.checkUsername)
 			return ;
+
+		if ($scope.societyNetwork) {
+			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.societyNetwork});
+		} else if ($scope.universityNetwork)
+			saveUniversityNetwork($scope.invite.emailNetwork);
+
 		$http.put(Url, $scope.data).success(function(res){
 			if (res.success) {
-				Authentication.SetCredentials(res.data.email, res.data.id, $rootScope.globals.currentUser.profile_id, res.data.username, res.data.moderator, function(done){
+				Authentication.SetCredentials(res.data.email, res.data.id, $rootScope.globals.currentUser.profile_id, res.data.username, res.data.moderator, res.data.ambassador, function(done){
 					$scope.checkFirstName 	= true;
 					$scope.checkLastName 	= true;
 					$scope.checkEmail 		= true;

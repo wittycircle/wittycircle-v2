@@ -103,7 +103,7 @@
                     <div class="presentation-search2-right inline">
                         <div id="ms2rinput" class="presentation-search2-right-input inline">
                             <div id="ms2left" class="presentation-search2-left inline">
-                                <h3 class="inline">Rank by: </h3>
+                                <h3 class="inline">Ranked by: </h3>
                                 <div class="inline">
                                     <h3 class="inline">{{meet.propertyName}}</h3>
                                     <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
@@ -112,16 +112,16 @@
                                     </ul>
                                 </div>
                             </div>
-                            <h3 class="inline">networks:</h3>
+                            <h3 class="inline">network:</h3>
                             <div id="netbox" class="network-box inline" >
                                 <h3 class="inline">{{searchNetwork}}</h3>
                                 <img ng-click="meet.removeNetwork()" class="inline" src="/images/cross-icon.svg">
                             </div>
                             <div id="nsnetwork" class="network-search inline">
-                                <input type="text" ng-model="searchNetwork" placeholder="Harvard University, Y Combinator, The Refiners,...">
+                                <input type="text" ng-model="searchNetwork" placeholder="Berkeley, Numa, 500 Startups...">
                                 <div id="netdrop" class="network-dropdown downbox">
                                     <h3>Popular network: </h3>
-                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.country)">{{uc.country}}</li>
+                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.name)">{{uc.name}}</li>
                                 </div>
                             </div>
                         </div>

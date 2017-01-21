@@ -95,13 +95,14 @@
 					<input ng-disabled="loadNetwork" ng-class="{ 'disabled-input' : loadNetwork }" id="sininput" type="text" ng-model="profileNetwork" placeholder="Boston College, Harvard University, etc..." />
 					<div id="sinlist" class="signup-info-network-list">
 						<ul>
-							<li ng-repeat="network in uclist | wordsFilter: profileNetwork | limitTo: 11" ng-click="getNetwork(network.country)">{{network.country}}</li>
+							<li ng-repeat="network in uclist | wordsFilter: profileNetwork | limitTo: 5" ng-click="getNetwork(network)">{{network.name}}</li>
 						</ul>
 					</div>
-					<p class="signup-info-network-text">Network help us to connect you to more people you may know</p>
+					<p class="signup-info-network-text">Networks help us to connect you to more people you may know</p>
 					<p ng-if="societyNetwork"><i>You'll be notified by email when we've checked you're part of this network</i></p>
+					<label ng-if="universityNetwork">Network verification</label>
 					<div ng-if="universityNetwork" class="signup-info-network-university">
-						<input class="signup-info-network-mail" type="email" ng-model="invite.emailNetwork" placeholder="email@network.edu" />
+						<input class="signup-info-network-mail" type="email" ng-model="invite.emailNetwork" placeholder="{{placeholderNetwork}}" />
 						<p class="signup-info-network-text">We'll send you a verification email to add you to the {{profileNetwork}} network</p>
 						<!-- <button class="signup-info-network-button" ng-click="saveUniversityNetwork(emailNetwork)">
 							<span ng-if="!loadAddUniversity">Send</span>

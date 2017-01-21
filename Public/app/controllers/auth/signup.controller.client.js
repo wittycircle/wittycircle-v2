@@ -143,18 +143,18 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    return false;
 	};
 
-	// function loadNetwork() {
-	// 	$(document).ready(function() {
- //        	$.getJSON("https://jsonip.com/", function (data) {
- //        		RetrieveData.ppdData('/signup/load/network', 'POST', {ip: data.ip}).then(function(network) {
- //        			if (network) 
- //        				$scope.loadNetwork = true;
- //        			$scope.profileNetwork = network;
- //        		});
- //        	});
- //        });
-	// };
-	// loadNetwork();
+	function loadNetwork() {
+		$(document).ready(function() {
+        	$.getJSON("https://jsonip.com/", function (data) {
+        		RetrieveData.ppdData('/signup/load/network', 'POST', {ip: data.ip}).then(function(network) {
+        			if (network) 
+        				$scope.loadNetwork = true;
+        			$scope.profileNetwork = network;
+        		});
+        	});
+        });
+	};
+	loadNetwork();
 	
 	/*
 	** Initiate controller to get list of Skills and Interests
@@ -198,8 +198,12 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	});
 
 	$scope.getNetwork = function(network) {
-		$scope.profileNetwork = network;
+		$scope.profileNetwork = network.name;
 		$scope.universityNetwork = true;
+
+		var position1 = network.website.indexOf('.') + 1;
+		var position2 = network.website.lastIndexOf('.');
+		$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
 		// var list   = $scope.ucList;
 		// var length = $scope.ucList.length;
 		// var n = 0
@@ -218,7 +222,6 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	};
 
 	function saveUniversityNetwork(email) {
-		console.log(email);
 		if (email) {
 			console.log("OK");
 			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.profileNetwork, email: email}, '', false).then(function(res) {

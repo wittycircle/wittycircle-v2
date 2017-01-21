@@ -121,6 +121,46 @@ angular.module('wittyApp')
 		}
 	}
 })
+.filter('discoverPopularity', function() {
+
+	function compare(a, b) {
+		if (a.vote < b.vote)
+			return 1;
+		else if (a.vote > b.vote)
+			return -1;
+		else
+			return 0;
+	};
+
+	return function(input, check) {
+		if (check !== 'popularity') return input;
+
+		var array = [];
+
+		array = input.sort(compare);
+		return array;
+	};
+})
+.filter('discoverNetwork', function() {
+	return function(input, network) {
+		if (network === '') return input;
+
+		var length 	= input.length;
+		var array 	= [];
+		var array2 	= [];
+
+		for (var i = 0; i < length; i++) {
+			if (input[i]['network'] === network)
+				array.push(input[i]);
+			else
+				array2.push(input[i]);
+		}
+		
+		array = array.concat(array2);
+		console.log(array);
+		return array;
+	};
+})
 .filter('meetPopularity', function() {
 	
 	function compare(a, b) {

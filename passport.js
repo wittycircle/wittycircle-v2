@@ -11,6 +11,8 @@ var mysql	= require('mysql');
 var bcrypt	= require('bcrypt-nodejs');
 var dbconfig	= require('./database');
 var pool	= mysql.createConnection(dbconfig.connection);
+pool.query('USE ' + dbconfig.database);
+
 
 // load the auth variables
 var configAuth = require('./controllers/auth');
@@ -24,7 +26,6 @@ var cloudinary = require('cloudinary');
 // Mailchimp
 var mailchimp = require('./mailchimpRequest');
 
-pool.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 

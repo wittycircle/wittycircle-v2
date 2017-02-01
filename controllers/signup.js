@@ -107,7 +107,6 @@ exports.addUniversityNetworkForVerification = function(req, res) {
     req.checkBody('network', "Error occurs!").isString();
     req.checkBody('email', "Error occurs!").isString().isEmail();
 
-    console.log("OK");
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);
     else {

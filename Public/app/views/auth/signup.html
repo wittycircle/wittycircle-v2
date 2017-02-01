@@ -92,7 +92,7 @@
 				<div class="signup-info-network">
 					<label>Your network</label><br />
 					<i class="fa fa-globe"></i>
-					<input ng-disabled="loadNetwork" ng-class="{ 'disabled-input' : loadNetwork }" id="sininput" type="text" ng-model="profileNetwork" placeholder="Boston College, Harvard University, etc..." />
+					<input ng-disabled="loadNetwork" ng-class="{ 'disabled-input' : loadNetwork }" id="sininput" type="text" ng-model="profileNetwork" placeholder="Berkeley, HEC, Station F..." />
 					<div id="sinlist" class="signup-info-network-list">
 						<ul>
 							<li ng-repeat="network in uclist | wordsFilter: profileNetwork | limitTo: 5" ng-click="getNetwork(network)">{{network.name}}</li>

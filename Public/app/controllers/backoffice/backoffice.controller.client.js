@@ -103,8 +103,7 @@ angular.module('wittyApp')
 					});
 				} else if (value === 3) {
 					$scope.onCharge3 = true;
-					if ($scope.numberSend[$scope.ucIndex] && $scope.numberSend[$scope.ucIndex].num && $scope.numberSend[$scope.ucIndex].students) {
-						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend, number: $scope.numberSend[$scope.ucIndex].num, students: $scope.numberSend[$scope.ucIndex].students, category: $scope.numberSend[$scope.ucIndex].category}, '', false).then(function(res) {
+						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend}, '', false).then(function(res) {
 							if (res.success) {
 								$scope.onCharge3 = false;
 								$scope.numberSend = null;
@@ -112,8 +111,6 @@ angular.module('wittyApp')
 								$scope.numberSend 	= [];
 							}
 						});
-					} else
-						$scope.error = true;
 				} else
 					$scope.error = true;
 			};
@@ -141,6 +138,7 @@ angular.module('wittyApp')
 			/********* UNIVERSITY CAMPAIGN *********/
 
 			$scope.initUniversityCampaign = function() {
+				console.log("OK");
 				RetrieveData.getData('/uc/invitation/list', 'GET').then(function(res) {
 					if (res.success)
 						$scope.ucDatas = res.data;
@@ -188,6 +186,8 @@ angular.module('wittyApp')
 					var object = {
 						university_name 		: $scope.ucName.capitalizeFirstLetter(),
 						university_mail_list	: $scope.ucList,
+						university_sender		: $scope.ucSender,
+						university_message 		: $scope.ucMessage,
 					}
 
 					RetrieveData.ppdData('/uc/invitation/add', 'POST', object, '', false).then(function(res) {

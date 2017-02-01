@@ -270,29 +270,10 @@
 		display: none;
 		vertical-align: top;
 
-		.bo-uc-campaign {
-			input {
-				border: 1px solid #e5e5e5;
-				border-radius: 4px;
-				padding: 7px 10px 8px 10px;
-				margin-left: 10px;
-				width: 250px;
-				font-size: 16px;
-				font-family: 'FreigBook';
-			}
-
-			button {
-				padding: 5px 15px 5px 15px !important;
-				margin-left: 15px;
-
-				.spinner-load {
-					position: initial;
-					background-color: transparent;
-				}
-			}
+		.new-section-back {
+			padding: 20px 0;
 
 			.import-zone {
-				text-align: right;
 
 				p {
 					display: inline-block;
@@ -317,6 +298,66 @@
 					box-shadow: 1px 1px 1px 1px #e5e5e5;
 				} 
 			}
+
+			.redactor-editor {
+				width: 600px;
+			}
+
+			.new-section-li-head {
+				li {
+					display: inline-block;
+					padding: 5px 20px;
+				}
+			}
+
+			.new-section-li-list {
+				padding: 5px;
+				
+				li {
+					display: inline-block;
+					padding: 5px 20px;
+				}
+			}
+
+			.new-section-table {
+				tbody {
+					padding: 20px 0;
+					tr {
+						padding: 5px 20px;
+						
+						td {
+							padding: 5px 20px;
+						}
+					}
+
+					th {
+						padding: 5px 20px;
+					}
+				}
+			}
+		}
+
+		.bo-uc-campaign {
+			input {
+				border: 1px solid #e5e5e5;
+				border-radius: 4px;
+				padding: 7px 10px 8px 10px;
+				margin-left: 10px;
+				width: 250px;
+				font-size: 16px;
+				font-family: 'FreigBook';
+			}
+
+			button {
+				padding: 5px 15px 5px 15px !important;
+				margin-left: 15px;
+
+				.spinner-load {
+					position: initial;
+					background-color: transparent;
+				}
+			}
+
 		}
 
 		.bo-uc-list {

@@ -1,81 +1,121 @@
 /**** UC INVITE ****/
+const mandrill  = require('mandrill-api/mandrill');
+const crypto      = require('crypto');
+
 
 /* BABSON UNIVERSITY INVITATION MAILS */
-function inviteMailToUc(university, number, category_name, callback) {
-	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id = 1829',
+function inviteMailToUc(university, callback) {
+	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = 1829)',
 		function(err, result) {
 			if (err) throw err;
 	
-			pool.query('SELECT id, first_name, email FROM invite_university WHERE university = ? AND send_date IS NULL LIMIT ?', [university, number],
+			pool.query('SELECT id, first_name, email, message, university FROM invite_university WHERE university = ? AND send_date IS NULL', university,
 				function(err, list) {	
 					if (err) throw err;
 					if (list[0]) {
-						function recursive(index) {
-							if (list[index]) {
-								/* FROM PROFILE SETTING */
-								var ffname = result[0].first_name + " " + result[0].last_name;
+						var buf     = crypto.randomBytes(40),
+            				token   = buf.toString('hex');
+            			pool.query('INSERT INTO networks SET name = ?, type = "university", token = ?', [list[0].university, token], function(err, done) {
+            				if (err) throw err;
+							function recursive(index) {
+								if (list[index]) {
+									/* FROM PROFILE SETTING */
+									var ffname = result[0].first_name + " " + result[0].last_name;
 
-								/* SET INFO UNIVERSITY */
-								if (category_name)
-									var uc 	= category_name; 
-								else
-									var uc 	= university + " University";
-								var ucC 	= university + " community";
-								var urlUc 	= "https://www.wittycircle.com/welcome/" + university; 
+	                                var subj = "Wittycircle is now open to the " + list[index].university + " community"
 
-								/* HELPER SETTING */
-								var helper = require('sendgrid').mail;
-								var from_email = new helper.Email('campuses@wittycircle.info', 'Sarah Nichols via Wittycircle');
-								var to_email = new helper.Email(list[index].email);
-								var subject = 'Wittycircle is now open to the ' + ucC;
-								var category = new helper.Category(uc);
-								var content = new helper.Content(
-									'text/html', 'Hello, Mail');
-								var mail = new helper.Mail(from_email, subject, to_email, content);
+	                                var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-								mail.addCategory(category);
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-tname-', list[index].first_name));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-fname-', result[0].first_name));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-ffname-', ffname));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-fdesc-', result[0].description));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-fpicture-', result[0].profile_picture));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-ucName-', university));
-								mail.personalizations[0].addSubstitution(
-									new helper.Substitution('-ucUrl-', urlUc));
+	                                var template_name = "uc-invitation";
+	                                var template_content = [{
+	                                    "name": "uc-invitation",
+	                                    "content": "content",
+	                                }];
 
-								mail.setTemplateId('9ed77865-aba3-401f-b1c8-2aa4ce7934ee');
+	                                var message = {
+	                                    "html": "<p>HTML content</p>",
+	                                    "subject": subj,
+	                                    "from_email": "noreply@wittycircle.com",
+	                                    "from_name": ffname + " via Wittycircle",
+	                                    "to": [{
+	                                        "email": "friends@wittycircle.com",
+	                                        "name": 'recipient',
+	                                        "type": "to"
+	                                    }],
+	                                    "headers": {
+	                                        "Reply-To": "noreply@wittycircle.com"
+	                                    },
+	                                    "important": false,
+	                                    "inline_css": null,
+	                                    "preserve_recipients": null,
+	                                    "view_content_link": null,
+	                                    "tracking_domain": null,
+	                                    "signing_domain": null,
+	                                    "return_path_domain": null,
+	                                    "merge": true,
+	                                    "merge_language": "mailchimp",
+	                                    "global_merge_vars": [{
+	                                        "name": "merge1",
+	                                        "content": "merge1 content"
+	                                    }],
+	                                    "merge_vars": [
+	                                        {
+	                                            "rcpt": "friends@wittycircle.com",
+	                                            "vars": [
+	                                                {
+	                                                    "name": "fname",
+	                                                    "content": list[index].first_name
+	                                                },
+	                                                {
+	                                                    "name": "message",
+	                                                    "content": list[index].message
+	                                                },
+	                                                {
+	                                                    "name": "funame",
+	                                                    "content": ffname
+	                                                },
+	                                                {
+	                                                	"name": "fnetwork",
+	                                                	"content": list[index].university
+	                                                },
+	                                                {
+	                                                	"name": "url",
+	                                                	"content": "www.wittycircle.com/welcome/" + list[index].university + "/" + token
+	                                                },
+	                                                {
+	                                                    "name": "pimg",
+	                                                    "content": result[0].profile_picture
+	                                                },
+	                                                {
+	                                                    "name": "fdesc",
+	                                                    "content": result[0].description
+	                                                },
+	                                            ]
+	                                        }
+	                                    ]
+	                                };
 
-								/* API CREDENTIAL */
-								var sg = require('sendgrid')('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');
-								var request = sg.emptyRequest({
-									method: 'POST',
-									path: '/v3/mail/send',
-									body: mail.toJSON(),
-								});
-
-								/* SEND MAIL */
-								sg.API(request, function(error, response) {
-									if (response.statusCode === 202) {
-										pool.query('UPDATE invite_university SET send_date = NOW() WHERE id = ?', list[index].id,
+	                                var async = false;
+	                                mandrill_client.messages.sendTemplate({"template_name": template_name, "template_content": template_content,"message": message, "async": async}, function(result) {
+	                                	return ;
+	                                    pool.query('UPDATE invite_university SET send_date = NOW() WHERE id = ?', list[index].id,
 											function(err, done) {
 												return recursive(index + 1);
 											});
-									} else {
-									    console.log(error);
-									    return recursive(index + 1);
-									}
-								});
-							} else {
-								return callback(true);
-							}
-						};
-						recursive(0);
+	                                }, function(e) {
+	                                	return recursive(index + 1);
+	                                    // Mandrill returns the error as an object with name and message keys
+	                                    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+	                                    throw e;
+	                                    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+	                                });
+
+								} else {
+									return callback(true);
+								}
+							};
+							recursive(0);
+						});
 					} else
 						return callback(false);
 				});
@@ -103,7 +143,7 @@ exports.verifyNetworks = function(req, res) {
 };
 
 exports.getUniversityList = function(req, res) {
-	pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+	pool.query('SELECT university, message, creation_date, max(send_date), number_students FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -127,6 +167,8 @@ exports.addUniversityMailList = function(req, res) {
 	if (req.body.university_name && req.body.university_mail_list[0]) {
 		var ucName = req.body.university_name;
 		var ucList = req.body.university_mail_list; 
+		var ucMessage = req.body.university_message;
+		var ucSender = req.body.university_sender;
 		var object = {};
 
 		function recursive(index) {
@@ -134,7 +176,9 @@ exports.addUniversityMailList = function(req, res) {
 				if (ucList[index].email) {
 					object.first_name  	= ucList[index].first_name;
 					object.email 		= ucList[index].email;
-					object.university 	= ucName; 
+					object.university 	= ucName;
+					object.sender 		= ucSender;
+					object.message 		= ucMessage; 
 					pool.query('INSERT INTO invite_university SET ?', object,
 						function(err, result) {
 							return recursive(index + 1);
@@ -150,23 +194,18 @@ exports.addUniversityMailList = function(req, res) {
 };
 
 exports.sendUcCampaignMail = function(req, res) {
-	if (req.body.uc && req.body.number && req.body.students) {
-		var number = parseInt(req.body.number);
-		pool.query('UPDATE invite_university SET number_students = ? WHERE university = ?', [req.body.students, req.body.uc],
-			function(err, update) {
-				if (err) throw err;
-				inviteMailToUc(req.body.uc, number, req.body.category, function(done) {
-					if (done) {
-						pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
-							function(err, data) {
-								if (err) throw err;
-								else
-									return res.status(200).send({success: true, data: data});
-							});
-					} else
-						return res.status(400).send("FORBIDDEN !")
-				});
-			});
+	if (req.body.uc) {
+		inviteMailToUc(req.body.uc, function(done) {
+			if (done) {
+				pool.query('SELECT university, creation_date, max(send_date) FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+					function(err, data) {
+						if (err) throw err;
+						else
+							return res.status(200).send({success: true, data: data});
+					});
+			} else
+				return res.status(400).send("FORBIDDEN !")
+		});
 	} else
 		return res.status(404).send("ERROR !");
 };

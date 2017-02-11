@@ -402,6 +402,27 @@ angular.module('wittyApp')
 		$http.put('/notification/update/permission', dataNotif);
 	};
 
+	/*** INVITATION SETTING ***/
+	$scope.invitPermission = false;
+	$scope.invit = {};
+	$scope.inviteMessage = 'Send Invitations';
+
+	function getInvitPermission() {
+		RetrieveData.getData('/uc/invitation/permission', 'GET').then(function(res) {
+			if (res)
+				$scope.invitPermission = true;
+		});
+	};
+	getInvitPermission();
+
+	$scope.sendInvitation = function() {
+		var emailList = $scope.invit.emailList.match(/[A-z0-9]+@[A-z0-9]+.[A-z]{2,3}/g)
+		RetrieveData.ppdData('/uc/invitation/sender', 'POST', {emails: emailList, id: currentUser.id}, '', false).then(function(res) {
+			if (res)
+				$scope.inviteMessage = 'Sended';
+		});
+	};
+
 	$scope.deleteProfile = function() {
 		if ($rootScope.globals.currentUser) {
 			$http.delete('/user/' + $rootScope.globals.currentUser.id, function(res) {

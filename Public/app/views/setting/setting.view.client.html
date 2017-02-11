@@ -11,6 +11,7 @@
 					<li class="setting-navbar-general" onclick="showGeneral()">General</li>
 					<li class="setting-navbar-password" onclick="showPassword()">Password</li>
 					<li class="setting-navbar-notif" onclick="showNotification()">Notifications</li>
+					<li ng-if="invitPermission" onclick="showInvitation()" class="setting-navbar-invitation">Invitation</li>
 <!-- 					<li>Social networks<sup>soon</sup></li>
  -->			</ul>
 			</div>
@@ -145,6 +146,12 @@
 			</div>
 		</div>
 
+		<div ng-if="invitPermission" class="setting-invitation setting-box" style="display: none">
+			<h4>Enter your invitation email list here</h4>
+			<textarea ng-model="invit.emailList">Enter email list</textarea>
+			<button ng-click="sendInvitation()">{{inviteMessage}} <i ng-if="inviteMessage === 'Sended'" class="fa fa-check"></i></button>
+		</div>
+
 	</section>
 
 <!-- 	<section id="setting-delete">
@@ -168,6 +175,9 @@
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
 			}
 		}
 
@@ -182,6 +192,9 @@
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
 			}
 		}
 
@@ -196,6 +209,27 @@
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
+			}
+		}
+
+		function showInvitation() {
+			if (document.getElementsByClassName('setting-invitation')[0].style.display == "none") {
+				document.getElementsByClassName('setting-invitation')[0].style.display = "block";
+				document.getElementsByClassName('setting-general')[0].style.display = "none";
+				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.getElementsByClassName('setting-notification')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
+
 			}
 		}
 

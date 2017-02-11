@@ -1,5 +1,5 @@
 angular.module('wittyApp')
-	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData, $sce, $templateRequest, $compile) {
+	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData, $sce, $templateRequest, $compile, Users) {
 		if (!access.data) {
 			$location.path('/');
 		} else {
@@ -66,6 +66,10 @@ angular.module('wittyApp')
 			$http.get('/admin/project/network/list').success(function(res) {
 				if (res.success)
 					$scope.projectLists = res.list;
+			});
+
+			Users.getUsers().then(function (resource) {
+				$scope.profiles = resource;
 			});
 
 			$scope.sendInviteToNetwork = function(project, index) {
@@ -135,14 +139,40 @@ angular.module('wittyApp')
 				}
 			};
 
+			$scope.getTextHtml = function(index) {
+				$scope.currentUcData = $scope.ucDatas[index];
+				Users.getProfileByUserId($scope.currentUcData.sender, function(res) {
+					Users.getProfilesByProfileId(res.content.profile_id, function(res2) {
+						$scope.senderUc = res2.content;
+						RetrieveData.ppdData('/uc/token', 'POST', {uc: $scope.ucDatas[index].university}, '', false).then(function(res3) {
+							$scope.ucToken = res3;
+							$scope.ucUrlToken = 'https://www.wittycircle.com/welcome/' + $scope.currentUcData.university + '/' + res3;
+							$('#bsc1').show();
+						});
+					});
+				});
+			};
+
+			$scope.getUserId = function(id, fullname) {
+				$scope.ucSender = fullname;
+				$scope.ucSenderId = id;
+			}
+
 			/********* UNIVERSITY CAMPAIGN *********/
 
 			$scope.initUniversityCampaign = function() {
-				console.log("OK");
 				RetrieveData.getData('/uc/invitation/list', 'GET').then(function(res) {
-					if (res.success)
+					if (res.success) 
 						$scope.ucDatas = res.data;
 				});
+			};
+
+			$scope.giveInvitPermission = function(sender_id) {
+				if (sender_id) {
+					RetrieveData.ppdData('/uc/invitation/permission', 'POST', {id: sender_id}, '', false).then(function(res) {
+						console.log(res);
+					});
+				}
 			};
 
 			$scope.loadCsvFile = function(file) {
@@ -186,7 +216,7 @@ angular.module('wittyApp')
 					var object = {
 						university_name 		: $scope.ucName.capitalizeFirstLetter(),
 						university_mail_list	: $scope.ucList,
-						university_sender		: $scope.ucSender,
+						university_sender		: $scope.ucSenderId,
 						university_message 		: $scope.ucMessage,
 					}
 

@@ -456,6 +456,31 @@
 				}
 			}
 		}
+
+		/******** Invitation body **********/
+		.setting-invitation {
+			text-align: left;
+
+			textarea {
+				width: 600px;
+				height: 200px;
+				resize: none;
+				outline: 0;
+				border: 1px solid #999999;
+				border-radius: 4px;
+			}
+
+			button {
+				display: block;
+			}
+
+			h4 {
+				margin-bottom: 15px;
+				font-family: 'FreigMed';
+				font-size: 16px;
+				color: #999999;
+			}
+		}
 	}
 
 	#setting-delete {

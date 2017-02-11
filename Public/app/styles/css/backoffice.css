@@ -134,6 +134,21 @@
       border-radius: 4px;
       padding: 6px 18px 8px 18px;
       margin-right: 15px; }
+  #backoffice-main-page .bo-alert-html {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    width: 600px;
+    margin: 0 auto;
+    top: 200px;
+    height: 500px;
+    overflow-y: scroll;
+    background-color: white;
+    z-index: 100;
+    padding: 20px;
+    border: 1px solid #999999;
+    border-radius: 4px; }
   #backoffice-main-page .bo-left-menu {
     height: 100%;
     padding-top: 15px;
@@ -223,6 +238,20 @@
         color: black; }
       #backoffice-main-page .bo-right-section4 .new-section-back .import-zone p:hover {
         box-shadow: 1px 1px 1px 1px #e5e5e5; }
+      #backoffice-main-page .bo-right-section4 .new-section-back .list-users {
+        position: absolute;
+        z-index: 10000;
+        background-color: white;
+        border: 1px solid #999999;
+        border-radius: 4px; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .list-users li {
+          padding: 5px 20px; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .list-users img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 10px;
+          margin-bottom: 5px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .redactor-editor {
         width: 600px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .new-section-li-head li {

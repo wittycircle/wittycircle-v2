@@ -166,6 +166,23 @@
 		}
 	}
 
+	.bo-alert-html {
+		position: absolute;
+	    width: 100%;
+	    left: 0;
+	    right: 0;
+	    width: 600px;
+	    margin: 0 auto;
+	    top: 200px;
+	    height: 500px;
+	    overflow-y: scroll;
+	    background-color: white;
+	    z-index: 100;
+	    padding: 20px;
+	    border: 1px solid #999999;
+	    border-radius: 4px;
+	}
+
 	.bo-left-menu {
 		height: 100%;
 		padding-top: 15px;
@@ -297,6 +314,26 @@
 				p:hover {
 					box-shadow: 1px 1px 1px 1px #e5e5e5;
 				} 
+			}
+
+			.list-users {
+				position: absolute;
+				z-index: 10000;
+				background-color: white;
+				border: 1px solid #999999;
+				border-radius: 4px;
+
+				li {
+					padding: 5px 20px;
+				}
+
+				img {
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					margin-right: 10px;
+					margin-bottom: 5px;
+				}
 			}
 
 			.redactor-editor {

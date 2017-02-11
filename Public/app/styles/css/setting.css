@@ -180,7 +180,8 @@
     /*background-color: #f5f5f5;*/
     /**** General body *****/
     /**** Password body *****/
-    /***** Notification body *****/ }
+    /***** Notification body *****/
+    /******** Invitation body **********/ }
     #setting-page #setting-body label {
       font-family: 'FreigMed';
       font-size: 16px;
@@ -312,6 +313,22 @@
               #setting-page #setting-body .setting-notification .setting-notification-center .setting-notification-body .li-body .checkbox-notif .fa-check {
                 position: relative;
                 bottom: 2px; }
+    #setting-page #setting-body .setting-invitation {
+      text-align: left; }
+      #setting-page #setting-body .setting-invitation textarea {
+        width: 600px;
+        height: 200px;
+        resize: none;
+        outline: 0;
+        border: 1px solid #999999;
+        border-radius: 4px; }
+      #setting-page #setting-body .setting-invitation button {
+        display: block; }
+      #setting-page #setting-body .setting-invitation h4 {
+        margin-bottom: 15px;
+        font-family: 'FreigMed';
+        font-size: 16px;
+        color: #999999; }
   #setting-page #setting-delete {
     background-color: #f5f5f5;
     border-top: 1px solid #e5e5e5; }

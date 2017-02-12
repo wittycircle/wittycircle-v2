@@ -220,7 +220,19 @@
     display: none;
     vertical-align: top; }
     #backoffice-main-page .bo-right-section4 .new-section-back {
-      padding: 20px 0; }
+      padding: 20px 0;
+      overflow-y: hidden;
+      overflow-x: auto;
+      float: right; }
+      #backoffice-main-page .bo-right-section4 .new-section-back input {
+        width: 300px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        padding: 5px 15px;
+        margin-bottom: 10px;
+        font-family: 'FreigBook'; }
+      #backoffice-main-page .bo-right-section4 .new-section-back .first-input {
+        margin-top: 20px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .import-zone p {
         display: inline-block;
         padding: 4px 10px;
@@ -238,6 +250,18 @@
         color: black; }
       #backoffice-main-page .bo-right-section4 .new-section-back .import-zone p:hover {
         box-shadow: 1px 1px 1px 1px #e5e5e5; }
+      #backoffice-main-page .bo-right-section4 .new-section-back .list-univeristy {
+        position: absolute;
+        z-index: 10000;
+        background-color: white;
+        border: 1px solid #999999;
+        border-radius: 4px; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .list-univeristy li {
+          min-width: 200px;
+          padding: 5px 20px;
+          font-family: 'FreigBook'; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .list-univeristy li:hover {
+          background-color: #e5e5e5; }
       #backoffice-main-page .bo-right-section4 .new-section-back .list-users {
         position: absolute;
         z-index: 10000;
@@ -245,7 +269,10 @@
         border: 1px solid #999999;
         border-radius: 4px; }
         #backoffice-main-page .bo-right-section4 .new-section-back .list-users li {
+          font-family: 'FreigBook';
           padding: 5px 20px; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .list-users li:hover {
+          background-color: #e5e5e5; }
         #backoffice-main-page .bo-right-section4 .new-section-back .list-users img {
           width: 30px;
           height: 30px;
@@ -253,15 +280,26 @@
           margin-right: 10px;
           margin-bottom: 5px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .redactor-editor {
-        width: 600px; }
+        /*width: 600px;*/
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        min-height: 200px !important;
+        font-family: 'FreigBook';
+        border-radius: 4px; }
+        #backoffice-main-page .bo-right-section4 .new-section-back .redactor-editor .redactor-placeholder::after {
+          top: 0;
+          left: 0; }
       #backoffice-main-page .bo-right-section4 .new-section-back .new-section-li-head li {
+        font-weight: bold;
+        width: 120px;
         display: inline-block;
-        padding: 5px 20px; }
+        padding: 5px 10px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .new-section-li-list {
         padding: 5px; }
         #backoffice-main-page .bo-right-section4 .new-section-back .new-section-li-list li {
+          width: 120px;
           display: inline-block;
-          padding: 5px 20px; }
+          padding: 5px 10px; }
       #backoffice-main-page .bo-right-section4 .new-section-back .new-section-table tbody {
         padding: 20px 0; }
         #backoffice-main-page .bo-right-section4 .new-section-back .new-section-table tbody tr {

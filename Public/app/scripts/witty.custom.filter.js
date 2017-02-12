@@ -157,7 +157,6 @@ angular.module('wittyApp')
 		}
 		
 		array = array.concat(array2);
-		console.log(array);
 		return array;
 	};
 })

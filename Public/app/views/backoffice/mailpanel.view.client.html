@@ -268,28 +268,25 @@
 				<li style="max-width: 200px; overflow-x: hidden; max-height: 50px">{{ucData.message}}</li>
 				<li>welcome/{{ucData.university}}</li>
 				<li>{{ucData.number_students}}</li>
-				<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
-					<div ng-if="onCharge3" class="spinner-load">
+				<!-- <button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span> -->
+					<!-- <div ng-if="onCharge3" class="spinner-load">
 					<div class="spinner__item1 spinner-item"></div>
 					<div class="spinner__item2 spinner-item"></div>
 					<div class="spinner__item3 spinner-item"></div> 
-				</button>
+				</button> -->
 				<button ng-click="getTextHtml($index)">
 					Generate Html
 				</button>
 				<button ng-click="giveInvitPermission(ucData.sender)">Give Permission</button>
 			</ul>
-			<!-- <table class="new-section-table" style="width:100%">
-				<tr ng-repeat="ucData in ucDatas">
-					<td>{{ucData.university}}</td>
-					<td>Sarah Nichols</td>
-					<td>{{ucData.message}}</td>
-					<td>/welcome/Babson</td>
-					<td>784</td>
-					<td>Last Send : {{ucData.send_date | wittyDateFilter}}</td>
-				</tr>
-			</table> -->
-			<input type="text" placeholder="Enter university name..." ng-model="ucName" />
+			<div>
+				<input id="sdsdfd" class="first-input" type="text" placeholder="Enter university name..." ng-model="ucName" />
+				<div id="bdfdfdf" class="list-univeristy" style="display:none">
+					<ul>
+						<li ng-repeat="ucl in uclist | wordsFilter: ucName | limitTo: 5" ng-click="getUniversityName(ucl.name)">{{ucl.name}}</li>
+					</ul>
+				</div>
+			</div>
 			<div>
 				<input id="abcddd" type="text" placeholder="From user list" ng-model="ucSender" />
 				<div id="bdcddc" class="list-users">
@@ -302,17 +299,17 @@
 				</div>
 			</div>
 			<textarea redactor ng-model="ucMessage" placeholder="Message to send"></textarea>
-			<input type="text" placeholder="Url..." ng-model="ucUrl"/>
-			<button ng-click="addUniversity()"><span ng-if="!onCharge4">Send</span>
+<!-- 			<input type="text" placeholder="Url..." ng-model="ucUrl"/>
+ -->			<button ng-click="addUniversity()"><span ng-if="!onCharge4">Add to list</span>
 				<div ng-if="onCharge4" class="spinner-load">
 				<div class="spinner__item1 spinner-item"></div>
 				<div class="spinner__item2 spinner-item"></div>
 				<div class="spinner__item3 spinner-item"></div>
 			</button>
-			<div class="import-zone">
+			<!-- <div class="import-zone">
 				<h5>{{csvName}}</h5>
 				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
-			</div>
+			</div> -->
 		</div>
 		<!-- <div class="bo-uc-campaign flot-box4 inline animated fadeInDown">
 			<label>UC Name</label>
@@ -399,6 +396,11 @@
 	    		$('#bdcddc').slideDown();
 	    	} else
 	    		$('#bdcddc').slideUp();
+
+	    	if (e.target.id === "sdsdfd") {
+	    		$('#bdfdfdf').slideDown();
+	    	} else
+	    		$('#bdfdfdf').slideUp();
 
 	    	if ($('#bsc1').is(e.target) || $('#bsc1').has(e.target).length) {
 	    		console.log("");

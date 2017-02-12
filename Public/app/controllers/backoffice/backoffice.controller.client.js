@@ -144,11 +144,13 @@ angular.module('wittyApp')
 				Users.getProfileByUserId($scope.currentUcData.sender, function(res) {
 					Users.getProfilesByProfileId(res.content.profile_id, function(res2) {
 						$scope.senderUc = res2.content;
-						RetrieveData.ppdData('/uc/token', 'POST', {uc: $scope.ucDatas[index].university}, '', false).then(function(res3) {
-							$scope.ucToken = res3;
-							$scope.ucUrlToken = 'https://www.wittycircle.com/welcome/' + $scope.currentUcData.university.replace(/\s+/g, '') + '/' + res3;
-							$('#bsc1').show();
-						});
+						$scope.ucUrlToken = $scope.ucDatas[index].ucUrl;
+						$('#bsc1').show();
+						// RetrieveData.ppdData('/uc/token', 'POST', {uc: $scope.ucDatas[index].university}, '', false).then(function(res3) {
+						// 	$scope.ucToken = res3;
+						// 	$scope.ucUrlToken = 'https://www.wittycircle.com/welcome/' + $scope.currentUcData.university.replace(/\s+/g, '') + '/' + res3;
+						// 	$('#bsc1').show();
+						// });
 					});
 				});
 			};
@@ -231,12 +233,16 @@ angular.module('wittyApp')
 						university_name 		: $scope.ucName.capitalizeFirstLetter(),
 						university_sender		: $scope.ucSenderId,
 						university_message 		: $scope.ucMessage,
+						university_customName 	: $scope.ucCustomUrl,
 					}
 
 					RetrieveData.ppdData('/uc/invitation/add', 'POST', object, '', false).then(function(res) {
 						if (res.success) {
 							$scope.ucName = null;
-							$scope.ucList = [];
+							$scope.ucSender = null;
+							$scope.ucSenderId = null;
+							$scope.ucCustomUrl = null;
+							$scope.ucMessage = null;
 							object = {};
 							$scope.onCharge4 = false;
 							$scope.initUniversityCampaign();

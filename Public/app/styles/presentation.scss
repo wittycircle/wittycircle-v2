@@ -311,8 +311,13 @@
 
 	li {
 		font-family: 'FreigBook';
-    color: #222222;
-    font-size: 18px;
+	    color: #222222;
+	    font-size: 18px;
+
+	    sup {
+	    	color: #999999;
+	    	margin-left: 5px;
+	    }
 	}
 
 	.presentation-search2-left {
@@ -340,7 +345,7 @@
 /*			margin-right: 50px;
 */
 		.presentation-search2-right-input {
-			display: none;
+			display: inline-block;
 /*				margin-right: 20px;
 */
 			.network-box {

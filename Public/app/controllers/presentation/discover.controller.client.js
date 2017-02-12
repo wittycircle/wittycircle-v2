@@ -112,6 +112,7 @@ angular.module('wittyApp')
 
     function retrieveUC() {
         RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+            console.log(res);
             $scope.uclist = res;
         });
     };

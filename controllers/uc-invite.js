@@ -267,11 +267,14 @@ function getSenderFullName(id, callback) {
 
 function getTokenForUniversity(uc_name, callback) {
     if (uc_name) {
-        pool.query('SELECT token FROM networks WHERE name = ?', uc_name,
+        pool.query('SELECT url_name, token FROM networks WHERE name = ?', uc_name,
             function(err, result) {
                 if (err) throw err;
-                else
-                    return callback(result[0].token);
+                else {
+                    var url = "https://www.wittycircle.com/welcome/" + result[0].url_name + "/" + result[0].token;
+                    var customName = result[0].url_name;
+                    return callback({url: url, customName: customName});
+                }
             });
     } else
         return callback(null);
@@ -284,8 +287,9 @@ exports.getUniversityList = function(req, res) {
 			else {
 				function recursive(index) {
 					if (result[index]) {
-                        getTokenForUniversity(result[index].university, function(token) {
-                            result[index].ucUrl = '/welcome/' + result[index].university.replace(/\s+/g, '') + '/' + token;
+                        getTokenForUniversity(result[index].university, function(object) {
+                            result[index].ucUrl = object.url;
+                            result[index].customName = object.customName;
     						getSenderFullName(result[index].sender, function(fullname) {
     							result[index].senderName = fullname;
     							pool.query('SELECT count(*) as number FROM invite_university WHERE university = ? AND send_date is null', result[index].university,
@@ -316,7 +320,7 @@ exports.getUniversityToken = function(req, res) {
 exports.addUniversityMailList = function(req, res) {
 	if (req.body.university_name) {
 		var ucName = req.body.university_name;
-        var ucUrlName = ucName.replace(/\s+/g, '');
+        var ucUrlName = req.body.university_customName;
 		var ucMessage = req.body.university_message;
 		var ucSender = req.body.university_sender;
 		var object = {};
@@ -332,7 +336,11 @@ exports.addUniversityMailList = function(req, res) {
 				pool.query('INSERT INTO invite_university SET ?', object,
 					function(err, result) {
 						if (err) throw err;
-						return res.status(200).send({success: true});
+                        pool.query('UPDATE university_list SET launched = 1 WHERE name = ?', ucName,
+                            function(err, success) {
+                                if (err) throw err;
+						        return res.status(200).send({success: true});
+                            });
 					});
 			});
 	} else

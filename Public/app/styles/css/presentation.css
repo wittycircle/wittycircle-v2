@@ -238,6 +238,9 @@
     font-family: 'FreigBook';
     color: #222222;
     font-size: 18px; }
+    #presentation-search2 li sup {
+      color: #999999;
+      margin-left: 5px; }
   #presentation-search2 .presentation-search2-left {
     cursor: pointer;
     width: 250px; }
@@ -258,7 +261,7 @@
     /*			margin-right: 50px;
     */ }
     #presentation-search2 .presentation-search2-right .presentation-search2-right-input {
-      display: none;
+      display: inline-block;
       /*				margin-right: 20px;
       */ }
       #presentation-search2 .presentation-search2-right .presentation-search2-right-input .network-box {

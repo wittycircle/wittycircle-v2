@@ -121,12 +121,12 @@
                                 <input type="text" ng-model="searchNetwork" placeholder="Berkeley, Numa, 500 Startups...">
                                 <div id="netdrop" class="network-dropdown downbox">
                                     <h3 ng-if="!searchNetwork">Popular network: </h3>
-                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.name)">{{uc.name}}</li>
+                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="uc.launched &&meet.getSearchNetwork(uc.name)">{{uc.name}}<sup ng-if="uc.launched === 0">Coming soon</sup></li>
                                 </div>
                             </div>
                         </div>
                         <div id="ms2right" class="presentation-search2-right-box inline">
-                            <h3 class="inline">more criteria</h3>
+                            <h3 class="inline">less criteria</h3>
                             <img class="inline" src="/images/arrow-down-icon-w.svg" alt="arrow" />
                         </div>
                     </div>

@@ -265,6 +265,18 @@ function getSenderFullName(id, callback) {
 		return callback(null);
 };
 
+function getTokenForUniversity(uc_name, callback) {
+    if (uc_name) {
+        pool.query('SELECT token FROM networks WHERE name = ?', uc_name,
+            function(err, result) {
+                if (err) throw err;
+                else
+                    return callback(result[0].token);
+            });
+    } else
+        return callback(null);
+};
+
 exports.getUniversityList = function(req, res) {
 	pool.query('SELECT university, message, creation_date, max(send_date), number_students, sender FROM invite_university GROUP BY university ORDER BY creation_date ASC',
 		function(err, result) {
@@ -272,15 +284,18 @@ exports.getUniversityList = function(req, res) {
 			else {
 				function recursive(index) {
 					if (result[index]) {
-						getSenderFullName(result[index].sender, function(fullname) {
-							result[index].senderName = fullname;
-							pool.query('SELECT count(*) as number FROM invite_university WHERE university = ? AND send_date is null', result[index].university,
-								function(err, result2) {
-									if (err) throw err;
-									result[index].rest = result2[0].number;
-									return recursive(index + 1);
-								});
-						});
+                        getTokenForUniversity(result[index].university, function(token) {
+                            result[index].ucUrl = '/welcome/' + result[index].university.replace(/\s+/g, '') + '/' + token;
+    						getSenderFullName(result[index].sender, function(fullname) {
+    							result[index].senderName = fullname;
+    							pool.query('SELECT count(*) as number FROM invite_university WHERE university = ? AND send_date is null', result[index].university,
+    								function(err, result2) {
+    									if (err) throw err;
+    									result[index].rest = result2[0].number;
+    									return recursive(index + 1);
+    								});
+    						});
+                        });
 					} else
 						return res.status(200).send({success: true, data: result});
 				};

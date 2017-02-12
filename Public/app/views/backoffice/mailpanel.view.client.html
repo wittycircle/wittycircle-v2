@@ -131,8 +131,8 @@
                     <!-- &lt;tr&gt;<br />
                         &lt;td style="font-size: 16px;" width="600"&gt;/* Say Hi Here ! */&lt;/td&gt;<br />
                     &lt;/tr&gt;<br /> -->
-                    &lt;tr&gt;<br />
-                        &lt;td style="font-size: 16px;" width="600"&gt;{{currentUcData.message}}&lt;/td&gt;<br />
+<!--                     &lt;tr&gt;<br />
+ -->                        &lt;td style="font-size: 16px;" width="600"&gt;{{currentUcData.message}}&lt;/td&gt;<br />
                     &lt;/tr&gt;<br />
                     
                 &lt;/tbody&gt;<br />
@@ -301,6 +301,9 @@
 
 			<div>
 				<input type="text" ng-model="ucCustomUrl" placeholder="Custom name">
+			</div>
+			<div>
+				<input type="text" ng-model="ucCustomDate" placeholder="Date limit">
 			</div>
 			<textarea redactor ng-model="ucMessage" placeholder="Message to send"></textarea>
 <!-- 			<input type="text" placeholder="Url..." ng-model="ucUrl"/>

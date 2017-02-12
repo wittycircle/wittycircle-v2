@@ -10,7 +10,7 @@ angular.module('wittyApp')
 		        });
 				RetrieveData.ppdData('/uc/students/', 'GET', null, passed.uc_name, null).then(function(res) {
 					if (res.success) {
-						console.log(res);
+						$scope.limitDate = res.date;
 						$scope.students = res.students;
 					} else
 						$location.path('/');

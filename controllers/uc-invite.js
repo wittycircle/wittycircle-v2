@@ -281,7 +281,7 @@ function getTokenForUniversity(uc_name, callback) {
 };
 
 exports.getUniversityList = function(req, res) {
-	pool.query('SELECT university, message, creation_date, max(send_date), number_students, sender FROM invite_university GROUP BY university ORDER BY creation_date ASC',
+	pool.query('SELECT * FROM invite_university ORDER BY creation_date ASC',
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -323,6 +323,7 @@ exports.addUniversityMailList = function(req, res) {
         var ucUrlName = req.body.university_customName;
 		var ucMessage = req.body.university_message;
 		var ucSender = req.body.university_sender;
+        var ucUntilDate = req.body.university_customDate;
 		var object = {};
 
 		var buf     = crypto.randomBytes(40),
@@ -333,6 +334,7 @@ exports.addUniversityMailList = function(req, res) {
 				object.university 	= ucName;
 				object.sender 		= ucSender;
 				object.message 		= ucMessage; 
+                object.until_date   = ucUntilDate;
 				pool.query('INSERT INTO invite_university SET ?', object,
 					function(err, result) {
 						if (err) throw err;
@@ -396,13 +398,13 @@ exports.getUcStudentsNumber = function(req, res) {
 				pool.query('UPDATE invite_university SET number_students = number_students + 1 WHERE university = ?', req.params.university,
 					function(err, update) {
 						if (err) throw err;
-						pool.query('SELECT number_students FROM invite_university WHERE university = ? GROUP BY university', req.params.university,
+						pool.query('SELECT number_students, until_date FROM invite_university WHERE university = ?', req.params.university,
 							function(err, result) {
 								if (err) throw err;
 								if (!result[0])
 									return res.status(200).send({success: false});
 								else
-									return res.status(200).send({success: true, students: result[0].number_students});
+									return res.status(200).send({success: true, students: result[0].number_students, date: result[0].until_date});
 							});
 					});
 			} else

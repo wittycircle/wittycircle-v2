@@ -234,6 +234,7 @@ angular.module('wittyApp')
 						university_sender		: $scope.ucSenderId,
 						university_message 		: $scope.ucMessage,
 						university_customName 	: $scope.ucCustomUrl,
+						university_customDate 	: $scope.ucCustomDate
 					}
 
 					RetrieveData.ppdData('/uc/invitation/add', 'POST', object, '', false).then(function(res) {
@@ -243,6 +244,7 @@ angular.module('wittyApp')
 							$scope.ucSenderId = null;
 							$scope.ucCustomUrl = null;
 							$scope.ucMessage = null;
+							$scope.ucCustomDate = null;
 							object = {};
 							$scope.onCharge4 = false;
 							$scope.initUniversityCampaign();

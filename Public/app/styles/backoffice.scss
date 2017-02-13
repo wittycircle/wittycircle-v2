@@ -166,6 +166,23 @@
 		}
 	}
 
+	.bo-alert-html {
+		position: absolute;
+	    width: 100%;
+	    left: 0;
+	    right: 0;
+	    width: 600px;
+	    margin: 0 auto;
+	    top: 200px;
+	    height: 500px;
+	    overflow-y: scroll;
+	    background-color: white;
+	    z-index: 100;
+	    padding: 20px;
+	    border: 1px solid #999999;
+	    border-radius: 4px;
+	}
+
 	.bo-left-menu {
 		height: 100%;
 		padding-top: 15px;
@@ -270,29 +287,26 @@
 		display: none;
 		vertical-align: top;
 
-		.bo-uc-campaign {
+		.new-section-back {
+			padding: 20px 0;
+			overflow-y: hidden;
+			overflow-x: auto;
+			float: right;
+
 			input {
+				width: 300px;
 				border: 1px solid #e5e5e5;
 				border-radius: 4px;
-				padding: 7px 10px 8px 10px;
-				margin-left: 10px;
-				width: 250px;
-				font-size: 16px;
+				padding: 5px 15px;
+				margin-bottom: 10px;
 				font-family: 'FreigBook';
 			}
 
-			button {
-				padding: 5px 15px 5px 15px !important;
-				margin-left: 15px;
-
-				.spinner-load {
-					position: initial;
-					background-color: transparent;
-				}
+			.first-input {
+				margin-top: 20px;
 			}
 
 			.import-zone {
-				text-align: right;
 
 				p {
 					display: inline-block;
@@ -317,6 +331,122 @@
 					box-shadow: 1px 1px 1px 1px #e5e5e5;
 				} 
 			}
+
+			.list-univeristy {
+				position: absolute;
+				z-index: 10000;
+				background-color: white;
+				border: 1px solid #999999;
+				border-radius: 4px;
+
+				li {
+					min-width: 200px;
+					padding: 5px 20px;
+					font-family: 'FreigBook';
+				}
+
+				li:hover {
+					background-color: #e5e5e5;
+				}
+			}
+
+			.list-users {
+				position: absolute;
+				z-index: 10000;
+				background-color: white;
+				border: 1px solid #999999;
+				border-radius: 4px;
+
+				li {
+					font-family: 'FreigBook';
+					padding: 5px 20px;
+				}
+
+				li:hover {
+					background-color: #e5e5e5;
+				}
+
+				img {
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					margin-right: 10px;
+					margin-bottom: 5px;
+				}
+			}
+
+			.redactor-editor {
+				/*width: 600px;*/
+				margin-bottom: 20px;
+				padding: 10px 20px;
+				min-height: 200px !important;
+				font-family: 'FreigBook';
+				border-radius: 4px;
+
+				.redactor-placeholder::after {
+					top: 0;
+					left: 0;
+				}
+			}
+
+			.new-section-li-head {
+				li {
+					font-weight: bold;
+					width: 120px;
+					display: inline-block;
+					padding: 5px 10px;
+				}
+			}
+
+			.new-section-li-list {
+				padding: 5px;
+				
+				li {
+					width: 120px;
+					display: inline-block;
+					padding: 5px 10px;
+				}
+			}
+
+			.new-section-table {
+				tbody {
+					padding: 20px 0;
+					tr {
+						padding: 5px 20px;
+						
+						td {
+							padding: 5px 20px;
+						}
+					}
+
+					th {
+						padding: 5px 20px;
+					}
+				}
+			}
+		}
+
+		.bo-uc-campaign {
+			input {
+				border: 1px solid #e5e5e5;
+				border-radius: 4px;
+				padding: 7px 10px 8px 10px;
+				margin-left: 10px;
+				width: 250px;
+				font-size: 16px;
+				font-family: 'FreigBook';
+			}
+
+			button {
+				padding: 5px 15px 5px 15px !important;
+				margin-left: 15px;
+
+				.spinner-load {
+					position: initial;
+					background-color: transparent;
+				}
+			}
+
 		}
 
 		.bo-uc-list {

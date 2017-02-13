@@ -1,5 +1,5 @@
 angular.module('wittyApp')
-	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData, $sce, $templateRequest, $compile) {
+	.controller('BackOfficeCtrl', function(access, $location, $scope, $http, $timeout, $filter, RetrieveData, $sce, $templateRequest, $compile, Users) {
 		if (!access.data) {
 			$location.path('/');
 		} else {
@@ -68,6 +68,10 @@ angular.module('wittyApp')
 					$scope.projectLists = res.list;
 			});
 
+			Users.getUsers().then(function (resource) {
+				$scope.profiles = resource;
+			});
+
 			$scope.sendInviteToNetwork = function(project, index) {
 				$scope.sendOnGoing = true;
 				$http.post('/admin/project/network/list', {project: project}).success(function(res) {
@@ -103,8 +107,7 @@ angular.module('wittyApp')
 					});
 				} else if (value === 3) {
 					$scope.onCharge3 = true;
-					if ($scope.numberSend[$scope.ucIndex] && $scope.numberSend[$scope.ucIndex].num && $scope.numberSend[$scope.ucIndex].students) {
-						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend, number: $scope.numberSend[$scope.ucIndex].num, students: $scope.numberSend[$scope.ucIndex].students, category: $scope.numberSend[$scope.ucIndex].category}, '', false).then(function(res) {
+						RetrieveData.ppdData('/uc/invitation/campaign', 'POST', {uc: $scope.ucSend}, '', false).then(function(res) {
 							if (res.success) {
 								$scope.onCharge3 = false;
 								$scope.numberSend = null;
@@ -112,8 +115,6 @@ angular.module('wittyApp')
 								$scope.numberSend 	= [];
 							}
 						});
-					} else
-						$scope.error = true;
 				} else
 					$scope.error = true;
 			};
@@ -138,13 +139,55 @@ angular.module('wittyApp')
 				}
 			};
 
+			$scope.getTextHtml = function(index) {
+				$scope.currentUcData = $scope.ucDatas[index];
+				Users.getProfileByUserId($scope.currentUcData.sender, function(res) {
+					Users.getProfilesByProfileId(res.content.profile_id, function(res2) {
+						$scope.senderUc = res2.content;
+						$scope.ucUrlToken = $scope.ucDatas[index].ucUrl;
+						$('#bsc1').show();
+						// RetrieveData.ppdData('/uc/token', 'POST', {uc: $scope.ucDatas[index].university}, '', false).then(function(res3) {
+						// 	$scope.ucToken = res3;
+						// 	$scope.ucUrlToken = 'https://www.wittycircle.com/welcome/' + $scope.currentUcData.university.replace(/\s+/g, '') + '/' + res3;
+						// 	$('#bsc1').show();
+						// });
+					});
+				});
+			};
+
+			$scope.getUserId = function(id, fullname) {
+				$scope.ucSender = fullname;
+				$scope.ucSenderId = id;
+			}
+
 			/********* UNIVERSITY CAMPAIGN *********/
 
 			$scope.initUniversityCampaign = function() {
 				RetrieveData.getData('/uc/invitation/list', 'GET').then(function(res) {
-					if (res.success)
+					if (res.success) 
 						$scope.ucDatas = res.data;
 				});
+			};
+
+			function retrieveUC() {
+		        RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+		            $scope.uclist = res;
+		        });
+		    };
+		    retrieveUC();
+
+		    $scope.getUniversityName = function(name) {
+		    	$scope.ucName = name;
+		    }
+
+			$scope.giveInvitPermission = function(sender_id) {
+				if (sender_id) {
+					RetrieveData.ppdData('/uc/invitation/permission', 'POST', {id: sender_id}, '', false).then(function(res) {
+						alert('Success !')
+					});
+				} else {
+					alert('Error occurs !');
+				}
 			};
 
 			$scope.loadCsvFile = function(file) {
@@ -183,19 +226,28 @@ angular.module('wittyApp')
 			};
 
 			$scope.addUniversity = function() {
-				if ($scope.ucName && $scope.ucList) {
+				if ($scope.ucName && $scope.ucSenderId && $scope.ucMessage) {
 					$scope.onCharge4 = true;
+
 					var object = {
 						university_name 		: $scope.ucName.capitalizeFirstLetter(),
-						university_mail_list	: $scope.ucList,
+						university_sender		: $scope.ucSenderId,
+						university_message 		: $scope.ucMessage,
+						university_customName 	: $scope.ucCustomUrl,
+						university_customDate 	: $scope.ucCustomDate
 					}
 
 					RetrieveData.ppdData('/uc/invitation/add', 'POST', object, '', false).then(function(res) {
 						if (res.success) {
 							$scope.ucName = null;
-							$scope.ucList = [];
+							$scope.ucSender = null;
+							$scope.ucSenderId = null;
+							$scope.ucCustomUrl = null;
+							$scope.ucMessage = null;
+							$scope.ucCustomDate = null;
 							object = {};
 							$scope.onCharge4 = false;
+							$scope.initUniversityCampaign();
 						}
 					});
 				} else

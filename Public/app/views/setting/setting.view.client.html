@@ -11,6 +11,7 @@
 					<li class="setting-navbar-general" onclick="showGeneral()">General</li>
 					<li class="setting-navbar-password" onclick="showPassword()">Password</li>
 					<li class="setting-navbar-notif" onclick="showNotification()">Notifications</li>
+					<li ng-if="invitPermission" onclick="showInvitation()" class="setting-navbar-invitation">Invitation</li>
 <!-- 					<li>Social networks<sup>soon</sup></li>
  -->			</ul>
 			</div>
@@ -42,6 +43,31 @@
 				<input type="email" ng-value="data.email" ng-model="data.email" />
 				<p ng-if="!checkEmail" >Please enter a valid email</p>
 				<p ng-if="checkExistE" > Email already in use</p>
+			</div>
+			<div class="setting-general-network sg-field">
+				<label class="inline">Network</label>
+				<div class="setting-general-network-input inline">
+					<input id="sgni" type="text" ng-model='data.network' placeholder="Boston College, Harvard University, etc..."/>
+					<div id="sgndropdown" class="setting-general-network-dropdown">
+						<ul>
+							<li ng-repeat="network in networks | wordsFilter: data.network | limitTo: 5" ng-click="getNetwork(network)">{{network.name}}</li>
+						</ul>
+					</div>
+					<p>Networks help us to connect you to more people you may know</p>
+					<p ng-if="societyNetwork"><i>You'll be notified by email when we've checked you're part of this network</i></p>
+					<label ng-if="universityNetwork">Network verification</label>
+					<div ng-if="universityNetwork" class="signup-info-network-university">
+						<input class="signup-info-network-mail" type="email" ng-model="invite.emailNetwork" placeholder="{{placeholderNetwork}}" />
+						<p class="signup-info-network-text">We'll send you a verification email to add you to the {{data.network}} network</p>
+						<!-- <button class="signup-info-network-button" ng-click="saveUniversityNetwork(emailNetwork)">
+							<span ng-if="!loadAddUniversity">Send</span>
+							<div ng-if="loadAddUniversity" class="spinner-load">
+							<div class="spinner__item1 spinner-item"></div>
+							<div class="spinner__item2 spinner-item"></div>
+							<div class="spinner__item3 spinner-item"></div> 
+						</button> -->
+					</div>
+				</div>
 			</div>
 
 			<button type="submit" ng-click="generalUpdate()"><i ng-if="settingChanged" class="fa fa-check"></i> {{changeText}}</button>
@@ -120,6 +146,12 @@
 			</div>
 		</div>
 
+		<div ng-if="invitPermission" class="setting-invitation setting-box" style="display: none">
+			<h4>Enter your invitation email list here</h4>
+			<textarea ng-model="invit.emailList">Enter email list</textarea>
+			<button ng-click="sendInvitation()">{{inviteMessage}} <i ng-if="inviteMessage === 'Sended'" class="fa fa-check"></i></button>
+		</div>
+
 	</section>
 
 <!-- 	<section id="setting-delete">
@@ -143,6 +175,9 @@
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
 			}
 		}
 
@@ -157,6 +192,9 @@
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
 			}
 		}
 
@@ -171,8 +209,38 @@
 				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
 				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "transparent";
+				document.getElementsByClassName('setting-invitation')[0].style.display = "none";
 			}
 		}
+
+		function showInvitation() {
+			if (document.getElementsByClassName('setting-invitation')[0].style.display == "none") {
+				document.getElementsByClassName('setting-invitation')[0].style.display = "block";
+				document.getElementsByClassName('setting-general')[0].style.display = "none";
+				document.getElementsByClassName('setting-password')[0].style.display = "none";
+				document.getElementsByClassName('setting-notification')[0].style.display = "none";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.color = "white";
+				document.querySelectorAll("#setting-header .setting-navbar-invitation")[0].style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-notif")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-general")[0].style.backgroundColor = "transparent";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.color = "#999999";
+				document.querySelectorAll("#setting-header .setting-navbar-password")[0].style.backgroundColor = "transparent";
+
+			}
+		}
+
+		$(document).ready(function() {
+			$(this).click(function(e) {
+				if ($('#sgni').is(e.target) || $('#sgni').has(e.target).length)
+					$('#sgndropdown').css('display', 'block');
+				else
+					$('#sgndropdown').css('display', 'none');
+			});
+		});
 	</script>
 </section>
 

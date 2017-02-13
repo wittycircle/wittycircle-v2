@@ -28,7 +28,7 @@ exports.sortProjectCard = function(data, callback) {
           //if (!data[index].picture_card)
             //return recursive(index + 1);
           //else {
-            pool.query('SELECT profile_picture_icon FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
+            pool.query('SELECT profile_picture_icon, network FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', data[index].creator_user_id,
               function(err, result) {
                 if (err) throw err;
                   pool.query('SELECT user_id FROM project_users WHERE project_id = ? AND n_read = 1', data[index].id,
@@ -36,6 +36,7 @@ exports.sortProjectCard = function(data, callback) {
                       if (err) throw err;
                       getUsersInProject(list_user_id, function(username_list) {
                         data[index].pic       = result[0].profile_picture_icon;
+                        data[index].network = result[0].network;
                         data[index].usersIn   = username_list;
                         newProjectCards.push(data[index]);
                         return recursive(index + 1);

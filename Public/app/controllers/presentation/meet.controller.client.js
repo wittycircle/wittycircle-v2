@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData, $mdBottomSheet, $state) {
+angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $stateParams, $http, $scope, $location, $rootScope, Users, Profile, $timeout, showbottomAlert, RetrieveData, $mdBottomSheet, $state) {
 
 
 	var meet = this;
@@ -15,6 +15,8 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.skillList = [];
 	meet.skillListM = [];
 	meet.logIn = $rootScope.globals.currentUser ? true : false;
+	meet.propertyName = 'magic';
+	meet.propertyName2 = 'Popularity';
 	/* functions */
 	meet.openmmodal = openmmodal;
 	meet.closemmodal = closemmodal;
@@ -24,6 +26,9 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 	meet.removeSkill = removeSkill;
 	meet.goToProfile = goToProfile;
 	meet.followUserFromCard = followUserFromCard;
+	meet.changeRankBy = changeRankBy;
+	meet.getSearchNetwork = getSearchNetwork;
+	meet.removeNetwork 	= removeNetwork;
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -56,6 +61,30 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
              document.execCommand("Stop", false);
         }
 	});
+
+	function changeRankBy() {
+		if (meet.propertyName === 'magic') {
+			meet.propertyName = 'popularity';
+			meet.propertyName2 = 'Magic';
+		} else {
+			meet.propertyName = 'magic';
+			meet.propertyName2 = 'Popularity';
+		}
+	};
+
+	function getSearchNetwork(network) {
+		$scope.checkNetwork = true;
+		$('#nsnetwork').css('display', 'none');
+		$('#netbox').css('display', 'inline-block');
+		$scope.searchNetwork = network;
+	};
+
+	function removeNetwork() {
+		$scope.checkNetwork = false;
+		$scope.searchNetwork = '';
+		$('#netbox').css('display', 'none');
+		$('#nsnetwork').css('display', 'inline-block');
+	};
 
 	/*** Discover Mobile ***/
 	function openmmodal (value) {
@@ -112,6 +141,13 @@ angular.module('wittyApp').controller('MeetCtrl', function(Picture, $stateParams
 			meet.cardProfiles = res.data;
 		});
 	};
+	
+	function retrieveUC() {
+		RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+			$scope.uclist = res;
+		});
+	};
+	retrieveUC();
 
 	RetrieveData.getData('/skills', 'GET').then(function(res) {
 		meet.skills = res.skills;

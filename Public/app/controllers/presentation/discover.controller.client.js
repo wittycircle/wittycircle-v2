@@ -9,7 +9,7 @@
 **/
 
 angular.module('wittyApp')
-.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow, showbottomAlert) {
+.controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow, showbottomAlert, $filter) {
 
     var socket = io.connect('https://www.wittycircle.com');
 
@@ -28,6 +28,9 @@ angular.module('wittyApp')
     discover.searchSkill    = searchSkill;
     discover.removeSkill    = removeSkill;
     discover.voteProjectCard= voteProjectCard;
+    discover.changeRankBy   = changeRankBy;
+    discover.getSearchNetwork= getSearchNetwork;
+    discover.removeNetwork  = removeNetwork;
 
     // discover.goToProfile     = goToProfile;
 
@@ -36,6 +39,8 @@ angular.module('wittyApp')
     discover.cProject = 'All Projects';
     discover.cHelp = 'Any help';
     discover.limit = 9;
+    discover.propertyName = 'magic';
+    discover.propertyName2 = 'Popularity';
 
    // var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
    // var allStatu = ['Idea', 'Drafted project', 'Beta project', 'Live project', 'all'];
@@ -75,11 +80,43 @@ angular.module('wittyApp')
         {
              window.stop();
         }
-        else if(document.execCommand !== undefined)
-        {
+        else if(document.execCommand !== undefined) {
              document.execCommand("Stop", false);
         }
     });
+
+    function changeRankBy() {
+        if (discover.propertyName === 'magic') {
+            discover.cards = $filter('discoverPopularity')(discover.cards, 'popularity');
+            discover.propertyName = 'popularity';
+            discover.propertyName2 = 'Magic';
+        } else {
+            getDiscoverCard();
+            discover.propertyName = 'magic';
+            discover.propertyName2 = 'Popularity';
+        }
+    };
+
+    function getSearchNetwork(network) {
+        discover.cards = $filter('discoverNetwork')(discover.cards, network);
+        $('#nsnetwork').css('display', 'none');
+        $('#netbox').css('display', 'inline-block');
+        $scope.searchNetwork = network;
+    };
+
+    function removeNetwork() {
+        $scope.searchNetwork = '';
+        $('#netbox').css('display', 'none');
+        $('#nsnetwork').css('display', 'inline-block');
+    };
+
+    function retrieveUC() {
+        RetrieveData.ppdData('/data/uc/list', 'GET').then(function(res) {
+            console.log(res);
+            $scope.uclist = res;
+        });
+    };
+    retrieveUC();
 
     /***** MOBILE *****/
     /*** Discover Mobile ***/

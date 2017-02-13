@@ -6,7 +6,7 @@
 		<div id="uwft" class="filter-text">
 			<h2>#welcome{{uc}}</h2>
 			<p class="uc-welcome-text1">We are scaling the entrepreneurial ecosystem, starting with {{uc}}.</p>
-			<p class="uc-welcome-text2">Sign up before Dec 12th (12:00am PST) and get yourself a lifetime free account.</p>
+			<p class="uc-welcome-text2">Sign up before {{limitDate}} and get yourself a lifetime free account.</p>
 			<div class="popover-button" style="margin-bottom: 50px">
 				<div class="fb-login" >
 					<a href="/auth/facebook" target="_self">
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 
-			<div class="uc-number-students">
+			<div class="uc-number-students" ng-if="students > 1000">
 				<p style="font-family: 'FreigBook'; font-size: 16px"><b style="font-family: 'FreigMed' ">{{students}}</b> people from {{uc}} already joined</p>
 			</div>
 		</div>

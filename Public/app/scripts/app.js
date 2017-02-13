@@ -81,9 +81,19 @@ var wittyCircleApp = angular
 	    controller  : 'SignupCtrl',
 	})
 	.state('welcomeuc', {
-		url 		: '/welcome/:uc',
+		url 		: '/welcome/:uc/:token',
 		templateUrl : 'views/welcome/uc.view.client.html',
 		controller 	: 'welcomeUcCtrl'
+	})
+	.state('network_validation', {
+		url 		: '/network/validation/:token',
+		templateUrl : 'views/core/validate-network.view.client.html',
+		controller 	: 'ValidateNetworkCtrl',
+		resolve: {
+			access: function($http, $stateParams) {
+				return $http.put('/signup/verify/university/network', {token: $stateParams.token});
+			}
+		}
 	})
 	.state('password_reset', {
 		url: '/password/reset/:token',

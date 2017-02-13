@@ -180,7 +180,8 @@
     /*background-color: #f5f5f5;*/
     /**** General body *****/
     /**** Password body *****/
-    /***** Notification body *****/ }
+    /***** Notification body *****/
+    /******** Invitation body **********/ }
     #setting-page #setting-body label {
       font-family: 'FreigMed';
       font-size: 16px;
@@ -223,6 +224,44 @@
       font-family: 'FreigBook';
       color: red;
       margin-bottom: 0; }
+    #setting-page #setting-body .setting-general .setting-general-network {
+      width: 100%; }
+      #setting-page #setting-body .setting-general .setting-general-network .inline {
+        display: inline-block; }
+      #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input {
+        vertical-align: top;
+        width: 80%; }
+        #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input input {
+          width: 100%; }
+        #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input p {
+          font-family: 'FreigMed';
+          font-size: 14px;
+          color: #999999; }
+        #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input .setting-general-network-dropdown {
+          display: none;
+          position: absolute;
+          border: 1px solid #e5e5e5;
+          border-radius: 4px;
+          background-color: white;
+          padding: 10px 0px 10px 0px;
+          z-index: 100;
+          width: 240px; }
+          #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input .setting-general-network-dropdown ul li {
+            display: block;
+            font-family: 'FreigBook';
+            padding: 4px 15px;
+            font-size: 16px;
+            margin-bottom: 4px;
+            margin-top: 4px;
+            color: black;
+            -webkit-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -ms-transition-duration: 0.3s;
+            -kthtml-transition-duration: 0.3s;
+            transition-duration: 0.3s; }
+          #setting-page #setting-body .setting-general .setting-general-network .setting-general-network-input .setting-general-network-dropdown ul li:hover {
+            background-color: #e5e5e5; }
     #setting-page #setting-body .setting-password label {
       width: 200px; }
     #setting-page #setting-body .setting-password input {
@@ -274,6 +313,22 @@
               #setting-page #setting-body .setting-notification .setting-notification-center .setting-notification-body .li-body .checkbox-notif .fa-check {
                 position: relative;
                 bottom: 2px; }
+    #setting-page #setting-body .setting-invitation {
+      text-align: left; }
+      #setting-page #setting-body .setting-invitation textarea {
+        width: 600px;
+        height: 200px;
+        resize: none;
+        outline: 0;
+        border: 1px solid #999999;
+        border-radius: 4px; }
+      #setting-page #setting-body .setting-invitation button {
+        display: block; }
+      #setting-page #setting-body .setting-invitation h4 {
+        margin-bottom: 15px;
+        font-family: 'FreigMed';
+        font-size: 16px;
+        color: #999999; }
   #setting-page #setting-delete {
     background-color: #f5f5f5;
     border-top: 1px solid #e5e5e5; }

@@ -317,6 +317,61 @@
 					margin-bottom: 0;
 				}
 			}
+
+			.setting-general-network {
+				width: 100%;
+				.inline {
+					display: inline-block;
+				}
+
+				.setting-general-network-input {
+					vertical-align: top;
+					width: 80%;
+
+					input {
+						width: 100%;
+					}
+
+					p {
+						font-family: 'FreigMed';
+						font-size: 14px;
+						color: #999999;
+					}
+
+					.setting-general-network-dropdown {
+						display: none;
+						position: absolute;
+						border: 1px solid #e5e5e5;
+						border-radius: 4px;
+						background-color: white;
+						padding: 10px 0px 10px 0px;
+						z-index: 100;
+						width: 240px;
+
+						ul {
+							li {
+								display: block;
+								font-family: 'FreigBook';
+								padding: 4px 15px;
+								font-size: 16px;
+								margin-bottom: 4px;
+								margin-top: 4px;
+								color: black;
+								-webkit-transition-duration: 0.3s;
+							    -o-transition-duration: 0.3s;
+							    -moz-transition-duration: 0.3s;
+							    -ms-transition-duration: 0.3s;
+							    -kthtml-transition-duration: 0.3s;
+							    transition-duration: 0.3s;
+							}
+
+							li:hover {
+								background-color: #e5e5e5;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		/**** Password body *****/
@@ -399,6 +454,31 @@
 						}
 					}
 				}
+			}
+		}
+
+		/******** Invitation body **********/
+		.setting-invitation {
+			text-align: left;
+
+			textarea {
+				width: 600px;
+				height: 200px;
+				resize: none;
+				outline: 0;
+				border: 1px solid #999999;
+				border-radius: 4px;
+			}
+
+			button {
+				display: block;
+			}
+
+			h4 {
+				margin-bottom: 15px;
+				font-family: 'FreigMed';
+				font-size: 16px;
+				color: #999999;
 			}
 		}
 	}

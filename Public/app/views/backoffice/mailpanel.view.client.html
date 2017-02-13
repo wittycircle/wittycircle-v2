@@ -1,215 +1,418 @@
 <!-- <section id="backoffice-mailpanel">
 
-	<h1>CHAMPAGNE!</h1>
-	<h2>You must removed at first all subscribers in the list before updating a new member list.</h2>
-	<h3 style="color: blue; margin-bottom: 20px">ATTENTION ! : Once you send a campaign to list, all subscribers in the list will not be able to be remove for 7 days. </h3>
+     <h1>CHAMPAGNE!</h1>
+     <h2>You must removed at first all subscribers in the list before updating a new member list.</h2>
+     <h3 style="color: blue; margin-bottom: 20px">ATTENTION ! : Once you send a campaign to list, all subscribers in the list will not be able to be remove for 7 days. </h3>
 
-	<div class="mail-profile">
-		<label>All Mails</label>
-		<button ng-click="getUpdateMail('all')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-incomplete-profile-skill">
-		<label>Incomplete Profile Skill</label>
-		<button ng-click="getUpdateMail('skill')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-incomplete-profile-about">
-		<label>Incomplete Profile About</label>
-		<button ng-click="getUpdateMail('about')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-incomplete-profile-experience">
-		<label>Incomplete Profile Experience</label>
-		<button ng-click="getUpdateMail('experience')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-project-picture">
-		<label>Incomplete Picture(only) Project</label>
-		<button ng-click="getUpdateMail('pProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-project-content">
-		<label>Incomplete Content(only) Project</label>
-		<button ng-click="getUpdateMail('tProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-project-contents">
-		<label>Incomplete Picture/Content(both) Project</label>
-		<button ng-click="getUpdateMail('tpProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-project-private">
-		<label>Incomplete Private Project</label>
-		<button ng-click="getUpdateMail('prProject')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
-	<div class="mail-upvote">
-		<label>Invite to upvote</label>
-		<button ng-click="getUpdateMail('upvote')">Update</button><span ng-if="updateComplete">	Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
-	</div>
+     <div class="mail-profile">
+       <label>All Mails</label>
+       <button ng-click="getUpdateMail('all')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-incomplete-profile-skill">
+       <label>Incomplete Profile Skill</label>
+       <button ng-click="getUpdateMail('skill')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-incomplete-profile-about">
+       <label>Incomplete Profile About</label>
+       <button ng-click="getUpdateMail('about')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-incomplete-profile-experience">
+       <label>Incomplete Profile Experience</label>
+       <button ng-click="getUpdateMail('experience')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-project-picture">
+       <label>Incomplete Picture(only) Project</label>
+       <button ng-click="getUpdateMail('pProject')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-project-content">
+       <label>Incomplete Content(only) Project</label>
+       <button ng-click="getUpdateMail('tProject')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-project-contents">
+       <label>Incomplete Picture/Content(both) Project</label>
+       <button ng-click="getUpdateMail('tpProject')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-project-private">
+       <label>Incomplete Private Project</label>
+       <button ng-click="getUpdateMail('prProject')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
+     <div class="mail-upvote">
+       <label>Invite to upvote</label>
+       <button ng-click="getUpdateMail('upvote')">Update</button><span ng-if="updateComplete">Success!</span><div id="hoho" class="loader" style="display: block" ng-if="loading"></div>
+       </div>
 
-	<div class="list-complete-profiles" style="margin-top: 50px;">
-		<label>List profiles completed</label>
-		<a href="/admin/panel/profiles"><button>Access List</button></a>
-	</div>
+     <div class="list-complete-profiles" style="margin-top: 50px;">
+       <label>List profiles completed</label>
+       <a href="/admin/panel/profiles"><button>Access List</button></a>
+       </div>
 </section> -->
 
 <section id="backoffice-main-page" style="overflow-y: hidden" ng-init="tab = 1">
-	<aside class="bo-left-menu inline">
-		<ul>
-			<li id="bo-da" ng-click="tab = 1" ng-class="{ active:tab === 1 }"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</li>
-			<li ng-click="tab = 2" ng-class="{ active:tab === 2 }"><i class="fa fa-envelope" aria-hidden="true"></i> Mail/Campaign</li>
-			<li id="bo-suggest" ng-click="tab = 3" ng-class="{ active:tab === 3 }"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Suggestion Campaign</li>
-			<li id="bo-uc" ng-click="tab = 4; initUniversityCampaign()" ng-class="{ active:tab === 4 }"><i class="fa fa-university" aria-hidden="true"></i> University Campaign</li>
-			<li ng-click="tab = 5" ng-class="{ active:tab === 5 }"><i class="fa fa-users" aria-hidden="true"></i> Users Profile</li>
-			<li ng-click="tab = 6" ng-class="{ active:tab === 6 }"><i class="fa fa-globe" aria-hidden="true"></i> Project Network</li>
+  <aside class="bo-left-menu inline">
+    <ul>
+      <li id="bo-da" ng-click="tab = 1" ng-class="{ active:tab === 1 }"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</li>
+      <li ng-click="tab = 2" ng-class="{ active:tab === 2 }"><i class="fa fa-envelope" aria-hidden="true"></i> Mail/Campaign</li>
+      <li id="bo-suggest" ng-click="tab = 3" ng-class="{ active:tab === 3 }"><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Suggestion Campaign</li>
+      <li id="bo-uc" ng-click="tab = 4; initUniversityCampaign()" ng-class="{ active:tab === 4 }"><i class="fa fa-university" aria-hidden="true"></i> University Campaign</li>
+      <li ng-click="tab = 5" ng-class="{ active:tab === 5 }"><i class="fa fa-users" aria-hidden="true"></i> Users Profile</li>
+      <li ng-click="tab = 6" ng-class="{ active:tab === 6 }"><i class="fa fa-globe" aria-hidden="true"></i> Project Network</li>
+      </ul>
+    </aside>
+
+  <div id="brs1" class="bo-right-section1 inline">
+    <div class="bo-info-witty">
+      <div id="bo-users-box" class="bo-users inline flot-box animated zoomIn">
+	<h1>{{stats.numUsers}}</h1>
+	<h2>Users</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-projects inline flot-box animated zoomIn">
+	<h1>{{stats.numProjects}}</h1>
+	<h2>Projects</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-messages inline flot-box animated zoomIn">
+	<h1>{{stats.numMessages}}</h1>
+	<h2>Conversations</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-upvote inline flot-box animated zoomIn">
+	<h1>{{stats.numUpvote}}</h1>
+	<h2>Upvotes</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-follows inline flot-box animated zoomIn">
+	<h1>{{stats.numFollows}}</h1>
+	<h2>Users Follow</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-views inline flot-box animated zoomIn">
+	<h1>{{stats.numViews}}</h1>
+	<h2>Views</h2>
+	</div>
+      <div id="bo-projects-box" class="bo-todayActive inline flot-box animated zoomIn">
+	<h1>{{stats.numTodayActive}}</h1>
+	<h2>Active Users</h2>
+	</div>
+      </div>
+    </div>
+  <div id="bsc1" class="bo-alert-html" style="position: absolute; display: none">
+    <div class="bo-alert-html-2">
+      <p style="font-size: 14px">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br />
+	&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;<br />
+&lt;head&gt;<br />
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;<br />
+    &lt;!--[if !mso]&gt;&lt;!--&gt;<br />
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"/&gt;<br />
+    &lt;!--&lt;![endif]--&gt;<br />
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br />
+    &lt;title&gt;&lt;/title&gt;<br />
+&lt;/head&gt;<br />
+    &lt;body style="color:#222;font-family:'Source Sans Pro', sans-serif;font-style:normal;font-weight:100;min-height:350px"&gt;<br />
+        
+        &lt;style type="text/css"&gt;<br />
+            .standardCSS{<br />
+                color:#505050;<br />
+                font-size:15px;<br />
+            }<br />
+        
+            @media only screen and (max-width:480px){<br />
+                .mediaQueryCSS{<br />
+                    color:#CCCCCC;<br />
+                    font-size:20px;<br />
+                }<br />
+            }<br />
+        &lt;/style&gt;<br />
+    &lt;center class="wrapper"&gt;<br />
+        &lt;div class="webkit" style="padding: 10px 10px; max-width: 620px"&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600" height="30"&gt;&lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600"&gt;<br />
+                
+                &lt;tbody&gt;<br />
+                    
+                    &lt;tr height="5"&gt;&lt;/tr&gt;<br />
+                    <!-- &lt;tr&gt;<br />
+                        &lt;td style="font-size: 16px;" width="600"&gt;/* Say Hi Here ! */&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br /> -->
+<!--                     &lt;tr&gt;<br />
+ -->                        &lt;td style="font-size: 16px;" width="600"&gt;{{currentUcData.message}}&lt;/td&gt;<br />
+                    &lt;/tr&gt;<br />
+                    
+                &lt;/tbody&gt;<br />
+                
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600"&gt;<br />
+                &lt;td width="200" height="50"&gt;&lt;/td&gt;<br />
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="display: inline-block; margin: auto; background-color: #fff" max-width="110"&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td&gt;&lt;img src="{{senderUc.profile_picture}}" style="vertical-align: middle; display: inline-block; width: 70px; height: 70px; border-radius: 35px;" alt="user photo"/&gt;<br />
+                    &lt;/td&gt;<br />
+                    &lt;td width="15"&gt;&lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+                &lt;tr height="20"&gt;&lt;/tr&gt;<br />
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="display: inline-block; margin: auto; background-color: #fff; vertical-align: top" width="515"&gt;<br />
+                &lt;tr height="10"&gt;&lt;/tr&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td max-width="265"&gt;<br />
+                        &lt;div style="font-size: 18px; font-weight: 500;"&gt;{{senderUc.first_name}} {{senderUc.last_name}}&lt;/div&gt;<br />
+                        &lt;div style="height: 10px; width: 100%"&gt;&lt;/div&gt;<br />
+                        &lt;div style="font-size: 16px;"&gt;{{senderUc.description}}&lt;/div&gt;<br />
+                    &lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+                &lt;tr height="20"&gt;&lt;/tr&gt;<br />
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff; text-align: center; vertical-align: top"&gt;<br />
+                &lt;tr&gt;<br />
+&lt;td height="70"&gt;<br />
+                        &lt;a href="{{ucUrlToken}}" style="padding: 10px 25px; background-color: #416299; color: white; border-radius: 4px; text-decoration: none; font-size: 16px"&gt;Claim your free {{currentUcData.customName}} account&lt;/a&gt;<br />
+&lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600" height="30"&gt;&lt;/table&gt;<br />
+            &lt;hr width="100%" style="border-top: 1px solid #e5e5e5"/&gt;<br />
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600" height="20"&gt;&lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff" max-width="600"&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td&gt;<br />
+                        &lt;a href="https://twitter.com/wittycircle" target="_blank"&gt;&lt;img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-twitter-48.png" style="height: 24px; width: 24px" alt="tw logo"/&gt;&lt;/a&gt;<br />
+                    &lt;/td&gt;<br />
+                    &lt;td width="10"&gt;&lt;/td&gt;<br />
+                    &lt;td&gt;<br />
+                        &lt;a href="https://www.facebook.com/wittycircle" target="_blank"&gt;&lt;img src="https://cdn-images.mailchimp.com/icons/social-block-v2/color-facebook-48.png" style="height: 24px; width: 24px" alt="fb logo"/&gt;&lt;/a&gt;<br />
+                    &lt;/td&gt;<br />
+                    &lt;td&gt;<br />
+                        
+                    &lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+            &lt;/table&gt;<br />
+            
+            &lt;table border="0" cellpadding="0" cellspacing="0" style="margin: auto; background-color: #fff; text-align: center" max-width="600"&gt;<br />
+                &lt;tr height="20" width="100%"&gt;&lt;/tr&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td style="font-size: 14px; font-weight:100;"&gt;© 2016 Wittygroup Inc&lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+                &lt;tr height="5" width="100%"&gt;&lt;/tr&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td style="font-size: 14px; font-weight:100;"&gt;169th 11th St, San Francisco, CA&lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+                &lt;tr height="5" width="100%"&gt;&lt;/tr&gt;<br />
+                &lt;tr&gt;<br />
+                    &lt;td style="font-size: 14px; font-weight:100;"&gt;&lt;a href="https://www.wittycircle.com"&gt;wittycircle.com&lt;/a&gt;&lt;/td&gt;<br />
+                &lt;/tr&gt;<br />
+            &lt;/table&gt;<br />
+            
+        &lt;/div&gt;<br />
+    &lt;/center&gt;<br />
+&lt;/body&gt;<br />
+&lt;/html&gt;<br />
+</p>
+      </div>
+    </div>
+  <div id="bsc" class="bo-suggestion-confirmation">
+    <div class="bosc-head">
+      <h4>Confirmation</h4>
+      </div>
+    <div class="bosc-body">
+      <p>Type ADMIN CONFIRM to confirm</p>
+      <input class="inline-block" type="text" ng-model="confirmSuggestion">
+      <button id="boscb" class="inline-block" ng-click="confirmSug()">Confirm</button>
+      </div>
+    <p ng-if="error">Error !</p>
+    </div>
+
+  <div id="brs3" class="bo-right-section3 inline">
+    <div class="bo-suggestion">
+      <div class="bo-suggestion-to-projects inline flot-box3 animated zoomIn">
+	<h4>Suggestion people to projects</h4>
+	<i class="fa fa-hand-o-down" aria-hidden="true"></i>
+	<button id="bstpb" ng-click="suggestion(1)"><span ng-if="!onCharge1">{{suggest1}}</span>
+	  <div ng-if="onCharge1" class="spinner-load">
+	    <div class="spinner__item1 spinner-item"></div>
+	    <div class="spinner__item2 spinner-item"></div>
+	    <div class="spinner__item3 spinner-item"></div> 
+	    </button>
+	</div>
+
+	<div class="bo-suggestion-to-people inline flot-box3 animated zoomIn">
+	  <h4>Suggestion projects to people</h4>
+	  <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+	  <button id="bstpplb" ng-click="suggestion(2)"><span ng-if="!onCharge2">{{suggest2}}</span>
+	    <div ng-if="onCharge2" class="spinner-load">
+	      <div class="spinner__item1 spinner-item"></div>
+	      <div class="spinner__item2 spinner-item"></div>
+	      <div class="spinner__item3 spinner-item"></div>
+	      </button>
+	  </div>
+	  </div>
+	</div>
+
+      <div id="brs4" class="bo-right-section4 inline">
+	<div class="new-section-back">
+	  <ul class="new-section-li-head">
+	    <li>Network Name</li>
+	    <li>Invite Sender</li> 
+	    <li>Invite Message</li>
+	    <li>Url</li>
+	    <li>Joined</li>
+	    <li>Send</li>
+	    </ul>
+
+	  <ul class="new-section-li-list" ng-repeat="ucData in ucDatas">
+	    <li>{{ucData.university}}</li>
+	    <li>{{ucData.senderName}}</li>
+	    <li style="max-width: 200px; overflow-x: hidden; max-height: 50px">{{ucData.message}}</li>
+	    <li>welcome/{{ucData.customName}}</li>
+	    <li>{{ucData.number_students}}</li>
+	    <!-- <button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span> -->
+	    <!-- <div ng-if="onCharge3" class="spinner-load">
+		 <div class="spinner__item1 spinner-item"></div>
+		 <div class="spinner__item2 spinner-item"></div>
+		 <div class="spinner__item3 spinner-item"></div> 
+		 </button> -->
+	    <button ng-click="getTextHtml($index)">
+	      Generate Html
+	      </button>
+	    <button ng-click="giveInvitPermission(ucData.sender)">Give Permission</button>
+	    </ul>
+	  <div>
+	    <input id="sdsdfd" class="first-input" type="text" placeholder="Enter university name..." ng-model="ucName" />
+	    <div id="bdfdfdf" class="list-univeristy" style="display:none">
+	      <ul>
+		<li ng-repeat="ucl in uclist | wordsFilter: ucName | limitTo: 5" ng-click="getUniversityName(ucl.name)">{{ucl.name}}</li>
 		</ul>
-	</aside>
+	      </div>
+	    </div>
+	  <div>
+	    <input id="abcddd" type="text" placeholder="From user list" ng-model="ucSender" />
+	    <div id="bdcddc" class="list-users">
+	      <ul>
+		<li ng-repeat="profile in profiles | filter: ucSender | limitTo: 5" ng-click="getUserId(profile.id, profile.fullname)">
+		  <img ng-repeat="img in profile.profile" src="{{img.profile_picture}}">
+		  <span>{{profile.fullname}}</span>
+		  </li>
+		</ul>
+	      </div>
+	    </div>
 
-	<div id="brs1" class="bo-right-section1 inline">
-		<div class="bo-info-witty">
-			<div id="bo-users-box" class="bo-users inline flot-box animated zoomIn">
-				<h1>{{stats.numUsers}}</h1>
-				<h2>Users</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-projects inline flot-box animated zoomIn">
-				<h1>{{stats.numProjects}}</h1>
-				<h2>Projects</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-messages inline flot-box animated zoomIn">
-				<h1>{{stats.numMessages}}</h1>
-				<h2>Conversations</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-upvote inline flot-box animated zoomIn">
-				<h1>{{stats.numUpvote}}</h1>
-				<h2>Upvotes</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-follows inline flot-box animated zoomIn">
-				<h1>{{stats.numFollows}}</h1>
-				<h2>Users Follow</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-views inline flot-box animated zoomIn">
-				<h1>{{stats.numViews}}</h1>
-				<h2>Views</h2>
-			</div>
-			<div id="bo-projects-box" class="bo-todayActive inline flot-box animated zoomIn">
-				<h1>{{stats.numTodayActive}}</h1>
-				<h2>Active Users</h2>
-			</div>
-		</div>
-	</div>
-	<div id="bsc" class="bo-suggestion-confirmation">
-		<div class="bosc-head">
-			<h4>Confirmation</h4>
-		</div>
-		<div class="bosc-body">
-			<p>Type ADMIN CONFIRM to confirm</p>
-			<input class="inline-block" type="text" ng-model="confirmSuggestion">
-			<button id="boscb" class="inline-block" ng-click="confirmSug()">Confirm</button>
-		</div>
-		<p ng-if="error">Error !</p>
-	</div>
-
-	<div id="brs3" class="bo-right-section3 inline">
-		<div class="bo-suggestion">
-			<div class="bo-suggestion-to-projects inline flot-box3 animated zoomIn">
-				<h4>Suggestion people to projects</h4>
-				<i class="fa fa-hand-o-down" aria-hidden="true"></i>
-				<button id="bstpb" ng-click="suggestion(1)"><span ng-if="!onCharge1">{{suggest1}}</span>
-					<div ng-if="onCharge1" class="spinner-load">
-					<div class="spinner__item1 spinner-item"></div>
-					<div class="spinner__item2 spinner-item"></div>
-					<div class="spinner__item3 spinner-item"></div> 
-				</button>
-			</div>
-
-			<div class="bo-suggestion-to-people inline flot-box3 animated zoomIn">
-				<h4>Suggestion projects to people</h4>
-				<i class="fa fa-hand-o-down" aria-hidden="true"></i>
-				<button id="bstpplb" ng-click="suggestion(2)"><span ng-if="!onCharge2">{{suggest2}}</span>
-					<div ng-if="onCharge2" class="spinner-load">
-					<div class="spinner__item1 spinner-item"></div>
-					<div class="spinner__item2 spinner-item"></div>
-					<div class="spinner__item3 spinner-item"></div>
-				</button>
-			</div>
-		</div>
-	</div>
-
-	<div id="brs4" class="bo-right-section4 inline">
-		<div class="bo-uc-campaign flot-box4 inline animated fadeInDown">
-			<label>UC Name</label>
-			<input type="text" placeholder="Enter university name..." ng-model="ucName" />
-			<button ng-click="addUniversity()"><span ng-if="!onCharge4">Add Csv</span>
-				<div ng-if="onCharge4" class="spinner-load">
-				<div class="spinner__item1 spinner-item"></div>
-				<div class="spinner__item2 spinner-item"></div>
-				<div class="spinner__item3 spinner-item"></div>
-			</button>
-			<div class="import-zone" >
-				<h5>{{csvName}}</h5>
-				<p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
-			</div>
-		</div>
-		<div class="bo-uc-list flot-box4 inline animated fadeInRight" style="height: 600px; overflow: scroll">
-			<h5>University List</h5>
-			<div class="bo-uc-list-display">
-				<ul>
-					<li ng-repeat="ucData in ucDatas">{{ucData.university}}
-						<div class="bo-uc-info">
-							<span>Last Update : {{ucData.creation_date | wittyDateFilter}}</span>
-							<span ng-if="ucData.send_date">Last Send : {{ucData.send_date | wittyDateFilter}}</span>
-							<span ng-if="!ucData.send_date">Last Send : Never</span>
-							<span ng-if="ucData.rest">Stand: {{ucData.rest}} to shoot</span>
-							<span ng-if="!ucData.rest">Stand: All mail are sended</span>
-							<input type="text" placeholder="Enter number to send..." ng-model="numberSend[$index].num">
-							<input style="display: block" type="text" placeholder="Enter number of students..." ng-model="numberSend[$index].students">
-							<input style="display: block" type="text" placeholder="Enter Category" ng-model="numberSend[$index].category">
-							<div class="bo-uc-info-button">
-								<button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
-									<div ng-if="onCharge3" class="spinner-load">
-									<div class="spinner__item1 spinner-item"></div>
-									<div class="spinner__item2 spinner-item"></div>
-									<div class="spinner__item3 spinner-item"></div> 
-								</button>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
+	  <div>
+	    <input type="text" ng-model="ucCustomUrl" placeholder="Custom name">
+	    </div>
+	  <div>
+	    <input type="text" ng-model="ucCustomDate" placeholder="Date limit">
+	    </div>
+	  <textarea redactor ng-model="ucMessage" placeholder="Message to send"></textarea>
+	  <!-- <input type="text" placeholder="Url..." ng-model="ucUrl"/>
+	    --><button ng-click="addUniversity()"><span ng-if="!onCharge4">Add to list</span>
+	    <div ng-if="onCharge4" class="spinner-load">
+	      <div class="spinner__item1 spinner-item"></div>
+	      <div class="spinner__item2 spinner-item"></div>
+	      <div class="spinner__item3 spinner-item"></div>
+	      </button>
+	  <!-- <div class="import-zone">
+	       <h5>{{csvName}}</h5>
+	       <p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
+	       </div> -->
+	  </div>
+	  <!-- <div class="bo-uc-campaign flot-box4 inline animated fadeInDown">
+	       <label>UC Name</label>
+	       <input type="text" placeholder="Enter university name..." ng-model="ucName" />
+	       <button ng-click="addUniversity()"><span ng-if="!onCharge4">Add Csv</span>
+		 <div ng-if="onCharge4" class="spinner-load">
+		   <div class="spinner__item1 spinner-item"></div>
+		   <div class="spinner__item2 spinner-item"></div>
+		   <div class="spinner__item3 spinner-item"></div>
+		   </button>
+	       <div class="import-zone" >
+		 <h5>{{csvName}}</h5>
+		 <p ngf-select="loadCsvFile(csvFile)" ng-model="csvFile" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="false" ngf-pattern="text/csv" accept="text/csv" ngf-max-size="5MB">Import csv</p>
+		 </div>
+	       </div>
+	       <div class="bo-uc-list flot-box4 inline animated fadeInRight" style="height: 600px; overflow: scroll">
+		 <h5>University List</h5>
+		 <div class="bo-uc-list-display">
+		   <ul>
+		     <li ng-repeat="ucData in ucDatas">{{ucData.university}}
+		       <div class="bo-uc-info">
+			 <span>Last Update : {{ucData.creation_date | wittyDateFilter}}</span>
+			 <span ng-if="ucData.send_date">Last Send : {{ucData.send_date | wittyDateFilter}}</span>
+			 <span ng-if="!ucData.send_date">Last Send : Never</span>
+			 <span ng-if="ucData.rest">Stand: {{ucData.rest}} to shoot</span>
+			 <span ng-if="!ucData.rest">Stand: All mail are sended</span>
+			 <input type="text" placeholder="Enter number to send..." ng-model="numberSend[$index].num">
+			 <input style="display: block" type="text" placeholder="Enter number of students..." ng-model="numberSend[$index].students">
+			 <input style="display: block" type="text" placeholder="Enter Category" ng-model="numberSend[$index].category">
+			 <div class="bo-uc-info-button">
+			   <button id="boucinfo{{$index}}" class="hvr-buzz" ng-click="sendUcCampaign(ucData.university, $index)"><span ng-if="!onCharge3">Shoot!</span>
+			     <div ng-if="onCharge3" class="spinner-load">
+			       <div class="spinner__item1 spinner-item"></div>
+			       <div class="spinner__item2 spinner-item"></div>
+			       <div class="spinner__item3 spinner-item"></div> 
+			       </button>
+			   </div>
+			   </div>
+			 </li>
+		     </ul>
+		   </div> -->
+	  </div>
 	</div>
 </section>
 <script>
-	$(document).ready(function() {
-	    $('#header-content').css("backgroundColor", "white");
-	    $('#header-content').css("borderBottom", "1px solid #e5e5e5");
-	    $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
-	    $('#hnl').attr("class", "header-nav-list2");
-	    $('#hsb').css("height", "48px");
-	    $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png");
-	    $('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg");
-	    $('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg");
-	    $('.header-log-dropdown').first().css("color", "#999999");
-	    $('#hnlog').attr("class", "header-nav-log2");
+  $(document).ready(function() {
+      $('#header-content').css("backgroundColor", "white");
+      $('#header-content').css("borderBottom", "1px solid #e5e5e5");
+      $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
+      $('#hnl').attr("class", "header-nav-list2");
+      $('#hsb').css("height", "48px");
+      $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png");
+      $('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg");
+      $('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg");
+      $('.header-log-dropdown').first().css("color", "#999999");
+      $('#hnlog').attr("class", "header-nav-log2");
 
-	    $('#footerCore').css("display", "none");
+      $('#footerCore').css("display", "none");
 
-	    $(this).click(function(e) {
-	    	if (($('#bstpb').is(e.target) || $('#bstpb').has(e.target).length) || ($('#bstpplb').is(e.target) || $('#bstpplb').has(e.target).length) || ($('#bsc').is(e.target) || $('#bsc').has(e.target).length) || ($('#boucinfo0').is(e.target) || $('#boucinfo0').has(e.target).length) || ($('#boucinfo1').is(e.target) || $('#boucinfo1').has(e.target).length) || ($('#boucinfo2').is(e.target) || $('#boucinfo2').has(e.target).length) || ($('#boucinfo3').is(e.target) || $('#boucinfo3').has(e.target).length) || ($('#boucinfo4').is(e.target) || $('#boucinfo4').has(e.target).length) || ($('#boucinfo5').is(e.target) || $('#boucinfo5').has(e.target).length) || ($('#boucinfo6').is(e.target) || $('#boucinfo6').has(e.target).length) || ($('#boucinfo7').is(e.target) || $('#boucinfo7').has(e.target).length) || ($('#boucinfo8').is(e.target) || $('#boucinfo8').has(e.target).length) || ($('#boucinfo9').is(e.target) || $('#boucinfo9').has(e.target).length) || ($('#boucinfo10').is(e.target) || $('#boucinfo10').has(e.target).length) || ($('#boucinfo11').is(e.target) || $('#boucinfo11').has(e.target).length) || ($('#boucinfo12').is(e.target) || $('#boucinfo12').has(e.target).length) || ($('#boucinfo13').is(e.target) || $('#boucinfo13').has(e.target).length) || ($('#boucinfo14').is(e.target) || $('#boucinfo14').has(e.target).length) || ($('#boucinfo15').is(e.target) || $('#boucinfo15').has(e.target).length) || ($('#boucinfo16').is(e.target) || $('#boucinfo16').has(e.target).length) || ($('#boucinfo17').is(e.target) || $('#boucinfo17').has(e.target).length) || ($('#boucinfo18').is(e.target) || $('#boucinfo18').has(e.target).length) || ($('#boucinfo19').is(e.target) || $('#boucinfo19').has(e.target).length)) {
-	    		$('#bsc').fadeIn(200);	
-	    	} else
-	    		$('#bsc').fadeOut(200);
+      $(this).click(function(e) {
+  if (($('#bstpb').is(e.target) || $('#bstpb').has(e.target).length) || ($('#bstpplb').is(e.target) || $('#bstpplb').has(e.target).length) || ($('#bsc').is(e.target) || $('#bsc').has(e.target).length) || ($('#boucinfo0').is(e.target) || $('#boucinfo0').has(e.target).length) || ($('#boucinfo1').is(e.target) || $('#boucinfo1').has(e.target).length) || ($('#boucinfo2').is(e.target) || $('#boucinfo2').has(e.target).length) || ($('#boucinfo3').is(e.target) || $('#boucinfo3').has(e.target).length) || ($('#boucinfo4').is(e.target) || $('#boucinfo4').has(e.target).length) || ($('#boucinfo5').is(e.target) || $('#boucinfo5').has(e.target).length) || ($('#boucinfo6').is(e.target) || $('#boucinfo6').has(e.target).length) || ($('#boucinfo7').is(e.target) || $('#boucinfo7').has(e.target).length) || ($('#boucinfo8').is(e.target) || $('#boucinfo8').has(e.target).length) || ($('#boucinfo9').is(e.target) || $('#boucinfo9').has(e.target).length) || ($('#boucinfo10').is(e.target) || $('#boucinfo10').has(e.target).length) || ($('#boucinfo11').is(e.target) || $('#boucinfo11').has(e.target).length) || ($('#boucinfo12').is(e.target) || $('#boucinfo12').has(e.target).length) || ($('#boucinfo13').is(e.target) || $('#boucinfo13').has(e.target).length) || ($('#boucinfo14').is(e.target) || $('#boucinfo14').has(e.target).length) || ($('#boucinfo15').is(e.target) || $('#boucinfo15').has(e.target).length) || ($('#boucinfo16').is(e.target) || $('#boucinfo16').has(e.target).length) || ($('#boucinfo17').is(e.target) || $('#boucinfo17').has(e.target).length) || ($('#boucinfo18').is(e.target) || $('#boucinfo18').has(e.target).length) || ($('#boucinfo19').is(e.target) || $('#boucinfo19').has(e.target).length)) {
+  $('#bsc').fadeIn(200);
+  } else
+  $('#bsc').fadeOut(200);
 
-	    	if ($('#boscb').is(e.target) || $('#boscb').has(e.target).length)
-	    		$('#bsc').fadeOut(200);
+  if ($('#boscb').is(e.target) || $('#boscb').has(e.target).length)
+  $('#bsc').fadeOut(200);
 
-	    	if (e.target.id === "bo-da") {
-	    		$('#brs3').hide();
-	    		$('#brs4').hide();
-	    		$('#brs1').show();
-	    	} else if (e.target.id === "bo-suggest") {
-	    		$('#brs1').hide();
-	    		$('#brs4').hide();
-	    		$('#brs3').css('display', 'inline-block');
-	    	} else if (e.target.id === "bo-uc") {
-	    		$('#brs1').hide();
-	    		$('#brs3').hide();
-	    		$('#brs4').css('display', 'inline-block');
-	    	}
-	    });
-	});
+  if (e.target.id === "bo-da") {
+  $('#brs3').hide();
+  $('#brs4').hide();
+  $('#brs1').show();
+  } else if (e.target.id === "bo-suggest") {
+  $('#brs1').hide();
+  $('#brs4').hide();
+  $('#brs3').css('display', 'inline-block');
+  } else if (e.target.id === "bo-uc") {
+  $('#brs1').hide();
+  $('#brs3').hide();
+  $('#brs4').css('display', 'inline-block');
+  }
+
+  if (e.target.id === "abcddd") {
+  $('#bdcddc').slideDown();
+  } else
+  $('#bdcddc').slideUp();
+
+  if (e.target.id === "sdsdfd") {
+  $('#bdfdfdf').slideDown();
+  } else
+  $('#bdfdfdf').slideUp();
+
+  if ($('#bsc1').is(e.target) || $('#bsc1').has(e.target).length) {
+  console.log("");
+  } else
+  $('#bsc1').fadeOut();
+      });
+  });
 </script>

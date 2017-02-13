@@ -6,7 +6,7 @@ module.exports = function(app, algoliaClient) {
     var Project = algoliaClient.initIndex('Projects');
     var PAndP   = algoliaClient.initIndex('PAndP');
 
-    /*    algoliaClient.deleteIndex('Users', function(error) {
+/*        algoliaClient.deleteIndex('Users', function(error) {
         pool.query('SELECT id, first_name, last_name, profession, description, location_city, location_state, location_country, profile_picture, about, genre, creation_date, cover_\
 picture, views, profile_picture_icon, cover_picture_cards FROM profiles WHERE fake = 0', function(err1, data) {
             if (err1) throw err;

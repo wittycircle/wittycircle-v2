@@ -271,6 +271,8 @@ function getTokenForUniversity(uc_name, callback) {
             function(err, result) {
                 if (err) throw err;
                 else {
+		    if (!result[0])
+			return callback(null);
                     var url = "https://www.wittycircle.com/welcome/" + result[0].url_name + "/" + result[0].token;
                     var customName = result[0].url_name;
                     return callback({url: url, customName: customName});
@@ -288,8 +290,10 @@ exports.getUniversityList = function(req, res) {
 				function recursive(index) {
 					if (result[index]) {
                         getTokenForUniversity(result[index].university, function(object) {
-                            result[index].ucUrl = object.url;
-                            result[index].customName = object.customName;
+                            if (object) {
+				result[index].ucUrl = object.url;
+				result[index].customName = object.customName;
+			    }
     						getSenderFullName(result[index].sender, function(fullname) {
     							result[index].senderName = fullname;
     							pool.query('SELECT count(*) as number FROM invite_university WHERE university = ? AND send_date is null', result[index].university,

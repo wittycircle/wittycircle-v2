@@ -59,7 +59,7 @@
                         <li ng-if="moderator" ><a href="/admin/panel">Admin Panel</a></li>
                         <li><a href="/my-projects">Projects</a></li>
                         <li><a href="/statistics">Statistics</a></li>
-                        <li><a href="/setting">Settings</a></li>
+                        <li><a href="/settings">Settings</a></li>
                         <li><a ng-click="logout()">Log out</a></li>
                     </ul>
                 </div>
@@ -98,7 +98,7 @@
                     <li ng-if="moderator" ><a href="/admin/panel">Admin Panel</a></li>
                     <li><a href="/my-projects">Projects</a></li>
                     <li><a href="/statistics">Statistics</a></li>
-                    <li><a href="/setting">Settings</a></li>
+                    <li><a href="/settings">Settings</a></li>
                     <li><a ng-click="logout()">Log out</a></li>
                 </ul>
             </div>
@@ -240,7 +240,7 @@
         }); */
 
 
-        if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet")
+        if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet")
             headerCon.style.position = "fixed";
         else
             headerCon.style.position = "absolute";
@@ -581,7 +581,7 @@
 
         var check = 0;
         $(window).scroll(function() {
-            if (window.location.href === "https://www.wittycircle.com/discover" || window.location.href === "https://www.wittycircle.com/meet") {
+            if (window.location.href === "http://localhost/discover" || window.location.href === "http://localhost/meet") {
                 if (y >= 736) {
                     if ($(window).scrollTop() > 1 && !check) {
                         check = 1;

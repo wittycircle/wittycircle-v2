@@ -1,9 +1,9 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
 
-    <div id="pffs" class="presentation-forced animated bounceIn" style="display: none" ng-if="!meet.logIn && !mobile">
-        <div class="presentation-forced-signup">
-            <h5>Let us find the people you might need. Join us now.</h5>
+    <div id="pffsm" class="presentation-forced animated fadeIn" style="display: none" ng-if="!meet.logIn && !mobile">
+        <div id="pfffsm" class="presentation-forced-signup">
+            <h5>Let us find who could help you, right now. Join the most exciting community on the Internet.</h5>
             <ul>
                 <li class="presentation-forced-signup-mail" ng-controller="PopUpCtrl" ng-click="popSwL()"><img src="/images/mailbox-icon-w.png" alt="mailbox"></li>
                 <a href="/auth/google" target="_self"><li class="presentation-forced-signup-google"><img src="/images/social_media/newgoogle-logo.svg"></li></a>
@@ -22,7 +22,7 @@
 
             <div class="meet-component presentation-component">
                 <div class="meet-title presentation-title">
-                    <h2>Who could help you?</h2>
+                    <h2>Who are you looking for?</h2>
                 </div>
                 <div id="meet-search1">
                     <div class="meet-search1-text">
@@ -345,16 +345,24 @@
     <script>
 
     $(document).ready(function() {
+        var check = 0;
         function initPage() {
-            var check = 0;
             $(window).scrollTop(0);
                 $(window).scroll(function() {
-                    if ($(window).scrollTop() > 300 && check === 0) {
-                        $('#pffs').css('display', 'block');
-                    }
-                    if ($(window).scrollTop() <= 300 && check === 1) {
+                    if ($(window).scrollTop() > 50 && $(window).scrollTop() < 300) {
+                        check = 1;
+                        $('#pffsm h5')[0].innerHTML = 'Let us find who could help you, right now. Join the most exciting community on the Internet.';
+                        $('#pfffsm').css('padding', '30px 90px')
+                        $('#pffsm').css('display', 'block');
+                    } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
+                        $('#pfffsm').css('padding', '45px 90px')
+                        $('#pffsm h5')[0].innerHTML = "It won't take more than 20 seconds";
+                    }  else if ($(window).scrollTop() > 600 && $(window).scrollTop()) {
+                        $('#pfffsm').css('padding', '55px 90px')
+                        $('#pffsm h5')[0].innerHTML = 'Elon and Mark already signed up 🙈';
+                    } else if ($(window).scrollTop() < 100 && check === 1) {
                         check = 0;
-                        $('#pffs').css('display', 'none');
+                        $('#pffsm').css('display', 'none');
                     }
                 });
         }; setTimeout(function(){ initPage() }, 1000);

@@ -19,6 +19,54 @@ a:hover {
     height: 410px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5); }
+  #profile-header .statistics-suggestion-new .suggestion-box {
+    position: absolute;
+    padding: 5px 15px;
+    z-index: 5000;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    margin-top: 60px;
+    border-radius: 4px; }
+    #profile-header .statistics-suggestion-new .suggestion-box .fa-question-circle {
+      color: white; }
+    #profile-header .statistics-suggestion-new .suggestion-box .fa {
+      background-color: black !important; }
+    #profile-header .statistics-suggestion-new .suggestion-box span {
+      font-family: 'FreigBook';
+      font-size: 14px;
+      color: white; }
+  #profile-header .statistics-suggestion-new .suggestion-about-profile {
+    right: 0;
+    margin-right: 15px;
+    max-width: 160px;
+    -webkit-animation-delay: 12s;
+    -moz-animation-delay: 12s;
+    animation-delay: 12s; }
+  #profile-header .statistics-suggestion-new .suggestion-discover-meet {
+    margin-left: 50px;
+    max-width: 190px;
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    animation-delay: 2s; }
+  #profile-header .statistics-suggestion-new .suggestion-post-project {
+    margin-left: 270px;
+    max-width: 240px;
+    -webkit-animation-delay: 7s;
+    -moz-animation-delay: 7s;
+    animation-delay: 7s; }
+  #profile-header .statistics-suggestion-new .suggestion-post-project-nodelay {
+    margin-left: 270px;
+    max-width: 240px;
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    animation-delay: 2s; }
+  #profile-header .statistics-suggestion-new .suggestion-about-profile-nodelay {
+    right: 0;
+    margin-right: 15px;
+    max-width: 160px;
+    -webkit-animation-delay: 2s;
+    -moz-animation-delay: 2s;
+    animation-delay: 2s; }
   #profile-header #profile-modal-newMessageArea .profile-message-needs {
     padding: 25px;
     border-bottom: 1px solid #e5e5e5; }

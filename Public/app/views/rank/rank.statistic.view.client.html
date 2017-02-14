@@ -1,6 +1,6 @@
 <section id="setting-page" class="animated fadeIn">
 
-	<section class="statistics-suggestion-new" ng-if="firstVisit">
+	<!-- <section class="statistics-suggestion-new" ng-if="firstVisit">
 		<div id="sdm" class="suggestion-box suggestion-about-profile animated fadeInDown">
 			<i class="fa fa-question-circle"></i> <span>... and find all your profile details here</span>
 		</div>
@@ -12,7 +12,7 @@
 		<div id="spp" class="suggestion-box suggestion-post-project animated fadeInDown">
 			<i class="fa fa-question-circle"></i> <span> Share what you have in mind so our community can help you</span>
 		</div>
-	</section>
+	</section> -->
 	
 	<header id="setting-header" ng-style="{'background-image': 'url({{ resizePic(backPic, 1200, 410, 'fill') }})'}" style="height: 180px">
 		<div class="setting-filter" style="height: 180px"></div>
@@ -147,27 +147,27 @@
 			}
 		});
 
-		function hideDiscover() {
-			$('#sbp').attr('class', 'suggestion-box suggestion-discover-meet animated fadeOutUp');
-		};
+		// function hideDiscover() {
+		// 	$('#sbp').attr('class', 'suggestion-box suggestion-discover-meet animated fadeOutUp');
+		// };
 
-		function hideProject() {
-			$('#spp').attr('class', 'suggestion-box suggestion-post-project-nodelay animated fadeOutUp');
-		};
+		// function hideProject() {
+		// 	$('#spp').attr('class', 'suggestion-box suggestion-post-project-nodelay animated fadeOutUp');
+		// };
 
-		function hideProfile() {
-			$('#sdm').attr('class', 'suggestion-box suggestion-about-profile-nodelay animated fadeOutUp');
-		};
+		// function hideProfile() {
+		// 	$('#sdm').attr('class', 'suggestion-box suggestion-about-profile-nodelay animated fadeOutUp');
+		// };
 
-		setTimeout(function() {
-			hideDiscover();
-			setTimeout(function() {
-				hideProject();
-				setTimeout(function() {
-					hideProfile();
-				}, 5000);
-			}, 5000);
-		}, 5000);
+		// setTimeout(function() {
+		// 	hideDiscover();
+		// 	setTimeout(function() {
+		// 		hideProject();
+		// 		setTimeout(function() {
+		// 			hideProfile();
+		// 		}, 5000);
+		// 	}, 5000);
+		// }, 5000);
 
 
 		$("#srpsib")

@@ -320,7 +320,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	    if (profileData.about) {
 			$http.put('/signup/about', profileData).success(function(res) {
 			    if (res.success) {
-					$state.go('statistics', {firstVisit: true});
+					$state.go('profile', {firstVisit: true});
 			    }
 			});
 	    } else

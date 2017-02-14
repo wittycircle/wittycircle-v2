@@ -115,8 +115,8 @@ var wittyCircleApp = angular
 			}
 		}
 	})
-	.state('setting', {
-		url: '/setting',
+	.state('settings', {
+		url: '/settings',
 		templateUrl: 'views/setting/setting.view.client.html',
 		controller: 'SettingCtrl',
 		// resolve : {
@@ -222,8 +222,8 @@ var wittyCircleApp = angular
 					if (res) {
 						return true;
 					} else {
-						if (!res && ($stateParams.username === "setting") && $rootScope.globals.currentUser.username) {
-							$state.go('setting');
+						if (!res && ($stateParams.username === "settings") && $rootScope.globals.currentUser.username) {
+							$state.go('settings');
 						} if (!res && $stateParams.username === "discover") {
 							$state.go('discover');
 						} if (!res && $stateParams.username === "meet") {

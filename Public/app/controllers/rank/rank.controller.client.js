@@ -14,7 +14,7 @@ angular.module('wittyApp')
 			$scope.backPic = $rootScope.globals.currentUser.profile_cover;
 			$scope.mailList = [];
 			$scope.inviteW = "Invite";
-			$scope.firstVisit = $state.params.firstVisit;
+			// $scope.firstVisit = $state.params.firstVisit;
 
 			$scope.initRanking = function() {
 				RetrieveData.getData('/rank/statistic', 'GET').then(function(res) {

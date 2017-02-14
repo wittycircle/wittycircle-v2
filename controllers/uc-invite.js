@@ -126,17 +126,16 @@ function inviteMailToUcBySender(list, university, sender_id, send_message, callb
 	pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', sender_id,
 		function(err, result) {
 			if (err) throw err;
-			pool.query('SELECT token FROM networks WHERE name = ? and type = "university"', university, function(err, done) {
+			pool.query('SELECT token, url_name FROM networks WHERE name = ? and type = "university"', university, function(err, done) {
 				if (err) throw err;
 
-				console.log(done);
 				function recursive(index) {
 					if (list[index]) {
 						/* FROM PROFILE SETTING */
 						var ffname = result[0].first_name + " " + result[0].last_name;
 						console.log(ffname);
 
-                        var subj = "Wittycircle is now open to the " + university + " community"
+                        var subj = "Wittycircle is now open to the " + done[0].url_name + " community"
 
                         var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
@@ -190,11 +189,11 @@ function inviteMailToUcBySender(list, university, sender_id, send_message, callb
                                         },
                                         {
                                         	"name": "fnetwork",
-                                        	"content": university
+                                        	"content": done[0].url_name
                                         },
                                         {
                                         	"name": "url",
-                                        	"content": "www.wittycircle.com/welcome/" + university + "/" + done[0].token
+                                        	"content": "www.wittycircle.com/welcome/" + done[0].url_name + "/" + done[0].token
                                         },
                                         {
                                             "name": "pimg",

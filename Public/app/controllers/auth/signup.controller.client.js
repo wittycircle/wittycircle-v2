@@ -209,8 +209,6 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		 		break ;
 			};
 		};
-		console.log($scope.universityNetwork);
-		console.log($scope.societyNetwork);
 		if ($scope.universityNetwork === true) {	
 			var position1 = network.website.indexOf('.') + 1;
 			var position2 = network.website.lastIndexOf('.');

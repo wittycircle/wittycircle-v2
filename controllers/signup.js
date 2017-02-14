@@ -6,7 +6,6 @@ const mandrill  = require('mandrill-api/mandrill');
 
 exports.loadNetworkByIp = function(req, res) {
     req.checkBody('ip', 'Error occurs!').isString();
-    console.log(req.body.ip);
 
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);

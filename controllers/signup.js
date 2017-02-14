@@ -258,8 +258,8 @@ exports.addSocietyNetworkForVerification = function(req, res) {
     var errors = req.validationErrors(true);
     if (errors) return res.status(400).send(errors);
     else {
-        checkExistNetworkForUser(req.user.id, network, function(res) {
-            if (!res) return ;
+        checkExistNetworkForUser(req.user.id, req.body.network, function(check) {
+            if (!check) return ;
 
             var buf     = crypto.randomBytes(40),
                 token   = buf.toString('hex');

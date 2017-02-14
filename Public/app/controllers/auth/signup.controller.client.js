@@ -15,9 +15,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
     
-  //   if (!currentUser || !$stateParams.tagCheckFirst)
-		// $location.path('/');
-  //   else {
+    if (!currentUser || !$stateParams.tagCheckFirst)
+		$location.path('/');
+    else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
 	    $rootScope.globals.currentUser.profile_cover = response.data.data;
@@ -42,9 +42,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.formDay    = "Day";
 	$scope.formMonth  = "Month";
 	$scope.formYear   = "Year";
-	$scope.ucList 	  = ['42', 'Babson', 'Berkeley', 'Dauphine', 'DePauw', 'EMLyon', 'Stanford'];
-	$scope.societyList = ['500 Startups', 'The Refiners', 'Techstars', 'Y Combinator', 'Facebook'];
-	$scope.allList = $scope.ucList.concat($scope.societyList);
+	// $scope.ucList 	  = ['42', 'Babson', 'Berkeley', 'Dauphine', 'DePauw', 'EMLyon', 'Stanford'];
+	$scope.societyList = ['500 Startups', 'The Refiners', 'Techstars', 'Y Combinator', 'Facebook', 'Hardware Club', 'StartX', 'Numa', 'Station F', 'Parisoma'];
+	// $scope.allList = $scope.ucList.concat($scope.societyList);
 	/** about data **/
 	$scope.aboutText  = "join projects";
 	/** experience data **/
@@ -199,11 +199,23 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
 	$scope.getNetwork = function(network) {
 		$scope.profileNetwork = network.name;
-		$scope.universityNetwork = true;
 
-		var position1 = network.website.indexOf('.') + 1;
-		var position2 = network.website.lastIndexOf('.');
-		$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
+		var list = $scope.societyList;
+		var length = list.length;
+		for (var i = 0; i < length; i++) {
+			if (list[i].indexOf(network.name) >= 0) {
+				$scope.universityNetwork = false;
+		 		$scope.societyNetwork = true;
+		 		break ;
+			};
+		};
+		console.log($scope.universityNetwork);
+		console.log($scope.societyNetwork);
+		if ($scope.universityNetwork === true) {	
+			var position1 = network.website.indexOf('.') + 1;
+			var position2 = network.website.lastIndexOf('.');
+			$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
+		}
 		// var list   = $scope.ucList;
 		// var length = $scope.ucList.length;
 		// var n = 0
@@ -223,7 +235,6 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
 	function saveUniversityNetwork(email) {
 		if (email) {
-			console.log("OK");
 			RetrieveData.ppdData('/signup/add/university/network', 'POST', {network: $scope.profileNetwork, email: email}, '', false).then(function(res) {
 				// *Condition of reponse.
 				if (!res)
@@ -255,7 +266,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		if ($scope.loadNetwork)
 			profileData.network 	  = $scope.profileNetwork;
 		else if ($scope.societyNetwork) {
-			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.societyNetwork});
+			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.profileNetwork});
 		} else if ($scope.universityNetwork)
 			saveUniversityNetwork($scope.invite.emailNetwork);
 
@@ -683,7 +694,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*
 	**End Redactor configuration
 	*/
-    // }
+    }
 })
 .directive('locationSearch', function() {
 	return {

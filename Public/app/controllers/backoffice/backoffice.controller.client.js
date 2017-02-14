@@ -68,7 +68,7 @@ angular.module('wittyApp')
 					$scope.projectLists = res.list;
 			});
 
-			Users.getUsers().then(function (resource) {
+			RetrieveData.getData('/users', 'GET').then(function (resource) {
 				$scope.profiles = resource;
 			});
 

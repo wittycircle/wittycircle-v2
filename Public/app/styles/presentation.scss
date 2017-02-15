@@ -4,6 +4,11 @@
 	display: none;
 }
 
+@keyframes moveTop {
+    0%   {bottom: -140px;}
+    100% {bottom: 0px;}
+}
+
 .presentation-forced {
 	position: fixed;
 	left: 0;
@@ -13,6 +18,8 @@
 	z-index: 100000;
 	margin: 0 auto;
 	text-align: center;
+	-webkit-animation: moveTop 250ms; /* Safari 4.0 - 8.0 */
+    animation: moveTop 250ms;
 
 	.presentation-forced-signup {
 /*		display: inline-block;

@@ -1,7 +1,7 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
 
-    <div id="pffsm" class="presentation-forced animated fadeIn" style="display: none" ng-if="!meet.logIn && !mobile">
+    <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile">
         <div id="pfffsm" class="presentation-forced-signup">
             <h5>Let us find who could help you. Join the most exciting community on the Internet.</h5>
             <ul>
@@ -353,7 +353,7 @@
                         check = 1;
                         $('#pffsm h5')[0].innerHTML = 'Let us find who could help you. Join the most exciting community on the Internet.';
                         $('#pfffsm').css('padding', '30px 90px')
-                        $('#pffsm').fadeIn();
+                        $('#pffsm').css('display', 'block');
                     } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
                         $('#pfffsm').css('padding', '45px 90px')
                         $('#pffsm h5')[0].innerHTML = "It won't take more than 20 seconds";

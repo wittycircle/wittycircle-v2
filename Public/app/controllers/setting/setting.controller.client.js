@@ -98,6 +98,8 @@ angular.module('wittyApp')
 		$scope.settingChanged 	= true;
 	};
 
+	$scope.societyList = ['500 Startups', 'The Refiners', 'Techstars', 'Y Combinator', 'Facebook', 'Hardware Club', 'StartX', 'Numa', 'Station F', 'Parisoma'];
+
 	$scope.getNetwork = function(network) {
 		$scope.data.network = network.name;
 		$scope.universityNetwork = true;

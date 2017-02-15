@@ -134,7 +134,7 @@
 
 		<div class="signup-skill-search">
 			<div class="signup-skill-header">
-				<h4>What are you skilled in? Don't miss this step: your skills & interests allow people to connect with you</h4>
+				<h4>What are you skilled in? <span style="color: #999999; font-size: 16px;">Don't miss this step: your skills & interests allow people to connect with you</span></h4>
 			</div>
 			<div class="signup-skill-select sss">
 				<li ng-repeat="skillC in skillCascade track by $index">
@@ -169,7 +169,7 @@
 
 		<div class="signup-interest-search">
 			<div class="signup-interest-header">
-				<h4>What are you into?</h4>
+				<h4>Let's pick a few ones!</h4>
 			</div>
 			<div class="signup-interest-select sss">
 				<li ng-repeat="interest in interestList track by $index">
@@ -177,7 +177,7 @@
 				</li>
 			</div>
 			<div class="signup-interest-inSearch">
-				<input type="search" ng-model="interestSearch" placeholder="Search for a specific hobby, topic...">
+				<input type="search" ng-model="interestSearch" placeholder="Search for specific interests...">
 			</div>
 			<div class="signup-interest-list sss">
 				<li ng-repeat="cInterest in cInterests | wordsFilter: interestSearch | limitTo : 34 track by $index" ng-click="getInterest(cInterest)">

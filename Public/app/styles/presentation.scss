@@ -20,8 +20,14 @@
 		text-align: center;
 		background-color: rgba(0, 0, 0, 0.8);
 		padding: 30px 90px;
-		border-radius: 6px;
-
+/*		border-radius: 6px;
+*/
+		-webkit-transition: all 250ms linear;
+		-o-transition: all 250ms linear;
+		-moz-transition: all 250ms linear;
+		-ms-transition: all 250ms linear;
+		-kthtml-transition: all 250ms linear;
+		transition: all 250ms linear;
 		h5 {
 			font-family: 'FreigBook';
 			font-size: 20px;

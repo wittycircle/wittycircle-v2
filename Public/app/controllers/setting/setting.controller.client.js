@@ -102,9 +102,21 @@ angular.module('wittyApp')
 		$scope.data.network = network.name;
 		$scope.universityNetwork = true;
 
-		var position1 = network.website.indexOf('.') + 1;
-		var position2 = network.website.lastIndexOf('.');
-		$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
+		var list = $scope.societyList;
+		var length = list.length;
+		for (var i = 0; i < length; i++) {
+			if (list[i].indexOf(network.name) >= 0) {
+				$scope.universityNetwork = false;
+		 		$scope.societyNetwork = true;
+		 		break ;
+			};
+		};
+		if ($scope.universityNetwork === true) {
+			$scope.societyNetwork = false;	
+			var position1 = network.website.indexOf('.') + 1;
+			var position2 = network.website.lastIndexOf('.');
+			$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
+		}
 	}
 
 	function saveUniversityNetwork(email) {

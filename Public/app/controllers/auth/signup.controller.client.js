@@ -15,9 +15,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
     /**** AUTHENTICATION *****/
     var currentUser = $rootScope.globals.currentUser;
     
-    if (!currentUser || !$stateParams.tagCheckFirst)
-		$location.path('/');
-    else {
+  //   if (!currentUser || !$stateParams.tagCheckFirst)
+		// $location.path('/');
+  //   else {
 	/*** Set Default Cover Picture ***/
 	$http.get('/picture/cover').then(function(response) {
 	    $rootScope.globals.currentUser.profile_cover = response.data.data;
@@ -199,6 +199,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 
 	$scope.getNetwork = function(network) {
 		$scope.profileNetwork = network.name;
+		$scope.universityNetwork = true;
 
 		var list = $scope.societyList;
 		var length = list.length;
@@ -209,7 +210,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		 		break ;
 			};
 		};
-		if ($scope.universityNetwork === true) {	
+		if ($scope.universityNetwork === true) {
+			$scope.societyNetwork = false;	
 			var position1 = network.website.indexOf('.') + 1;
 			var position2 = network.website.lastIndexOf('.');
 			$scope.placeholderNetwork = 'email@' + network.website.slice(position1, position2) + '.edu';
@@ -692,7 +694,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	/*
 	**End Redactor configuration
 	*/
-    }
+    // }
 })
 .directive('locationSearch', function() {
 	return {

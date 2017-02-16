@@ -90,6 +90,7 @@ recursive(0);
 							    });
 
 					 app.get('/admin/mailpanel/profiles', ensureAdmin, function(req, res) {
+function run() {
 									      pool.query('SELECT profile_id, email FROM users WHERE fake = 0 ORDER BY id ASC', function(err, result) {
 												 if (err) throw err;
 												 else {
@@ -113,14 +114,14 @@ recursive(0);
 														    }
 														    });
 												 } else {
-												 return res.send({success: true});
+												 return console.log("OK");
 												 }
 												 };
 												 recursive(0);
 												 }
 												 });
 									      });
-
+};
 					 app.get('/admin/mailpanel/profile/incomplete/skill', ensureAdmin, function(req, res) {
 											      pool.query('SELECT profile_id, email, username FROM users WHERE id NOT IN (SELECT user_id FROM user_skills GROUP BY user_id ORDER BY user_id) ORDER BY id', function(err, result) {
 														 if (err) throw err;

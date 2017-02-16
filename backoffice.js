@@ -520,7 +520,6 @@ function run() {
 																																														   });
 																																									});
 														// run(); 
-														run1(); 
 														run2(); 
 														run3(); 
 														run4(); 

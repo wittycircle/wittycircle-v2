@@ -574,7 +574,7 @@ $(document).ready(function() {
         		wait = 1;
         		if (!$scope.searchAl && !$scope.searchSk) {
 	        		$scope.limitc += 12;
-	            	// $scope.limit = $scope.limit + 12;
+	            	$scope.limit = $scope.limit + 12;
 	            	if ($scope.limitc > meet.cardProfiles.length) {
 	            		loaderMore(false);
 	            	}

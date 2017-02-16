@@ -154,7 +154,7 @@ angular.module('wittyApp')
 			return ;
 
 		if ($scope.societyNetwork) {
-			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.societyNetwork});
+			RetrieveData.ppdData('/signup/add/society/network', 'POST', {network: $scope.data.network});
 		} else if ($scope.universityNetwork)
 			saveUniversityNetwork($scope.invite.emailNetwork);
 

@@ -123,7 +123,7 @@ overflow: hidden;
   #main-discover .main-title-market-mobile {
     display: none; }
   #main-discover .main-title-text {
-    max-width: 850px;
+    max-width: 820px;
     margin: 15px auto 30px auto; }
     #main-discover .main-title-text h4 {
       color: #ededed;
@@ -173,6 +173,8 @@ overflow: hidden;
         background-color: transparent;
         color: white;
         border: 2px solid white; }
+    #main-discover .main-button-discover .marginb {
+      margin: 0 10px; }
     #main-discover .main-button-discover .button-start-project {
       display: inline-block;
       /*			margin: 3px 20px 3px 0px;
@@ -717,7 +719,7 @@ overflow: hidden;
   		display: none;
   	}*/
   .slick-dots {
-    bottom: -50px; }
+    bottom: -30px; }
     .slick-dots li button:before {
       font-size: 10px; }
 
@@ -936,7 +938,7 @@ overflow: hidden;
     #main-discover .main-title-text {
       display: block;
       margin-top: 25px;
-      margin-bottom: 60px; }
+      margin-bottom: 30px; }
       #main-discover .main-title-text h4 {
         font-size: 18px;
         color: white;
@@ -960,9 +962,13 @@ overflow: hidden;
     #main-discover .main-button-discover {
       margin: 0; }
       #main-discover .main-button-discover .button-start-project {
-        margin-bottom: 0; }
+        margin-bottom: 10px; }
         #main-discover .main-button-discover .button-start-project button {
-          font-size: 16px; }
+          font-size: 16px;
+          padding-left: 0;
+          padding-right: 0; }
+      #main-discover .main-button-discover .button-discover button {
+        font-size: 16px; }
     #main-discover .main-title-text-mobile {
       width: 310px; }
       #main-discover .main-title-text-mobile h4 {
@@ -979,7 +985,7 @@ overflow: hidden;
     #main-discover .main-title-text {
       display: block;
       margin-top: 25px;
-      margin-bottom: 60px; }
+      margin-bottom: 30px; }
       #main-discover .main-title-text h4 {
         font-size: 18px;
         color: white;
@@ -1003,9 +1009,13 @@ overflow: hidden;
     #main-discover .main-button-discover {
       margin: 0; }
       #main-discover .main-button-discover .button-start-project {
-        margin-bottom: 0; }
+        margin-bottom: 10px; }
         #main-discover .main-button-discover .button-start-project button {
-          font-size: 16px; }
+          font-size: 16px;
+          padding-left: 0;
+          padding-right: 0; }
+      #main-discover .main-button-discover .button-discover button {
+        font-size: 16px; }
     #main-discover .main-title-text-mobile {
       display: none;
       width: 305px;
@@ -1029,7 +1039,7 @@ overflow: hidden;
     #main-discover .main-title-text {
       display: block;
       margin-top: 30px;
-      margin-bottom: 60px; }
+      margin-bottom: 30px; }
       #main-discover .main-title-text h4 {
         font-size: 16px;
         color: white; }
@@ -1052,9 +1062,13 @@ overflow: hidden;
     #main-discover .main-button-discover {
       margin: 0; }
       #main-discover .main-button-discover .button-start-project {
-        margin-bottom: 0; }
+        margin-bottom: 10px; }
         #main-discover .main-button-discover .button-start-project button {
-          font-size: 16px; }
+          font-size: 16px;
+          padding-left: 0;
+          padding-right: 0; }
+      #main-discover .main-button-discover .button-discover button {
+        font-size: 16px; }
     #main-discover .main-info {
       margin-top: 50px; }
 

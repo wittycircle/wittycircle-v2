@@ -234,6 +234,10 @@ overflow: hidden;
 			}
 		}
 
+		.marginb {
+			margin: 0 10px;
+		}
+
 		.button-start-project {
 			display: inline-block;
 /*			margin: 3px 20px 3px 0px;
@@ -994,7 +998,7 @@ a:hover {
 	}*/
 
 	.slick-dots {
-		bottom: -50px;
+		bottom: -30px;
 		li {
 			button:before {
 				font-size: 10px;
@@ -1335,7 +1339,7 @@ a:hover {
 		.main-title-text {
 			display: block;
 			margin-top: 25px;
-			margin-bottom: 60px;
+			margin-bottom: 30px;
 
 			h4 {
 				font-size: 18px;
@@ -1373,8 +1377,16 @@ a:hover {
 			margin: 0;
 
 			.button-start-project {
-				margin-bottom: 0;
+				margin-bottom: 10px;
 
+				button {
+					font-size: 16px;
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+
+			.button-discover {
 				button {
 					font-size: 16px;
 				}
@@ -1406,7 +1418,7 @@ a:hover {
 		.main-title-text {
 			display: block;
 			margin-top: 25px;
-			margin-bottom: 60px;
+			margin-bottom: 30px;
 
 			h4 {
 				font-size: 18px;
@@ -1444,8 +1456,16 @@ a:hover {
 			margin: 0;
 
 			.button-start-project {
-				margin-bottom: 0;
+				margin-bottom: 10px;
 
+				button {
+					font-size: 16px;
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+
+			.button-discover {
 				button {
 					font-size: 16px;
 				}
@@ -1483,7 +1503,7 @@ a:hover {
 		.main-title-text {
 			display: block;
 			margin-top: 30px;
-			margin-bottom: 60px;
+			margin-bottom: 30px;
 
 			h4 {
 				font-size: 16px;
@@ -1520,8 +1540,16 @@ a:hover {
 			margin: 0;
 
 			.button-start-project {
-				margin-bottom: 0;
+				margin-bottom: 10px;
 
+				button {
+					font-size: 16px;
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
+
+			.button-discover {
 				button {
 					font-size: 16px;
 				}

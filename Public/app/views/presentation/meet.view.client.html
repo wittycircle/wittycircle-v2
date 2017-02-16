@@ -121,7 +121,7 @@
                                 <input type="text" ng-model="searchNetwork" placeholder="Berkeley, Numa, 500 Startups...">
                                 <div id="netdrop" class="network-dropdown downbox">
                                     <h3 ng-if="!searchNetwork">Popular network: </h3>
-                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="uc.launched &&meet.getSearchNetwork(uc.name)">{{uc.name}}</li>
+                                    <li ng-repeat="uc in uclist | wordsFilter: searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.name)">{{uc.name}}</li>
                                 </div>
                             </div>
                         </div>

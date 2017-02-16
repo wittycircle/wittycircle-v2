@@ -448,7 +448,7 @@ angular.module('wittyApp')
 	};
 
 	} else {
-        if($location.path() === "/setting") {
+        if($location.path() === "/settings") {
             $location.path('/login').replace();
         }
 	} 

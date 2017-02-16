@@ -5,6 +5,7 @@ var LocalStrategy	= require('passport-local').Strategy;
 var FacebookStrategy	= require('passport-facebook').Strategy;
 //var TwitterStrategy	= require('passport-twitter').Strategy;
 var GoogleStrategy	= require('passport-google-oauth').OAuth2Strategy;
+// var GoogleContacts = require('google-contacts-with-photos');
 
 // load up the user model
 var mysql	= require('mysql');
@@ -349,6 +350,19 @@ module.exports = function(passport) {
     },
     function(token, refreshToken, profile, done) {
 	process.nextTick(function() {
+		// console.log(token);
+		// var opts = {
+		// 	token: token
+		// };
+
+		// GoogleContacts(opts)
+		//     .then(function (data) {
+		//         // console.log(data);
+		//     })
+		//     .catch(function (err) {
+		//         console.log(err);
+		//     });
+		    
 	    var user = profile._json;
 	    var google_info = {
 		google_id	: user.id,
@@ -449,7 +463,6 @@ module.exports = function(passport) {
 				   }
 			       });
 			   } else {
-			       console.log("user found");
 			       return done(null, rows[0]); // user found, return that user
 			   }
 		       });

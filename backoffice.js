@@ -519,14 +519,15 @@ function run() {
 																																														   return res.status(404).send({success: false});
 																																														   });
 																																									});
-														// run(); 
-														run2(); 
-														run3(); 
-														run4(); 
-														run5(); 
-														run6(); 
-														run7(); 
-														run8(); 
-														run9(); 
-														run10();																						
+
+												// 		run();																							
+												//		run2(); 
+												//		run3(); 
+												//		run4(); 
+												//		run5(); 
+												//		run6(); 
+												//		run7(); 
+												//		run8(); 
+												//		run9(); 
+												//		run10();																						
 };

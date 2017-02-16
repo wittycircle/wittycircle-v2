@@ -52,7 +52,8 @@ app.get('/admin/check', function(req, res) {
 			return res.send(false);
 			});
 
-app.get('/admin/list/profiles/complete', ensureAdmin, function(req, res) {
+// app.get('/admin/list/profiles/complete', ensureAdmin, function(req, res) {
+	function run2() {
 					 pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
 							    function(err, result) {
 							    if (err) throw err;
@@ -79,7 +80,7 @@ app.get('/admin/list/profiles/complete', ensureAdmin, function(req, res) {
 															return recursive(index + 1);
 															});
 												     } else {
-												     return res.send({success: true, list: list});
+												     return console.log('OK RUN2')
 }
 };
 recursive(0);
@@ -87,9 +88,10 @@ recursive(0);
 });
 											  }
 											  });
-							    });
+					}
+							    // });
 
-					 app.get('/admin/mailpanel/profiles', ensureAdmin, function(req, res) {
+					 // app.get('/admin/mailpanel/profiles', ensureAdmin, function(req, res) {
 function run() {
 									      pool.query('SELECT profile_id, email FROM users WHERE fake = 0 ORDER BY id ASC', function(err, result) {
 												 if (err) throw err;
@@ -120,9 +122,10 @@ function run() {
 												 recursive(0);
 												 }
 												 });
-									      });
+									      // });
 };
-					 app.get('/admin/mailpanel/profile/incomplete/skill', ensureAdmin, function(req, res) {
+					 // app.get('/admin/mailpanel/profile/incomplete/skill', ensureAdmin, function(req, res) {
+					 	function run3() {
 											      pool.query('SELECT profile_id, email, username FROM users WHERE id NOT IN (SELECT user_id FROM user_skills GROUP BY user_id ORDER BY user_id) ORDER BY id', function(err, result) {
 														 if (err) throw err;
 														 else {
@@ -149,14 +152,16 @@ function run() {
 																    }
 																    });
 														 } else
-														 return res.send({success: true});
+														 return console.log('OK RUN3');
 														 };
 														 recursive(0);
 														 }
 														 });
-											      });
+											  };
+											      // });
 
-					 app.get('/admin/mailpanel/profile/incomplete/about', ensureAdmin, function(req, res) {
+					 // app.get('/admin/mailpanel/profile/incomplete/about', ensureAdmin, function(req, res) {
+					 	function run4() {
 											      pool.query("SELECT id, first_name, last_name FROM profiles WHERE description is null || description = ''", function(err, result) {
 													 if (err) throw err;
 													 else  {
@@ -183,14 +188,16 @@ function run() {
 															    }
 															    });
 													 } else
-													 return res.send({success: true});
+													 return console.log('OK RUN4');;
 													 };
 													 recursive(0);
 													 }
 													 });
-											      });
+											  }
+											      // });
 
-					 app.get('/admin/mailpanel/profile/incomplete/experience', ensureAdmin, function(req, res) {
+					 // app.get('/admin/mailpanel/profile/incomplete/experience', ensureAdmin, function(req, res) {
+					 	function run5() {
 												   pool.query('SELECT profile_id, email, username FROM users WHERE id NOT IN (SELECT user_id FROM user_experiences)', function(err, result) {
 														      if (err) throw err;
 														      else {
@@ -222,16 +229,18 @@ function run() {
 																					  }
 																					  });
 														      } else
-														      return res.send({success: true});
+														      return console.log('OK RUN5');;
 
 														      };
 														      recursive(0);
 														      }
 														      }
 														      });
-												   });
+												};
+												   // });
 
-					 app.get('/admin/mailpanel/project/incomplete/post', ensureAdmin, function(req, res) {
+					 // app.get('/admin/mailpanel/project/incomplete/post', ensureAdmin, function(req, res) {
+					 	function run6() {
 											     pool.query("SELECT creator_user_id FROM projects WHERE project_visibility = 1 AND (post = '' OR post is null) AND picture != ''", function(err, result) {
 													if (err) throw err;
 													else {
@@ -263,20 +272,22 @@ function run() {
 																														   });
 																										     });
 																					    } else {
-																					    return res.send({success: true});
+																					    return console.log('OK RUN6');;
 																					    }
 																					    });
 																			 } else
-																			 return res.send({success: true});
+																			 return console.log('OK RUN6');;
 																			 };
 																			 recursive(0);
 																			 }
 																			 })
 																      }
 																      });
-													});
+											 };
+													// });
 
-											     app.get('/admin/mailpanel/project/incomplete/picture', ensureAdmin, function(req, res) {
+											     // app.get('/admin/mailpanel/project/incomplete/picture', ensureAdmin, function(req, res) {
+											     	function run7() {
 																		    pool.query("SELECT creator_user_id, title FROM projects WHERE project_visibility = 1 AND picture = '' AND post != ''", function(err, result) {
 																			       if (err) throw err;
 																			       else {
@@ -309,20 +320,22 @@ function run() {
 																																					  });
 																																	    });
 																												   } else {
-																												   return res.send({success: true});
+																												   return console.log('OK RUN7');;
 																												   }
 																												   });
 																										} else
-																										return res.send({success: true});
+																										return console.log('OK RUN7');;
 																										};
 																										recursive(0);
 																										}
 																										});
 																							     }
 																							     });
-																			       });
+																		};
+																			       // });
 
-																		    app.get('/admin/mailpanel/project/incomplete/pp', ensureAdmin, function(req, res) {
+																		    // app.get('/admin/mailpanel/project/incomplete/pp', ensureAdmin, function(req, res) {
+																		    	function run8() {
 																								      pool.query("SELECT creator_user_id, title FROM projects WHERE project_visibility = 1 AND picture = '' AND post = ''", function(err, result) {
 																										 if (err) throw err;
 																										 else {
@@ -355,20 +368,22 @@ function run() {
 																																											    });
 																																							      });
 																																		     } else {
-																																		     return res.send({success: true});
+																																		     return console.log('OK RUN8');;
 																																		     }
 																																		     });
 																																  } else
-																																  return res.send({success: true});
+																																  return console.log('OK RUN8');;
 																																  };
 																																  recursive(0);
 																																  }
 																																  });
 																													       }
 																													       });
-																										 });
+																								  };
+																										 // });
 
-																								      app.get('/admin/mailpanel/project/incomplete/private', ensureAdmin, function(req, res) {
+																								      // app.get('/admin/mailpanel/project/incomplete/private', ensureAdmin, function(req, res) {
+																								      	function run9() {
 																															     pool.query("SELECT creator_user_id, title FROM projects WHERE project_visibility = 0", function(err, result) {
 																																	if (err) throw err;
 																																	else {
@@ -401,20 +416,22 @@ function run() {
 																																																		   });
 																																														     });
 																																									    } else {
-																																									    return res.send({success: true});
+																																									    return console.log('OK RUN9');;
 																																									    }
 																																									    });
 																																							 } else
-																																							 return res.send({success: true});
+																																							 return console.log('OK RUN9');;
 																																							 };
 																																							 recursive(0);
 																																							 }
 																																							 });
 																																				      }
 																																				      });
-																																	});
+																															 };
+																																	// });
 
-																															     app.get('/admin/mailpanel/upvote', ensureAdmin, function(req, res) {
+																															     // app.get('/admin/mailpanel/upvote', ensureAdmin, function(req, res) {
+																															     	function run10() {
 																																				pool.query('SELECT user_id FROM project_followers GROUP BY user_id HAVING count(user_id) > 9', function(err, result) {
 																																						   if (err) throw err;
 																																						   else {
@@ -441,18 +458,19 @@ function run() {
 																																																					       return recursive(index + 1);
 																																																					       });
 																																																		 } else {
-																																																		 return res.send({success: true});
+																																																		 return console.log('OK RUN10');;
 																																																		 }
 																																																		 });
 																																												    } else
-																																												    return res.send({success: true});
+																																												    return console.log('OK RUN10');;
 																																												    };
 																																												    recursive(0);
 																																												    }
 																																												    });
 																																										 }
 																																										 });
-																																						   });
+																																			};
+																																						   // });
 
 																																				app.get('/admin/mailpanel/followers', ensureAdmin, function(req, res) {
 																																								      pool.query('SELECT follow_user_id FROM user_followers GROUP BY follow_user_id ORDER BY follow_user_id', function(err, result) {
@@ -501,4 +519,15 @@ function run() {
 																																														   return res.status(404).send({success: false});
 																																														   });
 																																									});
+														// run(); 
+														run1(); 
+														run2(); 
+														run3(); 
+														run4(); 
+														run5(); 
+														run6(); 
+														run7(); 
+														run8(); 
+														run9(); 
+														run10();																						
 };

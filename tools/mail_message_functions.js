@@ -260,128 +260,127 @@ function sendMailToValidateNetwork(info, callback) {
 
     var mandrill_client = new mandrill.Mandrill('XMOg7zwJZIT5Ty-_vrtqgA');
 
-    var fullname    = info.creator_first_name + " " + info.creator_last_name;
-    var subj        = fullname + " needs you to verify " + info.title + " is part of the " + info.network + " network";
+    var fullname    = info.first_name + " " + info.last_name;
+    var subj        = "We needs you to verify " + info.first_name + " is part of the " + info.network + " network";
     var link        = "https://www.wittycircle.com/validation/network/" + info.token;
-    var network     = info.network.replace(/ +/g, "");
     var emails      = [];
 
     if (info.network === "The Refiners") {
         emails = [{
             email: 'pierre@theref.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         }, {
             email: 'carlos@theref.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         }]
     } else if (info.network === "Techstars") {
         emails = [{
             email: 'brad.feld@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'Joel.Alcaraz@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'Chris.Chang@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'Karina.Costa@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'John.Hill@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'Erin.Ford@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'Mark.Solon@techstars.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         }]
     } else if (info.network === "500 Startups") {
         emails = [{
             email: 'bedy@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'jess@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'christine@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'jonathan@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'bailey@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'mat@500.co',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         }] 
     } else if (info.network === "Y Combinator") {
         emails = [{
             email: 'Steven@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'sharon@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'erica@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'sam@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'adora@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'kat@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'craig@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         },
         {
             email: 'tim@ycombinator.com',
-            name: info.creator_first_name,
+            name: info.first_name,
             type: "to"
         }]
     }
@@ -416,24 +415,24 @@ function sendMailToValidateNetwork(info, callback) {
         }],
         "global_merge_vars": [
             {
-                "name": "pjname",
-                "content": info.title
-            },
-            {
                 "name": "funame",
                 "content": fullname
+            },
+            {
+                "name": "fname",
+                "content": info.first_name
             },
             {
                 "name": "iname",
                 "content": info.network
             },
             {
-                "name": "ihname",
-                "content": network
+                "name": "desc",
+                "content": info.description
             },
             {
                 "name": "fimg",
-                "content": info.creator_picture
+                "content": info.profile_picture
             },
             {
                 "name": "link",
@@ -924,14 +923,17 @@ function sendSuggestionProjectMailByMandrill(email, first_name, last_name, proje
 };
 
 exports.sendValidateNetwork = function(info, callback) {
-    pool.query('SELECT token FROM project_network WHERE id = ?', info.id,
+    pool.query('SELECT first_name, last_name, description, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', info.user_id,
         function(err, result) {
             if (err) throw err;
             else {
-                info.token = result[0].token;
+                info.first_name = result[0].first_name;
+                info.last_name = result[0].last_name;
+                info.description = result[0].description;
+                info.profile_picture = result[0].profile_picture;
                 sendMailToValidateNetwork(info, function(res) {
                     if (res.success) {
-                        pool.query('UPDATE project_network SET admin_check = 1 WHERE id = ?', info.id,
+                        pool.query('UPDATE profile_network_2 SET admin_check = 1 WHERE id = ?', info.id,
                             function(err, result2) {
                                 if (err) throw err;
                                 return callback(true);

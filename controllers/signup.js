@@ -3,6 +3,8 @@
 /*** Sign Up ***/
 const crypto      = require('crypto');
 const mandrill  = require('mandrill-api/mandrill');
+const mail = require('../tools/mail_message_functions');
+
 
 exports.loadNetworkByIp = function(req, res) {
     req.checkBody('ip', 'Error occurs!').isString();
@@ -272,7 +274,18 @@ exports.addSocietyNetworkForVerification = function(req, res) {
                 function(err, result) {
                     if (err) throw err;
                     else
-                        return res.status(200).send({success: true, message: "Network Added"})
+                        res.status(200).send({success: true, message: "Network Added"})
+                    if (object.network === 'The Refiners') {
+                        pool.query('SELECT user_id, token, network FROM profile_network_2 WHERE id = ?', result.insertId,
+                            function(err, done) {
+                                if (err) throw err;
+                                else {
+                                    mail.sendValidateNetwork(done[0], function() {
+
+                                    });
+                                }    
+                            });
+                    }   
                 });
         });
     }

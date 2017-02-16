@@ -38,7 +38,7 @@ callback(false, false);
 module.exports = function(app) {
 
 app.get('/data/uc/list', function(req, res) {
-			 pool.query('SELECT * FROM university_list',
+			 pool.query('SELECT * FROM university_list ORDER BY popular DESC',
 					    function(err, result) {
 					    if (err) throw err;
 					    return res.status(200).send(result);

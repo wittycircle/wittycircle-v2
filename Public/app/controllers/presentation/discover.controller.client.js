@@ -11,7 +11,7 @@
 angular.module('wittyApp')
 .controller('DiscoverCtrl', function($scope, $http, $rootScope, $stateParams, Categories, Projects, Beauty_encode, algolia, $timeout, RetrieveData, $mdBottomSheet, $mdMenu, $state, Project_Follow, showbottomAlert, $filter) {
 
-    var socket = io.connect('https://www.wittycircle.com');
+    var socket = io.connect('http://127.0.0.1');
 
     var discover = this;
 
@@ -58,6 +58,7 @@ angular.module('wittyApp')
 
     discover.skillList = [];
     discover.skillListM = [];
+    $scope.search = {};
 
     getDiscoverCard();
 
@@ -71,7 +72,7 @@ angular.module('wittyApp')
 
     $scope.$parent.card = {
         title: "Wittycircle | Discover",
-        url: "https://www.wittycircle.com/discover",
+        url: "http://127.0.0.1/discover",
         image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Discover.png",
     };
 
@@ -98,14 +99,14 @@ angular.module('wittyApp')
     };
 
     function getSearchNetwork(network) {
+        $scope.search.searchNetwork = network;
         discover.cards = $filter('discoverNetwork')(discover.cards, network);
         $('#nsnetwork').css('display', 'none');
-        $('#netbox').css('display', 'inline-block');
-        $scope.searchNetwork = network;
+        $('#netbox').css('display', 'inline-block');;
     };
 
     function removeNetwork() {
-        $scope.searchNetwork = '';
+        $scope.search.searchNetwork = '';
         $('#netbox').css('display', 'none');
         $('#nsnetwork').css('display', 'inline-block');
     };

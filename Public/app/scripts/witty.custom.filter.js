@@ -454,7 +454,6 @@ angular.module('wittyApp')
                 value = value.substr(0, lastspace);
             }
         }
-
         return value + (tail || ' ...');
     };
 })

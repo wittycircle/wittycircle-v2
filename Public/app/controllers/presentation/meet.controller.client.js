@@ -37,6 +37,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	// $scope.onLoadSearch = true;
 	meet.cardProfiles = false;
+	$scope.search = {};
 
 	/*** Meet Card Page ***/
 	$scope.$parent.seo = {
@@ -47,7 +48,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -74,14 +75,14 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	function getSearchNetwork(network) {
 		$scope.checkNetwork = true;
+		$scope.search.searchNetwork = network;
 		$('#nsnetwork').css('display', 'none');
 		$('#netbox').css('display', 'inline-block');
-		$scope.searchNetwork = network;
 	};
 
 	function removeNetwork() {
 		$scope.checkNetwork = false;
-		$scope.searchNetwork = '';
+		$scope.search.searchNetwork = '';
 		$('#netbox').css('display', 'none');
 		$('#nsnetwork').css('display', 'inline-block');
 	};

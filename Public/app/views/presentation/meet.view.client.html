@@ -349,9 +349,11 @@
          function initPage() {
              $(window).scrollTop(0);
                  $(window).scroll(function() {
+                    if ($('#pffsm h5')[0]) {
                      if ($(window).scrollTop() > 50 && $(window).scrollTop() < 300) {
                          check = 1;
-                         $('#pffsm h5')[0].innerHTML = 'Let us find who could help you. Join the most exciting community on the Internet.';
+                         console.log($('#pffsm h5')[0].innerHTML);
+                            $('#pffsm h5')[0].innerHTML = 'Let us find who could help you. Join the most exciting community on the Internet.';
                          $('#pfffsm').css('padding', '30px 90px')
                          $('#pffsm').css('display', 'block');
                      } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
@@ -364,6 +366,7 @@
                          check = 0;
                          $('#pffsm').css('display', 'none');
                      }
+                    }
                  });
          }; setTimeout(function(){ initPage() }, 1000);
      });

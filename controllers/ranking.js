@@ -232,12 +232,13 @@ function registeAllRank() {
 						function(err, done) {
 							if (err) throw err;
 							else {
-								pool.query('SELECT user_id, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE()) ) AS rank FROM profile_ranking WHERE points >= 1000 && DATE(creation_date) = CURDATE() ORDER BY rank',
+								pool.query('SELECT user_id, @curRank := @curRank + 1 AS rank FROM profile_ranking, (SELECT @curRank := 0) r WHERE DATE(creation_date) = curdate() ORDER BY points DESC',
 									function(err, result) {
 										if (err) throw err;
 										else {
 											function recursive(index) {
 												if (result[index]) {
+													console.log(result[index]);
 													pool.query('INSERT INTO rank_of_the_day SET ?', result[index],
 														function(err, result2) {
 															if (err) throw err;
@@ -259,7 +260,7 @@ function registeAllRank() {
 };
 
 function compareRank(user_id, newRank, callback) {
-	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE() - 1) ) AS rank FROM profile_ranking WHERE points >= 1000 && DATE(creation_date) = CURDATE() - 1 && user_id = ? ORDER BY rank', user_id,
+	pool.query('SELECT points, rank FROM (SELECT points, user_id, @curRank := @curRank + 1 AS rank FROM profile_ranking, (SELECT @curRank := 0) r WHERE DATE(creation_date) = curdate() - 1 ORDER BY points DESC) x WHERE user_id = ?', user_id,
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -293,7 +294,7 @@ exports.getProfileStatisticRank = function(req, res) {
     if (errors) {
     	return res.status(400).send(errors);
     } else {
-    	pool.query('SELECT points, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = CURDATE()) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = CURDATE() ORDER BY rank', req.body.user_id,
+    	pool.query('SELECT points, rank FROM (SELECT points, user_id, @curRank := @curRank + 1 AS rank FROM profile_ranking, (SELECT @curRank := 0) r WHERE DATE(creation_date) = curdate() ORDER BY points DESC) x WHERE user_id = ?', req.body.user_id,
 		function(err, result) {
 			if (err) throw err;
 			else {
@@ -326,14 +327,17 @@ exports.getProfileAllTimeRank = function(req, res) {
 			if (err) throw err;
 			else {
 				if (result[0]) {
+					var restDay = 30;
+					if ((result[0].number - 1) <= 30)
+						restDay = result[0].number - 1;
 					var rankArr = [];
 					function recursive(index) {
-						if (index < result[0].number - 1) {
+						if (index < restDay) {
 							if (!index)
 								var curdate = "CURDATE()"
 							else 
 								var curdate = "CURDATE() - INTERVAL " + index + " DAY";
-							pool.query('SELECT creation_date, FIND_IN_SET( points, ( SELECT GROUP_CONCAT( DISTINCT points ORDER BY points DESC ) FROM profile_ranking WHERE DATE(creation_date) = ' + curdate + ' ) ) AS rank FROM profile_ranking WHERE points >= 1000 && user_id = ? && DATE(creation_date) = ' + curdate + ' ORDER BY rank', req.user.id,
+							pool.query('SELECT creation_date, rank FROM (SELECT creation_date, user_id, @curRank := @curRank + 1 AS rank FROM profile_ranking, (SELECT @curRank := 0) r WHERE DATE(creation_date) = ' + curdate + ' ORDER BY points DESC) x WHERE user_id = ?', req.user.id,
 								function(err, result2) {
 									if (err) throw err;
 									else {
@@ -342,7 +346,7 @@ exports.getProfileAllTimeRank = function(req, res) {
 											rankArr.unshift({rank: result2[0].rank, date: result2[0].creation_date});
 										return recursive(index + 1);
 									}
-								})
+								});
 						} else {
 							var numberArr = rankArr.map( function(el) { return el.rank; });
 							var maxum = Math.max.apply(Math, numberArr);

@@ -583,6 +583,65 @@
     background-image: url("images/poster/poster_meet.jpg"); }
     #meet-body-page .body-page .home-video-bg video {
       background-image: url("images/poster/poster_meet.jpg"); }
+#meet-body-page .meet-modal-invite-main {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000000000;
+  width: 100%;
+  height: 100%; }
+  #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal {
+    text-align: center;
+    padding: 40px; }
+    #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal h4 {
+      font-family: 'FreigBook';
+      font-size: 20px; }
+    #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box {
+      background-color: white;
+      display: inline-block;
+      border-radius: 4px;
+      margin: 30px 0;
+      overflow: hidden; }
+      #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-title {
+        padding: 20px;
+        border-bottom: 1px solid #e5e5e5; }
+        #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-title h3 {
+          font-family: 'FreigBook';
+          color: black;
+          font-size: 16px; }
+      #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list {
+        padding: 5px 0; }
+        #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element {
+          padding: 10px 65px; }
+          #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element img {
+            display: inline-block;
+            width: 40px;
+            border-radius: 50%;
+            margin: 0 10px; }
+          #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info {
+            display: inline-block;
+            text-align: left;
+            min-width: 200px;
+            vertical-align: middle; }
+            #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h5, #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h6 {
+              font-family: 'FreigBook';
+              color: black; }
+          #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-checkbox {
+            display: inline-block;
+            border: 1px solid #e5e5e5;
+            width: 19px;
+            height: 19px;
+            border-radius: 3px;
+            background-color: #e5e5e5; }
+            #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-checkbox .fa-check {
+              color: green; }
+      #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-button {
+        padding: 20px 0;
+        border-top: 1px solid #e5e5e5; }
+        #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-button button {
+          margin-bottom: 10px; }
+        #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-button p {
+          margin: 0;
+          font-family: 'FreigBook'; }
 
 .meet-component li {
   padding: 10px 20px 5px 20px;

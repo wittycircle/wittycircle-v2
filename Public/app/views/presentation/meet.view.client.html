@@ -1,5 +1,6 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
+    <div data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
 
     <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile">
         <div id="pfffsm" class="presentation-forced-signup">
@@ -9,6 +10,28 @@
                 <a href="/auth/google" target="_self"><li class="presentation-forced-signup-google"><img src="/images/social_media/newgoogle-logo.svg"></li></a>
                 <a href="/auth/facebook" target="_self"><li class="presentation-forced-signup-facebook"><i class="fa fa-facebook" style="color: white"></i></li></a>
             </ul>   
+        </div>
+    </div>
+
+    <div id="pffsmin" class="presentation-forced" style="display: none" ng-if="!mobile">
+        <div id="pfffsmin" class="presentation-forced-signup">
+            <img onclick="disableBanner()" style="position: absolute; right: 0; width: 14px; margin: 15px 15px 0 0; top: 0; cursor: pointer" src="/images/cross-icon.svg">
+            <div id="s11" class="sharing1">
+                <h5 style="margin-bottom: 10px">Want to be listed on top?🎉</h5>
+                <h5 style="margin-bottom: 10px">See how ranking is done in your <a href="statistics"><u>Statistics</u></a> page</h5>
+            </div>
+            <div id="s12" class="sharing2" style="display: none">
+                <h5>Increase your ranking by 283% and get 27x more exposure, instantly</h5>
+                <button style="background-color: white; padding: 10px; color: black; border: none; font-family: 'FreigBook';"><img style="width: 30px; margin-right: 15px" src="/images/social_media/newgoogle-logo.svg"> Connect your Google account</button>
+            </div>
+            <div id="s13" class="sharing3" style="display: none">
+                <img style="width: 40px; border-radius: 50%" src="{{globals.currentUser.profile_picture_icon}}">
+                <h5 style="margin-bottom: 10px">or share your own <u>invite link<u></h5>
+                <h4 style="font-family: 'FreigBook'; font-size: 18px ">invite/JayHo</h4>
+            </div>
+            <div id="s14" class="sharing4" style="display: none">
+                <h5>Maybe next time 🙈</h5>
+            </div>
         </div>
     </div>
 
@@ -344,6 +367,9 @@
 
     <script>
 
+    var x = $(window).width();
+    var checkScroll = 0;
+
     $(document).ready(function() {
          var check = 0;
          function initPage() {
@@ -352,7 +378,6 @@
                     if ($('#pffsm h5')[0]) {
                      if ($(window).scrollTop() > 50 && $(window).scrollTop() < 300) {
                          check = 1;
-                         console.log($('#pffsm h5')[0].innerHTML);
                             $('#pffsm h5')[0].innerHTML = 'Let us find who could help you. Join the most exciting community on the Internet.';
                          $('#pfffsm').css('padding', '30px 90px')
                          $('#pffsm').css('display', 'block');
@@ -366,12 +391,47 @@
                          check = 0;
                          $('#pffsm').css('display', 'none');
                      }
+                    } else if ($('#pffsmin #pfffsmin') && !checkScroll) {
+                        if ($(window).scrollTop() > 50 && $(window).scrollTop() < 300) {
+                            check = 1;
+                            $('#pfffsmin').css('padding', '30px 90px');
+                            $('#s11').css('display', 'block');
+                            $('#s12').css('display', 'none');
+                            $('#s13').css('display', 'none');
+                            $('#s14').css('display', 'none');
+                            $('#pffsmin').css('display', 'block');
+                        } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
+                            $('#pfffsmin').css('padding', '45px 90px');
+                            $('#s11').css('display', 'none');
+                            $('#s12').css('display', 'block');
+                            $('#s13').css('display', 'none');
+                            $('#s14').css('display', 'none');
+                        } else if ($(window).scrollTop() > 600 && $(window).scrollTop() < 900) {
+                            $('#pfffsmin').css('padding', '55px 90px');
+                            $('#s11').css('display', 'none');
+                            $('#s12').css('display', 'none');
+                            $('#s13').css('display', 'block');
+                            $('#s14').css('display', 'none');
+                        } else if ($(window).scrollTop() > 900) {
+                            $('#pfffsmin').css('padding', '85px 90px');
+                            $('#s11').css('display', 'none');
+                            $('#s12').css('display', 'none');
+                            $('#s13').css('display', 'none');
+                            $('#s14').css('display', 'block');
+                        } else if ($(window).scrollTop() < 100 && check === 1) {
+                            check = 0;
+                            $('#pffsmin').css('display', 'none');
+                        }
                     }
                  });
          }; setTimeout(function(){ initPage() }, 1000);
      });
 
-    var x = $(window).width();
+    function disableBanner() {
+        checkScroll = 1;
+        $('#pffsmin').css('display', 'none');
+    };
+
     var val = {};
     var scope = angular.element($("#meet-body-page")).scope();
     //console.log(scope.asd.skillList);

@@ -1,8 +1,7 @@
 #backoffice-main-page {
   padding-top: 61px;
   background-color: #fafafa;
-  height: 100vh;
-  overflow-x: hidden; }
+  height: 100vh; }
   #backoffice-main-page .inline {
     display: inline-block; }
   #backoffice-main-page .active {

@@ -790,6 +790,98 @@
 			}
 		}
 	}
+
+	.meet-modal-invite-main {
+		position: fixed;
+		background-color: rgba(0, 0, 0, 0.7);
+		z-index: 1000000000;
+		width: 100%;
+		height: 100%;
+		
+		.meet-modal-invite-modal {
+			text-align: center;
+			padding: 40px;
+
+			h4 {
+				font-family: 'FreigBook';
+				font-size: 20px;
+			}
+
+			.meet-modal-invite-box {
+				background-color: white;
+				display: inline-block;
+				border-radius: 4px;
+				margin: 30px 0;
+				overflow: hidden;
+
+				.mmi-box-title {
+					padding: 20px;
+					border-bottom: 1px solid #e5e5e5;
+
+					h3 {
+						font-family: 'FreigBook';
+						color: black;
+						font-size: 16px;
+					}
+				}
+
+				.mmi-box-list {
+					padding: 5px 0;
+
+					.mmi-box-list-element {
+						padding: 10px 65px;
+
+						img {
+							display: inline-block;
+							width: 40px;
+							border-radius: 50%;
+							margin: 0 10px;
+						}
+
+						.mmibl-element-info {
+							display: inline-block;
+							text-align: left;
+							min-width: 200px;
+							vertical-align: middle;
+
+							h5, h6 {
+								font-family: 'FreigBook';
+								color: black;
+								
+							}
+						}
+
+						.mmibl-element-checkbox {
+							display: inline-block;
+							border: 1px solid #e5e5e5;
+							width: 19px;
+							height: 19px;
+							border-radius: 3px;
+							background-color: #e5e5e5;
+
+							.fa-check {
+								color: green;
+							}
+						}
+					}
+				}
+
+				.mmi-box-button {
+					padding: 20px 0;
+					border-top: 1px solid #e5e5e5;
+
+					button {
+						margin-bottom: 10px;
+					}
+
+					p {
+						margin: 0;
+						font-family: 'FreigBook';
+					}
+				}
+			}
+		}
+	}
 }
 
 .meet-component {

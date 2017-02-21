@@ -47,7 +47,7 @@
        </div>
 </section> -->
 
-<section id="backoffice-main-page" style="overflow-y: hidden" ng-init="tab = 1">
+<section id="backoffice-main-page" ng-init="tab = 1">
   <aside class="bo-left-menu inline">
     <ul>
       <li id="bo-da" ng-click="tab = 1" ng-class="{ active:tab === 1 }"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</li>
@@ -62,7 +62,7 @@
   <div id="brs1" class="bo-right-section1 inline">
     <div class="bo-info-witty">
       <div id="bo-users-box" class="bo-users inline flot-box animated zoomIn">
-	<h1>{{stats.numUsers + 200}}</h1>
+	<h1>{{stats.numUsers + 640}}</h1>
 	<h2>Users</h2>
 	</div>
       <div id="bo-projects-box" class="bo-projects inline flot-box animated zoomIn">

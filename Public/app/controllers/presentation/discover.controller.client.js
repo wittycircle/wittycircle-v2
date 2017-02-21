@@ -180,6 +180,8 @@ angular.module('wittyApp')
                 // }
             });
         } else {
+            $('#pffs').hide();
+            $scope.checkScroll = 1;
             showbottomAlert.pop_it();
         }
     };

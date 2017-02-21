@@ -340,6 +340,8 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	function followUserFromCard (id, index, $event) {
 		if (!$rootScope.globals.currentUser) {
+			$('#pffsm').hide();
+			$scope.checkScroll = 1;
 			showbottomAlert.pop_it();
 		} else {
 			Users.getUserIdByProfileId(id).then(function(data) {

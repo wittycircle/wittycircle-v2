@@ -1,8 +1,8 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
-    <div data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
+    <div style="display: none" data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
 
-    <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile">
+    <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile && !checkScroll">
         <div id="pfffsm" class="presentation-forced-signup">
             <h5>Let us find who could help you. Join the most exciting community on the Internet.</h5>
             <ul>
@@ -17,8 +17,8 @@
         <div id="pfffsmin" class="presentation-forced-signup">
             <img onclick="disableBanner()" style="position: absolute; right: 0; width: 14px; margin: 15px 15px 0 0; top: 0; cursor: pointer" src="/images/cross-icon.svg">
             <div id="s11" class="sharing1">
-                <h5 style="margin-bottom: 10px">Want to be listed on top?🎉</h5>
-                <h5 style="margin-bottom: 10px">See how ranking is done in your <a href="statistics"><u>Statistics</u></a> page</h5>
+                <h5 style="margin-bottom: 10px">Want to be listed on top? 🤓</h5>
+                <h5 style="margin-bottom: 10px">See how ranking is done in your <a href="statistics" style="border-bottom: 1px solid white">Statistics</a> page</h5>
             </div>
             <div id="s12" class="sharing2" style="display: none">
                 <h5>Increase your ranking by 283% and get 27x more exposure, instantly</h5>
@@ -26,8 +26,8 @@
             </div>
             <div id="s13" class="sharing3" style="display: none">
                 <img style="width: 40px; border-radius: 50%" src="{{globals.currentUser.profile_picture_icon}}">
-                <h5 style="margin-bottom: 10px">or share your own <u>invite link<u></h5>
-                <h4 style="font-family: 'FreigBook'; font-size: 18px ">invite/JayHo</h4>
+                <h5 style="margin-bottom: 10px">or share your own <span style="border-bottom: 1px solid white">invite link</span></h5>
+                <h4 style="font-family: 'FreigBook'; font-size: 18px ">wittycircle.com/invite/jayho</h4>
             </div>
             <div id="s14" class="sharing4" style="display: none">
                 <h5>Maybe next time 🙈</h5>
@@ -394,30 +394,24 @@
                     } else if ($('#pffsmin #pfffsmin') && !checkScroll) {
                         if ($(window).scrollTop() > 50 && $(window).scrollTop() < 300) {
                             check = 1;
-                            $('#pfffsmin').css('padding', '30px 90px');
                             $('#s11').css('display', 'block');
                             $('#s12').css('display', 'none');
                             $('#s13').css('display', 'none');
                             $('#s14').css('display', 'none');
                             $('#pffsmin').css('display', 'block');
+                            $('#pfffsmin').css('padding', '30px 90px');
                         } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
-                            $('#pfffsmin').css('padding', '45px 90px');
                             $('#s11').css('display', 'none');
                             $('#s12').css('display', 'block');
                             $('#s13').css('display', 'none');
                             $('#s14').css('display', 'none');
+                            $('#pfffsmin').css('padding', '45px 90px');
                         } else if ($(window).scrollTop() > 600 && $(window).scrollTop() < 900) {
-                            $('#pfffsmin').css('padding', '55px 90px');
                             $('#s11').css('display', 'none');
                             $('#s12').css('display', 'none');
                             $('#s13').css('display', 'block');
                             $('#s14').css('display', 'none');
-                        } else if ($(window).scrollTop() > 900) {
-                            $('#pfffsmin').css('padding', '85px 90px');
-                            $('#s11').css('display', 'none');
-                            $('#s12').css('display', 'none');
-                            $('#s13').css('display', 'none');
-                            $('#s14').css('display', 'block');
+                            $('#pfffsmin').css('padding', '55px 90px');
                         } else if ($(window).scrollTop() < 100 && check === 1) {
                             check = 0;
                             $('#pffsmin').css('display', 'none');
@@ -429,7 +423,15 @@
 
     function disableBanner() {
         checkScroll = 1;
-        $('#pffsmin').css('display', 'none');
+        $('#pfffsmin').css('padding', '85px 90px');
+        $('#s11').css('display', 'none');
+        $('#s12').css('display', 'none');
+        $('#s13').css('display', 'none');
+        $('#s14').css('display', 'block');
+
+        setTimeout( function() {
+            $('#pffsmin').css('display', 'none');
+        }, 2000);
     };
 
     var val = {};

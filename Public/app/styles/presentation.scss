@@ -830,6 +830,7 @@
 
 					.mmi-box-list-element {
 						padding: 10px 65px;
+						cursor: pointer;
 
 						img {
 							display: inline-block;
@@ -844,10 +845,14 @@
 							min-width: 200px;
 							vertical-align: middle;
 
-							h5, h6 {
+							h5 {
+								font-family: 'FreigMed';
+								color: black;
+							}
+
+							h6 {
 								font-family: 'FreigBook';
 								color: black;
-								
 							}
 						}
 
@@ -863,6 +868,10 @@
 								color: green;
 							}
 						}
+					}
+
+					.mmi-box-list-element:hover {
+						background-color: #fafafa;
 					}
 				}
 

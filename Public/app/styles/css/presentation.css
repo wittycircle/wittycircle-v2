@@ -611,7 +611,8 @@
       #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list {
         padding: 5px 0; }
         #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element {
-          padding: 10px 65px; }
+          padding: 10px 65px;
+          cursor: pointer; }
           #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element img {
             display: inline-block;
             width: 40px;
@@ -622,7 +623,10 @@
             text-align: left;
             min-width: 200px;
             vertical-align: middle; }
-            #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h5, #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h6 {
+            #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h5 {
+              font-family: 'FreigMed';
+              color: black; }
+            #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-info h6 {
               font-family: 'FreigBook';
               color: black; }
           #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-checkbox {
@@ -634,6 +638,8 @@
             background-color: #e5e5e5; }
             #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element .mmibl-element-checkbox .fa-check {
               color: green; }
+        #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-list .mmi-box-list-element:hover {
+          background-color: #fafafa; }
       #meet-body-page .meet-modal-invite-main .meet-modal-invite-modal .meet-modal-invite-box .mmi-box-button {
         padding: 20px 0;
         border-top: 1px solid #e5e5e5; }

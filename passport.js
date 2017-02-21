@@ -106,14 +106,14 @@ module.exports = function(passport) {
 	profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified',  'photos'],
 
     }, function(token, refreshToken, profile, done) { // facebook will send back the token and profile's user
-    FB.setAccessToken(token);
- 
+	FB.setAccessToken(token);
+
 	FB.api('/me/friends', function (res) {
-		if(!res || res.error) {
-			console.log(!res ? 'error occurred' : res.error);
-			return;
-		}
-		console.log(res);
+	    if(!res || res.error) {
+		console.log(!res ? 'error occurred' : res.error);
+		return;
+	    }
+	    console.log(res);
 	});
 
 	var info = profile._json;

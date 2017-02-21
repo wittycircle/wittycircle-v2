@@ -3,9 +3,12 @@
 // load all the things we need
 var LocalStrategy	= require('passport-local').Strategy;
 var FacebookStrategy	= require('passport-facebook').Strategy;
+var FB = require('fb');
+
 //var TwitterStrategy	= require('passport-twitter').Strategy;
 var GoogleStrategy	= require('passport-google-oauth').OAuth2Strategy;
-// var GoogleContacts = require('google-contacts-with-photos');
+var GoogleContacts = require('google-contacts').GoogleContacts;
+var ssf = require('./controllers/social_signup_follow');
 
 // load up the user model
 var mysql	= require('mysql');
@@ -103,6 +106,16 @@ module.exports = function(passport) {
 	profileFields: ['id', 'email', 'gender', 'link', 'locale', 'name', 'timezone', 'updated_time', 'verified',  'photos'],
 
     }, function(token, refreshToken, profile, done) { // facebook will send back the token and profile's user
+    FB.setAccessToken(token);
+ 
+	FB.api('/me/friends', function (res) {
+		if(!res || res.error) {
+			console.log(!res ? 'error occurred' : res.error);
+			return;
+		}
+		console.log(res);
+	});
+
 	var info = profile._json;
 	var facebook_info = {
 	    facebook_id		: profile.id,
@@ -350,18 +363,16 @@ module.exports = function(passport) {
     },
     function(token, refreshToken, profile, done) {
 	process.nextTick(function() {
-		// console.log(token);
-		// var opts = {
-		// 	token: token
-		// };
+		var c = new GoogleContacts({
+			token: token
+		});
 
-		// GoogleContacts(opts)
-		//     .then(function (data) {
-		//         // console.log(data);
-		//     })
-		//     .catch(function (err) {
-		//         console.log(err);
-		//     });
+		c.getContacts(function(err, contacts) {
+			if (err) console.log(err);
+			else {
+				ssf.handleGoogleContacts(contacts);
+			}
+		}, null);
 		    
 	    var user = profile._json;
 	    var google_info = {

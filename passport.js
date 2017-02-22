@@ -108,14 +108,6 @@ module.exports = function(passport) {
     }, function(token, refreshToken, profile, done) { // facebook will send back the token and profile's user
 	FB.setAccessToken(token);
 
-	FB.api('/me/friends', function (res) {
-	    if(!res || res.error) {
-		console.log(!res ? 'error occurred' : res.error);
-		return;
-	    }
-	    console.log(res);
-	});
-
 	var info = profile._json;
 	var facebook_info = {
 	    facebook_id		: profile.id,
@@ -192,6 +184,21 @@ module.exports = function(passport) {
 													 pool.query('SELECT * FROM `users` WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize.
 														    function(err, user) {
 															if (err) throw err;
+
+															// contact facebook follow list
+															FB.api('/me/friends', function (res) {
+															    if(!res || res.error) {
+																	console.log(!res ? 'error occurred' : res.error);
+																	return ;
+															    } 
+
+															    if (res.data[0]) {
+															    	ssf.handleFacebookFriends(user[0].id, res.data);
+															    }
+															});
+															done(null, user[0]);
+
+															// send email to new user
 															pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
 																   function(err, save) {
 																       if (err) { 
@@ -261,7 +268,6 @@ module.exports = function(passport) {
 																       }, function(e) {
 																	   console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
 																       });
-																       return done(null, user[0]);
 																   });
 														    });
 												     });
@@ -283,6 +289,16 @@ module.exports = function(passport) {
 				   }
 			       });
 			   } else
+			   		FB.api('/me/friends', function (res) {
+					    if(!res || res.error) {
+							console.log(!res ? 'error occurred' : res.error);
+							return ;
+					    }
+
+					    if (res.data[0]) {
+					    	ssf.handleFacebookFriends(rows[0].id, res.data);
+					    }
+					});
                                return done(null, rows[0]); // user found, return that user
 		       });
 	});
@@ -296,47 +312,6 @@ module.exports = function(passport) {
             });
         };
     
-    // =========================================================================
-    // TWITTER =================================================================
-    // =========================================================================
-    /*passport.use(new TwitterStrategy({
-
-        consumerKey     : configAuth.twitterAuth.consumerKey,
-        consumerSecret  : configAuth.twitterAuth.consumerSecret,
-        callbackURL     : configAuth.twitterAuth.callbackURL,
-
-    }, function(token, tokenSecret, profile, done) {
-	process.nextTick(function(){
-	    pool.query('SELECT * FROM `users` WHERE `profile_id` IN (SELECT `id` FROM `profiles` WHERE `twitter_id` = ?)', [profile.id],
-		       function(err, rows) { // find the user in the database based on their twitter id
-			   if (err) return done(err);
-			   if (!rows.length) {
-			       pool.query('INSERT INTO `profiles` SET ?', { // set all of the twitter information in our user model
-				   first_name		: "Coco",
-				   last_name		: "Cici",
-				   twitter_id		: profile.id,
-				   twitter_token	: token,
-			       }, function(err, result){
-				   if (err) throw err;
-				   pool.query('INSERT INTO `users` SET ?', {
-				       profile_id	: result.insertId,
-				       email		: "moi",
-				   }, function(err, data) {
-				       if (err) throw err;
-				       pool.query('SELECT * FROM `users` WHERE profile_id = ?', [result.insertId],
-						  function(err, user) {
-						      if (err) throw err;
-						      return done(null, user[0]);
-						  });
-				   });
-			       });
-			   } else {
-			       console.log("user found");
-			       return done(null, rows[0]); // user found, return that user
-			   }
-		       });
-	});
-	}));*/
 
     // =========================================================================
     // GOOGLE ==================================================================
@@ -366,13 +341,6 @@ module.exports = function(passport) {
 		var c = new GoogleContacts({
 			token: token
 		});
-
-		c.getContacts(function(err, contacts) {
-			if (err) console.log(err);
-			else {
-				ssf.handleGoogleContacts(contacts);
-			}
-		}, null);
 		    
 	    var user = profile._json;
 	    var google_info = {
@@ -450,6 +418,12 @@ module.exports = function(passport) {
 															 pool.query('SELECT * FROM users WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize
 																    function(err, user) {
 																	if (err) throw err;
+																	c.getContacts(function(err, contacts) {
+																		if (err) console.log(err);
+																		else {
+																			ssf.handleGoogleContacts(user[0].id, contacts);
+																		}
+																	}, null);
 																	pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
 																		   function(err, save) {
 																		       if (err) throw err;
@@ -474,6 +448,12 @@ module.exports = function(passport) {
 				   }
 			       });
 			   } else {
+			   		c.getContacts(function(err, contacts) {
+						if (err) console.log(err);
+						else {
+							ssf.handleGoogleContacts(rows[0].id, contacts);
+						}
+					}, null);
 			       return done(null, rows[0]); // user found, return that user
 			   }
 		       });

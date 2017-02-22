@@ -1,0 +1,73 @@
+<div class="main-signup-page-bg" style="background-image: url('images/bg-test.png'); background-position: center center; background-size: cover">
+<section id="main-signup-page" data-ng-controller="Signup_modalCtrl">
+    <div class="signup-modal-social signup-login-social" style="padding: 0">
+        <div style="padding: 15px 0 15px 0">
+        	<img src="{{info.profile_picture}}" style="width: 55px; border-radius: 50%; margin: 0 auto">
+        	<h4 style="font-size: 18px; font-family: 'FreigBook'; color: black; margin-top: 0">{{info.first_name}} will increate his ranking and get 24% more exposure thanks to you.</h4>
+        </div>
+        <div class="fb-login">
+            <a href="/auth/facebook" target="_self">
+                <button><i class="fa fa-facebook" style="color: white"></i>Log in with Facebook</button>
+            </a>
+        </div>
+        <div class="go-login">
+            <a href="/auth/google" target="_self">
+                <button class="go-login"><img src="/images/social_media/newgoogle-logo.svg">Log in with Google</button>
+            </a>
+        </div>
+    </div>
+    <div class="signup-modal-old signup-login-old">
+        <div class="old-dash"></div>
+        <h4>Let's get you started</h4>
+        <div class="old-dash"></div>
+    </div>
+    <div class="signup-modal-field">
+        <p ng-if="eat">Email is already taken</p>
+        <div class="signup-firstname-field firstname-input">
+            <input type="text" ng-model="formData.first_name" placeholder="Enter your first name" />
+            <p ng-if="!fnf">This is a required field</p>
+        </div>
+        <div class="signup-lastname-field lastname-input">
+            <input type="text" ng-model="formData.last_name" placeholder="Enter your last name"/>
+            <p ng-if="!lnf">This is a required field</p>
+        </div>
+        <div class="signup-email-field email-input">
+            <input type="email" ng-model="formData.email" placeholder="Enter your email address"/>
+            <p ng-if="!emf">Address must be valid</p>
+        </div>
+        <div class="signup-password-field password-input">
+            <input type="password" ng-model="formData.password" placeholder="Enter your password (minimum 6 characters)"/>
+            <p ng-if="!pwf">This is a required field</p>
+            <span ng-if='week' class='pw-week'>Weak</span>
+            <span ng-if='okey' class='pw-okey'>Medium</span>
+            <span ng-if='strong' class='pw-strong'>Strong</span>
+        </div>
+    </div>
+    <div class="sign-modal-policy">
+        <p>By creating an account, I accept Wittycircle's <br /> <a href="/terms" target="_blank"><strong><u>Terms of Services</u></strong></a>,
+        and <a href="/privacy" target="_blank"><strong><u>Privacy Policy</u></strong></a>.
+        </p>
+    </div>
+    <div class="signup-modal-button">
+        <button type="submit" ng-click="signupto()">Sign Up</button>
+    </div>
+
+    <div class="signup-modal-footer">
+        <h4>Already have an account? <strong><u><a href="/login">Sign in</a></u></strong></h4>
+    </div>
+</section>
+</div>
+<script>
+// $(document).ready(function() {
+//     $('#header-content').css("backgroundColor", "white");
+//     $('#header-content').css("borderBottom", "1px solid #e5e5e5");
+//     $('#hbp').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/witty-logo-icon-b_ejb1po.svg");
+//     $('#hnl').attr("class", "header-nav-list2");
+//     $('#hsb').css("height", "48px");
+//     $('#notif-w-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/waves-icon-b_swhyaz.png");
+//     $('#notif-m-i').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/mailbox-icon-b_lbsllf.svg");
+//     $('#c-img').attr("src", "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1457892593/arrow-down-icon-b_opi301.svg");
+//     $('.header-log-dropdown').first().css("color", "#999999");
+//     $('#hnlog').attr("class", "header-nav-log2");
+// });
+</script>

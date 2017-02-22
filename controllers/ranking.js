@@ -238,7 +238,6 @@ function registeAllRank() {
 							     else {
 								 function recursive(index) {
 								     if (result[index]) {
-									 console.log(result[index]);
 									 pool.query('INSERT INTO rank_of_the_day SET ?', result[index],
 										    function(err, result2) {
 											if (err) throw err;

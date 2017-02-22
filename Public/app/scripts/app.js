@@ -135,6 +135,16 @@ var wittyCircleApp = angular
 		templateUrl : 'views/rank/rank.statistic.view.client.html',
 		controller 	: 'RankCtrl'
 	})
+	.state('share-invite', {
+		url: '/invite/:invite_id',
+		templateUrl: 'views/share/share-invite.view.client.html',
+		controller: 'ShareInviteCtrl',
+		resolve: {
+			access: function($http, $stateParams) {
+				return $http.get('/share/invite/' + $stateParams.invite_id);
+			}
+		}
+	})
 	.state('messages', {
 		url: '/messages',
 		params: {profile: null, user_id: null, username: null, input: null, userOn: null},

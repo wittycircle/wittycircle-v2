@@ -29,6 +29,9 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	meet.changeRankBy = changeRankBy;
 	meet.getSearchNetwork = getSearchNetwork;
 	meet.removeNetwork 	= removeNetwork;
+	meet.getContactListFromGoogle = getContactListFromGoogle;
+	meet.unselect = unselect;
+	meet.sendInviteToGoogleContacts = sendInviteToGoogleContacts;
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -73,7 +76,8 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		}
 	};
 
-	function getSearchNetwork(network) {
+	function getSearchNetwork(network, bolean) {
+		meet.launched = bolean;
 		$scope.checkNetwork = true;
 		$scope.search.searchNetwork = network;
 		$('#nsnetwork').css('display', 'none');
@@ -135,6 +139,12 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 			reInitializeProfile();
 			loaderMore(true);
 		});
+
+		if (meet.logIn) {
+			$http.get('/share/invite/' + $rootScope.globals.currentUser.id + '/link/', 'GET').then(function(link) {
+				if (link) meet.invite_link = link.data;
+			});
+		}
 	}; initializeProfile();
 
 	function reInitializeProfile() {
@@ -352,6 +362,93 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 					});
 				}
 			});
+		}
+	};
+
+	function sendInviteToGoogleContacts() {
+		var array = [];
+		var length = $scope.googleList.length;
+
+		for (var i = 0; i < length; i++) {
+			if ($scope.googleList[i].select)
+				array.push($scope.googleList[i]);
+		};
+
+		var newArray = array.map(function (el) { return el.email });
+		RetrieveData.ppdData('/invitation/new', 'POST', {mailList: newArray, user_id: $rootScope.globals.currentUser.id}, null, '').then(function(res) {
+
+		});
+	};
+
+
+	function getContactListFromGoogle() {
+		// GoogleAuth.signIn();
+
+		var config = {
+		  'client_id': '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
+		  'scope': 'https://www.google.com/m8/feeds',
+		  'authuser': -1
+		};
+		gapi.auth.authorize(config, function() {
+		  fetch(gapi.auth.getToken());
+		});
+
+		function fetch(token) {
+			$.get('https://www.google.com/m8/feeds/contacts/default/full?alt=json&access_token=' + token.access_token + '&max-results=10000&v=3.0',
+				function(response) {
+					var array = response.feed.entry;
+					var length = array.length;
+					var photo_link;
+					$scope.googleList = [];
+
+					for (var i = 0; i < length; i++) {
+						if (array[i].gd$email && array[i].gd$email[0]) {
+							if (array[i].link[0].gd$etag)
+								photo_link = array[i].link[0].href + '&access_token=' + token.access_token;
+							else
+								photo_link = 'https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458645842/default_profile/shutterstock_355730741_qyx4in.jpg'
+
+							var object = {
+								link: photo_link,
+								name: array[i].title.$t,
+								email: array[i].gd$email[0].address,
+								select: 1
+							}
+							$scope.googleList.push(object);
+						}
+					};
+
+					$timeout(function() {
+						$scope.googleList;
+						meet.numberInvited = $scope.googleList.length;
+						$scope.checkScroll2 = 1;
+					}, 0);
+
+					$("#modal-meet-invite").fadeIn();
+					    $('#modal-meet-invite').ready(function() {
+							$('.count').each(function () {
+								$(this).prop('Counter',0).animate({
+								Counter: $(this).text()
+							}, {
+								duration: 3000,
+								easing: 'swing',
+							step: function (now) {
+									$(this).text(Math.ceil(now));
+									}
+								});
+							});
+					    });
+				});
+		}
+	};
+
+	function unselect(index) {
+		if ($scope.googleList[index].select === 1) {
+			$scope.googleList[index].select = 0;
+			meet.numberInvited--;
+		} else {
+			$scope.googleList[index].select = 1;
+			meet.numberInvited++;
 		}
 	};
 

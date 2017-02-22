@@ -1,6 +1,6 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
-    <div style="display: none" data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
+    <div data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
 
     <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile && !checkScroll">
         <div id="pfffsm" class="presentation-forced-signup">
@@ -13,23 +13,23 @@
         </div>
     </div>
 
-    <div id="pffsmin" class="presentation-forced" style="display: none" ng-if="!mobile">
+    <div id="pffsmin" class="presentation-forced" style="display: none" ng-if="!mobile && !checkScroll2">
         <div id="pfffsmin" class="presentation-forced-signup">
             <img onclick="disableBanner()" style="position: absolute; right: 0; width: 14px; margin: 15px 15px 0 0; top: 0; cursor: pointer" src="/images/cross-icon.svg">
-            <div id="s11" class="sharing1">
+            <div id="s11" class="sharing1" style="height: 95px; padding-top: 20px">
                 <h5 style="margin-bottom: 10px">Want to be listed on top? 🤓</h5>
-                <h5 style="margin-bottom: 10px">See how ranking is done in your <a href="statistics" style="border-bottom: 1px solid white">Statistics</a> page</h5>
+                <h5 style="margin-bottom: 10px">See how ranking is done in your <a id="laflemme" href="statistics" style="border-bottom: 1px solid white; cursor: pointer">Statistics</a> page</h5>
             </div>
-            <div id="s12" class="sharing2" style="display: none">
-                <h5>Increase your ranking by 283% and get 27x more exposure, instantly</h5>
-                <button style="background-color: white; padding: 10px; color: black; border: none; font-family: 'FreigBook';"><img style="width: 30px; margin-right: 15px" src="/images/social_media/newgoogle-logo.svg"> Connect your Google account</button>
+            <div id="s12" class="sharing2" style="display: none; height: 95px">
+                <h5>Increase your ranking by <span class="count1">283</span> % and get <span class="count1">27</span>x more exposure, instantly</h5>
+                <button ng-click="meet.getContactListFromGoogle()" style="background-color: white; padding: 10px; color: black; border: none; font-family: 'FreigBook';"><img style="width: 30px; margin-right: 15px" src="/images/social_media/newgoogle-logo.svg"> Connect your Google account</button>
             </div>
-            <div id="s13" class="sharing3" style="display: none">
+            <div id="s13" class="sharing3" style="display: none; height: 95px">
                 <img style="width: 40px; border-radius: 50%" src="{{globals.currentUser.profile_picture_icon}}">
-                <h5 style="margin-bottom: 10px">or share your own <span style="border-bottom: 1px solid white">invite link</span></h5>
-                <h4 style="font-family: 'FreigBook'; font-size: 18px ">wittycircle.com/invite/jayho</h4>
+                <h5 style="margin-bottom: 10px">or share your own <a id="laflemme" href="https://www.wittycircle.com/{{meet.invite_link}}" style="border-bottom: 1px solid white">invite link</a></h5>
+                <h4 style="font-family: 'FreigBook'; font-size: 18px ">wittycircle.com/{{meet.invite_link}}</h4>
             </div>
-            <div id="s14" class="sharing4" style="display: none">
+            <div id="s14" class="sharing4" style="display: none; height: 95px; padding-top: 40px">
                 <h5>Maybe next time 🙈</h5>
             </div>
         </div>
@@ -137,14 +137,14 @@
                             </div>
                             <h3 class="inline">network:</h3>
                             <div id="netbox" class="network-box inline" >
-                                <h3 class="inline">{{search.searchNetwork}}</h3>
+                                <h3 class="inline">{{search.searchNetwork}} <span ng-if="!meet.launched">(Coming soon)</span></h3>
                                 <img ng-click="meet.removeNetwork()" class="inline" src="/images/cross-icon.svg">
                             </div>
                             <div id="nsnetwork" class="network-search inline">
                                 <input type="text" ng-model="search.searchNetwork" placeholder="Berkeley, Numa, 500 Startups...">
                                 <div id="netdrop" class="network-dropdown downbox">
                                     <h3 ng-if="!search.searchNetwork">Popular network: </h3>
-                                    <li ng-repeat="uc in uclist | wordsFilter: search.searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.name)">{{uc.name}}</li>
+                                    <li ng-repeat="uc in uclist | wordsFilter: search.searchNetwork | limitTo: 5" ng-click="meet.getSearchNetwork(uc.name, uc.launched)">{{uc.name}}</li>
                                 </div>
                             </div>
                         </div>
@@ -369,6 +369,7 @@
 
     var x = $(window).width();
     var checkScroll = 0;
+    var checkCount = 0;
 
     $(document).ready(function() {
          var check = 0;
@@ -399,19 +400,33 @@
                             $('#s13').css('display', 'none');
                             $('#s14').css('display', 'none');
                             $('#pffsmin').css('display', 'block');
-                            $('#pfffsmin').css('padding', '30px 90px');
+                            $('#pfffsmin').css('padding', '20px 90px');
                         } else if ($(window).scrollTop() > 300 && $(window).scrollTop() < 600) {
                             $('#s11').css('display', 'none');
                             $('#s12').css('display', 'block');
                             $('#s13').css('display', 'none');
                             $('#s14').css('display', 'none');
-                            $('#pfffsmin').css('padding', '45px 90px');
+                            $('#pfffsmin').css('padding', '35px 90px');
+                            if (!checkCount) {
+                                checkCount = 1;
+                                $('.count1').each(function () {
+                                    $(this).prop('Counter',0).animate({
+                                    Counter: $(this).text()
+                                }, {
+                                    duration: 3000,
+                                    easing: 'swing',
+                                step: function (now) {
+                                        $(this).text(Math.ceil(now));
+                                        }
+                                    });
+                                });
+                            }
                         } else if ($(window).scrollTop() > 600 && $(window).scrollTop() < 900) {
                             $('#s11').css('display', 'none');
                             $('#s12').css('display', 'none');
                             $('#s13').css('display', 'block');
                             $('#s14').css('display', 'none');
-                            $('#pfffsmin').css('padding', '55px 90px');
+                            $('#pfffsmin').css('padding', '50px 90px');
                         } else if ($(window).scrollTop() < 100 && check === 1) {
                             check = 0;
                             $('#pffsmin').css('display', 'none');
@@ -423,7 +438,6 @@
 
     function disableBanner() {
         checkScroll = 1;
-        $('#pfffsmin').css('padding', '85px 90px');
         $('#s11').css('display', 'none');
         $('#s12').css('display', 'none');
         $('#s13').css('display', 'none');

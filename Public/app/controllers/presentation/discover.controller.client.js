@@ -98,7 +98,8 @@ angular.module('wittyApp')
         }
     };
 
-    function getSearchNetwork(network) {
+    function getSearchNetwork(network, bolean) {
+        discover.launched = bolean;
         $scope.search.searchNetwork = network;
         discover.cards = $filter('discoverNetwork')(discover.cards, network);
         $('#nsnetwork').css('display', 'none');

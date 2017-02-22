@@ -142,4 +142,3 @@ function setInviteLink() {
 			recursive(0);
 		});
 };
-

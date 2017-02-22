@@ -51,7 +51,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "http://127.0.0.1/meet",
+		url: "https://www.wittycircle.com/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -385,7 +385,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		// GoogleAuth.signIn();
 
 		var config = {
-		  'client_id': '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
+		  'client_id': '1000804181890-epc9jh416f4hvqp7gklkk0f3ot1u7gg6.apps.googleusercontent.com',
 		  'scope': 'https://www.google.com/m8/feeds',
 		  'authuser': -1
 		};

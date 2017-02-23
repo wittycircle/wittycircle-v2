@@ -23,7 +23,7 @@
 				</div>
 
 				<div class="mmi-box-button">
-					<button ng-click="meet.sendInviteToGoogleContacts()">Invite {{meet.numberInvited}} selected</button>
+					<button id="mmibb" ng-click="meet.sendInviteToGoogleContacts()" onclick="textChange()">Invite {{meet.numberInvited}} selected</button>
 					<p>More than <span class="count">47</span>% of invitations get accepted 🙈</p>
 				</div>
 			</div>
@@ -44,5 +44,11 @@
 
   function disableModal() {
     $('#modal-meet-invite').css('display', 'none');
+  };
+  function textChange() {
+  $('#mmibb').text('Sended 🖖');
+  setTimeout(function() {
+  $('#modal-meet-invite').css('display', 'none');
+  }, 2000);
   };
 </script>

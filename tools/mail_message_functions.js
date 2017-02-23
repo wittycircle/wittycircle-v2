@@ -240,6 +240,10 @@ function sendMailByMandrill(info, callback) {
             {
                 "name": "url",
                 "content": url_invite
+            },
+            {
+                "name": "fname",
+                "content": info.first_name
             }
         ]
     };

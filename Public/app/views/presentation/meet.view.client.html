@@ -1,6 +1,6 @@
 <div id="meet-body-page">
     <div data-ng-include="'views/mobiles/meet-mobile-modal.view.client.html'"></div>
-    <div data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
+    <div ng-if="globals.currentUser.moderator" data-ng-include="'views/presentation/meet.modal.view.client.html'"></div>
 
     <div id="pffsm" class="presentation-forced" style="display: none" ng-if="!meet.logIn && !mobile && !checkScroll">
         <div id="pfffsm" class="presentation-forced-signup">
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div id="pffsmin" class="presentation-forced" style="display: none" ng-if="!mobile && !checkScroll2">
+    <div id="pffsmin" class="presentation-forced" style="display: none" ng-if="!mobile && !checkScroll2 && globals.currentUser.moderator">
         <div id="pfffsmin" class="presentation-forced-signup">
             <img onclick="disableBanner()" style="position: absolute; right: 0; width: 14px; margin: 15px 15px 0 0; top: 0; cursor: pointer" src="/images/cross-icon.svg">
             <div id="s11" class="sharing1" style="height: 95px; padding-top: 20px">

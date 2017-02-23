@@ -11,6 +11,17 @@ function checkDataMail(email, callback) {
 		})
 };
 
+function checkDataMailInvite(email, callback) {
+	pool.query('SELECT id FROM invitation WHERE invite_email = ? && date(creation_date) = curdate()', email,
+		function(err, result) {
+			if (err) throw err;
+			if (result[0])
+				return callback(false);
+			else
+				return callback(true);
+		});
+};
+
 /*exports.checkExistenceMail = function(req, res) {
 
 	emailCheck(req.body.email).then(function (check) {
@@ -48,16 +59,19 @@ exports.addInvitationMail = function(req, res) {
     	function recursive(index) {
     		if (mailList[index]) {
     			if (!req.body.team) {
-	    			checkDataMail(mailList[index], function(valid) {
-	    				if (valid) {
-	    					newMailList.push(mailList[index]);
-							pool.query('INSERT INTO invitation SET user_id = ?, invite_email = ?', [id, mailList[index]],
-		    					function(err, result) {
-		    						if (err) throw err;
-		    						return recursive(index + 1);
-		    					}); 
-						} else
-							return recursive(index + 1);
+    				checkDataMailInvite(mailList[index], function(exist) {
+    					if (!exist) return recursive(index + 1);
+		    			checkDataMail(mailList[index], function(valid) {
+		    				if (valid) {
+		    					newMailList.push(mailList[index]);
+								pool.query('INSERT INTO invitation SET user_id = ?, invite_email = ?', [id, mailList[index]],
+			    					function(err, result) {
+			    						if (err) throw err;
+			    						return recursive(index + 1);
+			    					}); 
+							} else
+								return recursive(index + 1);
+						});
 					});
     			} else {
 					newMailList.push(mailList[index]);

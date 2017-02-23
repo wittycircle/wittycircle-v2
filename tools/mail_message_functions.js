@@ -156,8 +156,13 @@ function getInformationForSendMail(user_id, callback) {
     pool.query("SELECT first_name, last_name, profile_picture, location_city, location_state, location_country FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)", user_id,
         function(err, result) {
             if (err) throw err;
-            else 
-                return callback(result[0]);
+            else {
+                pool.query('SELECT invite_id FROM share_invite_link WHERE user_id = ?', user_id,
+                    function(err, result2) {
+                        result[0].link = result2[0];
+                        return callback(result[0]);
+                    });
+            }
         });
 };
 
@@ -184,11 +189,12 @@ function sendMailByMandrill(info, callback) {
 
     var fullname    = info.first_name + " " + info.last_name;
     var subj        = fullname + " invited you to join Wittycircle";
-    
+    var url_invite  = 'https://www.wittycircle.com/invite/' + info.link.invite_id;
+
     if (info.location_state)
-        var desc    = info.location_city + ", " + info.location_state;
+        var loc    = info.location_city + ", " + info.location_state;
     else
-        var desc    = info.location_city + ", " + info.location_country;
+        var loc    = info.location_city + ", " + info.location_country;
 
     var template_name = "invitation";
     var template_content = [{
@@ -220,14 +226,6 @@ function sendMailByMandrill(info, callback) {
         }],
         "global_merge_vars": [
             {
-                "name": "ffname",
-                "content": info.first_name
-            },
-            {
-                "name": "flname",
-                "content": info.last_name
-            },
-            {
                 "name": "pimg",
                 "content": info.profile_picture
             },
@@ -236,9 +234,13 @@ function sendMailByMandrill(info, callback) {
                 "content": fullname
             },
             {
-                "name": "fdesc",
-                "content": desc
+                "name": "floc",
+                "content": loc
             },
+            {
+                "name": "url",
+                "content": url_invite
+            }
         ]
     };
 

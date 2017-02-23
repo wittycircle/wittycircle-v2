@@ -34,9 +34,7 @@
 	  	var x = $(window).height();
 	    // var y           = $(window).width();
 		var divHeight = $('#mmic').height();
-	    var margL = (x - divHeight)/2;
-	    if (margL > 150)
-	    	margL = margL - 100;
+	    var margL = (x - divHeight - 100)/2/2;
 
 	    $('#mmic').css('top', margL.toString() + 'px')
   });

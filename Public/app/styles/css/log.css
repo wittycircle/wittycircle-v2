@@ -114,7 +114,8 @@
     margin: 0 auto;
     padding: 5px 0 15px 0;
     background-color: white;
-    border-radius: 4px; }
+    border-radius: 4px;
+    border: 1px solid #e5e5e5; }
     .main-signup-page-bg #main-signup-page .signup-modal-social {
       padding: 0 55px 25px 60px; }
       .main-signup-page-bg #main-signup-page .signup-modal-social .fb-login, .main-signup-page-bg #main-signup-page .signup-modal-social .fb-share {

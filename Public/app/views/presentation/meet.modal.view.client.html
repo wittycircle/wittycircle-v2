@@ -1,40 +1,46 @@
 <section style="display: none" id="modal-meet-invite" class="meet-modal-invite-main">
 	<div class="meet-modal-invite-modal">
     <img onclick="disableModal()" style="position: absolute; right: 0; width: 21px; margin: 45px 45px 0 0; top: 0; cursor: pointer; " src="/images/cross-icon.svg">
-		<h4>Your ranking will grow by <span class="count">789</span>% and get </br>you <span class="count">42</span> times more exposure, instantly.</h4>
-		<div class="meet-modal-invite-box">
-			<div class="mmi-box-title">
-				<h3>Time to be a little bit social</h3>
-			</div>
+    	<div id="mmic" style="position: relative">
+			<h4>Your ranking will grow by <span class="count">789</span>% and get </br>you <span class="count">42</span> times more exposure, instantly.</h4>
+			<div class="meet-modal-invite-box">
+				<div class="mmi-box-title">
+					<h3>Time to be a little bit social</h3>
+				</div>
 
-			<div class="mmi-box-list">
-				<div class="mmi-box-list-element" ng-repeat="info in googleList" ng-click="meet.unselect($index)">
-					<img id="{{$index}}abcd" ng-src="{{info.link}}" alt="profile_picture" />
-					<div class="mmibl-element-info">
-						<h5>{{info.name}}</h5>
-						<h6>{{info.email}}</h6>
-					</div>
-					<div class="mmibl-element-checkbox">
-						<i ng-if="info.select" class="fa fa-check"></i>
+				<div class="mmi-box-list">
+					<div class="mmi-box-list-element" ng-repeat="info in googleList" ng-click="meet.unselect($index)">
+						<img id="{{$index}}abcd" ng-src="{{info.link}}" alt="profile_picture" />
+						<div class="mmibl-element-info">
+							<h5>{{info.name}}</h5>
+							<h6>{{info.email}}</h6>
+						</div>
+						<div class="mmibl-element-checkbox">
+							<i ng-if="info.select" class="fa fa-check"></i>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="mmi-box-button">
-				<button ng-click="meet.sendInviteToGoogleContacts()">Invite {{meet.numberInvited}} selected</button>
-				<p>More than <span class="count">47</span>% of invitations get accepted 🙈</p>
+				<div class="mmi-box-button">
+					<button ng-click="meet.sendInviteToGoogleContacts()">Invite {{meet.numberInvited}} selected</button>
+					<p>More than <span class="count">47</span>% of invitations get accepted 🙈</p>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
 <script>
-  // $(document).ready(function() {
-  //   var number = 3000;
+  $(document).ready(function() {
+	  	var x = $(window).height();
+	    // var y           = $(window).width();
+		var divHeight = $('#mmic').height();
+	    var margL = (x - divHeight)/2;
+	    if (margL > 150)
+	    	margL = margL - 100;
 
-  //   for (var i = 0; i < 3000; i++) {
-  //     $('#' + i + 'abcd').batchedImageLoader();
-  //   }
-  // });
+	    $('#mmic').css('top', margL.toString() + 'px')
+  });
+
   function disableModal() {
     $('#modal-meet-invite').css('display', 'none');
   };

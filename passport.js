@@ -33,6 +33,21 @@ var mailchimp = require('./mailchimpRequest');
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
+	function initShareInviteLink(first_name, last_name, user_id) {
+		var invite_id = first_name.replace(/ /g,'') + last_name.replace(/ /g,'') + '_W';
+			pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"', invite_id,
+				function(err, result3) {
+					if (!result3[0].number)
+						invite_id = invite_id + 1;
+					else
+						invite_id = invite_id + (result3[0].number + 1);
+					pool.query('INSERT INTO share_invite_link SET user_id = ?, invite_id = ?', [user_id, invite_id],
+						function(err, done) {
+							return ;
+						});
+				});
+	};
+
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================
@@ -185,6 +200,7 @@ module.exports = function(passport) {
 														    function(err, user) {
 															if (err) throw err;
 
+															initShareInviteLink(info.first_name, info.last_name, user[0].id);
 															// contact facebook follow list
 															FB.api('/me/friends', function (res) {
 															    if(!res || res.error) {
@@ -418,12 +434,16 @@ module.exports = function(passport) {
 															 pool.query('SELECT * FROM users WHERE profile_id = ?', [result.insertId], // return our user model to serialize and deserialize
 																    function(err, user) {
 																	if (err) throw err;
+
+																	initShareInviteLink(mailObject.merge_fields.FNAME, mailObject.merge_fields.LNAME, user[0].id);
+																	
 																	c.getContacts(function(err, contacts) {
 																		if (err) console.log(err);
 																		else {
 																			ssf.handleGoogleContacts(user[0].id, contacts);
 																		}
 																	}, null);
+
 																	pool.query('INSERT INTO first_log SET user_id = ?', user[0].id,
 																		   function(err, save) {
 																		       if (err) throw err;

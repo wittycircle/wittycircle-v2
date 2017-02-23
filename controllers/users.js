@@ -427,6 +427,22 @@ exports.searchUser = function(req, res){
     }
 };
 
+function initShareInviteLink(first_name, last_name, user_id) {
+    var invite_id = first_name.replace(/ /g,'') + last_name.replace(/ /g,'') + '_W';
+        pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"', invite_id,
+            function(err, result3) {
+                if (!result3[0].number)
+                    invite_id = invite_id + 1;
+                else
+                    invite_id = invite_id + (result3[0].number + 1);
+                console.log(invite_id);
+                pool.query('INSERT INTO share_invite_link SET user_id = ?, invite_id = ?', [user_id, invite_id],
+                    function(err, done) {
+                        return ;
+                    });
+            });
+};
+
 exports.createUser = function(req, res){
     /* Validate */
     req.checkBody('email', 'E-Mail is already in used.').isUnique('email');
@@ -486,6 +502,7 @@ exports.createUser = function(req, res){
                                 console.log(err);
                                 return res.status(400).send({success: false});
                                }
+                               initShareInviteLink(req.body.first_name, req.body.last_name, result.insertId);
 						       var mailObject = {
 							   'email_address': req.body.email,
 							   'status': 'subscribed',

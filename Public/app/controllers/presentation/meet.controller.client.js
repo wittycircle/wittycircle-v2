@@ -32,6 +32,9 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	meet.getContactListFromGoogle = getContactListFromGoogle;
 	meet.unselect = unselect;
 	meet.sendInviteToGoogleContacts = sendInviteToGoogleContacts;
+	meet.disableModal = disableModal;
+	meet.unselectAll = unselectAll;
+	meet.selectAllContact = 'Unselect all';
 
 	var skillListUrl = "";
 	// var allHelp = ['Teammate', 'Feedback', 'Mentor', 'Tips', 'Any help'];
@@ -51,7 +54,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -366,18 +369,20 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	};
 
 	function sendInviteToGoogleContacts() {
-		var array = [];
-		var length = $scope.googleList.length;
+		if (meet.numberInvited) {
+			var array = [];
+			var length = $scope.googleList.length;
 
-		for (var i = 0; i < length; i++) {
-			if ($scope.googleList[i].select)
-				array.push($scope.googleList[i]);
-		};
+			for (var i = 0; i < length; i++) {
+				if ($scope.googleList[i].select)
+					array.push($scope.googleList[i]);
+			};
 
-		var newArray = array.map(function (el) { return el.email });
-		RetrieveData.ppdData('/invitation/new', 'POST', {mailList: newArray, user_id: $rootScope.globals.currentUser.id}, null, '').then(function(res) {
+			var newArray = array.map(function (el) { return el.email });
+			RetrieveData.ppdData('/invitation/new', 'POST', {mailList: newArray, user_id: $rootScope.globals.currentUser.id}, null, '').then(function(res) {
 
-		});
+			});
+		}
 	};
 
 
@@ -406,7 +411,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 							if (array[i].link[0].gd$etag)
 								photo_link = array[i].link[0].href + '&access_token=' + token.access_token;
 							else
-								photo_link = 'https://res.cloudinary.com/dqpkpmrgk/image/upload/v1458645842/default_profile/shutterstock_355730741_qyx4in.jpg'
+								photo_link = 'https://ssl.gstatic.com/s2/contacts/images/NoPicture.gif'
 
 							var object = {
 								link: photo_link,
@@ -414,7 +419,10 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 								email: array[i].gd$email[0].address,
 								select: 1
 							}
-							$scope.googleList.push(object);
+							if (photo_link !== 'https://ssl.gstatic.com/s2/contacts/images/NoPicture.gif')
+								$scope.googleList.unshift(object);
+							else
+								$scope.googleList.push(object);
 						}
 					};
 
@@ -422,9 +430,9 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 						$scope.googleList;
 						meet.numberInvited = $scope.googleList.length;
 						$scope.checkScroll2 = 1;
+						$scope.displayGoogleModal = 1;
 					}, 0);
 
-					$("#modal-meet-invite").fadeIn();
 					    $('#modal-meet-invite').ready(function() {
 							$('.count').each(function () {
 								$(this).prop('Counter',0).animate({
@@ -442,6 +450,10 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		}
 	};
 
+	function disableModal() {
+		$scope.displayGoogleModal = 0;
+	};
+
 	function unselect(index) {
 		if ($scope.googleList[index].select === 1) {
 			$scope.googleList[index].select = 0;
@@ -449,6 +461,25 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		} else {
 			$scope.googleList[index].select = 1;
 			meet.numberInvited++;
+		}
+	};
+
+	function unselectAll() {
+		var index = meet.numberInvited ? false : true;
+		var length = $scope.googleList.length;
+
+		if (!index) {
+			for (var i = 0; i < length; i++) {
+				$scope.googleList[i].select = 0;
+			};
+			meet.numberInvited = 0;
+			meet.selectAllContact = 'Select all';
+		} else {
+			for (var i = 0; i < length; i++) {
+				$scope.googleList[i].select = 1;
+			};
+			meet.numberInvited = length;
+			meet.selectAllContact = 'Unselect all';
 		}
 	};
 

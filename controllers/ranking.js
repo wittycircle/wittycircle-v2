@@ -276,6 +276,7 @@ function compareRank(user_id, newRank, callback) {
 	       });
 };
 
+
 var job = new CronJob({
     cronTime: '00 00 17 * * 0-6',
     onTick: function() {

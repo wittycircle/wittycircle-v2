@@ -23,7 +23,7 @@
 				</div>
 
 				<div class="mmi-box-button">
-					<button id="mmibb" ng-click="meet.sendInviteToGoogleContacts()" onclick="textChange()" >Invite {{meet.numberInvited}} selected</button>
+					<button id="mmibb" ng-click="meet.sendInviteToGoogleContacts()" onclick="textChange()">Invite {{meet.numberInvited}} selected</button>
 					<p>More than <span class="count">47</span>% of invitations get accepted 🙈</p>
 				</div>
 			</div>
@@ -31,25 +31,25 @@
 	</div>
 </section>
 <script>
-  $(document).ready(function() {
+ 	$(document).ready(function() {
 	  	var x = $(window).height();
 	    // var y           = $(window).width();
 		var divHeight = $('#mmic').height();
 	    var margL = (x - divHeight - 100)/2/2;
 
-	    console.log(x, divHeight, margL);
 	    $('#mmic').css('top', margL.toString() + 'px')
 
-  });
+	});
 
-  function disableModal() {
-    $('#modal-meet-invite').css('display', 'none');
-  };
+	function disableModal() {
+		$('#modal-meet-invite').css('display', 'none');
+	};
 
-  function textChange() {
-  	$('#mmibb').text('Sended 🖖');
-  	setTimeout(function() {
-  		$('#modal-meet-invite').css('display', 'none');
-  	}, 2000);
-  };
+	function textChange() {
+		$('#mmibb').text('Sended 🖖');
+		setTimeout(function() {
+			$('#modal-meet-invite').css('display', 'none');
+		}, 2000);
+	};
+
 </script>

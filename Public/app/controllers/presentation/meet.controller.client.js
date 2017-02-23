@@ -399,6 +399,11 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		});
 
 		function fetch(token) {
+			$('#s11').css('display', 'none');
+	        $('#s12').css('display', 'none');
+	        $('#s13').css('display', 'none');
+	        $('#s14').css('display', 'none');
+	        $('#s15').css('display', 'block');
 			$.get('https://www.google.com/m8/feeds/contacts/default/full?alt=json&access_token=' + token.access_token + '&max-results=10000&v=3.0',
 				function(response) {
 					var array = response.feed.entry;

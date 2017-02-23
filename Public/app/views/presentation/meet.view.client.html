@@ -32,6 +32,9 @@
             <div id="s14" class="sharing4" style="display: none; height: 95px; padding-top: 40px">
                 <h5>Maybe next time 🙈</h5>
             </div>
+            <div id="s15" class="sharing4" style="display: none; height: 95px; padding-top: 40px">
+                <h5>Retrieving your contacts...</h5>
+            </div>
         </div>
     </div>
 
@@ -413,7 +416,7 @@
                                     $(this).prop('Counter',0).animate({
                                     Counter: $(this).text()
                                 }, {
-                                    duration: 2000,
+                                    duration: 1500,
                                     easing: 'swing',
                                 step: function (now) {
                                         $(this).text(Math.ceil(now));

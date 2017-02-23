@@ -54,7 +54,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 
 	$scope.$parent.card = {
 		title: "Wittycircle | Meet",
-		url: "https://www.wittycircle.com/meet",
+		url: "http://127.0.0.1/meet",
 		image: "https://res.cloudinary.com/dqpkpmrgk/image/upload/v1465994773/Share_Link_Cards_Facebook/Share_Pic_Facebook_Meet.png",
 	};
 
@@ -371,11 +371,11 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	function sendInviteToGoogleContacts() {
 		if (meet.numberInvited) {
 			var array = [];
-			var length = $scope.googleList.length;
+			var length = meet.googleList.length;
 
 			for (var i = 0; i < length; i++) {
-				if ($scope.googleList[i].select)
-					array.push($scope.googleList[i]);
+				if (meet.googleList[i].select)
+					array.push(meet.googleList[i]);
 			};
 
 			var newArray = array.map(function (el) { return el.email });
@@ -390,7 +390,7 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 		// GoogleAuth.signIn();
 
 		var config = {
-		  'client_id': '1000804181890-epc9jh416f4hvqp7gklkk0f3ot1u7gg6.apps.googleusercontent.com',
+		  'client_id': '462789229840-h9vot9kt0ihli4hvoh7eeooddm6l4kqa.apps.googleusercontent.com',
 		  'scope': 'https://www.google.com/m8/feeds',
 		  'authuser': -1
 		};
@@ -409,7 +409,8 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 					var array = response.feed.entry;
 					var length = array.length;
 					var photo_link;
-					$scope.googleList = [];
+					meet.googleList = [];
+					meet.limitContacts = 100;
 
 					for (var i = 0; i < length; i++) {
 						if (array[i].gd$email && array[i].gd$email[0]) {
@@ -425,17 +426,18 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 								select: 1
 							}
 							if (photo_link !== 'https://ssl.gstatic.com/s2/contacts/images/NoPicture.gif')
-								$scope.googleList.unshift(object);
+								meet.googleList.unshift(object);
 							else
-								$scope.googleList.push(object);
+								meet.googleList.push(object);
 						}
 					};
 
 					$timeout(function() {
-						$scope.googleList;
-						meet.numberInvited = $scope.googleList.length;
+						meet.googleList;
+						meet.numberInvited = meet.googleList.length;
 						$scope.checkScroll2 = 1;
 						$scope.displayGoogleModal = 1;
+						meet.limitContacts = meet.googleList.length;
 					}, 0);
 
 					    $('#modal-meet-invite').ready(function() {
@@ -460,31 +462,37 @@ angular.module('wittyApp').controller('MeetCtrl', function($filter, Picture, $st
 	};
 
 	function unselect(index) {
-		if ($scope.googleList[index].select === 1) {
-			$scope.googleList[index].select = 0;
+		if (meet.googleList[index].select === 1) {
+			meet.googleList[index].select = 0;
 			meet.numberInvited--;
 		} else {
-			$scope.googleList[index].select = 1;
+			meet.googleList[index].select = 1;
 			meet.numberInvited++;
 		}
 	};
 
 	function unselectAll() {
-		var index = meet.numberInvited ? false : true;
-		var length = $scope.googleList.length;
+		meet.limitContacts = 100;
+		var length = meet.googleList.length;
 
-		if (!index) {
+		if (meet.selectAllContact === 'Unselect all') {
 			for (var i = 0; i < length; i++) {
-				$scope.googleList[i].select = 0;
+				meet.googleList[i].select = 0;
 			};
 			meet.numberInvited = 0;
 			meet.selectAllContact = 'Select all';
+			$timeout(function() {
+				meet.limitContacts = length;
+			}, 3000);
 		} else {
 			for (var i = 0; i < length; i++) {
-				$scope.googleList[i].select = 1;
+				meet.googleList[i].select = 1;
 			};
 			meet.numberInvited = length;
 			meet.selectAllContact = 'Unselect all';
+			$timeout(function() {
+				meet.limitContacts = length;
+			}, 3000);
 		}
 	};
 

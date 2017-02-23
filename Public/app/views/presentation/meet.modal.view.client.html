@@ -2,15 +2,15 @@
 	<div class="meet-modal-invite-modal">
     <img onclick="disableModal()" style="position: absolute; right: 0; width: 21px; margin: 45px 45px 0 0; top: 0; cursor: pointer; z-index: 100000" src="/images/cross-icon.svg">
     	<div id="mmic" style="position: relative">
-			<h4>Your ranking will grow by <span class="count">{{(meet.numberInvited / googleList.length) * 789 | number: 0}}</span>% and get </br>you <span class="count">{{(meet.numberInvited / googleList.length) * 42 | number: 0}}</span> times more exposure, instantly.</h4>
+			<h4>Your ranking will grow by <span class="count">{{(meet.numberInvited / meet.googleList.length) * 789 | number: 0}}</span>% and get </br>you <span class="count">{{(meet.numberInvited / meet.googleList.length) * 42 | number: 0}}</span> times more exposure, instantly.</h4>
 			<div class="meet-modal-invite-box">
 				<div class="mmi-box-title">
 					<h3>Time to be a little bit social</h3>
 					<span ng-click="meet.unselectAll()">{{meet.selectAllContact}}</span>
 				</div>
 
-				<div class="mmi-box-list">
-					<div class="mmi-box-list-element" ng-repeat="info in googleList" ng-click="meet.unselect($index)">
+				<div id="mmibl" class="mmi-box-list">
+					<div class="mmi-box-list-element" ng-repeat="info in meet.googleList | limitTo: meet.limitContacts" ng-click="meet.unselect($index)">
 						<img id="{{$index}}abcd" ng-src="{{info.link}}" onerror="this.src='https://ssl.gstatic.com/s2/contacts/images/NoPicture.gif'" alt="profile_picture" />
 						<div class="mmibl-element-info">
 							<h5>{{info.name}}</h5>
@@ -38,7 +38,7 @@
 	    var margL = (x - divHeight - 100)/2/2;
 
 	    $('#mmic').css('top', margL.toString() + 'px')
-
+	
 	});
 
 	function disableModal() {

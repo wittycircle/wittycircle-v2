@@ -124,7 +124,7 @@ function setInviteLink() {
 
 							// parametre invite_id
 							var invite_id = result[index].first_name.replace(/ /g,'') + result[index].last_name.replace(/ /g,'') + '_W';
-							pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"', invite_id,
+							pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"',
 								function(err, result3) {
 									if (!result3[0].number)
 										invite_id = invite_id + 1;
@@ -141,4 +141,28 @@ function setInviteLink() {
 			};
 			recursive(0);
 		});
+};
+
+function setInviteLinkRebuild() {
+    pool.query('select u.profile_id, p.id, p.first_name, p.last_name from profiles as p inner join (select profile_id from users) as u on p.id=u.profile_id where id in (select profile_id from users where id not in (select user_id from share_invite_link))',
+	       function(err, result) {
+		   function recursive(index) {
+		       if (result[index]) {
+			   var invite_id = result[index].first_name.replace(/ /g,'') + result[index].last_name.replace(/ /g,'') + '_W';
+			   pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"',
+				      function(err, result3) {
+					  if (!result3[0].number)
+					      invite_id = invite_id + 1;
+					  else
+					      invite_id = invite_id + (result3[0].number + 1);
+					  pool.query('INSERT INTO share_invite_link SET user_id = ?, invite_id = ?', [result[index].id, invite_id],
+						     function(err, done) {
+							 return recursive(index + 1);
+							 });
+					  });
+			   } else
+			       return ;
+		       };
+		   recursive(0);
+		   })
 };

@@ -429,7 +429,7 @@ exports.getInvitPermission = function(req, res) {
 	pool.query('SELECT university_communication FROM profiles WHERE id = ?', req.user.id,
 		function(err, result) {
 			if (err) throw err;
-			if (result[0].university_communication) 
+			if (result[0] && result[0].university_communication) 
 				return res.status(200).send(true);
 			else
 				return res.status(200).send(false);

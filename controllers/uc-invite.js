@@ -177,7 +177,7 @@ function inviteMailToUcBySender(list, university, sender_id, send_message, callb
                                     "vars": [
                                         {
                                             "name": "fname",
-                                            "content": "There"
+                                            "content": result[0].first_name
                                         },
                                         {
                                             "name": "message",

@@ -133,7 +133,6 @@ function inviteMailToUcBySender(list, university, sender_id, send_message, callb
 					if (list[index]) {
 						/* FROM PROFILE SETTING */
 						var ffname = result[0].first_name + " " + result[0].last_name;
-						console.log(ffname);
 
                         var subj = "Wittycircle is now open to the " + done[0].url_name + " community"
 
@@ -177,7 +176,7 @@ function inviteMailToUcBySender(list, university, sender_id, send_message, callb
                                     "vars": [
                                         {
                                             "name": "fname",
-                                            "content": "There"
+                                            "content": result[0].first_name
                                         },
                                         {
                                             "name": "message",

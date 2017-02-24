@@ -538,7 +538,6 @@ angular.module('wittyApp')
     matches = urls.exec( input );
 
     if ( matches !== null ) output = matches[1];
-    console.log(output);
     return output;
   };
 })

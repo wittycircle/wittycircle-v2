@@ -450,6 +450,7 @@ function getListUserSearch(data, callback) {
 };
 
 exports.getUserBySkills = function(req, res) {
+    console.time('Time to find skills: ');
     pool.query('SELECT * FROM user_skills GROUP BY user_id', function(err, result) {
         if (err) throw err;
         if (result[0]) {
@@ -476,6 +477,7 @@ exports.getUserBySkills = function(req, res) {
                                 else
                                     bigData2.push(arr1);
                                 bigData = bigData.concat(bigData2);
+                                console.timeEnd('Time to find skills: ');
                                 return res.send({success: true, newList: bigData});
                             } else {
                                 if (arr1[0].skill.length === 3)
@@ -604,11 +606,12 @@ exports.getUsersBySkillAl = function(req, res) {
             recursive(0);
         });
     } else
-        return res.send({success: false});
+        return res.send({ success: false });
 };
 
 exports.getUsersByAl = function(req, res) {
     if (req.body.about || req.body.geo) {
+        console.log("OK");
         pool.query('SELECT id, first_name, last_name, description, location_city, network, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE fake = 0 ORDER BY views DESC', 
             function (err, results) {
             if (err) throw (err);

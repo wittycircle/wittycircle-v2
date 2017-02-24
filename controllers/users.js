@@ -200,29 +200,60 @@ exports.getUser = function(req, res){
 
 exports.getCardProfile = function(req, res) {
     console.time('Time to find: ');
-    pool.query('SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id',
-        function(err, result) {
-            if (err) throw err;
-            else {
-                var arr = result.map( function(el) { return el.user_id; })
-                pool.query("SELECT id FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id IN (" + arr + ")) && (DESCRIPTION != '' && DESCRIPTION is not null)",
+    var query = "select u.id, u.profile_id, u.username, uf.followers, fu.following, r.myRank, p.first_name, p.last_name, p.description, p.network, p.location_city, p.location_state, p.location_country, p.profile_picture, p.about, p.cover_picture_cards from users as u inner join (select id as profile_id2, first_name, last_name, description, network, location_city, location_state, location_country, profile_picture, about, cover_picture_cards from profiles where description != '' && DESCRIPTION is not null && profile_picture is not null && fake = 0 ORDER BY rand()) as p on u.profile_id=p.profile_id2 left join (select follow_user_id, count(*) as followers from user_followers group by follow_user_id) as uf on u.id=uf.follow_user_id left join (select user_id, count(*) as following from user_followers group by user_id) as fu on u.id=fu.user_id left join (select user_id, rank as myRank from rank_of_the_day) as r on u.id=r.user_id where id in (SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id) order by rand()"    
+    
+    pool.query(query, function(err, result) {
+        if (err) throw err;
+        function recursive(index) {
+            if (result[index]) {
+                pool.query('SELECT skill_name FROM user_skills WHERE user_id = ?', result[index].id,
                     function(err, result2) {
-                        if (err) throw err;
-                        var arr2 = result2.map( function(el) { return el.id});
-                        pool.query('SELECT id, first_name, last_name, description, network, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null && fake = 0 ORDER BY rand()', 
-                            function (err, result3) {                                
-                                if (err) throw (err);
-                                pf.sortCardProfile(result3, function(array1) {
-                                    console.timeEnd('Time to find: ');
-                                    if (array1[0]) {
-                                        return res.send({success: true, data: array1})
-                                    } else
-                                        return res.send({success: false});
-                                });
-                            });
+                        result[index].user_id = result[index].id;
+                        result[index].skills = result2;
+                        return recursive(index + 1);
                     });
+            } else  {
+                console.timeEnd('Time to find: ');
+                return res.send({success: true, data: result})
             }
-        });
+        };
+        recursive(0);
+    });
+    // pool.query("SELECT id, first_name, last_name, description, network, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id IN ( SELECT profile_id FROM users WHERE id IN (SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id) )  && (DESCRIPTION != '' && DESCRIPTION is not null) && profile_picture is not null && fake = 0 ORDER BY rand()",
+    //     function(err, result) {
+    //         if (err) throw err;
+    //         pf.sortCardProfile(result, function(array) {
+    //             console.timeEnd('Time to find: ');
+    //             if (array[0]) {
+    //                 return res.send({success: true, data: array})
+    //             } else
+    //                 return res.send({success: false});
+    //         });
+    //     });
+    // pool.query('SELECT profile_id FROM users WHERE id IN (SELECT user_id FROM user_skills WHERE user_id IN (SELECT user_id FROM user_experiences GROUP BY user_id) GROUP BY user_id)',
+    //     function(err, result) {
+    //         console.log(result.length);
+    //         if (err) throw err;
+    //         else {
+    //             var arr = result.map( function(el) { return el.user_id; })
+    //             pool.query("SELECT id FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id IN (" + arr + ")) && (DESCRIPTION != '' && DESCRIPTION is not null)",
+    //                 function(err, result2) {
+    //                     if (err) throw err;
+    //                     var arr2 = result2.map( function(el) { return el.id});
+    //                     pool.query('SELECT id, first_name, last_name, description, network, location_city, location_state, location_country, profile_picture, about, cover_picture_cards FROM `profiles` WHERE id IN (' + arr2 + ') && profile_picture is not null && fake = 0 ORDER BY rand()', 
+    //                         function (err, result3) {                                
+    //                             if (err) throw (err);
+    //                             pf.sortCardProfile(result3, function(array1) {
+    //                                 console.timeEnd('Time to find: ');
+    //                                 if (array1[0]) {
+    //                                     return res.send({success: true, data: array1})
+    //                                 } else
+    //                                     return res.send({success: false});
+    //                             });
+    //                         });
+    //                 });
+    //         }
+    //     });
 };
 
 exports.getCardProfilePlus = function(req, res) {

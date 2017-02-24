@@ -457,6 +457,18 @@ angular.module('wittyApp')
         return value + (tail || ' ...');
     };
 })
+.filter('better_number',
+['$filter', function (filter) {
+    var _filter = filter('number');
+    return function (number) {
+    	if (Math.floor(number) < 1)
+    		return _filter(number + 1, 2)
+    	if (number % 1 === 0)
+    		return number;
+   		else
+   			return _filter(number, 2);
+    }
+}])
 .filter('sortSkill', function () {
     return function (input) {
 

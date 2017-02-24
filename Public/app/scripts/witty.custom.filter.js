@@ -461,6 +461,8 @@ angular.module('wittyApp')
 ['$filter', function (filter) {
     var _filter = filter('number');
     return function (number) {
+	if (number === 0)
+	    return 1;
     	if (Math.floor(number) < 1)
     		return _filter(number + 1, 2)
     	if (number % 1 === 0)

@@ -14,6 +14,7 @@ var wittyCircleApp = angular
 	'ngMaterial',
 	'ngFileUpload',
 	'angular-toArrayFilter',
+	'angular.filter',
 	'algoliasearch',
 	'angularMoment',
 	'cloudinary',

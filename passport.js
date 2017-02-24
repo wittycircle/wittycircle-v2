@@ -35,7 +35,7 @@ module.exports = function(passport) {
 
 	function initShareInviteLink(first_name, last_name, user_id) {
 		var invite_id = first_name.replace(/ /g,'') + last_name.replace(/ /g,'') + '_W';
-			pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"', invite_id,
+			pool.query('SELECT count(*) AS number FROM share_invite_link WHERE invite_id like "' + invite_id + '%"',
 				function(err, result3) {
 					if (!result3[0].number)
 						invite_id = invite_id + 1;

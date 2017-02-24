@@ -171,9 +171,9 @@
                                 <div class="card-rank" ng-if="cardProfile.myRank">
                                     <span>#{{cardProfile.myRank}}</span>
                                 </div>
-                                <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
+                                <div class="card-picture" back-img="{{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }}">
                                     <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
-                                    ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
+                                    back-img="{{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }}">
                                     </div>
                                 </div>
                                 <div class="card-info">
@@ -248,9 +248,9 @@
                                     <div class="card-rank" ng-if="cardProfile.myRank">
                                         <span>#{{cardProfile.myRank}}</span>
                                     </div>
-                                    <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.cover_picture_cards, 205, 40, 'fill') }})'}">
+                                    <div class="card-picture" back-img="{{ resizePic(cardProfile.profiles.cover_picture_cards, 205, 40, 'fill') }}">
                                         <div ng-hide="!cardProfile.profiles.profile_picture" class="card-profile-picture"
-                                        ng-style="{'background-image': 'url({{ resizePic(cardProfile.profiles.profile_picture, 60, 60, 'fill') }})'}">
+                                        back-img="{{ resizePic(cardProfile.profiles.profile_picture, 60, 60, 'fill') }}">
                                     </div>
                                     </div>
                                     <div class="card-info">
@@ -322,9 +322,9 @@
                                         <div class="card-rank" ng-if="cardProfile.myRank">
                                             <span>#{{cardProfile.myRank}}</span>
                                         </div>
-                                        <div class="card-picture" ng-style="{'background-image': 'url({{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }})'}">
+                                        <div class="card-picture" back-img="{{ resizePic(cardProfile.cover_picture_cards, 205, 40, 'fill') }}">
                                             <div ng-hide="!cardProfile.profile_picture" class="card-profile-picture"
-                                            ng-style="{'background-image': 'url({{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }})'}">
+                                            back-img="{{ resizePic(cardProfile.profile_picture, 60, 60, 'fill') }}">
                                         </div>
                                         </div>
                                         <div class="card-info">

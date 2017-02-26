@@ -80,7 +80,7 @@ exports.getOpeningsOfProject = function(req, res) {
   if (errors) {
     return res.status(400).send(errors);
   } else {
-    pool.query("SELECT * FROM project_openings WHERE project_id = (SELECT id FROM projects WHERE public_id = ?)",
+    pool.query("SELECT * FROM project_openings WHERE project_id IN (SELECT id FROM projects WHERE public_id = ?)",
     req.params.project_id,
     function (err, result) {
       if (err) {

@@ -166,7 +166,7 @@
                         <h4>Browse <span>the users below</span> or filter them using our magic tool above.</h4>
                     </div>
                     <div class="meet-body-cards" ng-if="meet.cardProfiles && !searchSk && !searchAl">
-                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | meetPopularity: meet.propertyName | meetNetwork: search.searchNetwork:checkNetwork:'partial' | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
+                        <div class="meet-body-card profile-card" ng-repeat="cardProfile in meet.cardProfiles | meetPopularity: meet.propertyName | meetNetwork: meet.launched && search.searchNetwork:checkNetwork:'partial' | limitTo: limitc" ng-if="cardProfile.cover_picture_cards" ng-if="!cardProfile.fake">
                             <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">
                                 <div class="card-rank" ng-if="cardProfile.myRank">
                                     <span>#{{cardProfile.myRank}}</span>
@@ -242,7 +242,7 @@
                             <h2 ng-if="cardProfiles.length && $index === 5">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in {{fCountry}}</h2>
                             <h2 ng-if="cardProfiles.length && $index === 6">People skilled in <span ng-repeat="skillAl in cardsFound[0].skills"><span style="border-bottom: 1px solid black">{{skillAl}}</span><span ng-if="!$last">, </span></span> in the rest of the world</h2>
                         </div>
-                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | meetPopularity: meet.propertyName:true:'all' | meetNetwork: search.searchNetwork:checkNetwork:'all' | unique: 'username' | limitTo: limitSk1 track by $index">
+                        <div class="meet-body-cards" ng-repeat="cardProfile in cardProfiles | meetPopularity: meet.propertyName:true:'all' | meetNetwork: meet.launched && search.searchNetwork:checkNetwork:'all' | unique: 'username' | limitTo: limitSk1 track by $index">
                             <div class="meet-body-card profile-card" ng-if="cardProfile.profiles.cover_picture_cards && cardProfiles !== 'none'">
                                 <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">
                                     <div class="card-rank" ng-if="cardProfile.myRank">
@@ -315,7 +315,7 @@
                                 <h2 ng-if="cardProfiles.length && $index === 4">People from {{fCountry}}</h2>
                                 <h2 ng-if="cardProfiles.length && $index === 5">People in the rest of the world</h2>
                             </div>
-                            <div class="meet-body-cards" style="display: inline-block; padding-left: 0; margin-bottom: 20px;" ng-repeat="cardProfile in cardProfiles | meetPopularity: meet.propertyName:true:'partial' | meetNetwork: search.searchNetwork:checkNetwork:'partial' | limitTo: limitAl1 track by $index">
+                            <div class="meet-body-cards" style="display: inline-block; padding-left: 0; margin-bottom: 20px;" ng-repeat="cardProfile in cardProfiles | meetPopularity: meet.propertyName:true:'partial' | meetNetwork: meet.launched && search.searchNetwork:checkNetwork:'partial' | limitTo: limitAl1 track by $index">
                                 <!-- <h1 style="color: black; width: 1000px" ng-if="meet.cardProfiles.length > 1 && $index === 0 && cardProfiles.length">{{ ::cardProfile}}</h1> -->
                                 <div class="meet-body-card profile-card" ng-if="cardProfile.cover_picture_cards">
                                     <a ng-href="/{{cardProfile.username}}" class="card-click-zone" target="_blank">

@@ -330,6 +330,7 @@ function addUserView(user_id, numView, numberProfiles, callback) {
                                 if (!result[0])
                                     return recursive(index);
                                 var fullName = result[0].first_name + " " + result[0].last_name;
+                                console.log(fullName);
                                 pool.query('INSERT INTO notification_list SET user_id = ?, user_notif_id = ?, user_notif_username = ?, type_notif = "view"', [user_id, randomId, fullName],
                                     function(err, result2) {
                                         if (err) throw err;
@@ -396,7 +397,6 @@ function increaseUserView() {
     } else
         return ;
 };
-
 
 var job = new CronJob({
     cronTime: '00 00 19 * * 6',

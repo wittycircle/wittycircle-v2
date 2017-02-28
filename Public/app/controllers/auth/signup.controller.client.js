@@ -276,8 +276,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 		$http.put('/signup/basic/' + currentUser.id, profileData).success(function(res) {
 		    if (res.success) {
 				$scope.canPass = true;
-				bClassName.attr('class', inRightBig);
-				bClassName.css('display', 'block');
+				dClassName.attr('class', inRightBig);
+				dClassName.css('display', 'block');
 				aClassName.attr('class', outLeftBig);
 				setTimeout(function() {
 				    aClassName.hide();
@@ -433,8 +433,8 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	};
 	
 	$scope.saveInterest     = function() {
-	    dClassName.attr('class', inRightBig);
-	    dClassName.css('display', 'block');
+	    eClassName.attr('class', inRightBig);
+	    eClassName.css('display', 'block');
 	    cClassName.attr('class', outLeftBig);
 	    setTimeout(function() {
 		cClassName.hide();
@@ -547,6 +547,7 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 			'first-name', 'last-name', // Add these to get the name
 			'industry', 'date-of-birth', 'educations:(id,school-name)',
 			'positions', // Add this one to get the job history
+			'public-profile-url',
 		])
 		.result(displayProfiles)
 		.error(function(err) {
@@ -558,6 +559,10 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	$scope.getLinkedinField = function() {
 		$scope.onImport = true;
 		IN.User.authorize(retrieveLinkedinPosition);
+		// IN.User.logout(function() {
+		// 	console.log("OK"); 
+		// 	IN.User.authorize(retrieveLinkedinPosition); 
+		// })
 	};
 	
 	$scope.savePosition   = function(no) {
@@ -669,9 +674,9 @@ angular.module('wittyApp').controller('SignupCtrl', function ($http, $cookieStor
 	};
 	
 	$scope.saveExperience          = function() {
-		eClassName.attr('class', inRightBig);
-	    eClassName.css('display', 'block');
-	    dClassName.attr('class', outLeftBig);
+		bClassName.attr('class', inRightBig);
+	    bClassName.css('display', 'block');
+	    eClassName.attr('class', outLeftBig);
 	    setTimeout(function() {
 		dClassName.hide();
 	    }, 200);

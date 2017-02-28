@@ -6,9 +6,9 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba"><strong>Basics</strong></li>
-				<li class="sbnsk" ng-disabled="!canPass">Skills</li>
+				<li class="sbnex" ng-disabled="!canPass">Experience</li>
+				<li class="sbnsk">Skills</li>
 				<li class="sbnin">Interests</li>
-				<li class="sbnex">Experience</li>
 				<li class="sbnab">About you</li>
 			</ul>
 		</div>
@@ -125,9 +125,9 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
-				<li class="sbnsk"><strong>Skills</strong></li>
+				<li class="sbnsk">Experience</li>
+				<li class="sbnex"><strong>Skills</strong></li>
 				<li class="sbnin">Interests</li>
-				<li class="sbnex">Experience</li>
 				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
@@ -160,9 +160,9 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
+				<li class="sbnex">Experience</li>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin"><strong>Interests</strong></li>
-				<li class="sbnex">Experience</li>
 				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
@@ -195,9 +195,9 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
+				<li class="sbnex"><strong>Experience</strong></li>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin">Interests</li>
-				<li class="sbnex"><strong>Experience</strong></li>
 				<li class="sbnab">About you</li></a>
 			</ul>
 		</div>
@@ -258,9 +258,9 @@
 		<div class="signup-body-nav">
 			<ul>
 				<li class="sbnba">Basics</li></a>
+				<li class="sbnex">Experience</li>
 				<li class="sbnsk">Skills</li>
 				<li class="sbnin">Interests</li>
-				<li class="sbnex">Experience</li>
 				<li class="sbnab"><strong>About you</strong></li></a>
 			</ul>
 		</div>
@@ -477,20 +477,20 @@
 
 				if (scope.canPass) {
 					var c0			= $('.sbnba');
-					var c1 	 		= $('.sbnsk');
-					var c2 			= $('.sbnin');
-					var c3 			= $('.sbnex');
+					var c1 	 		= $('.sbnex');
+					var c2 			= $('.sbnsk');
+					var c3 			= $('.sbnin');
 					var c4 			= $('.sbnab');
 
-					var b1 			= $('#bsk');
-					var b2 			= $('#bin');
-					var b3 			= $('#bex');
+					var b1 			= $('#bex');
+					var b2 			= $('#bsk');
+					var b3 			= $('#bin');
 					var b4 			= $('#bab');
 
 					var aClassName 	= $('#signup-basic-body'),
-						bClassName  = $('#signup-skill-body'),
-						cClassName  = $('#signup-interest-body'),
-						dClassName 	= $('#signup-experience-body'),
+						bClassName  = $('#signup-experience-body'),
+						cClassName  = $('#signup-skill-body'),
+						dClassName 	= $('#signup-interest-body'),
 						eClassName	= $('#signup-about-body');
 
 					if (mobileSize > 736) {
@@ -510,17 +510,17 @@
 						var count 	 = 0;
 						var cDisplay = $('#signup-basic-body');
 					}
-					if ($('#signup-skill-body').css('display') === "block") {
+					if ($('#signup-experience-body').css('display') === "block") {
 						var count 	 = 1;
+						var cDisplay = $('#signup-experience-body');
+					}
+					if ($('#signup-skill-body').css('display') === "block") {
+						var count 	 = 2;
 						var cDisplay = $('#signup-skill-body');
 					}
 					if ($('#signup-interest-body').css('display') === "block") {
-						var count 	 = 2;
-						var cDisplay = $('#signup-interest-body');
-					}
-					if ($('#signup-experience-body').css('display') === "block") {
 						var count 	 = 3;
-						var cDisplay = $('#signup-experience-body');
+						var cDisplay = $('#signup-interest-body');
 					}
 					if ($('#signup-about-body').css('display') === "block") {
 						var count 	 = 4;

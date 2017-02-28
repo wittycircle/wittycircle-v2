@@ -34,22 +34,23 @@ function getVotedProject(list, req, callback) {
 		       if (result[0]) {
 			   function recursive(index) {
 			       if (result[index]) {
-				   function recursive2(index2) {
-				       if (list[index2]) {
-					   if (list[index2].public_id == result[index].follow_project_public_id) {
-					       list[index2].check_vote = 1;
-					       recursive(index + 1);
-					   } 
-					   else {
-					       recursive2(index2 + 1);
-					   }
-				       } else
-					   recursive(index + 1);
-				       
-				   };
-				   recursive2(0);
+    				   function recursive2(index2) {
+                        console.log(typeof list[index2]);
+    				       if (list[index2]) {
+        					   if (list[index2].public_id === result[index].follow_project_public_id) {
+                                console.log("OK");
+        					       list[index2].check_vote = 1;
+        					       return recursive(index + 1);
+        					   } else {
+        					       return recursive2(index2 + 1);
+        					   }
+    				       } else
+    					       return recursive(index + 1);
+    				       
+    				   };
+    				   recursive2(0);
 			       } else {
-				   callback(list);
+				    callback(list);
 			       }
 			       
 			   };

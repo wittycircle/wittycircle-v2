@@ -5,6 +5,31 @@ var _             = require('underscore');
 var mandrill      = require('mandrill-api/mandrill');
 const crypto      = require('crypto');
 
+// function updateCategoryProjects() {
+//     pool.query('SELECT id, category_id FROM projects',
+//         function(err, result) {
+//             if (err) throw err;
+//             function recursive(index) {
+//                 if (result[index]) {
+//                     pool.query('SELECT name FROM categories WHERE id = ?', result[index].category_id,
+//                         function(err, check) {
+//                             pool.query('UPDATE projects SET category_name = ? WHERE id = ?', [check[0].name, result[index].id],
+//                                 function(err, done) {
+//                                     console.log(done);
+//                                     return recursive(index + 1);
+//                                 });
+//                         });
+//                 } else {
+//                     console.log("OK");
+//                     return ;
+//                 }
+//             };
+//             recursive(0);
+//         });
+// };
+
+// updateCategoryProjects();
+
 
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {

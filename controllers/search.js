@@ -28,38 +28,31 @@ var _  = require('underscore');
 // };
 function getVotedProject(list, req, callback) {
     if (req.isAuthenticated()) {
-	pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
-		   function(err, result) {
-		       if (err) throw err;
-		       if (result[0]) {
-			   function recursive(index) {
-			       if (result[index]) {
-    				   function recursive2(index2) {
-                        console.log(typeof list[index2]);
-    				       if (list[index2]) {
-        					   if (list[index2].public_id === result[index].follow_project_public_id) {
-                                console.log("OK");
-        					       list[index2].check_vote = 1;
-        					       return recursive(index + 1);
-        					   } else {
-        					       return recursive2(index2 + 1);
-        					   }
-    				       } else
-    					       return recursive(index + 1);
-    				       
-    				   };
-    				   recursive2(0);
-			       } else {
-				    callback(list);
-			       }
-			       
-			   };
-			   recursive(0);
-		       } else
-			   callback(list);
-		   });
+        pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+            function(err, result) {
+                if (err) throw err;
+                if (result[0]) {
+                    var follow_id_list = result.map( function(el) { return el.follow_project_public_id});
+                    function recursive(index) {
+                        if (list[index]) {
+                            if (!list[index].picture_card) {
+                                list.splice(index, 1);
+                                return recursive(index);
+                            }
+                            if (follow_id_list.indexOf(list[index].public_id) != -1)
+                                list[index].check_vote = 1;
+                            else
+                                list[index].check_vote = 0;
+                            return recursive(index + 1);
+                        } else                             
+                            return callback(list);
+                    };
+                    recursive(0);
+            } else
+                return callback(list);
+        });
     } else
-	callback(list);
+        return callback(list);
 };
 
 // Check if the element is already in the list

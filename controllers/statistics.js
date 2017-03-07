@@ -89,6 +89,7 @@ exports.verifyShareInviteLink = function(req, res) {
     				pool.query('SELECT first_name, last_name, profile_picture FROM profiles WHERE id IN (SELECT profile_id FROM users WHERE id = ?)', result[0].user_id,
     					function(err, result2) {
     						if (err) throw err;
+    						result2[0].user_id = result[0].user_id;
     						return res.status(200).send({success: true, info: result2[0]});
     					});
     			} else
@@ -111,6 +112,29 @@ exports.getShareInviteLink = function(req, res) {
     			return res.status(200).send('invite/' + result[0].invite_id);
     		});
     }
+};
+
+exports.updateShareInvite = function(req, res) {
+	if (req.body.email && req.body.invite_id) {
+		pool.query('SELECT id FROM invitation WHERE user_id = ? AND invite_email = ?', [req.body.invite_id, req.body.email],
+			function(err, result) {
+				if (err) throw err;
+				if (result[0]) {
+ 					pool.query('UPDATE invitation SET status = "registed" WHERE id = ?', [result[0].id],
+ 						function(err, result1) {
+ 							if (err) throw err;
+ 							return res.status(200).send(true);
+ 						});
+				} else {
+					pool.query('INSERT INTO invitation SET invite_email = ?, status = "registed", user_id = ?', [req.body.email, req.body.invite_id],
+						function(err, result2) {
+							if (err) throw err;
+							return res.status(200).send(true);
+						});
+				}
+			});
+	} else
+		return res.status(400).send(false);
 };
 
 

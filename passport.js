@@ -48,6 +48,29 @@ module.exports = function(passport) {
 				});
 	};
 
+	// function updateSuccessInvite(email, invite_id) {
+	// 	if (email && invite_id) {
+	// 		pool.query('SELECT id FROM invitation WHERE user_id = ? AND invite_email = ?', [invite_id, email],
+	// 			function(err, result) {
+	// 				if (err) throw err;
+	// 				if (result[0]) {
+	//  					pool.query('UPDATE invitation SET status = "registed" WHERE id = ?', [result[0].id],
+	//  						function(err, result1) {
+	//  							if (err) throw err;
+	//  							return callback();
+	//  						});
+	// 				} else {
+	// 					pool.query('INSERT INTO invitation SET invite_email = ?, status = "registed", user_id = ?', [email, invite_id],
+	// 						function(err, result2) {
+	// 							if (err) throw err;
+	// 							return callback();
+	// 						});
+	// 				}
+	// 			});
+	// 	} else
+	// 		return callback();
+	// }
+
     // =========================================================================
     // passport session setup ==================================================
     // =========================================================================

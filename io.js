@@ -21,6 +21,13 @@ function getNewD(value, wordwise, max, tail, callback) {
     }
 }
 
+// const client = require('socket.io-client')('http://localhost:3000', {
+//     query: {
+//         user: 'chau-nguyen.ho@hec.edu',
+//         password: 'tolatetosee2'
+//     }
+// });
+
 module.exports = function(app, io, ensureAuth) {
     var users = {};
 
@@ -51,6 +58,20 @@ module.exports = function(app, io, ensureAuth) {
             socket.emit('userOnline', users);
             socket.broadcast.emit('userOnline', users);
         };
+
+        // let profile_lookup_table = [];
+
+        // //Authenticated connection to scrape server
+        // socket.on('import::linkedin', url => {
+        //     client.emit('social::robot::please', {u: url});
+        //     profile_lookup_table[url] = socket.id;
+        // });
+
+        // client.on('social::robot::here_you_go', data => {
+        //     console.log(data);
+        //     socket.emit('import::success', data);
+        // });
+
 
         /*** View Notification ***/
         socket.on('view-notification', function(view_user) {

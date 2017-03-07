@@ -12,12 +12,12 @@
         	<h4 style="font-size: 18px; font-family: 'FreigBook'; color: black; margin-top: 0">{{info.first_name}} will increase his ranking and get 24% more exposure thanks to you.</h4>
         </div>
         <div class="fb-login">
-            <a href="/auth/facebook" target="_self">
+            <a href="/auth/facebook" target="_self" ng-click="saveInvite(info.user_id)">
                 <button><i class="fa fa-facebook" style="color: white"></i>Log in with Facebook</button>
             </a>
         </div>
         <div class="go-login">
-            <a href="/auth/google" target="_self">
+            <a href="/auth/google" target="_self" ng-click="saveInivite()">
                 <button class="go-login"><img src="/images/social_media/newgoogle-logo.svg">Log in with Google</button>
             </a>
         </div>
@@ -55,7 +55,7 @@
         </p>
     </div>
     <div class="signup-modal-button">
-        <button type="submit" ng-click="signupto()">Sign Up</button>
+        <button type="submit" ng-click="signupto(info.user_id)">Sign Up</button>
     </div>
 
     <div class="signup-modal-footer">

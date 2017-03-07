@@ -57,8 +57,7 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
       }
     });
 
-    $scope.signupto = function () {
-        console.log('ici');
+    $scope.signupto = function (user_id) {
       // var username = createUsername($scope.formData.first_name, $scope.formData.last_name);
       // $scope.formData.username = username;
       $scope.eat = false;
@@ -89,10 +88,16 @@ angular.module('wittyApp').controller('Signup_modalCtrl', function ($http, $loca
         } else {
           Authentication.Login($scope.formData.email, $scope.formData.password, function (response) {
             if (response.success) {
-              $scope.closeModal = true;
+              if (!user_id)
+                $scope.closeModal = true;
               Authentication.SetCredentials(response.user.email, response.user.id, response.user.profile_id, response.user.username, response.user.moderator, response.user.ambassador, function(done) {
                 $scope.formData = [];
-                $state.go('signup', {tagCheckFirst: true});
+                if (user_id) {
+                  $http.post('/share/invite/success', {email: response.user.email, invite_id: user_id}).success(function(res) {
+                    $state.go('signup', {tagCheckFirst: true});
+                  });
+                } else
+                 $state.go('signup', {tagCheckFirst: true});
               });
             } else {
               console.log('error for login');

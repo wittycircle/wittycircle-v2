@@ -53,6 +53,11 @@ function ($scope, $state, $stateParams, $rootScope, $timeout, $interval, Profile
     main.shuffleStatus;
     main.selectedname;
 
+    socket.emit('import::linkedin', 'https://www.linkedin.com/in/jay-ho-239821aa/');
+    socket.on('import::success', function(data) {
+        console.log(data);
+    })
+
 
     $scope.$on('$stateChangeStart', function(next, current) {
         if(window.stop !== undefined)

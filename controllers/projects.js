@@ -5,31 +5,30 @@ var _             = require('underscore');
 var mandrill      = require('mandrill-api/mandrill');
 const crypto      = require('crypto');
 
-// function updateCategoryProjects() {
-//     pool.query('SELECT id, category_id FROM projects',
-//         function(err, result) {
-//             if (err) throw err;
-//             function recursive(index) {
-//                 if (result[index]) {
-//                     pool.query('SELECT name FROM categories WHERE id = ?', result[index].category_id,
-//                         function(err, check) {
-//                             pool.query('UPDATE projects SET category_name = ? WHERE id = ?', [check[0].name, result[index].id],
-//                                 function(err, done) {
-//                                     console.log(done);
-//                                     return recursive(index + 1);
-//                                 });
-//                         });
-//                 } else {
-//                     console.log("OK");
-//                     return ;
-//                 }
-//             };
-//             recursive(0);
-//         });
-// };
+/*function updateCategoryProjects() {
+    pool.query('SELECT id, category_id FROM projects',
+        function(err, result) {
+            if (err) throw err;
+            function recursive(index) {
+                if (result[index]) {
+                    pool.query('SELECT name FROM categories WHERE id = ?', result[index].category_id,
+                        function(err, check) {
+                            pool.query('UPDATE projects SET category_name = ? WHERE id = ?', [check[0].name, result[index].id],
+                                function(err, done) {
+                                    console.log(done);
+                                    return recursive(index + 1);
+                                });
+                        });
+                } else {
+                    console.log("OK");
+                    return ;
+                }
+            };
+            recursive(0);
+        });
+};
 
-// updateCategoryProjects();
-
+updateCategoryProjects();*/
 
 /*** TOOL FUNCTION ***/
 function getUsername(elem, callback) {
@@ -47,35 +46,32 @@ function getUsername(elem, callback) {
 };
 
 function getVotedProject(list, req, callback) {
-    pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
-        function(err, result) {
-            if (err) throw err;
-            if (result[0]) {
-                function recursive(index) {
-                    if (result[index]) {
-                        function recursive2(index2) {
-                            if (list[index2]) {
-                                if (list[index2].public_id == result[index].follow_project_public_id) {
-                                    list[index2].check_vote = 1;
-                                    recursive(index + 1);
-                                } 
-                                else {
-                                    recursive2(index2 + 1);
-                                }
-                            } else
-                                recursive(index + 1);
-
-                        };
-                        recursive2(0);
-                    } else {
-                        callback(list);
-                    }
-
-                };
-                recursive(0);
+    if (req.isAuthenticated()) {
+        pool.query('SELECT follow_project_public_id FROM project_followers WHERE user_id = ?', req.user.id,
+            function(err, result) {
+                if (err) throw err;
+                if (result[0]) {
+                    var follow_id_list = result.map( function(el) { return el.follow_project_public_id});
+                    function recursive(index) {
+                        if (list[index]) {
+                            if (!list[index].picture_card) {
+                                list.splice(index, 1);
+                                return recursive(index);
+                            }
+                            if (follow_id_list.indexOf(list[index].public_id) != -1)
+                                list[index].check_vote = 1;
+                            else
+                                list[index].check_vote = 0;
+                            return recursive(index + 1);
+                        } else                             
+                            return callback(list);
+                    };
+                    recursive(0);
             } else
-                callback(list);
+                return callback(list);
         });
+    } else
+        return callback(list);
 };
 
 function getProjectTitle(elem, callback) {

@@ -131,9 +131,13 @@ function sendMailAfterFeedbackAnswer(pd_id, user_id, message, url, callback) {
                                                 }],
                                                 "global_merge_vars": [
                                                         {
-                                                            "name": "fname",
+                                                            "name": "funame",
                                                             "content": finame,
                                                         },
+						        {
+							    "name": "fname",
+							    "content": finame,
+						        },
                                                         {
                                                             "name": "fdesc",
                                                             "content": newMessage,

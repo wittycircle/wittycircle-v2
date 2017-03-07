@@ -56,7 +56,7 @@
   					</aside>
   					<aside id="dsabox2" class="discover-search2-downbox1 downbox" style="display: none">
   						<ul>
-  							<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | filter: skillName | limitTo: 5">{{skillS.name}}</li>
+  							<li ng-click="searchSkill(skillS.name)" ng-repeat="skillS in skills | wordsFilter: skillName | limitTo: 5">{{skillS.name}}</li>
   						</ul>
   					</aside>
   				</div>
